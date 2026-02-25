@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Programs", href: "#programs" },
-  { label: "Why Invincio", href: "#difference" },
-  { label: "Results", href: "#results" },
-  { label: "Process", href: "#process" },
-  { label: "FAQs", href: "#faq" },
+  { label: "About", href: "/about" },
+  { label: "Programs", href: "/programs" },
+  { label: "Why Invincio", href: "/difference" },
+  { label: "Results", href: "/results" },
+  { label: "Process", href: "/process" },
+  { label: "FAQs", href: "/faq" },
 ];
 
 const Navbar = () => {
@@ -26,25 +27,24 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-background/95 backdrop-blur-md border-b border-border shadow-lg" : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-background/95 backdrop-blur-md border-b border-border shadow-lg" : "bg-transparent"
+        }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-16 md:h-20">
-        <a href="#" className="font-serif text-xl md:text-2xl font-bold tracking-wide">
+        <Link to="/" className="font-serif text-xl md:text-2xl font-bold tracking-wide">
           <span className="gold-text">INVINCIO</span>
-        </a>
+        </Link>
 
         {/* Desktop */}
         <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
-              href={link.href}
+              to={link.href}
               className="text-sm font-sans font-medium text-muted-foreground hover:text-primary transition-colors tracking-wide uppercase"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
           <a
             href="tel:+919999999999"
@@ -74,14 +74,14 @@ const Navbar = () => {
         >
           <div className="px-6 py-6 flex flex-col gap-4">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
-                href={link.href}
+                to={link.href}
                 onClick={() => setMobileOpen(false)}
                 className="text-sm font-sans font-medium text-muted-foreground hover:text-primary transition-colors tracking-wide uppercase"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
             <a
               href="tel:+919999999999"
