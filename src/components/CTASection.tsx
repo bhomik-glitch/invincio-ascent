@@ -1,55 +1,85 @@
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import { CalendarCheck, MessageCircle, Phone } from "lucide-react";
+import {
+  CONTAINER,
+  EYEBROW,
+  H2_DARK,
+  BODY_DARK,
+  SECTION_PAD,
+  EASE_OUT,
+  TAP_SCALE,
+  TAP_TRANSITION,
+} from "@/lib/design-system";
 
 const CTASection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section id="contact" className="section-padding relative overflow-hidden" ref={ref}>
-      <div className="absolute inset-0 bg-gradient-to-br from-navy-light via-background to-secondary/30" />
-      <div className="relative z-10 max-w-4xl mx-auto text-center">
+    <section id="contact" className={`bg-[#0E1116] ${SECTION_PAD}`}>
+      <div className={CONTAINER}>
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.4, ease: EASE_OUT }}
+          className="max-w-xl"
         >
-          <p className="text-primary font-sans text-sm font-semibold tracking-[0.2em] uppercase mb-4">
-            Begin Your Journey
-          </p>
-          <h2 className="font-serif text-3xl md:text-5xl font-bold mb-6 leading-tight">
-            Ready to Begin Your{" "}
-            <span className="gold-text">Officer Journey?</span>
+          <p className={`${EYEBROW} mb-6`}>Begin Your Officer Journey</p>
+
+          <h2 className={`${H2_DARK} mb-5 leading-tight`}>
+            Your Selection Starts Here.
           </h2>
-          <p className="text-muted-foreground font-sans text-lg max-w-2xl mx-auto mb-10">
-            Take the first step towards your defence career. Schedule a free consultation with our ex-SSB assessor mentors today.
+
+          <p className={`${BODY_DARK} mb-10 max-w-md`}>
+            Schedule a free consultation with an ex-SSB assessor. No commitment
+            — just clarity on your path forward.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
+          {/* Primary CTA — whileTap for instant press feedback */}
+          <div className="mb-8">
+            <motion.a
               href="#"
-              className="flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded font-sans font-semibold text-base hover:bg-gold-dark transition-colors w-full sm:w-auto justify-center"
+              whileTap={TAP_SCALE}
+              transition={TAP_TRANSITION}
+              className="inline-flex items-center gap-2 bg-[#C2A46D] text-[#0E1116] px-8 py-3.5 rounded-lg font-sans font-semibold text-sm tracking-wide"
+              style={{ transition: "opacity 150ms ease" }}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.9")}
+              onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
             >
-              <CalendarCheck className="w-5 h-5" />
-              Schedule Consultation
-            </a>
-            <a
+              <CalendarCheck className="w-4 h-4 shrink-0" />
+              Book Free Consultation
+            </motion.a>
+          </div>
+
+          {/* Ghost contact links */}
+          <div className="flex items-center gap-6 font-sans text-sm">
+            <motion.a
               href="https://wa.me/919999999999"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 border border-primary/40 text-primary px-8 py-4 rounded font-sans font-semibold text-base hover:bg-primary/10 transition-colors w-full sm:w-auto justify-center"
+              whileTap={TAP_SCALE}
+              transition={TAP_TRANSITION}
+              className="inline-flex items-center gap-1.5 text-white/40"
+              style={{ transition: "color 150ms ease" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.7)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.4)")}
             >
-              <MessageCircle className="w-5 h-5" />
+              <MessageCircle className="w-4 h-4" />
               WhatsApp
-            </a>
-            <a
+            </motion.a>
+
+            <span className="text-white/15 select-none">|</span>
+
+            <motion.a
               href="tel:+919999999999"
-              className="flex items-center gap-2 border border-border text-foreground px-8 py-4 rounded font-sans font-semibold text-base hover:bg-muted transition-colors w-full sm:w-auto justify-center"
+              whileTap={TAP_SCALE}
+              transition={TAP_TRANSITION}
+              className="inline-flex items-center gap-1.5 text-white/40"
+              style={{ transition: "color 150ms ease" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.7)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.4)")}
             >
-              <Phone className="w-5 h-5" />
+              <Phone className="w-4 h-4" />
               Call Now
-            </a>
+            </motion.a>
           </div>
         </motion.div>
       </div>

@@ -1,10 +1,20 @@
 import HeroSection from "@/components/HeroSection";
+import TrustStrip from "@/components/TrustStrip";
+import CoreOffering from "@/components/CoreOffering";
+import ProcessSection from "@/components/ProcessSection";
+import ResultsSection from "@/components/ResultsSection";
+import CollaborationsSection from "@/components/CollaborationsSection";
 import CTASection from "@/components/CTASection";
 
 const Index = () => {
   return (
-    <div className="">
+    <div>
       <HeroSection />
+      <TrustStrip />
+      <CoreOffering />
+      <ProcessSection />
+      <ResultsSection />
+      <CollaborationsSection />
       <CTASection />
     </div>
   );

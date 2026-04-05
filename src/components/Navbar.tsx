@@ -48,7 +48,7 @@ const Navbar = () => {
           ))}
           <a
             href="tel:+919999999999"
-            className="flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded text-sm font-semibold hover:bg-gold-dark transition-colors"
+            className="flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-gold-dark transition-colors"
           >
             <Phone className="w-4 h-4" />
             Call Now

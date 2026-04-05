@@ -1,63 +1,80 @@
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
+import {
+  CONTAINER,
+  EYEBROW,
+  H2_LIGHT,
+  H3_LIGHT,
+  BODY_LIGHT,
+  SECTION_PAD,
+  SECTION_HEADER_MB,
+  EASE_OUT,
+} from "@/lib/design-system";
 
 const steps = [
-  { number: "01", title: "Assessment", desc: "Initial screening to understand your baseline strengths and areas for development." },
-  { number: "02", title: "Profiling", desc: "Deep psychological and personality profiling to create a tailored mentorship plan." },
-  { number: "03", title: "Mentorship", desc: "One-on-one sessions with ex-SSB assessors focused on genuine personality development." },
-  { number: "04", title: "Simulation", desc: "Full SSB simulations including GTO, interview, and psychology testing." },
-  { number: "05", title: "Feedback", desc: "Structured, detailed feedback after every session to track and accelerate growth." },
-  { number: "06", title: "Final Preparation", desc: "Conference-day readiness, confidence building, and last-mile strategy." },
+  {
+    number: "01",
+    title: "Assessment",
+    desc: "Initial baseline screening to map your strengths, gaps, and development areas.",
+  },
+  {
+    number: "02",
+    title: "Profiling",
+    desc: "Deep psychological and personality profiling to build a tailored mentorship plan.",
+  },
+  {
+    number: "03",
+    title: "Mentorship",
+    desc: "Structured sessions with ex-SSB assessors covering written prep, GTO, psychology, and interviews.",
+  },
+  {
+    number: "04",
+    title: "Selection",
+    desc: "Full SSB simulation, conference-day readiness, and strategy to walk in recommended.",
+  },
 ];
 
 const ProcessSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section id="process" className="section-padding" ref={ref}>
-      <div className="max-w-7xl mx-auto">
+    <section id="process" className={`bg-[#F5F7FA] ${SECTION_PAD}`}>
+      <div className={CONTAINER}>
+
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-14"
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.35, ease: EASE_OUT }}
+          className={SECTION_HEADER_MB}
         >
-          <p className="text-primary font-sans text-sm font-semibold tracking-[0.2em] uppercase mb-4">
-            Our Process
-          </p>
-          <h2 className="font-serif text-3xl md:text-4xl font-bold">
-            A Disciplined Path to <span className="gold-text">Success</span>
-          </h2>
+          <p className={`${EYEBROW} mb-4`}>The Journey</p>
+          <h2 className={`${H2_LIGHT} max-w-2xl`}>A Disciplined Path to Selection</h2>
         </motion.div>
 
-        <div className="relative">
-          {/* Vertical line */}
-          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-border -translate-x-1/2" />
+        {/* Vertical step layout */}
+        <div className="relative pl-10 md:pl-14">
+          <div className="absolute left-4 md:left-5 top-1 bottom-1 w-px bg-black/10" />
 
-          <div className="space-y-8 md:space-y-0">
-            {steps.map((step, i) => {
-              const isLeft = i % 2 === 0;
-              return (
-                <motion.div
-                  key={step.number}
-                  initial={{ opacity: 0, x: isLeft ? -30 : 30 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
-                  className={`md:grid md:grid-cols-2 md:gap-12 items-center ${i > 0 ? "md:mt-8" : ""}`}
-                >
-                  <div className={`${isLeft ? "md:text-right" : "md:col-start-2"}`}>
-                    <div className={`card-premium ${isLeft ? "md:ml-auto" : ""} max-w-md`}>
-                      <span className="font-serif text-3xl font-bold gold-text">{step.number}</span>
-                      <h3 className="font-serif text-xl font-bold mt-2 mb-2">{step.title}</h3>
-                      <p className="text-muted-foreground font-sans text-sm leading-relaxed">{step.desc}</p>
-                    </div>
-                  </div>
-                  {/* Dot on timeline */}
-                  <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-primary border-4 border-background" style={{ marginTop: i === 0 ? "2rem" : undefined }} />
-                </motion.div>
-              );
-            })}
+          <div className="space-y-12">
+            {steps.map((step, i) => (
+              <motion.div
+                key={step.number}
+                /* scale: 0.98 — nothing appears from nothing */
+                initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ duration: 0.35, ease: EASE_OUT, delay: i * 0.05 }}
+                className="relative"
+              >
+                <div className="absolute -left-10 md:-left-14 top-0 w-8 h-8 rounded-full border border-black/10 bg-white flex items-center justify-center">
+                  <span className="font-sans text-[11px] font-bold text-[#C2A46D]">
+                    {step.number}
+                  </span>
+                </div>
+
+                <h3 className={`${H3_LIGHT} mb-2`}>{step.title}</h3>
+                <p className={`${BODY_LIGHT} max-w-lg`}>{step.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>

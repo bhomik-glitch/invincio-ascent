@@ -1,87 +1,107 @@
 import { motion } from "framer-motion";
-import { Shield, Phone, MessageCircle, CalendarCheck } from "lucide-react";
-import heroBg from "@/assets/hero-bg.jpg";
-
-const trustBadges = [
-  { icon: Shield, label: "Ex-SSB Assessors" },
-  { icon: Shield, label: "Real Mentorship" },
-  { icon: Shield, label: "Proven Track Record" },
-];
+import { CalendarCheck, MessageCircle, Phone } from "lucide-react";
+import {
+  CONTAINER,
+  EYEBROW,
+  BODY_DARK,
+  EASE_OUT,
+  TAP_SCALE,
+  TAP_TRANSITION,
+} from "@/lib/design-system";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0">
-        <img src={heroBg} alt="Military academy training" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-background/80" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-      </div>
+    <section className="min-h-screen flex items-center bg-[#0E1116]">
+      <div className={`w-full ${CONTAINER} py-32 pt-40`}>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center pt-20">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
+        {/* Eyebrow */}
+        <motion.p
+          initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.2 }}
+          transition={{ duration: 0.3, ease: EASE_OUT, delay: 0.1 }}
+          className={`${EYEBROW} mb-6`}
         >
-          <p className="text-primary font-sans text-sm md:text-base font-semibold tracking-[0.25em] uppercase mb-6">
-            Leadership Transformation Institute
-          </p>
-          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 text-balance">
-            Transforming Defence Aspirants{" "}
-            <span className="gold-text">into Officers.</span>
+          Defence Leadership Institute
+        </motion.p>
+
+        {/* H1 — scale: 0.99 (subtle — text shouldn't shift too much) */}
+        <motion.div
+          initial={{ opacity: 0, y: 12, scale: 0.99 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.5, ease: EASE_OUT, delay: 0.18 }}
+          className="max-w-3xl mb-7"
+        >
+          <h1 className="font-serif text-4xl md:text-5xl lg:text-[3.75rem] font-bold leading-[1.1] tracking-tight text-[#E5E7EB]">
+            Transforming Defence Aspirants into{" "}
+            <span className="text-[#C2A46D]">Officers.</span>
           </h1>
-          <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto mb-10 font-sans leading-relaxed">
-            Mentorship by Former SSB Assessors. Real Leadership. Real Transformation.
-          </p>
         </motion.div>
+
+        {/* Sub-text */}
+        <motion.p
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, ease: EASE_OUT, delay: 0.3 }}
+          className={`${BODY_DARK} max-w-md mb-12`}
+        >
+          Mentored by Former SSB Assessors. Real personality development.
+          Proven selections.
+        </motion.p>
 
         {/* CTAs */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14"
+          transition={{ duration: 0.3, ease: EASE_OUT, delay: 0.4 }}
+          className="flex flex-col sm:flex-row items-start gap-4"
         >
-          <a
+          {/* Primary — whileTap gives instant press feedback */}
+          <motion.a
             href="#contact"
-            className="flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded font-sans font-semibold text-base hover:bg-gold-dark transition-colors w-full sm:w-auto justify-center"
+            whileTap={TAP_SCALE}
+            transition={TAP_TRANSITION}
+            className="inline-flex items-center gap-2 bg-[#C2A46D] text-[#0E1116] px-8 py-3.5 rounded-lg font-sans font-semibold text-sm tracking-wide"
+            style={{ transition: "opacity 150ms ease" }}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.9")}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
           >
-            <CalendarCheck className="w-5 h-5" />
+            <CalendarCheck className="w-4 h-4 shrink-0" />
             Book Free Consultation
-          </a>
-          <a
+          </motion.a>
+
+          {/* Secondary */}
+          <motion.a
             href="https://wa.me/919999999999"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 border border-primary/40 text-primary px-8 py-4 rounded font-sans font-semibold text-base hover:bg-primary/10 transition-colors w-full sm:w-auto justify-center"
+            whileTap={TAP_SCALE}
+            transition={TAP_TRANSITION}
+            className="inline-flex items-center gap-2 border border-white/20 text-white px-8 py-3.5 rounded-lg font-sans font-semibold text-sm tracking-wide"
+            style={{ transition: "border-color 150ms ease" }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)")
+            }
           >
-            <MessageCircle className="w-5 h-5" />
-            WhatsApp Now
-          </a>
-          <a
-            href="tel:+919999999999"
-            className="flex items-center gap-2 border border-border text-foreground px-8 py-4 rounded font-sans font-semibold text-base hover:bg-muted transition-colors w-full sm:w-auto justify-center"
-          >
-            <Phone className="w-5 h-5" />
-            Call Us
-          </a>
-        </motion.div>
+            <MessageCircle className="w-4 h-4 shrink-0" />
+            WhatsApp Us
+          </motion.a>
 
-        {/* Trust badges */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1 }}
-          className="flex flex-wrap items-center justify-center gap-6 md:gap-10"
-        >
-          {trustBadges.map((badge) => (
-            <div key={badge.label} className="flex items-center gap-2 text-muted-foreground">
-              <badge.icon className="w-4 h-4 text-primary" />
-              <span className="text-sm font-sans font-medium tracking-wide">{badge.label}</span>
-            </div>
-          ))}
+          {/* Tertiary */}
+          <motion.a
+            href="tel:+919999999999"
+            whileTap={TAP_SCALE}
+            transition={TAP_TRANSITION}
+            className="inline-flex items-center gap-2 text-white/45 px-3 py-3.5 font-sans font-medium text-sm"
+            style={{ transition: "color 150ms ease" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.75)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.45)")}
+          >
+            <Phone className="w-4 h-4 shrink-0" />
+            Call Now
+          </motion.a>
         </motion.div>
       </div>
     </section>
