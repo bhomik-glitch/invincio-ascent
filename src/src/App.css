@@ -1,0 +1,26 @@
+@import "swiper/css/pagination";
+@import "swiper/css";
+
+
+.poppins{
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+}
+.poppins::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("/image/bg-imagge.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1; /* Send it behind everything */
+    filter: blur(4px); /* optional */
+  }
+
+  .object-80{
+    object-position: 80% 50%;
+  }

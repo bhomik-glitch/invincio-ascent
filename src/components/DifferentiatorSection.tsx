@@ -2,6 +2,8 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { X, Check } from "lucide-react";
 
+const EASE_OUT = [0.23, 1, 0.32, 1] as [number, number, number, number];
+
 const notThings = [
   "Not Coaching.",
   "Not Memorised Answers.",
@@ -15,12 +17,12 @@ const instead = [
 ];
 
 const comparison = [
-  { aspect: "Approach", invincio: "Mentorship & transformation", traditional: "Coaching & repetition" },
-  { aspect: "Faculty", invincio: "Ex-SSB Assessors", traditional: "Generic trainers" },
-  { aspect: "Feedback", invincio: "Personalised, structured", traditional: "Generic, group-based" },
-  { aspect: "Psychology", invincio: "Deep profiling & development", traditional: "Template-based answers" },
-  { aspect: "Focus", invincio: "Officer-Like Qualities", traditional: "Interview tricks" },
-  { aspect: "Outcome", invincio: "Genuine personality change", traditional: "Temporary behaviour" },
+  { aspect: "Approach",   invincio: "Mentorship & transformation",    traditional: "Coaching & repetition"       },
+  { aspect: "Faculty",    invincio: "Ex-SSB Assessors",               traditional: "Generic trainers"            },
+  { aspect: "Feedback",   invincio: "Personalised, structured",       traditional: "Generic, group-based"        },
+  { aspect: "Psychology", invincio: "Deep profiling & development",   traditional: "Template-based answers"      },
+  { aspect: "Focus",      invincio: "Officer-Like Qualities",         traditional: "Interview tricks"            },
+  { aspect: "Outcome",    invincio: "Genuine personality change",     traditional: "Temporary behaviour"         },
 ];
 
 const DifferentiatorSection = () => {
@@ -28,63 +30,80 @@ const DifferentiatorSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="difference" className="section-padding" ref={ref}>
+    <section
+      id="difference"
+      className="px-6 py-20 md:px-12 lg:px-20 xl:px-32 bg-[#F1FFFF]"
+      ref={ref}
+    >
       <div className="max-w-7xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.55, ease: EASE_OUT }}
           className="text-center mb-14"
         >
-          <p className="text-primary font-sans text-sm font-semibold tracking-[0.2em] uppercase mb-4">
+          <p className="font-sans text-xs font-semibold tracking-[0.3em] uppercase text-[#2FB4E7] mb-4">
             The Invincio Difference
           </p>
-          <h2 className="font-serif text-3xl md:text-4xl font-bold mb-8">
-            Why We're <span className="gold-text">Different</span>
+          <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#00568C] mb-2">
+            Why We're Different
           </h2>
         </motion.div>
 
-        {/* Bold statements */}
         <div className="grid md:grid-cols-2 gap-12 mb-16">
+          {/* Left column — bold contrast statements */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -24 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2 }}
+            transition={{ duration: 0.55, ease: EASE_OUT, delay: 0.15 }}
           >
             <div className="space-y-4 mb-8">
               {notThings.map((t) => (
                 <div key={t} className="flex items-center gap-3">
-                  <X className="w-5 h-5 text-destructive shrink-0" />
-                  <span className="font-serif text-xl md:text-2xl font-bold text-muted-foreground line-through decoration-destructive/50">{t}</span>
+                  <X className="w-5 h-5 text-[#E66133] shrink-0" />
+                  <span className="font-serif text-xl md:text-2xl font-bold text-[#6B7280] line-through decoration-[#E66133]/50">
+                    {t}
+                  </span>
                 </div>
               ))}
             </div>
             <div className="space-y-4">
               {instead.map((t) => (
                 <div key={t} className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-primary shrink-0" />
-                  <span className="font-serif text-xl md:text-2xl font-bold">{t}</span>
+                  <Check className="w-5 h-5 text-[#00568C] shrink-0" />
+                  <span className="font-serif text-xl md:text-2xl font-bold text-[#00568C]">
+                    {t}
+                  </span>
                 </div>
               ))}
             </div>
           </motion.div>
 
-          {/* Comparison table */}
+          {/* Right column — comparison table */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 24 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.4 }}
-            className="card-premium overflow-hidden p-0"
+            transition={{ duration: 0.55, ease: EASE_OUT, delay: 0.28 }}
+            className="bg-white border border-[#e5e7eb] rounded-xl overflow-hidden"
+            style={{ boxShadow: "0 2px 12px rgba(0,86,140,0.06)" }}
           >
             <div className="grid grid-cols-3 text-sm font-sans">
-              <div className="p-4 bg-muted/50 font-semibold text-muted-foreground">Aspect</div>
-              <div className="p-4 bg-primary/10 font-semibold text-primary">Invincio</div>
-              <div className="p-4 bg-muted/50 font-semibold text-muted-foreground">Traditional</div>
+              {/* Header row */}
+              <div className="p-4 bg-[#eaf6f8] font-semibold text-[#6B7280]">Aspect</div>
+              <div className="p-4 bg-[#00568C]/8 font-semibold text-[#00568C]" style={{ background: "rgba(0,86,140,0.07)" }}>Invincio</div>
+              <div className="p-4 bg-[#eaf6f8] font-semibold text-[#6B7280]">Traditional</div>
+
               {comparison.map((row) => (
                 <>
-                  <div key={row.aspect + "a"} className="p-4 border-t border-border text-muted-foreground">{row.aspect}</div>
-                  <div key={row.aspect + "i"} className="p-4 border-t border-border text-foreground">{row.invincio}</div>
-                  <div key={row.aspect + "t"} className="p-4 border-t border-border text-muted-foreground">{row.traditional}</div>
+                  <div key={row.aspect + "a"} className="p-4 border-t border-[#e5e7eb] text-[#6B7280]">
+                    {row.aspect}
+                  </div>
+                  <div key={row.aspect + "i"} className="p-4 border-t border-[#e5e7eb] text-[#00568C] font-medium">
+                    {row.invincio}
+                  </div>
+                  <div key={row.aspect + "t"} className="p-4 border-t border-[#e5e7eb] text-[#6B7280]">
+                    {row.traditional}
+                  </div>
                 </>
               ))}
             </div>

@@ -1,5 +1,5 @@
 import HeroSection from "@/components/HeroSection";
-import TrustStrip from "@/components/TrustStrip";
+import SuccessStories from "@/components/SuccessStories";
 import CoreOffering from "@/components/CoreOffering";
 import ProcessSection from "@/components/ProcessSection";
 import ResultsSection from "@/components/ResultsSection";
@@ -10,7 +10,7 @@ const Index = () => {
   return (
     <div>
       <HeroSection />
-      <TrustStrip />
+      <SuccessStories />
       <CoreOffering />
       <ProcessSection />
       <ResultsSection />

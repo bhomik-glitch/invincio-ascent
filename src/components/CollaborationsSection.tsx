@@ -11,7 +11,7 @@ const collaborators = [
 
 const CollaborationsSection = () => {
   return (
-    <section className={`bg-[#F5F7FA] ${SECTION_PAD} border-t border-gray-200`}>
+    <section className={`bg-[#F1FFFF] ${SECTION_PAD} border-t border-[#e5e7eb]`}>
       <div className={`${CONTAINER} text-center`}>
         <motion.div
           initial={{ opacity: 0, y: 8 }}
@@ -29,7 +29,7 @@ const CollaborationsSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, ease: EASE_OUT, delay: i * 0.05 }}
-                className="font-sans text-sm font-medium text-[#6B7280]/60 tracking-wide"
+                className="font-sans text-sm font-medium text-[#6B7280]/70 tracking-wide"
               >
                 {name}
               </motion.span>

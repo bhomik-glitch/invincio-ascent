@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { BookOpen, Users, Building } from "lucide-react";
+import { BookOpen, Users, Shield } from "lucide-react";
+import { Link } from "react-router-dom";
 import {
   CONTAINER,
   EYEBROW,
@@ -22,6 +23,7 @@ const offerings = [
       "Test series with performance analytics",
       "Past paper analysis and exam strategy",
     ],
+    href: "/programs/written-exam",
   },
   {
     Icon: Users,
@@ -33,23 +35,27 @@ const offerings = [
       "GTO tasks, group discussion, command task",
       "Personal interview and full mock SSBs",
     ],
+    href: "/programs/ssb-interview",
   },
   {
-    Icon: Building,
-    title: "Leadership & Govt Collaboration",
+    Icon: Shield,
+    title: "Future Leader Bootcamp",
     summary:
-      "Institutional programs developing officer-like qualities in students and professionals.",
+      "A foundational program designed for students starting from class 9, focused on early personality development, discipline, communication skills, and officer-like qualities.",
     bullets: [
-      "OLQ-based leadership development",
-      "School, college, and corporate workshops",
-      "Certified government collaboration programs",
+      "Personality & confidence building",
+      "Communication & leadership training",
+      "Discipline & routine structuring",
+      "Early exposure to SSB mindset",
     ],
+    subtitle: "9th Class Onwards",
+    href: "/programs/future-leader",
   },
 ];
 
 const CoreOffering = () => {
   return (
-    <section id="programs" className={`bg-[#F5F7FA] ${SECTION_PAD}`}>
+    <section id="programs" className={`bg-[#F1FFFF] ${SECTION_PAD}`}>
       <div className={CONTAINER}>
 
         {/* Header */}
@@ -70,44 +76,76 @@ const CoreOffering = () => {
 
         {/* 3-column grid — stagger 50ms, scale 0.98 initial */}
         <div className={`grid md:grid-cols-3 ${GRID_GAP}`}>
-          {offerings.map(({ Icon, title, summary, bullets }, i) => (
+          {offerings.map(({ Icon, title, summary, bullets, subtitle, href }, i) => (
+            <Link key={title} to={href} className="h-full" style={{ textDecoration: "none" }}>
             <motion.div
-              key={title}
               initial={{ opacity: 0, y: 10, scale: 0.98 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.4, ease: EASE_OUT, delay: i * 0.05 }}
-              className="bg-white border border-gray-200 rounded-xl p-8 flex flex-col"
-              style={{ transition: "border-color 150ms ease" }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.borderColor = "#D1D5DB")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.borderColor = "#E5E7EB")
-              }
+              className="group relative overflow-hidden bg-white border border-[#e5e7eb] rounded-xl p-8 flex flex-col cursor-pointer h-full"
+              style={{
+                boxShadow: "0 1px 4px rgba(0,0,0,0.04)",
+                transition:
+                  "transform 280ms cubic-bezier(0.23,1,0.32,1), box-shadow 280ms cubic-bezier(0.23,1,0.32,1), border-color 280ms ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-4px)";
+                e.currentTarget.style.boxShadow = "0 12px 40px rgba(0,86,140,0.10)";
+                e.currentTarget.style.borderColor = "rgba(0,86,140,0.18)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "0 1px 4px rgba(0,0,0,0.04)";
+                e.currentTarget.style.borderColor = "#e5e7eb";
+              }}
             >
-              {/* Icon */}
-              <div className="w-9 h-9 bg-gray-100 rounded-md flex items-center justify-center mb-6 shrink-0">
-                <Icon className="w-4 h-4 text-[#C2A46D]" />
+              {/* Background image layer — fades in on hover */}
+              <div
+                className="absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                style={{ backgroundImage: "url('/assets/bg-cards.jpeg')" }}
+              />
+              {/* Scrim for text readability */}
+              <div className="absolute inset-0 bg-[#00568C]/75 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl" />
+
+              {/* Card contents */}
+              <div className="relative z-10 flex flex-col h-full">
+                {/* Icon */}
+                <div
+                  className="w-9 h-9 rounded-md flex items-center justify-center mb-6 shrink-0 bg-[#eaf6f8] group-hover:bg-white transition-colors duration-300"
+                >
+                  <Icon className="w-4 h-4 text-[#00568C]" />
+                </div>
+
+                <h3 className={`${H3_LIGHT} mb-1 leading-snug group-hover:text-white transition-colors duration-300`}>
+                  {title}
+                </h3>
+                {subtitle && (
+                  <span className="inline-block mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#2FB4E7] group-hover:text-[#F6B828] transition-colors duration-300">
+                    {subtitle}
+                  </span>
+                )}
+                <p className={`${BODY_LIGHT} mb-6 group-hover:text-white/85 transition-colors duration-300`}>
+                  {summary}
+                </p>
+
+                <div className="w-6 h-px bg-[#e5e7eb] group-hover:bg-white/30 mb-6 transition-colors duration-300" />
+
+                <ul className="space-y-2.5 mt-auto">
+                  {bullets.map((bullet) => (
+                    <li
+                      key={bullet}
+                      className="flex items-start gap-2.5 font-sans text-sm text-[#6B7280] group-hover:text-white/80 transition-colors duration-300"
+                    >
+                      <span className="w-1 h-1 rounded-full bg-[#2FB4E7] mt-[7px] shrink-0 group-hover:bg-[#F6B828] transition-colors duration-300" />
+                      {bullet}
+                    </li>
+                  ))}
+                </ul>
+
               </div>
-
-              <h3 className={`${H3_LIGHT} mb-3 leading-snug`}>{title}</h3>
-              <p className={`${BODY_LIGHT} mb-6`}>{summary}</p>
-
-              <div className="w-6 h-px bg-gray-200 mb-6" />
-
-              <ul className="space-y-2.5 mt-auto">
-                {bullets.map((bullet) => (
-                  <li
-                    key={bullet}
-                    className="flex items-start gap-2.5 font-sans text-sm text-[#6B7280]"
-                  >
-                    <span className="w-1 h-1 rounded-full bg-[#C2A46D] mt-[7px] shrink-0" />
-                    {bullet}
-                  </li>
-                ))}
-              </ul>
             </motion.div>
+            </Link>
           ))}
         </div>
       </div>

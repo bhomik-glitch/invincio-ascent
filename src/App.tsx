@@ -12,6 +12,10 @@ import Results from "./pages/Results";
 import Process from "./pages/Process";
 import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
+import ScrollToTop from "./components/ScrollToTop";
+import WrittenExam from "./pages/WrittenExam";
+import SSBInterview from "./pages/SSBInterview";
+import FutureLeader from "./pages/FutureLeader";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +25,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Index />} />
@@ -30,6 +35,9 @@ const App = () => (
             <Route path="/results" element={<Results />} />
             <Route path="/process" element={<Process />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route path="/programs/written-exam" element={<WrittenExam />} />
+            <Route path="/programs/ssb-interview" element={<SSBInterview />} />
+            <Route path="/programs/future-leader" element={<FutureLeader />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Route>

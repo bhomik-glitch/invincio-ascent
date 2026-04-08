@@ -25,16 +25,12 @@ const AboutSection = () => {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            <div className="aspect-[4/3] rounded-lg overflow-hidden bg-muted border border-border">
-              <div className="w-full h-full bg-gradient-to-br from-secondary to-navy-light flex items-center justify-center">
-                <div className="text-center p-8">
-                  <div className="w-20 h-20 rounded-full gold-gradient mx-auto mb-4 flex items-center justify-center">
-                    <span className="font-serif text-2xl font-bold text-primary-foreground">I</span>
-                  </div>
-                  <p className="font-serif text-2xl font-bold text-foreground">Invincio Services LLP</p>
-                  <p className="text-muted-foreground font-sans text-sm mt-2">Delhi, India</p>
-                </div>
-              </div>
+            <div className="aspect-[4/3] rounded-lg overflow-hidden border border-border">
+              <img
+                src="/assets/cooperateTraining2.jpeg"
+                alt="Invincio — session in progress"
+                className="w-full h-full object-cover"
+              />
             </div>
           </motion.div>
 

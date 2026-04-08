@@ -1,0 +1,17 @@
+.wisdom-well-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.wisdom-well-scroll::-webkit-scrollbar-track {
+  background: #eaeeed;
+  border-radius: 4px;
+}
+
+.wisdom-well-scroll::-webkit-scrollbar-thumb {
+  background: #718979;
+  border-radius: 4px;
+}
+
+.wisdom-well-scroll::-webkit-scrollbar-thumb:hover {
+  background: #2d4b41;
+} 

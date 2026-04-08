@@ -1,9 +1,11 @@
 import ResultsSection from "@/components/ResultsSection";
+import TransformationSection from "@/components/TransformationSection";
 
 const Results = () => {
     return (
-        <div className="pt-8 pb-16">
+        <div>
             <ResultsSection />
+            <TransformationSection />
         </div>
     );
 };

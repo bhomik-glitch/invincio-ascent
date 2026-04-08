@@ -1,85 +1,121 @@
-import { motion } from "framer-motion";
-import {
-  CONTAINER,
-  EYEBROW,
-  H2_LIGHT,
-  H3_LIGHT,
-  BODY_LIGHT,
-  SECTION_PAD,
-  SECTION_HEADER_MB,
-  EASE_OUT,
-} from "@/lib/design-system";
+import { Target, Brain, Users, Trophy } from "lucide-react";
+import { EYEBROW, CONTAINER } from "@/lib/design-system";
 
 const steps = [
   {
     number: "01",
-    title: "Assessment",
-    desc: "Initial baseline screening to map your strengths, gaps, and development areas.",
+    title:  "Assessment",
+    desc:   "Baseline Assessment",
+    Icon:   Target,
   },
   {
     number: "02",
-    title: "Profiling",
-    desc: "Deep psychological and personality profiling to build a tailored mentorship plan.",
+    title:  "Profiling",
+    desc:   "Personality + Written Parallel Prep",
+    Icon:   Brain,
   },
   {
     number: "03",
-    title: "Mentorship",
-    desc: "Structured sessions with ex-SSB assessors covering written prep, GTO, psychology, and interviews.",
+    title:  "Mentorship",
+    desc:   "Performance Tracking + Mentorship",
+    Icon:   Users,
   },
   {
     number: "04",
-    title: "Selection",
-    desc: "Full SSB simulation, conference-day readiness, and strategy to walk in recommended.",
+    title:  "Selection",
+    desc:   "SSB Specialisation + Final Merit Readiness",
+    Icon:   Trophy,
   },
 ];
 
-const ProcessSection = () => {
-  return (
-    <section id="process" className={`bg-[#F5F7FA] ${SECTION_PAD}`}>
-      <div className={CONTAINER}>
+const ProcessSection = () => (
+  <section id="process" className="bg-[#eaf6f8] py-24">
+    <div className={CONTAINER}>
 
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.35, ease: EASE_OUT }}
-          className={SECTION_HEADER_MB}
-        >
-          <p className={`${EYEBROW} mb-4`}>The Journey</p>
-          <h2 className={`${H2_LIGHT} max-w-2xl`}>A Disciplined Path to Selection</h2>
-        </motion.div>
-
-        {/* Vertical step layout */}
-        <div className="relative pl-10 md:pl-14">
-          <div className="absolute left-4 md:left-5 top-1 bottom-1 w-px bg-black/10" />
-
-          <div className="space-y-12">
-            {steps.map((step, i) => (
-              <motion.div
-                key={step.number}
-                /* scale: 0.98 — nothing appears from nothing */
-                initial={{ opacity: 0, y: 8, scale: 0.98 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, amount: 0.4 }}
-                transition={{ duration: 0.35, ease: EASE_OUT, delay: i * 0.05 }}
-                className="relative"
-              >
-                <div className="absolute -left-10 md:-left-14 top-0 w-8 h-8 rounded-full border border-black/10 bg-white flex items-center justify-center">
-                  <span className="font-sans text-[11px] font-bold text-[#C2A46D]">
-                    {step.number}
-                  </span>
-                </div>
-
-                <h3 className={`${H3_LIGHT} mb-2`}>{step.title}</h3>
-                <p className={`${BODY_LIGHT} max-w-lg`}>{step.desc}</p>
-              </motion.div>
-            ))}
-          </div>
+      {/* Header */}
+      <div className="mb-14">
+        <p className={`${EYEBROW} mb-4`}>The Journey</p>
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+          <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#00568C] max-w-sm leading-tight">
+            A Disciplined Path<br />to Selection
+          </h2>
+          <p className="font-sans text-sm leading-relaxed text-[#6B7280] max-w-xs md:text-right">
+            Four structured phases engineered to carry you from aspiration to recommendation.
+          </p>
         </div>
       </div>
-    </section>
-  );
-};
+
+      {/* Cards grid */}
+      <div className="relative">
+        {/* Connector line — desktop only */}
+        <div
+          aria-hidden
+          className="hidden md:block absolute top-[2.75rem] left-[calc(12.5%+1rem)] right-[calc(12.5%+1rem)] h-px"
+          style={{ background: "linear-gradient(90deg, transparent 0%, #2FB4E7 15%, #2FB4E7 85%, transparent 100%)", opacity: 0.25 }}
+        />
+
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          {steps.map((step) => (
+            <StepCard key={step.number} step={step} />
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </section>
+);
+
+interface StepData {
+  number: string;
+  title:  string;
+  desc:   string;
+  Icon:   React.ElementType;
+}
+
+const StepCard = ({ step }: { step: StepData }) => (
+  <div
+    className="group relative bg-white rounded-2xl border border-[#e5e7eb] p-7 flex flex-col gap-5"
+    style={{
+      boxShadow: "0 1px 3px rgba(0,0,0,0.05), 0 4px 16px rgba(0,0,0,0.04)",
+      transition: "transform 280ms cubic-bezier(0.23,1,0.32,1), box-shadow 280ms cubic-bezier(0.23,1,0.32,1), border-color 280ms ease",
+    }}
+    onMouseEnter={(e) => {
+      const el = e.currentTarget;
+      el.style.transform     = "translateY(-4px)";
+      el.style.boxShadow     = "0 8px 32px rgba(0,86,140,0.10)";
+      el.style.borderColor   = "rgba(0,86,140,0.20)";
+    }}
+    onMouseLeave={(e) => {
+      const el = e.currentTarget;
+      el.style.transform     = "translateY(0)";
+      el.style.boxShadow     = "0 1px 3px rgba(0,0,0,0.05), 0 4px 16px rgba(0,0,0,0.04)";
+      el.style.borderColor   = "#e5e7eb";
+    }}
+  >
+    {/* Icon badge */}
+    <div
+      className="relative z-10 w-10 h-10 rounded-xl flex items-center justify-center self-start"
+      style={{
+        background: "rgba(47,180,231,0.10)",
+        border:     "1px solid rgba(47,180,231,0.25)",
+      }}
+    >
+      <step.Icon size={17} className="text-[#00568C]" strokeWidth={1.5} />
+    </div>
+
+    {/* Content */}
+    <div className="flex flex-col gap-2">
+      <span className="font-sans text-[11px] font-bold tracking-[0.22em] text-[#2FB4E7] uppercase">
+        {step.number}
+      </span>
+      <h3 className="font-serif text-[1.0625rem] font-bold text-[#00568C] leading-snug">
+        {step.title}
+      </h3>
+      <p className="font-sans text-[0.8125rem] leading-relaxed text-[#374151]">
+        {step.desc}
+      </p>
+    </div>
+  </div>
+);
 
 export default ProcessSection;
