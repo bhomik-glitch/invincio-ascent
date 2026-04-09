@@ -87,7 +87,8 @@ const DifferentiatorSection = () => {
             className="bg-white border border-[#e5e7eb] rounded-xl overflow-hidden"
             style={{ boxShadow: "0 2px 12px rgba(0,86,140,0.06)" }}
           >
-            <div className="grid grid-cols-3 text-sm font-sans">
+            <div className="overflow-x-auto">
+            <div className="grid grid-cols-3 text-sm font-sans min-w-[400px]">
               {/* Header row */}
               <div className="p-4 bg-[#eaf6f8] font-semibold text-[#6B7280]">Aspect</div>
               <div className="p-4 bg-[#00568C]/8 font-semibold text-[#00568C]" style={{ background: "rgba(0,86,140,0.07)" }}>Invincio</div>
@@ -106,6 +107,7 @@ const DifferentiatorSection = () => {
                   </div>
                 </>
               ))}
+            </div>
             </div>
           </motion.div>
         </div>

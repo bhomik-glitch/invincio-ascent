@@ -241,7 +241,7 @@ const TransformationSection = () => {
         </div>
 
         {/* Scrolling carousel */}
-        <div className="relative overflow-hidden w-full">
+        <div className="relative overflow-hidden w-full max-w-full" style={{ contain: "paint" }}>
           <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white to-transparent pointer-events-none z-10" />
           <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white to-transparent pointer-events-none z-10" />
 

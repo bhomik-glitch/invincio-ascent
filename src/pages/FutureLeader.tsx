@@ -97,12 +97,12 @@ const FutureLeader = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
-    <div className="bg-[#F1FFFF] min-h-screen">
+    <div className="bg-[#F1FFFF] min-h-screen overflow-x-hidden w-full">
       <HeroSection
         subtitle="Future Leader Bootcamp"
         title="Build the Officer Before the Exam Begins."
         description="A foundational program for Class 9 students onwards. Personality, discipline, communication, and SSB mindset — developed early, developed right."
-        backgroundImage="/assets/Whisk_af546ace17f28599d3f4ed17a321bd6fdr.png"
+        backgroundImage="/assets/hero-bg.png"
         showStats={false}
       />
 

@@ -125,12 +125,12 @@ const SSBInterview = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
-    <div className="bg-[#F1FFFF] min-h-screen">
+    <div className="bg-[#F1FFFF] min-h-screen overflow-x-hidden w-full">
       <HeroSection
         subtitle="SSB Interview Preparation"
         title="Train for the Board from the Inside."
         description="Mentored by former SSB Assessors who sat on the other side of the table. Real OLQ development. Full mock SSBs. Proven recommendations."
-        backgroundImage="/assets/Whisk_af546ace17f28599d3f4ed17a321bd6fdr.png"
+        backgroundImage="/assets/hero-bg.png"
         showStats={false}
       />
 

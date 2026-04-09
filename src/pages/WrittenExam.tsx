@@ -86,12 +86,12 @@ const WrittenExam = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
-    <div className="bg-[#F1FFFF] min-h-screen">
+    <div className="bg-[#F1FFFF] min-h-screen overflow-x-hidden w-full">
       <HeroSection
         subtitle="Written Examination Training"
         title="Clear the Written. Earn Your SSB Call."
         description="Structured, mentor-driven preparation for NDA, CDS, and AFCAT. Every subject, every exam, every attempt — covered."
-        backgroundImage="/assets/Whisk_af546ace17f28599d3f4ed17a321bd6fdr.png"
+        backgroundImage="/assets/hero-bg.png"
         showStats={false}
       />
 
