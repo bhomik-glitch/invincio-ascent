@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { CalendarCheck, MessageCircle } from "lucide-react";
 import ConsultationModal from "./ConsultationModal";
+import { candidateStories } from "@/data/candidate-selections";
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as [number, number, number, number];
 
@@ -16,6 +17,8 @@ const stats = [
   { value: "Notifications", label: "" },
   { value: "Result Out !", label: "" },
 ];
+
+const duplicatedStories = [...candidateStories, ...candidateStories];
 
 interface HeroSectionProps {
   title?: string;
@@ -163,6 +166,58 @@ const HeroSection = ({
         </motion.div>
       </div>
     </section>
+
+    {/* Moving Image Section — Selections Carousel */}
+    <div className="w-full bg-white py-12 border-b border-[#e5e7eb]">
+      <div className="relative overflow-hidden w-full max-w-full">
+        {/* Side Gradient Fades */}
+        <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white to-transparent pointer-events-none z-10" />
+        <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white to-transparent pointer-events-none z-10" />
+
+        <motion.div
+          className="flex gap-5 w-max"
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ duration: 35, ease: "linear", repeat: Infinity }}
+        >
+          {duplicatedStories.map((story, index) => (
+            <div
+              key={index}
+              className="group/card flex items-center gap-4 bg-white rounded-xl px-5 py-4 min-w-[280px] border border-[#e5e7eb]"
+              style={{
+                boxShadow: "0 1px 4px rgba(0,0,0,0.04)",
+                transition: "transform 250ms cubic-bezier(0.23,1,0.32,1), box-shadow 250ms ease, border-color 250ms ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "scale(1.02)";
+                e.currentTarget.style.boxShadow = "0 6px 24px rgba(0,86,140,0.10)";
+                e.currentTarget.style.borderColor = "rgba(47,180,231,0.30)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "scale(1)";
+                e.currentTarget.style.boxShadow = "0 1px 4px rgba(0,0,0,0.04)";
+                e.currentTarget.style.borderColor = "#e5e7eb";
+              }}
+            >
+              <div className="w-16 aspect-square rounded-md overflow-hidden shrink-0">
+                <img
+                  src={story.image}
+                  alt={story.name}
+                  className="block w-full h-full object-cover object-[center_20%]"
+                />
+              </div>
+              <div className="flex flex-col text-left leading-tight max-w-[160px]">
+                <span className="font-serif text-sm font-semibold text-[#00568C]">
+                  {story.name}
+                </span>
+                <span className="font-sans text-xs text-[#6B7280] mt-0.5 line-clamp-2">
+                  {story.info}
+                </span>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+    </div>
 
     <ConsultationModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </>
