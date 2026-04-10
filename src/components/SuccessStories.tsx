@@ -80,11 +80,11 @@ const SuccessStories = () => {
               }}
             >
               {/* Photo */}
-              <div className="w-full h-[300px] overflow-hidden rounded-t-xl shrink-0">
+              <div className="w-full aspect-[4/3] overflow-hidden rounded-t-xl shrink-0 relative">
                 <img
                   src={story.image}
                   alt={story.name}
-                  className="w-full h-auto object-cover object-top"
+                  className="w-full h-full object-cover object-center"
                 />
               </div>
 
