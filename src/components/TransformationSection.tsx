@@ -226,11 +226,13 @@ const TransformationSection = () => {
             className="bg-white border border-[#e5e7eb] rounded-xl overflow-hidden"
             style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}
           >
-            <img
-              src="/assets/client_photo/75 out of 87 mentored at Success point at Itanagar.jpg"
-              alt="75 out of 87 mentored at Success point at Itanagar"
-              className="w-full h-64 object-cover"
-            />
+            <div className="w-full aspect-[16/9] overflow-hidden">
+              <img
+                src="/assets/client_photo/75 out of 87 mentored at Success point at Itanagar.jpg"
+                alt="75 out of 87 mentored at Success point at Itanagar"
+                className="block w-full h-full object-cover"
+              />
+            </div>
             <div className="px-8 py-5 text-center">
               <p className="font-serif font-bold text-[#00568C] text-lg">Itanagar Milestone</p>
               <p className="font-sans text-sm text-[#6B7280] mt-1">
@@ -240,13 +242,13 @@ const TransformationSection = () => {
           </motion.div>
         </div>
 
-        {/* Scrolling carousel */}
-        <div className="relative overflow-hidden w-full max-w-full" style={{ contain: "paint" }}>
+        {/* Scrolling carousel — contain:paint removed (Safari bug), will-change removed */}
+        <div className="relative overflow-hidden w-full max-w-full">
           <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white to-transparent pointer-events-none z-10" />
           <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white to-transparent pointer-events-none z-10" />
 
           <motion.div
-            className="flex gap-5 w-max will-change-transform"
+            className="flex gap-5 w-max"
             animate={{ x: ["0%", "-50%"] }}
             transition={{ duration: 35, ease: "linear", repeat: Infinity }}
           >
@@ -269,11 +271,12 @@ const TransformationSection = () => {
                   e.currentTarget.style.borderColor = "#e5e7eb";
                 }}
               >
-                <div className="w-16 h-14 rounded-md overflow-hidden shrink-0">
+                {/* Avatar — aspect-ratio replaces fixed h-14 */}
+                <div className="w-16 aspect-square rounded-md overflow-hidden shrink-0">
                   <img
                     src={story.image}
                     alt={story.name}
-                    className="w-full h-full object-cover object-[center_20%]"
+                    className="block w-full h-full object-cover object-[center_20%]"
                   />
                 </div>
                 <div className="flex flex-col text-left leading-tight max-w-[160px]">

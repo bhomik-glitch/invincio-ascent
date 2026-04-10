@@ -54,16 +54,16 @@ const SuccessStories = () => {
         <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#eaf6f8] to-transparent pointer-events-none z-10" />
         <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#eaf6f8] to-transparent pointer-events-none z-10" />
 
-        {/* Track */}
+        {/* Track — no will-change, animation scoped to inner wrapper only */}
         <motion.div
-          className="flex gap-5 w-max will-change-transform"
+          className="flex gap-5 w-max"
           animate={{ x: ["0%", "-50%"] }}
           transition={{ duration: 30, ease: "linear", repeat: Infinity }}
         >
           {duplicatedStories.map((story, index) => (
             <div
               key={index}
-              className="group/card flex flex-col bg-white rounded-xl overflow-hidden min-w-[220px] min-h-[420px] cursor-pointer border border-[#e5e7eb]"
+              className="group/card flex flex-col bg-white rounded-xl overflow-hidden min-w-[220px] cursor-pointer border border-[#e5e7eb]"
               style={{
                 boxShadow: "0 1px 4px rgba(0,0,0,0.04)",
                 transition: "transform 250ms cubic-bezier(0.23,1,0.32,1), box-shadow 250ms ease, border-color 250ms ease",
@@ -79,12 +79,12 @@ const SuccessStories = () => {
                 e.currentTarget.style.borderColor = "#e5e7eb";
               }}
             >
-              {/* Photo */}
+              {/* Photo — aspect-ratio drives height, no fixed px */}
               <div className="w-full aspect-[4/3] overflow-hidden rounded-t-xl shrink-0 relative">
                 <img
                   src={story.image}
                   alt={story.name}
-                  className="w-full h-full object-cover object-center"
+                  className="block w-full h-full object-cover object-center"
                 />
               </div>
 
