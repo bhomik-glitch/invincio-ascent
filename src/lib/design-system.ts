@@ -16,12 +16,11 @@
  *
  * Section sequence:
  *   1. Hero          → bg image + subtle dark overlay (special case)
- *   2. SuccessStories → bg-[#eaf6f8]  alt-light
- *   3. CoreOffering  → bg-[#F1FFFF]  base
- *   4. ProcessSection → bg-[#eaf6f8]  alt-light
- *   5. ResultsSection → bg-white      card surface
- *   6. Collabs       → bg-[#F1FFFF]  base
- *   7. CTA           → bg-[#00568C]  deep blue (brand anchor)
+ *   2. CoreOffering  → bg-[#F1FFFF]  base
+ *   3. ProcessSection → bg-[#eaf6f8]  alt-light
+ *   4. ResultsSection → bg-white      card surface
+ *   5. Collabs       → bg-[#F1FFFF]  base
+ *   6. CTA           → bg-[#00568C]  deep blue (brand anchor)
  */
 
 // ── Backgrounds ──────────────────────────────────────────────────────────────
