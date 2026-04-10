@@ -26,14 +26,16 @@ interface HeroSectionProps {
   subtitle?: string;
   backgroundImage?: string;
   showStats?: boolean;
+  showCarousel?: boolean;
 }
 
 const HeroSection = ({
-  title = "Transforming Defence Aspirants into Officers.",
-  description = "Mentored by Former SSB Assessors. Real personality development. Proven selections across all defence branches.",
+  title = "Transforming Defence Aspirants Into Officers",
+  description = "Mentored by Ex-SSB Assessors, we deliver authentic personality development and proven success across all branches of the armed forces.",
   subtitle = "Defence Leadership Institute",
   backgroundImage = "/assets/hero-bg.png",
   showStats = true,
+  showCarousel = false,
 }: HeroSectionProps) => {
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -168,7 +170,8 @@ const HeroSection = ({
     </section>
 
     {/* Moving Image Section — Selections Carousel */}
-    <div className="w-full bg-white py-12 border-b border-[#e5e7eb]">
+    {showCarousel && (
+      <div className="w-full bg-white py-12 border-b border-[#e5e7eb]">
       <div className="relative overflow-hidden w-full max-w-full">
         {/* Side Gradient Fades */}
         <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white to-transparent pointer-events-none z-10" />
@@ -218,6 +221,7 @@ const HeroSection = ({
         </motion.div>
       </div>
     </div>
+    )}
 
     <ConsultationModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </>

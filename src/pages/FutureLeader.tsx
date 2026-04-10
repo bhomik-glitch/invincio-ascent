@@ -14,46 +14,46 @@ import {
 const pillars = [
   {
     icon: Star,
-    title: "Personality & Confidence",
-    desc: "Build a strong self-image from the ground up. Students learn to carry themselves with purpose, speak with conviction, and act without hesitation.",
+    title: "Personality and Confidence",
+    desc: "Building a strong self-image from the ground up, our students learn to carry themselves with purpose and speak with conviction.",
     points: [
-      "Public speaking & stage confidence",
+      "Public speaking and stage confidence",
       "Self-awareness and identity exercises",
-      "Positive self-talk and mental conditioning",
+      "Positive mental conditioning",
       "Overcoming social anxiety",
     ],
   },
   {
     icon: MessageSquare,
-    title: "Communication & Leadership",
-    desc: "Officers lead through clear communication. We train students to articulate thoughts, manage group dynamics, and influence peers constructively.",
+    title: "Communication and Leadership",
+    desc: "Officers lead through clarity. We train students to articulate thoughts, manage group dynamics, and influence peers constructively.",
     points: [
       "Structured group discussions",
       "Debate and argumentation skills",
       "Active listening and empathy",
-      "Peer leadership exercises",
+      "Peer leadership simulations",
     ],
   },
   {
     icon: Clock,
-    title: "Discipline & Routine",
-    desc: "Discipline is the foundation of every officer. We help students build structured daily routines, goal-setting habits, and a long-term vision mindset.",
+    title: "Discipline and Routine",
+    desc: "Discipline is the foundation. We help students build structured daily routines, goal-setting habits, and a long-term vision.",
     points: [
-      "Daily schedule planning & execution",
+      "Daily schedule execution",
       "Goal-setting frameworks",
-      "Study discipline & time management",
-      "Physical fitness habits",
+      "Study discipline and time management",
+      "Core physical fitness habits",
     ],
   },
   {
     icon: Shield,
     title: "SSB Mindset Exposure",
-    desc: "Early introduction to what the Services Selection Board looks for — not to teach tricks, but to build the genuine qualities that get candidates recommended.",
+    desc: "Early introduction to the qualities the SSB Interview board looks for — building the genuine attributes that get candidates recommended.",
     points: [
-      "Introduction to Officer Like Qualities",
-      "Basic PPDT & WAT exercises",
-      "Situational response practice (age-appropriate)",
-      "Understanding the armed forces career path",
+      "Introduction to Officer-Like Qualities (OLQs)",
+      "Foundational PPDT and WAT exercises",
+      "Situational response practice",
+      "Armed Forces career roadmap",
     ],
   },
 ];
@@ -67,30 +67,30 @@ const timeline = [
 
 const whyEarly = [
   {
-    title: "Habits form before Class 11",
-    desc: "The window from Class 9–10 is when foundational habits of discipline, focus, and communication are most easily shaped.",
+    title: "Habits Form Before Class 11",
+    desc: "The window from Class 9 onwards is when foundational habits of discipline and focus are most easily shaped.",
   },
   {
-    title: "Competitive edge at SSB",
-    desc: "Candidates who started personality development early are consistently more natural and less rehearsed at the board.",
+    title: "Competitive Edge at the SSB Interview",
+    desc: "Candidates who begin early are consistently more natural and less rehearsed during board assessments.",
   },
   {
-    title: "Academics + defence prep together",
-    desc: "The bootcamp is designed to complement school academics — not compete with them. Sessions are structured around school schedules.",
+    title: "Balanced Academics and Prep",
+    desc: "Our 2024 methodology complements school academics rather than competing with them, featuring flexible schedules.",
   },
   {
-    title: "Mentorship before pressure",
-    desc: "Starting in Class 9 means 3–4 years of mentorship before the NDA exam — building genuine maturity, not last-minute cramming.",
+    title: "Long-Term Mentorship",
+    desc: "Starting early ensures 3–4 years of guidance before the NDA exam, building genuine maturity.",
   },
 ];
 
 const outcomes = [
   "Strong communication and leadership foundation before Class 11",
-  "Disciplined daily routine with consistent follow-through",
-  "Awareness of the SSB process and defence career paths",
-  "Increased self-confidence and public presence",
+  "Disciplined daily routine with consistent execution",
+  "Deep awareness of the SSB Interview process",
+  "Enhanced self-confidence and public presence",
   "Academic performance improvement through structured habits",
-  "Head start on personality development for future SSB attempts",
+  "A significant head start on Officer-Like Qualities (OLQs)",
 ];
 
 const FutureLeader = () => {
@@ -100,8 +100,8 @@ const FutureLeader = () => {
     <div className="bg-[#F1FFFF] min-h-screen overflow-x-hidden w-full">
       <HeroSection
         subtitle="Future Leader Bootcamp"
-        title="Build the Officer Before the Exam Begins."
-        description="A foundational program for Class 9 students onwards. Personality, discipline, communication, and SSB mindset — developed early, developed right."
+        title="Build the Officer Before the Exam Begins"
+        description="A foundational program for Class 9 onwards. Personality, discipline, communication, and the SSB mindset — developed early, developed right."
         backgroundImage="/assets/hero-bg.png"
         showStats={false}
       />

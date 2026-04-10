@@ -4,10 +4,10 @@ import { useRef } from "react";
 import { UserCheck, Brain, HeartHandshake, ClipboardCheck } from "lucide-react";
 
 const features = [
-  { icon: UserCheck, title: "Officer-Like Qualities", desc: "Developing the 15 OLQs assessed during SSB interviews" },
-  { icon: Brain, title: "Psychological Assessment", desc: "Deep profiling for TAT, WAT, SRT, and SD preparation" },
-  { icon: HeartHandshake, title: "Personal Mentorship", desc: "One-on-one guidance by former SSB assessors" },
-  { icon: ClipboardCheck, title: "Structured Feedback", desc: "Actionable feedback after every mock & simulation" },
+  { icon: UserCheck, title: "Officer-Like Qualities (OLQs)", desc: "Developing the 15 core attributes assessed during the SSB Interview" },
+  { icon: Brain, title: "Psychological Assessment", desc: "Comprehensive profiling for the TAT, WAT, SRT, and SD modules" },
+  { icon: HeartHandshake, title: "Expert Mentorship", desc: "Exclusive one-on-one guidance conducted by Ex-SSB Assessors" },
+  { icon: ClipboardCheck, title: "Strategic Feedback", desc: "Detailed and actionable feedback for every mock simulation" },
 ];
 
 const AboutSection = () => {
@@ -48,13 +48,10 @@ const AboutSection = () => {
               <span className="gold-text">Officers</span>
             </h2>
             <p className="text-muted-foreground font-sans leading-relaxed mb-4">
-              Founded by experienced defence assessors who have spent decades evaluating candidates at Services Selection Boards, Invincio brings an insider's perspective to SSB preparation.
-            </p>
-            <p className="text-muted-foreground font-sans leading-relaxed mb-4">
-              We don't believe in coaching. We believe in transformation. Our mentorship-first approach focuses on developing genuine officer-like qualities, personality traits, and the psychological readiness required to clear SSB.
+              Founded by veteran assessors, we prioritize authentic transformation over traditional coaching. Our 2024 mentorship model focuses exclusively on the genuine development of Officer-Like Qualities (OLQs).
             </p>
             <p className="text-muted-foreground font-sans leading-relaxed">
-              Every candidate is unique — and so is our approach. Through personalised mentorship, deep psychological profiling, and structured feedback, we build the real you.
+              Every candidate is unique — and so is our approach. Through personalised mentorship, deep psychological profiling, and strategic feedback, we build the real you.
             </p>
           </motion.div>
         </div>

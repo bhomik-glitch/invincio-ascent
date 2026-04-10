@@ -27,16 +27,15 @@ const CTASection = () => {
         >
           {/* Eyebrow */}
           <p className="font-sans text-xs font-semibold tracking-[0.3em] uppercase text-[#2FB4E7] mb-6">
-            Begin Your Officer Journey
+            Begin Your Leadership Journey
           </p>
 
           <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-5 leading-tight">
-            Your Selection Starts Here.
+            Your Selection Journey Starts Here
           </h2>
 
           <p className="font-sans text-sm leading-relaxed text-white/70 mb-10 max-w-md">
-            Schedule a free consultation with an ex-SSB assessor. No commitment
-            — just clarity on your path forward.
+            Consult with an Ex-SSB Assessor throughout 2024. Gain absolute clarity on your path to recommendation through our specialized mentorship.
           </p>
 
           {/* Primary CTA — golden yellow */}

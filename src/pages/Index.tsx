@@ -8,7 +8,7 @@ import CTASection from "@/components/CTASection";
 const Index = () => {
   return (
     <div>
-      <HeroSection />
+      <HeroSection showCarousel={true} />
       <CoreOffering />
       <ProcessSection />
       <ResultsSection />

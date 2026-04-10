@@ -4,15 +4,15 @@ import { CalendarCheck } from "lucide-react";
 const EASE_OUT = [0.23, 1, 0.32, 1] as [number, number, number, number];
 
 const stats = [
-  { value: "75/87", label: "Selected – Itanagar" },
+  { value: "75/87", label: "Selections in 2024" },
   { value: "500+",  label: "Aspirants Mentored"  },
-  { value: "10+",   label: "Institutions"         },
-  { value: "100%",  label: "Real SSB Mentors"     },
+  { value: "10+",   label: "Respected Institutions" },
+  { value: "100%",  label: "Ex-SSB Assessors"     },
 ];
 
 const achievements = [
   {
-    title: "Mentoring the APPSCCE-2024 Aspirants",
+    title: "Mentoring APPSCCE-2024 Aspirants",
     desc: "In the heart of Itanagar, our mock interview sessions for aspiring candidates fostered confidence and clarity, paving their way to success. The experience blended professional growth with the spirit of Arunachal Pradesh.",
     tag: "Mentorship",
     image: "/assets/client_photo/75 out of 87 mentored at Success point at Itanagar.jpg",
@@ -30,9 +30,9 @@ const achievements = [
     image: "/assets/Sainik_School_East_Siang/img1.jpg",
   },
   {
-    title: "Mentoring the Mentors — SS Ambikapur",
+    title: "Mentoring Mentors — SS Ambikapur",
     desc: "Empowering educators with advanced training methodologies and leadership skills to better guide the next generation of leaders. Because learning never ends.",
-    tag: "Trainer Development",
+    tag: "Development",
     image: "/assets/projects/training-the-trainers/img-1.jpg",
   },
   {
@@ -48,13 +48,13 @@ const achievements = [
     image: "/assets/projects/harayana/img-1.png",
   },
   {
-    title: "Sainik School Ambikapur — Infra Development",
+    title: "Sainik School Ambikapur — Infra",
     desc: "Hallmark personality development and infrastructure creation project, catapulting the training of aspirants to greater heights with purpose-built SSB simulation setups.",
     tag: "Infrastructure",
     image: "/assets/projects/infra-development/img-2.jpg",
   },
   {
-    title: "Sainik School Kapurthala, Punjab — Infra",
+    title: "Sainik School Kapurthala — Infra",
     desc: "Training the next generation with precision. Custom-built structures for cadets to experience authentic, realistic scenarios and prepare for life's challenges.",
     tag: "Infrastructure",
     image: "/assets/projects/punjab/img-2.jpg",

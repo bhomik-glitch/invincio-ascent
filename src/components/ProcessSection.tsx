@@ -5,25 +5,25 @@ const steps = [
   {
     number: "01",
     title:  "Assessment",
-    desc:   "Baseline Assessment",
+    desc:   "Baseline diagnostic assessment",
     Icon:   Target,
   },
   {
     number: "02",
     title:  "Profiling",
-    desc:   "Personality + Written Parallel Prep",
+    desc:   "Integrated personality and written preparation",
     Icon:   Brain,
   },
   {
     number: "03",
     title:  "Mentorship",
-    desc:   "Performance Tracking + Mentorship",
+    desc:   "Continuous performance tracking and mentorship",
     Icon:   Users,
   },
   {
     number: "04",
     title:  "Selection",
-    desc:   "SSB Specialisation + Final Merit Readiness",
+    desc:   "Advanced SSB Interview specialization and merit readiness",
     Icon:   Trophy,
   },
 ];
@@ -37,10 +37,10 @@ const ProcessSection = () => (
         <p className={`${EYEBROW} mb-4`}>The Journey</p>
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
           <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#00568C] max-w-sm leading-tight">
-            A Disciplined Path<br />to Selection
+            A Disciplined Path<br />To Selection
           </h2>
           <p className="font-sans text-sm leading-relaxed text-[#6B7280] max-w-xs md:text-right">
-            Four structured phases engineered to carry you from aspiration to recommendation.
+            Four rigorous phases designed to transition you from an aspirant to a recommended candidate in 2024.
           </p>
         </div>
       </div>

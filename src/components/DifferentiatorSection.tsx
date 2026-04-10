@@ -5,24 +5,24 @@ import { X, Check } from "lucide-react";
 const EASE_OUT = [0.23, 1, 0.32, 1] as [number, number, number, number];
 
 const notThings = [
-  "Not Coaching.",
-  "Not Memorised Answers.",
-  "Not Fake Confidence.",
+  "Not generic coaching.",
+  "Not memorized templates.",
+  "Not fabricated confidence.",
 ];
 
 const instead = [
-  "Real psychological profiling",
-  "Real behavioural feedback",
-  "Real transformation",
+  "Strategic psychological profiling",
+  "Authentic behavioral assessment",
+  "Genuine leadership transformation",
 ];
 
 const comparison = [
-  { aspect: "Approach",   invincio: "Mentorship & transformation",    traditional: "Coaching & repetition"       },
+  { aspect: "Approach",   invincio: "Mentorship and transformation",    traditional: "Coaching and repetition" },
   { aspect: "Faculty",    invincio: "Ex-SSB Assessors",               traditional: "Generic trainers"            },
-  { aspect: "Feedback",   invincio: "Personalised, structured",       traditional: "Generic, group-based"        },
-  { aspect: "Psychology", invincio: "Deep profiling & development",   traditional: "Template-based answers"      },
-  { aspect: "Focus",      invincio: "Officer-Like Qualities",         traditional: "Interview tricks"            },
-  { aspect: "Outcome",    invincio: "Genuine personality change",     traditional: "Temporary behaviour"         },
+  { aspect: "Feedback",   invincio: "Highly personalized",            traditional: "Generic and group-based"     },
+  { aspect: "Psychology", invincio: "Deep profiling and development", traditional: "Template-based responses"    },
+  { aspect: "Core Focus", invincio: "Officer-Like Qualities (OLQs)",  traditional: "Interview tricks"            },
+  { aspect: "Outcome",    invincio: "Genuine personality evolution",  traditional: "Temporary behavioral shifts" },
 ];
 
 const DifferentiatorSection = () => {

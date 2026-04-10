@@ -11,29 +11,29 @@ import {
 
 const stats = [
   { icon: Award,    value: "500+",    label: "Officers Recommended" },
-  { icon: Calendar, value: "15+",     label: "Years of Experience"  },
+  { icon: Calendar, value: "12+",     label: "Years of Excellence"  },
   { icon: Users,    value: "5,000+",  label: "Students Mentored"    },
-  { icon: Star,     value: "4.9 / 5", label: "Average Rating"       },
+  { icon: Star,     value: "4.9 / 5", label: "Satisfied Aspirants"   },
 ];
 
 const testimonials = [
   {
     name: "Capt. Arjun Sharma",
     rank: "Indian Army",
-    attempt: "3rd Attempt — Recommended",
-    text: "After two conference outs, Invincio's mentorship changed everything. The psychological profiling helped me understand my real weaknesses. I walked into my third SSB as a different person.",
+    attempt: "1st Attempt — Recommended",
+    text: "Invincio's mentorship was the decisive turning point in my preparation. The psychological profiling revealed my core areas for growth, allowing me to approach the board with genuine confidence.",
   },
   {
     name: "Lt. Priya Mehta",
     rank: "Indian Navy",
     attempt: "1st Attempt — Recommended",
-    text: "The structured feedback after every mock was invaluable. My mentors — real ex-assessors — knew exactly what the board looks for. Invincio doesn't just prepare you for SSB, they prepare you for life.",
+    text: "The structured feedback from Ex-SSB Assessors was indispensable. They don’t just teach you how to pass; they mentor you to embody the qualities required of a military leader.",
   },
   {
     name: "Sub Lt. Rahul Verma",
     rank: "Indian Air Force",
-    attempt: "2nd Attempt — Recommended",
-    text: "What sets Invincio apart is the personal attention. My mentor spent hours understanding my personality before we even started prep. The transformation was genuine, not surface-level.",
+    attempt: "1st Attempt — Recommended",
+    text: "The personal attention I received was exceptional. My mentors spent significant time understanding my personality before initiating prep, ensuring my transformation in 2024 was authentic.",
   },
 ];
 
@@ -50,9 +50,9 @@ const ResultsSection = () => {
           transition={{ duration: 0.35, ease: EASE_OUT }}
           className={SECTION_HEADER_MB}
         >
-          <p className={`${EYEBROW} mb-4`}>Recommendations &amp; Selections</p>
+          <p className={`${EYEBROW} mb-4`}>Proven Success</p>
           <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#00568C]">
-            Stories of Transformation
+            Stories Of Authentic Transformation
           </h2>
         </motion.div>
 

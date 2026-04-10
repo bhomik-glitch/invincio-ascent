@@ -18,12 +18,12 @@ const programs = [
       "Personalized performance tracking"
     ],
     tagline: "Officer prep, anywhere, anytime.",
-    duration: "4-6 Months",
+    duration: "4–6 Months",
     audience: ["College Students", "Job Holders", "Distance Learners"]
   },
   {
     title: "NDA/CDS Offline",
-    description: "Immersive classroom experience with rigorous discipline and peer-to-peer learning environment.",
+    description: "Immersive classroom experience with rigorous discipline and a peer-to-peer learning environment.",
     points: [
       "Direct face-to-face mentorship",
       "Structured classroom environment",
@@ -36,35 +36,35 @@ const programs = [
     audience: ["Full-time Aspirants", "Local Students"]
   },
   {
-    title: "SSB / AFSB / NSB / PSB / FSB",
+    title: "SSB Interview Track",
     description: "Specialized personality development program tailored for all selection boards of the Indian Armed Forces.",
     points: [
-      "Real-world GTO task simulations",
-      "Psychological battery practice",
-      "One-on-one Mock Interviews",
-      "Individualized feedback sessions",
-      "Confidence & Clarity workshops"
+      "Real-world GTO Task simulations",
+      "Psychological battery modules",
+      "Mock Interviews with Ex-SSB Assessors",
+      "Strategic feedback sessions",
+      "Selection-focused character evolution"
     ],
     tagline: "Master the psychology of selection.",
-    duration: "2-4 Weeks",
+    duration: "2–4 Weeks",
     audience: ["Written Qualified Candidates", "Direct Entry Aspirants"]
   },
   {
-    title: "Young Leaders",
-    description: "Foundational character-building program designed to instill Officer-Like Qualities from an early age.",
+    title: "Future Leaders",
+    description: "Foundational character-building program designed to instill Officer-Like Qualities (OLQs) from an early age.",
     points: [
-      "Leadership & Initiative workshops",
+      "Leadership and Initiative workshops",
       "Effective communication training",
-      "Critical thinking & logic puzzles",
-      "Ethical decision making drills",
-      "Public speaking & articulation"
+      "Critical thinking and logic puzzles",
+      "Ethical decision-making drills",
+      "Public speaking and articulation"
     ],
     tagline: "Drafting the future of leadership.",
     duration: "1 Year",
-    audience: ["School Students", "Early Dreamers"]
+    audience: ["Class 9 onwards", "Early Dreamers"]
   },
   {
-    title: "UPSC Interview",
+    title: "Civil Services Personality Test",
     description: "Refined guidance for the Civil Services personality test with a focus on administrative leadership and poise.",
     points: [
       "In-depth DAF analysis & briefing",
@@ -93,8 +93,8 @@ const Programs = () => {
       {/* Hero */}
       <HeroSection
         subtitle="Our Training Programs"
-        title="Specialized Mentorship for Defence Excellence."
-        description="From NDA/CDS written prep to SSB personality development, our programs are designed to build the next generation of military leaders with precision and purpose."
+        title="Specialized Mentorship for Defence Excellence"
+        description="From comprehensive written exam preparation to elite SSB mentorship, our 2024 programs are meticulously designed to build the next generation of military leaders with precision and purpose."
         backgroundImage="/assets/offlineclasses.jpeg"
         showStats={false}
       />
@@ -242,7 +242,7 @@ const Programs = () => {
             transition={{ duration: 0.35, ease: EASE_OUT, delay: 0.1 }}
             className="font-sans text-sm text-white/70 mb-8 leading-relaxed"
           >
-            Talk to one of our ex-SSB assessors for free — zero commitment, total clarity.
+            Talk to one of our Ex-SSB Assessors for free — zero commitment, total clarity.
           </motion.p>
 
           <motion.div

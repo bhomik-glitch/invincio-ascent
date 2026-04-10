@@ -17,11 +17,11 @@ const offerings = [
   {
     Icon: BookOpen,
     title: "Written Examination Training",
-    summary: "Structured prep for NDA, CDS, and AFCAT written tests.",
+    summary: "Highly structured preparation for the NDA, CDS, and AFCAT written examinations.",
     bullets: [
-      "Subject-wise modules: GK, Maths, English",
-      "Test series with performance analytics",
-      "Past paper analysis and exam strategy",
+      "Comprehensive modules for General Knowledge, Mathematics, and English",
+      "Advanced test series with precise performance analytics",
+      "In-depth analysis of past papers and strategic exam planning",
     ],
     href: "/programs/written-exam",
   },
@@ -29,11 +29,11 @@ const offerings = [
     Icon: Users,
     title: "SSB Interview Preparation",
     summary:
-      "End-to-end SSB mentorship by former assessors who know the board from inside.",
+      "End-to-end mentorship conducted by Ex-SSB Assessors with profound internal board experience.",
     bullets: [
-      "Psychology: TAT, WAT, SRT, SD practice",
-      "GTO tasks, group discussion, command task",
-      "Personal interview and full mock SSBs",
+      "Psychological Battery: TAT, WAT, SRT, and SD evaluations",
+      "GTO tasks, group discussions, and command task simulations",
+      "Intensive personal interviews and comprehensive mock SSB Interview cycles",
     ],
     href: "/programs/ssb-interview",
   },
@@ -41,14 +41,14 @@ const offerings = [
     Icon: Shield,
     title: "Future Leader Bootcamp",
     summary:
-      "A foundational program designed for students starting from class 9, focused on early personality development, discipline, communication skills, and officer-like qualities.",
+      "A foundational program for students from Class 9 onwards, engineered to instill discipline, leadership, and Officer-Like Qualities (OLQs).",
     bullets: [
-      "Personality & confidence building",
-      "Communication & leadership training",
-      "Discipline & routine structuring",
-      "Early exposure to SSB mindset",
+      "Advanced personality and confidence building",
+      "Strategic communication and leadership training",
+      "Professional discipline and routine structuring",
+      "Early exposure to the SSB Interview mindset",
     ],
-    subtitle: "9th Class Onwards",
+    subtitle: "Class 9 onwards",
     href: "/programs/future-leader",
   },
 ];
@@ -66,11 +66,11 @@ const CoreOffering = () => {
           transition={{ duration: 0.35, ease: EASE_OUT }}
           className={SECTION_HEADER_MB}
         >
-          <p className={`${EYEBROW} mb-4`}>What We Offer</p>
+          <p className={`${EYEBROW} mb-4`}>Our Expertise</p>
           <h2 className={H2_LIGHT}>
             Three Distinct Tracks.
             <br />
-            One Clear Mission.
+            One Decisive Mission.
           </h2>
         </motion.div>
 

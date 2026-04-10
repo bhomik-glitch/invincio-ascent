@@ -68,18 +68,18 @@ const exams = [
 const methodology = [
   { icon: Target, title: "Baseline Diagnostic", desc: "Day-1 assessment to identify your exact weak zones — no generic study plans." },
   { icon: Layers, title: "Module-by-Module Coverage", desc: "Each subject broken into small, digestible chapters with spaced repetition." },
-  { icon: BarChart2, title: "Weekly Mock Tests", desc: "Timed tests that mirror actual exam patterns. Analytics reviewed with mentor." },
-  { icon: Users, title: "Doubt Sessions", desc: "Live doubt-clearing every week — one-on-one with the subject expert." },
-  { icon: Clock, title: "Revision Cycles", desc: "Structured revision at 7-day, 21-day, and 45-day intervals before the exam." },
-  { icon: FileText, title: "Past Paper Deep Dives", desc: "Last 10 years of papers analysed for patterns, frequency, and trap questions." },
+  { icon: BarChart2, title: "Weekly Mock Tests", desc: "Timed tests that mirror actual exam patterns. Analytics reviewed with an Ex-SSB Assessor." },
+  { icon: Users, title: "Strategic Doubt Sessions", desc: "Live doubt-clearing every week — one-on-one with a subject expert." },
+  { icon: Clock, title: "Revision Cycles", desc: "Structured revision at 7, 21, and 45-day intervals before the exam." },
+  { icon: FileText, title: "Past Paper Deep Dives", desc: "Analysis of the last 10 years of papers for patterns, frequency, and trap questions." },
 ];
 
 const outcomes = [
-  "Clear NDA / CDS / AFCAT written in first or second attempt",
+  "Clear NDA, CDS, or AFCAT written exams in your 1st Attempt",
   "Subject-wise score improvement tracked every 2 weeks",
-  "Exam-day strategy — time management and question selection",
-  "Full syllabus coverage with zero gaps",
-  "Shortlist for SSB and beyond",
+  "Comprehensive exam-day strategy including time management",
+  "Full syllabus coverage with zero architectural gaps",
+  "Confirmed shortlist for the SSB Interview and beyond",
 ];
 
 const WrittenExam = () => {
@@ -90,7 +90,7 @@ const WrittenExam = () => {
       <HeroSection
         subtitle="Written Examination Training"
         title="Clear the Written. Earn Your SSB Call."
-        description="Structured, mentor-driven preparation for NDA, CDS, and AFCAT. Every subject, every exam, every attempt — covered."
+        description="Structured, mentor-driven preparation for NDA, CDS, and AFCAT. Every subject, every module, every attempt — covered."
         backgroundImage="/assets/hero-bg.png"
         showStats={false}
       />
@@ -273,7 +273,7 @@ const WrittenExam = () => {
             transition={{ duration: 0.35, ease: EASE_OUT, delay: 0.1 }}
             className="font-sans text-sm text-white/70 mb-8 leading-relaxed"
           >
-            Book a free consultation with an ex-SSB assessor and get a personalised prep roadmap.
+            Book a free consultation with an Ex-SSB Assessor and get a personalized prep roadmap.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 8 }}

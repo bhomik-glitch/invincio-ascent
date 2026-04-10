@@ -5,27 +5,27 @@ import { Plus, Minus } from "lucide-react";
 const faqs = [
   {
     q: "Who are the mentors at Invincio?",
-    a: "Our core mentorship team consists of Former SSB Assessors (GTOs, TOs, and Interviewing Officers) from the Indian Army, Navy, and Air Force. These are retired officers who have collectively spent decades inside selection boards. Unlike traditional 'teachers', they provide an authentic psychological bridge, identifying your specific OLQs (Officer Like Qualities) and refining them through the very lens that selection boards use.",
+    a: "Our core team is comprised exclusively of Ex-SSB Assessors, including GTOs, TOs, and Interviewing Officers.",
   },
   {
-    q: "Is this coaching or mentorship?",
-    a: "We strictly define ourselves as a Mentorship Institute. Standard coaching often relies on rote memorization and 'template' answers that assessors can spot in seconds. Our mentorship focuses on genuine character building. We help you understand the 'Why' behind every task, fostering real personality growth, emotional intelligence, and spontaneous leadership that doesn't falter under pressure.",
+    q: "Is this a coaching or mentorship program?",
+    a: "We are a dedicated Mentorship Institute. We reject rote memorization in favor of genuine personality evolution.",
   },
   {
-    q: "How is the program personalised?",
-    a: "Every candidate is unique, and so is our approach. We begin with a comprehensive initial assessment that covers your background, psychology, and physical aptitude. Based on this profile, we map out a bespoke development path. Whether you need more work on your GTO skills, your psychological TAT/WAT speed, or your interviewing poise, your schedule is optimized to prioritize your specific areas for improvement.",
+    q: "How is the program personalized?",
+    a: "Recognizing that every candidate is unique, we create a bespoke development roadmap for each aspirant.",
   },
   {
-    q: "Do you help with repeater candidates?",
-    a: "Repeaters are our specialty. We understand the unique psychological baggage and technical errors that come with previous attempts. Our mentors analyze your past experiences to pinpoint exactly 'what went wrong' and why. We then work on unlearning bad habits and rebuilding your confidence with refined strategies that help you stand out from the crowd as a mature, self-aware candidate.",
+    q: "Do you support repeater candidates?",
+    a: "Yes. We specialize in repeaters, addressing the psychological aspects of previous attempts.",
   },
   {
-    q: "What is the duration of the program?",
-    a: "Our flagship programs typically range from 2 to 6 weeks, depending on the depth of intervention required. We offer intensive 14-day SSB Mentorship camps, month-long Foundations courses for early aspirants, and ongoing weekend workshops for working professionals. We also provide post-program support until your recommended date to ensure you stay in peak psychological state.",
+    q: "What is the duration of the 2024 programs?",
+    a: "Flagship programs typically range from 2–4 weeks depending on the specific track.",
   },
   {
-    q: "Do you offer online mentorship?",
-    a: "Yes. Our digital platform is one of the most advanced in the field, hosting live one-on-one strategy sessions with former assessors. We use high-definition video conferencing to simulate real interview environments and proprietary digital tools to conduct psychological time-bound tests. We believe that geographic location should never be a barrier to elite mentorship.",
+    q: "Is online mentorship available?",
+    a: "Yes. Our digital platform provides the same level of rigorous mentorship remotely.",
   },
 ];
 

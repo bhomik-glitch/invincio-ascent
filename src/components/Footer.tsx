@@ -11,7 +11,7 @@ const Footer = () => {
           <div>
             <p className="font-serif text-2xl font-bold text-[#00568C] mb-4">INVINCIO</p>
             <p className="font-sans text-sm leading-relaxed text-[#6B7280] mb-6">
-              Leadership Transformation Institute. Mentorship by Former SSB Assessors.
+              Leadership Transformation Institute. Specialized mentorship by Ex-SSB Assessors.
             </p>
             <div className="flex gap-4">
               <a
@@ -92,7 +92,7 @@ const Footer = () => {
 
         <div className="border-t border-[#e5e7eb] pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="font-sans text-xs text-[#6B7280]">
-            © 2025 Invincio Services LLP. All rights reserved.
+            © 2024 Invincio Services LLP. All rights reserved.
           </p>
           <div className="flex gap-6 font-sans text-xs text-[#6B7280]">
             <a href="#" className="hover:text-[#2FB4E7] transition-colors duration-150">

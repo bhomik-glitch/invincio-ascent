@@ -10,7 +10,7 @@ import {
 const echoes = [
   {
     name: "Atharv",
-    text: "Recommended from 19 SSB for SSC(Tech) Entry — Now in OTA, Chennai",
+    text: "Recommended from 19 SSB for SSC (Tech) Entry — Now in OTA, Chennai",
     video: "/assets/candidates/ATHARV RECOMMENDED FROM 19 SSB FOR SSC(TECH) ENTRY, NOW IN OTA, CHENNAI.mp4",
   },
   {
@@ -20,7 +20,7 @@ const echoes = [
   },
   {
     name: "Shivangi",
-    text: "Recommended from 34 SSB for JAG Entry — Now in OTA Chennai",
+    text: "Recommended from 34 SSB for JAG Entry — Now in OTA, Chennai",
     video: "/assets/candidates/SHIVANGI RECOMMENDED FROM 34 SSB FOR JAG ENTRY. NOW IN OTA CHENNAI.mp4",
   },
   {
@@ -30,43 +30,43 @@ const echoes = [
   },
   {
     name: "Colonel Anirudh Das",
-    text: "Father of Invincible Rishit Das (Batch Life Skills — 042025)",
+    text: "Father of Invincible Rishit Das (Batch: Life Skills — 042024)",
     video: "/assets/candidates/Colonel Anirudh Das, father of Invincible Rishit Das (Batch Life Skills - 042025).mp4",
   },
   {
     name: "Cdr Praveen Pola",
-    text: "Principal, Sainik School, East Siang",
+    text: "Principal, Sainik School East Siang",
     video: "/assets/candidates/Cdr Praveen Pola, Principal, Sainik School, East Siang.mp4",
   },
   {
     name: "Col Manjit Singh",
-    text: "Father of Invincible Hameshul Singh (Life Skills Batch 032025)",
+    text: "Father of Invincible Hameshul Singh (Life Skills Batch: 032024)",
     video: "/assets/candidates/Col Manjit Singh fo Invincible Hameshul Singh  (life skills batch 032025).mp4",
   },
   {
     name: "Lt Col Roy",
-    text: "Father of Araina Roy (Class 9th, Batch — Life Skills 032025)",
+    text: "Mother of Araina Roy (Class 9 onwards, Batch: Life Skills — 032024)",
     video: "/assets/candidates/Lt Col Roy, mo Araina Roy (Class 9th, batch - Life Skills - 032025).mp4",
   },
   {
     name: "Mr Deka",
-    text: "Senior Master, Sainik School, East Siang, Arunachal Pradesh",
+    text: "Senior Master, Sainik School East Siang, Arunachal Pradesh",
     video: "/assets/candidates/Mr Deka, Senior Master, Sainik School, East Siang, Arunachal Pradesh.mp4",
   },
 ];
 
 const stories = [
   { name: "Vivek Sharma",      info: "SSC Navy ATC Entry — 16th Attempt",               image: "/assets/client_photo/Vivek Sharma .jpg" },
-  { name: "S R Hari Kumar",    info: "SSC Tech — 16th Attempt",                          image: "/assets/client_photo/S R Hari Kumar.jpg" },
+  { name: "S R Hari Kumar",    info: "SSC Tech Entry — 16th Attempt",                    image: "/assets/client_photo/S R Hari Kumar.jpg" },
   { name: "Prashant Upadhyay", info: "Batch RNDA-46843 — NDA 155 Entry",                image: "/assets/client_photo/Prashant Upadhyay.jpg" },
   { name: "Sanyog Tiwari",     info: "SSC Tech Entry — 10th Attempt",                   image: "/assets/client_photo/Sanyog Tiwari.jpg" },
   { name: "Akash Swamy",       info: "CDS OTA Entry — 7th Attempt",                     image: "/assets/client_photo/Akash Swamy .jpg" },
-  { name: "Gyanendra Yadav",   info: "4 AFSB Varanasi — Batch VNDA(M)/729",            image: "/assets/client_photo/Gyanendra.jpg" },
-  { name: "Akshat Mishra",     info: "NDA/62806 — Batch VNDA(M)/729",                  image: "/assets/client_photo/Akshat mishra.jpg" },
-  { name: "Atharv",            info: "Batch DSTL 39818 — 19 SSB Prayagraj, Chest No. 7", image: "/assets/client_photo/Atharv.jpg" },
-  { name: "Rudransh Kishore",  info: "Batch KNDA 40815 — 20 SSB, Chest No. 02",        image: "/assets/client_photo/Rudransh.jpg" },
-  { name: "Aditya Gupta",      info: "Batch KNDA 40816 — 20 SSB, Chest No. 09",        image: "/assets/client_photo/Aditya.jpg" },
-  { name: "Sankalp Jaiswal",   info: "Batch PNDA 72255 — 21 SSB, Chest No. 03",        image: "/assets/client_photo/Sankalp.jpg" },
+  { name: "Gyanendra Yadav",   info: "4 AFSB Varanasi — Batch VNDA (M)/729",            image: "/assets/client_photo/Gyanendra.jpg" },
+  { name: "Akshat Mishra",     info: "NDA/62806 — Batch VNDA (M)/729",                  image: "/assets/client_photo/Akshat mishra.jpg" },
+  { name: "Atharv",            info: "Batch DSTL 39818 — 19 SSB Prayagraj",             image: "/assets/client_photo/Atharv.jpg" },
+  { name: "Rudransh Kishore",  info: "Batch KNDA 40815 — 20 SSB Interview",             image: "/assets/client_photo/Rudransh.jpg" },
+  { name: "Aditya Gupta",      info: "Batch KNDA 40816 — 20 SSB Interview",             image: "/assets/client_photo/Aditya.jpg" },
+  { name: "Sankalp Jaiswal",   info: "Batch PNDA 72255 — 21 SSB Interview",             image: "/assets/client_photo/Sankalp.jpg" },
 ];
 
 const duplicatedStories = [...stories, ...stories];
@@ -236,7 +236,7 @@ const TransformationSection = () => {
             <div className="px-8 py-5 text-center">
               <p className="font-serif font-bold text-[#00568C] text-lg">Itanagar Milestone</p>
               <p className="font-sans text-sm text-[#6B7280] mt-1">
-                75 out of 87 students mentored at Success Point, Itanagar — selected in final interviews
+                75 out of 87 students mentored in 2024 at Success Point, Itanagar — recommended in final selection rounds.
               </p>
             </div>
           </motion.div>

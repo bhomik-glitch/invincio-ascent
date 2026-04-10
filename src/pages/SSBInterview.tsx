@@ -60,46 +60,46 @@ const days = [
 const trainingAreas = [
   {
     icon: Brain,
-    title: "Psychology Battery",
-    desc: "Master TAT, WAT, SRT, and SD through daily practice. Learn to reflect OLQs authentically — not mechanically.",
+    title: "Psychological Battery",
+    desc: "Master the TAT, WAT, SRT, and SD modules through precision practice. Learn to project your OLQs authentically — not mechanically.",
     points: [
-      "200+ TAT stories reviewed with mentor",
-      "WAT speed and quality drills",
+      "Extensive TAT story reviews",
+      "WAT speed and quality optimization",
       "SRT situational response patterns",
-      "SD self-awareness coaching",
+      "Comprehensive SD self-awareness coaching",
     ],
   },
   {
     icon: Users,
     title: "GTO Training",
-    desc: "Outdoor physical tasks done in groups. We simulate every GTO task in a real field-like environment.",
+    desc: "Simulate every GTO Task in an authentic outdoor environment under the observation of Ex-GTOs.",
     points: [
-      "PGT, HGT, FGT group task practice",
-      "Command task leadership execution",
-      "Individual obstacle confidence",
-      "Group cohesion & initiative training",
+      "PGT, HGT, and FGT group task practice",
+      "Command Task leadership execution",
+      "Individual Obstacle confidence building",
+      "Group cohesion and initiative training",
     ],
   },
   {
     icon: MessageSquare,
     title: "Personal Interview",
-    desc: "The IO interview is won in preparation. We do 5+ full mock interviews per candidate before the actual board.",
+    desc: "Master the Interviewing Officer (IO) round through repeated simulations and deep analytical feedback.",
     points: [
-      "PIQ form deep-dive with mentor",
-      "Stress question handling",
+      "PIQ form deep-dive analysis",
+      "Strategic stress question handling",
       "Body language and voice modulation",
-      "Current affairs preparation",
+      "Current affairs and policy preparation",
     ],
   },
   {
     icon: Eye,
     title: "OLQ Development",
-    desc: "Officer Like Qualities cannot be faked — they must be built. Our 15 OLQ framework is the backbone of all training.",
+    desc: "Officer-Like Qualities (OLQs) must be genuinely built. Our 15 OLQ framework remains the backbone of our 2024 training methodology.",
     points: [
-      "Effective Intelligence & Reasoning",
-      "Social adaptability & team spirit",
-      "Initiative, confidence, determination",
-      "Stamina, speed of decision-making",
+      "Effective Intelligence and Reasoning",
+      "Social Adaptability and Team Spirit",
+      "Initiative, Confidence, and Determination",
+      "Speed of Decision and Emotional Stability",
     ],
   },
 ];
@@ -113,12 +113,12 @@ const boards = [
 ];
 
 const outcomes = [
-  "Understand exactly what assessors look for in every task",
-  "Develop genuine OLQs — not surface-level performance",
-  "Full mock SSB over 5 days before the real board",
-  "Personal feedback report after every mock",
-  "Conference preparation — how to respond under final scrutiny",
-  "Psychological consistency across all tests",
+  "Comprehensive understanding of assessor expectations",
+  "Genuine development of Officer-Like Qualities (OLQs)",
+  "Full 5-day Mock SSB simulation",
+  "Detailed personal feedback reports",
+  "Conference preparation and stress management",
+  "Psychological consistency across all assessment modules",
 ];
 
 const SSBInterview = () => {
@@ -128,8 +128,8 @@ const SSBInterview = () => {
     <div className="bg-[#F1FFFF] min-h-screen overflow-x-hidden w-full">
       <HeroSection
         subtitle="SSB Interview Preparation"
-        title="Train for the Board from the Inside."
-        description="Mentored by former SSB Assessors who sat on the other side of the table. Real OLQ development. Full mock SSBs. Proven recommendations."
+        title="Train for the Board from the Inside"
+        description="Mentorship exclusively by Ex-SSB Assessors who have evaluated thousands of candidates. Real-world OLQ development. Comprehensive mock simulations. Proven 2024 recommendation strategies."
         backgroundImage="/assets/hero-bg.png"
         showStats={false}
       />
@@ -355,7 +355,7 @@ const SSBInterview = () => {
             transition={{ duration: 0.35, ease: EASE_OUT, delay: 0.1 }}
             className="font-sans text-sm text-white/70 mb-8 leading-relaxed"
           >
-            Book a free one-on-one session with a former SSB assessor. Understand your OLQ gaps before the real board does.
+            Book a free one-on-one session with an Ex-SSB Assessor. Understand your OLQ gaps before the actual board assessment.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 8 }}
