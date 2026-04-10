@@ -49,7 +49,7 @@ const SuccessStories = () => {
       </div>
 
       {/* Carousel */}
-      <div className="relative overflow-hidden w-full max-w-full" style={{ contain: "paint" }}>
+      <div className="relative overflow-hidden w-full max-w-full">
         {/* Fade edges — match section bg */}
         <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#eaf6f8] to-transparent pointer-events-none z-10" />
         <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#eaf6f8] to-transparent pointer-events-none z-10" />
@@ -84,7 +84,7 @@ const SuccessStories = () => {
                 <img
                   src={story.image}
                   alt={story.name}
-                  className="w-full h-full object-cover object-top"
+                  className="w-full h-auto object-cover object-top"
                 />
               </div>
 
