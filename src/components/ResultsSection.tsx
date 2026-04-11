@@ -12,7 +12,7 @@ import {
 const stats = [
   { icon: Award,    value: "500+",    label: "Officers Recommended" },
   { icon: Calendar, value: "12+",     label: "Years of Excellence"  },
-  { icon: Users,    value: "5,000+",  label: "Students Mentored"    },
+  { icon: Users,    value: "11,000+", label: "Total Recommendations"  },
   { icon: Star,     value: "4.9 / 5", label: "Satisfied Aspirants"   },
 ];
 
@@ -33,7 +33,7 @@ const testimonials = [
     name: "Sub Lt. Rahul Verma",
     rank: "Indian Air Force",
     attempt: "1st Attempt — Recommended",
-    text: "The personal attention I received was exceptional. My mentors spent significant time understanding my personality before initiating prep, ensuring my transformation in 2024 was authentic.",
+    text: "The personal attention I received was exceptional. My mentors spent significant time understanding my personality before initiating prep, ensuring my transformation in 2026 was authentic.",
   },
 ];
 

@@ -30,7 +30,7 @@ const echoes = [
   },
   {
     name: "Colonel Anirudh Das",
-    text: "Father of Invincible Rishit Das (Batch: Life Skills — 042024)",
+    text: "Father of Invincible Rishit Das (Batch: Life Skills — 042026)",
     video: "/assets/candidates/Colonel Anirudh Das, father of Invincible Rishit Das (Batch Life Skills - 042025).mp4",
   },
   {
@@ -40,12 +40,12 @@ const echoes = [
   },
   {
     name: "Col Manjit Singh",
-    text: "Father of Invincible Hameshul Singh (Life Skills Batch: 032024)",
+    text: "Father of Invincible Hameshul Singh (Life Skills Batch: 032026)",
     video: "/assets/candidates/Col Manjit Singh fo Invincible Hameshul Singh  (life skills batch 032025).mp4",
   },
   {
     name: "Lt Col Roy",
-    text: "Mother of Araina Roy (Class 9 onwards, Batch: Life Skills — 032024)",
+    text: "Mother of Araina Roy (Class 9 onwards, Batch: Life Skills — 032026)",
     video: "/assets/candidates/Lt Col Roy, mo Araina Roy (Class 9th, batch - Life Skills - 032025).mp4",
   },
   {
@@ -236,7 +236,7 @@ const TransformationSection = () => {
             <div className="px-8 py-5 text-center">
               <p className="font-serif font-bold text-[#00568C] text-lg">Itanagar Milestone</p>
               <p className="font-sans text-sm text-[#6B7280] mt-1">
-                75 out of 87 students mentored in 2024 at Success Point, Itanagar — recommended in final selection rounds.
+                75 out of 87 students mentored in 2026 at Success Point, Itanagar — recommended in final selection rounds.
               </p>
             </div>
           </motion.div>

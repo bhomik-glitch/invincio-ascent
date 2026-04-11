@@ -66,7 +66,7 @@ interface Project {
 const Projects: React.FC<{ id?: string }> = ({ id }) => {
   const leapProjects: Project[] = [
     {
-      title: "Mentoring the APPSCCE-2024 Aspirants",
+      title: "Mentoring the APPSCCE-2026 Aspirants",
       description: "In the heart of Itanagar, our mock interview sessions for aspiring candidates fostered confidence and clarity, paving their way to success. Surrounded by the city's vibrancy and cultural richness, the experience blended professional growth with the spirit of Arunachal Pradesh.",
       images: [itanagar5, itanagar1, itanagar2, itanagar3, itanagar4]
     },
@@ -189,7 +189,7 @@ const Projects: React.FC<{ id?: string }> = ({ id }) => {
 
                   {/* Content Section */}
                   <div className="w-full">
-                                                                                   <div className={`bg-white p-6 rounded-lg shadow-md ${project.title === "Mentoring the APPSCCE-2024 Aspirants" ? "pb-[34px]" : ""} ${project.title === "Sainik School Kapurthala Takes the LEAP Again! | Class 11 Students Step into Clarity & Confidence!!" ? "pb-[33px]" : ""} ${project.title === "Mentoring the Mentors at SS Ambikapur: learning never ends!!" ? "pb-[45px]" : ""} ${project.title === "Sainik School Ambikapur" ? "pb-[113px]" : ""} ${project.title === "Sainik School Kapurthala, Punjab" ? "pb-[121px]" : ""} ${project.title === "YODDHAA Defence Academy, Pune" ? "pb-[83px]" : ""}`}>
+                                                                                   <div className={`bg-white p-6 rounded-lg shadow-md ${project.title === "Mentoring the APPSCCE-2026 Aspirants" ? "pb-[34px]" : ""} ${project.title === "Sainik School Kapurthala Takes the LEAP Again! | Class 11 Students Step into Clarity & Confidence!!" ? "pb-[33px]" : ""} ${project.title === "Mentoring the Mentors at SS Ambikapur: learning never ends!!" ? "pb-[45px]" : ""} ${project.title === "Sainik School Ambikapur" ? "pb-[113px]" : ""} ${project.title === "Sainik School Kapurthala, Punjab" ? "pb-[121px]" : ""} ${project.title === "YODDHAA Defence Academy, Pune" ? "pb-[83px]" : ""}`}>
                       <h3 className="text-2xl font-semibold text-[#2d4b41] mb-4">
                         {project.title}
                       </h3>

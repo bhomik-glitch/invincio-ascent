@@ -94,7 +94,7 @@ const trainingAreas = [
   {
     icon: Eye,
     title: "OLQ Development",
-    desc: "Officer-Like Qualities (OLQs) must be genuinely built. Our 15 OLQ framework remains the backbone of our 2024 training methodology.",
+    desc: "Officer-Like Qualities (OLQs) must be genuinely built. Our 15 OLQ framework remains the backbone of our 2026 training methodology.",
     points: [
       "Effective Intelligence and Reasoning",
       "Social Adaptability and Team Spirit",
@@ -129,8 +129,8 @@ const SSBInterview = () => {
       <HeroSection
         subtitle="SSB Interview Preparation"
         title="Train for the Board from the Inside"
-        description="Mentorship exclusively by Ex-SSB Assessors who have evaluated thousands of candidates. Real-world OLQ development. Comprehensive mock simulations. Proven 2024 recommendation strategies."
-        backgroundImage="/assets/hero-bg.png"
+        description="Mentorship exclusively by Ex-SSB Assessors who have evaluated thousands of candidates. Real-world OLQ development. Comprehensive mock simulations. Proven 2026 recommendation strategies."
+        backgroundImage="/assets/Whisk_af546ace17f28599d3f4ed17a321bd6fdr.png"
         showStats={false}
       />
 

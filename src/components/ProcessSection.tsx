@@ -40,7 +40,7 @@ const ProcessSection = () => (
             A Disciplined Path<br />To Selection
           </h2>
           <p className="font-sans text-sm leading-relaxed text-[#6B7280] max-w-xs md:text-right">
-            Four rigorous phases designed to transition you from an aspirant to a recommended candidate in 2024.
+            Four rigorous phases designed to transition you from an aspirant to a recommended candidate in 2026.
           </p>
         </div>
       </div>

@@ -91,7 +91,7 @@ const WrittenExam = () => {
         subtitle="Written Examination Training"
         title="Clear the Written. Earn Your SSB Call."
         description="Structured, mentor-driven preparation for NDA, CDS, and AFCAT. Every subject, every module, every attempt — covered."
-        backgroundImage="/assets/hero-bg.png"
+        backgroundImage="/assets/Whisk_af546ace17f28599d3f4ed17a321bd6fdr.png"
         showStats={false}
       />
 

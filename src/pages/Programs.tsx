@@ -1,225 +1,366 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, CalendarCheck } from "lucide-react";
-import HeroSection from "@/components/HeroSection";
+import { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { CheckCircle2, CalendarCheck, ChevronDown, X } from "lucide-react";
 import ConsultationModal from "@/components/ConsultationModal";
 
-const EASE_OUT = [0.23, 1, 0.32, 1] as [number, number, number, number];
+const EASE_OUT: [number, number, number, number] = [0.23, 1, 0.32, 1];
+const GRID_COLS = 2; // desktop columns
 
 const programs = [
   {
+    id: "nda-cds-online",
     title: "NDA/CDS Online",
-    description: "Comprehensive digital mentorship ensuring geographic distance is never a barrier to your officer dreams.",
+    tagline: "Officer prep, anywhere, anytime.",
+    description:
+      "Comprehensive digital mentorship ensuring geographic distance is never a barrier to your officer dreams.",
     points: [
       "Live interactive strategy sessions",
       "Comprehensive digital study material",
       "Regular online mock assessments",
       "Direct doubt clearing with mentors",
-      "Personalized performance tracking"
+      "Personalized performance tracking",
     ],
-    tagline: "Officer prep, anywhere, anytime.",
     duration: "4–6 Months",
-    audience: ["College Students", "Job Holders", "Distance Learners"]
+    audience: ["College Students", "Job Holders", "Distance Learners"],
   },
   {
+    id: "nda-cds-offline",
     title: "NDA/CDS Offline",
-    description: "Immersive classroom experience with rigorous discipline and a peer-to-peer learning environment.",
+    tagline: "Precision training in person.",
+    description:
+      "Immersive classroom experience with rigorous discipline and a peer-to-peer learning environment.",
     points: [
       "Direct face-to-face mentorship",
       "Structured classroom environment",
       "Daily physical conditioning drills",
       "In-house library & resources",
-      "Regular group discussion practice"
+      "Regular group discussion practice",
     ],
-    tagline: "Precision training in person.",
     duration: "6 Months",
-    audience: ["Full-time Aspirants", "Local Students"]
+    audience: ["Full-time Aspirants", "Local Students"],
   },
   {
+    id: "ssb-interview",
     title: "SSB Interview Track",
-    description: "Specialized personality development program tailored for all selection boards of the Indian Armed Forces.",
+    tagline: "Master the psychology of selection.",
+    description:
+      "Specialized personality development program tailored for all selection boards of the Indian Armed Forces.",
     points: [
       "Real-world GTO Task simulations",
       "Psychological battery modules",
       "Mock Interviews with Ex-SSB Assessors",
       "Strategic feedback sessions",
-      "Selection-focused character evolution"
+      "Selection-focused character evolution",
     ],
-    tagline: "Master the psychology of selection.",
     duration: "2–4 Weeks",
-    audience: ["Written Qualified Candidates", "Direct Entry Aspirants"]
+    audience: ["Written Qualified Candidates", "Direct Entry Aspirants"],
   },
   {
+    id: "future-leaders",
     title: "Future Leaders",
-    description: "Foundational character-building program designed to instill Officer-Like Qualities (OLQs) from an early age.",
+    tagline: "Drafting the future of leadership.",
+    description:
+      "Foundational character-building program designed to instill Officer-Like Qualities (OLQs) from an early age.",
     points: [
       "Leadership and Initiative workshops",
       "Effective communication training",
       "Critical thinking and logic puzzles",
       "Ethical decision-making drills",
-      "Public speaking and articulation"
+      "Public speaking and articulation",
     ],
-    tagline: "Drafting the future of leadership.",
     duration: "1 Year",
-    audience: ["Class 9 onwards", "Early Dreamers"]
+    audience: ["Class 9 onwards", "Early Dreamers"],
   },
   {
+    id: "civil-services",
     title: "Civil Services Personality Test",
-    description: "Refined guidance for the Civil Services personality test with a focus on administrative leadership and poise.",
+    tagline: "The final step to prestige.",
+    description:
+      "Refined guidance for the Civil Services personality test with a focus on administrative leadership and poise.",
     points: [
       "In-depth DAF analysis & briefing",
       "Mock panels with retired officers",
       "Current affairs & policy discussions",
       "Body language & voice modulation",
-      "Stress management techniques"
+      "Stress management techniques",
     ],
-    tagline: "The final step to prestige.",
     duration: "2 Months",
-    audience: ["UPSC Mains Qualified"]
-  }
+    audience: ["UPSC Mains Qualified"],
+  },
 ];
 
+// Group programs into rows of GRID_COLS each
+const rows = Array.from(
+  { length: Math.ceil(programs.length / GRID_COLS) },
+  (_, i) => programs.slice(i * GRID_COLS, (i + 1) * GRID_COLS)
+);
+
 const Programs = () => {
+  const [activeId, setActiveId] = useState<string | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState<string | undefined>();
 
-  const openModal = (program: string) => {
-    setSelectedProgram(program);
+  const expansionRefs = useRef<Record<number, HTMLDivElement | null>>({});
+
+  const openModal = (title: string) => {
+    setSelectedProgram(title);
     setModalOpen(true);
   };
 
+  const handleToggle = (id: string, rowIdx: number) => {
+    const next = activeId === id ? null : id;
+    setActiveId(next);
+    if (next) {
+      // Scroll to expansion panel after animation starts
+      setTimeout(() => {
+        expansionRefs.current[rowIdx]?.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+        });
+      }, 80);
+    }
+  };
+
+  const activeProgram = programs.find((p) => p.id === activeId) ?? null;
+
   return (
     <div className="bg-[#F1FFFF] min-h-screen">
-      {/* Hero */}
-      <HeroSection
-        subtitle="Our Training Programs"
-        title="Specialized Mentorship for Defence Excellence"
-        description="From comprehensive written exam preparation to elite SSB mentorship, our 2024 programs are meticulously designed to build the next generation of military leaders with precision and purpose."
-        backgroundImage="/assets/offlineclasses.jpeg"
-        showStats={false}
-      />
 
-      {/* Programs Grid */}
-      <section className="py-24 px-6 md:px-12 bg-[#F1FFFF]">
+      {/* ── Page Header (replaces HeroSection banner) ── */}
+      <div className="bg-white border-b border-[#e5e7eb] px-6 md:px-12 pt-12 pb-10">
         <div className="max-w-7xl mx-auto">
-
-          {/* Section header */}
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
+          <motion.p
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35, ease: EASE_OUT }}
-            className="mb-14"
+            className="font-sans text-[11px] font-bold tracking-[0.3em] uppercase text-[#2FB4E7] mb-3"
           >
-            <p className="font-sans text-xs font-semibold tracking-[0.3em] uppercase text-[#2FB4E7] mb-4">
-              What We Offer
-            </p>
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#00568C]">
-              Choose Your Path to Selection
-            </h2>
-          </motion.div>
+            Training Programs
+          </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: EASE_OUT, delay: 0.06 }}
+            className="font-serif text-3xl md:text-4xl font-bold text-[#00568C] mb-3"
+          >
+            Choose Your Path to Selection
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35, ease: EASE_OUT, delay: 0.12 }}
+            className="font-sans text-sm text-[#6B7280] max-w-lg leading-relaxed"
+          >
+            Click any program card to see what's inside — curriculum, features, and how to enroll.
+          </motion.p>
+        </div>
+      </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {programs.map((program, idx) => (
-              <motion.div
-                key={program.title}
-                initial={{ opacity: 0, y: 18, scale: 0.98 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ duration: 0.45, ease: EASE_OUT, delay: idx * 0.05 }}
-                className="bg-white border border-[#e5e7eb] rounded-2xl p-8 flex flex-col"
-                style={{
-                  boxShadow: "0 1px 4px rgba(0,0,0,0.04)",
-                  transition: "transform 280ms cubic-bezier(0.23,1,0.32,1), box-shadow 280ms cubic-bezier(0.23,1,0.32,1), border-color 280ms ease",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-4px)";
-                  e.currentTarget.style.boxShadow = "0 12px 40px rgba(0,86,140,0.10)";
-                  e.currentTarget.style.borderColor = "rgba(0,86,140,0.20)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "0 1px 4px rgba(0,0,0,0.04)";
-                  e.currentTarget.style.borderColor = "#e5e7eb";
-                }}
-              >
-                <div>
-                  {/* Audience tags + duration */}
-                  <div className="flex justify-between items-start mb-6">
-                    <div className="flex flex-wrap gap-2">
-                      {program.audience.map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full font-sans font-semibold border"
+      {/* ── Programs Grid + Accordion ── */}
+      <section className="py-14 px-6 md:px-12">
+        <div className="max-w-7xl mx-auto">
+          {rows.map((row, rowIdx) => {
+            const rowActiveProgram = row.find((p) => p.id === activeId);
+            const isRowExpanded = !!rowActiveProgram;
+
+            return (
+              <div key={rowIdx}>
+                {/* Card row */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-3">
+                  {row.map((program, colIdx) => {
+                    const isActive = program.id === activeId;
+                    const globalIdx = rowIdx * GRID_COLS + colIdx;
+
+                    return (
+                      <motion.div
+                        key={program.id}
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.1 }}
+                        transition={{
+                          duration: 0.4,
+                          ease: EASE_OUT,
+                          delay: globalIdx * 0.05,
+                        }}
+                      >
+                        <button
+                          onClick={() => handleToggle(program.id, rowIdx)}
+                          className="w-full text-left rounded-2xl p-7 flex flex-col"
                           style={{
-                            background: "rgba(47,180,231,0.08)",
-                            color: "#00568C",
-                            borderColor: "rgba(47,180,231,0.25)",
+                            background: "white",
+                            border: `1.5px solid ${isActive ? "#00568C" : "#e5e7eb"}`,
+                            boxShadow: isActive
+                              ? "0 8px 32px rgba(0,86,140,0.12)"
+                              : "0 1px 4px rgba(0,0,0,0.04)",
+                            transform: isActive ? "scale(1.015)" : "scale(1)",
+                            transition:
+                              "border-color 250ms ease-out, box-shadow 250ms ease-out, transform 250ms ease-out",
                           }}
                         >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <span
-                      className="shrink-0 text-[10px] px-3 py-1 rounded-full font-sans font-medium"
-                      style={{ background: "#eaf6f8", color: "#00568C" }}
+                          {/* Top: audience tags + duration + toggle icon */}
+                          <div className="flex justify-between items-start mb-5">
+                            <div className="flex flex-wrap gap-1.5">
+                              {program.audience.map((tag) => (
+                                <span
+                                  key={tag}
+                                  className="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full font-sans font-semibold"
+                                  style={{
+                                    background: "rgba(47,180,231,0.08)",
+                                    color: "#00568C",
+                                    border: "1px solid rgba(47,180,231,0.2)",
+                                  }}
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+
+                            <div className="flex items-center gap-2 shrink-0 ml-2">
+                              <span
+                                className="text-[10px] px-2.5 py-0.5 rounded-full font-sans font-medium"
+                                style={{ background: "#eaf6f8", color: "#00568C" }}
+                              >
+                                {program.duration}
+                              </span>
+                              <div
+                                className="w-6 h-6 rounded-full flex items-center justify-center shrink-0"
+                                style={{
+                                  background: isActive ? "#00568C" : "#f3f4f6",
+                                  transition: "background 250ms ease-out",
+                                }}
+                              >
+                                {isActive ? (
+                                  <X className="w-3 h-3 text-white" />
+                                ) : (
+                                  <ChevronDown
+                                    className="w-3 h-3"
+                                    style={{ color: "#9CA3AF" }}
+                                  />
+                                )}
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Title */}
+                          <h3
+                            className="font-serif text-xl md:text-2xl font-semibold leading-tight mb-2"
+                            style={{
+                              color: isActive ? "#00568C" : "#111827",
+                              transition: "color 200ms ease",
+                            }}
+                          >
+                            {program.title}
+                          </h3>
+
+                          {/* Tagline */}
+                          <p className="font-sans text-sm text-[#6B7280] italic">
+                            {program.tagline}
+                          </p>
+                        </button>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+
+                {/* ── Expansion Panel for this row ── */}
+                <AnimatePresence initial={false}>
+                  {isRowExpanded && rowActiveProgram && (
+                    <motion.div
+                      key={rowActiveProgram.id}
+                      ref={(el) => {
+                        expansionRefs.current[rowIdx] = el;
+                      }}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: EASE_OUT }}
+                      className="overflow-hidden mb-5"
                     >
-                      {program.duration}
-                    </span>
-                  </div>
+                      <div
+                        className="rounded-2xl p-8 md:p-10"
+                        style={{
+                          background:
+                            "linear-gradient(135deg, #f0f9ff 0%, #eaf6f8 100%)",
+                          border: "1.5px solid rgba(0,86,140,0.12)",
+                        }}
+                      >
+                        <div className="max-w-3xl">
+                          {/* Header */}
+                          <h3 className="font-serif text-2xl md:text-3xl font-bold text-[#00568C] mb-3">
+                            {rowActiveProgram.title}
+                          </h3>
+                          <p className="font-sans text-[#374151] text-sm md:text-base leading-relaxed mb-8">
+                            {rowActiveProgram.description}
+                          </p>
 
-                  {/* Title */}
-                  <h3
-                    className="font-serif text-2xl md:text-[1.6rem] font-semibold mb-3 leading-tight text-[#00568C]"
-                    style={{ transition: "color 200ms ease" }}
-                  >
-                    {program.title}
-                  </h3>
+                          {/* Feature list */}
+                          <div className="grid sm:grid-cols-2 gap-x-8 gap-y-3 mb-9">
+                            {rowActiveProgram.points.map((point, i) => (
+                              <motion.div
+                                key={point}
+                                initial={{ opacity: 0, x: -8 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{
+                                  duration: 0.25,
+                                  ease: EASE_OUT,
+                                  delay: 0.1 + i * 0.04,
+                                }}
+                                className="flex gap-3 items-start"
+                              >
+                                <CheckCircle2
+                                  className="w-4 h-4 mt-0.5 shrink-0"
+                                  style={{ color: "#2FB4E7" }}
+                                />
+                                <span className="font-sans text-sm text-[#374151]">
+                                  {point}
+                                </span>
+                              </motion.div>
+                            ))}
+                          </div>
 
-                  <p className="text-[#374151] text-sm md:text-base mb-8 leading-relaxed font-sans">
-                    {program.description}
-                  </p>
-
-                  {/* Bullet points */}
-                  <div className="space-y-3 mb-10">
-                    {program.points.map((point) => (
-                      <div key={point} className="flex gap-3 items-start">
-                        <CheckCircle2
-                          className="w-4 h-4 mt-0.5 shrink-0"
-                          style={{ color: "#2FB4E7" }}
-                        />
-                        <span className="text-[#374151] text-sm font-sans">{point}</span>
+                          {/* CTA */}
+                          <button
+                            onClick={() => openModal(rowActiveProgram.title)}
+                            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-sans font-bold text-sm"
+                            style={{
+                              background: "#00568C",
+                              color: "white",
+                              boxShadow: "0 4px 16px rgba(0,86,140,0.25)",
+                              transition:
+                                "background 200ms ease, box-shadow 200ms ease, transform 120ms ease",
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.background = "#004a7a";
+                              e.currentTarget.style.boxShadow =
+                                "0 6px 24px rgba(0,86,140,0.35)";
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.background = "#00568C";
+                              e.currentTarget.style.boxShadow =
+                                "0 4px 16px rgba(0,86,140,0.25)";
+                            }}
+                            onMouseDown={(e) =>
+                              (e.currentTarget.style.transform = "scale(0.97)")
+                            }
+                            onMouseUp={(e) =>
+                              (e.currentTarget.style.transform = "scale(1)")
+                            }
+                          >
+                            <CalendarCheck className="w-4 h-4" />
+                            Book Free Consultation
+                          </button>
+                        </div>
                       </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Card footer */}
-                <div
-                  className="mt-auto pt-5 border-t border-[#e5e7eb] flex items-center justify-between"
-                >
-                  <p className="italic text-[#6B7280] text-sm font-sans">
-                    {program.tagline}
-                  </p>
-                  <button
-                    onClick={() => openModal(program.title)}
-                    className="flex items-center gap-1.5 text-[#00568C] text-xs font-semibold uppercase tracking-widest group/btn"
-                    style={{ transition: "color 150ms ease" }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = "#2FB4E7")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "#00568C")}
-                  >
-                    Learn More
-                    <ArrowRight className="w-3 h-3 transition-transform group-hover/btn:translate-x-1" />
-                  </button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
         </div>
       </section>
 
-      {/* CTA banner */}
+      {/* ── Bottom CTA banner ── */}
       <section
         className="py-24 border-t border-[#e5e7eb]"
         style={{ background: "linear-gradient(135deg, #00568C 0%, #003d66 100%)" }}
@@ -251,27 +392,34 @@ const Programs = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.35, ease: EASE_OUT, delay: 0.18 }}
           >
-            <a
-              href="#contact"
+            <button
+              onClick={() => openModal("General Inquiry")}
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#F6B828] text-[#00568C] px-10 py-4 text-sm font-bold tracking-wide"
               style={{
                 boxShadow: "0 4px 20px rgba(246,184,40,0.35)",
-                transition: "background-color 200ms ease, box-shadow 200ms ease, transform 120ms ease",
+                transition:
+                  "background-color 200ms ease, box-shadow 200ms ease, transform 120ms ease",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = "#e0a720";
-                e.currentTarget.style.boxShadow = "0 6px 28px rgba(246,184,40,0.50)";
+                e.currentTarget.style.boxShadow =
+                  "0 6px 28px rgba(246,184,40,0.50)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = "#F6B828";
-                e.currentTarget.style.boxShadow = "0 4px 20px rgba(246,184,40,0.35)";
+                e.currentTarget.style.boxShadow =
+                  "0 4px 20px rgba(246,184,40,0.35)";
               }}
-              onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
-              onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
+              onMouseDown={(e) =>
+                (e.currentTarget.style.transform = "scale(0.97)")
+              }
+              onMouseUp={(e) =>
+                (e.currentTarget.style.transform = "scale(1)")
+              }
             >
               <CalendarCheck className="h-4 w-4" />
               Book Free Consultation
-            </a>
+            </button>
           </motion.div>
         </div>
       </section>

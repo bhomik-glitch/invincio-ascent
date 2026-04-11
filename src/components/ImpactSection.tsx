@@ -4,7 +4,7 @@ import { CalendarCheck } from "lucide-react";
 const EASE_OUT = [0.23, 1, 0.32, 1] as [number, number, number, number];
 
 const stats = [
-  { value: "75/87", label: "Selections in 2024" },
+  { value: "75/87", label: "Selections in 2026" },
   { value: "500+",  label: "Aspirants Mentored"  },
   { value: "10+",   label: "Respected Institutions" },
   { value: "100%",  label: "Ex-SSB Assessors"     },
@@ -12,7 +12,7 @@ const stats = [
 
 const achievements = [
   {
-    title: "Mentoring APPSCCE-2024 Aspirants",
+    title: "Mentoring APPSCCE-2026 Aspirants",
     desc: "In the heart of Itanagar, our mock interview sessions for aspiring candidates fostered confidence and clarity, paving their way to success. The experience blended professional growth with the spirit of Arunachal Pradesh.",
     tag: "Mentorship",
     image: "/assets/client_photo/75 out of 87 mentored at Success point at Itanagar.jpg",

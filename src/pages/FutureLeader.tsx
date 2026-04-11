@@ -76,7 +76,7 @@ const whyEarly = [
   },
   {
     title: "Balanced Academics and Prep",
-    desc: "Our 2024 methodology complements school academics rather than competing with them, featuring flexible schedules.",
+    desc: "Our 2026 methodology complements school academics rather than competing with them, featuring flexible schedules.",
   },
   {
     title: "Long-Term Mentorship",
@@ -102,7 +102,7 @@ const FutureLeader = () => {
         subtitle="Future Leader Bootcamp"
         title="Build the Officer Before the Exam Begins"
         description="A foundational program for Class 9 onwards. Personality, discipline, communication, and the SSB mindset — developed early, developed right."
-        backgroundImage="/assets/hero-bg.png"
+        backgroundImage="/assets/Whisk_af546ace17f28599d3f4ed17a321bd6fdr.png"
         showStats={false}
       />
 

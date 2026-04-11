@@ -287,7 +287,7 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
 
                         {/* WhatsApp option */}
                         <a
-                          href="https://wa.me/919999999999"
+                          href="https://wa.me/918601407444"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center justify-center gap-1.5 text-[#6B7280] text-[13px] hover:text-[#25D366] transition-colors duration-150 py-0.5"

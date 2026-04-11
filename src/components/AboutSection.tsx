@@ -48,7 +48,7 @@ const AboutSection = () => {
               <span className="gold-text">Officers</span>
             </h2>
             <p className="text-muted-foreground font-sans leading-relaxed mb-4">
-              Founded by veteran assessors, we prioritize authentic transformation over traditional coaching. Our 2024 mentorship model focuses exclusively on the genuine development of Officer-Like Qualities (OLQs).
+              Founded by veteran assessors, we prioritize authentic transformation over traditional coaching. Our 2026 mentorship model focuses exclusively on the genuine development of Officer-Like Qualities (OLQs).
             </p>
             <p className="text-muted-foreground font-sans leading-relaxed">
               Every candidate is unique — and so is our approach. Through personalised mentorship, deep psychological profiling, and strategic feedback, we build the real you.

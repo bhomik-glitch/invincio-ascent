@@ -35,7 +35,7 @@ const CTASection = () => {
           </h2>
 
           <p className="font-sans text-sm leading-relaxed text-white/70 mb-10 max-w-md">
-            Consult with an Ex-SSB Assessor throughout 2024. Gain absolute clarity on your path to recommendation through our specialized mentorship.
+            Consult with an Ex-SSB Assessor throughout 2026. Gain absolute clarity on your path to recommendation through our specialized mentorship.
           </p>
 
           {/* Primary CTA — golden yellow */}
@@ -66,7 +66,7 @@ const CTASection = () => {
           {/* Secondary contact links */}
           <div className="flex items-center gap-6 font-sans text-sm">
             <motion.a
-              href="https://wa.me/919999999999"
+              href="https://wa.me/918601407444"
               target="_blank"
               rel="noopener noreferrer"
               whileTap={TAP_SCALE}
@@ -83,7 +83,7 @@ const CTASection = () => {
             <span className="text-white/20 select-none">|</span>
 
             <motion.a
-              href="tel:+919999999999"
+              href="tel:+918601407444"
               whileTap={TAP_SCALE}
               transition={TAP_TRANSITION}
               className="inline-flex items-center gap-1.5 text-white/50"

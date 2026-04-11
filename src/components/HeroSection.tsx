@@ -56,7 +56,7 @@ const HeroSection = ({
         Since 2012
       </div>
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-28 pb-20 flex items-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-28 pb-20 flex items-center justify-end">
 
         {/* Glass content card */}
         <motion.div
@@ -122,7 +122,7 @@ const HeroSection = ({
 
             {/* Secondary — glass outline */}
             <a
-              href="https://wa.me/919999999999"
+              href="https://wa.me/918601407444"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/25 px-6 py-3.5 text-sm font-semibold tracking-wide text-white"

@@ -1,4 +1,4 @@
-import { MapPin, Mail, Phone, Instagram, Linkedin, Youtube } from "lucide-react";
+import { MapPin, Mail, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -13,27 +13,27 @@ const Footer = () => {
             <p className="font-sans text-sm leading-relaxed text-[#6B7280] mb-6">
               Leadership Transformation Institute. Specialized mentorship by Ex-SSB Assessors.
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-4 items-center">
               <a
-                href="#"
-                className="text-[#6B7280] hover:text-[#00568C] transition-colors duration-150"
+                href="https://www.instagram.com/lt_col_ankur_sabharwal"
+                className="opacity-70 hover:opacity-100 hover:scale-110 transition-all duration-150"
                 aria-label="Instagram"
               >
-                <Instagram className="w-5 h-5" />
+                <img src="/assets/instagram-1-svgrepo-com.svg" alt="Instagram" className="w-5 h-5" />
               </a>
               <a
                 href="#"
-                className="text-[#6B7280] hover:text-[#00568C] transition-colors duration-150"
+                className="opacity-70 hover:opacity-100 hover:scale-110 transition-all duration-150"
                 aria-label="LinkedIn"
               >
-                <Linkedin className="w-5 h-5" />
+                <img src="/linkedin-svgrepo-com.svg" alt="LinkedIn" className="w-5 h-5" />
               </a>
               <a
-                href="#"
-                className="text-[#6B7280] hover:text-[#00568C] transition-colors duration-150"
+                href="https://www.youtube.com/@learntolivetolearn"
+                className="opacity-70 hover:opacity-100 hover:scale-110 transition-all duration-150"
                 aria-label="YouTube"
               >
-                <Youtube className="w-5 h-5" />
+                <img src="/youtube-svgrepo-com.svg" alt="YouTube" className="w-5 h-5" />
               </a>
             </div>
           </div>
@@ -43,11 +43,11 @@ const Footer = () => {
             <h4 className="font-serif text-lg font-semibold text-[#00568C] mb-4">Quick Links</h4>
             <div className="space-y-3 font-sans text-sm">
               {[
-                { label: "About Us",       href: "/about"      },
-                { label: "Programs",       href: "/programs"   },
-                { label: "Success Stories",href: "/results"    },
-                { label: "FAQs",           href: "/faq"        },
-                { label: "Contact",        href: "#contact"    },
+                { label: "About Us",        href: "/about"    },
+                { label: "Programs",        href: "/programs" },
+                { label: "Success Stories", href: "/results"  },
+                { label: "FAQs",            href: "/faq"      },
+                { label: "Contact",         href: "#contact"  },
               ].map(({ label, href }) => (
                 <Link
                   key={label}
@@ -71,19 +71,19 @@ const Footer = () => {
               <div className="flex items-center gap-3 text-[#6B7280]">
                 <Phone className="w-4 h-4 text-[#00568C] shrink-0" />
                 <a
-                  href="tel:+919999999999"
+                  href="tel:+918601407444"
                   className="hover:text-[#2FB4E7] transition-colors duration-150"
                 >
-                  +91 99999 99999
+                  +91 86014 07444
                 </a>
               </div>
               <div className="flex items-center gap-3 text-[#6B7280]">
                 <Mail className="w-4 h-4 text-[#00568C] shrink-0" />
                 <a
-                  href="mailto:info@invincio.in"
+                  href="mailto:invincio_soldier@outlook.com"
                   className="hover:text-[#2FB4E7] transition-colors duration-150"
                 >
-                  info@invincio.in
+                  invincio_soldier@outlook.com
                 </a>
               </div>
             </div>
@@ -92,7 +92,7 @@ const Footer = () => {
 
         <div className="border-t border-[#e5e7eb] pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="font-sans text-xs text-[#6B7280]">
-            © 2024 Invincio Services LLP. All rights reserved.
+            © 2026 Invincio Services LLP. All rights reserved.
           </p>
           <div className="flex gap-6 font-sans text-xs text-[#6B7280]">
             <a href="#" className="hover:text-[#2FB4E7] transition-colors duration-150">

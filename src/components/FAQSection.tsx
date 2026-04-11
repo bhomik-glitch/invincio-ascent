@@ -20,7 +20,7 @@ const faqs = [
     a: "Yes. We specialize in repeaters, addressing the psychological aspects of previous attempts.",
   },
   {
-    q: "What is the duration of the 2024 programs?",
+    q: "What is the duration of the 2026 programs?",
     a: "Flagship programs typically range from 2–4 weeks depending on the specific track.",
   },
   {
