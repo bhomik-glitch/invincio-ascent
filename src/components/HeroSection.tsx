@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { CalendarCheck, MessageCircle } from "lucide-react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { CalendarCheck } from "lucide-react";
 import ConsultationModal from "./ConsultationModal";
 import { candidateStories } from "@/data/candidate-selections";
 
@@ -20,11 +20,43 @@ const stats = [
 
 const duplicatedStories = [...candidateStories, ...candidateStories];
 
+const SSB_ENTRIES = [
+  "NDA", "CDS – IMA", "CDS – OTA", "AFCAT – Flying",
+  "SSC Tech", "TGC", "TES Entry", "NCC Entry", "Navy B.Tech", "Coast Guard",
+];
+
+const TickerText = ({ paused }: { paused: boolean }) => {
+  const [idx, setIdx] = useState(0);
+
+  useEffect(() => {
+    if (paused) return;
+    const id = setInterval(() => setIdx(i => (i + 1) % SSB_ENTRIES.length), 2000);
+    return () => clearInterval(id);
+  }, [paused]);
+
+  return (
+    <AnimatePresence mode="wait" initial={false}>
+      <motion.span
+        key={idx}
+        initial={{ opacity: 0, x: 10 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -10 }}
+        transition={{ duration: 0.28, ease: EASE_OUT }}
+        style={{ display: "inline-block", whiteSpace: "nowrap", verticalAlign: "middle" }}
+      >
+        {SSB_ENTRIES[idx]}
+      </motion.span>
+    </AnimatePresence>
+  );
+};
+
 interface HeroSectionProps {
   title?: string;
   description?: string;
   subtitle?: string;
   backgroundImage?: string;
+  backgroundPosition?: string;
+  backgroundSize?: string;
   showStats?: boolean;
   showCarousel?: boolean;
 }
@@ -34,29 +66,39 @@ const HeroSection = ({
   description = "Mentored by Ex-SSB Assessors, we deliver authentic personality development and proven success across all branches of the armed forces.",
   subtitle = "Defence Leadership Institute",
   backgroundImage = "/assets/hero-bg.png",
+  backgroundPosition = "top",
+  backgroundSize = "cover",
   showStats = true,
   showCarousel = false,
 }: HeroSectionProps) => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [waHovered, setWaHovered] = useState(false);
 
   return (
     <>
     <section
-      className="relative w-full min-h-[90vh] flex items-center bg-[#04060D] bg-cover bg-center bg-no-repeat -mt-16"
-      style={{ backgroundImage: `url('${backgroundImage}')` }}
+      className="relative w-full min-h-[85vh] flex items-center bg-[#04060D] bg-no-repeat"
+      style={{
+        backgroundImage: `url('${backgroundImage}')`,
+        backgroundSize,
+        backgroundPosition,
+      }}
     >
       {/* Dark overlay for image readability — hero special case */}
       <div className="absolute inset-0 bg-[#021526]/62" />
 
-      {/* Floating top-right pill */}
-      <div
-        className="absolute top-6 right-6 z-20 px-4 py-2 rounded-full border border-white/30 text-[11px] font-medium uppercase tracking-[0.18em] text-white shadow-sm"
-        style={{ background: "rgba(0,0,0,0.30)", backdropFilter: "blur(16px)" }}
-      >
-        Since 2012
+
+      {/* Strategic partner logo — top right */}
+      <div className="absolute right-6 z-20" style={{ top: "4px" }}>
+        <img
+          src="/assets/Monks_and_Worriers_-_1-removebg-preview.png"
+          alt="Monks and Warriors — Strategic Partners"
+          className="w-20 md:w-24 object-contain drop-shadow-lg"
+        />
       </div>
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-28 pb-20 flex items-center justify-end">
+
+<div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-24 pb-16 flex items-center justify-end">
 
         {/* Glass content card */}
         <motion.div
@@ -120,7 +162,7 @@ const HeroSection = ({
               Book Free Consultation
             </button>
 
-            {/* Secondary — glass outline */}
+            {/* Secondary — glass outline with ticker */}
             <a
               href="https://wa.me/918601407444"
               target="_blank"
@@ -128,10 +170,12 @@ const HeroSection = ({
               className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/25 px-6 py-3.5 text-sm font-semibold tracking-wide text-white"
               style={{ transition: "background-color 200ms ease, border-color 200ms ease, transform 120ms ease" }}
               onMouseEnter={(e) => {
+                setWaHovered(true);
                 e.currentTarget.style.borderColor = "rgba(255,255,255,0.45)";
                 e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.08)";
               }}
               onMouseLeave={(e) => {
+                setWaHovered(false);
                 e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
                 e.currentTarget.style.backgroundColor = "transparent";
                 e.currentTarget.style.transform = "scale(1)";
@@ -139,29 +183,68 @@ const HeroSection = ({
               onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
               onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
             >
-              <MessageCircle className="h-4 w-4 shrink-0" />
-              WhatsApp Us
+              <TickerText paused={waHovered} />
             </a>
           </motion.div>
 
-          {/* Stats row — sky blue values */}
+          {/* Bento grid — stats + GTO CTA */}
           {showStats && (
             <motion.div
               {...fadeUp(0.46)}
-              className="flex flex-wrap gap-2 border-t border-white/[0.07] pt-6"
+              className="border-t border-white/[0.07] pt-6"
             >
-              {stats.map((stat, i) => (
-                <motion.div
-                  key={stat.label}
+              {/* Bento wrapper */}
+              <div
+                className="inline-grid w-full gap-1.5"
+                style={{ gridTemplateColumns: "1fr 1fr 1fr", gridTemplateRows: "auto auto" }}
+              >
+                {/* Top row — 3 equal cells */}
+                {stats.map((stat, i) => (
+                  <motion.div
+                    key={stat.value}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3, ease: EASE_OUT, delay: 0.5 + i * 0.06 }}
+                    className="flex items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] px-3 py-2.5"
+                    style={{ transition: "background-color 180ms ease, border-color 180ms ease" }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = "rgba(246,184,40,0.10)";
+                      e.currentTarget.style.borderColor = "rgba(246,184,40,0.35)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.06)";
+                      e.currentTarget.style.borderColor = "rgba(255,255,255,0.10)";
+                    }}
+                  >
+                    <span className="text-[12.5px] font-semibold text-[#F6B828] whitespace-nowrap">{stat.value}</span>
+                  </motion.div>
+                ))}
+
+                {/* Bottom row — spans all 3 columns */}
+                <motion.button
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.35, ease: EASE_OUT, delay: 0.5 + i * 0.07 }}
-                  className="flex items-baseline gap-1.5 rounded-lg border border-white/10 bg-white/[0.06] px-3.5 py-2"
+                  transition={{ duration: 0.3, ease: EASE_OUT, delay: 0.68 }}
+                  className="col-span-3 flex items-center justify-center gap-2 rounded-xl border border-[#F6B828]/35 bg-[#F6B828]/[0.08] py-3 text-[15px] font-semibold text-[#F6B828] tracking-wide"
+                  style={{ transition: "background-color 180ms ease, border-color 180ms ease, transform 120ms ease" }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "rgba(246,184,40,0.16)";
+                    e.currentTarget.style.borderColor = "rgba(246,184,40,0.60)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "rgba(246,184,40,0.08)";
+                    e.currentTarget.style.borderColor = "rgba(246,184,40,0.35)";
+                    e.currentTarget.style.transform = "scale(1)";
+                  }}
+                  onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.98)")}
+                  onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
                 >
-                  <span className="text-sm font-bold text-[#F6B828]">{stat.value}</span>
-                  <span className="text-[11px] text-white/55">{stat.label}</span>
-                </motion.div>
-              ))}
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+                  </svg>
+                  <span className="text-[15px]">Train in the Biggest GTO Ground in Delhi</span>
+                </motion.button>
+              </div>
             </motion.div>
           )}
 
@@ -185,8 +268,11 @@ const HeroSection = ({
           {duplicatedStories.map((story, index) => (
             <div
               key={index}
-              className="group/card flex items-center gap-4 bg-white rounded-xl px-5 py-4 min-w-[280px] border border-[#e5e7eb]"
+              className="group/card flex items-center bg-white rounded-xl border border-[#e5e7eb]"
               style={{
+                minWidth: "420px",
+                gap: "1.5rem",
+                padding: "1.5rem 1.875rem",
                 boxShadow: "0 1px 4px rgba(0,0,0,0.04)",
                 transition: "transform 250ms cubic-bezier(0.23,1,0.32,1), box-shadow 250ms ease, border-color 250ms ease",
               }}
@@ -201,18 +287,18 @@ const HeroSection = ({
                 e.currentTarget.style.borderColor = "#e5e7eb";
               }}
             >
-              <div className="w-16 aspect-square rounded-md overflow-hidden shrink-0">
+              <div className="rounded-md overflow-hidden shrink-0" style={{ width: "96px", height: "96px" }}>
                 <img
                   src={story.image}
                   alt={story.name}
                   className="block w-full h-full object-cover object-[center_20%]"
                 />
               </div>
-              <div className="flex flex-col text-left leading-tight max-w-[160px]">
-                <span className="font-serif text-sm font-semibold text-[#00568C]">
+              <div className="flex flex-col text-left leading-tight" style={{ maxWidth: "240px" }}>
+                <span className="font-serif font-semibold text-[#00568C]" style={{ fontSize: "1rem" }}>
                   {story.name}
                 </span>
-                <span className="font-sans text-xs text-[#6B7280] mt-0.5 line-clamp-2">
+                <span className="font-sans text-[#6B7280] line-clamp-2" style={{ fontSize: "0.8125rem", marginTop: "0.25rem" }}>
                   {story.info}
                 </span>
               </div>

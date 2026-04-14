@@ -56,17 +56,13 @@ const echoes = [
 ];
 
 const stories = [
-  { name: "Vivek Sharma",      info: "SSC Navy ATC Entry — 16th Attempt",               image: "/assets/client_photo/Vivek Sharma .jpg" },
-  { name: "S R Hari Kumar",    info: "SSC Tech Entry — 16th Attempt",                    image: "/assets/client_photo/S R Hari Kumar.jpg" },
-  { name: "Prashant Upadhyay", info: "Batch RNDA-46843 — NDA 155 Entry",                image: "/assets/client_photo/Prashant Upadhyay.jpg" },
-  { name: "Sanyog Tiwari",     info: "SSC Tech Entry — 10th Attempt",                   image: "/assets/client_photo/Sanyog Tiwari.jpg" },
-  { name: "Akash Swamy",       info: "CDS OTA Entry — 7th Attempt",                     image: "/assets/client_photo/Akash Swamy .jpg" },
-  { name: "Gyanendra Yadav",   info: "4 AFSB Varanasi — Batch VNDA (M)/729",            image: "/assets/client_photo/Gyanendra.jpg" },
-  { name: "Akshat Mishra",     info: "NDA/62806 — Batch VNDA (M)/729",                  image: "/assets/client_photo/Akshat mishra.jpg" },
-  { name: "Atharv",            info: "Batch DSTL 39818 — 19 SSB Prayagraj",             image: "/assets/client_photo/Atharv.jpg" },
-  { name: "Rudransh Kishore",  info: "Batch KNDA 40815 — 20 SSB Interview",             image: "/assets/client_photo/Rudransh.jpg" },
-  { name: "Aditya Gupta",      info: "Batch KNDA 40816 — 20 SSB Interview",             image: "/assets/client_photo/Aditya.jpg" },
-  { name: "Sankalp Jaiswal",   info: "Batch PNDA 72255 — 21 SSB Interview",             image: "/assets/client_photo/Sankalp.jpg" },
+  { name: "Prashant Upadhyay", info: "Batch RNDA-46843 — NDA 155 Entry",                  image: "/assets/client_photo/Prashant Upadhyay.jpg" },
+  { name: "Gyanendra Yadav",   info: "4 AFSB Varanasi — Batch VNDA(M)/729",              image: "/assets/client_photo/Gyanendra.jpg" },
+  { name: "Akshat Mishra",     info: "NDA/62806 — Batch VNDA(M)/729",                    image: "/assets/client_photo/Akshat mishra.jpg" },
+  { name: "Atharv",            info: "Batch DSTL 39818 — 19 SSB Prayagraj, Chest No. 7", image: "/assets/client_photo/Atharv.jpg" },
+  { name: "Rudransh Kishore",  info: "Batch KNDA 40815 — 20 SSB, Chest No. 02",          image: "/assets/client_photo/Rudransh.jpg" },
+  { name: "Aditya Gupta",      info: "Batch KNDA 40816 — 20 SSB, Chest No. 09",          image: "/assets/client_photo/Aditya.jpg" },
+  { name: "Sankalp Jaiswal",   info: "Batch PNDA 72255 — 21 SSB, Chest No. 03",          image: "/assets/client_photo/Sankalp.jpg" },
 ];
 
 const duplicatedStories = [...stories, ...stories];
@@ -255,8 +251,11 @@ const TransformationSection = () => {
             {duplicatedStories.map((story, index) => (
               <div
                 key={index}
-                className="group/card flex items-center gap-4 bg-white rounded-xl px-5 py-4 min-w-[280px] cursor-pointer border border-[#e5e7eb]"
+                className="group/card flex items-center bg-white rounded-xl cursor-pointer border border-[#e5e7eb]"
                 style={{
+                  minWidth: "560px",
+                  gap: "2rem",
+                  padding: "2rem 2.5rem",
                   boxShadow: "0 1px 4px rgba(0,0,0,0.04)",
                   transition: "transform 250ms cubic-bezier(0.23,1,0.32,1), box-shadow 250ms ease, border-color 250ms ease",
                 }}
@@ -272,18 +271,18 @@ const TransformationSection = () => {
                 }}
               >
                 {/* Avatar — aspect-ratio replaces fixed h-14 */}
-                <div className="w-16 aspect-square rounded-md overflow-hidden shrink-0">
+                <div className="rounded-md overflow-hidden shrink-0" style={{ width: "128px", height: "128px" }}>
                   <img
                     src={story.image}
                     alt={story.name}
                     className="block w-full h-full object-cover object-[center_20%]"
                   />
                 </div>
-                <div className="flex flex-col text-left leading-tight max-w-[160px]">
-                  <span className="font-serif text-sm font-semibold text-[#00568C]">
+                <div className="flex flex-col text-left leading-tight" style={{ maxWidth: "320px" }}>
+                  <span className="font-serif font-semibold text-[#00568C]" style={{ fontSize: "1.125rem" }}>
                     {story.name}
                   </span>
-                  <span className="font-sans text-xs text-[#6B7280] mt-0.5 line-clamp-2">
+                  <span className="font-sans text-[#6B7280] line-clamp-2" style={{ fontSize: "0.875rem", marginTop: "0.25rem" }}>
                     {story.info}
                   </span>
                 </div>

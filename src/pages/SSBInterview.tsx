@@ -128,9 +128,11 @@ const SSBInterview = () => {
     <div className="bg-[#F1FFFF] min-h-screen overflow-x-hidden w-full">
       <HeroSection
         subtitle="SSB Interview Preparation"
-        title="Train for the Board from the Inside"
-        description="Mentorship exclusively by Ex-SSB Assessors who have evaluated thousands of candidates. Real-world OLQ development. Comprehensive mock simulations. Proven 2026 recommendation strategies."
-        backgroundImage="/assets/Whisk_af546ace17f28599d3f4ed17a321bd6fdr.png"
+        title="Train Like an Officer"
+        description="Learn directly from ex-SSB assessors who have evaluated thousands of candidates. Develop strong OLQs through structured guidance, realistic mock scenarios, and practical preparation strategies that align with actual board expectations."
+        backgroundImage="/assets/IMA image.jpg"
+        backgroundPosition="center center"
+        backgroundSize="cover"
         showStats={false}
       />
 

@@ -102,7 +102,9 @@ const FutureLeader = () => {
         subtitle="Future Leader Bootcamp"
         title="Build the Officer Before the Exam Begins"
         description="A foundational program for Class 9 onwards. Personality, discipline, communication, and the SSB mindset — developed early, developed right."
-        backgroundImage="/assets/Whisk_af546ace17f28599d3f4ed17a321bd6fdr.png"
+        backgroundImage="/assets/bootcamp-image.jpeg"
+        backgroundPosition="center center"
+        backgroundSize="cover"
         showStats={false}
       />
 

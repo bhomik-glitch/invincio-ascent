@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(node -e ':*)",
-      "Bash(node_modules/.bin/tsc --noEmit)"
+      "Bash(node_modules/.bin/tsc --noEmit)",
+      "Bash(xargs grep:*)"
     ]
   }
 }

@@ -51,7 +51,7 @@ const Navbar = () => {
             <Link
               key={l.href}
               to={l.href}
-              className="text-sm font-medium text-[#00568C] hover:text-[#2FB4E7] transition-colors duration-150"
+              className="text-base font-medium text-[#00568C] hover:text-[#2FB4E7] transition-colors duration-150"
               style={{ textDecoration: "none" }}
             >
               {l.label}
@@ -105,7 +105,7 @@ const Navbar = () => {
               key={l.href}
               to={l.href}
               onClick={() => setOpen(false)}
-              className="text-sm font-medium text-[#00568C] hover:text-[#2FB4E7] transition-colors duration-150"
+              className="text-base font-medium text-[#00568C] hover:text-[#2FB4E7] transition-colors duration-150"
             >
               {l.label}
             </Link>

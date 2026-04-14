@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const socialLinks = [
@@ -36,12 +36,22 @@ const socialLinks = [
 
 const SocialSidebar = () => {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const scrolled = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+      setVisible(scrolled >= 0.1);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <motion.div
-      initial={{ x: -20, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      transition={{ duration: 0.4, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
+      animate={{ x: visible ? 0 : "-120%", opacity: visible ? 1 : 0 }}
+      transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+      style={{ pointerEvents: visible ? "auto" : "none" }}
       className="fixed left-4 top-1/2 -translate-y-1/2 z-[100] hidden md:flex flex-col items-center gap-1 rounded-2xl py-4 px-2"
       style={{
         background: "rgba(0, 86, 140, 0.08)",
