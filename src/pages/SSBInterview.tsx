@@ -131,7 +131,7 @@ const SSBInterview = () => {
         title="Train Like an Officer"
         description="Learn directly from ex-SSB assessors who have evaluated thousands of candidates. Develop strong OLQs through structured guidance, realistic mock scenarios, and practical preparation strategies that align with actual board expectations."
         backgroundImage="/assets/IMA image.jpg"
-        backgroundPosition="center center"
+        backgroundPosition="center 30%"
         backgroundSize="cover"
         showStats={false}
       />
