@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { CalendarCheck, MessageCircle, Phone } from "lucide-react";
 import {
@@ -7,9 +8,13 @@ import {
   TAP_SCALE,
   TAP_TRANSITION,
 } from "@/lib/design-system";
+import ConsultationModal from "./ConsultationModal";
 
 const CTASection = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
+    <>
     <section
       id="contact"
       className={`${SECTION_PAD}`}
@@ -40,8 +45,8 @@ const CTASection = () => {
 
           {/* Primary CTA — golden yellow */}
           <div className="mb-8">
-            <motion.a
-              href="#"
+            <motion.button
+              onClick={() => setModalOpen(true)}
               whileTap={TAP_SCALE}
               transition={TAP_TRANSITION}
               className="inline-flex items-center gap-2 bg-[#F6B828] text-[#00568C] px-8 py-3.5 rounded-lg font-sans font-semibold text-sm tracking-wide"
@@ -60,7 +65,7 @@ const CTASection = () => {
             >
               <CalendarCheck className="w-4 h-4 shrink-0" />
               Book Free Consultation
-            </motion.a>
+            </motion.button>
           </div>
 
           {/* Secondary contact links */}
@@ -98,6 +103,9 @@ const CTASection = () => {
         </motion.div>
       </div>
     </section>
+
+    <ConsultationModal open={modalOpen} onClose={() => setModalOpen(false)} />
+    </>
   );
 };
 
