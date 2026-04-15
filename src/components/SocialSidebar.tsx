@@ -51,9 +51,9 @@ const SocialSidebar = () => {
     <motion.div
       animate={{ x: visible ? 0 : "-120%", opacity: visible ? 1 : 0 }}
       transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-      style={{ pointerEvents: visible ? "auto" : "none" }}
       className="fixed left-4 top-1/2 -translate-y-1/2 z-[100] hidden md:flex flex-col items-center gap-1 rounded-2xl py-4 px-2"
       style={{
+        pointerEvents: visible ? "auto" : "none",
         background: "rgba(0, 86, 140, 0.08)",
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
