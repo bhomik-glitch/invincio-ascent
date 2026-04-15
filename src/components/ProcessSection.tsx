@@ -41,7 +41,7 @@ const ProcessSection = () => {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="process" className="bg-[#eaf6f8] py-24">
+    <section id="process" className="bg-[#eaf6f8] py-14 md:py-24">
       <div className={CONTAINER}>
 
         {/* Header */}

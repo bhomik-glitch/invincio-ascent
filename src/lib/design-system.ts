@@ -56,8 +56,8 @@ export const CARD_LIGHT =
   "bg-white border border-[#e5e7eb] rounded-xl p-8 transition-[transform,box-shadow] duration-[280ms] [transition-timing-function:cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(0,86,140,0.10)]";
 
 // ── Layout ───────────────────────────────────────────────────────────────────
-export const CONTAINER       = "max-w-[1200px] mx-auto px-6 md:px-12";
-export const SECTION_PAD     = "py-24";
+export const CONTAINER       = "max-w-[1200px] mx-auto px-4 sm:px-6 md:px-12";
+export const SECTION_PAD     = "py-14 md:py-24";
 export const SECTION_HEADER_MB = "mb-14";
 export const GRID_GAP        = "gap-8";
 

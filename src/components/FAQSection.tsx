@@ -37,8 +37,8 @@ const FAQSection = () => {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-24 bg-[#F1FFFF]" ref={ref}>
-      <div className="max-w-4xl mx-auto px-6">
+    <section id="faq" className="py-14 md:py-24 bg-[#F1FFFF]" ref={ref}>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
 
         {/* Header */}
         <motion.div
@@ -50,7 +50,7 @@ const FAQSection = () => {
           <p className="font-sans text-xs font-semibold tracking-[0.3em] uppercase text-[#2FB4E7] mb-4">
             Insights & Clarity
           </p>
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#00568C] tracking-tight">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#00568C] tracking-tight">
             Frequently Asked Questions
           </h2>
           <p className="mt-4 text-[#6B7280] max-w-xl mx-auto text-sm md:text-base font-sans">
@@ -78,10 +78,10 @@ const FAQSection = () => {
             >
               <button
                 onClick={() => setOpen(open === i ? null : i)}
-                className="w-full flex items-center justify-between p-6 md:p-7 text-left"
+                className="w-full flex items-center justify-between p-5 md:p-7 text-left min-h-[56px]"
               >
                 <span
-                  className="font-serif text-lg md:text-xl font-medium tracking-tight pr-8"
+                  className="font-serif text-base md:text-xl font-medium tracking-tight pr-6 md:pr-8"
                   style={{
                     color: open === i ? "#00568C" : "#374151",
                     transition: "color 200ms ease",

@@ -28,7 +28,7 @@ const CTASection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.4, ease: EASE_OUT }}
-          className="max-w-xl"
+          className="max-w-xl mx-auto sm:mx-0"
         >
           {/* Eyebrow */}
           <p className="font-sans text-xs font-semibold tracking-[0.3em] uppercase text-[#2FB4E7] mb-6">
@@ -49,7 +49,7 @@ const CTASection = () => {
               onClick={() => setModalOpen(true)}
               whileTap={TAP_SCALE}
               transition={TAP_TRANSITION}
-              className="inline-flex items-center gap-2 bg-[#F6B828] text-[#00568C] px-8 py-3.5 rounded-lg font-sans font-semibold text-sm tracking-wide"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#F6B828] text-[#00568C] px-8 py-3.5 rounded-lg font-sans font-semibold text-sm tracking-wide"
               style={{
                 boxShadow: "0 4px 20px rgba(246,184,40,0.30)",
                 transition: "background-color 200ms ease, box-shadow 200ms ease",

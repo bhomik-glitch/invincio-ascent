@@ -42,7 +42,7 @@ const DifferentiatorSection = () => {
     <section
       id="difference"
       ref={sectionRef}
-      className="relative px-6 py-20 md:px-12 lg:px-20 xl:px-32 overflow-hidden"
+      className="relative px-4 py-14 sm:px-6 md:py-20 md:px-12 lg:px-20 xl:px-32 overflow-hidden"
     >
       {/* Parallax background image */}
       <motion.div
@@ -111,7 +111,7 @@ const DifferentiatorSection = () => {
               {notThings.map((t) => (
                 <div key={t} className="flex items-center gap-3">
                   <X className="w-5 h-5 text-[#E66133] shrink-0" />
-                  <span className="font-serif text-xl md:text-2xl font-bold text-white/78 line-through decoration-[#E66133]/60" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.4)" }}>
+                  <span className="font-serif text-lg md:text-2xl font-bold text-white/78 line-through decoration-[#E66133]/60" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.4)" }}>
                     {t}
                   </span>
                 </div>
@@ -138,7 +138,7 @@ const DifferentiatorSection = () => {
                     />
                   </div>
                   <span
-                    className="font-serif text-xl md:text-2xl font-bold leading-snug"
+                    className="font-serif text-lg md:text-2xl font-bold leading-snug"
                     style={{
                       color: i === instead.length - 1 ? "#2FB4E7" : "rgba(255,255,255,0.96)",
                       textShadow: "0 1px 10px rgba(0,0,0,0.45)",

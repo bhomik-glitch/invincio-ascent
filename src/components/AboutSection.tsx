@@ -16,7 +16,7 @@ const AboutSection = () => {
 
   return (
     <section id="about" className="section-padding" ref={ref}>
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-16">
           {/* Left: visual */}
           <motion.div

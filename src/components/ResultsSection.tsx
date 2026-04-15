@@ -65,7 +65,7 @@ const ResultsSection = () => {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.35, ease: EASE_OUT, delay: i * 0.05 }}
-              className="bg-white border border-[#e5e7eb] rounded-xl p-8 text-center"
+              className="bg-white border border-[#e5e7eb] rounded-xl p-5 md:p-8 text-center"
               style={{
                 boxShadow: "0 1px 4px rgba(0,0,0,0.04)",
                 transition: "transform 280ms cubic-bezier(0.23,1,0.32,1), box-shadow 280ms cubic-bezier(0.23,1,0.32,1), border-color 280ms ease",
@@ -101,7 +101,7 @@ const ResultsSection = () => {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.4, ease: EASE_OUT, delay: i * 0.05 }}
-              className="bg-white border border-[#e5e7eb] rounded-xl p-8 flex flex-col"
+              className="bg-white border border-[#e5e7eb] rounded-xl p-5 md:p-8 flex flex-col"
               style={{
                 boxShadow: "0 1px 4px rgba(0,0,0,0.04)",
                 transition: "transform 280ms cubic-bezier(0.23,1,0.32,1), box-shadow 280ms cubic-bezier(0.23,1,0.32,1), border-color 280ms ease",

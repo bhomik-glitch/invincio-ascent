@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#eaf6f8] border-t border-[#e5e7eb] px-6 py-16 md:px-12">
+    <footer className="bg-[#eaf6f8] border-t border-[#e5e7eb] px-4 sm:px-6 py-12 md:py-16 md:px-12">
       <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-3 gap-12 mb-12">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-10 md:gap-12 mb-10 md:mb-12">
 
           {/* Brand */}
           <div>
@@ -81,7 +81,7 @@ const Footer = () => {
                 <Mail className="w-4 h-4 text-[#00568C] shrink-0" />
                 <a
                   href="mailto:invincio_soldier@outlook.com"
-                  className="hover:text-[#2FB4E7] transition-colors duration-150"
+                  className="hover:text-[#2FB4E7] transition-colors duration-150 break-all"
                 >
                   invincio_soldier@outlook.com
                 </a>

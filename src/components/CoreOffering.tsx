@@ -83,7 +83,7 @@ const CoreOffering = () => {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.4, ease: EASE_OUT, delay: i * 0.05 }}
-              className="group relative overflow-hidden bg-white border border-[#e5e7eb] rounded-xl p-8 flex flex-col cursor-pointer h-full"
+              className="group relative overflow-hidden bg-white border border-[#e5e7eb] rounded-xl p-6 md:p-8 flex flex-col cursor-pointer h-full"
               style={{
                 boxShadow: "0 1px 4px rgba(0,0,0,0.04)",
                 transition:

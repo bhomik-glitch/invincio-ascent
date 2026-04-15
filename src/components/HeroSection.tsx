@@ -89,23 +89,23 @@ const HeroSection = ({
 
 
       {/* Strategic partner logo — top right */}
-      <div className="absolute right-6 z-20" style={{ top: "4px" }}>
+      <div className="absolute right-4 md:right-6 z-20" style={{ top: "4px" }}>
         <img
           src="/assets/Monks_and_Worriers_-_1-removebg-preview.png"
           alt="Monks and Warriors — Strategic Partners"
-          className="w-20 md:w-24 object-contain drop-shadow-lg"
+          className="w-14 sm:w-18 md:w-24 object-contain drop-shadow-lg"
         />
       </div>
 
 
-<div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-24 pb-16 flex items-center justify-end">
+<div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pt-16 pb-10 md:pt-24 md:pb-16 flex items-center justify-center md:justify-end">
 
         {/* Glass content card */}
         <motion.div
           initial={{ opacity: 0, y: 28, scale: 0.97 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6, ease: EASE_OUT, delay: 0.05 }}
-          className="max-w-[580px] rounded-2xl border border-white/10 bg-black/35 backdrop-blur-md p-8 md:p-10"
+          className="w-full max-w-[580px] rounded-2xl border border-white/10 bg-black/35 backdrop-blur-md p-6 sm:p-8 md:p-10"
           style={{ boxShadow: "0 8px 48px rgba(0,0,0,0.40), inset 0 1px 0 rgba(255,255,255,0.06)" }}
         >
 
@@ -119,7 +119,7 @@ const HeroSection = ({
           {/* H1 */}
           <motion.h1
             {...fadeUp(0.22)}
-            className="mb-5 font-serif text-[2.5rem] font-bold text-white md:text-[3.1rem]"
+            className="mb-5 font-serif text-[1.8rem] sm:text-[2.2rem] font-bold text-white md:text-[3.1rem]"
             style={{ lineHeight: 1.06, letterSpacing: "-0.025em" }}
           >
             {title}
@@ -136,7 +136,7 @@ const HeroSection = ({
           {/* CTAs */}
           <motion.div
             {...fadeUp(0.38)}
-            className="mb-8 flex flex-col gap-3 sm:flex-row"
+            className="mb-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
           >
             {/* Primary — golden yellow, deep blue text */}
             <button
@@ -270,7 +270,7 @@ const HeroSection = ({
               key={index}
               className="group/card flex items-center bg-white rounded-xl border border-[#e5e7eb]"
               style={{
-                minWidth: "420px",
+                minWidth: "min(420px, 80vw)",
                 gap: "1.5rem",
                 padding: "1.5rem 1.875rem",
                 boxShadow: "0 1px 4px rgba(0,0,0,0.04)",

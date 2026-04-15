@@ -250,7 +250,7 @@ const TeamSection = () => {
 
   return (
     <section className="section-padding bg-muted/40">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
 
         {/* ── Our Team ── */}
         <SectionHeader
