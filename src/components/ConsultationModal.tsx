@@ -1,8 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, MessageCircle, Loader2, CheckCircle } from "lucide-react";
+import emailjs from "@emailjs/browser";
 import { EASE_OUT, TAP_SCALE, TAP_TRANSITION } from "@/lib/design-system";
 
+// ── EmailJS config ────────────────────────────────────────────────────────────
+const EJ_SERVICE        = "service_y8ogfpa";
+const EJ_TEMPLATE_USER  = "template_zjmxzb9";   // auto-reply → user
+const EJ_TEMPLATE_ADMIN = "template_6hy9bn3";    // lead notification → admin
+const EJ_KEY            = "Cpj922V80h18ionmf";
+
+// ── Types ─────────────────────────────────────────────────────────────────────
 interface Props {
   open: boolean;
   onClose: () => void;
@@ -10,45 +18,57 @@ interface Props {
 }
 
 interface FormState {
-  name: string;
-  phone: string;
-  email: string;
+  full_name:    string;
+  phone_number: string;
+  email:        string;
 }
 
 interface Errors {
-  name?: string;
-  phone?: string;
-  email?: string;
+  full_name?:    string;
+  phone_number?: string;
+  email?:        string;
 }
 
+type SubmitStatus = "idle" | "loading" | "success" | "error";
+
+// ── Validation ────────────────────────────────────────────────────────────────
 function validate(form: FormState): Errors {
   const errors: Errors = {};
-  if (!form.name.trim()) errors.name = "Full name is required";
-  if (!form.phone.trim()) errors.phone = "Phone number is required";
-  else if (!/^\+?[\d\s\-()+]{8,}$/.test(form.phone))
-    errors.phone = "Enter a valid phone number";
-  if (!form.email.trim()) errors.email = "Email is required";
+
+  if (!form.full_name.trim())
+    errors.full_name = "Full name is required";
+  else if (form.full_name.trim().length < 2)
+    errors.full_name = "Name must be at least 2 characters";
+
+  if (!form.phone_number.trim())
+    errors.phone_number = "Phone number is required";
+  else if (!/^\d{10}$/.test(form.phone_number.trim()))
+    errors.phone_number = "Enter a valid 10-digit number";
+
+  if (!form.email.trim())
+    errors.email = "Email is required";
   else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
-    errors.email = "Enter a valid email";
+    errors.email = "Enter a valid email address";
+
   return errors;
 }
 
-// ── Field ────────────────────────────────────────────────────────────────────
-
+// ── Field component ───────────────────────────────────────────────────────────
 interface FieldProps {
-  label: string;
-  id: string;
-  type: string;
+  label:        string;
+  id:           string;
+  type:         string;
   placeholder?: string;
-  value: string;
-  onChange: (v: string) => void;
-  onBlur?: () => void;
-  error?: string;
+  value:        string;
+  onChange:     (v: string) => void;
+  onBlur?:      () => void;
+  error?:       string;
   autoComplete?: string;
+  inputMode?:   React.InputHTMLAttributes<HTMLInputElement>["inputMode"];
 }
 
 const Field = React.forwardRef<HTMLInputElement, FieldProps>(
-  ({ label, id, type, placeholder, value, onChange, onBlur, error, autoComplete }, ref) => (
+  ({ label, id, type, placeholder, value, onChange, onBlur, error, autoComplete, inputMode }, ref) => (
     <div className="flex flex-col gap-1">
       <label htmlFor={id} className="text-xs font-semibold text-[#374151] tracking-wide">
         {label} <span className="text-[#F6B828]">*</span>
@@ -57,6 +77,7 @@ const Field = React.forwardRef<HTMLInputElement, FieldProps>(
         ref={ref}
         id={id}
         type={type}
+        inputMode={inputMode}
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
@@ -90,46 +111,41 @@ const Field = React.forwardRef<HTMLInputElement, FieldProps>(
 );
 Field.displayName = "Field";
 
-// ── Modal ────────────────────────────────────────────────────────────────────
-
+// ── Modal ─────────────────────────────────────────────────────────────────────
 const ConsultationModal = ({ open, onClose, program }: Props) => {
-  const [form, setForm] = useState<FormState>({ name: "", phone: "", email: "" });
-  const [errors, setErrors] = useState<Errors>({});
+  const [form, setForm]       = useState<FormState>({ full_name: "", phone_number: "", email: "" });
+  const [errors, setErrors]   = useState<Errors>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [status, setStatus]   = useState<SubmitStatus>("idle");
   const nameRef = useRef<HTMLInputElement>(null);
 
-  // ESC to close
+  const isLoading = status === "loading";
+  const isSuccess = status === "success";
+
+  // ESC key
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && !loading) onClose();
+      if (e.key === "Escape" && !isLoading) onClose();
     };
     if (open) document.addEventListener("keydown", handler);
     return () => document.removeEventListener("keydown", handler);
-  }, [open, loading, onClose]);
+  }, [open, isLoading, onClose]);
 
-  // Reset + autofocus on open
+  // Reset on open + autofocus
   useEffect(() => {
     if (open) {
-      setForm({ name: "", phone: "", email: "" });
+      setForm({ full_name: "", phone_number: "", email: "" });
       setErrors({});
       setTouched({});
-      setLoading(false);
-      setSuccess(false);
-      // Slight delay so animation has started
+      setStatus("idle");
       const t = setTimeout(() => nameRef.current?.focus(), 90);
       return () => clearTimeout(t);
     }
   }, [open]);
 
-  // Lock body scroll while open
+  // Lock body scroll
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = open ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [open]);
 
@@ -144,21 +160,36 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
     if (touched[field]) setErrors(validate(next));
   };
 
-  const isValid = Object.keys(validate(form)).length === 0;
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setTouched({ name: true, phone: true, email: true });
+    setTouched({ full_name: true, phone_number: true, email: true });
+
     const errs = validate(form);
     setErrors(errs);
     if (Object.keys(errs).length > 0) return;
 
-    setLoading(true);
-    // Replace with real API call
-    await new Promise((r) => setTimeout(r, 1400));
-    setLoading(false);
-    setSuccess(true);
-    setTimeout(onClose, 2800);
+    setStatus("loading");
+
+    const payload = {
+      name:  form.full_name.trim(),
+      phone: form.phone_number.trim(),
+      email: form.email.trim(),
+      title: program
+        ? `New Defence Consultation Lead — ${program}`
+        : "New Defence Consultation Lead",
+    };
+
+    try {
+      await Promise.all([
+        emailjs.send(EJ_SERVICE, EJ_TEMPLATE_USER,  payload, EJ_KEY),
+        emailjs.send(EJ_SERVICE, EJ_TEMPLATE_ADMIN, payload, EJ_KEY),
+      ]);
+      setStatus("success");
+      // Auto-close after 2.8 s
+      setTimeout(onClose, 2800);
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -173,11 +204,11 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-[80] bg-black/55 backdrop-blur-[3px]"
-            onClick={() => !loading && onClose()}
+            onClick={() => !isLoading && onClose()}
             aria-hidden="true"
           />
 
-          {/* Panel wrapper (pointer-events-none so clicks fall through to overlay) */}
+          {/* Panel wrapper */}
           <div className="fixed inset-0 z-[81] flex items-center justify-center px-4 pointer-events-none">
             <motion.div
               key="panel"
@@ -192,21 +223,59 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
               aria-modal="true"
               aria-labelledby="modal-heading"
             >
-              {/* Brand top bar — deep blue */}
+              {/* Brand top bar */}
               <div className="h-[3px] w-full bg-gradient-to-r from-[#00568C]/60 via-[#2FB4E7] to-[#00568C]/60" />
 
               {/* Close button */}
               <button
-                onClick={() => !loading && onClose()}
+                onClick={() => !isLoading && onClose()}
                 aria-label="Close"
-                className="absolute top-4 right-4 z-10 rounded-lg p-1.5 text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors"
+                disabled={isLoading}
+                className="absolute top-4 right-4 z-10 rounded-lg p-1.5 text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors disabled:opacity-40"
               >
                 <X className="w-4 h-4" />
               </button>
 
               <div className="px-7 py-7">
                 <AnimatePresence mode="wait">
-                  {!success ? (
+
+                  {/* ── Success state ── */}
+                  {isSuccess ? (
+                    <motion.div
+                      key="success"
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.28, ease: EASE_OUT }}
+                      className="flex flex-col items-center text-center py-10"
+                    >
+                      <motion.div
+                        initial={{ scale: 0, rotate: -15 }}
+                        animate={{ scale: 1, rotate: 0 }}
+                        transition={{ type: "spring", stiffness: 280, damping: 18, delay: 0.08 }}
+                        className="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#F6B828]/10"
+                      >
+                        <CheckCircle className="w-8 h-8 text-[#F6B828]" strokeWidth={1.75} />
+                      </motion.div>
+                      <motion.h3
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3, ease: EASE_OUT, delay: 0.18 }}
+                        className="font-serif text-xl font-bold text-[#00568C] mb-2"
+                      >
+                        Request Received!
+                      </motion.h3>
+                      <motion.p
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3, ease: EASE_OUT, delay: 0.26 }}
+                        className="text-[13px] text-[#6B7280] max-w-[260px] leading-relaxed"
+                      >
+                        Our team will reach out within 24 hours with your personalised selection roadmap.
+                      </motion.p>
+                    </motion.div>
+
+                  ) : (
+                  /* ── Form state ── */
                     <motion.div
                       key="form"
                       initial={{ opacity: 0 }}
@@ -237,21 +306,22 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
                           id="cons-name"
                           type="text"
                           placeholder="Arjun Sharma"
-                          value={form.name}
-                          onChange={(v) => handleChange("name", v)}
-                          onBlur={() => handleBlur("name")}
-                          error={touched.name ? errors.name : undefined}
+                          value={form.full_name}
+                          onChange={(v) => handleChange("full_name", v)}
+                          onBlur={() => handleBlur("full_name")}
+                          error={touched.full_name ? errors.full_name : undefined}
                           autoComplete="name"
                         />
                         <Field
                           label="Phone Number"
                           id="cons-phone"
                           type="tel"
-                          placeholder="+91 98765 43210"
-                          value={form.phone}
-                          onChange={(v) => handleChange("phone", v)}
-                          onBlur={() => handleBlur("phone")}
-                          error={touched.phone ? errors.phone : undefined}
+                          inputMode="numeric"
+                          placeholder="98765 43210"
+                          value={form.phone_number}
+                          onChange={(v) => handleChange("phone_number", v.replace(/\D/g, "").slice(0, 10))}
+                          onBlur={() => handleBlur("phone_number")}
+                          error={touched.phone_number ? errors.phone_number : undefined}
                           autoComplete="tel"
                         />
                         <Field
@@ -266,26 +336,43 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
                           autoComplete="email"
                         />
 
-                        {/* Primary CTA */}
+                        {/* API error banner */}
+                        <AnimatePresence>
+                          {status === "error" && (
+                            <motion.p
+                              initial={{ opacity: 0, y: -4 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0 }}
+                              className="text-[12px] text-red-500 bg-red-50 border border-red-200 rounded-lg px-3 py-2 text-center"
+                            >
+                              Something went wrong. Please try again or&nbsp;
+                              <a href="https://wa.me/918601407444" target="_blank" rel="noopener noreferrer" className="underline font-medium">
+                                WhatsApp us
+                              </a>.
+                            </motion.p>
+                          )}
+                        </AnimatePresence>
+
+                        {/* Submit CTA */}
                         <motion.button
                           type="submit"
-                          disabled={loading}
-                          whileHover={!loading ? { y: -1, boxShadow: "0 6px 20px rgba(246,184,40,0.35)" } : undefined}
-                          whileTap={!loading ? TAP_SCALE : undefined}
+                          disabled={isLoading}
+                          whileHover={!isLoading ? { y: -1, boxShadow: "0 6px 20px rgba(246,184,40,0.35)" } : undefined}
+                          whileTap={!isLoading ? TAP_SCALE : undefined}
                           transition={TAP_TRANSITION}
-                          className="mt-1 w-full flex items-center justify-center gap-2 bg-[#F6B828] text-[#00568C] font-semibold text-sm py-3.5 rounded-xl hover:bg-[#e0a720] disabled:opacity-60 disabled:cursor-not-allowed transition-colors duration-150"
+                          className="mt-1 w-full flex items-center justify-center gap-2 bg-[#F6B828] text-[#00568C] font-semibold text-sm py-3.5 rounded-xl hover:bg-[#e0a720] disabled:opacity-70 disabled:cursor-not-allowed transition-colors duration-150"
                         >
-                          {loading ? (
+                          {isLoading ? (
                             <>
                               <Loader2 className="w-4 h-4 animate-spin" />
-                              Submitting…
+                              Sending…
                             </>
                           ) : (
                             "Get Started"
                           )}
                         </motion.button>
 
-                        {/* WhatsApp option */}
+                        {/* WhatsApp fallback */}
                         <a
                           href="https://wa.me/918601407444"
                           target="_blank"
@@ -297,7 +384,7 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
                         </a>
                       </form>
 
-                      {/* Trust + badges */}
+                      {/* Trust badges */}
                       <div className="mt-5 pt-4 border-t border-gray-100 flex flex-col items-center gap-2.5">
                         <p className="text-[11px] text-[#9CA3AF] tracking-wide">
                           No spam. Only serious guidance.
@@ -313,40 +400,6 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
                           ))}
                         </div>
                       </div>
-                    </motion.div>
-                  ) : (
-                    /* Success state */
-                    <motion.div
-                      key="success"
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.28, ease: EASE_OUT }}
-                      className="flex flex-col items-center text-center py-10"
-                    >
-                      <motion.div
-                        initial={{ scale: 0, rotate: -15 }}
-                        animate={{ scale: 1, rotate: 0 }}
-                        transition={{ type: "spring", stiffness: 280, damping: 18, delay: 0.08 }}
-                        className="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#F6B828]/10"
-                      >
-                        <CheckCircle className="w-8 h-8 text-[#F6B828]" strokeWidth={1.75} />
-                      </motion.div>
-                      <motion.h3
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3, ease: EASE_OUT, delay: 0.18 }}
-                        className="font-serif text-xl font-bold text-[#00568C] mb-2"
-                      >
-                        We'll contact you shortly
-                      </motion.h3>
-                      <motion.p
-                        initial={{ opacity: 0, y: 6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3, ease: EASE_OUT, delay: 0.26 }}
-                        className="text-[13px] text-[#6B7280] max-w-[260px] leading-relaxed"
-                      >
-                        Our team will reach out within 24 hours with your personalised selection roadmap.
-                      </motion.p>
                     </motion.div>
                   )}
                 </AnimatePresence>
