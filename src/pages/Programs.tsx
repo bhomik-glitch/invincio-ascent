@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, CalendarCheck, ChevronDown, X } from "lucide-react";
 import ConsultationModal from "@/components/ConsultationModal";
+import UpcomingBatches from "@/components/UpcomingBatches";
 
 const EASE_OUT: [number, number, number, number] = [0.23, 1, 0.32, 1];
 const GRID_COLS = 2; // desktop columns
@@ -359,6 +360,9 @@ const Programs = () => {
           })}
         </div>
       </section>
+
+      {/* ── Upcoming Batches ── */}
+      <UpcomingBatches />
 
       {/* ── Bottom CTA banner ── */}
       <section

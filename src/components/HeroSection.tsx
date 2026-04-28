@@ -4,6 +4,7 @@ import { CalendarCheck } from "lucide-react";
 import ConsultationModal from "./ConsultationModal";
 import NotificationsModal from "./NotificationsModal";
 import ResultsModal from "./ResultsModal";
+import NewCoursesModal from "./NewCoursesModal";
 import { candidateStories } from "@/data/candidate-selections";
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as [number, number, number, number];
@@ -70,10 +71,11 @@ const HeroSection = ({
   const [modalOpen, setModalOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
   const [resultsOpen, setResultsOpen] = useState(false);
+  const [newCoursesOpen, setNewCoursesOpen] = useState(false);
   const [waHovered, setWaHovered] = useState(false);
 
   const stats = [
-    { value: "New Courses", action: () => {} },
+    { value: "New Courses", action: () => setNewCoursesOpen(true) },
     { value: "Notifications", action: () => setNotifOpen(true) },
     { value: "Result Out !", action: () => setResultsOpen(true) },
   ];
@@ -317,6 +319,7 @@ const HeroSection = ({
     <ConsultationModal open={modalOpen} onClose={() => setModalOpen(false)} />
     <NotificationsModal isOpen={notifOpen} onClose={() => setNotifOpen(false)} />
     <ResultsModal isOpen={resultsOpen} onClose={() => setResultsOpen(false)} />
+    <NewCoursesModal isOpen={newCoursesOpen} onClose={() => setNewCoursesOpen(false)} />
     </>
   );
 };
