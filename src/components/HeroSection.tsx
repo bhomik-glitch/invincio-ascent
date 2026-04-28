@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CalendarCheck } from "lucide-react";
 import ConsultationModal from "./ConsultationModal";
+import NotificationsModal from "./NotificationsModal";
 import { candidateStories } from "@/data/candidate-selections";
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as [number, number, number, number];
@@ -11,12 +12,6 @@ const fadeUp = (delay: number) => ({
   animate: { opacity: 1, y: 0, scale: 1 },
   transition: { duration: 0.55, ease: EASE_OUT, delay },
 });
-
-const stats = [
-  { value: "New Courses", label: "" },
-  { value: "Notifications", label: "" },
-  { value: "Result Out !", label: "" },
-];
 
 const duplicatedStories = [...candidateStories, ...candidateStories];
 
@@ -72,7 +67,14 @@ const HeroSection = ({
   showCarousel = false,
 }: HeroSectionProps) => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [notifOpen, setNotifOpen] = useState(false);
   const [waHovered, setWaHovered] = useState(false);
+
+  const stats = [
+    { value: "New Courses", action: () => {} },
+    { value: "Notifications", action: () => setNotifOpen(true) },
+    { value: "Result Out !", action: () => {} },
+  ];
 
   return (
     <>
@@ -200,12 +202,13 @@ const HeroSection = ({
               >
                 {/* Top row — 3 equal cells */}
                 {stats.map((stat, i) => (
-                  <motion.div
+                  <motion.button
                     key={stat.value}
+                    onClick={stat.action}
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.3, ease: EASE_OUT, delay: 0.5 + i * 0.06 }}
-                    className="flex items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] px-3 py-2.5"
+                    className="flex items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] px-3 py-2.5 outline-none"
                     style={{ transition: "background-color 180ms ease, border-color 180ms ease" }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.backgroundColor = "rgba(246,184,40,0.10)";
@@ -217,7 +220,7 @@ const HeroSection = ({
                     }}
                   >
                     <span className="text-[12.5px] font-semibold text-[#F6B828] whitespace-nowrap">{stat.value}</span>
-                  </motion.div>
+                  </motion.button>
                 ))}
 
                 {/* Bottom row — spans all 3 columns */}
@@ -225,7 +228,7 @@ const HeroSection = ({
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3, ease: EASE_OUT, delay: 0.68 }}
-                  className="col-span-3 flex items-center justify-center gap-2 rounded-xl border border-[#F6B828]/35 bg-[#F6B828]/[0.08] py-3 text-[15px] font-semibold text-[#F6B828] tracking-wide"
+                  className="col-span-3 flex items-center justify-center gap-2 rounded-xl border border-[#F6B828]/35 bg-[#F6B828]/[0.08] py-3 text-[15px] font-semibold text-[#F6B828] tracking-wide outline-none"
                   style={{ transition: "background-color 180ms ease, border-color 180ms ease, transform 120ms ease" }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.backgroundColor = "rgba(246,184,40,0.16)";
@@ -310,6 +313,7 @@ const HeroSection = ({
     )}
 
     <ConsultationModal open={modalOpen} onClose={() => setModalOpen(false)} />
+    <NotificationsModal isOpen={notifOpen} onClose={() => setNotifOpen(false)} />
     </>
   );
 };

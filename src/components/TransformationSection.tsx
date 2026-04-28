@@ -63,6 +63,15 @@ const stories = [
   { name: "Rudransh Kishore",  info: "Batch KNDA 40815 — 20 SSB, Chest No. 02",          image: "/assets/client_photo/Rudransh.jpg" },
   { name: "Aditya Gupta",      info: "Batch KNDA 40816 — 20 SSB, Chest No. 09",          image: "/assets/client_photo/Aditya.jpg" },
   { name: "Sankalp Jaiswal",   info: "Batch PNDA 72255 — 21 SSB, Chest No. 03",          image: "/assets/client_photo/Sankalp.jpg" },
+  { name: "Ansh Joon",         info: "Batch BNDA-81484 — NDA Entry",                     image: "/assets/client_photo/ansh joon batch - bnda 81484 nda entry.jpeg" },
+  { name: "Aradhya Fazudar",   info: "NDA-156 Course",                                   image: "/assets/client_photo/aradhya fazudar nda -156 course.jpeg" },
+  { name: "Arpit Sharma",      info: "TES Entry — Jalandhar Center",                     image: "/assets/client_photo/arpit sharma tes entry jalandhar center.jpeg" },
+  { name: "Harshvardhan",      info: "NDA 02/2025",                                      image: "/assets/client_photo/harshvardhan nda 02 2025.jpeg" },
+  { name: "Lavish Choudhary",  info: "Batch PNDA-72317 — NDA Entry-156",                 image: "/assets/client_photo/lavish choudhary  batch - PNDA 72317 Nda entry - 156.jpeg" },
+  { name: "Nitish Tomar",      info: "34 SSB — CDS(OTA) Entry",                          image: "/assets/client_photo/nitish tomar 34 ssb cds(OTA) entry.jpeg" },
+  { name: "Raghvendra Yadav",  info: "5AFSB Guwahati",                                   image: "/assets/client_photo/raghvendra yadav 5AFSB guwahati.jpeg" },
+  { name: "Sumit Kumar",       info: "Entry CDS IMA-161 — Prayagraj Center",             image: "/assets/client_photo/sumit kumar entry - cds ima - 161 prayagraj center.jpeg" },
+  { name: "Tejasvi",           info: "CDS OTA Course — SSC NT 124",                      image: "/assets/client_photo/tejasvi cds ota course ssc nt 124.jpeg" },
 ];
 
 const duplicatedStories = [...stories, ...stories];
