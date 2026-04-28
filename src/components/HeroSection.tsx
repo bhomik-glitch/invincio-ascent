@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { CalendarCheck } from "lucide-react";
 import ConsultationModal from "./ConsultationModal";
 import NotificationsModal from "./NotificationsModal";
+import ResultsModal from "./ResultsModal";
 import { candidateStories } from "@/data/candidate-selections";
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as [number, number, number, number];
@@ -68,12 +69,13 @@ const HeroSection = ({
 }: HeroSectionProps) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
+  const [resultsOpen, setResultsOpen] = useState(false);
   const [waHovered, setWaHovered] = useState(false);
 
   const stats = [
     { value: "New Courses", action: () => {} },
     { value: "Notifications", action: () => setNotifOpen(true) },
-    { value: "Result Out !", action: () => {} },
+    { value: "Result Out !", action: () => setResultsOpen(true) },
   ];
 
   return (
@@ -314,6 +316,7 @@ const HeroSection = ({
 
     <ConsultationModal open={modalOpen} onClose={() => setModalOpen(false)} />
     <NotificationsModal isOpen={notifOpen} onClose={() => setNotifOpen(false)} />
+    <ResultsModal isOpen={resultsOpen} onClose={() => setResultsOpen(false)} />
     </>
   );
 };
