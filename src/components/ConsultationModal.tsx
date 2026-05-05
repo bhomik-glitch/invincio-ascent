@@ -5,10 +5,9 @@ import emailjs from "@emailjs/browser";
 import { EASE_OUT, TAP_SCALE, TAP_TRANSITION } from "@/lib/design-system";
 
 // ── EmailJS config ────────────────────────────────────────────────────────────
-const EJ_SERVICE        = "service_y8ogfpa";
-const EJ_TEMPLATE_USER  = "template_zjmxzb9";   // auto-reply → user
-const EJ_TEMPLATE_ADMIN = "template_6hy9bn3";    // lead notification → admin
-const EJ_KEY            = "Cpj922V80h18ionmf";
+const EJ_SERVICE  = "service_2daf7np";
+const EJ_TEMPLATE = "template_kkpre0a";   // lead notification → invincioleads@gmail.com
+const EJ_KEY      = "SvrHhhstrSZ11Wbwx";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 interface Props {
@@ -180,10 +179,7 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
     };
 
     try {
-      await Promise.all([
-        emailjs.send(EJ_SERVICE, EJ_TEMPLATE_USER,  payload, EJ_KEY),
-        emailjs.send(EJ_SERVICE, EJ_TEMPLATE_ADMIN, payload, EJ_KEY),
-      ]);
+      await emailjs.send(EJ_SERVICE, EJ_TEMPLATE, payload, EJ_KEY);
       setStatus("success");
       // Auto-close after 2.8 s
       setTimeout(onClose, 2800);
