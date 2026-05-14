@@ -88,6 +88,23 @@ const programs = [
     duration: "2 Months",
     audience: ["UPSC Mains Qualified"],
   },
+  {
+    id: "summer-bootcamp",
+    title: "Life Skills Summer Bootcamp",
+    tagline: "What you plant today, will grow tomorrow.",
+    description:
+      "A transformative program focusing on holistic development. Mentored by veterans Lt Col Ankur Sabharwal, Brig Ramit Mehta, and Col Ranjit Singh, we help children grow mentally, emotionally, and socially through interactive workshops, leadership tasks, and personality development sessions.",
+    points: [
+      "Communication & Public Speaking",
+      "Leadership & Teamwork",
+      "Confidence Building",
+      "Discipline & Time Management",
+      "Decision Making & Problem Solving",
+      "Goal Setting & Career Awareness",
+    ],
+    duration: "15–30 Days",
+    audience: ["School Students", "Future Leaders"],
+  },
 ];
 
 // Group programs into rows of GRID_COLS each

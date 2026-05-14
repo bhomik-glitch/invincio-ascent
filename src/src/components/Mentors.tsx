@@ -14,6 +14,7 @@ import pooja from "../assets/mentor/pooja.png"
 import hema from "../assets/mentor/hema.png"
 import tanugola from "../assets/mentor/tanugola.jpeg"
 import devendra from "../assets/mentor/Devendra Sharma's Photo 1.png"
+import sunny from "../assets/mentor/sunny.png"
 
 interface MentorData {
   name: string;
@@ -72,22 +73,22 @@ const mentorData: MentorData[] = [
     imageUrl: havilRajest,
   },
   {
-    name: "Radhika Bali",
+    name: "Sunny Sabharwal",
     description:
-      "Radhika Bali, Presence Sculptor & Image Consultant, empowers professionals in executive presence, communication, and branding. With 24+ years of experience, she is the Founder of Aक्स by Radhika and PSAI Delhi Chapter President.",
-    imageUrl: radhika,
+      "With 18+ years of experience in infrastructure finance, banking, and financial services, Sunny works with governments and businesses to design goal-oriented financial strategies for infrastructure projects and sustainable growth.",
+    imageUrl: sunny,
   },
   {
-    name: "Hina Arora",
+    name: "Reena Beri",
     description:
-      "Hina Arora, Engineering Manager & Career Coach, has helped 500+ students secure jobs, optimized 1,000+ LinkedIn profiles, and built a 300K+ social media following. She specializes in ATS resumes and interview success.",
-    imageUrl: hina,
+      "Training professional with over 11 years of experience in Functional & Technical training. Expert in the design, development, and implementation of learning solutions and strategies.",
+    imageUrl: "/assets/reena-beri.png",
   },
   {
-    name: "Tanu Gola",
+    name: "Priyanka Gupta",
     description:
-      "Motivated Economics undergrad at LSR College with interests in consulting and decision-making. Junior Consultant at LSR Consulting Club, active in WICCI, skilled in Canva, event coordination, and driven by creative, impactful problem-solving.",
-    imageUrl: tanugola,
+      "Internationally Certified Soft Skill Trainer, Leadership Expert, POSH Trainer, Personal Branding Consultant, Corporate Trainer, Image Consultant, and Personality Trainer.",
+    imageUrl: "/assets/priyanka-gupta.png",
   },
   {
     name: "Devendra Sharma",
