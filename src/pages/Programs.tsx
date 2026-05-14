@@ -51,7 +51,7 @@ const programs = [
       "Psychological battery modules",
       "Mock Interviews with Ex-SSB Assessors",
       "Strategic feedback sessions",
-      "Selection-focused character evolution",
+      "21 Days of active mentorship with 6 months post-training support",
     ],
     duration: "2–4 Weeks",
     audience: ["Written Qualified Candidates", "Direct Entry Aspirants"],

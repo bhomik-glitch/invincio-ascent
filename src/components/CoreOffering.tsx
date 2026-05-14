@@ -33,7 +33,8 @@ const offerings = [
     bullets: [
       "Psychological Battery: TAT, WAT, SRT, and SD evaluations",
       "GTO tasks, group discussions, and command task simulations",
-      "Intensive personal interviews and comprehensive mock SSB Interview cycles",
+      "Intensive personal interviews and mock SSB Interview cycles",
+      "21 Days of active mentorship with 6 months post-training support",
     ],
     href: "/programs/ssb-interview",
   },

@@ -201,10 +201,9 @@ const HeroSection = ({
             >
               {/* Bento wrapper */}
               <div
-                className="inline-grid w-full gap-1.5"
-                style={{ gridTemplateColumns: "1fr 1fr 1fr", gridTemplateRows: "auto auto" }}
+                className="grid w-full gap-2 grid-cols-1 sm:grid-cols-3"
               >
-                {/* Top row — 3 equal cells */}
+                {/* Top row — 3 cells, stacked on mobile */}
                 {stats.map((stat, i) => (
                   <motion.button
                     key={stat.value}
@@ -212,7 +211,7 @@ const HeroSection = ({
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.3, ease: EASE_OUT, delay: 0.5 + i * 0.06 }}
-                    className="flex items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] px-3 py-2.5 outline-none"
+                    className="flex items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] px-3 py-3 outline-none"
                     style={{ transition: "background-color 180ms ease, border-color 180ms ease" }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.backgroundColor = "rgba(246,184,40,0.10)";
@@ -223,16 +222,16 @@ const HeroSection = ({
                       e.currentTarget.style.borderColor = "rgba(255,255,255,0.10)";
                     }}
                   >
-                    <span className="text-[12.5px] font-semibold text-[#F6B828] whitespace-nowrap">{stat.value}</span>
+                    <span className="text-[13px] font-semibold text-[#F6B828] whitespace-nowrap">{stat.value}</span>
                   </motion.button>
                 ))}
 
-                {/* Bottom row — spans all 3 columns */}
+                {/* Bottom row — spans all columns */}
                 <motion.button
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3, ease: EASE_OUT, delay: 0.68 }}
-                  className="col-span-3 flex items-center justify-center gap-2 rounded-xl border border-[#F6B828]/35 bg-[#F6B828]/[0.08] py-3 text-[15px] font-semibold text-[#F6B828] tracking-wide outline-none"
+                  className="col-span-1 sm:col-span-3 flex items-center justify-center gap-2 rounded-xl border border-[#F6B828]/35 bg-[#F6B828]/[0.08] py-3.5 text-[15px] font-semibold text-[#F6B828] tracking-wide outline-none"
                   style={{ transition: "background-color 180ms ease, border-color 180ms ease, transform 120ms ease" }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.backgroundColor = "rgba(246,184,40,0.16)";
@@ -249,7 +248,7 @@ const HeroSection = ({
                   <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
                   </svg>
-                  <span className="text-[15px]">Train in the Biggest GTO Ground in Delhi</span>
+                  <span className="text-[14px] sm:text-[15px]">Train in the Biggest GTO Ground in Delhi</span>
                 </motion.button>
               </div>
             </motion.div>
