@@ -22,9 +22,11 @@ const Footer = () => {
                 <img src="/assets/instagram-1-svgrepo-com.svg" alt="Instagram" className="w-5 h-5" />
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/company/invincio-services"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="opacity-70 hover:opacity-100 hover:scale-110 transition-all duration-150"
-                aria-label="LinkedIn"
+                aria-label="Invincio on LinkedIn"
               >
                 <img src="/linkedin-svgrepo-com.svg" alt="LinkedIn" className="w-5 h-5" />
               </a>
@@ -95,12 +97,12 @@ const Footer = () => {
             © 2026 Invincio Services LLP. All rights reserved.
           </p>
           <div className="flex gap-6 font-sans text-xs text-[#6B7280]">
-            <a href="#" className="hover:text-[#2FB4E7] transition-colors duration-150">
+            <Link to="/privacy" className="hover:text-[#2FB4E7] transition-colors duration-150">
               Privacy Policy
-            </a>
-            <a href="#" className="hover:text-[#2FB4E7] transition-colors duration-150">
+            </Link>
+            <Link to="/terms" className="hover:text-[#2FB4E7] transition-colors duration-150">
               Terms of Service
-            </a>
+            </Link>
           </div>
         </div>
       </div>

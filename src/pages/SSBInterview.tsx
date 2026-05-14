@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import HeroSection from "@/components/HeroSection";
 import ConsultationModal from "@/components/ConsultationModal";
+import SEO from "@/components/SEO";
 import {
   CONTAINER, SECTION_PAD, EYEBROW, H2_LIGHT, H3_LIGHT,
   BODY_LIGHT, EASE_OUT, SECTION_HEADER_MB,
@@ -126,6 +127,34 @@ const SSBInterview = () => {
 
   return (
     <div className="bg-[#F1FFFF] min-h-screen overflow-x-hidden w-full">
+      <SEO
+        title="SSB Interview Coaching by Ex-SSB Assessors | Invincio"
+        description="Train directly with Ex-SSB Assessors — GTOs, Interviewing Officers and Psychologists. Develop the 15 Officer Like Qualities through realistic mock boards and conferences."
+        path="/programs/ssb-interview"
+        keywords="SSB interview coaching, GTO training, SSB psychologist, SSB mock interview, OLQ development"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Programs", path: "/programs" },
+          { name: "SSB Interview", path: "/programs/ssb-interview" },
+        ]}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Course",
+          name: "SSB Interview Coaching",
+          description: "5-day SSB Interview preparation by Ex-SSB Assessors covering screening, psych tests, GTO, personal interview and conference.",
+          provider: {
+            "@type": "Organization",
+            name: "Invincio Services LLP",
+            sameAs: "https://www.invincioservices.com/",
+          },
+          inLanguage: "en",
+          hasCourseInstance: {
+            "@type": "CourseInstance",
+            courseMode: ["Online", "Onsite"],
+            courseWorkload: "P5D",
+          },
+        }}
+      />
       <HeroSection
         subtitle="SSB Interview Preparation"
         title="Train Like an Officer"

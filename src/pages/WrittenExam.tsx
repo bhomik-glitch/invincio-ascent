@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import HeroSection from "@/components/HeroSection";
 import ConsultationModal from "@/components/ConsultationModal";
+import SEO from "@/components/SEO";
 import {
   CONTAINER, SECTION_PAD, EYEBROW, H2_LIGHT, H3_LIGHT,
   BODY_LIGHT, EASE_OUT, SECTION_HEADER_MB,
@@ -279,6 +280,35 @@ const WrittenExam = () => {
 
   return (
     <div className="bg-[#F1FFFF] min-h-screen overflow-x-hidden w-full">
+      <SEO
+        title="NDA, CDS & AFCAT Written Exam Coaching | Invincio"
+        description="Structured, mentor-driven NDA, CDS and AFCAT written exam preparation. Every subject, every module, every attempt — covered by Invincio's Ex-SSB Assessors."
+        path="/programs/written-exam"
+        keywords="NDA written exam coaching, CDS written coaching, AFCAT written coaching, defence written exam"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Programs", path: "/programs" },
+          { name: "Written Exam", path: "/programs/written-exam" },
+        ]}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Course",
+          name: "NDA, CDS & AFCAT Written Exam Preparation",
+          description: "Mentor-driven NDA, CDS and AFCAT written exam coaching covering Maths, GAT, English and Reasoning.",
+          provider: {
+            "@type": "Organization",
+            name: "Invincio Services LLP",
+            sameAs: "https://www.invincioservices.com/",
+          },
+          educationalLevel: "Undergraduate",
+          inLanguage: "en",
+          hasCourseInstance: {
+            "@type": "CourseInstance",
+            courseMode: ["Online", "Onsite"],
+            courseWorkload: "PT8H",
+          },
+        }}
+      />
       <HeroSection
         subtitle="Written Examination Training"
         title="Clear the Written. Earn Your SSB Call."

@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import HeroSection from "@/components/HeroSection";
 import ConsultationModal from "@/components/ConsultationModal";
+import SEO from "@/components/SEO";
 import {
   CONTAINER, SECTION_PAD, EYEBROW, H2_LIGHT, H3_LIGHT,
   BODY_LIGHT, EASE_OUT, SECTION_HEADER_MB,
@@ -98,6 +99,34 @@ const FutureLeader = () => {
 
   return (
     <div className="bg-[#F1FFFF] min-h-screen overflow-x-hidden w-full">
+      <SEO
+        title="Future Leader Bootcamp | Early Officer Development by Invincio"
+        description="Invincio's Future Leader Bootcamp builds Officer Like Qualities early — for school and college aspirants preparing for NDA, Naval Academy and Air Force Academy."
+        path="/programs/future-leader"
+        keywords="Future Leader bootcamp, NDA preparation school, Officer Like Qualities, young aspirants defence"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Programs", path: "/programs" },
+          { name: "Future Leader", path: "/programs/future-leader" },
+        ]}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Course",
+          name: "Future Leader Bootcamp",
+          description: "Early officer development program building Officer Like Qualities for school and college aspirants.",
+          provider: {
+            "@type": "Organization",
+            name: "Invincio Services LLP",
+            sameAs: "https://www.invincioservices.com/",
+          },
+          inLanguage: "en",
+          hasCourseInstance: {
+            "@type": "CourseInstance",
+            courseMode: ["Online", "Onsite"],
+            courseWorkload: "P14D",
+          },
+        }}
+      />
       <HeroSection
         subtitle="Future Leader Bootcamp"
         title="Build the Officer Before the Exam Begins"

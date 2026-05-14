@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, CalendarCheck, ChevronDown, X } from "lucide-react";
 import ConsultationModal from "@/components/ConsultationModal";
 import UpcomingBatches from "@/components/UpcomingBatches";
+import SEO from "@/components/SEO";
 
 const EASE_OUT: [number, number, number, number] = [0.23, 1, 0.32, 1];
 const GRID_COLS = 2; // desktop columns
@@ -143,6 +144,26 @@ const Programs = () => {
 
   return (
     <div className="bg-[#F1FFFF] min-h-screen">
+      <SEO
+        title="SSB & Defence Coaching Programs | NDA, CDS, AFCAT — Invincio"
+        description="Explore Invincio's flagship mentorship programs: NDA/CDS Online, SSB Interview Coaching, Future Leader Track and Repeater Programs by Ex-SSB Assessors."
+        path="/programs"
+        keywords="SSB coaching programs, NDA coaching, CDS coaching, AFCAT coaching, SSB interview program, repeater program"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Programs", path: "/programs" },
+        ]}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "Invincio Mentorship Programs",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "NDA/CDS Online", url: "https://www.invincioservices.com/programs/written-exam" },
+            { "@type": "ListItem", position: 2, name: "SSB Interview Coaching", url: "https://www.invincioservices.com/programs/ssb-interview" },
+            { "@type": "ListItem", position: 3, name: "Future Leader Program", url: "https://www.invincioservices.com/programs/future-leader" },
+          ],
+        }}
+      />
 
       {/* ── Page Header (replaces HeroSection banner) ── */}
       <div className="bg-white border-b border-[#e5e7eb] px-4 sm:px-6 md:px-12 pt-10 pb-8 md:pt-12 md:pb-10">

@@ -1,0 +1,14 @@
+{
+  "name": "Invincio Services",
+  "short_name": "Invincio",
+  "description": "SSB interview coaching by Ex-SSB Assessors for NDA, CDS, AFCAT and all defence entries.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#F1FFFF",
+  "theme_color": "#00568C",
+  "icons": [
+    { "src": "/favicon.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/favicon.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
