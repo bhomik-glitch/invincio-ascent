@@ -47,6 +47,35 @@ const TickerText = ({ paused }: { paused: boolean }) => {
   );
 };
 
+const PILL_TEXTS = [
+  "Defence Leadership Institute",
+  "113 recommendations in 6 months",
+];
+
+const RotatingPillText = () => {
+  const [idx, setIdx] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => setIdx(i => (i + 1) % PILL_TEXTS.length), 4000);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <AnimatePresence mode="wait" initial={false}>
+      <motion.span
+        key={idx}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -10 }}
+        transition={{ duration: 0.4, ease: EASE_OUT }}
+        className="block"
+      >
+        {PILL_TEXTS[idx]}
+      </motion.span>
+    </AnimatePresence>
+  );
+};
+
 interface HeroSectionProps {
   title?: string;
   description?: string;
@@ -117,8 +146,8 @@ const HeroSection = ({
 
           {/* Eyebrow pill — sky blue accent */}
           <motion.div {...fadeUp(0.14)} className="mb-6">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/40 bg-white/15 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white" style={{ backdropFilter: "blur(8px)" }}>
-              {subtitle}
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/40 bg-white/15 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white overflow-hidden" style={{ backdropFilter: "blur(8px)", minWidth: "220px", textAlign: "center" }}>
+              <RotatingPillText />
             </span>
           </motion.div>
 
