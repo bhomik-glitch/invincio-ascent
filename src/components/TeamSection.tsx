@@ -1,5 +1,10 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import ColKaushalKashyap from "../src/assets/mentor/kaushal.png";
+import LtColKaushalendraSingh from "../src/assets/mentor/Kaushalendra.png";
+import BrigRamitMehta from "../src/assets/mentor/breg ramit mehta.JPG";
+import ColIqbalSingh from "../src/assets/mentor/col iqbal singh.JPG";
+import TanyaArora from "../src/assets/mentor/WhatsApp Image 2026-05-16 at 11.30.10.jpeg";
 
 /* ── Team Data ─────────────────────────────────────────────────────── */
 
@@ -55,6 +60,27 @@ const teamMembers: Member[] = [
     objectPosition: "top",
   },
   {
+    name: "Brig Ramit Mehta",
+    role: "Brigadier (Retd) · Clinical Psychologist",
+    bio: "Master’s in Clinical Psychology with extensive experience in psychological assessment and behavioural interventions. He works closely with defence aspirants to build emotional resilience, self-awareness, and mental well-being.",
+    image: BrigRamitMehta,
+    objectPosition: "top",
+  },
+  {
+    name: "Col Iqbal Singh",
+    role: "Colonel (Retd) · SSB Ex-President",
+    bio: "Respected former President of 19 SSB with experience assessing 2,500+ candidates. A champion of the ‘candidate-first’ approach, he focuses on genuine personality development and SSB success.",
+    image: ColIqbalSingh,
+    objectPosition: "top",
+  },
+  {
+    name: "Tanya Arora",
+    role: "Psychologist · Personality Development Expert",
+    bio: "Psychologist focused on personality development and emotional well-being. She works with defence aspirants to enhance communication, self-awareness, and mental resilience through practical psychological guidance.",
+    image: TanyaArora,
+    objectPosition: "top",
+  },
+  {
     name: "Havildar Sanjay Kumar Choubey",
     role: "Kargil War Veteran · SSB Trainer",
     bio: "Kargil War veteran from Bihar, served with 1st BIHAR in the Batalik Sector. Former Havildar Major at 34 SSB, Allahabad — dedicated to training future defence aspirants.",
@@ -100,10 +126,17 @@ const teamMembers: Member[] = [
 
 const mentors: Member[] = [
   {
-    name: "Maj Gen Vinod, VSM",
-    role: "Major General (Retd) · Strategic Mentor",
-    bio: "Military veteran with 37 years in Army Air Defence and SSB expertise, mentoring thousands in interviews, leadership, and career success. Strategic guidance that empowers individuals to excel.",
-    image: "/assets/mentor/vinod.png",
+    name: "Colonel Kaushal Kashyap, SC",
+    role: "Colonel (Retd) · Special Forces & Leadership Expert",
+    bio: "Colonel Kaushal Kashyap, SC, stands as a towering figure in leadership, military excellence, and corporate mentorship. With over two decades in the Indian Army, he epitomizes courage and strategic brilliance. As an ex-Special Forces officer, he led the 52nd Special Action Group of the NSG and has extensive operational experience in Jammu & Kashmir, Ladakh, and UN missions.",
+    image: ColKaushalKashyap,
+    objectPosition: "top",
+  },
+  {
+    name: "Lt Col Kaushalendra Singh, SM",
+    role: "Lt Colonel (Retd) · Special Forces Officer",
+    bio: "Decorated Special Forces officer with extensive experience in high-risk operations and elite training. He played a pivotal role in the Army Marksmanship Unit (AMU), enhancing training standards for India’s top shooters. An expert in combat training, resilience building, and high-performance coaching.",
+    image: LtColKaushalendraSingh,
     objectPosition: "top",
   },
   {
@@ -111,6 +144,13 @@ const mentors: Member[] = [
     role: "Educationist · Mentor",
     bio: "Educationist with 17+ years of experience dedicated to mentoring future leaders. Blends philosophy with experiential learning to empower young minds and shape the next generation's success.",
     image: "/assets/mentor/pooja.png",
+    objectPosition: "top",
+  },
+  {
+    name: "Maj Gen Vinod, VSM",
+    role: "Major General (Retd) · Strategic Mentor",
+    bio: "Military veteran with 37 years in Army Air Defence and SSB expertise, mentoring thousands in interviews, leadership, and career success. Strategic guidance that empowers individuals to excel.",
+    image: "/assets/mentor/vinod.png",
     objectPosition: "top",
   },
   {
@@ -182,7 +222,7 @@ const MentorCard = ({ member }: { member: Member }) => (
     variants={cardVariants}
     whileHover={{ y: -4, boxShadow: "0 16px 48px rgba(0,86,140,0.13)" }}
     transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
-    className="flex flex-col items-center text-center bg-white rounded-2xl overflow-hidden border border-[#e5e7eb] p-7 cursor-default"
+    className="flex flex-col items-center text-center bg-white rounded-2xl overflow-hidden border border-[#e5e7eb] p-7 cursor-default w-full sm:w-[320px] lg:w-[350px]"
     style={{ boxShadow: "0 2px 16px rgba(0,86,140,0.07)" }}
   >
     <div
@@ -292,11 +332,21 @@ const TeamSection = () => {
             variants={containerVariants}
             initial="hidden"
             animate={mentorInView ? "visible" : "hidden"}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-4xl mx-auto"
+            className="flex flex-col gap-6"
           >
-            {mentors.map((m) => (
-              <MentorCard key={m.name} member={m} />
-            ))}
+            {/* Top Row: First 3 Mentors */}
+            <div className="flex flex-wrap justify-center gap-6 max-w-7xl mx-auto w-full">
+              {mentors.slice(0, 3).map((m) => (
+                <MentorCard key={m.name} member={m} />
+              ))}
+            </div>
+            
+            {/* Bottom Row: Remaining 2 Mentors (Centered) */}
+            <div className="flex flex-wrap justify-center gap-6 max-w-7xl mx-auto w-full">
+              {mentors.slice(3).map((m) => (
+                <MentorCard key={m.name} member={m} />
+              ))}
+            </div>
           </motion.div>
         </div>
 

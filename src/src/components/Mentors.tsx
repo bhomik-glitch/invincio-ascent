@@ -15,6 +15,11 @@ import hema from "../assets/mentor/hema.png"
 import tanugola from "../assets/mentor/tanugola.jpeg"
 import devendra from "../assets/mentor/Devendra Sharma's Photo 1.png"
 import sunny from "../assets/mentor/sunny.png"
+import ColKaushalKashyap from "../assets/mentor/kaushal.png";
+import LtColKaushalendraSingh from "../assets/mentor/Kaushalendra.png";
+import BrigRamitMehta from "../assets/mentor/breg ramit mehta.JPG";
+import ColIqbalSingh from "../assets/mentor/col iqbal singh.JPG";
+import TanyaArora from "../assets/mentor/WhatsApp Image 2026-05-16 at 11.30.10.jpeg";
 
 interface MentorData {
   name: string;
@@ -61,6 +66,24 @@ const mentorData: MentorData[] = [
     imageUrl: GpCaptVikramSingh,
   },
   {
+    name: "Brig Ramit Mehta",
+    description:
+      "Master’s in Clinical Psychology with extensive experience in psychological assessment and behavioral interventions. He works closely with defence aspirants to build emotional resilience, self-awareness, and mental well-being.",
+    imageUrl: BrigRamitMehta,
+  },
+  {
+    name: "Col Iqbal Singh",
+    description:
+      "Respected former President of 19 SSB with experience assessing 2,500+ candidates. A champion of the ‘candidate-first’ approach, he focuses on genuine personality development and SSB success.",
+    imageUrl: ColIqbalSingh,
+  },
+  {
+    name: "Tanya Arora",
+    description:
+      "Psychologist focused on personality development and emotional well-being. She works with defence aspirants to enhance communication, self-awareness, and mental resilience through practical psychological guidance.",
+    imageUrl: TanyaArora,
+  },
+  {
     name: "Havildar Sanjay Kumar Choubey",
     description:
       " Hav Sanjay Kumar Choubey, a Kargil War veteran from Bihar, served with 1st BIHAR in the Batalik Sector. Former Havildar Major at 34 SSB,  Allahabad, he is dedicated to training future defence aspirants. ",
@@ -100,16 +123,28 @@ const mentorData: MentorData[] = [
 
 const ourMentors = [
   {
-    name: "Maj Gen Vinod, VSM",
+    name: "Colonel Kaushal Kashyap, SC",
     description:
-      "A military veteran with 37 years in Army Air Defence and SSB expertise, mentoring thousands in interviews, leadership, and  Career success. His strategic guidance empowers individuals to excel, and we're honoured to have him as our mentor.",
-    imageUrl: vinod,
+      "Colonel Kaushal Kashyap, SC, stands as a towering figure in leadership, military excellence, and corporate mentorship. Leading the 52nd Special Action Group of the NSG, he has extensive operational experience in Jammu & Kashmir, Ladakh, and UN missions.",
+    imageUrl: ColKaushalKashyap,
+  },
+  {
+    name: "Lt Col Kaushalendra Singh, SM",
+    description:
+      "Decorated Special Forces officer with extensive experience in high-risk operations and elite training. Played a pivotal role in the Army Marksmanship Unit (AMU), enhancing training standards for India’s top shooters.",
+    imageUrl: LtColKaushalendraSingh,
   },
   {
     name: "Puja Sabharwal",
     description:
       "An educationist with 17+ years of experience, is dedicated to mentoring future leaders. As the mentor she blends philosophy with experiential learning to empower young minds. Her commitment has earned her widespread recognition for shaping the next generation's success.",
     imageUrl: pooja,
+  },
+  {
+    name: "Maj Gen Vinod, VSM",
+    description:
+      "A military veteran with 37 years in Army Air Defence and SSB expertise, mentoring thousands in interviews, leadership, and  Career success. His strategic guidance empowers individuals to excel, and we're honoured to have him as our mentor.",
+    imageUrl: vinod,
   },
   {
     name: "Dr. Hema Diwan",
@@ -150,14 +185,14 @@ const Mentors: React.FC<{ id?: string }> = ({ id }) => {
             <div
               key={index}
               className={`bg-white rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl ${
-                index < 6
+                index < 9
                   ? "flex flex-col md:flex-row items-center px-6 py-8 w-full md:w-[35rem] gap-8"
                   : "flex flex-col items-center px-6 py-8 w-full md:w-[22rem]"
               }`}
             >
               <div
                 className={`${
-                  index < 6
+                  index < 9
                     ? "w-64 h-64 rounded-lg overflow-hidden"
                     : "w-48 h-48 rounded-full overflow-hidden border-4 border-[#eaeeed]"
                 }`}
@@ -169,7 +204,7 @@ const Mentors: React.FC<{ id?: string }> = ({ id }) => {
                 />
               </div>
 
-              <div className={`${index < 6 ? "flex-1 text-center md:text-left" : "text-center"}`}>
+              <div className={`${index < 9 ? "flex-1 text-center md:text-left" : "text-center"}`}>
                 <h3 className="text-xl font-bold text-[#2d4b41] mb-3">
                   {mentor.name}
                 </h3>
@@ -193,29 +228,58 @@ const Mentors: React.FC<{ id?: string }> = ({ id }) => {
           <div className="w-24 h-1 bg-[#718979] mx-auto mb-4"></div>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-10 mt-10 max-w-6xl mx-auto">
-          {ourMentors.map((mentor, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl flex flex-col items-center px-6 py-8 w-full md:w-[22rem]"
-            >
-              <div className="w-48 h-48 mb-6 rounded-full overflow-hidden border-4 border-[#eaeeed]">
-                <img
-                  src={mentor.imageUrl}
-                  alt={mentor.name}
-                  className="object-cover object-top w-full h-full"
-                />
-              </div>
+        <div className="flex flex-col gap-10">
+          {/* Top Row: 3 Mentors */}
+          <div className="flex flex-wrap justify-center gap-10 max-w-6xl mx-auto w-full">
+            {ourMentors.slice(0, 3).map((mentor, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl flex flex-col items-center px-6 py-8 w-full md:w-[22rem]"
+              >
+                <div className="w-48 h-48 mb-6 rounded-full overflow-hidden border-4 border-[#eaeeed]">
+                  <img
+                    src={mentor.imageUrl}
+                    alt={mentor.name}
+                    className="object-cover object-top w-full h-full"
+                  />
+                </div>
 
-              <div className="text-center">
-                <h3 className="text-xl font-bold text-[#2d4b41] mb-3">
-                  {mentor.name}
-                </h3>
+                <div className="text-center">
+                  <h3 className="text-xl font-bold text-[#2d4b41] mb-3">
+                    {mentor.name}
+                  </h3>
 
-                <p className="text-gray-600 text-sm">{mentor.description}</p>
+                  <p className="text-gray-600 text-sm">{mentor.description}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          {/* Bottom Row: 2 Mentors */}
+          <div className="flex flex-wrap justify-center gap-10 max-w-6xl mx-auto w-full">
+            {ourMentors.slice(3).map((mentor, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl flex flex-col items-center px-6 py-8 w-full md:w-[22rem]"
+              >
+                <div className="w-48 h-48 mb-6 rounded-full overflow-hidden border-4 border-[#eaeeed]">
+                  <img
+                    src={mentor.imageUrl}
+                    alt={mentor.name}
+                    className="object-cover object-top w-full h-full"
+                  />
+                </div>
+
+                <div className="text-center">
+                  <h3 className="text-xl font-bold text-[#2d4b41] mb-3">
+                    {mentor.name}
+                  </h3>
+
+                  <p className="text-gray-600 text-sm">{mentor.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

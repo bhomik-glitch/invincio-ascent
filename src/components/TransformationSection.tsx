@@ -6,6 +6,7 @@ import {
   EYEBROW,
   EASE_OUT,
 } from "@/lib/design-system";
+import { candidateStories as stories } from "@/data/candidate-selections";
 
 const echoes = [
   {
@@ -55,25 +56,6 @@ const echoes = [
   },
 ];
 
-const stories = [
-  { name: "Prashant Upadhyay", info: "Batch RNDA-46843 — NDA 155 Entry",                  image: "/assets/client_photo/Prashant Upadhyay.jpg" },
-  { name: "Gyanendra Yadav",   info: "4 AFSB Varanasi — Batch VNDA(M)/729",              image: "/assets/client_photo/Gyanendra.jpg" },
-  { name: "Akshat Mishra",     info: "NDA/62806 — Batch VNDA(M)/729",                    image: "/assets/client_photo/Akshat mishra.jpg" },
-  { name: "Atharv",            info: "Batch DSTL 39818 — 19 SSB Prayagraj, Chest No. 7", image: "/assets/client_photo/Atharv.jpg" },
-  { name: "Rudransh Kishore",  info: "Batch KNDA 40815 — 20 SSB, Chest No. 02",          image: "/assets/client_photo/Rudransh.jpg" },
-  { name: "Aditya Gupta",      info: "Batch KNDA 40816 — 20 SSB, Chest No. 09",          image: "/assets/client_photo/Aditya.jpg" },
-  { name: "Sankalp Jaiswal",   info: "Batch PNDA 72255 — 21 SSB, Chest No. 03",          image: "/assets/client_photo/Sankalp.jpg" },
-  { name: "Ansh Joon",         info: "Batch BNDA-81484 — NDA Entry",                     image: "/assets/client_photo/ansh joon batch - bnda 81484 nda entry.jpeg" },
-  { name: "Aradhya Fazudar",   info: "NDA-156 Course",                                   image: "/assets/client_photo/aradhya fazudar nda -156 course.jpeg" },
-  { name: "Arpit Sharma",      info: "TES Entry — Jalandhar Center",                     image: "/assets/client_photo/arpit sharma tes entry jalandhar center.jpeg" },
-  { name: "Harshvardhan",      info: "NDA 02/2025",                                      image: "/assets/client_photo/harshvardhan nda 02 2025.jpeg" },
-  { name: "Lavish Choudhary",  info: "Batch PNDA-72317 — NDA Entry-156",                 image: "/assets/client_photo/lavish choudhary  batch - PNDA 72317 Nda entry - 156.jpeg" },
-  { name: "Nitish Tomar",      info: "34 SSB — CDS(OTA) Entry",                          image: "/assets/client_photo/nitish tomar 34 ssb cds(OTA) entry.jpeg" },
-  { name: "Raghvendra Yadav",  info: "5AFSB Guwahati",                                   image: "/assets/client_photo/raghvendra yadav 5AFSB guwahati.jpeg" },
-  { name: "Sumit Kumar",       info: "Entry CDS IMA-161 — Prayagraj Center",             image: "/assets/client_photo/sumit kumar entry - cds ima - 161 prayagraj center.jpeg" },
-  { name: "Tejasvi",           info: "CDS OTA Course — SSC NT 124",                      image: "/assets/client_photo/tejasvi cds ota course ssc nt 124.jpeg" },
-];
-
 const duplicatedStories = [...stories, ...stories];
 
 // ── Video Card ────────────────────────────────────────────────────────────────
@@ -97,6 +79,8 @@ const VideoCard = ({
     if (el.requestFullscreen) el.requestFullscreen();
     else if ((el as any).webkitRequestFullscreen) (el as any).webkitRequestFullscreen();
   };
+
+  const isSenior = item.name === "Colonel Anirudh Das" || item.name === "Cdr Praveen Pola" || item.name === "Col Manjit Singh" || item.name === "Lt Col Roy" || item.name === "Mr Deka";
 
   return (
     <motion.div
@@ -152,7 +136,14 @@ const VideoCard = ({
         )}
       </div>
       <div className="px-5 py-4 flex flex-col gap-1">
-        <p className="font-serif font-semibold text-sm text-[#00568C]">{item.name}</p>
+        <div className="flex flex-col">
+          {!isSenior && (
+            <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#F6B828]">Invincible</span>
+          )}
+          <p className="font-serif font-semibold text-sm text-[#00568C]">
+            {item.name}
+          </p>
+        </div>
         <p className="font-sans text-xs text-[#6B7280] leading-snug">{item.text}</p>
       </div>
     </motion.div>
@@ -288,10 +279,11 @@ const TransformationSection = () => {
                   />
                 </div>
                 <div className="flex flex-col text-left leading-tight" style={{ maxWidth: "320px" }}>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#F6B828] mb-0.5">Invincible</span>
                   <span className="font-serif font-semibold text-[#00568C]" style={{ fontSize: "1.125rem" }}>
                     {story.name}
                   </span>
-                  <span className="font-sans text-[#6B7280] line-clamp-2" style={{ fontSize: "0.875rem", marginTop: "0.25rem" }}>
+                  <span className="font-sans text-[#6B7280]" style={{ fontSize: "0.875rem", marginTop: "0.4rem", whiteSpace: "pre-line" }}>
                     {story.info}
                   </span>
                 </div>

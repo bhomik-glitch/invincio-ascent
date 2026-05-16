@@ -301,10 +301,11 @@ const HeroSection = ({
                 />
               </div>
               <div className="flex flex-col text-left leading-tight" style={{ maxWidth: "240px" }}>
+                <span className="text-[9px] font-bold uppercase tracking-[0.15em] text-[#F6B828]">Invincible</span>
                 <span className="font-serif font-semibold text-[#00568C]" style={{ fontSize: "1rem" }}>
                   {story.name}
                 </span>
-                <span className="font-sans text-[#6B7280] line-clamp-2" style={{ fontSize: "0.8125rem", marginTop: "0.25rem" }}>
+                <span className="font-sans text-[#6B7280]" style={{ fontSize: "0.8125rem", marginTop: "0.4rem", whiteSpace: "pre-line" }}>
                   {story.info}
                 </span>
               </div>
