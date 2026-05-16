@@ -49,14 +49,15 @@ const TickerText = ({ paused }: { paused: boolean }) => {
 
 const PILL_TEXTS = [
   "Defence Leadership Institute",
-  "113 recommendations in 6 months",
+  "113 SSB Recommendations in the First Year.",
+  "2100+ Lives Transformed. One Mission — Building Future Leaders.",
 ];
 
 const RotatingPillText = () => {
   const [idx, setIdx] = useState(0);
 
   useEffect(() => {
-    const id = setInterval(() => setIdx(i => (i + 1) % PILL_TEXTS.length), 4000);
+    const id = setInterval(() => setIdx(i => (i + 1) % PILL_TEXTS.length), 4500);
     return () => clearInterval(id);
   }, []);
 
@@ -68,7 +69,7 @@ const RotatingPillText = () => {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -10 }}
         transition={{ duration: 0.4, ease: EASE_OUT }}
-        className="block"
+        className="block px-2"
       >
         {PILL_TEXTS[idx]}
       </motion.span>
