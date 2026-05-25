@@ -30,6 +30,77 @@ type Notification = DetailNotification | LinkNotification;
 const notifications: Notification[] = [
   {
     type: "detail",
+    title: "Indian Army – TES 56 (10+2)",
+    badge: "Applications Open",
+    link: "https://www.joinindianarmy.nic.in",
+    linkLabel: "Join Indian Army Portal",
+    sections: [
+      {
+        heading: "Eligibility",
+        points: [
+          "Unmarried Male candidates",
+          "Age: 16½ and 19½ years as on 01 Jan 2027",
+          "10+2 Class with Physics, Chemistry & Maths (PCM)",
+          "Must have appeared in JEE Mains",
+        ],
+      },
+      {
+        heading: "Training Program",
+        points: [
+          "3 Years in CTW (Cadet Training Wing)",
+          "1 Year in IMA (Indian Military Academy), Dehradun",
+        ],
+      },
+    ],
+    highlight: "Last Date to Apply: 12th June 2026. Direct entry pathway based on JEE Mains — a great opportunity for PCM graduates.",
+    expected: {
+      notification: "Released (TES-56)",
+      application: "Open until 12th June 2026",
+    },
+  },
+  {
+    type: "detail",
+    title: "Indian Army – TGC 144 (Jan 2027)",
+    badge: "Applications Open",
+    link: "https://www.joinindianarmy.nic.in",
+    linkLabel: "Join Indian Army Portal",
+    sections: [
+      {
+        heading: "Eligibility",
+        points: [
+          "Unmarried Male candidates",
+          "Age: 20 to 27 Years as on 01 Jan 2027",
+          "Educational Qualification: Engineering Degree in notified streams (Civil, Computer Science, Electrical, Electronics, Mechanical, etc.)",
+        ],
+      },
+      {
+        heading: "Highlights & Benefits",
+        points: [
+          "Vacancies: 30 (Tentative)",
+          "Type of Commission: Permanent Commission",
+          "Rank after Training: Lieutenant",
+          "Training Academy: Indian Military Academy (IMA), Dehradun (12-month course starting Jan 2027)",
+          "Stipend during Training: ₹56,400 per month",
+          "Salary on Commissioning: CTC approx. ₹17–18 Lakhs per annum (excludes free medical cover & annual travel allowance)",
+        ],
+      },
+      {
+        heading: "Selection Timeline",
+        points: [
+          "SSB Dates & Centre Selection: Will open for two weeks in June 2026",
+          "5-Day SSB Interview: July – September 2026",
+          "Joining Course: January 2027",
+        ],
+      },
+    ],
+    highlight: "Application Window: 13th May 2026 to 11th June 2026. Opportunity for engineering graduates to join the Indian Army as commissioned officers.",
+    expected: {
+      notification: "Released",
+      application: "13th May 2026 to 11th June 2026",
+    },
+  },
+  {
+    type: "detail",
     title: "Indian Navy – B.Tech Entry (10+2)",
     badge: "Upcoming 2027",
     link: "https://www.joinindiannavy.gov.in",
