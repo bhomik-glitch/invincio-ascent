@@ -30,6 +30,102 @@ type Notification = DetailNotification | LinkNotification;
 const notifications: Notification[] = [
   {
     type: "detail",
+    title: "Territorial Army – TA Officer 2026",
+    badge: "Exam: 12 July",
+    link: "https://www.jointerritorialarmy.gov.in",
+    linkLabel: "Territorial Army Portal",
+    sections: [
+      {
+        heading: "Exam Date",
+        points: [
+          "Written Exam: 12th July 2026",
+        ],
+      },
+      {
+        heading: "Eligibility Criteria",
+        points: [
+          "Nationality: Only citizens of India (Male and Female)",
+          "Age Limit: 18 to 42 years on the date of application",
+          "Educational Qualification: Graduate from any recognized university",
+          "Requirement: Must be gainfully employed",
+        ],
+      },
+    ],
+    highlight: "Exam Date: 12th July 2026. A unique pathway for gainfully employed citizens to serve in the Indian Army in a part-time capacity.",
+  },
+  {
+    type: "detail",
+    title: "Indian Air Force – AFCAT 2026",
+    badge: "Exam: 8 August",
+    link: "https://afcat.cdac.in",
+    linkLabel: "AFCAT CDAC Portal",
+    sections: [
+      {
+        heading: "Exam Date",
+        points: [
+          "Online Written Test: 8th August 2026",
+        ],
+      },
+      {
+        heading: "Eligibility Details",
+        points: [
+          "Age Limit (Flying Branch): 20 to 24 years",
+          "Age Limit (Ground Duty Tech/Non-Tech): 20 to 26 years",
+          "Educational Qualification: Graduation with minimum 60% marks and Physics & Mathematics at 10+2 level, or B.E./B.Tech degree",
+        ],
+      },
+    ],
+    highlight: "Exam Date: 8th August 2026. Direct pathway to join the flying and ground branches of the Indian Air Force.",
+  },
+  {
+    type: "detail",
+    title: "UPSC – NDA 2-2026",
+    badge: "Exam: 13 Sept",
+    link: "https://www.upsc.gov.in",
+    linkLabel: "UPSC Official Portal",
+    sections: [
+      {
+        heading: "Exam Date",
+        points: [
+          "Written Examination: 13th September 2026",
+        ],
+      },
+      {
+        heading: "Eligibility Details",
+        points: [
+          "Gender: Unmarried Male & Female candidates",
+          "Age Limit: Between 16.5 and 19.5 years",
+          "Educational Qualification: 12th Pass (Army Wing) / 12th Pass with Physics & Mathematics (Air Force & Navy Wings)",
+        ],
+      },
+    ],
+    highlight: "Exam Date: 13th September 2026. Joint services academy of the Indian Armed Forces, recruiting candidates right after high school.",
+  },
+  {
+    type: "detail",
+    title: "UPSC – CDS 2-2026",
+    badge: "Exam: 13 Sept",
+    link: "https://www.upsc.gov.in",
+    linkLabel: "UPSC Official Portal",
+    sections: [
+      {
+        heading: "Exam Date",
+        points: [
+          "Written Examination: 13th September 2026",
+        ],
+      },
+      {
+        heading: "Eligibility Details",
+        points: [
+          "Age Limits: 19 to 24 years (IMA & INA), 19 to 25 years (OTA & AFA)",
+          "Educational Qualification: Graduation (IMA/OTA), B.E/B.Tech (INA/AFA)",
+        ],
+      },
+    ],
+    highlight: "Exam Date: 13th September 2026. Recruitment for Indian Military Academy, Indian Naval Academy, Air Force Academy, and Officers Training Academy.",
+  },
+  {
+    type: "detail",
     title: "Indian Army – TES 56 (10+2)",
     badge: "Applications Open",
     link: "https://www.joinindianarmy.nic.in",
