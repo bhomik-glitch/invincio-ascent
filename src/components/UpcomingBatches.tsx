@@ -6,17 +6,17 @@ const EASE_OUT = [0.23, 1, 0.32, 1] as [number, number, number, number];
 const batches = [
   {
     title: "Offline SSB Mentorship",
-    tagline: "The Ultimate 15-Day Immersive Simulation.",
+    tagline: "The Ultimate 21-Day Immersive Simulation.",
     description:
-      "A holistic, offline module conducted strictly on SSB lines. Starts with 15 days of intensive ground training, followed by continuous online support until your actual SSB—even if it's 6 months away.",
+      "A holistic, offline module conducted strictly on SSB lines. Starts with 21 days of intensive ground training, followed by continuous online support until your actual SSB—even if it's 6 months away.",
     points: [
       "SSB-style personality assessment & psych tests",
       "Live GTO practice on real GTO grounds",
       "Orientation by Ex-Interviewing Officers & GTOs",
       "Individual hand-holding & behavioural correction",
     ],
-    dates: "04 May | 11 May | 24 May 2026",
-    duration: "15 Days Offline + Online Support",
+    dates: "22 Jun | 06 Jul 2026",
+    duration: "21 Days Offline + Online Support",
     highlight: "Limited Seats Available",
   },
   {
@@ -25,13 +25,13 @@ const batches = [
     description:
       "Designed for aspirants balancing college or work who need absolute clarity, personality orientation, and discipline without full-time offline coaching.",
     points: [
-      "15-Day focus on officer-like mindset & routine",
+      "21-Day focus on officer-like mindset & routine",
       "Continuous interactive live sessions & guided tasks",
       "Personal feedback to fix strengths and weaknesses",
       "Exposure to real SSB expectations & assessment logic",
     ],
-    dates: "Next Batch Launch: 04 May 2026",
-    duration: "15 Days Initial + Ongoing Support",
+    dates: "Next Batch Launch: 22 Jun 2026",
+    duration: "21 Days Initial + Ongoing Support",
     highlight: "Ideal for Working/College Aspirants",
   },
   {
@@ -45,7 +45,7 @@ const batches = [
       "Weekly performance tracking & personal mentoring",
       "Post-written SSB specialization (Psych, GTO, Interview)",
     ],
-    dates: "Starts 23 April 2026 (Online & Offline)",
+    dates: "",
     duration: "April 2026 till Exam",
     highlight: "Parallel Personality Prep",
   },
@@ -60,7 +60,7 @@ const batches = [
       "Continuous mentoring & performance feedback",
       "Dedicated SSB preparation post-written exam",
     ],
-    dates: "Enrollments Open (Prep from April to Sept)",
+    dates: "",
     duration: "April 2026 till Sept 2026",
     highlight: "Structured Mentoring",
   },
@@ -131,20 +131,32 @@ const UpcomingBatches = () => {
               </div>
 
               <div className="mt-auto pt-6 border-t border-neutral-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-neutral-400" />
-                  <span className="text-sm font-bold text-neutral-800">
-                    {batch.dates}
-                  </span>
-                </div>
-                
-                <a
-                  href="#contact"
-                  className="inline-flex items-center justify-center gap-2 text-sm font-bold text-[#00568C] hover:text-[#004a7a] transition-colors group/btn"
-                >
-                  Enroll Now
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                </a>
+                {batch.dates ? (
+                  <>
+                    <div className="flex items-center gap-2">
+                      <Calendar className="w-4 h-4 text-neutral-400" />
+                      <span className="text-sm font-bold text-neutral-800">
+                        {batch.dates}
+                      </span>
+                    </div>
+                    
+                    <a
+                      href="#contact"
+                      className="inline-flex items-center justify-center gap-2 text-sm font-bold text-[#00568C] hover:text-[#004a7a] transition-colors group/btn"
+                    >
+                      Enroll Now
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                    </a>
+                  </>
+                ) : (
+                  <a
+                    href="#contact"
+                    className="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl border text-sm font-bold text-white bg-[#00568C] hover:bg-[#004471] transition-colors shadow-sm hover:shadow-md"
+                  >
+                    Register Now
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                )}
               </div>
             </motion.div>
           ))}

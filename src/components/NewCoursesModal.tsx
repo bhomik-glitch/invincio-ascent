@@ -13,8 +13,8 @@ const WA_NUMBER = "918601407444";
 const batches = [
   {
     title: "Offline SSB Mentorship",
-    tagline: "The Ultimate 15-Day Immersive Simulation.",
-    description: "A holistic, offline module conducted strictly on SSB lines. Starts with 15 days of intensive ground training.",
+    tagline: "The Ultimate 21-Day Immersive Simulation.",
+    description: "A holistic, offline module conducted strictly on SSB lines. Starts with 21 days of intensive ground training.",
     highlight: "Limited Seats",
     slots: ["22 Jun 2026", "6 July 2026"],
   },
@@ -26,25 +26,18 @@ const batches = [
     slots: ["22 Jun 2026", "6 July 2026"],
   },
   {
-    title: "Summer Bootcamp",
-    tagline: "Intensive summer training for serious aspirants.",
-    description: "A focused summer programme for aspirants who want to utilise their break to accelerate SSB preparation.",
-    highlight: "Bootcamp",
-    slots: ["22 Jun 2026", "6 July 2026"],
-  },
-  {
     title: "CDS 2/2026 Preparation",
     tagline: "Personality + Written = Selection.",
     description: "Comprehensive Written Prep with parallel personality development from Day 1.",
     highlight: "Written + SSB",
-    slots: ["22 Jun 2026", "6 July 2026"],
+    slots: [],
   },
   {
     title: "NDA 2/2026 Preparation",
     tagline: "Early foundation for future leaders.",
     description: "A complete preparation journey ensuring structured guidance at every stage for young aspirants.",
     highlight: "Full Prep",
-    slots: ["22 Jun 2026", "6 July 2026"],
+    slots: [],
   },
 ];
 
@@ -80,11 +73,19 @@ const NewCoursesModal = ({ isOpen, onClose }: NewCoursesModalProps) => {
   }, [isOpen]);
 
   const handleBook = () => {
-    if (!selectedSlot || activeBatch === null) return;
+    if (activeBatch === null) return;
     const batch = batches[activeBatch];
-    const msg = encodeURIComponent(
-      `Hi Invincio, I'd like to book a slot for *${batch.title}* starting *${selectedSlot}*. Please confirm availability.`
-    );
+    const hasSlots = batch.slots && batch.slots.length > 0;
+    
+    let text = "";
+    if (hasSlots) {
+      if (!selectedSlot) return;
+      text = `Hi Invincio, I'd like to book a slot for *${batch.title}* starting *${selectedSlot}*. Please confirm availability.`;
+    } else {
+      text = `Hi Invincio, I'd like to register for *${batch.title}*. Please confirm availability and share registration details.`;
+    }
+    
+    const msg = encodeURIComponent(text);
     window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, "_blank", "noopener,noreferrer");
   };
 
@@ -134,7 +135,7 @@ const NewCoursesModal = ({ isOpen, onClose }: NewCoursesModalProps) => {
                       {batch ? batch.title : "New Course Batches"}
                     </h2>
                     <p className="text-[11px] text-white/60 font-sans uppercase tracking-widest">
-                      {batch ? "Select a batch start date" : "Admissions Open — 2026"}
+                      {batch ? (batch.slots.length > 0 ? "Select a batch start date" : "Registration Details") : "Admissions Open — 2026"}
                     </p>
                   </div>
                 </div>
@@ -172,7 +173,7 @@ const NewCoursesModal = ({ isOpen, onClose }: NewCoursesModalProps) => {
                             {b.highlight}
                           </span>
                           <span className="text-[10px] text-gray-400 font-medium">
-                            {b.slots.length} slot{b.slots.length > 1 ? "s" : ""}
+                            {b.slots.length > 0 ? `${b.slots.length} slot${b.slots.length > 1 ? "s" : ""}` : "Open"}
                           </span>
                         </div>
                         <h3 className="text-[15px] font-bold text-[#1F2937] group-hover:text-[#00568C] transition-colors mb-1">
@@ -186,11 +187,19 @@ const NewCoursesModal = ({ isOpen, onClose }: NewCoursesModalProps) => {
                         </p>
                         <div className="mt-auto pt-4 border-t border-gray-50 flex items-center justify-between">
                           <div className="flex items-center gap-1.5 text-[11px] font-bold text-gray-700">
-                            <Calendar className="w-3 h-3 text-gray-400" />
-                            {b.slots[0]}{b.slots.length > 1 ? ` + ${b.slots.length - 1} more` : ""}
+                            {b.slots.length > 0 ? (
+                              <>
+                                <Calendar className="w-3 h-3 text-gray-400" />
+                                {b.slots[0]}{b.slots.length > 1 ? ` + ${b.slots.length - 1} more` : ""}
+                              </>
+                            ) : (
+                              <span className="text-green-600 font-semibold uppercase tracking-wider text-[10px]">
+                                Enrollments Open
+                              </span>
+                            )}
                           </div>
                           <span className="text-[11px] font-semibold text-[#00568C] flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                            Pick slot <ArrowRight className="w-3 h-3" />
+                            {b.slots.length > 0 ? "Pick slot" : "Register"} <ArrowRight className="w-3 h-3" />
                           </span>
                         </div>
                       </motion.button>
@@ -209,46 +218,58 @@ const NewCoursesModal = ({ isOpen, onClose }: NewCoursesModalProps) => {
                     <p className="text-[11px] text-[#C6A15B] font-medium italic mb-4">{batch!.tagline}</p>
                     <p className="text-[12px] text-gray-500 mb-5">{batch!.description}</p>
 
-                    <p className="text-[11px] font-bold text-[#00568C]/60 uppercase tracking-widest mb-3">
-                      Available Start Dates
-                    </p>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mb-6">
-                      {batch!.slots.map((slot) => {
-                        const isSelected = selectedSlot === slot;
-                        return (
-                          <motion.button
-                            key={slot}
-                            whileTap={TAP_SCALE}
-                            onClick={() => setSelectedSlot(slot)}
-                            className={`relative flex items-center justify-center gap-2 p-3 rounded-xl border text-[13px] font-semibold transition-all duration-200 ${
-                              isSelected
-                                ? "bg-[#00568C] border-[#00568C] text-white shadow-md"
-                                : "bg-white border-gray-200 text-[#374151] hover:border-[#00568C]/40 hover:shadow-sm"
-                            }`}
-                          >
-                            {isSelected && <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />}
-                            {slot}
-                          </motion.button>
-                        );
-                      })}
-                    </div>
+                    {batch!.slots && batch!.slots.length > 0 ? (
+                      <>
+                        <p className="text-[11px] font-bold text-[#00568C]/60 uppercase tracking-widest mb-3">
+                          Available Start Dates
+                        </p>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mb-6">
+                          {batch!.slots.map((slot) => {
+                            const isSelected = selectedSlot === slot;
+                            return (
+                              <motion.button
+                                key={slot}
+                                whileTap={TAP_SCALE}
+                                onClick={() => setSelectedSlot(slot)}
+                                className={`relative flex items-center justify-center gap-2 p-3 rounded-xl border text-[13px] font-semibold transition-all duration-200 ${
+                                  isSelected
+                                    ? "bg-[#00568C] border-[#00568C] text-white shadow-md"
+                                    : "bg-white border-gray-200 text-[#374151] hover:border-[#00568C]/40 hover:shadow-sm"
+                                }`}
+                              >
+                                {isSelected && <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />}
+                                {slot}
+                              </motion.button>
+                            );
+                          })}
+                        </div>
 
-                    <motion.button
-                      whileTap={TAP_SCALE}
-                      onClick={handleBook}
-                      disabled={!selectedSlot}
-                      className={`w-full py-3.5 rounded-xl font-bold text-[14px] flex items-center justify-center gap-2 transition-all duration-200 ${
-                        selectedSlot
-                          ? "bg-[#00568C] text-white hover:bg-[#004471] shadow-md hover:shadow-lg"
-                          : "bg-gray-100 text-gray-400 cursor-not-allowed"
-                      }`}
-                    >
-                      {selectedSlot ? (
-                        <>Book via WhatsApp — {selectedSlot} <ArrowRight className="w-4 h-4" /></>
-                      ) : (
-                        "Select a date to continue"
-                      )}
-                    </motion.button>
+                        <motion.button
+                          whileTap={TAP_SCALE}
+                          onClick={handleBook}
+                          disabled={!selectedSlot}
+                          className={`w-full py-3.5 rounded-xl font-bold text-[14px] flex items-center justify-center gap-2 transition-all duration-200 ${
+                            selectedSlot
+                              ? "bg-[#00568C] text-white hover:bg-[#004471] shadow-md hover:shadow-lg"
+                              : "bg-gray-100 text-gray-400 cursor-not-allowed"
+                          }`}
+                        >
+                          {selectedSlot ? (
+                            <>Book via WhatsApp — {selectedSlot} <ArrowRight className="w-4 h-4" /></>
+                          ) : (
+                            "Select a date to continue"
+                          )}
+                        </motion.button>
+                      </>
+                    ) : (
+                      <motion.button
+                        whileTap={TAP_SCALE}
+                        onClick={handleBook}
+                        className="w-full py-3.5 rounded-xl font-bold text-[14px] flex items-center justify-center gap-2 transition-all duration-200 bg-[#00568C] text-white hover:bg-[#004471] shadow-md hover:shadow-lg"
+                      >
+                        Register Now via WhatsApp <ArrowRight className="w-4 h-4" />
+                      </motion.button>
+                    )}
                   </motion.div>
                 )}
               </AnimatePresence>
