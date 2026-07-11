@@ -15,7 +15,7 @@ const batches = [
       "Orientation by Ex-Interviewing Officers & GTOs",
       "Individual hand-holding & behavioural correction",
     ],
-    dates: "13 Jul | 27 Jul 2026",
+    dates: "13 Jul | 27 Jul | 10 Aug 2026",
     duration: "21 Days Offline + Online Support",
     highlight: "Limited Seats Available",
   },
