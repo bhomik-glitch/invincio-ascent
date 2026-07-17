@@ -3,6 +3,7 @@ import CoreOffering from "@/components/CoreOffering";
 import ProcessSection from "@/components/ProcessSection";
 import ResultsSection from "@/components/ResultsSection";
 import PodcastSection from "@/components/PodcastSection";
+import LeadCentreSection from "@/components/LeadCentreSection";
 import CollaborationsSection from "@/components/CollaborationsSection";
 import CTASection from "@/components/CTASection";
 import SEO from "@/components/SEO";
@@ -57,6 +58,7 @@ const Index = () => {
         jsonLd={homepageFaq}
       />
       <HeroSection showCarousel={true} />
+      <LeadCentreSection />
       <CoreOffering />
       <ProcessSection />
       <ResultsSection />

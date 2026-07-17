@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { CONTAINER, EYEBROW, SECTION_PAD, EASE_OUT } from "@/lib/design-system";
 
 const collaborators = [
+  "HSNC University, Mumbai",
   "Ministry of Defence Initiatives",
   "Kendriya Vidyalaya Sangathan",
   "State Police Academies",
