@@ -16,7 +16,7 @@ const batches = [
     tagline: "The Ultimate 21-Day Immersive Simulation.",
     description: "A holistic, offline module conducted strictly on SSB lines. Starts with 21 days of intensive ground training.",
     highlight: "Limited Seats",
-    slots: ["13 July 2026", "27 July 2026", "10 August 2026"],
+    slots: ["23 July 2026", "10 August 2026"],
   },
   {
     title: "Online Officer Mentorship",
