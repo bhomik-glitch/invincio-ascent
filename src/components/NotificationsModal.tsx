@@ -235,6 +235,7 @@ const notifications: Notification[] = [
   { title: "Women Notification For NCC Spl Entry 124 Course Oct 2026 PDF", link: "https://drive.google.com/file/d/1_CuoRzVj1idkgJVHaSqnejbrAqOyrzX4/view" },
   { title: "Notification For NCC Spl Entry 124 Men Course Oct 2026 PDF", link: "https://drive.google.com/file/d/17f76Id1qGzqeE_j8-7-rety9SXHh4Ure/view" },
   { title: "Territorial Army Application Form", link: "https://cdn.digialm.com/EForms/configuredHtml/1258/100459/Index.html" },
+  { title: "Jag entry 125 course", link: "https://joinindianarmy.nic.in/writereaddata/Portal/NotificationPDF/Notification_for_JAG_Entry_Scheme_124rd_Course__Oct_2026_.pdf" },
 ];
 
 const DetailCard = ({ notif, index }: { notif: DetailNotification; index: number }) => {
