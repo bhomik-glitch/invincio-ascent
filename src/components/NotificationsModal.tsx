@@ -30,6 +30,34 @@ type Notification = DetailNotification | LinkNotification;
 const notifications: Notification[] = [
   {
     type: "detail",
+    title: "Indian Army – NCC Special Entry 125th Course (Apr 2027)",
+    badge: "Applications Open",
+    link: "https://www.joinindianarmy.nic.in",
+    linkLabel: "Join Indian Army Portal",
+    sections: [
+      {
+        heading: "Important Dates",
+        points: [
+          "Online Applications Open: 20th July 2026 at 1500 HRS",
+          "Online Applications Close: 20th August 2026 at 1500 HRS",
+        ],
+      },
+      {
+        heading: "Eligibility Details",
+        points: [
+          "NCC Special Entry Scheme for Men (including Wards of Battle Casualties of Army Personnel)",
+          "Course starting in April 2027",
+        ],
+      },
+    ],
+    highlight: "Online Applications are open from 20th July 2026 to 20th August 2026. This entry does not require a written exam; candidates are directly shortlisted for the SSB interview.",
+    expected: {
+      notification: "Released (125th Course)",
+      application: "20th July 2026 to 20th August 2026",
+    },
+  },
+  {
+    type: "detail",
     title: "Territorial Army – TA Officer 2026",
     badge: "Exam: 12 July",
     link: "https://www.jointerritorialarmy.gov.in",
