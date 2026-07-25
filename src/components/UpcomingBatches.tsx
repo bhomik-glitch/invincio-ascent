@@ -6,63 +6,48 @@ const EASE_OUT = [0.23, 1, 0.32, 1] as [number, number, number, number];
 const batches = [
   {
     title: "Offline SSB Mentorship",
-    tagline: "The Ultimate 21-Day Immersive Simulation.",
+    tagline: "The Ultimate 21-Day Immersive Simulation (Project Invincible).",
     description:
-      "A holistic, offline module conducted strictly on SSB lines. Starts with 21 days of intensive ground training, followed by continuous online support until your actual SSB—even if it's 6 months away.",
+      "A holistic, offline module conducted strictly on SSB lines under Project Invincible. Starts with 21 days of intensive ground training, followed by continuous online support until your actual SSB.",
     points: [
       "SSB-style personality assessment & psych tests",
       "Live GTO practice on real GTO grounds",
       "Orientation by Ex-Interviewing Officers & GTOs",
-      "Individual hand-holding & behavioural correction",
+      "Individual hand-holding under Project Invincible",
     ],
-    dates: "23 Jul | 10 Aug 2026",
+    dates: "10 Aug 2026",
     duration: "21 Days Offline + Online Support",
-    highlight: "Limited Seats Available",
+    highlight: "Project Invincible",
   },
   {
     title: "Online Officer Mentorship",
-    tagline: "Structured guidance without geographical limits.",
+    tagline: "Structured guidance without geographical limits (Project Invincible).",
     description:
-      "Designed for aspirants balancing college or work who need absolute clarity, personality orientation, and discipline without full-time offline coaching.",
+      "Designed for aspirants balancing college or work who need absolute clarity, personality orientation, and discipline under Project Invincible.",
     points: [
       "21-Day focus on officer-like mindset & routine",
       "Continuous interactive live sessions & guided tasks",
       "Personal feedback to fix strengths and weaknesses",
       "Exposure to real SSB expectations & assessment logic",
     ],
-    dates: "Next Batch Launch: 29 Jun 2026",
+    dates: "Next Batch Launch: 01 Aug 2026",
     duration: "21 Days Initial + Ongoing Support",
-    highlight: "Ideal for Working/College Aspirants",
+    highlight: "Project Invincible",
   },
   {
-    title: "CDS 2/2026 Preparation",
-    tagline: "Personality + Written = Selection.",
+    title: "CDS & NDA Intense Revision Batch",
+    tagline: "Personality + Written = Selection (Online & Offline).",
     description:
-      "A continuous program from April to the CDS exam. We uniquely run personality development parallel to written preparation from Day 1, ensuring you aim for the final merit list.",
+      "Intense, rapid-fire revision batch for CDS 2/2026 & NDA 2/2026 written exams combined with parallel personality development. Available in both Online & Offline modes.",
     points: [
-      "Small focused batches (max 30 students)",
-      "Comprehensive Written Prep (English, GS, Maths)",
+      "Available in BOTH Online & Offline modes",
+      "High-yield topic revision (Maths, English, GS & GAT)",
       "Weekly performance tracking & personal mentoring",
-      "Post-written SSB specialization (Psych, GTO, Interview)",
+      "Parallel SSB specialization (Psych, GTO, Interview)",
     ],
-    dates: "",
-    duration: "April 2026 till Exam",
-    highlight: "Parallel Personality Prep",
-  },
-  {
-    title: "NDA 2/2026 Preparation",
-    tagline: "Early foundation for future leaders.",
-    description:
-      "A complete preparation journey from April to September 2026, ensuring structured guidance at every stage for young aspirants aiming for the NDA final merit list.",
-    points: [
-      "NDA Written Prep (Maths + GAT)",
-      "Personality baseline & leadership development",
-      "Continuous mentoring & performance feedback",
-      "Dedicated SSB preparation post-written exam",
-    ],
-    dates: "",
-    duration: "April 2026 till Sept 2026",
-    highlight: "Structured Mentoring",
+    dates: "Batch Starts: 03 Aug 2026",
+    duration: "03 Aug 2026 till Exam",
+    highlight: "Online & Offline Mode",
   },
 ];
 

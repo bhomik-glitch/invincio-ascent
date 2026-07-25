@@ -30,6 +30,91 @@ type Notification = DetailNotification | LinkNotification;
 const notifications: Notification[] = [
   {
     type: "detail",
+    title: "CDS & NDA Intense Revision Batch (Online & Offline)",
+    badge: "Starts: 03 Aug 2026",
+    sections: [
+      {
+        heading: "Batch Details",
+        points: [
+          "Available in BOTH Online and Offline modes",
+          "High-yield fast-track revision for CDS 2/2026 & NDA 2/2026 written exams",
+          "Comprehensive coverage of Maths, English, General Studies (GS), and GAT",
+          "Parallel SSB orientation & personality refinement from Day 1",
+        ],
+      },
+      {
+        heading: "Key Highlights",
+        points: [
+          "Batch Commencement: 03rd August 2026",
+          "Daily practice sets, weekly mock testing & personal tracking",
+          "Direct mentoring by veterans and domain experts",
+        ],
+      },
+    ],
+    highlight: "Batch starts 03 August 2026 (Online & Offline). Target revision designed for final merit selection.",
+    expected: {
+      notification: "Admissions Open",
+      application: "Starts 03 Aug 2026",
+    },
+  },
+  {
+    type: "detail",
+    title: "Project Invincible – SSB Offline Mentorship Batch",
+    badge: "Starts: 10 Aug 2026",
+    sections: [
+      {
+        heading: "Program Details",
+        points: [
+          "Flagship 21-Day Immersive SSB Mentorship under Project Invincible",
+          "Strictly conducted on SSB lines with real GTO ground simulations",
+          "Comprehensive psychological evaluation & interview guidance",
+          "Personalized feedback by former SSB Presidents & Assessor Veterans",
+        ],
+      },
+      {
+        heading: "Important Dates",
+        points: [
+          "Batch Commencement: 10th August 2026",
+          "21 Days Offline Ground Training + Continuous Online Support until SSB",
+        ],
+      },
+    ],
+    highlight: "Batch starts 10 August 2026 under Project Invincible. Limited seats available for ground training.",
+    expected: {
+      notification: "Admissions Open",
+      application: "Starts 10 Aug 2026",
+    },
+  },
+  {
+    type: "detail",
+    title: "Project Invincible – SSB Online Mentorship Batch",
+    badge: "Starts: 01 Aug 2026",
+    sections: [
+      {
+        heading: "Program Details",
+        points: [
+          "21-Day structured online mentorship program under Project Invincible",
+          "Designed for college students & working aspirants needing flexible, high-impact guidance",
+          "Live interactive sessions covering Psych, Interviewing Officer & GTO logic",
+          "Continuous task submission & individual behavioral corrections",
+        ],
+      },
+      {
+        heading: "Important Dates",
+        points: [
+          "Batch Commencement: 01st August 2026",
+          "21 Days Initial Intensive Module + Ongoing Support until SSB",
+        ],
+      },
+    ],
+    highlight: "Batch starts 01 August 2026 under Project Invincible. Flexible online training with veteran guidance.",
+    expected: {
+      notification: "Admissions Open",
+      application: "Starts 01 Aug 2026",
+    },
+  },
+  {
+    type: "detail",
     title: "Indian Army – NCC Special Entry 125th Course (Apr 2027)",
     badge: "Applications Open",
     link: "https://www.joinindianarmy.nic.in",
@@ -50,36 +135,11 @@ const notifications: Notification[] = [
         ],
       },
     ],
-    highlight: "Online Applications are open from 20th July 2026 to 20th August 2026. This entry does not require a written exam; candidates are directly shortlisted for the SSB interview.",
+    highlight: "Online Applications are open from 20th July 2026 to 20th August 2026. Direct shortlisting for SSB interview without written exam.",
     expected: {
       notification: "Released (125th Course)",
       application: "20th July 2026 to 20th August 2026",
     },
-  },
-  {
-    type: "detail",
-    title: "Territorial Army – TA Officer 2026",
-    badge: "Exam: 12 July",
-    link: "https://www.jointerritorialarmy.gov.in",
-    linkLabel: "Territorial Army Portal",
-    sections: [
-      {
-        heading: "Exam Date",
-        points: [
-          "Written Exam: 12th July 2026",
-        ],
-      },
-      {
-        heading: "Eligibility Criteria",
-        points: [
-          "Nationality: Only citizens of India (Male and Female)",
-          "Age Limit: 18 to 42 years on the date of application",
-          "Educational Qualification: Graduate from any recognized university",
-          "Requirement: Must be gainfully employed",
-        ],
-      },
-    ],
-    highlight: "Exam Date: 12th July 2026. A unique pathway for gainfully employed citizens to serve in the Indian Army in a part-time capacity.",
   },
   {
     type: "detail",
@@ -151,77 +211,6 @@ const notifications: Notification[] = [
       },
     ],
     highlight: "Exam Date: 13th September 2026. Recruitment for Indian Military Academy, Indian Naval Academy, Air Force Academy, and Officers Training Academy.",
-  },
-  {
-    type: "detail",
-    title: "Indian Army – TES 56 (10+2)",
-    badge: "Applications Open",
-    link: "https://www.joinindianarmy.nic.in",
-    linkLabel: "Join Indian Army Portal",
-    sections: [
-      {
-        heading: "Eligibility",
-        points: [
-          "Unmarried Male candidates",
-          "Age: 16½ and 19½ years as on 01 Jan 2027",
-          "10+2 Class with Physics, Chemistry & Maths (PCM)",
-          "Must have appeared in JEE Mains",
-        ],
-      },
-      {
-        heading: "Training Program",
-        points: [
-          "3 Years in CTW (Cadet Training Wing)",
-          "1 Year in IMA (Indian Military Academy), Dehradun",
-        ],
-      },
-    ],
-    highlight: "Last Date to Apply: 12th June 2026. Direct entry pathway based on JEE Mains — a great opportunity for PCM graduates.",
-    expected: {
-      notification: "Released (TES-56)",
-      application: "Open until 12th June 2026",
-    },
-  },
-  {
-    type: "detail",
-    title: "Indian Army – TGC 144 (Jan 2027)",
-    badge: "Applications Open",
-    link: "https://www.joinindianarmy.nic.in",
-    linkLabel: "Join Indian Army Portal",
-    sections: [
-      {
-        heading: "Eligibility",
-        points: [
-          "Unmarried Male candidates",
-          "Age: 20 to 27 Years as on 01 Jan 2027",
-          "Educational Qualification: Engineering Degree in notified streams (Civil, Computer Science, Electrical, Electronics, Mechanical, etc.)",
-        ],
-      },
-      {
-        heading: "Highlights & Benefits",
-        points: [
-          "Vacancies: 30 (Tentative)",
-          "Type of Commission: Permanent Commission",
-          "Rank after Training: Lieutenant",
-          "Training Academy: Indian Military Academy (IMA), Dehradun (12-month course starting Jan 2027)",
-          "Stipend during Training: ₹56,400 per month",
-          "Salary on Commissioning: CTC approx. ₹17–18 Lakhs per annum (excludes free medical cover & annual travel allowance)",
-        ],
-      },
-      {
-        heading: "Selection Timeline",
-        points: [
-          "SSB Dates & Centre Selection: Will open for two weeks in June 2026",
-          "5-Day SSB Interview: July – September 2026",
-          "Joining Course: January 2027",
-        ],
-      },
-    ],
-    highlight: "Application Window: 13th May 2026 to 11th June 2026. Opportunity for engineering graduates to join the Indian Army as commissioned officers.",
-    expected: {
-      notification: "Released",
-      application: "13th May 2026 to 11th June 2026",
-    },
   },
   {
     type: "detail",
