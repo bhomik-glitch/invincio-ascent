@@ -181,6 +181,14 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
     try {
       await emailjs.send(EJ_SERVICE, EJ_TEMPLATE, payload, EJ_KEY);
       setStatus("success");
+
+      // Google Ads conversion — fires once per successful send
+      if (typeof window.gtag === "function") {
+        window.gtag("event", "conversion", {
+          send_to: "AW-18079951507/aN3HCOPdqtYcEJPVmK1D",
+        });
+      }
+
       // Auto-close after 2.8 s
       setTimeout(onClose, 2800);
     } catch {
