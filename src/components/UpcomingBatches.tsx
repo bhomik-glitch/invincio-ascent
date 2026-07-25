@@ -35,19 +35,64 @@ const batches = [
     highlight: "Project Invincible",
   },
   {
-    title: "CDS & NDA Intense Revision Batch",
-    tagline: "Personality + Written = Selection (Online & Offline).",
+    title: "NDA Intense Revision Batch (Offline)",
+    tagline: "Classroom Fast-Track Revision for NDA 2/2026.",
     description:
-      "Intense, rapid-fire revision batch for CDS 2/2026 & NDA 2/2026 written exams combined with parallel personality development. Available in both Online & Offline modes.",
+      "Intense offline revision program for NDA aspirants. Immersive classroom practice for Mathematics & GAT with parallel personality mentoring.",
     points: [
-      "Available in BOTH Online & Offline modes",
-      "High-yield topic revision (Maths, English, GS & GAT)",
-      "Weekly performance tracking & personal mentoring",
-      "Parallel SSB specialization (Psych, GTO, Interview)",
+      "Offline Classroom Learning & Problem Solving",
+      "Comprehensive NDA Maths & GAT high-yield revision",
+      "Weekly mock tests & personal feedback",
+      "Parallel SSB baseline & leadership orientation",
     ],
     dates: "Batch Starts: 03 Aug 2026",
     duration: "03 Aug 2026 till Exam",
-    highlight: "Online & Offline Mode",
+    highlight: "Offline Mode",
+  },
+  {
+    title: "NDA Intense Revision Batch (Online)",
+    tagline: "Live Interactive Revision for NDA 2/2026.",
+    description:
+      "Structured online fast-track course for NDA written preparation combined with interactive doubt clearance and test series.",
+    points: [
+      "Live Interactive Online Classes & Practice Sets",
+      "High-yield revision of Maths & GAT syllabus",
+      "Regular performance tracking & mentor feedback",
+      "SSB guidance & personality orientation",
+    ],
+    dates: "Batch Starts: 03 Aug 2026",
+    duration: "03 Aug 2026 till Exam",
+    highlight: "Online Mode",
+  },
+  {
+    title: "CDS Intense Revision Batch (Offline)",
+    tagline: "Classroom Fast-Track Revision for CDS 2/2026.",
+    description:
+      "Rigorous offline classroom preparation for English, General Studies & Maths tailored for CDS 2/2026 aspirants.",
+    points: [
+      "Offline Classroom Instruction & Practice",
+      "Comprehensive coverage of English, GS & Maths",
+      "Weekly full-length mock tests & analysis",
+      "Post-written SSB specialization & interview guidance",
+    ],
+    dates: "Batch Starts: 03 Aug 2026",
+    duration: "03 Aug 2026 till Exam",
+    highlight: "Offline Mode",
+  },
+  {
+    title: "CDS Intense Revision Batch (Online)",
+    tagline: "Live Interactive Revision for CDS 2/2026.",
+    description:
+      "Interactive online fast-track batch providing targeted revision for CDS 2/2026 written exam with flexible access.",
+    points: [
+      "Live Interactive Online Sessions & Doubt Clearing",
+      "High-yield revision of English, GS & Mathematics",
+      "Daily practice questions & mock paper discussions",
+      "Continuous mentoring until the CDS written exam",
+    ],
+    dates: "Batch Starts: 03 Aug 2026",
+    duration: "03 Aug 2026 till Exam",
+    highlight: "Online Mode",
   },
 ];
 

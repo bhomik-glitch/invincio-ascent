@@ -30,28 +30,111 @@ type Notification = DetailNotification | LinkNotification;
 const notifications: Notification[] = [
   {
     type: "detail",
-    title: "CDS & NDA Intense Revision Batch (Online & Offline)",
+    title: "NDA 2/2026 – Intense Revision Batch (Offline)",
     badge: "Starts: 03 Aug 2026",
     sections: [
       {
-        heading: "Batch Details",
+        heading: "Program Details",
         points: [
-          "Available in BOTH Online and Offline modes",
-          "High-yield fast-track revision for CDS 2/2026 & NDA 2/2026 written exams",
-          "Comprehensive coverage of Maths, English, General Studies (GS), and GAT",
-          "Parallel SSB orientation & personality refinement from Day 1",
+          "Immersive offline classroom instruction for NDA 2/2026 aspirants",
+          "High-yield revision for Mathematics & General Ability Test (GAT)",
+          "Weekly full-length offline mock tests & individual doubt resolution",
+          "Parallel SSB leadership orientation & personality mentoring",
         ],
       },
       {
-        heading: "Key Highlights",
+        heading: "Important Dates",
         points: [
           "Batch Commencement: 03rd August 2026",
-          "Daily practice sets, weekly mock testing & personal tracking",
-          "Direct mentoring by veterans and domain experts",
+          "Classroom Prep from 03 Aug 2026 until written examination",
         ],
       },
     ],
-    highlight: "Batch starts 03 August 2026 (Online & Offline). Target revision designed for final merit selection.",
+    highlight: "Batch starts 03 August 2026 (Offline Classroom Mode). Comprehensive NDA written + SSB preparation.",
+    expected: {
+      notification: "Admissions Open",
+      application: "Starts 03 Aug 2026",
+    },
+  },
+  {
+    type: "detail",
+    title: "NDA 2/2026 – Intense Revision Batch (Online)",
+    badge: "Starts: 03 Aug 2026",
+    sections: [
+      {
+        heading: "Program Details",
+        points: [
+          "Live interactive online fast-track course for NDA 2/2026",
+          "Comprehensive coverage of Maths & GAT syllabus with live problem solving",
+          "Daily practice assignments & online test series with performance analytics",
+          "Online SSB personality guidance sessions",
+        ],
+      },
+      {
+        heading: "Important Dates",
+        points: [
+          "Batch Commencement: 03rd August 2026",
+          "Interactive Online Prep from 03 Aug 2026 until exam",
+        ],
+      },
+    ],
+    highlight: "Batch starts 03 August 2026 (Live Online Mode). Flexible high-yield NDA written prep.",
+    expected: {
+      notification: "Admissions Open",
+      application: "Starts 03 Aug 2026",
+    },
+  },
+  {
+    type: "detail",
+    title: "CDS 2/2026 – Intense Revision Batch (Offline)",
+    badge: "Starts: 03 Aug 2026",
+    sections: [
+      {
+        heading: "Program Details",
+        points: [
+          "Rigorous offline classroom preparation for CDS 2/2026 written exam",
+          "Targeted revision for English, General Studies (GS), and Mathematics",
+          "Weekly full-scale mock tests with detailed performance analysis",
+          "Specialized post-written SSB interview preparation guidance",
+        ],
+      },
+      {
+        heading: "Important Dates",
+        points: [
+          "Batch Commencement: 03rd August 2026",
+          "Offline Classroom prep from 03 Aug 2026 till exam date",
+        ],
+      },
+    ],
+    highlight: "Batch starts 03 August 2026 (Offline Classroom Mode). Tailored CDS preparation by veteran faculty.",
+    expected: {
+      notification: "Admissions Open",
+      application: "Starts 03 Aug 2026",
+    },
+  },
+  {
+    type: "detail",
+    title: "CDS 2/2026 – Intense Revision Batch (Online)",
+    badge: "Starts: 03 Aug 2026",
+    sections: [
+      {
+        heading: "Program Details",
+        points: [
+          "Live online interactive fast-track batch for CDS 2/2026 written exam",
+          "In-depth revision of English, GS & Mathematics with live Q&A",
+          "Digital practice sets, regular mock tests & continuous mentor support",
+          "Online SSB personality guidance and behavioral correction",
+        ],
+      },
+      {
+        heading: "Important Dates",
+        points: [
+          "Batch Commencement: 03rd August 2026",
+          "Online Live Prep from 03 Aug 2026 until exam date",
+        ],
+      },
+    ],
+    highlight: "Batch starts 03 August 2026 (Live Online Mode). Accessible top-tier CDS preparation.",
     expected: {
       notification: "Admissions Open",
       application: "Starts 03 Aug 2026",
