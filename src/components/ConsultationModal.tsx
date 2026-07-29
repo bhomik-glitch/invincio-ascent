@@ -179,19 +179,39 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
     };
 
     try {
+      console.log("[Invincio] EmailJS send starting…", payload);
       await emailjs.send(EJ_SERVICE, EJ_TEMPLATE, payload, EJ_KEY);
+      console.log("[Invincio] EmailJS send SUCCESS");
+
       setStatus("success");
 
-      // Google Ads conversion — fires once per successful send
-      if (typeof window.gtag === "function") {
-        window.gtag("event", "conversion", {
-          send_to: "AW-18079951507/aN3HCOPdqtYcEJPVmK1D",
-        });
+      // ── Google Ads conversion diagnostics ─────────────────────────────────
+      const gtagType = typeof window.gtag;
+      const conversionPayload = {
+        send_to: "AW-18079951507/aN3HCOPdqtYcEJPVmK1D",
+      };
+
+      console.log("[Invincio] window.gtag type:", gtagType);
+      console.log("[Invincio] window.dataLayer:", window.dataLayer ?? "NOT DEFINED");
+      console.log("[Invincio] Conversion payload to send:", conversionPayload);
+
+      if (gtagType === "function") {
+        console.log("[Invincio] ✅ gtag IS defined — firing conversion event now");
+        window.gtag("event", "conversion", conversionPayload);
+        console.log("[Invincio] gtag('event', 'conversion', …) call dispatched");
+      } else {
+        console.warn(
+          "[Invincio] ❌ window.gtag is NOT a function (got:", gtagType, ").",
+          "The gtag script may not have loaded yet or was blocked by an ad-blocker.",
+          "dataLayer:", window.dataLayer ?? "undefined"
+        );
       }
+      // ── End diagnostics ───────────────────────────────────────────────────
 
       // Auto-close after 2.8 s
       setTimeout(onClose, 2800);
-    } catch {
+    } catch (err) {
+      console.error("[Invincio] Form submit error:", err);
       setStatus("error");
     }
   };
