@@ -31,26 +31,31 @@ const notifications: Notification[] = [
   {
     type: "detail",
     title: "NDA 2/2026 – Intense Revision Batch (Offline)",
-    badge: "Starts: 03 Aug 2026",
+    badge: "03 Aug – 12 Sep 2026",
     sections: [
       {
         heading: "Program Details",
         points: [
-          "Immersive offline classroom instruction for NDA 2/2026 aspirants",
-          "High-yield revision for Mathematics & General Ability Test (GAT)",
-          "Weekly full-length offline mock tests & individual doubt resolution",
-          "Parallel SSB leadership orientation & personality mentoring",
+          "Complete revision of all high-priority NDA topics across the full syllabus",
+          "Maths & General Studies — Daily offline classroom sessions",
+          "Biology, Chemistry & Physics — Alternate day offline classes",
+          "Marathon Sessions for comprehensive revision of important concepts",
+          "Dedicated Doubt-Solving Sessions every week",
+          "Weekly Mock Tests — August: 1/week | September: 2/week",
+          "Practice Questions & Daily Practice Problems (DPPs)",
+          "Weekly Current Affairs Session & Regular Map Work",
         ],
       },
       {
-        heading: "Important Dates",
+        heading: "Schedule",
         points: [
-          "Batch Commencement: 03rd August 2026",
-          "Classroom Prep from 03 Aug 2026 until written examination",
+          "Batch Commencement: 3rd August 2026",
+          "Batch Ends: 12th September 2026",
+          "Classes start from 6:00 PM onwards",
         ],
       },
     ],
-    highlight: "Batch starts 03 August 2026 (Offline Classroom Mode). Comprehensive NDA written + SSB preparation.",
+    highlight: "Offline classroom batch from 03 Aug to 12 Sep 2026. Classes from 6:00 PM. No Communication Skills sessions — pure exam-focused NDA revision.",
     expected: {
       notification: "Admissions Open",
       application: "Starts 03 Aug 2026",
@@ -59,26 +64,31 @@ const notifications: Notification[] = [
   {
     type: "detail",
     title: "NDA 2/2026 – Intense Revision Batch (Online)",
-    badge: "Starts: 03 Aug 2026",
+    badge: "03 Aug – 12 Sep 2026",
     sections: [
       {
         heading: "Program Details",
         points: [
-          "Live interactive online fast-track course for NDA 2/2026",
-          "Comprehensive coverage of Maths & GAT syllabus with live problem solving",
-          "Daily practice assignments & online test series with performance analytics",
-          "Online SSB personality guidance sessions",
+          "Complete revision of all high-priority NDA topics across the full syllabus",
+          "Maths & General Studies — Daily live interactive online sessions",
+          "Biology, Chemistry & Physics — Alternate day live online classes",
+          "Marathon Sessions for comprehensive revision of important concepts",
+          "Dedicated Doubt-Solving Sessions every week via live class",
+          "Weekly Mock Tests — August: 1/week | September: 2/week",
+          "Practice Questions & Daily Practice Problems (DPPs)",
+          "Weekly Current Affairs Session & Regular Map Work",
         ],
       },
       {
-        heading: "Important Dates",
+        heading: "Schedule",
         points: [
-          "Batch Commencement: 03rd August 2026",
-          "Interactive Online Prep from 03 Aug 2026 until exam",
+          "Batch Commencement: 3rd August 2026",
+          "Batch Ends: 12th September 2026",
+          "Classes start from 6:00 PM onwards",
         ],
       },
     ],
-    highlight: "Batch starts 03 August 2026 (Live Online Mode). Flexible high-yield NDA written prep.",
+    highlight: "Live online batch from 03 Aug to 12 Sep 2026. Classes from 6:00 PM. Focused NDA written revision — no Communication Skills sessions.",
     expected: {
       notification: "Admissions Open",
       application: "Starts 03 Aug 2026",
