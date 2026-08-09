@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X, BookOpen, Calendar, ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react";
 import { EASE_OUT, TAP_SCALE } from "@/lib/design-system";
+import { plusDays, isCurrent, SSB_VISIBLE_DAYS, WRITTEN_EXAM_END } from "@/lib/batch-visibility";
 import { useEffect, useState } from "react";
 
 interface NewCoursesModalProps {
@@ -10,50 +11,54 @@ interface NewCoursesModalProps {
 
 const WA_NUMBER = "918601407444";
 
-const batches = [
-  {
-    title: "Offline SSB Mentorship",
-    tagline: "The Ultimate 21-Day Immersive Simulation (Project Invincible).",
-    description: "A holistic, offline module conducted strictly on SSB lines under Project Invincible. Starts with 21 days of intensive ground training.",
-    highlight: "Project Invincible",
-    slots: ["10 August 2026"],
-  },
-  {
-    title: "Online Officer Mentorship",
-    tagline: "Structured guidance without geographical limits (Project Invincible).",
-    description: "Designed for aspirants balancing college or work who need absolute clarity and personality orientation under Project Invincible.",
-    highlight: "Project Invincible",
-    slots: ["01 August 2026"],
-  },
-  {
-    title: "NDA Intense Revision Batch (Offline)",
-    tagline: "Complete Revision & Exam-Oriented Preparation — 6:00 PM Onwards.",
-    description: "Intensive offline classroom revision batch for NDA 2/2026. Daily Maths & GS classes; Biology, Chemistry & Physics on alternate days; Marathon Sessions, Doubt-Solving, Weekly Mocks, DPPs, Current Affairs & Map Work.",
-    highlight: "Offline Mode",
-    slots: ["03 August 2026"],
-  },
-  {
-    title: "NDA Intense Revision Batch (Online)",
-    tagline: "Complete Revision & Exam-Oriented Preparation — 6:00 PM Onwards.",
-    description: "Live interactive online revision batch for NDA 2/2026. Daily Maths & GS live classes; Biology, Chemistry & Physics on alternate days; Marathon Sessions, Doubt-Solving, Weekly Mocks, DPPs, Current Affairs & Map Work.",
-    highlight: "Online Mode",
-    slots: ["03 August 2026"],
-  },
-  {
-    title: "CDS Intense Revision Batch (Offline)",
-    tagline: "Comprehensive offline revision & mock testing for CDS 2/2026.",
-    description: "Rigorous classroom training for English, General Studies & Maths with SSB assessment guidance.",
-    highlight: "Offline Mode",
-    slots: ["03 August 2026"],
-  },
-  {
-    title: "CDS Intense Revision Batch (Online)",
-    tagline: "Structured online fast-track course for CDS 2/2026.",
-    description: "Interactive online revision program with daily practice sets and expert mentoring.",
-    highlight: "Online Mode",
-    slots: ["03 August 2026"],
-  },
+const ssbBatch = (label: string, start: string, date: string, mode: "Offline" | "Online", sessions?: string[]) => ({
+  until: plusDays(start, SSB_VISIBLE_DAYS),
+  title: `SSB Mentorship — ${label} (${mode})`,
+  tagline:
+    mode === "Offline"
+      ? "The Ultimate 21-Day Immersive Simulation (Project Invincible)."
+      : "Structured guidance without geographical limits (Project Invincible).",
+  description:
+    mode === "Offline"
+      ? "A holistic, offline module conducted strictly on SSB lines under Project Invincible. Starts with 21 days of intensive ground training, followed by online support until your SSB."
+      : "Designed for aspirants balancing college or work who need absolute clarity and personality orientation under Project Invincible.",
+  highlight: "Project Invincible",
+  slots: sessions ? sessions.map((s) => `${date} (${s})`) : [date],
+});
+
+const writtenBatch = (exam: "NDA" | "CDS" | "AFCAT", mode: "Offline" | "Online") => ({
+  until: WRITTEN_EXAM_END[exam],
+  title: `${exam} Written Prep Batch (${mode})`,
+  tagline:
+    mode === "Offline"
+      ? `Offline classroom preparation for the ${exam} written exam.`
+      : `Live interactive online preparation for the ${exam} written exam.`,
+  description:
+    mode === "Offline"
+      ? `Full-syllabus offline classroom batch for ${exam} with daily practice, doubt-solving sessions and regular mock tests right up to the exam.`
+      : `Live online batch for ${exam} with interactive classes, daily practice sets, doubt clearing and regular mock tests right up to the exam.`,
+  highlight: `${mode} Mode`,
+  slots: ["01 October 2026"],
+});
+
+const allBatches = [
+  ssbBatch("10 Aug", "2026-08-10", "10 August 2026", "Offline"),
+  ssbBatch("17 Aug", "2026-08-17", "17 August 2026", "Offline"),
+  ssbBatch("24 Aug", "2026-08-24", "24 August 2026", "Offline"),
+  ssbBatch("14 Sep", "2026-09-14", "14 September 2026", "Offline", ["Forenoon", "Afternoon"]),
+  ssbBatch("21 Sep", "2026-09-21", "21 September 2026", "Offline", ["Forenoon", "Afternoon"]),
+  ssbBatch("24 Aug", "2026-08-24", "24 August 2026", "Online"),
+  ssbBatch("07 Sep", "2026-09-07", "07 September 2026", "Online"),
+  writtenBatch("NDA", "Offline"),
+  writtenBatch("NDA", "Online"),
+  writtenBatch("CDS", "Offline"),
+  writtenBatch("CDS", "Online"),
+  writtenBatch("AFCAT", "Offline"),
+  writtenBatch("AFCAT", "Online"),
 ];
+
+// SSB batches drop off a week after they start; written batches stay until their exam.
+const batches = allBatches.filter(isCurrent);
 
 const NewCoursesModal = ({ isOpen, onClose }: NewCoursesModalProps) => {
   const [activeBatch, setActiveBatch] = useState<number | null>(null);
@@ -172,6 +177,11 @@ const NewCoursesModal = ({ isOpen, onClose }: NewCoursesModalProps) => {
                     transition={{ duration: 0.2 }}
                     className="max-h-[65vh] overflow-y-auto p-6 grid sm:grid-cols-2 gap-4 bg-gray-50/50"
                   >
+                    {batches.length === 0 && (
+                      <p className="sm:col-span-2 text-center text-[13px] text-gray-500 py-8">
+                        Dates for the next cohort are being finalised. Message us on WhatsApp to be notified first.
+                      </p>
+                    )}
                     {batches.map((b, index) => (
                       <motion.button
                         key={index}

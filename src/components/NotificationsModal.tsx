@@ -30,131 +30,19 @@ type Notification = DetailNotification | LinkNotification;
 const notifications: Notification[] = [
   {
     type: "detail",
-    title: "NDA 2/2026 – Intense Revision Batch (Offline)",
-    badge: "03 Aug – 12 Sep 2026",
+    title: "Project Invincible – SSB Offline Mentorship Batches",
+    badge: "Aug & Sep 2026",
     sections: [
       {
-        heading: "Program Details",
+        heading: "Batch Start Dates",
         points: [
-          "Complete revision of all high-priority NDA topics across the full syllabus",
-          "Maths & General Studies — Daily offline classroom sessions",
-          "Biology, Chemistry & Physics — Alternate day offline classes",
-          "Marathon Sessions for comprehensive revision of important concepts",
-          "Dedicated Doubt-Solving Sessions every week",
-          "Weekly Mock Tests — August: 1/week | September: 2/week",
-          "Practice Questions & Daily Practice Problems (DPPs)",
-          "Weekly Current Affairs Session & Regular Map Work",
+          "10th August 2026",
+          "17th August 2026",
+          "24th August 2026",
+          "14th September 2026 — Forenoon / Afternoon",
+          "21st September 2026 — Forenoon / Afternoon",
         ],
       },
-      {
-        heading: "Schedule",
-        points: [
-          "Batch Commencement: 3rd August 2026",
-          "Batch Ends: 12th September 2026",
-          "Classes start from 6:00 PM onwards",
-        ],
-      },
-    ],
-    highlight: "Offline classroom batch from 03 Aug to 12 Sep 2026. Classes from 6:00 PM. No Communication Skills sessions — pure exam-focused NDA revision.",
-    expected: {
-      notification: "Admissions Open",
-      application: "Starts 03 Aug 2026",
-    },
-  },
-  {
-    type: "detail",
-    title: "NDA 2/2026 – Intense Revision Batch (Online)",
-    badge: "03 Aug – 12 Sep 2026",
-    sections: [
-      {
-        heading: "Program Details",
-        points: [
-          "Complete revision of all high-priority NDA topics across the full syllabus",
-          "Maths & General Studies — Daily live interactive online sessions",
-          "Biology, Chemistry & Physics — Alternate day live online classes",
-          "Marathon Sessions for comprehensive revision of important concepts",
-          "Dedicated Doubt-Solving Sessions every week via live class",
-          "Weekly Mock Tests — August: 1/week | September: 2/week",
-          "Practice Questions & Daily Practice Problems (DPPs)",
-          "Weekly Current Affairs Session & Regular Map Work",
-        ],
-      },
-      {
-        heading: "Schedule",
-        points: [
-          "Batch Commencement: 3rd August 2026",
-          "Batch Ends: 12th September 2026",
-          "Classes start from 6:00 PM onwards",
-        ],
-      },
-    ],
-    highlight: "Live online batch from 03 Aug to 12 Sep 2026. Classes from 6:00 PM. Focused NDA written revision — no Communication Skills sessions.",
-    expected: {
-      notification: "Admissions Open",
-      application: "Starts 03 Aug 2026",
-    },
-  },
-  {
-    type: "detail",
-    title: "CDS 2/2026 – Intense Revision Batch (Offline)",
-    badge: "Starts: 03 Aug 2026",
-    sections: [
-      {
-        heading: "Program Details",
-        points: [
-          "Rigorous offline classroom preparation for CDS 2/2026 written exam",
-          "Targeted revision for English, General Studies (GS), and Mathematics",
-          "Weekly full-scale mock tests with detailed performance analysis",
-          "Specialized post-written SSB interview preparation guidance",
-        ],
-      },
-      {
-        heading: "Important Dates",
-        points: [
-          "Batch Commencement: 03rd August 2026",
-          "Offline Classroom prep from 03 Aug 2026 till exam date",
-        ],
-      },
-    ],
-    highlight: "Batch starts 03 August 2026 (Offline Classroom Mode). Tailored CDS preparation by veteran faculty.",
-    expected: {
-      notification: "Admissions Open",
-      application: "Starts 03 Aug 2026",
-    },
-  },
-  {
-    type: "detail",
-    title: "CDS 2/2026 – Intense Revision Batch (Online)",
-    badge: "Starts: 03 Aug 2026",
-    sections: [
-      {
-        heading: "Program Details",
-        points: [
-          "Live online interactive fast-track batch for CDS 2/2026 written exam",
-          "In-depth revision of English, GS & Mathematics with live Q&A",
-          "Digital practice sets, regular mock tests & continuous mentor support",
-          "Online SSB personality guidance and behavioral correction",
-        ],
-      },
-      {
-        heading: "Important Dates",
-        points: [
-          "Batch Commencement: 03rd August 2026",
-          "Online Live Prep from 03 Aug 2026 until exam date",
-        ],
-      },
-    ],
-    highlight: "Batch starts 03 August 2026 (Live Online Mode). Accessible top-tier CDS preparation.",
-    expected: {
-      notification: "Admissions Open",
-      application: "Starts 03 Aug 2026",
-    },
-  },
-  {
-    type: "detail",
-    title: "Project Invincible – SSB Offline Mentorship Batch",
-    badge: "Starts: 10 Aug 2026",
-    sections: [
       {
         heading: "Program Details",
         points: [
@@ -162,27 +50,28 @@ const notifications: Notification[] = [
           "Strictly conducted on SSB lines with real GTO ground simulations",
           "Comprehensive psychological evaluation & interview guidance",
           "Personalized feedback by former SSB Presidents & Assessor Veterans",
-        ],
-      },
-      {
-        heading: "Important Dates",
-        points: [
-          "Batch Commencement: 10th August 2026",
           "21 Days Offline Ground Training + Continuous Online Support until SSB",
         ],
       },
     ],
-    highlight: "Batch starts 10 August 2026 under Project Invincible. Limited seats available for ground training.",
+    highlight: "Five offline batches across August & September 2026 under Project Invincible. Limited seats per batch for ground training.",
     expected: {
       notification: "Admissions Open",
-      application: "Starts 10 Aug 2026",
+      application: "Next batch starts 10 Aug 2026",
     },
   },
   {
     type: "detail",
-    title: "Project Invincible – SSB Online Mentorship Batch",
-    badge: "Starts: 01 Aug 2026",
+    title: "Project Invincible – SSB Online Mentorship Batches",
+    badge: "Aug & Sep 2026",
     sections: [
+      {
+        heading: "Batch Start Dates",
+        points: [
+          "24th August 2026",
+          "07th September 2026",
+        ],
+      },
       {
         heading: "Program Details",
         points: [
@@ -192,18 +81,47 @@ const notifications: Notification[] = [
           "Continuous task submission & individual behavioral corrections",
         ],
       },
+    ],
+    highlight: "Two online batches — 24 Aug and 07 Sep 2026 — under Project Invincible. Flexible training with veteran guidance.",
+    expected: {
+      notification: "Admissions Open",
+      application: "Next batch starts 24 Aug 2026",
+    },
+  },
+  {
+    type: "detail",
+    title: "NDA, CDS & AFCAT Written Prep Batches (Online & Offline)",
+    badge: "Starts: 01 Oct 2026",
+    sections: [
+      {
+        heading: "Batches Available",
+        points: [
+          "NDA Written Prep — Offline & Online",
+          "CDS Written Prep — Offline & Online",
+          "AFCAT Written Prep — Offline & Online",
+        ],
+      },
+      {
+        heading: "Program Details",
+        points: [
+          "Full-syllabus coverage by veteran faculty for each exam",
+          "Daily practice problems & dedicated doubt-solving sessions",
+          "Weekly full-length mock tests with detailed performance analysis",
+          "Post-written SSB / AFSB interview guidance",
+        ],
+      },
       {
         heading: "Important Dates",
         points: [
-          "Batch Commencement: 01st August 2026",
-          "21 Days Initial Intensive Module + Ongoing Support until SSB",
+          "Batch Commencement: 01st October 2026",
+          "Classes continue right up to the respective exam dates",
         ],
       },
     ],
-    highlight: "Batch starts 01 August 2026 under Project Invincible. Flexible online training with veteran guidance.",
+    highlight: "All written preparation batches start 01 October 2026, in both offline classroom and live online modes.",
     expected: {
       notification: "Admissions Open",
-      application: "Starts 01 Aug 2026",
+      application: "Starts 01 Oct 2026",
     },
   },
   {
@@ -233,30 +151,6 @@ const notifications: Notification[] = [
       notification: "Released (125th Course)",
       application: "20th July 2026 to 20th August 2026",
     },
-  },
-  {
-    type: "detail",
-    title: "Indian Air Force – AFCAT 2026",
-    badge: "Exam: 8 August",
-    link: "https://afcat.cdac.in",
-    linkLabel: "AFCAT CDAC Portal",
-    sections: [
-      {
-        heading: "Exam Date",
-        points: [
-          "Online Written Test: 8th August 2026",
-        ],
-      },
-      {
-        heading: "Eligibility Details",
-        points: [
-          "Age Limit (Flying Branch): 20 to 24 years",
-          "Age Limit (Ground Duty Tech/Non-Tech): 20 to 26 years",
-          "Educational Qualification: Graduation with minimum 60% marks and Physics & Mathematics at 10+2 level, or B.E./B.Tech degree",
-        ],
-      },
-    ],
-    highlight: "Exam Date: 8th August 2026. Direct pathway to join the flying and ground branches of the Indian Air Force.",
   },
   {
     type: "detail",

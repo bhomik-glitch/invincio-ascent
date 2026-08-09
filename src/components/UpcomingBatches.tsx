@@ -1,108 +1,95 @@
 import { motion } from "framer-motion";
 import { Calendar, CheckCircle2, ArrowRight } from "lucide-react";
+import { plusDays, isCurrent, SSB_VISIBLE_DAYS, WRITTEN_EXAM_END } from "@/lib/batch-visibility";
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as [number, number, number, number];
 
-const batches = [
-  {
-    title: "Offline SSB Mentorship",
-    tagline: "The Ultimate 21-Day Immersive Simulation (Project Invincible).",
-    description:
-      "A holistic, offline module conducted strictly on SSB lines under Project Invincible. Starts with 21 days of intensive ground training, followed by continuous online support until your actual SSB.",
-    points: [
-      "SSB-style personality assessment & psych tests",
-      "Live GTO practice on real GTO grounds",
-      "Orientation by Ex-Interviewing Officers & GTOs",
-      "Individual hand-holding under Project Invincible",
-    ],
-    dates: "10 Aug 2026",
-    duration: "21 Days Offline + Online Support",
-    highlight: "Project Invincible",
-  },
-  {
-    title: "Online Officer Mentorship",
-    tagline: "Structured guidance without geographical limits (Project Invincible).",
-    description:
-      "Designed for aspirants balancing college or work who need absolute clarity, personality orientation, and discipline under Project Invincible.",
-    points: [
-      "21-Day focus on officer-like mindset & routine",
-      "Continuous interactive live sessions & guided tasks",
-      "Personal feedback to fix strengths and weaknesses",
-      "Exposure to real SSB expectations & assessment logic",
-    ],
-    dates: "Next Batch Launch: 01 Aug 2026",
-    duration: "21 Days Initial + Ongoing Support",
-    highlight: "Project Invincible",
-  },
-  {
-    title: "NDA Intense Revision Batch (Offline)",
-    tagline: "Complete Revision & Exam-Oriented Preparation — 6:00 PM Onwards.",
-    description:
-      "Immersive offline classroom revision batch for NDA 2/2026. Focused revision of all high-priority topics across the NDA syllabus — from Maths & General Studies every day, to Biology, Chemistry & Physics on alternate days, with marathon sessions, doubt clearance, mock tests, DPPs, and current affairs.",
-    points: [
-      "Maths & General Studies — Daily Classes",
-      "Biology, Chemistry & Physics — Alternate Classes",
-      "Marathon Sessions for comprehensive revision",
-      "Dedicated Doubt-Solving Sessions every week",
-      "Weekly Mock Tests — August: 1 every week; September: 2 per week",
-      "Practice Questions & Daily Practice Problems (DPPs)",
-      "Weekly Current Affairs Session",
-      "Regular Map Work for geographical awareness",
-    ],
-    dates: "Batch: 03 Aug – 12 Sep 2026 | Classes from 6:00 PM",
-    duration: "03 Aug – 12 Sep 2026",
-    highlight: "Offline Mode",
-  },
-  {
-    title: "NDA Intense Revision Batch (Online)",
-    tagline: "Complete Revision & Exam-Oriented Preparation — 6:00 PM Onwards.",
-    description:
-      "Live interactive online revision batch for NDA 2/2026. High-yield revision of the full NDA syllabus — Maths & General Studies every day, Biology, Chemistry & Physics on alternate days — with marathon sessions, doubt clearance, mock tests, DPPs, and current affairs coverage.",
-    points: [
-      "Maths & General Studies — Daily Live Classes",
-      "Biology, Chemistry & Physics — Alternate Live Classes",
-      "Marathon Sessions for comprehensive topic revision",
-      "Dedicated Doubt-Solving Sessions every week",
-      "Weekly Mock Tests — August: 1 every week; September: 2 per week",
-      "Practice Questions & Daily Practice Problems (DPPs)",
-      "Weekly Current Affairs Session",
-      "Regular Map Work for geographical awareness",
-    ],
-    dates: "Batch: 03 Aug – 12 Sep 2026 | Classes from 6:00 PM",
-    duration: "03 Aug – 12 Sep 2026",
-    highlight: "Online Mode",
-  },
-  {
-    title: "CDS Intense Revision Batch (Offline)",
-    tagline: "Classroom Fast-Track Revision for CDS 2/2026.",
-    description:
-      "Rigorous offline classroom preparation for English, General Studies & Maths tailored for CDS 2/2026 aspirants.",
-    points: [
-      "Offline Classroom Instruction & Practice",
-      "Comprehensive coverage of English, GS & Maths",
-      "Weekly full-length mock tests & analysis",
-      "Post-written SSB specialization & interview guidance",
-    ],
-    dates: "Batch Starts: 03 Aug 2026",
-    duration: "03 Aug 2026 till Exam",
-    highlight: "Offline Mode",
-  },
-  {
-    title: "CDS Intense Revision Batch (Online)",
-    tagline: "Live Interactive Revision for CDS 2/2026.",
-    description:
-      "Interactive online fast-track batch providing targeted revision for CDS 2/2026 written exam with flexible access.",
-    points: [
-      "Live Interactive Online Sessions & Doubt Clearing",
-      "High-yield revision of English, GS & Mathematics",
-      "Daily practice questions & mock paper discussions",
-      "Continuous mentoring until the CDS written exam",
-    ],
-    dates: "Batch Starts: 03 Aug 2026",
-    duration: "03 Aug 2026 till Exam",
-    highlight: "Online Mode",
-  },
+const ssbBatch = (date: string, start: string, mode: "Offline" | "Online", session?: string) => ({
+  until: plusDays(start, SSB_VISIBLE_DAYS),
+  title: `SSB Mentorship — ${date} (${mode})`,
+  tagline:
+    mode === "Offline"
+      ? "The Ultimate 21-Day Immersive Simulation (Project Invincible)."
+      : "Structured guidance without geographical limits (Project Invincible).",
+  description:
+    mode === "Offline"
+      ? "A holistic, offline module conducted strictly on SSB lines under Project Invincible. Starts with 21 days of intensive ground training, followed by continuous online support until your actual SSB."
+      : "Designed for aspirants balancing college or work who need absolute clarity, personality orientation, and discipline under Project Invincible.",
+  points:
+    mode === "Offline"
+      ? [
+          "SSB-style personality assessment & psych tests",
+          "Live GTO practice on real GTO grounds",
+          "Orientation by Ex-Interviewing Officers & GTOs",
+          "Individual hand-holding under Project Invincible",
+        ]
+      : [
+          "21-Day focus on officer-like mindset & routine",
+          "Continuous interactive live sessions & guided tasks",
+          "Personal feedback to fix strengths and weaknesses",
+          "Exposure to real SSB expectations & assessment logic",
+        ],
+  dates: session ? `Starts: ${date} 2026 — ${session}` : `Starts: ${date} 2026`,
+  duration: `21 Days ${mode} + Support`,
+  highlight: "Project Invincible",
+});
+
+const writtenPoints: Record<string, string[]> = {
+  NDA: [
+    "Complete Mathematics & General Ability Test coverage",
+    "Physics, Chemistry, Biology, History, Geography & Polity",
+    "Daily Practice Problems (DPPs) & weekly mock tests",
+    "Current affairs, map work & post-written SSB guidance",
+  ],
+  CDS: [
+    "English, General Knowledge & Elementary Mathematics",
+    "Sectional drills for speed and accuracy",
+    "Weekly full-length mock tests with detailed analysis",
+    "Post-written SSB specialization & interview guidance",
+  ],
+  AFCAT: [
+    "General Awareness, Verbal Ability & Numerical Ability",
+    "Reasoning & Military Aptitude Test practice",
+    "Weekly full-length mock tests with detailed analysis",
+    "Post-written AFSB interview guidance",
+  ],
+};
+
+const writtenBatch = (exam: "NDA" | "CDS" | "AFCAT", mode: "Offline" | "Online") => ({
+  until: WRITTEN_EXAM_END[exam],
+  title: `${exam} Written Prep Batch (${mode})`,
+  tagline:
+    mode === "Offline"
+      ? `Offline classroom preparation for the ${exam} written exam.`
+      : `Live interactive online preparation for the ${exam} written exam.`,
+  description:
+    mode === "Offline"
+      ? `Full-syllabus offline classroom batch for ${exam}, taught by veteran faculty with daily practice, doubt-solving sessions and regular mock tests right up to the exam.`
+      : `Live online batch for ${exam} with interactive classes, recorded sessions, daily practice sets, doubt clearing and regular mock tests right up to the exam.`,
+  points: writtenPoints[exam],
+  dates: "Starts: 01 Oct 2026",
+  duration: "01 Oct 2026 till Exam",
+  highlight: `${mode} Mode`,
+});
+
+const allBatches = [
+  ssbBatch("10 Aug", "2026-08-10", "Offline"),
+  ssbBatch("17 Aug", "2026-08-17", "Offline"),
+  ssbBatch("24 Aug", "2026-08-24", "Offline"),
+  ssbBatch("14 Sep", "2026-09-14", "Offline", "Forenoon / Afternoon"),
+  ssbBatch("21 Sep", "2026-09-21", "Offline", "Forenoon / Afternoon"),
+  ssbBatch("24 Aug", "2026-08-24", "Online"),
+  ssbBatch("07 Sep", "2026-09-07", "Online"),
+  writtenBatch("NDA", "Offline"),
+  writtenBatch("NDA", "Online"),
+  writtenBatch("CDS", "Offline"),
+  writtenBatch("CDS", "Online"),
+  writtenBatch("AFCAT", "Offline"),
+  writtenBatch("AFCAT", "Online"),
 ];
+
+// SSB batches drop off a week after they start; written batches stay until their exam.
+const batches = allBatches.filter(isCurrent);
 
 const UpcomingBatches = () => {
   return (
@@ -125,6 +112,13 @@ const UpcomingBatches = () => {
             Enroll in our carefully structured mentorship tracks designed for real outcomes. Secure your seat in the upcoming cohorts.
           </p>
         </motion.div>
+
+        {batches.length === 0 && (
+          <p className="text-neutral-500 font-sans text-sm">
+            Dates for the next cohort are being finalised —{" "}
+            <a href="#contact" className="font-bold text-[#00568C] hover:underline">get in touch</a> to be notified first.
+          </p>
+        )}
 
         <div className="grid md:grid-cols-2 gap-8">
           {batches.map((batch, idx) => (
