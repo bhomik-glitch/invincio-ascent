@@ -30,7 +30,7 @@ type Notification = DetailNotification | LinkNotification;
 const notifications: Notification[] = [
   {
     type: "detail",
-    title: "Project Invincible – SSB Offline Mentorship Batches",
+    title: "SSB Offline Mentorship Batches",
     badge: "Aug & Sep 2026",
     sections: [
       {
@@ -46,7 +46,7 @@ const notifications: Notification[] = [
       {
         heading: "Program Details",
         points: [
-          "Flagship 21-Day Immersive SSB Mentorship under Project Invincible",
+          "Flagship 21-Day Immersive SSB Mentorship programme",
           "Strictly conducted on SSB lines with real GTO ground simulations",
           "Comprehensive psychological evaluation & interview guidance",
           "Personalized feedback by former SSB Presidents & Assessor Veterans",
@@ -54,7 +54,7 @@ const notifications: Notification[] = [
         ],
       },
     ],
-    highlight: "Five offline batches across August & September 2026 under Project Invincible. Limited seats per batch for ground training.",
+    highlight: "Five offline batches across August & September 2026. Limited seats per batch for ground training.",
     expected: {
       notification: "Admissions Open",
       application: "Next batch starts 10 Aug 2026",
@@ -62,7 +62,7 @@ const notifications: Notification[] = [
   },
   {
     type: "detail",
-    title: "Project Invincible – SSB Online Mentorship Batches",
+    title: "SSB Online Mentorship Batches",
     badge: "Aug & Sep 2026",
     sections: [
       {
@@ -75,14 +75,14 @@ const notifications: Notification[] = [
       {
         heading: "Program Details",
         points: [
-          "21-Day structured online mentorship program under Project Invincible",
+          "21-Day structured online mentorship programme",
           "Designed for college students & working aspirants needing flexible, high-impact guidance",
           "Live interactive sessions covering Psych, Interviewing Officer & GTO logic",
           "Continuous task submission & individual behavioral corrections",
         ],
       },
     ],
-    highlight: "Two online batches — 24 Aug and 07 Sep 2026 — under Project Invincible. Flexible training with veteran guidance.",
+    highlight: "Two online batches — 24 Aug and 07 Sep 2026. Flexible training with veteran guidance.",
     expected: {
       notification: "Admissions Open",
       application: "Next batch starts 24 Aug 2026",

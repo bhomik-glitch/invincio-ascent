@@ -5,6 +5,7 @@ import ConsultationModal from "./ConsultationModal";
 import NotificationsModal from "./NotificationsModal";
 import ResultsModal from "./ResultsModal";
 import NewCoursesModal from "./NewCoursesModal";
+import GtoGroundOverlay from "./GtoGroundOverlay";
 import { candidateStories } from "@/data/candidate-selections";
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as [number, number, number, number];
@@ -103,6 +104,7 @@ const HeroSection = ({
   const [resultsOpen, setResultsOpen] = useState(false);
   const [newCoursesOpen, setNewCoursesOpen] = useState(false);
   const [waHovered, setWaHovered] = useState(false);
+  const [gtoOpen, setGtoOpen] = useState(false);
 
   const stats = [
     { value: "New Courses", action: () => setNewCoursesOpen(true) },
@@ -258,6 +260,7 @@ const HeroSection = ({
 
                 {/* Bottom row — spans all columns */}
                 <motion.button
+                  onClick={() => setGtoOpen(true)}
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3, ease: EASE_OUT, delay: 0.68 }}
@@ -350,6 +353,7 @@ const HeroSection = ({
     <NotificationsModal isOpen={notifOpen} onClose={() => setNotifOpen(false)} />
     <ResultsModal isOpen={resultsOpen} onClose={() => setResultsOpen(false)} />
     <NewCoursesModal isOpen={newCoursesOpen} onClose={() => setNewCoursesOpen(false)} />
+    <GtoGroundOverlay isOpen={gtoOpen} onClose={() => setGtoOpen(false)} />
     </>
   );
 };

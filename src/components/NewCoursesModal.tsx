@@ -16,13 +16,13 @@ const ssbBatch = (label: string, start: string, date: string, mode: "Offline" | 
   title: `SSB Mentorship — ${label} (${mode})`,
   tagline:
     mode === "Offline"
-      ? "The Ultimate 21-Day Immersive Simulation (Project Invincible)."
-      : "Structured guidance without geographical limits (Project Invincible).",
+      ? "The Ultimate 21-Day Immersive SSB Simulation."
+      : "Structured SSB guidance without geographical limits.",
   description:
     mode === "Offline"
-      ? "A holistic, offline module conducted strictly on SSB lines under Project Invincible. Starts with 21 days of intensive ground training, followed by online support until your SSB."
-      : "Designed for aspirants balancing college or work who need absolute clarity and personality orientation under Project Invincible.",
-  highlight: "Project Invincible",
+      ? "A holistic, offline module conducted strictly on SSB lines. Starts with 21 days of intensive ground training, followed by online support until your SSB."
+      : "Designed for aspirants balancing college or work who need absolute clarity and personality orientation before their SSB.",
+  highlight: `${mode} Mode`,
   slots: sessions ? sessions.map((s) => `${date} (${s})`) : [date],
 });
 

@@ -9,19 +9,19 @@ const ssbBatch = (date: string, start: string, mode: "Offline" | "Online", sessi
   title: `SSB Mentorship — ${date} (${mode})`,
   tagline:
     mode === "Offline"
-      ? "The Ultimate 21-Day Immersive Simulation (Project Invincible)."
-      : "Structured guidance without geographical limits (Project Invincible).",
+      ? "The Ultimate 21-Day Immersive SSB Simulation."
+      : "Structured SSB guidance without geographical limits.",
   description:
     mode === "Offline"
-      ? "A holistic, offline module conducted strictly on SSB lines under Project Invincible. Starts with 21 days of intensive ground training, followed by continuous online support until your actual SSB."
-      : "Designed for aspirants balancing college or work who need absolute clarity, personality orientation, and discipline under Project Invincible.",
+      ? "A holistic, offline module conducted strictly on SSB lines. Starts with 21 days of intensive ground training, followed by continuous online support until your actual SSB."
+      : "Designed for aspirants balancing college or work who need absolute clarity, personality orientation, and discipline before their SSB.",
   points:
     mode === "Offline"
       ? [
           "SSB-style personality assessment & psych tests",
           "Live GTO practice on real GTO grounds",
           "Orientation by Ex-Interviewing Officers & GTOs",
-          "Individual hand-holding under Project Invincible",
+          "Individual hand-holding through every stage",
         ]
       : [
           "21-Day focus on officer-like mindset & routine",
@@ -31,7 +31,7 @@ const ssbBatch = (date: string, start: string, mode: "Offline" | "Online", sessi
         ],
   dates: session ? `Starts: ${date} 2026 — ${session}` : `Starts: ${date} 2026`,
   duration: `21 Days ${mode} + Support`,
-  highlight: "Project Invincible",
+  highlight: `${mode} Mode`,
 });
 
 const writtenPoints: Record<string, string[]> = {
