@@ -31,10 +31,6 @@ const photos = [
     alt: "Signing of the agreement between Invincio and Remtab Care Foundation for the Future Leaders Employment Readiness Scholarship",
   },
   {
-    src: "/assets/remtab/DSC05458.jpg",
-    alt: "Launch of the Future Leaders Employment Readiness Scholarship by Invincio Services LLP and Remtab Care Foundation",
-  },
-  {
     src: "/assets/remtab/DSC05460.jpg",
     alt: "Representatives of Invincio and Remtab Care Foundation shaking hands at the scholarship launch",
   },
