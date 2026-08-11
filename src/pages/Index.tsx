@@ -4,6 +4,7 @@ import ProcessSection from "@/components/ProcessSection";
 import ResultsSection from "@/components/ResultsSection";
 import SelectedStudentsSection from "@/components/SelectedStudentsSection";
 import PodcastSection from "@/components/PodcastSection";
+import RemtabSection from "@/components/RemtabSection";
 import LeadCentreSection from "@/components/LeadCentreSection";
 import CollaborationsSection from "@/components/CollaborationsSection";
 import CTASection from "@/components/CTASection";
@@ -59,6 +60,7 @@ const Index = () => {
         jsonLd={homepageFaq}
       />
       <HeroSection showCarousel={true} />
+      <RemtabSection />
       <LeadCentreSection />
       <CoreOffering />
       <ProcessSection />

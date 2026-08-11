@@ -1,6 +1,61 @@
 export const candidateStories = [
-  { 
-    name: "Prashant Upadhyay", 
+  {
+    name: "Mithlesh",
+    info: "NDA 157\n24 SSB\nChest No. 17",
+    image: "/assets/client_photo/mithlesh-24ssb-nda157.png"
+  },
+  {
+    name: "Prashant",
+    info: "NDA 157\n34 SSB\nChest No. 49",
+    image: "/assets/client_photo/prashant-34ssb-nda157.png"
+  },
+  {
+    name: "Kalpojit",
+    info: "NDA 157\n24 SSB\n3 Assam Bn NCC, Silchar",
+    image: "/assets/client_photo/kalpojit-24ssb-nda157.png"
+  },
+  {
+    name: "Daksh",
+    info: "V-NDA(W) 779\nNDA\n4 AFSB Varanasi",
+    image: "/assets/client_photo/daksh-4afsb-varanasi.png"
+  },
+  {
+    name: "Rishabh",
+    info: "NDA 157\n24 SSB Bangalore",
+    image: "/assets/client_photo/rishabh-24ssb-bangalore.png"
+  },
+  {
+    name: "Rajat",
+    info: "NDA 157\n5 AFSB Guwahati",
+    image: "/assets/client_photo/rajat-5afsb-guwahati.png"
+  },
+  {
+    name: "Pankaj",
+    info: "NDA 157\n4 AFSB Varanasi",
+    image: "/assets/client_photo/pankaj-4afsb-varanasi.png"
+  },
+  {
+    name: "Himanshu",
+    info: "NDA 157\n20 SSB Bhopal",
+    image: "/assets/client_photo/himanshu-20ssb-bhopal.png"
+  },
+  {
+    name: "Aman",
+    info: "NDA 157\n10 SSB\nChest No. 31",
+    image: "/assets/client_photo/aman-10ssb-nda157.png"
+  },
+  {
+    name: "Armaan",
+    info: "SSB Recommended\n34 SSB",
+    image: "/assets/client_photo/armaan-34ssb.png"
+  },
+  {
+    name: "Prateek Sharma",
+    info: "SSB Recommended\nChest No. 31",
+    image: "/assets/client_photo/prateek-sharma.png"
+  },
+  {
+    name: "Prashant Upadhyay",
     info: "RNDA-46843\nNDA 155\n19 SSB Prayagraj", 
     image: "/assets/client_photo/Prashant Upadhyay.jpg" 
   },

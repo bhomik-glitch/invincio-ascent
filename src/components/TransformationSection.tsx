@@ -246,7 +246,7 @@ const TransformationSection = () => {
           <motion.div
             className="flex gap-5 w-max"
             animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: 35, ease: "linear", repeat: Infinity }}
+            transition={{ duration: stories.length * 3, ease: "linear", repeat: Infinity }}
           >
             {duplicatedStories.map((story, index) => (
               <div
