@@ -27,6 +27,10 @@ const pillars = [
 
 const photos = [
   {
+    src: "/assets/remtab/DSC05411.jpg",
+    alt: "Signing of the agreement between Invincio and Remtab Care Foundation for the Future Leaders Employment Readiness Scholarship",
+  },
+  {
     src: "/assets/remtab/DSC05458.jpg",
     alt: "Launch of the Future Leaders Employment Readiness Scholarship by Invincio Services LLP and Remtab Care Foundation",
   },
