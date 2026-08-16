@@ -3,6 +3,7 @@ import { X, BookOpen, Calendar, ArrowRight, ArrowLeft, CheckCircle2 } from "luci
 import { EASE_OUT, TAP_SCALE } from "@/lib/design-system";
 import { plusDays, isCurrent, SSB_VISIBLE_DAYS, WRITTEN_EXAM_END } from "@/lib/batch-visibility";
 import { useModalLock } from "@/lib/modal-lock";
+import { WA_LABEL_SITE, trackWhatsApp } from "@/lib/whatsapp";
 import { useEffect, useState } from "react";
 
 interface NewCoursesModalProps {
@@ -102,6 +103,9 @@ const NewCoursesModal = ({ isOpen, onClose }: NewCoursesModalProps) => {
       text = `Hi Invincio, I'd like to register for *${batch.title}*. Please confirm availability and share registration details.`;
     }
     
+    trackWhatsApp(WA_LABEL_SITE);
+
+    // Message is already batch-specific, so it needs no extra prefill.
     const msg = encodeURIComponent(text);
     window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, "_blank", "noopener,noreferrer");
   };

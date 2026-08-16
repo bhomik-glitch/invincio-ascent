@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { WA_LABEL_SITE, WA_TEXT_SITE, waHref, trackWhatsApp } from "@/lib/whatsapp";
 
 const socialLinks = [
   {
@@ -24,7 +25,7 @@ const socialLinks = [
   },
   {
     src: "/whatsapp-svgrepo-com.svg",
-    href: "https://wa.me/918601407444",
+    href: waHref(WA_TEXT_SITE),
     label: "WhatsApp",
   },
   {
@@ -71,6 +72,7 @@ const SocialSidebar = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
+              onClick={() => label === "WhatsApp" && trackWhatsApp(WA_LABEL_SITE)}
               onMouseEnter={() => setHoveredIdx(idx)}
               onMouseLeave={() => setHoveredIdx(null)}
               className="flex items-center justify-center w-9 h-9 rounded-xl"

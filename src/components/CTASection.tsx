@@ -9,6 +9,7 @@ import {
   TAP_TRANSITION,
 } from "@/lib/design-system";
 import ConsultationModal from "./ConsultationModal";
+import { WA_LABEL_SITE, WA_TEXT_SITE, waHref, trackWhatsApp } from "@/lib/whatsapp";
 
 const CTASection = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -71,9 +72,10 @@ const CTASection = () => {
           {/* Secondary contact links */}
           <div className="flex items-center gap-6 font-sans text-sm">
             <motion.a
-              href="https://wa.me/918601407444"
+              href={waHref(WA_TEXT_SITE)}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackWhatsApp(WA_LABEL_SITE)}
               whileTap={TAP_SCALE}
               transition={TAP_TRANSITION}
               className="inline-flex items-center gap-1.5 text-white/50"

@@ -2,27 +2,13 @@ import { useState, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, X, MessageCircle } from "lucide-react";
 import { useAnyModalOpen } from "@/lib/modal-lock";
+import { WA_LABEL_SITE, WA_NUMBER, WA_TEXT_SITE, trackWhatsApp } from "@/lib/whatsapp";
 
-const WA_NUMBER = "918601407444";
 const DUMMY_MSG = "Hi! How can we help you with SSB preparation?";
-
-/** Prefilled so leads that arrive by WhatsApp are identifiable as coming from the site. */
-const WA_PREFILL = "Hi, I want to know about SSB coaching";
-
-/**
- * PLACEHOLDER — create the "WhatsApp click" conversion action in Google Ads and
- * paste its label here. Until then this send_to targets a label that does not
- * exist, so Google Ads simply ignores the event; nothing else breaks.
- *
- * Deliberately separate from the "Submit lead form" conversion in
- * ConsultationModal so the two entry points can be told apart.
- */
-const WA_CONVERSION_LABEL = "PASTE_WHATSAPP_CONVERSION_LABEL_HERE";
-const WA_CONVERSION_SEND_TO = `AW-18079951507/${WA_CONVERSION_LABEL}`;
 
 const WhatsAppChat = () => {
   const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState(WA_PREFILL);
+  const [message, setMessage] = useState(WA_TEXT_SITE);
   const anyModalOpen = useAnyModalOpen();
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isMobile =
@@ -44,14 +30,11 @@ const WhatsAppChat = () => {
     const trimmed = message.trim();
     if (!trimmed) return;
 
-    // Fire before navigating so the event is never lost to the page going away.
-    if (typeof window.gtag === "function") {
-      window.gtag("event", "conversion", { send_to: WA_CONVERSION_SEND_TO });
-    }
+    trackWhatsApp(WA_LABEL_SITE);
 
     const encoded = encodeURIComponent(trimmed);
     window.open(`https://wa.me/${WA_NUMBER}?text=${encoded}`, "_blank", "noopener,noreferrer");
-    setMessage(WA_PREFILL);
+    setMessage(WA_TEXT_SITE);
     setOpen(false);
   };
 
