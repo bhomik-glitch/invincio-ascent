@@ -126,7 +126,7 @@ const notifications: Notification[] = [
   },
   {
     type: "detail",
-    title: "Indian Army – NCC Special Entry 125th Course (Apr 2027)",
+    title: "Indian Army – SSC NCC Special Entry 125th Course, Men & Women (Apr 2027)",
     badge: "Applications Open",
     link: "https://www.joinindianarmy.nic.in",
     linkLabel: "Join Indian Army Portal",
@@ -135,21 +135,24 @@ const notifications: Notification[] = [
         heading: "Important Dates",
         points: [
           "Online Applications Open: 20th July 2026 at 1500 HRS",
-          "Online Applications Close: 20th August 2026 at 1500 HRS",
+          "Last Date to Apply (Men): 20th August 2026",
+          "Last Date to Apply (Women): 21st August 2026",
         ],
       },
       {
         heading: "Eligibility Details",
         points: [
-          "NCC Special Entry Scheme for Men (including Wards of Battle Casualties of Army Personnel)",
-          "Course starting in April 2027",
+          "Unmarried Male & Female candidates (including Wards of Battle Casualties of Army Personnel)",
+          "Education: Graduation degree with minimum 'B' grade in NCC 'C' Certificate examination",
+          "Age: 19 to 25 years",
+          "Short Service Commission (NT) — course starting April 2027",
         ],
       },
     ],
-    highlight: "Online Applications are open from 20th July 2026 to 20th August 2026. Direct shortlisting for SSB interview without written exam.",
+    highlight: "Applications close 20th August 2026 (Men) and 21st August 2026 (Women). Direct shortlisting for SSB interview without written exam.",
     expected: {
       notification: "Released (125th Course)",
-      application: "20th July 2026 to 20th August 2026",
+      application: "Closes 20 Aug 2026 (Men) / 21 Aug 2026 (Women)",
     },
   },
   {
