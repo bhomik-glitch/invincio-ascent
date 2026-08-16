@@ -10,6 +10,22 @@ const EJ_SERVICE  = "service_2daf7np";
 const EJ_TEMPLATE = "template_kkpre0a";   // lead notification → invincioleads@gmail.com
 const EJ_KEY      = "SvrHhhstrSZ11Wbwx";
 
+/**
+ * The form no longer asks leads for an email — follow-up happens by phone, and
+ * a third required field on a mobile keyboard cost more conversions than the
+ * address was worth.
+ *
+ * We still send an `email` template variable because template_kkpre0a is
+ * believed to use `{{email}}` as its Reply-To. An empty or malformed Reply-To
+ * makes EmailJS reject the send outright (422), which would silently lose
+ * every lead — worse than the problem we set out to fix. Sending our own
+ * inbox keeps the address valid; replies simply come back to us.
+ *
+ * TODO: once the Reply-To in template_kkpre0a is confirmed or repointed to a
+ * static address, delete this and stop sending the field.
+ */
+const EJ_FALLBACK_REPLY_TO = "invincioleads@gmail.com";
+
 // ── Types ─────────────────────────────────────────────────────────────────────
 interface Props {
   open: boolean;
@@ -20,13 +36,11 @@ interface Props {
 interface FormState {
   full_name:    string;
   phone_number: string;
-  email:        string;
 }
 
 interface Errors {
   full_name?:    string;
   phone_number?: string;
-  email?:        string;
 }
 
 type SubmitStatus = "idle" | "loading" | "success" | "error";
@@ -44,11 +58,6 @@ function validate(form: FormState): Errors {
     errors.phone_number = "Phone number is required";
   else if (!/^\d{10}$/.test(form.phone_number.trim()))
     errors.phone_number = "Enter a valid 10-digit number";
-
-  if (!form.email.trim())
-    errors.email = "Email is required";
-  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
-    errors.email = "Enter a valid email address";
 
   return errors;
 }
@@ -144,7 +153,7 @@ function useVisualViewport(open: boolean) {
 
 // ── Modal ─────────────────────────────────────────────────────────────────────
 const ConsultationModal = ({ open, onClose, program }: Props) => {
-  const [form, setForm]       = useState<FormState>({ full_name: "", phone_number: "", email: "" });
+  const [form, setForm]       = useState<FormState>({ full_name: "", phone_number: "" });
   const [errors, setErrors]   = useState<Errors>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [status, setStatus]   = useState<SubmitStatus>("idle");
@@ -165,7 +174,7 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
   // Reset on open + autofocus
   useEffect(() => {
     if (open) {
-      setForm({ full_name: "", phone_number: "", email: "" });
+      setForm({ full_name: "", phone_number: "" });
       setErrors({});
       setTouched({});
       setStatus("idle");
@@ -192,7 +201,7 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setTouched({ full_name: true, phone_number: true, email: true });
+    setTouched({ full_name: true, phone_number: true });
 
     const errs = validate(form);
     setErrors(errs);
@@ -203,7 +212,7 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
     const payload = {
       name:  form.full_name.trim(),
       phone: form.phone_number.trim(),
-      email: form.email.trim(),
+      email: EJ_FALLBACK_REPLY_TO,   // see EJ_FALLBACK_REPLY_TO — keeps Reply-To valid
       title: program
         ? `New Defence Consultation Lead — ${program}`
         : "New Defence Consultation Lead",
@@ -386,17 +395,6 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
                           onBlur={() => handleBlur("phone_number")}
                           error={touched.phone_number ? errors.phone_number : undefined}
                           autoComplete="tel"
-                        />
-                        <Field
-                          label="Email"
-                          id="cons-email"
-                          type="email"
-                          placeholder="you@example.com"
-                          value={form.email}
-                          onChange={(v) => handleChange("email", v)}
-                          onBlur={() => handleBlur("email")}
-                          error={touched.email ? errors.email : undefined}
-                          autoComplete="email"
                         />
 
                         {/* API error banner */}
