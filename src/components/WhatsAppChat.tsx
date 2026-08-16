@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, X, MessageCircle } from "lucide-react";
+import { useAnyModalOpen } from "@/lib/modal-lock";
 
 const WA_NUMBER = "918601407444";
 const DUMMY_MSG = "Hi! How can we help you with SSB preparation?";
@@ -8,6 +9,7 @@ const DUMMY_MSG = "Hi! How can we help you with SSB preparation?";
 const WhatsAppChat = () => {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
+  const anyModalOpen = useAnyModalOpen();
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isMobile =
     typeof window !== "undefined" &&
@@ -36,6 +38,11 @@ const WhatsAppChat = () => {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") handleSend();
   };
+
+  // This sits at z-[200], above every modal panel — and a pulsing green circle
+  // next to a form is a distraction even when it is behind one. Get out of the
+  // way entirely while any overlay is open.
+  if (anyModalOpen) return null;
 
   return (
     <div

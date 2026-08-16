@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, BookOpen, Calendar, ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react";
 import { EASE_OUT, TAP_SCALE } from "@/lib/design-system";
 import { plusDays, isCurrent, SSB_VISIBLE_DAYS, WRITTEN_EXAM_END } from "@/lib/batch-visibility";
+import { useModalLock } from "@/lib/modal-lock";
 import { useEffect, useState } from "react";
 
 interface NewCoursesModalProps {
@@ -79,10 +80,7 @@ const NewCoursesModal = ({ isOpen, onClose }: NewCoursesModalProps) => {
     return () => document.removeEventListener("keydown", handler);
   }, [isOpen, onClose, activeBatch]);
 
-  useEffect(() => {
-    if (isOpen) document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = ""; };
-  }, [isOpen]);
+  useModalLock(isOpen);
 
   useEffect(() => {
     if (!isOpen) {
