@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, MessageCircle, Loader2, CheckCircle } from "lucide-react";
+import { X, Loader2, CheckCircle } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import { EASE_OUT, TAP_SCALE, TAP_TRANSITION } from "@/lib/design-system";
 import { useModalLock } from "@/lib/modal-lock";
+import { WA_LABEL_MODAL, WA_TEXT_MODAL, waHref, trackWhatsApp } from "@/lib/whatsapp";
 
 // ── EmailJS config ────────────────────────────────────────────────────────────
 const EJ_SERVICE  = "service_2daf7np";
@@ -407,7 +408,13 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
                               className="text-[12px] text-red-500 bg-red-50 border border-red-200 rounded-lg px-3 py-2 text-center"
                             >
                               Something went wrong. Please try again or&nbsp;
-                              <a href="https://wa.me/918601407444" target="_blank" rel="noopener noreferrer" className="underline font-medium">
+                              <a
+                                href={waHref(WA_TEXT_MODAL)}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={() => trackWhatsApp(WA_LABEL_MODAL)}
+                                className="underline font-medium"
+                              >
                                 WhatsApp us
                               </a>.
                             </motion.p>
@@ -430,6 +437,20 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
                             </span>
                           ))}
                         </div>
+
+                        {/* WhatsApp fallback — deliberately demoted. Some of these
+                            are real leads we would otherwise lose, so it stays
+                            reachable, but as plain muted text below the badges
+                            rather than a second CTA competing with submit. */}
+                        <a
+                          href={waHref(WA_TEXT_MODAL)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => trackWhatsApp(WA_LABEL_MODAL)}
+                          className="mt-1 text-[11px] text-[#9CA3AF] underline underline-offset-2 hover:text-[#6B7280] transition-colors duration-150"
+                        >
+                          Or message us on WhatsApp
+                        </a>
                       </div>
                       </div>
 
@@ -453,17 +474,6 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
                             "Get Started"
                           )}
                         </motion.button>
-
-                        {/* WhatsApp fallback */}
-                        <a
-                          href="https://wa.me/918601407444"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="mt-1 flex items-center justify-center gap-1.5 text-[#6B7280] text-[13px] hover:text-[#25D366] transition-colors duration-150 py-0.5"
-                        >
-                          <MessageCircle className="w-3.5 h-3.5" />
-                          Or WhatsApp Us
-                        </a>
                       </div>
                       </form>
                     </motion.div>
