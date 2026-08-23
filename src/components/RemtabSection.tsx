@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
+  ArrowUpRight,
+  Check,
   ChevronLeft,
   ChevronRight,
   GraduationCap,
@@ -16,6 +18,7 @@ import {
   SECTION_PAD,
   GRID_GAP,
   EASE_OUT,
+  BTN_PRIMARY,
 } from "@/lib/design-system";
 
 const pillars = [
@@ -45,6 +48,40 @@ const photos = [
 ];
 
 const SLIDE_MS = 5000;
+
+const FORM_URL = "https://forms.gle/UBCDSatWnNQjT4WF8";
+
+const applyColumns = [
+  {
+    title: "Who can apply",
+    items: [
+      "Ward of a Veer Nari or of a war-wounded soldier",
+      "Ward of serving or retired Armed Forces personnel",
+      "Serving or retired CAPF personnel",
+      "Economically Weaker Section (EWS)",
+      "Any other deserving and dedicated aspirant",
+    ],
+  },
+  {
+    title: "What the support covers",
+    items: [
+      "Full or partial scholarship",
+      "Course and training fee assistance",
+      "SSB mentorship and written exam preparation",
+      "Books, study material and educational expenses",
+      "Career guidance, personality and communication development",
+    ],
+  },
+  {
+    title: "How the selection works",
+    items: [
+      "Submit the application form",
+      "Document verification of the category claimed",
+      "Initial interaction with the program team",
+      "Final interview and approval by the Scholarship Committee",
+    ],
+  },
+];
 
 const PhotoSlider = () => {
   const [index, setIndex] = useState(0);
@@ -197,6 +234,61 @@ const RemtabSection = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* Apply */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.4, ease: EASE_OUT }}
+          className="mt-14 md:mt-20 bg-white border border-[#e5e7eb] rounded-xl p-8 md:p-10 shadow-[0_1px_4px_rgba(0,0,0,0.04)]"
+        >
+          <p className={`${EYEBROW} mb-3`}>Applications Open</p>
+          <h3 className="font-serif text-2xl md:text-3xl font-bold text-[#00568C]">
+            Apply for the Scholarship
+          </h3>
+          <p className={`${BODY_LIGHT} text-base mt-4 max-w-3xl`}>
+            REMTAB Foundation and Invincio invite applications from deserving, dedicated and
+            desirous aspirants who need financial assistance, mentorship or other support to pursue
+            their educational and career goals.
+          </p>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+            {applyColumns.map(({ title, items }) => (
+              <div key={title}>
+                <h4 className="font-serif text-base font-bold text-[#00568C] mb-4">{title}</h4>
+                <ul className="space-y-2.5">
+                  {items.map((item) => (
+                    <li key={item} className="flex gap-2.5">
+                      <Check className="w-4 h-4 mt-0.5 shrink-0 text-[#2FB4E7]" />
+                      <span className="font-sans text-sm text-[#6B7280] leading-relaxed">
+                        {item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 pt-8 border-t border-[#e5e7eb] flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+            <a
+              href={FORM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${BTN_PRIMARY} shrink-0`}
+            >
+              Start Your Application
+              <ArrowUpRight className="w-4 h-4" />
+            </a>
+            <p className="font-sans text-xs text-[#6B7280] leading-relaxed">
+              Keep ready: proof of the category claimed, supporting financial documents if
+              shortlisted, and a 60–90 second video introduction. Submission of the form does not
+              automatically entitle an applicant to a scholarship — every application is assessed
+              through a structured selection process.
+            </p>
+          </div>
+        </motion.div>
 
         {/* Closing */}
         <motion.div
