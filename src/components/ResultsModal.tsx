@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Award, Download, Trophy } from "lucide-react";
 import { EASE_OUT, TAP_SCALE } from "@/lib/design-system";
+import { useModalLock } from "@/lib/modal-lock";
 import { useEffect } from "react";
 
 interface ResultsModalProps {
@@ -27,14 +28,7 @@ const ResultsModal = ({ isOpen, onClose }: ResultsModalProps) => {
   }, [isOpen, onClose]);
 
   // Lock body scroll
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
+  useModalLock(isOpen);
 
   return (
     <AnimatePresence>

@@ -1,13 +1,15 @@
 import { useState, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, X, MessageCircle } from "lucide-react";
+import { useAnyModalOpen } from "@/lib/modal-lock";
+import { WA_LABEL_SITE, WA_NUMBER, WA_TEXT_SITE, trackWhatsApp } from "@/lib/whatsapp";
 
-const WA_NUMBER = "918601407444";
 const DUMMY_MSG = "Hi! How can we help you with SSB preparation?";
 
 const WhatsAppChat = () => {
   const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(WA_TEXT_SITE);
+  const anyModalOpen = useAnyModalOpen();
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isMobile =
     typeof window !== "undefined" &&
@@ -27,15 +29,23 @@ const WhatsAppChat = () => {
   const handleSend = () => {
     const trimmed = message.trim();
     if (!trimmed) return;
+
+    trackWhatsApp(WA_LABEL_SITE);
+
     const encoded = encodeURIComponent(trimmed);
     window.open(`https://wa.me/${WA_NUMBER}?text=${encoded}`, "_blank", "noopener,noreferrer");
-    setMessage("");
+    setMessage(WA_TEXT_SITE);
     setOpen(false);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") handleSend();
   };
+
+  // This sits at z-[200], above every modal panel — and a pulsing green circle
+  // next to a form is a distraction even when it is behind one. Get out of the
+  // way entirely while any overlay is open.
+  if (anyModalOpen) return null;
 
   return (
     <div

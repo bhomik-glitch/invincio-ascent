@@ -23,15 +23,13 @@ const SSB_ENTRIES = [
   "SSC Tech", "TGC", "TES Entry", "NCC Entry", "Navy B.Tech", "Coast Guard",
 ];
 
-const TickerText = ({ paused }: { paused: boolean }) => {
-  const [idx, setIdx] = useState(0);
-
-  useEffect(() => {
-    if (paused) return;
-    const id = setInterval(() => setIdx(i => (i + 1) % SSB_ENTRIES.length), 2000);
-    return () => clearInterval(id);
-  }, [paused]);
-
+/**
+ * Index is owned by HeroSection so the button can open the consultation modal
+ * for whichever entry is on screen. Rotation is deliberately slow and pauses on
+ * hover/touch: at the old 2s it changed faster than someone could read it and
+ * reach it, so a tap aimed at "NDA" could land on "Coast Guard".
+ */
+const TickerText = ({ idx }: { idx: number }) => {
   return (
     <AnimatePresence mode="wait" initial={false}>
       <motion.span
@@ -100,11 +98,26 @@ const HeroSection = ({
   showCarousel = false,
 }: HeroSectionProps) => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalProgram, setModalProgram] = useState<string | undefined>(undefined);
   const [notifOpen, setNotifOpen] = useState(false);
   const [resultsOpen, setResultsOpen] = useState(false);
   const [newCoursesOpen, setNewCoursesOpen] = useState(false);
-  const [waHovered, setWaHovered] = useState(false);
   const [gtoOpen, setGtoOpen] = useState(false);
+
+  // Rotating SSB entry — paused while the user is reaching for it.
+  const [entryIdx, setEntryIdx] = useState(0);
+  const [tickerPaused, setTickerPaused] = useState(false);
+
+  useEffect(() => {
+    if (tickerPaused) return;
+    const id = setInterval(() => setEntryIdx(i => (i + 1) % SSB_ENTRIES.length), 5000);
+    return () => clearInterval(id);
+  }, [tickerPaused]);
+
+  const openConsultation = (program?: string) => {
+    setModalProgram(program);
+    setModalOpen(true);
+  };
 
   const stats = [
     { value: "New Courses", action: () => setNewCoursesOpen(true) },
@@ -176,10 +189,11 @@ const HeroSection = ({
             {...fadeUp(0.38)}
             className="mb-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
           >
-            {/* Primary — golden yellow, deep blue text */}
+            {/* Primary — golden yellow, deep blue text. Full-width and larger
+                on mobile so nothing else on the card matches its weight. */}
             <button
-              onClick={() => setModalOpen(true)}
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#F6B828] px-6 py-3.5 text-sm font-semibold tracking-wide text-[#00568C]"
+              onClick={() => openConsultation()}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#F6B828] px-6 py-4 text-base font-semibold tracking-wide text-[#00568C] sm:w-auto sm:py-3.5 sm:text-sm"
               style={{
                 boxShadow: "0 4px 16px rgba(246,184,40,0.35)",
                 transition: "background-color 200ms ease, box-shadow 200ms ease, transform 120ms ease",
@@ -200,29 +214,31 @@ const HeroSection = ({
               Book Free Consultation
             </button>
 
-            {/* Secondary — glass outline with ticker */}
-            <a
-              href="https://wa.me/918601407444"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/25 px-6 py-3.5 text-sm font-semibold tracking-wide text-white"
+            {/* Secondary — glass outline with ticker. Opens the consultation
+                modal pre-tagged with the entry on screen; it used to be a
+                wa.me link, so all ten labels led to the same chat window.
+                Demoted on mobile: shrink-wrapped, smaller, lower contrast. */}
+            <button
+              onClick={() => openConsultation(SSB_ENTRIES[entryIdx])}
+              onPointerDown={() => setTickerPaused(true)}
+              className="inline-flex self-start items-center justify-center gap-2 rounded-xl border border-white/15 px-4 py-2.5 text-xs font-semibold tracking-wide text-white/60 sm:self-auto sm:border-white/25 sm:px-6 sm:py-3.5 sm:text-sm sm:text-white"
               style={{ transition: "background-color 200ms ease, border-color 200ms ease, transform 120ms ease" }}
               onMouseEnter={(e) => {
-                setWaHovered(true);
+                setTickerPaused(true);
                 e.currentTarget.style.borderColor = "rgba(255,255,255,0.45)";
                 e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.08)";
               }}
               onMouseLeave={(e) => {
-                setWaHovered(false);
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
+                setTickerPaused(false);
+                e.currentTarget.style.borderColor = "";
                 e.currentTarget.style.backgroundColor = "transparent";
                 e.currentTarget.style.transform = "scale(1)";
               }}
               onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
               onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
             >
-              <TickerText paused={waHovered} />
-            </a>
+              <TickerText idx={entryIdx} />
+            </button>
           </motion.div>
 
           {/* Bento grid — stats + GTO CTA */}
@@ -243,7 +259,7 @@ const HeroSection = ({
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.3, ease: EASE_OUT, delay: 0.5 + i * 0.06 }}
-                    className="flex items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] px-3 py-3 outline-none"
+                    className="flex items-center justify-center rounded-xl border border-white/[0.07] bg-white/[0.03] px-3 py-2 outline-none sm:border-white/10 sm:bg-white/[0.06] sm:py-3"
                     style={{ transition: "background-color 180ms ease, border-color 180ms ease" }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.backgroundColor = "rgba(246,184,40,0.10)";
@@ -254,7 +270,7 @@ const HeroSection = ({
                       e.currentTarget.style.borderColor = "rgba(255,255,255,0.10)";
                     }}
                   >
-                    <span className="text-[13px] font-semibold text-[#F6B828] whitespace-nowrap">{stat.value}</span>
+                    <span className="text-[11px] font-semibold text-[#F6B828]/70 whitespace-nowrap sm:text-[13px] sm:text-[#F6B828]">{stat.value}</span>
                   </motion.button>
                 ))}
 
@@ -264,7 +280,7 @@ const HeroSection = ({
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3, ease: EASE_OUT, delay: 0.68 }}
-                  className="col-span-1 sm:col-span-3 flex items-center justify-center gap-2 rounded-xl border border-[#F6B828]/35 bg-[#F6B828]/[0.08] py-3.5 text-[15px] font-semibold text-[#F6B828] tracking-wide outline-none"
+                  className="col-span-1 sm:col-span-3 flex items-center justify-center gap-2 rounded-xl border border-[#F6B828]/15 bg-[#F6B828]/[0.03] py-2.5 text-[15px] font-semibold text-[#F6B828]/70 tracking-wide outline-none sm:border-[#F6B828]/35 sm:bg-[#F6B828]/[0.08] sm:py-3.5 sm:text-[#F6B828]"
                   style={{ transition: "background-color 180ms ease, border-color 180ms ease, transform 120ms ease" }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.backgroundColor = "rgba(246,184,40,0.16)";
@@ -281,7 +297,7 @@ const HeroSection = ({
                   <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
                   </svg>
-                  <span className="text-[14px] sm:text-[15px]">Train in the Biggest GTO Ground in Delhi</span>
+                  <span className="text-[12px] sm:text-[15px]">Train in the Biggest GTO Ground in Delhi</span>
                 </motion.button>
               </div>
             </motion.div>
@@ -349,7 +365,7 @@ const HeroSection = ({
     </div>
     )}
 
-    <ConsultationModal open={modalOpen} onClose={() => setModalOpen(false)} />
+    <ConsultationModal open={modalOpen} onClose={() => setModalOpen(false)} program={modalProgram} />
     <NotificationsModal isOpen={notifOpen} onClose={() => setNotifOpen(false)} />
     <ResultsModal isOpen={resultsOpen} onClose={() => setResultsOpen(false)} />
     <NewCoursesModal isOpen={newCoursesOpen} onClose={() => setNewCoursesOpen(false)} />

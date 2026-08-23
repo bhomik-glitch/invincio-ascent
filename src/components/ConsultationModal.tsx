@@ -1,13 +1,31 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, MessageCircle, Loader2, CheckCircle } from "lucide-react";
+import { X, Loader2, CheckCircle } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import { EASE_OUT, TAP_SCALE, TAP_TRANSITION } from "@/lib/design-system";
+import { useModalLock } from "@/lib/modal-lock";
+import { WA_LABEL_MODAL, WA_TEXT_MODAL, waHref, trackWhatsApp } from "@/lib/whatsapp";
 
 // ── EmailJS config ────────────────────────────────────────────────────────────
 const EJ_SERVICE  = "service_2daf7np";
 const EJ_TEMPLATE = "template_kkpre0a";   // lead notification → invincioleads@gmail.com
 const EJ_KEY      = "SvrHhhstrSZ11Wbwx";
+
+/**
+ * The form no longer asks leads for an email — follow-up happens by phone, and
+ * a third required field on a mobile keyboard cost more conversions than the
+ * address was worth.
+ *
+ * We still send an `email` template variable because template_kkpre0a is
+ * believed to use `{{email}}` as its Reply-To. An empty or malformed Reply-To
+ * makes EmailJS reject the send outright (422), which would silently lose
+ * every lead — worse than the problem we set out to fix. Sending our own
+ * inbox keeps the address valid; replies simply come back to us.
+ *
+ * TODO: once the Reply-To in template_kkpre0a is confirmed or repointed to a
+ * static address, delete this and stop sending the field.
+ */
+const EJ_FALLBACK_REPLY_TO = "invincioleads@gmail.com";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 interface Props {
@@ -19,13 +37,11 @@ interface Props {
 interface FormState {
   full_name:    string;
   phone_number: string;
-  email:        string;
 }
 
 interface Errors {
   full_name?:    string;
   phone_number?: string;
-  email?:        string;
 }
 
 type SubmitStatus = "idle" | "loading" | "success" | "error";
@@ -43,11 +59,6 @@ function validate(form: FormState): Errors {
     errors.phone_number = "Phone number is required";
   else if (!/^\d{10}$/.test(form.phone_number.trim()))
     errors.phone_number = "Enter a valid 10-digit number";
-
-  if (!form.email.trim())
-    errors.email = "Email is required";
-  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
-    errors.email = "Enter a valid email address";
 
   return errors;
 }
@@ -110,9 +121,40 @@ const Field = React.forwardRef<HTMLInputElement, FieldProps>(
 );
 Field.displayName = "Field";
 
+// ── Visual viewport ───────────────────────────────────────────────────────────
+/**
+ * `position: fixed` resolves against the *layout* viewport, which neither iOS
+ * Safari nor Chrome (default `interactive-widget=resizes-visual`) shrinks when
+ * the on-screen keyboard opens. A centred panel therefore keeps its submit
+ * button underneath the keyboard. Tracking `visualViewport` pins the panel to
+ * what the user can actually see.
+ *
+ * Returns null where the API is unavailable (iOS < 13) — caller falls back to
+ * 100vh, which is slightly too tall there but still bounded and scrollable.
+ */
+function useVisualViewport(open: boolean) {
+  const [rect, setRect] = useState<{ top: number; height: number } | null>(null);
+
+  useEffect(() => {
+    const vv = window.visualViewport;
+    if (!open || !vv) return;
+
+    const sync = () => setRect({ top: vv.offsetTop, height: vv.height });
+    sync();
+    vv.addEventListener("resize", sync);
+    vv.addEventListener("scroll", sync);
+    return () => {
+      vv.removeEventListener("resize", sync);
+      vv.removeEventListener("scroll", sync);
+    };
+  }, [open]);
+
+  return rect;
+}
+
 // ── Modal ─────────────────────────────────────────────────────────────────────
 const ConsultationModal = ({ open, onClose, program }: Props) => {
-  const [form, setForm]       = useState<FormState>({ full_name: "", phone_number: "", email: "" });
+  const [form, setForm]       = useState<FormState>({ full_name: "", phone_number: "" });
   const [errors, setErrors]   = useState<Errors>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [status, setStatus]   = useState<SubmitStatus>("idle");
@@ -133,7 +175,7 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
   // Reset on open + autofocus
   useEffect(() => {
     if (open) {
-      setForm({ full_name: "", phone_number: "", email: "" });
+      setForm({ full_name: "", phone_number: "" });
       setErrors({});
       setTouched({});
       setStatus("idle");
@@ -142,11 +184,10 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
     }
   }, [open]);
 
-  // Lock body scroll
-  useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [open]);
+  // Lock body scroll + hide the floating WhatsApp button while open
+  useModalLock(open);
+
+  const viewport = useVisualViewport(open);
 
   const handleBlur = (field: keyof FormState) => {
     setTouched((t) => ({ ...t, [field]: true }));
@@ -161,7 +202,7 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setTouched({ full_name: true, phone_number: true, email: true });
+    setTouched({ full_name: true, phone_number: true });
 
     const errs = validate(form);
     setErrors(errs);
@@ -172,7 +213,7 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
     const payload = {
       name:  form.full_name.trim(),
       phone: form.phone_number.trim(),
-      email: form.email.trim(),
+      email: EJ_FALLBACK_REPLY_TO,   // see EJ_FALLBACK_REPLY_TO — keeps Reply-To valid
       title: program
         ? `New Defence Consultation Lead — ${program}`
         : "New Defence Consultation Lead",
@@ -232,15 +273,18 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
             aria-hidden="true"
           />
 
-          {/* Panel wrapper */}
-          <div className="fixed inset-0 z-[81] flex items-center justify-center px-4 pointer-events-none">
+          {/* Panel wrapper — pinned to the visual viewport, not the layout viewport */}
+          <div
+            className="fixed left-0 right-0 z-[81] flex items-start sm:items-center justify-center px-4 py-4 pointer-events-none"
+            style={viewport ? { top: viewport.top, height: viewport.height } : { top: 0, height: "100vh" }}
+          >
             <motion.div
               key="panel"
               initial={{ opacity: 0, scale: 0.94, y: 14 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 8 }}
               transition={{ duration: 0.26, ease: EASE_OUT }}
-              className="relative w-full max-w-[440px] bg-white rounded-2xl overflow-hidden pointer-events-auto"
+              className="relative w-full max-w-[440px] max-h-full flex flex-col bg-white rounded-2xl overflow-hidden pointer-events-auto"
               style={{ boxShadow: "0 24px 80px rgba(0,0,0,0.28), 0 4px 16px rgba(0,0,0,0.12)" }}
               onClick={(e) => e.stopPropagation()}
               role="dialog"
@@ -250,18 +294,20 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
               {/* Brand top bar */}
               <div className="h-[3px] w-full bg-gradient-to-r from-[#00568C]/60 via-[#2FB4E7] to-[#00568C]/60" />
 
-              {/* Close button */}
-              <button
-                onClick={() => !isLoading && onClose()}
-                aria-label="Close"
-                disabled={isLoading}
-                className="absolute top-4 right-4 z-10 rounded-lg p-1.5 text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors disabled:opacity-40"
-              >
-                <X className="w-4 h-4" />
-              </button>
+              {/* Close button — its own non-scrolling row, so panel content
+                  never slides underneath it and steals the tap. */}
+              <div className="flex-none flex justify-end px-2 pt-1">
+                <button
+                  onClick={() => !isLoading && onClose()}
+                  aria-label="Close"
+                  disabled={isLoading}
+                  className="flex h-11 w-11 items-center justify-center rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors disabled:opacity-40"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
 
-              <div className="px-7 py-7">
-                <AnimatePresence mode="wait">
+              <AnimatePresence mode="wait">
 
                   {/* ── Success state ── */}
                   {isSuccess ? (
@@ -270,7 +316,7 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.28, ease: EASE_OUT }}
-                      className="flex flex-col items-center text-center py-10"
+                      className="flex flex-1 min-h-0 overflow-y-auto flex-col items-center text-center px-7 pt-4 pb-10"
                     >
                       <motion.div
                         initial={{ scale: 0, rotate: -15 }}
@@ -306,7 +352,11 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0, scale: 0.98 }}
                       transition={{ duration: 0.18 }}
+                      className="flex flex-1 min-h-0 flex-col"
                     >
+                      {/* Form — scrollable body + non-scrolling submit footer */}
+                      <form onSubmit={handleSubmit} noValidate className="flex flex-1 min-h-0 flex-col">
+                      <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-7 pt-1 pb-3">
                       {/* Header */}
                       <div className="mb-6">
                         <h2
@@ -322,8 +372,7 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
                         </p>
                       </div>
 
-                      {/* Form */}
-                      <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
+                      <div className="flex flex-col gap-4">
                         <Field
                           ref={nameRef}
                           label="Full Name"
@@ -348,17 +397,6 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
                           error={touched.phone_number ? errors.phone_number : undefined}
                           autoComplete="tel"
                         />
-                        <Field
-                          label="Email"
-                          id="cons-email"
-                          type="email"
-                          placeholder="you@example.com"
-                          value={form.email}
-                          onChange={(v) => handleChange("email", v)}
-                          onBlur={() => handleBlur("email")}
-                          error={touched.email ? errors.email : undefined}
-                          autoComplete="email"
-                        />
 
                         {/* API error banner */}
                         <AnimatePresence>
@@ -370,43 +408,19 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
                               className="text-[12px] text-red-500 bg-red-50 border border-red-200 rounded-lg px-3 py-2 text-center"
                             >
                               Something went wrong. Please try again or&nbsp;
-                              <a href="https://wa.me/918601407444" target="_blank" rel="noopener noreferrer" className="underline font-medium">
+                              <a
+                                href={waHref(WA_TEXT_MODAL)}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={() => trackWhatsApp(WA_LABEL_MODAL)}
+                                className="underline font-medium"
+                              >
                                 WhatsApp us
                               </a>.
                             </motion.p>
                           )}
                         </AnimatePresence>
-
-                        {/* Submit CTA */}
-                        <motion.button
-                          type="submit"
-                          disabled={isLoading}
-                          whileHover={!isLoading ? { y: -1, boxShadow: "0 6px 20px rgba(246,184,40,0.35)" } : undefined}
-                          whileTap={!isLoading ? TAP_SCALE : undefined}
-                          transition={TAP_TRANSITION}
-                          className="mt-1 w-full flex items-center justify-center gap-2 bg-[#F6B828] text-[#00568C] font-semibold text-sm py-3.5 rounded-xl hover:bg-[#e0a720] disabled:opacity-70 disabled:cursor-not-allowed transition-colors duration-150"
-                        >
-                          {isLoading ? (
-                            <>
-                              <Loader2 className="w-4 h-4 animate-spin" />
-                              Sending…
-                            </>
-                          ) : (
-                            "Get Started"
-                          )}
-                        </motion.button>
-
-                        {/* WhatsApp fallback */}
-                        <a
-                          href="https://wa.me/918601407444"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center justify-center gap-1.5 text-[#6B7280] text-[13px] hover:text-[#25D366] transition-colors duration-150 py-0.5"
-                        >
-                          <MessageCircle className="w-3.5 h-3.5" />
-                          Or WhatsApp Us
-                        </a>
-                      </form>
+                      </div>
 
                       {/* Trust badges */}
                       <div className="mt-5 pt-4 border-t border-gray-100 flex flex-col items-center gap-2.5">
@@ -423,11 +437,48 @@ const ConsultationModal = ({ open, onClose, program }: Props) => {
                             </span>
                           ))}
                         </div>
+
+                        {/* WhatsApp fallback — deliberately demoted. Some of these
+                            are real leads we would otherwise lose, so it stays
+                            reachable, but as plain muted text below the badges
+                            rather than a second CTA competing with submit. */}
+                        <a
+                          href={waHref(WA_TEXT_MODAL)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => trackWhatsApp(WA_LABEL_MODAL)}
+                          className="mt-1 text-[11px] text-[#9CA3AF] underline underline-offset-2 hover:text-[#6B7280] transition-colors duration-150"
+                        >
+                          Or message us on WhatsApp
+                        </a>
                       </div>
+                      </div>
+
+                      {/* Footer — outside the scroll area, so the keyboard can never cover it */}
+                      <div className="flex-none border-t border-gray-100 bg-white px-7 pt-3 pb-4">
+                        {/* Submit CTA */}
+                        <motion.button
+                          type="submit"
+                          disabled={isLoading}
+                          whileHover={!isLoading ? { y: -1, boxShadow: "0 6px 20px rgba(246,184,40,0.35)" } : undefined}
+                          whileTap={!isLoading ? TAP_SCALE : undefined}
+                          transition={TAP_TRANSITION}
+                          className="w-full flex items-center justify-center gap-2 bg-[#F6B828] text-[#00568C] font-semibold text-sm py-3.5 rounded-xl hover:bg-[#e0a720] disabled:opacity-70 disabled:cursor-not-allowed transition-colors duration-150"
+                        >
+                          {isLoading ? (
+                            <>
+                              <Loader2 className="w-4 h-4 animate-spin" />
+                              Sending…
+                            </>
+                          ) : (
+                            "Get Started"
+                          )}
+                        </motion.button>
+                      </div>
+                      </form>
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
             </motion.div>
           </div>
         </>
