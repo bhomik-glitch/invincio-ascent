@@ -7,7 +7,6 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
 
 jobs:
   track:
@@ -17,20 +16,22 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Selftest filters
         run: node scripts/track-army.mjs --selftest
 
-      - name: Fetch + curate
+      - name: Fetch + curate + publish
         run: node scripts/track-army.mjs
 
-      - name: Raise PR if anything was staged
-        uses: peter-evans/create-pull-request@v6
-        with:
-          branch: bot/army-notifications
-          add-paths: src/data/army-feed.json
-          commit-message: "chore(notifications): stage new Army notifications for review"
-          title: "🔔 New Army notifications to review"
-          body-path: scripts/.army-pr-body.md
-          delete-branch: true
+      - name: Commit if the feed changed
+        run: |
+          if [[ -n "$(git status --porcelain src/data/army-feed.json)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add src/data/army-feed.json
+            git commit -m "chore(notifications): sync Army notifications feed [skip ci]"
+            git push
+          else
+            echo "No feed changes."
+          fi

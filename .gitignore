@@ -23,5 +23,3 @@ dist-ssr
 *.sln
 *.sw?
 
-# army notification tracker scratch
-scripts/.army-pr-body.md

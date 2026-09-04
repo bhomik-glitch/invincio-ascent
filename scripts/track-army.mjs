@@ -5,16 +5,16 @@
  * joinindianarmy.nic.in is CAPTCHA-walled (every page 302s to Authentication.aspx),
  * so we can't scrape it directly. Instead we watch Google News RSS for the news
  * outlets that report every Army recruitment event same-day, run strict filters,
- * dedupe by event, and stage survivors into src/data/army-feed.json as
- * status:"review". Nothing reaches the website until a human flips an item to
- * status:"published" (done in the PR this raises via GitHub Actions).
+ * dedupe by event, and publish survivors straight into src/data/army-feed.json
+ * (status:"published"). The GitHub Actions cron commits the file to main and the
+ * site redeploys — fully automatic, no review step.
  *
- *   node scripts/track-army.mjs            # fetch + curate + stage into the feed
+ *   node scripts/track-army.mjs            # fetch + curate + write the feed
  *   node scripts/track-army.mjs --selftest # run the filter/dedupe assertions
  *
- * The <link> in each item is a Google News redirect URL — it resolves fine in a
- * browser, but at PR-review time you should replace it with the authoritative
- * link (joinindianarmy.nic.in page or the official PDF).
+ * To bury an item, set its status to "hidden" in src/data/army-feed.json — it
+ * stays out of future runs. The <link> is a Google News redirect (resolves fine
+ * in a browser); swap in the official URL by hand whenever you want a clean link.
  */
 
 import { readFile, writeFile } from "node:fs/promises";
@@ -24,7 +24,6 @@ import assert from "node:assert/strict";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const FEED_PATH = resolve(ROOT, "src/data/army-feed.json");
-const PR_BODY_PATH = resolve(ROOT, "scripts/.army-pr-body.md");
 
 // Two queries: broad Army events (14d) + officer-entry focus (30d, our audience).
 const QUERIES = [
@@ -139,7 +138,7 @@ async function fetchCurated() {
         source: it.source || "Google News",
         date: date || new Date().toISOString().slice(0, 10),
         category: category(it.title),
-        status: "review",
+        status: "published",
       });
     }
   }
@@ -156,8 +155,7 @@ async function main() {
   const fresh = curated.filter((i) => !known.has(i.id));
 
   if (!fresh.length) {
-    console.log("No new Army notifications. Nothing to stage.");
-    await writeFile(PR_BODY_PATH, "");
+    console.log("No new Army notifications.");
     return;
   }
 
@@ -165,27 +163,7 @@ async function main() {
   feed.updated = new Date().toISOString().slice(0, 10);
   await writeFile(FEED_PATH, JSON.stringify(feed, null, 2) + "\n");
 
-  const body = [
-    `Staged **${fresh.length}** candidate Army notification(s) as \`status: "review"\`.`,
-    "",
-    "**They are NOT live on the site yet.** For each one you want to publish:",
-    "",
-    "1. Set `status` to `\"published\"` in `src/data/army-feed.json`.",
-    "2. Replace `link` with the authoritative URL (joinindianarmy.nic.in page or the official PDF) — the current link is a Google News redirect.",
-    "3. Tidy the `title` if needed.",
-    "",
-    "Set `status` to `\"hidden\"` for anything you don't want (keeps it out of future PRs). Then merge.",
-    "",
-    "---",
-    "",
-    ...fresh.map(
-      (i) =>
-        `- **${i.title}**  \n  \`${i.id}\` · ${i.category} · ${i.date} · _${i.source}_  \n  ${i.link}`,
-    ),
-  ].join("\n");
-  await writeFile(PR_BODY_PATH, body + "\n");
-
-  console.log(`Staged ${fresh.length} item(s):`);
+  console.log(`Published ${fresh.length} new item(s):`);
   for (const i of fresh) console.log(`  - [${i.category}] ${i.title}`);
 }
 
