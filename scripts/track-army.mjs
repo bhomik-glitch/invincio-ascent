@@ -12,9 +12,12 @@
  *   node scripts/track-army.mjs            # fetch + curate + write the feed
  *   node scripts/track-army.mjs --selftest # run the filter/dedupe assertions
  *
+ * Each item's link is resolved to the real publisher article URL (not a
+ * news.google.com redirect) before it is written. If resolution fails the item
+ * is skipped that run and retried next cron.
+ *
  * To bury an item, set its status to "hidden" in src/data/army-feed.json — it
- * stays out of future runs. The <link> is a Google News redirect (resolves fine
- * in a browser); swap in the official URL by hand whenever you want a clean link.
+ * stays out of future runs.
  */
 
 import { readFile, writeFile } from "node:fs/promises";
@@ -24,6 +27,8 @@ import assert from "node:assert/strict";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const FEED_PATH = resolve(ROOT, "src/data/army-feed.json");
+const UA =
+  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126 Safari/537.36";
 
 // Two queries: broad Army events (14d) + officer-entry focus (30d, our audience).
 const QUERIES = [
@@ -117,7 +122,7 @@ function isoDate(pubDate) {
 async function fetchCurated() {
   const raw = [];
   for (const q of QUERIES) {
-    const res = await fetch(RSS(q), { headers: { "user-agent": "Mozilla/5.0" } });
+    const res = await fetch(RSS(q), { headers: { "user-agent": UA } });
     if (!res.ok) throw new Error(`RSS ${res.status} for query: ${q}`);
     raw.push(...parseItems(await res.text()));
   }
@@ -145,6 +150,40 @@ async function fetchCurated() {
   return [...byKey.values()].sort((a, b) => b.date.localeCompare(a.date));
 }
 
+// --- resolve google-news redirect -> real publisher article url ------------
+// news.google.com stopped embedding the target URL in 2024; the only reliable
+// route is its internal `garturlreq` RPC (same call the news.google.com SPA
+// makes when you click an article). If Google changes this, resolution throws
+// and the item is skipped that run, then retried on the next cron.
+
+async function resolvePublisherUrl(gnUrl) {
+  const html = await (await fetch(gnUrl, { headers: { "user-agent": UA } })).text();
+  const id = html.match(/data-n-a-id="([^"]+)"/)?.[1];
+  const sig = html.match(/data-n-a-sg="([^"]+)"/)?.[1];
+  const ts = html.match(/data-n-a-ts="([^"]+)"/)?.[1];
+  if (!id || !sig || !ts) throw new Error("no id/sig/ts in article shell");
+
+  const inner = JSON.stringify([
+    "garturlreq",
+    [["X", "X", ["X", "X"], null, null, 1, 1, "US:en", null, 1, null, null, null, null, null, 0, 1],
+     "X", "X", 1, [1, 1, 1], 1, 1, null, 0, 0, null, 0],
+    id, Number(ts), sig,
+  ]);
+  const freq = JSON.stringify([[["Fbv4je", inner, null, "generic"]]]);
+  const res = await fetch("https://news.google.com/_/DotsSplashUi/data/batchexecute", {
+    method: "POST",
+    headers: { "content-type": "application/x-www-form-urlencoded;charset=UTF-8", "user-agent": UA },
+    body: "f.req=" + encodeURIComponent(freq),
+  });
+  const line = (await res.text()).split("\n").find((l) => l.includes("garturlres"));
+  if (!line) throw new Error("garturlres missing from RPC response");
+  const url = JSON.parse(JSON.parse(line)[0][2])[1];
+  if (!/^https?:\/\//.test(url || "")) throw new Error("RPC returned non-url");
+  return url;
+}
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
 // --- main ------------------------------------------------------------------
 
 async function main() {
@@ -152,7 +191,18 @@ async function main() {
   const known = new Set(feed.items.map((i) => i.id));
 
   const curated = await fetchCurated();
-  const fresh = curated.filter((i) => !known.has(i.id));
+  const candidates = curated.filter((i) => !known.has(i.id));
+
+  const fresh = [];
+  for (const item of candidates) {
+    try {
+      item.link = await resolvePublisherUrl(item.link);
+      fresh.push(item);
+    } catch (e) {
+      console.warn(`skip (link unresolved, will retry next run): ${item.title} — ${e.message}`);
+    }
+    await sleep(500); // be polite to news.google.com
+  }
 
   if (!fresh.length) {
     console.log("No new Army notifications.");
@@ -164,7 +214,7 @@ async function main() {
   await writeFile(FEED_PATH, JSON.stringify(feed, null, 2) + "\n");
 
   console.log(`Published ${fresh.length} new item(s):`);
-  for (const i of fresh) console.log(`  - [${i.category}] ${i.title}`);
+  for (const i of fresh) console.log(`  - [${i.category}] ${i.title}\n    ${i.link}`);
 }
 
 // --- selftest ------------------------------------------------------------------

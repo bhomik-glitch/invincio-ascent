@@ -1,11 +1,11 @@
 {
   "updated": "2026-09-04",
-  "note": "Curated Indian Army notification feed. `scripts/track-army.mjs` (GitHub Actions, every 6h) auto-publishes new curated items straight to this file and the site redeploys. To remove an item, set its status to \"hidden\" — it renders nowhere and won't come back.",
+  "note": "Curated Indian Army notification feed. scripts/track-army.mjs (GitHub Actions, every 6h) auto-publishes new curated items straight to this file, with each link resolved to the real publisher article URL. To remove an item, set its status to \"hidden\" — it renders nowhere and won't come back.",
   "items": [
     {
       "id": "jag-124-merit-list",
       "title": "JAG 124 Merit List Indian Army (Men and Women)",
-      "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNMkJpTVlNX2xxajFuUDBCVVFLQWlraC02bmxXMU9HVEM3VWtIWmJXNVhabU9pVU9pLUpJN05USFlvVkkyLVlyaWI5Qm03ZnFvcERPQzY5a3VOYUNRN0xTQV9tNUJ1NlZGWVJoeExvM1BaOHVVQnotUHphb3VQaGJCQTVUckp6UWFwdVE?oc=5",
+      "link": "https://www.ssbcrack.com/2026/08/jag-124-merit-list-indian-army-men-and-women.html",
       "source": "SSBCrack",
       "date": "2026-08-29",
       "category": "officer",
@@ -14,7 +14,7 @@
     {
       "id": "agniveer-admit-card-2026",
       "title": "Indian Army Agniveer Admit Card 2026: Check Steps To Download Hall Ticket And Rally Schedule",
-      "link": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxNaFI4aHZLRnZEMTBiNDViVDFSMUFKM20wSC0wcW1fdDIyMzZ5SG5lbEhKb2trYTltZTBwRG9UU1JLNndnQnF2eEZTc1pzRDF1eThpVzR2ckpwNVBpMTktZkl1TWVkY3l2YmY4QV9aLVBRTkJkRVlCSjVaS0MyMFowZGpnTm9DYms0TlcwcE9KSWJTMWlSTFZCQV9mbTJaOUNid2lBTVBjTFh3RVhXU04yYy1feGFUMEZtTlVteTR4ZVdFXzVfaHBZbUpING5pUmktZkxqN3N6Y9IB3gFBVV95cUxOaEl1SE9CeUFJMlZwdFllVFR3cnRpMHZ3clZjREFtU004STd1QjVfalA1UjNoQXQ4N3JXNjZBMksyOTdfU0pwRWk1Yks5X2VNaTByd29La05ILXZGVUxWdUFaZVdRM2ZOc0xUYi1pQUc1ZUZXNnpDYS1Uallva0dVMkxWR0dwMEN0bl82N19Fcy1BckxwZ2FzYmZvMi12T2V3NGFCVkxpZDhaSDhoZzlaWmV4cTR2T2xSU2tBTHkyQnJ0MmZMMks3RjFSWndjTzV6WV9zTlhjWWlmLUlhZ0E?oc=5",
+      "link": "https://www.jagranjosh.com/articles/indian-army-agniveer-admit-card-2026-check-steps-to-download-hall-ticket-and-rally-schedule-1800015892-1",
       "source": "Jagran Josh",
       "date": "2026-08-28",
       "category": "soldier",
@@ -23,28 +23,10 @@
     {
       "id": "agniveer-recruitment",
       "title": "Agniveer recruitment rally at Vijayapura from September 10 to September 22",
-      "link": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOV000Q1VaZUNuY0ZVUVJtVWJxN0FEWHNzRmhiRHRSNjhsYjBsdjNvZDBoenJ1M1pkenNYOXJlVGd4MWNrT3FCS3VhLUYza0xtRXZGZmpBUFBSWXlnSFdyUUdzbVpoZUV6RlFtNFVZNHFrbVpkNGRmU1B4TGxqaWZmSDlMUWN2VVNFLTJZMnFEbHVmcU5lSGw1WFFHZlh6eWlvcndLdHNhWXpDVDNTR0gwc19aUHZPTFY0b0lWemt1VV9mcTF5TTlJS1VKcGZIQjY5WjFONWEzbTTSAd8BQVVfeXFMTnAxQlRXbnl2VkpxdjROMUxDaWhUUWNpV1FaVDZDcldiNkpkUFl6bnExVWxST1l6c3hIbXY4Q2E4NFVJZ1UtNWc1Z2treXBHWTBKdGh1UU1tNWNfbUpjbnZBaTNJU3RWZkJVSGE5VTk2dXFNZzR2dXBFNlVsYTJsY1QyRjY2OHhfTDQxNDA1Vy1pYWZJdEJSVFZ5WEhnbW5jdTB4UUVCb1ZpVDZsdzNKY3lydEd6dFFTcjhrY2puS2lrSllKajVlWGpiQzg4cXR4SlBSZkVlVmJwYjBpekNVQQ?oc=5",
+      "link": "https://www.thehindu.com/news/cities/Mangalore/agniveer-recruitment-rally-at-vijayapura-from-september-10-to-september-22/article71388600.ece",
       "source": "The Hindu",
       "date": "2026-08-25",
       "category": "soldier",
-      "status": "published"
-    },
-    {
-      "id": "cds-2-2025-ota-124-merit-list",
-      "title": "CDS 2-2025 Final Result — OTA 124th Course Merit List PDF",
-      "link": "/notifications/cds-2-2025-final-merit-list-ota-124.pdf",
-      "source": "Invincio Ascent",
-      "date": "2026-08-06",
-      "category": "officer",
-      "status": "published"
-    },
-    {
-      "id": "ssc-tech-67-oct-2026-merit-list",
-      "title": "SSC (Tech)-67 Oct 2026 Course — Merit List PDF",
-      "link": "/notifications/ssc-tech-67-oct-2026-merit-list.pdf",
-      "source": "Invincio Ascent",
-      "date": "2026-08-07",
-      "category": "officer",
       "status": "published"
     },
     {
