@@ -1,0 +1,36 @@
+name: Track Army notifications
+
+on:
+  schedule:
+    - cron: "0 */6 * * *" # every 6 hours
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  track:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Selftest filters
+        run: node scripts/track-army.mjs --selftest
+
+      - name: Fetch + curate
+        run: node scripts/track-army.mjs
+
+      - name: Raise PR if anything was staged
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: bot/army-notifications
+          add-paths: src/data/army-feed.json
+          commit-message: "chore(notifications): stage new Army notifications for review"
+          title: "🔔 New Army notifications to review"
+          body-path: scripts/.army-pr-body.md
+          delete-branch: true

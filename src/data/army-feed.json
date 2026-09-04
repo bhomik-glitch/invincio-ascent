@@ -1,0 +1,60 @@
+{
+  "updated": "2026-09-04",
+  "note": "Curated Indian Army notification feed. `scripts/track-army.mjs` prepends new items as status:\"review\". They only render on the site once a human sets status:\"published\" (do it in the bot's PR). Set status:\"hidden\" to bury an item without publishing it.",
+  "items": [
+    {
+      "id": "cds-2-2025-ota-124-merit-list",
+      "title": "CDS 2-2025 Final Result — OTA 124th Course Merit List PDF",
+      "link": "/notifications/cds-2-2025-final-merit-list-ota-124.pdf",
+      "source": "Invincio Ascent",
+      "date": "2026-08-06",
+      "category": "officer",
+      "status": "published"
+    },
+    {
+      "id": "ssc-tech-67-oct-2026-merit-list",
+      "title": "SSC (Tech)-67 Oct 2026 Course — Merit List PDF",
+      "link": "/notifications/ssc-tech-67-oct-2026-merit-list.pdf",
+      "source": "Invincio Ascent",
+      "date": "2026-08-07",
+      "category": "officer",
+      "status": "published"
+    },
+    {
+      "id": "ssc-tech-women-combined-notification",
+      "title": "Combined Notification SSC Tech Women PDF",
+      "link": "https://drive.google.com/file/d/13aqC4HS4to8UGbEMdHTPgw6OU7M-JZSU/view",
+      "source": "Invincio Ascent",
+      "date": "2026-07-02",
+      "category": "officer",
+      "status": "published"
+    },
+    {
+      "id": "ssc-tech-men-combined-notification",
+      "title": "Combined Notification SSC Tech Men PDF",
+      "link": "https://drive.google.com/file/d/1UzftCcny_WH7Iesqpz9rcOZlcwk2dJe8/view",
+      "source": "Invincio Ascent",
+      "date": "2026-07-02",
+      "category": "officer",
+      "status": "published"
+    },
+    {
+      "id": "afcat-2026-notification",
+      "title": "AFCAT 2026 Notification PDF",
+      "link": "https://drive.google.com/file/d/18BwQl5TsDDKLMqDXf89dKOW0vjt9PH44/view",
+      "source": "Invincio Ascent",
+      "date": "2026-06-01",
+      "category": "officer",
+      "status": "published"
+    },
+    {
+      "id": "jag-2026-notification",
+      "title": "JAG 2026 Notification PDF",
+      "link": "https://drive.google.com/file/d/1OMkXS_l9fu-sGBlJQB6C6Cr_HrV3ygOu/view",
+      "source": "Invincio Ascent",
+      "date": "2026-05-20",
+      "category": "officer",
+      "status": "published"
+    }
+  ]
+}

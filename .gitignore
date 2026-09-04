@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# army notification tracker scratch
+scripts/.army-pr-body.md
