@@ -1,0 +1,41 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-2",
+  title: "OIR Test 2",
+  durationMinutes: 20,
+  questions: [
+    { q: "Find the next number: 4, 9, 19, 39, 79, ?", options: ["149", "157", "159", "161"], answer: 2 },
+    { q: "Find the next number: 2, 5, 10, 17, 26, ?", options: ["35", "36", "37", "38"], answer: 2 },
+    { q: "Find the next number: 100, 98, 94, 88, 80, ?", options: ["72", "70", "68", "66"], answer: 1 },
+    { q: "Find the missing number: 1, 1, 2, 3, 5, 8, 13, ?, 34", options: ["20", "21", "22", "23"], answer: 1 },
+    { q: "Find the next letter: B, E, H, K, N, ?", options: ["P", "Q", "R", "S"], answer: 1 },
+    { q: "Find the next pair: AZ, BY, CX, DW, ?", options: ["EV", "EU", "FV", "EW"], answer: 0 },
+    { q: "Sculptor : Statue :: Poet : ?", options: ["Pen", "Poem", "Rhyme", "Book"], answer: 1 },
+    { q: "7 : 50 :: 9 : ?", options: ["80", "81", "82", "90"], answer: 2 },
+    { q: "Thermometer : Temperature :: Barometer : ?", options: ["Humidity", "Pressure", "Altitude", "Wind"], answer: 1 },
+    { q: "Which one does not belong with the others?", options: ["Tiger", "Lion", "Leopard", "Wolf"], answer: 3 },
+    { q: "Which number does not belong with the others?", options: ["121", "144", "169", "195"], answer: 3 },
+    { q: "Which one does not belong with the others?", options: ["Tulsidas", "Kabir", "Surdas", "Tansen"], answer: 3 },
+    { q: "If FRIEND is coded as GSJFOE, how is ENEMY coded?", options: ["FOFNZ", "FOFMZ", "ENFNZ", "FNFNZ"], answer: 0 },
+    { q: "In a code language, 'sky is blue' is written as 'ta ra ma', 'blue is deep' as 'ma ra ka' and 'deep sea' as 'ka pa'. What is the code for 'sky'?", options: ["ta", "ra", "ma", "ka"], answer: 0 },
+    { q: "In a code, ALPHA is written as ZOKSZ. How is DELTA written in the same code?", options: ["WVOGZ", "WVOHZ", "WUOGZ", "XVOGZ"], answer: 0 },
+    { q: "P is the brother of Q. R is the mother of P. S is the father of R. How is Q related to S?", options: ["Granddaughter", "Grandson", "Either grandson or granddaughter", "Niece"], answer: 2 },
+    { q: "Introducing a woman, a man said, \"She is the daughter of my grandfather's only son.\" How is the woman related to the man?", options: ["Sister", "Cousin", "Aunt", "Mother"], answer: 0 },
+    { q: "Ram walks 10 m north, turns right and walks 5 m, turns right and walks 10 m, then turns left and walks 5 m. How far is he from the starting point?", options: ["5 m", "10 m", "15 m", "20 m"], answer: 1 },
+    { q: "At 6 am a man faces the rising sun. He turns right, walks some distance, then turns left. Which direction is he facing now?", options: ["East", "West", "North", "South"], answer: 0 },
+    { q: "Ravi ranks 12th from the top and 28th from the bottom in his class. How many students are in the class?", options: ["38", "39", "40", "41"], answer: 1 },
+    { q: "A is older than B but younger than C. D is older than C. E is the youngest. Who is the second oldest?", options: ["A", "B", "C", "D"], answer: 2 },
+    { q: "A can do a piece of work in 12 days and B in 24 days. In how many days can they finish it together?", options: ["6", "8", "9", "10"], answer: 1 },
+    { q: "Which is the smallest number that leaves a remainder of 3 when divided by 5 and a remainder of 4 when divided by 7?", options: ["13", "18", "23", "33"], answer: 1 },
+    { q: "What is the angle between the hands of a clock at 4:20?", options: ["0°", "5°", "10°", "15°"], answer: 2 },
+    { q: "If today is Wednesday, what day of the week will it be 100 days from today?", options: ["Thursday", "Friday", "Saturday", "Monday"], answer: 1 },
+    { q: "Statements: All pens are books. All books are chairs. Conclusions: I. All pens are chairs. II. Some chairs are pens.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2 },
+    { q: "Statement: An advertisement says, \"Use Brand X toothpaste for whiter teeth.\" Assumptions: I. People want whiter teeth. II. Brand X is the cheapest toothpaste.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0 },
+    { q: "A cube painted red on all faces is cut into 27 equal small cubes. How many small cubes have exactly one face painted?", options: ["6", "8", "12", "1"], answer: 0 },
+    { q: "If the English alphabet is written in reverse order, which letter will be 5th to the left of the 10th letter from the right?", options: ["E", "O", "N", "P"], answer: 1 },
+    { q: "If the letters of the word RECRUITMENT are arranged in alphabetical order, how many letters remain in the same position as in the original word?", options: ["0", "1", "2", "3"], answer: 1 },
+  ],
+};
+
+export default test;

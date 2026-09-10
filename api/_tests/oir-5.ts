@@ -1,0 +1,41 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-5",
+  title: "OIR Test 5",
+  durationMinutes: 20,
+  questions: [
+    { q: "Find the next number: 5, 9, 17, 33, 65, ?", options: ["127", "129", "131", "133"], answer: 1 },
+    { q: "Find the next number: 1, 2, 6, 24, 120, ?", options: ["600", "720", "840", "960"], answer: 1 },
+    { q: "Find the next number: 11, 13, 17, 25, 41, ?", options: ["65", "73", "81", "89"], answer: 1 },
+    { q: "Find the next number: 64, 32, 48, 24, 36, 18, ?", options: ["9", "27", "36", "54"], answer: 1 },
+    { q: "Find the next letter: A, D, I, P, ?", options: ["X", "Y", "Z", "W"], answer: 1 },
+    { q: "Find the next pair: BD, FH, JL, NP, ?", options: ["QS", "RT", "ST", "RS"], answer: 1 },
+    { q: "Melt : Liquid :: Freeze : ?", options: ["Ice", "Solid", "Cold", "Water"], answer: 1 },
+    { q: "16 : 4 :: 49 : ?", options: ["6", "7", "8", "9"], answer: 1 },
+    { q: "Navy : Admiral :: Air Force : ?", options: ["General", "Air Chief Marshal", "Commodore", "Field Marshal"], answer: 1 },
+    { q: "Which one does not belong with the others?", options: ["Rose", "Lotus", "Marigold", "Neem"], answer: 3 },
+    { q: "Which number does not belong with the others?", options: ["27", "64", "125", "144"], answer: 3 },
+    { q: "Which one does not belong with the others?", options: ["Kilogram", "Litre", "Metre", "Thermometer"], answer: 3 },
+    { q: "If WATER is coded as XBUFS, how is FIRE coded?", options: ["GJSF", "GJSE", "GISF", "HJSF"], answer: 0 },
+    { q: "If BRIGADE is written as EDAGIRB, how is COMMAND written in the same code?", options: ["DNAMMOC", "DNAMOMC", "DNAMMCO", "CNAMMOD"], answer: 0 },
+    { q: "If A=1, B=2, ..., Z=26, what is the sum of the letter values of the word NDA?", options: ["18", "19", "20", "21"], answer: 1 },
+    { q: "M is the father of N. N is the sister of O. O is the son of P. How is P related to M?", options: ["Wife", "Sister", "Mother", "Daughter"], answer: 0 },
+    { q: "Pointing to a lady, Ramesh said, \"Her father's only son is my father.\" How is the lady related to Ramesh?", options: ["Aunt", "Mother", "Sister", "Cousin"], answer: 0 },
+    { q: "A man walks 15 m north, then 10 m west, then 15 m south. How far and in which direction is he from his starting point?", options: ["10 m West", "10 m East", "25 m North", "40 m South"], answer: 0 },
+    { q: "If South-East becomes North, then North-East becomes:", options: ["West", "East", "South", "North-West"], answer: 0 },
+    { q: "P is heavier than Q. R is lighter than S. Q is heavier than S. Who is the lightest?", options: ["P", "Q", "R", "S"], answer: 2 },
+    { q: "Manoj is 14th from the top and 19th from the bottom in his class. How many students are in the class?", options: ["31", "32", "33", "34"], answer: 1 },
+    { q: "A car travels at 60 km/h for 2 hours and then at 40 km/h for 3 hours. What is its average speed for the whole journey?", options: ["45 km/h", "48 km/h", "50 km/h", "52 km/h"], answer: 1 },
+    { q: "The sum of three consecutive odd numbers is 63. What is the largest of them?", options: ["21", "23", "25", "19"], answer: 1 },
+    { q: "How many times in 12 hours are the hands of a clock at right angles?", options: ["11", "22", "24", "44"], answer: 1 },
+    { q: "29 February 2024 was a Thursday. What day of the week is 29 February 2028?", options: ["Monday", "Tuesday", "Wednesday", "Thursday"], answer: 1 },
+    { q: "Statements: All roses are flowers. Some flowers fade quickly. Conclusions: I. Some roses fade quickly. II. All flowers are roses.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 3 },
+    { q: "Statement: Many students failed the entrance test. Courses of action: I. The test should be made easier. II. Students should be given better guidance.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1 },
+    { q: "A cube of side 3 cm is painted on two adjacent faces only and then cut into 27 small cubes. How many small cubes have no paint on them?", options: ["12", "15", "18", "9"], answer: 0 },
+    { q: "Which letter is exactly midway between J and T in the English alphabet?", options: ["N", "O", "P", "M"], answer: 1 },
+    { q: "In the word TRANSPORT, the 1st and 2nd letters are interchanged, the 3rd and 4th, the 5th and 6th, and the 7th and 8th. Which letter is 5th from the right in the new arrangement?", options: ["P", "S", "A", "N"], answer: 0 },
+  ],
+};
+
+export default test;

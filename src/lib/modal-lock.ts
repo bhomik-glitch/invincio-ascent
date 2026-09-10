@@ -8,10 +8,10 @@ import { useEffect, useSyncExternalStore } from "react";
  * others. Doubles as the signal the floating WhatsApp button uses to get out of
  * the way — it renders at z-[200], above every modal panel.
  *
- * NOT all consumers are converted yet. NotificationsModal and
- * SelectedStudentsSection still write `document.body.style.overflow` directly,
- * so either of them unmounting still clears the lock for everyone else. The
- * bug is reduced, not gone — convert those two to finish the job.
+ * NOT all consumers are converted yet. NotificationsModal still writes
+ * `document.body.style.overflow` directly, so it unmounting still clears the
+ * lock for everyone else. The bug is reduced, not gone — convert it to finish
+ * the job.
  */
 
 let openCount = 0;

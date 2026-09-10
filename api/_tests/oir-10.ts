@@ -1,0 +1,41 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-10",
+  title: "OIR Test 10",
+  durationMinutes: 20,
+  questions: [
+    { q: "Find the next number: 2, 7, 17, 37, 77, ?", options: ["147", "155", "157", "167"], answer: 2 },
+    { q: "Find the next number: 0, 3, 8, 15, 24, ?", options: ["33", "35", "37", "39"], answer: 1 },
+    { q: "Find the next number: 1000, 500, 250, 125, ?", options: ["60", "62.5", "65", "75"], answer: 1 },
+    { q: "Find the next number: 5, 6, 8, 11, 15, 20, ?", options: ["24", "25", "26", "27"], answer: 2 },
+    { q: "Find the next letter: A, E, I, M, Q, ?", options: ["T", "U", "V", "W"], answer: 1 },
+    { q: "Find the next pair: CE, GI, KM, OQ, ?", options: ["RT", "SU", "TV", "QS"], answer: 1 },
+    { q: "Grain : Granary :: Water : ?", options: ["Reservoir", "River", "Well", "Tap"], answer: 0 },
+    { q: "14 : 196 :: 17 : ?", options: ["269", "279", "289", "299"], answer: 2 },
+    { q: "Kolkata : Hooghly :: Delhi : ?", options: ["Ganga", "Yamuna", "Sutlej", "Gomti"], answer: 1 },
+    { q: "Which one does not belong with the others?", options: ["Wheat", "Rice", "Maize", "Cotton"], answer: 3 },
+    { q: "Which number does not belong with the others?", options: ["5", "7", "11", "15"], answer: 3 },
+    { q: "Which one does not belong with the others?", options: ["Radio", "Television", "Telephone", "Newspaper"], answer: 3 },
+    { q: "If COURAGE is coded as DPVSBHF, how is VALOUR coded?", options: ["WBMPVS", "WBMPUS", "WBLPVS", "VBMPVS"], answer: 0 },
+    { q: "If each letter of LEADER is replaced by its position in the alphabet (A=1 ... Z=26) and the values are added, what is the total?", options: ["43", "44", "45", "46"], answer: 2 },
+    { q: "In a code language, 'ka pi lo' means 'fruit is sweet', 'pi na' means 'sweet dish' and 'lo ma' means 'fruit juice'. What does 'ka' stand for?", options: ["is", "fruit", "sweet", "dish"], answer: 0 },
+    { q: "A is the wife of B. C is the son of A. D is the daughter of C. How is B related to D?", options: ["Grandfather", "Father", "Uncle", "Brother"], answer: 0 },
+    { q: "Pointing to a girl, Vikram said, \"She is the daughter of the only son of my father.\" How is the girl related to Vikram?", options: ["Daughter", "Sister", "Niece", "Cousin"], answer: 0 },
+    { q: "A person walks 7 km east, then 5 km south, then 7 km west. How far and in which direction is he from the start?", options: ["5 km South", "5 km North", "19 km East", "12 km West"], answer: 0 },
+    { q: "Two men start from the same point. One walks 6 km north and the other 8 km east. What is the distance between them?", options: ["10 km", "12 km", "14 km", "2 km"], answer: 0 },
+    { q: "In a class of 45 students, Ajay's rank from the top is 19th. What is his rank from the bottom?", options: ["26th", "27th", "28th", "25th"], answer: 1 },
+    { q: "Six people A to F sit in a row. E is at the left end and D at the right end. A is next to E. B is between A and C. F is between C and D. Who is 4th from the left?", options: ["B", "C", "F", "A"], answer: 1 },
+    { q: "8 men can build a wall in 12 days. How many days will 6 men take to build the same wall?", options: ["14", "16", "18", "9"], answer: 1 },
+    { q: "The average of 7 consecutive whole numbers is 20. What is the largest of them?", options: ["22", "23", "24", "26"], answer: 1 },
+    { q: "What is the angle between the hands of a clock at 12:30?", options: ["150°", "165°", "180°", "175°"], answer: 1 },
+    { q: "In a leap year, 1 January is a Sunday. How many Sundays are there in that year?", options: ["52", "53", "54", "51"], answer: 1 },
+    { q: "Statements: No pilot is a sailor. All sailors are swimmers. Conclusions: I. No pilot is a swimmer. II. Some swimmers are not pilots.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1 },
+    { q: "Statement: All employees must submit leave applications a week in advance. Assumptions: I. Leave applications are sometimes submitted late. II. No leave will be granted in an emergency.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0 },
+    { q: "A 5 × 5 × 5 cube is painted on all faces and cut into unit cubes. How many unit cubes have exactly two faces painted?", options: ["27", "36", "48", "54"], answer: 1 },
+    { q: "If the English alphabet is written in reverse order, how many letters stay in the same position as before?", options: ["0", "1", "2", "13"], answer: 0 },
+    { q: "How many pairs of letters in the word SOLDIER have as many letters between them in the word as there are between them in the English alphabet?", options: ["None", "One", "Two", "Three"], answer: 0 },
+  ],
+};
+
+export default test;

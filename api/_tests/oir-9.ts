@@ -1,0 +1,41 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-9",
+  title: "OIR Test 9",
+  durationMinutes: 20,
+  questions: [
+    { q: "Find the next number: 4, 7, 12, 19, 28, ?", options: ["37", "39", "41", "43"], answer: 1 },
+    { q: "Find the next number: 3, 12, 48, 192, ?", options: ["576", "768", "960", "384"], answer: 1 },
+    { q: "Find the next number: 1, 5, 14, 30, 55, ?", options: ["85", "91", "96", "100"], answer: 1 },
+    { q: "Find the next number: 6, 13, 27, 55, 111, ?", options: ["221", "222", "223", "224"], answer: 2 },
+    { q: "Find the next letter: E, J, O, T, ?", options: ["X", "Y", "Z", "W"], answer: 1 },
+    { q: "Find the next pair: DF, GI, JL, MO, ?", options: ["PR", "PQ", "QS", "OQ"], answer: 0 },
+    { q: "Optimist : Cheerful :: Pessimist : ?", options: ["Gloomy", "Helpful", "Brave", "Honest"], answer: 0 },
+    { q: "11 : 121 :: 13 : ?", options: ["143", "169", "196", "156"], answer: 1 },
+    { q: "Army : General :: Navy : ?", options: ["Admiral", "Captain", "Commodore", "Marshal"], answer: 0 },
+    { q: "Which one does not belong with the others?", options: ["Table", "Chair", "Sofa", "Carpet"], answer: 3 },
+    { q: "Which number does not belong with the others?", options: ["8", "27", "64", "100"], answer: 3 },
+    { q: "Which one does not belong with the others?", options: ["Hockey", "Football", "Chess", "Cricket"], answer: 2 },
+    { q: "If FLOWER is coded as GMPXFS, how is GARDEN coded?", options: ["HBSEFO", "HBSEFN", "HBRDFO", "GBSEFO"], answer: 0 },
+    { q: "If letters are valued by position (A=1 ... Z=26) so that TRAIN totals 62, what is the total for PLANE?", options: ["46", "47", "48", "49"], answer: 2 },
+    { q: "If '×' means '+', '+' means '÷', '−' means '×' and '÷' means '−', what is the value of 8 × 4 + 2 − 3 ÷ 5?", options: ["7", "8", "9", "10"], answer: 2 },
+    { q: "A is B's brother. C is A's mother. D is C's father. E is B's son. How is A related to E?", options: ["Uncle", "Father", "Grandfather", "Brother"], answer: 0 },
+    { q: "Looking at a portrait, Amit said, \"His father is the only son of my mother.\" Whose portrait is it?", options: ["Amit's son", "Amit's father", "Amit's brother", "Amit's nephew"], answer: 0 },
+    { q: "Rohit walks 3 km north, 4 km east, 3 km south and then 4 km west. How far is he from his starting point?", options: ["0 km", "4 km", "6 km", "7 km"], answer: 0 },
+    { q: "A man facing south turns 90° anticlockwise, then 180°, then 90° clockwise. Which direction is he facing?", options: ["North", "South", "East", "West"], answer: 0 },
+    { q: "In a row of 25 people, Suresh is 8th from the left and Ramesh is 12th from the right. Where is Suresh with respect to Ramesh?", options: ["6th to the left", "5th to the left", "6th to the right", "7th to the left"], answer: 0 },
+    { q: "In a race, P finished ahead of Q. R finished after S. Q finished ahead of S. T finished last. Who finished third?", options: ["Q", "S", "R", "P"], answer: 1 },
+    { q: "A car covers 240 km in 4 hours. By how much must its speed increase to cover the same distance in 3 hours?", options: ["15 km/h", "20 km/h", "25 km/h", "30 km/h"], answer: 1 },
+    { q: "The difference between a two-digit number and the number formed by reversing its digits is 27. What is the difference between its two digits?", options: ["2", "3", "4", "5"], answer: 1 },
+    { q: "A clock loses 4 minutes every hour. It is set right at 8 am. What time will it show at 2 pm the same day?", options: ["1:36 pm", "1:40 pm", "2:24 pm", "1:30 pm"], answer: 0 },
+    { q: "The last day of a century cannot be a:", options: ["Sunday", "Monday", "Tuesday", "Friday"], answer: 2 },
+    { q: "Statements: All cadets are athletes. No athlete is lazy. Conclusions: I. No cadet is lazy. II. Some athletes are cadets.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2 },
+    { q: "Statement: An advertisement says, \"Join our institute to crack SSB in the first attempt.\" Assumptions: I. Clearing SSB in the first attempt is desirable. II. No one has cleared SSB without coaching.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0 },
+    { q: "A cube of side 6 cm is painted on all faces and cut into 1 cm cubes. How many small cubes have no face painted?", options: ["36", "64", "96", "125"], answer: 1 },
+    { q: "The second half of the English alphabet (N to Z) is written in reverse order while the first half stays the same. Which letter is 6th to the right of the 15th letter from the left?", options: ["S", "T", "R", "U"], answer: 0 },
+    { q: "Which of the following words can be formed using only the letters of the word CONFIDENCE?", options: ["DANCE", "FENCE", "OFFICE", "NOTICE"], answer: 1 },
+  ],
+};
+
+export default test;

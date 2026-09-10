@@ -56,7 +56,39 @@ const echoes = [
   },
 ];
 
-const duplicatedStories = [...stories, ...stories];
+type Story = (typeof stories)[number];
+
+const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+const isThisWeek = (addedAt?: string) =>
+  !!addedAt && Date.now() - new Date(addedAt).getTime() < WEEK_MS;
+
+const sortedStories = [...stories].sort((a, b) =>
+  (b.addedAt ?? "").localeCompare(a.addedAt ?? "")
+);
+const freshStories = sortedStories.filter((s) => isThisWeek(s.addedAt));
+
+const PhotoCard = ({ story, fresh }: { story: Story; fresh?: boolean }) => (
+  <div className="relative flex flex-col bg-white rounded-xl border border-[#e5e7eb] overflow-hidden shadow-[0_1px_4px_rgba(0,0,0,0.04)]">
+    {fresh && (
+      <span className="absolute top-3 right-3 z-10 rounded-full bg-[#F6B828] text-[#1f2937] text-[10px] font-bold uppercase tracking-[0.12em] px-2.5 py-1">
+        New
+      </span>
+    )}
+    <div className="w-full aspect-square overflow-hidden bg-[#f3f4f6]">
+      <img
+        src={story.image}
+        alt={story.name}
+        loading="lazy"
+        className="block w-full h-full object-cover object-[center_20%]"
+      />
+    </div>
+    <div className="flex flex-col text-left leading-tight p-5">
+      <span className="text-[9px] font-bold uppercase tracking-[0.15em] text-[#F6B828]">Invincible</span>
+      <span className="font-serif font-semibold text-[#00568C] text-lg">{story.name}</span>
+      <span className="font-sans text-[#6B7280] text-sm mt-1.5 whitespace-pre-line">{story.info}</span>
+    </div>
+  </div>
+);
 
 // ── Video Card ────────────────────────────────────────────────────────────────
 const VideoCard = ({
@@ -164,7 +196,78 @@ const TransformationSection = () => {
 
   return (
     <>
-      {/* Echoes of Transformation — videos */}
+      {/* 1 — Individual Success Stories: static photo grid, auto-fed weekly by the WhatsApp automation */}
+      <section className="bg-white py-24">
+        <div className={CONTAINER}>
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.35, ease: EASE_OUT }}
+            className="mb-14 text-center"
+          >
+            <p className={`${EYEBROW} mb-4`}>The Hall of Honour</p>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#00568C]">
+              Individual Success Stories
+            </h2>
+            <div className="w-20 h-1 bg-[#F6B828] mx-auto mt-6 rounded-full" />
+          </motion.div>
+
+          {/* Itanagar group highlight */}
+          <div className="max-w-3xl mx-auto mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 8, scale: 0.98 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.4, ease: EASE_OUT }}
+              className="bg-white border border-[#e5e7eb] rounded-xl overflow-hidden"
+              style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}
+            >
+              <div className="w-full aspect-[16/9] overflow-hidden">
+                <img
+                  src="/assets/client_photo/75 out of 87 mentored at Success point at Itanagar.jpg"
+                  alt="75 out of 87 mentored at Success point at Itanagar"
+                  className="block w-full h-full object-cover"
+                />
+              </div>
+              <div className="px-8 py-5 text-center">
+                <p className="font-serif font-bold text-[#00568C] text-lg">Itanagar Milestone</p>
+                <p className="font-sans text-sm text-[#6B7280] mt-1">
+                  75 out of 87 students mentored in 2026 at Success Point, Itanagar — recommended in final selection rounds.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+
+          {freshStories.length > 0 && (
+            <div className="mb-16">
+              <h3 className="font-serif text-2xl font-bold text-[#00568C] mb-6">
+                Recommended this week
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {freshStories.map((story) => (
+                  <PhotoCard key={story.image} story={story} fresh />
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div>
+            {freshStories.length > 0 && (
+              <h3 className="font-serif text-2xl font-bold text-[#00568C] mb-6">
+                All Invincibles
+              </h3>
+            )}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {sortedStories.map((story) => (
+                <PhotoCard key={story.image} story={story} fresh={isThisWeek(story.addedAt)} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 2 — Echoes of Transformation: videos */}
       <section className="bg-[#eaf6f8] py-24">
         <div className={CONTAINER}>
           <motion.div
@@ -192,104 +295,6 @@ const TransformationSection = () => {
               />
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Individual Success Stories — carousel */}
-      <section className="bg-white py-24">
-        <div className="mb-14 text-center px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.35, ease: EASE_OUT }}
-          >
-            <p className={`${EYEBROW} mb-4`}>The Hall of Honour</p>
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#00568C]">
-              Individual Success Stories
-            </h2>
-            <div className="w-20 h-1 bg-[#F6B828] mx-auto mt-6 rounded-full" />
-          </motion.div>
-        </div>
-
-        {/* Itanagar group highlight */}
-        <div className="max-w-3xl mx-auto px-6 mb-14">
-          <motion.div
-            initial={{ opacity: 0, y: 8, scale: 0.98 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.4, ease: EASE_OUT }}
-            className="bg-white border border-[#e5e7eb] rounded-xl overflow-hidden"
-            style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}
-          >
-            <div className="w-full aspect-[16/9] overflow-hidden">
-              <img
-                src="/assets/client_photo/75 out of 87 mentored at Success point at Itanagar.jpg"
-                alt="75 out of 87 mentored at Success point at Itanagar"
-                className="block w-full h-full object-cover"
-              />
-            </div>
-            <div className="px-8 py-5 text-center">
-              <p className="font-serif font-bold text-[#00568C] text-lg">Itanagar Milestone</p>
-              <p className="font-sans text-sm text-[#6B7280] mt-1">
-                75 out of 87 students mentored in 2026 at Success Point, Itanagar — recommended in final selection rounds.
-              </p>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Scrolling carousel — contain:paint removed (Safari bug), will-change removed */}
-        <div className="relative overflow-hidden w-full max-w-full">
-          <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white to-transparent pointer-events-none z-10" />
-          <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white to-transparent pointer-events-none z-10" />
-
-          <motion.div
-            className="flex gap-5 w-max"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: stories.length * 3, ease: "linear", repeat: Infinity }}
-          >
-            {duplicatedStories.map((story, index) => (
-              <div
-                key={index}
-                className="group/card flex items-center bg-white rounded-xl cursor-pointer border border-[#e5e7eb]"
-                style={{
-                  minWidth: "560px",
-                  gap: "2rem",
-                  padding: "2rem 2.5rem",
-                  boxShadow: "0 1px 4px rgba(0,0,0,0.04)",
-                  transition: "transform 250ms cubic-bezier(0.23,1,0.32,1), box-shadow 250ms ease, border-color 250ms ease",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "scale(1.02)";
-                  e.currentTarget.style.boxShadow = "0 6px 24px rgba(0,86,140,0.10)";
-                  e.currentTarget.style.borderColor = "rgba(47,180,231,0.30)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "scale(1)";
-                  e.currentTarget.style.boxShadow = "0 1px 4px rgba(0,0,0,0.04)";
-                  e.currentTarget.style.borderColor = "#e5e7eb";
-                }}
-              >
-                {/* Avatar — aspect-ratio replaces fixed h-14 */}
-                <div className="rounded-md overflow-hidden shrink-0" style={{ width: "128px", height: "128px" }}>
-                  <img
-                    src={story.image}
-                    alt={story.name}
-                    className="block w-full h-full object-cover object-[center_20%]"
-                  />
-                </div>
-                <div className="flex flex-col text-left leading-tight" style={{ maxWidth: "320px" }}>
-                  <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#F6B828] mb-0.5">Invincible</span>
-                  <span className="font-serif font-semibold text-[#00568C]" style={{ fontSize: "1.125rem" }}>
-                    {story.name}
-                  </span>
-                  <span className="font-sans text-[#6B7280]" style={{ fontSize: "0.875rem", marginTop: "0.4rem", whiteSpace: "pre-line" }}>
-                    {story.info}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </motion.div>
         </div>
       </section>
     </>

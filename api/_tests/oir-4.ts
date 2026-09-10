@@ -1,0 +1,41 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-4",
+  title: "OIR Test 4",
+  durationMinutes: 20,
+  questions: [
+    { q: "Find the next number: 7, 10, 16, 28, 52, ?", options: ["96", "100", "104", "108"], answer: 1 },
+    { q: "Find the next number: 1, 3, 7, 13, 21, ?", options: ["29", "31", "33", "35"], answer: 1 },
+    { q: "Find the next number: 4, 12, 36, 108, ?", options: ["216", "324", "432", "648"], answer: 1 },
+    { q: "Find the next number: 13, 17, 19, 23, 29, ?", options: ["30", "31", "33", "37"], answer: 1 },
+    { q: "Find the next letter: D, H, L, P, ?", options: ["S", "T", "U", "V"], answer: 1 },
+    { q: "Find the next pair: AB, DE, GH, JK, ?", options: ["LM", "MN", "NO", "KL"], answer: 1 },
+    { q: "Chisel : Sculptor :: Scalpel : ?", options: ["Doctor", "Surgeon", "Butcher", "Barber"], answer: 1 },
+    { q: "9 : 80 :: 11 : ?", options: ["110", "120", "121", "132"], answer: 1 },
+    { q: "Lieutenant Colonel : Battalion :: Major General : ?", options: ["Brigade", "Division", "Corps", "Command"], answer: 1 },
+    { q: "Which one does not belong with the others?", options: ["Cheetah", "Deer", "Horse", "Snail"], answer: 3 },
+    { q: "Which number does not belong with the others?", options: ["4", "9", "16", "27"], answer: 3 },
+    { q: "Which one does not belong with the others?", options: ["Violin", "Flute", "Guitar", "Sitar"], answer: 1 },
+    { q: "If MOBILE is coded as OQDKNG, how is LAPTOP coded?", options: ["NCRVQR", "NCRVQP", "MCRVQR", "NBRVQR"], answer: 0 },
+    { q: "If TEACHER is written as VGCEJGT in a code, how is STUDENT written?", options: ["UVWFGPV", "UVWFGPU", "UVXFGPV", "TVWFGPV"], answer: 0 },
+    { q: "In a code, 7 means '×', 5 means '+', 3 means '−' and 1 means '÷'. What is the value of 8 7 4 5 6 3 2?", options: ["32", "36", "38", "40"], answer: 1 },
+    { q: "A is the son of B. B is the sister of C. D is the father of C. How is A related to D?", options: ["Grandson", "Nephew", "Son", "Brother"], answer: 0 },
+    { q: "A woman says, \"The man in this photo is the husband of my mother's only daughter.\" How is the man related to the woman?", options: ["Husband", "Brother", "Father", "Son"], answer: 0 },
+    { q: "A man walks 3 km north, 4 km east, 3 km north and 4 km east. How far is he from his starting point?", options: ["10 km", "12 km", "14 km", "7 km"], answer: 0 },
+    { q: "At 3 pm a man notices that his shadow falls to his right. Which direction is he facing?", options: ["North", "South", "East", "West"], answer: 0 },
+    { q: "In a row of 25 girls, Priya is 10th from the left. Sonia is 6th to the right of Priya. What is Sonia's position from the right end?", options: ["9th", "10th", "11th", "12th"], answer: 1 },
+    { q: "Six boxes are stacked. F is at the top and E at the bottom. A is directly above B, B is directly above D, and C is directly below D. Which box is 3rd from the top?", options: ["A", "B", "D", "C"], answer: 1 },
+    { q: "A shopkeeper marks his goods 20% above cost price and allows a 10% discount. What is his profit percentage?", options: ["8%", "10%", "12%", "2%"], answer: 0 },
+    { q: "The product of two numbers is 120 and their sum is 23. What is the larger number?", options: ["12", "15", "20", "24"], answer: 1 },
+    { q: "What is the angle between the hands of a clock at 7:30?", options: ["30°", "45°", "60°", "75°"], answer: 1 },
+    { q: "In a non-leap year, 3 March is a Tuesday. What day of the week is 3 April?", options: ["Thursday", "Friday", "Saturday", "Sunday"], answer: 1 },
+    { q: "Statements: No soldier is a coward. All cowards are weak. Conclusions: I. No soldier is weak. II. Some weak people are cowards.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1 },
+    { q: "Statement: \"Report to the office by 9 am,\" the manager told the staff. Assumptions: I. The staff are able to reach the office by 9 am. II. The staff usually come late.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0 },
+    { q: "A cube has each pair of opposite faces painted the same colour: red, blue and green. It is cut into 64 small cubes. How many small cubes have exactly two painted faces, one red and one blue?", options: ["4", "8", "12", "16"], answer: 1 },
+    { q: "Every alternate letter starting from B is deleted from the English alphabet. Which letter is 8th from the left in the remaining letters?", options: ["M", "O", "Q", "K"], answer: 1 },
+    { q: "How many meaningful English words can be formed using all the letters of RAT, each exactly once?", options: ["2", "3", "4", "1"], answer: 1 },
+  ],
+};
+
+export default test;

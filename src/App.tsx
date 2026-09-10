@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Index from "./pages/Index";
 import ScrollToTop from "./components/ScrollToTop";
+import RequireAuth from "./components/RequireAuth";
 
 const About = lazy(() => import("./pages/About"));
 const Programs = lazy(() => import("./pages/Programs"));
@@ -20,6 +21,9 @@ const SSBInterview = lazy(() => import("./pages/SSBInterview"));
 const FutureLeader = lazy(() => import("./pages/FutureLeader"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const Terms = lazy(() => import("./pages/Terms"));
+const Login = lazy(() => import("./pages/Login"));
+const Tests = lazy(() => import("./pages/Tests"));
+const TakeTest = lazy(() => import("./pages/TakeTest"));
 
 const queryClient = new QueryClient();
 
@@ -51,6 +55,11 @@ const App = () => (
               <Route path="/programs/future-leader" element={<FutureLeader />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
+              <Route path="/login" element={<Login />} />
+              <Route element={<RequireAuth />}>
+                <Route path="/tests" element={<Tests />} />
+                <Route path="/tests/:id" element={<TakeTest />} />
+              </Route>
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Route>

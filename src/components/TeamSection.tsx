@@ -1,10 +1,10 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import ColKaushalKashyap from "../src/assets/mentor/kaushal.png";
-import LtColKaushalendraSingh from "../src/assets/mentor/Kaushalendra.png";
-import BrigRamitMehta from "../src/assets/mentor/breg ramit mehta.JPG";
-import ColIqbalSingh from "../src/assets/mentor/col iqbal singh.JPG";
-import TanyaArora from "../src/assets/mentor/WhatsApp Image 2026-05-16 at 11.30.10.jpeg";
+const ColKaushalKashyap = "/assets/mentor/kaushal.png";
+const LtColKaushalendraSingh = "/assets/mentor/kaushalendra.png";
+const BrigRamitMehta = "/assets/mentor/ramit-mehta.jpg";
+const ColIqbalSingh = "/assets/mentor/iqbal-singh.jpg";
+const TanyaArora = "/assets/mentor/tanya-arora.jpeg";
 
 /* ── Team Data ─────────────────────────────────────────────────────── */
 

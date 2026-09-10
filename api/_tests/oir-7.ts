@@ -1,0 +1,41 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-7",
+  title: "OIR Test 7",
+  durationMinutes: 20,
+  questions: [
+    { q: "Find the next number: 10, 17, 26, 37, 50, ?", options: ["63", "65", "67", "69"], answer: 1 },
+    { q: "Find the next number: 2, 3, 6, 18, 108, ?", options: ["1944", "1296", "972", "2016"], answer: 0 },
+    { q: "Find the missing number: 9, 18, 36, 72, ?, 288", options: ["108", "144", "180", "216"], answer: 1 },
+    { q: "Find the next number: 1, 3, 4, 7, 11, 18, ?", options: ["25", "27", "29", "31"], answer: 2 },
+    { q: "Find the next letter: C, E, I, O, ?", options: ["U", "V", "W", "X"], answer: 2 },
+    { q: "Find the next pair: AC, EG, IK, MO, ?", options: ["PR", "QS", "RT", "QR"], answer: 1 },
+    { q: "Hammer : Nail :: Screwdriver : ?", options: ["Screw", "Bolt", "Nut", "Drill"], answer: 0 },
+    { q: "6 : 35 :: 8 : ?", options: ["62", "63", "64", "65"], answer: 1 },
+    { q: "India : Rupee :: Japan : ?", options: ["Yuan", "Yen", "Won", "Ringgit"], answer: 1 },
+    { q: "Which one does not belong with the others?", options: ["Cotton", "Silk", "Wool", "Nylon"], answer: 3 },
+    { q: "Which number does not belong with the others?", options: ["36", "49", "64", "82"], answer: 3 },
+    { q: "Which one does not belong with the others?", options: ["Ear", "Eye", "Nose", "Heart"], answer: 3 },
+    { q: "If ARMY is coded as BSNZ, how is NAVY coded?", options: ["OBWZ", "OBWY", "OAWZ", "OBVZ"], answer: 0 },
+    { q: "If PAINT is coded as 74128 and EXCEL as 93596, how is ACCEPT coded?", options: ["455978", "455987", "445978", "455798"], answer: 0 },
+    { q: "If '+' means '×', '×' means '−', '−' means '÷' and '÷' means '+', what is the value of 12 + 3 − 6 × 2 ÷ 4?", options: ["6", "8", "10", "12"], answer: 1 },
+    { q: "A is the mother of B. B is the sister of C. C is the father of D. How is A related to D?", options: ["Grandmother", "Mother", "Aunt", "Sister"], answer: 0 },
+    { q: "Pointing to a boy, Seema said, \"He is the son of my grandfather's only child.\" How is the boy related to Seema?", options: ["Brother", "Cousin", "Nephew", "Son"], answer: 0 },
+    { q: "A man walks 20 m south, 10 m west, 20 m north and then 5 m east. How far is he from his starting point?", options: ["5 m", "10 m", "15 m", "25 m"], answer: 0 },
+    { q: "A man facing east turns 135° clockwise and then 90° anticlockwise. Which direction is he facing now?", options: ["South-East", "South-West", "North-East", "South"], answer: 0 },
+    { q: "In a row of children, Kamal is 8th from the left and 15th from the right. How many children are in the row?", options: ["21", "22", "23", "24"], answer: 1 },
+    { q: "Seven friends stand in a line facing north. G is at the left end and C at the right end. E is immediately right of G. A is immediately right of E. D is between A and B. F is between B and C. Who is 4th from the left?", options: ["A", "D", "B", "E"], answer: 1 },
+    { q: "A sum of money doubles itself in 8 years at simple interest. What is the rate of interest per annum?", options: ["10%", "12.5%", "15%", "8%"], answer: 1 },
+    { q: "Ram gives half of his marbles to Shyam, then half of the remainder to Mohan, and is left with 10 marbles. How many did he have originally?", options: ["30", "40", "50", "60"], answer: 1 },
+    { q: "A clock gains 5 minutes every hour. It is set right at 6 am. What time will it show at 12 noon the same day?", options: ["12:25", "12:30", "12:35", "11:30"], answer: 1 },
+    { q: "Which year will have the same calendar as the year 2025?", options: ["2029", "2030", "2031", "2036"], answer: 2 },
+    { q: "Statements: All A are B. No B is C. Conclusions: I. No A is C. II. Some C are A.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0 },
+    { q: "Statement: A notice reads, \"Please switch off the lights when leaving the room.\" Assumptions: I. People sometimes leave the lights on. II. Electricity is free.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0 },
+    { q: "A 4 × 4 × 4 cube is painted on all faces and cut into unit cubes. How many unit cubes have exactly one face painted?", options: ["16", "24", "32", "8"], answer: 1 },
+    { q: "How many letters are there between the 4th letter from the left and the 4th letter from the right in the English alphabet?", options: ["17", "18", "19", "20"], answer: 1 },
+    { q: "If the letters of the word PARLIAMENT are arranged in alphabetical order, how many letters remain in the same position?", options: ["1", "2", "3", "0"], answer: 1 },
+  ],
+};
+
+export default test;

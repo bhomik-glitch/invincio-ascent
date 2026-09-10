@@ -1,0 +1,41 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-8",
+  title: "OIR Test 8",
+  durationMinutes: 20,
+  questions: [
+    { q: "Find the next number: 3, 6, 11, 18, 27, ?", options: ["36", "38", "40", "42"], answer: 1 },
+    { q: "Find the missing number: 5, 10, 20, 40, ?, 160", options: ["60", "80", "100", "120"], answer: 1 },
+    { q: "Find the missing number: 121, 100, 81, 64, ?, 36", options: ["49", "50", "56", "42"], answer: 0 },
+    { q: "Find the next number: 2, 5, 11, 23, 47, ?", options: ["93", "95", "97", "99"], answer: 1 },
+    { q: "Find the next letter: Z, W, T, Q, ?", options: ["M", "N", "O", "P"], answer: 1 },
+    { q: "Find the next pair: AY, CW, EU, GS, ?", options: ["IQ", "HR", "IR", "JQ"], answer: 0 },
+    { q: "Bread : Baker :: Furniture : ?", options: ["Carpenter", "Mason", "Cobbler", "Tailor"], answer: 0 },
+    { q: "25 : 125 :: 36 : ?", options: ["196", "216", "256", "144"], answer: 1 },
+    { q: "Peninsula : Water :: Oasis : ?", options: ["Desert", "Forest", "Mountain", "Sea"], answer: 0 },
+    { q: "Which one does not belong with the others?", options: ["Sparrow", "Crow", "Bat", "Parrot"], answer: 2 },
+    { q: "Which number does not belong with the others?", options: ["13", "17", "23", "27"], answer: 3 },
+    { q: "Which one does not belong with the others?", options: ["Kilometre", "Metre", "Litre", "Centimetre"], answer: 2 },
+    { q: "If DELHI is coded as CDKGH, how is MUMBAI coded?", options: ["LTLAZH", "LTLAZI", "LTMAZH", "KTLAZH"], answer: 0 },
+    { q: "If ZEBRA is written as 2652181 (using letter positions), how is COBRA written?", options: ["3152181", "3151281", "3152182", "2152181"], answer: 0 },
+    { q: "In a code language, 'ne ki pa' means 'you are good', 'ki lo' means 'good boy' and 'pa ti' means 'you go'. What is the code for 'are'?", options: ["ne", "ki", "pa", "lo"], answer: 0 },
+    { q: "P is the daughter of Q. Q is the brother of R. R is the wife of S. How is P related to S?", options: ["Niece", "Daughter", "Sister-in-law", "Cousin"], answer: 0 },
+    { q: "Rahul's mother is the only daughter of Sunil's father. How is Sunil related to Rahul?", options: ["Maternal uncle", "Father", "Brother", "Cousin"], answer: 0 },
+    { q: "A boy walks 6 km west and then 8 km north. What is the shortest distance back to his starting point?", options: ["10 km", "12 km", "14 km", "2 km"], answer: 0 },
+    { q: "If North-West becomes South, what does East become?", options: ["North-West", "South-West", "North-East", "South"], answer: 0 },
+    { q: "In a row of 30 students, Neha is 12th from the left and Rekha is 8th from the right. How many students are between them?", options: ["9", "10", "11", "12"], answer: 1 },
+    { q: "B is heavier than A but lighter than C. D is heavier than C. E is lighter than A. Who is the third heaviest?", options: ["B", "C", "A", "D"], answer: 0 },
+    { q: "What is the value of 15% of 40 + 40% of 15?", options: ["10", "12", "14", "16"], answer: 1 },
+    { q: "A number is doubled and 9 is added. The result is then trebled to give 75. What is the number?", options: ["6", "8", "10", "12"], answer: 1 },
+    { q: "What is the angle between the hands of a clock at 9:45?", options: ["15°", "22.5°", "30°", "7.5°"], answer: 1 },
+    { q: "26 January 2026 is a Monday. What day of the week is 15 August 2026?", options: ["Friday", "Saturday", "Sunday", "Monday"], answer: 1 },
+    { q: "Statements: Some books are pens. No pen is a pencil. Conclusions: I. Some books are not pencils. II. No book is a pencil.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0 },
+    { q: "Statement: Road accidents in the city have increased sharply. Courses of action: I. Traffic rules should be enforced strictly. II. All roads in the city should be closed.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0 },
+    { q: "A 3 × 3 × 3 cube is painted on all faces and cut into 27 unit cubes. How many unit cubes have at least two faces painted?", options: ["12", "20", "26", "8"], answer: 1 },
+    { q: "Which letter is 3rd to the left of the letter that is 9th to the right of E in the English alphabet?", options: ["K", "L", "J", "M"], answer: 0 },
+    { q: "How many pairs of letters in the word BRIGADE are consecutive letters of the alphabet (in either order, not necessarily adjacent in the word)?", options: ["1", "2", "3", "4"], answer: 1 },
+  ],
+};
+
+export default test;

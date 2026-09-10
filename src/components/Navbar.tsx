@@ -10,6 +10,7 @@ const links = [
   { label: "Recommendations", href: "/results" },
   { label: "Process", href: "/process" },
   { label: "FAQs", href: "/faq" },
+  { label: "OIR Tests", href: "/tests" },
 ];
 
 const Navbar = () => {

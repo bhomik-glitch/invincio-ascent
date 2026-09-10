@@ -1,0 +1,41 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-3",
+  title: "OIR Test 3",
+  durationMinutes: 20,
+  questions: [
+    { q: "Find the next number: 6, 11, 21, 41, 81, ?", options: ["151", "161", "171", "181"], answer: 1 },
+    { q: "Find the next number: 3, 8, 15, 24, 35, ?", options: ["46", "47", "48", "49"], answer: 2 },
+    { q: "Find the next number: 720, 120, 24, 6, 2, ?", options: ["0", "1", "2", "3"], answer: 1 },
+    { q: "Find the missing number: 2, 6, 18, 54, ?, 486", options: ["108", "162", "216", "324"], answer: 1 },
+    { q: "Find the next letter: C, F, I, L, O, ?", options: ["Q", "R", "S", "T"], answer: 1 },
+    { q: "Find the next pair: ZA, YB, XC, WD, ?", options: ["VE", "UE", "VF", "UF"], answer: 0 },
+    { q: "Hour : Minute :: Minute : ?", options: ["Hour", "Second", "Day", "Time"], answer: 1 },
+    { q: "3 : 27 :: 5 : ?", options: ["25", "75", "125", "150"], answer: 2 },
+    { q: "Cricket : Pitch :: Boxing : ?", options: ["Ring", "Court", "Arena", "Field"], answer: 0 },
+    { q: "Which one does not belong with the others?", options: ["Square", "Rectangle", "Rhombus", "Circle"], answer: 3 },
+    { q: "Which number does not belong with the others?", options: ["15", "21", "28", "34"], answer: 3 },
+    { q: "Which one does not belong with the others?", options: ["Mango", "Banana", "Apple", "Potato"], answer: 3 },
+    { q: "If each letter is given its position in the alphabet (A=1, B=2, ...) and CHAIR is coded as 39, what is the code for TABLE?", options: ["38", "39", "40", "41"], answer: 2 },
+    { q: "If GOLD is written as HQOH, how is IRON written in the same code?", options: ["JTRR", "JTRQ", "JSRR", "JTQR"], answer: 0 },
+    { q: "In a code language, 'ki pa lo' means 'we are brave', 'pa ma' means 'brave men' and 'lo ti' means 'we fight'. Which word stands for 'are'?", options: ["ki", "pa", "lo", "ma"], answer: 0 },
+    { q: "A's father is B's son. C is B's father. How is A related to C?", options: ["Grandson", "Great-grandchild", "Nephew", "Son"], answer: 1 },
+    { q: "A man X says, \"Y's mother is the only daughter of my mother-in-law.\" How is X related to Y?", options: ["Father", "Uncle", "Brother", "Grandfather"], answer: 0 },
+    { q: "A man walks 4 km east and then 3 km north. What is the shortest distance from his starting point?", options: ["5 km", "6 km", "7 km", "1 km"], answer: 0 },
+    { q: "A is 20 m north of B. C is 20 m east of A. D is 20 m south of C. In which direction is D from B?", options: ["East", "West", "North-East", "South-East"], answer: 0 },
+    { q: "In a row of boys, Deepak is 7th from the left and Nilesh is 12th from the right. If they interchange positions, Deepak becomes 22nd from the left. How many boys are in the row?", options: ["31", "32", "33", "34"], answer: 2 },
+    { q: "In a race, P finished before Q but after R. S finished after Q but before T. Who came last?", options: ["Q", "S", "T", "P"], answer: 2 },
+    { q: "The average of 5 numbers is 20. When one number is removed, the average becomes 18. Which number was removed?", options: ["26", "28", "30", "32"], answer: 1 },
+    { q: "A father is three times as old as his son. In 12 years he will be twice as old. What is the son's present age?", options: ["10", "12", "14", "16"], answer: 1 },
+    { q: "At what time between 3 and 4 o'clock do the hands of a clock coincide?", options: ["3:15", "3:16 4/11", "3:17 1/2", "3:18"], answer: 1 },
+    { q: "15 August 2025 is a Friday. What day of the week was 26 January 2025?", options: ["Saturday", "Sunday", "Monday", "Tuesday"], answer: 1 },
+    { q: "Statements: Some cats are dogs. All dogs are birds. Conclusions: I. Some cats are birds. II. All birds are dogs.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0 },
+    { q: "Statement: The government has banned single-use plastic. Conclusions: I. People will stop using all plastic entirely. II. Alternatives to single-use plastic will be needed.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1 },
+    { q: "A cube of side 5 cm is painted on all faces and cut into 1 cm cubes. How many small cubes have no face painted?", options: ["9", "27", "36", "64"], answer: 1 },
+    { q: "How many letters are there between the 8th letter from the left and the 8th letter from the right in the English alphabet?", options: ["9", "10", "11", "12"], answer: 1 },
+    { q: "Which of the following words cannot be formed using only the letters of the word ADMINISTRATION?", options: ["STATION", "TRADITION", "MINISTER", "STRAIN"], answer: 2 },
+  ],
+};
+
+export default test;

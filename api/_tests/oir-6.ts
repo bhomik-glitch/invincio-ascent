@@ -1,0 +1,41 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-6",
+  title: "OIR Test 6",
+  durationMinutes: 20,
+  questions: [
+    { q: "Find the next number: 8, 12, 20, 36, 68, ?", options: ["124", "132", "136", "140"], answer: 1 },
+    { q: "Find the next number: 2, 9, 28, 65, 126, ?", options: ["215", "216", "217", "218"], answer: 2 },
+    { q: "Find the next number: 1, 4, 10, 22, 46, ?", options: ["92", "94", "96", "98"], answer: 1 },
+    { q: "Find the next number: 3, 5, 9, 17, 33, ?", options: ["63", "65", "67", "69"], answer: 1 },
+    { q: "Find the next letter: A, B, D, G, K, ?", options: ["O", "P", "Q", "N"], answer: 1 },
+    { q: "Find the next group: ZYX, WVU, TSR, ?", options: ["QPO", "PON", "RQP", "QON"], answer: 0 },
+    { q: "Ship : Captain :: Aircraft : ?", options: ["Pilot", "Engineer", "Steward", "Officer"], answer: 0 },
+    { q: "4 : 20 :: 6 : ?", options: ["30", "36", "42", "48"], answer: 2 },
+    { q: "Botany : Plants :: Ichthyology : ?", options: ["Fish", "Insects", "Birds", "Reptiles"], answer: 0 },
+    { q: "Which one does not belong with the others?", options: ["Mercury", "Venus", "Moon", "Mars"], answer: 2 },
+    { q: "Which number does not belong with the others?", options: ["2", "3", "5", "9"], answer: 3 },
+    { q: "Which one does not belong with the others?", options: ["Arjun", "Bhishma", "Karna", "Akbar"], answer: 3 },
+    { q: "If HONEST is coded as GNMDRS, how is TRUTH coded?", options: ["SQTSG", "SQTTG", "SQUSG", "RQTSG"], answer: 0 },
+    { q: "In a code language, 'pit nit dit' means 'come here now', 'nit sit' means 'here today' and 'dit bit' means 'now go'. What is the code for 'come'?", options: ["pit", "nit", "dit", "bit"], answer: 0 },
+    { q: "If letters are valued by position (A=1 ... Z=26) so that MANGO totals 50, what is the total for GRAPE?", options: ["45", "46", "47", "48"], answer: 2 },
+    { q: "A and B are brothers. C is the daughter of A. D is the son of C. How is D related to B?", options: ["Grand-nephew", "Nephew", "Grandson", "Cousin"], answer: 0 },
+    { q: "A man says, \"She is the wife of my father's wife's only son.\" How is the woman related to the man?", options: ["Wife", "Mother", "Sister-in-law", "Daughter"], answer: 0 },
+    { q: "A man starts walking north, turns right, then right again, then left. Which direction is he facing now?", options: ["East", "West", "South", "North"], answer: 0 },
+    { q: "A man walks 5 km east, turns left and walks 4 km, turns left and walks 5 km, then turns right and walks 2 km. How far and in which direction is he from the start?", options: ["6 km North", "4 km North", "6 km South", "2 km North"], answer: 0 },
+    { q: "In a queue Arun is 10th from the front and Varun is 15th from the back. Arun is ahead of Varun and there are 3 people between them. How many people are in the queue?", options: ["26", "27", "28", "29"], answer: 2 },
+    { q: "Five books P, Q, R, S, T are on a shelf. Q is at one end. R is between P and S. T is between Q and P. Which book is in the middle?", options: ["P", "R", "T", "S"], answer: 0 },
+    { q: "20% of a number is 45. What is 60% of the same number?", options: ["125", "135", "145", "155"], answer: 1 },
+    { q: "An exam has 100 questions with +1 for each correct answer and −0.25 for each wrong one. A candidate attempts all questions and scores 75. How many did he answer correctly?", options: ["75", "80", "85", "90"], answer: 1 },
+    { q: "By how many degrees does the minute hand of a clock gain on the hour hand every minute?", options: ["5°", "5.5°", "6°", "6.5°"], answer: 1 },
+    { q: "In a non-leap year, how many days are there from 15 March to 15 August, both days included?", options: ["152", "153", "154", "155"], answer: 2 },
+    { q: "Statements: Some officers are pilots. All pilots are brave. Conclusions: I. Some officers are brave. II. Some brave people are officers.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2 },
+    { q: "Statement: Petrol prices have risen by 10% this month. Conclusions: I. Transport costs are likely to rise. II. People will stop buying cars.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0 },
+    { q: "A cube painted green on all faces is cut into 125 equal small cubes. How many small cubes have exactly three faces painted?", options: ["8", "12", "27", "36"], answer: 0 },
+    { q: "If A is written as Z, B as Y, C as X and so on, how is NDA written?", options: ["MWZ", "MXZ", "NWZ", "MWY"], answer: 0 },
+    { q: "How many vowels are there in the word INTELLIGENCE?", options: ["4", "5", "6", "3"], answer: 1 },
+  ],
+};
+
+export default test;
