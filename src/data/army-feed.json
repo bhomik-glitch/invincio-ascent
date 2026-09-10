@@ -1,7 +1,16 @@
 {
-  "updated": "2026-09-04",
+  "updated": "2026-09-10",
   "note": "Curated Indian Army notification feed. scripts/track-army.mjs (GitHub Actions, every 6h) auto-publishes new curated items straight to this file, with each link resolved to the real publisher article URL. To remove an item, set its status to \"hidden\" — it renders nowhere and won't come back.",
   "items": [
+    {
+      "id": "agniveer-registration",
+      "title": "Online registration for Agniveer extended to April 10",
+      "link": "https://www.cityairnews.com/content/online-registration-for-agniveer-extended-to-april-10",
+      "source": "Cityairnews",
+      "date": "2026-08-28",
+      "category": "soldier",
+      "status": "published"
+    },
     {
       "id": "jag-124-merit-list",
       "title": "JAG 124 Merit List Indian Army (Men and Women)",
