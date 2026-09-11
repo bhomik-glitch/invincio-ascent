@@ -150,7 +150,7 @@ const HeroSection = ({
       </div>
 
 
-<div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pt-16 pb-10 md:pt-24 md:pb-16 flex items-center justify-center md:justify-end">
+<div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pt-16 pb-10 md:pt-24 md:pb-16 flex flex-col items-center justify-center sm:flex-row sm:justify-center md:justify-end">
 
         {/* Glass content card */}
         <motion.div
@@ -254,7 +254,7 @@ const HeroSection = ({
             >
               {/* Bento wrapper */}
               <div
-                className="grid w-full gap-2 grid-cols-1 sm:grid-cols-3"
+                className="grid w-full gap-2 grid-cols-2 sm:grid-cols-3"
               >
                 {/* Top row — 3 cells, stacked on mobile */}
                 {stats.map((stat, i) => (
@@ -279,13 +279,13 @@ const HeroSection = ({
                   </motion.button>
                 ))}
 
-                {/* Bottom row — spans all columns */}
+                {/* 4th cell on mobile (2×2 grid), spans all columns from sm up */}
                 <motion.button
                   onClick={() => setGtoOpen(true)}
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3, ease: EASE_OUT, delay: 0.68 }}
-                  className="col-span-1 sm:col-span-3 flex items-center justify-center gap-2 rounded-xl border border-[#F6B828]/15 bg-[#F6B828]/[0.03] py-2.5 text-[15px] font-semibold text-[#F6B828]/70 tracking-wide outline-none sm:border-[#F6B828]/35 sm:bg-[#F6B828]/[0.08] sm:py-3.5 sm:text-[#F6B828]"
+                  className="flex flex-col items-center justify-center gap-1 rounded-xl border border-[#F6B828]/15 bg-[#F6B828]/[0.03] px-2 py-2.5 text-center text-[15px] font-semibold text-[#F6B828]/70 tracking-wide outline-none sm:col-span-3 sm:flex-row sm:gap-2 sm:border-[#F6B828]/35 sm:bg-[#F6B828]/[0.08] sm:py-3.5 sm:text-[#F6B828]"
                   style={{ transition: "background-color 180ms ease, border-color 180ms ease, transform 120ms ease" }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.backgroundColor = "rgba(246,184,40,0.16)";
@@ -299,22 +299,49 @@ const HeroSection = ({
                   onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.98)")}
                   onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
                 >
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
                     <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
                   </svg>
-                  <span className="text-[12px] sm:text-[15px]">Train in the Biggest GTO Ground in North India</span>
+                  <span className="text-[11px] leading-tight sm:text-[15px]">Train in the Biggest GTO Ground in North India</span>
                 </motion.button>
               </div>
             </motion.div>
           )}
 
         </motion.div>
+
+        {/* Mobile-only student strip — its own block (not merged into the
+            glass card) sitting flush against the card's bottom edge, so
+            faces are visible on first paint instead of behind a scroll.
+            Portrait cards (photo on top, name/info on the bottom) read
+            faster than the desktop marquee's side-by-side layout. Desktop
+            keeps the full marquee below the hero. */}
+        {showCarousel && (
+          <motion.div {...fadeUp(0.54)} className="mt-2 w-full max-w-[720px] overflow-hidden sm:hidden">
+            <motion.div
+              className="flex gap-2.5 w-max"
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ duration: candidateStories.length * 2.2, ease: "linear", repeat: Infinity }}
+            >
+              {duplicatedStories.map((story, index) => (
+                <div key={index} className="w-[92px] shrink-0 overflow-hidden rounded-lg border border-white/15 bg-white/[0.06]">
+                  <img src={story.image} alt={story.name} className="block h-20 w-full object-cover object-[center_20%]" />
+                  <div className="px-1.5 py-1.5">
+                    <p className="truncate font-serif text-[10px] font-semibold leading-tight text-white">{story.name}</p>
+                    <p className="truncate font-sans text-[8.5px] leading-tight text-white/60">{story.info.split("\n")[0]}</p>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
+        )}
+
       </div>
     </section>
 
-    {/* Moving Image Section — Selections Carousel */}
+    {/* Moving Image Section — Selections Carousel (tablet/desktop; mobile has its own strip inside the hero above) */}
     {showCarousel && (
-      <div className="w-full bg-white py-12 border-b border-[#e5e7eb]">
+      <div className="hidden w-full bg-white py-12 border-b border-[#e5e7eb] sm:block">
       <div className="relative overflow-hidden w-full max-w-full">
         {/* Side Gradient Fades */}
         <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white to-transparent pointer-events-none z-10" />
