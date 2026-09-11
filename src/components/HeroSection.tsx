@@ -48,8 +48,8 @@ const TickerText = ({ idx }: { idx: number }) => {
 
 const PILL_TEXTS = [
   "Defence Leadership Institute",
-  "127 SSB Recommendations in 2025 Alone.",
-  "2400+ Lives Transformed. One Mission — Building Future Leaders.",
+  "138 SSB Recommendations in 2025 Alone",
+  "2400+ Lives Transformed — One Mission — Building Future Leaders",
 ];
 
 const RotatingPillText = () => {
@@ -122,7 +122,7 @@ const HeroSection = ({
   const stats = [
     { value: "New Courses", action: () => setNewCoursesOpen(true) },
     { value: "Notifications", action: () => setNotifOpen(true) },
-    { value: "Result Out !", action: () => setResultsOpen(true) },
+    { value: "Result Out!", action: () => setResultsOpen(true) },
   ];
 
   return (
@@ -297,7 +297,7 @@ const HeroSection = ({
                   <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
                   </svg>
-                  <span className="text-[12px] sm:text-[15px]">Train in the Biggest GTO Ground in Delhi</span>
+                  <span className="text-[12px] sm:text-[15px]">Train in the Biggest GTO Ground in North India</span>
                 </motion.button>
               </div>
             </motion.div>

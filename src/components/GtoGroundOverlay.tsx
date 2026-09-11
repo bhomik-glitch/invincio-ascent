@@ -55,7 +55,7 @@ const GtoGroundOverlay = ({ isOpen, onClose }: GtoGroundOverlayProps) => {
                   </div>
                   <div>
                     <h2 className="text-lg font-serif font-bold text-white tracking-tight">Our GTO Ground</h2>
-                    <p className="text-[11px] text-white/60 font-sans uppercase tracking-widest">Biggest in Delhi</p>
+                    <p className="text-[11px] text-white/60 font-sans uppercase tracking-widest">Biggest in North-India</p>
                   </div>
                 </div>
                 <button
