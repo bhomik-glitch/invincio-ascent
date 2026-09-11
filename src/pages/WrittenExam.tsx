@@ -512,7 +512,7 @@ const WrittenExam = () => {
             transition={{ duration: 0.35, ease: EASE_OUT, delay: 0.1 }}
             className="font-sans text-sm text-white/70 mb-8 leading-relaxed"
           >
-            Book a free consultation with an Ex-SSB Assessor and get a personalized prep roadmap.
+            Book a free consultation with an Ex-SSB Assessor and get a personalized prep roadmap
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 8 }}

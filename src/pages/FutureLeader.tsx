@@ -309,7 +309,7 @@ const FutureLeader = () => {
             transition={{ duration: 0.4, ease: EASE_OUT }}
             className="font-serif text-3xl md:text-4xl font-bold text-white mb-4"
           >
-            Start the journey in Class 9.
+            Start the journey in Class 9
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 6 }}
@@ -318,7 +318,7 @@ const FutureLeader = () => {
             transition={{ duration: 0.35, ease: EASE_OUT, delay: 0.1 }}
             className="font-sans text-sm text-white/70 mb-8 leading-relaxed"
           >
-            Talk to a mentor today and understand how early preparation shapes the officer your child becomes.
+            Talk to a mentor today and understand how early preparation shapes the officer your child becomes
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 8 }}

@@ -425,7 +425,7 @@ const Programs = () => {
             transition={{ duration: 0.35, ease: EASE_OUT, delay: 0.1 }}
             className="font-sans text-sm text-white/70 mb-8 leading-relaxed"
           >
-            Talk to one of our Ex-SSB Assessors for free — zero commitment, total clarity.
+            Talk to one of our Ex-SSB Assessors for free — zero commitment, total clarity
           </motion.p>
 
           <motion.div
