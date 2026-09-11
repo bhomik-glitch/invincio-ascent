@@ -129,7 +129,7 @@ const HeroSection = ({
   return (
     <>
     <section
-      className="relative w-full min-h-[85vh] flex items-center bg-[#04060D] bg-no-repeat"
+      className="relative w-full min-h-0 sm:min-h-[85vh] flex items-center bg-[#04060D] bg-no-repeat"
       style={{
         backgroundImage: `url('${backgroundImage}')`,
         backgroundSize,
@@ -150,19 +150,19 @@ const HeroSection = ({
       </div>
 
 
-<div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pt-16 pb-10 md:pt-24 md:pb-16 flex flex-col items-center justify-center sm:flex-row sm:justify-center md:justify-end">
+<div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pt-8 pb-6 sm:pt-16 sm:pb-10 md:pt-24 md:pb-16 flex items-center justify-center md:justify-end">
 
         {/* Glass content card */}
         <motion.div
           initial={{ opacity: 0, y: 28, scale: 0.97 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6, ease: EASE_OUT, delay: 0.05 }}
-          className="w-full max-w-[720px] rounded-2xl border border-white/10 bg-black/35 backdrop-blur-md p-6 sm:p-8 md:p-10"
+          className="w-full max-w-[720px] rounded-2xl border border-white/10 bg-black/35 backdrop-blur-md p-5 sm:p-8 md:p-10"
           style={{ boxShadow: "0 8px 48px rgba(0,0,0,0.40), inset 0 1px 0 rgba(255,255,255,0.06)" }}
         >
 
           {/* Eyebrow pill — sky blue accent */}
-          <motion.div {...fadeUp(0.14)} className="mb-6">
+          <motion.div {...fadeUp(0.14)} className="mb-4 sm:mb-6">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-white/40 bg-white/15 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white overflow-hidden" style={{ backdropFilter: "blur(8px)", minWidth: "220px", textAlign: "center" }}>
               <RotatingPillText />
             </span>
@@ -171,7 +171,7 @@ const HeroSection = ({
           {/* H1 */}
           <motion.h1
             {...fadeUp(0.22)}
-            className="mb-5 font-serif text-[1.8rem] sm:text-[2.2rem] font-bold text-white md:text-[3.1rem]"
+            className="mb-3 font-serif text-[1.8rem] sm:mb-5 sm:text-[2.2rem] font-bold text-white md:text-[3.1rem]"
             style={{ lineHeight: 1.06, letterSpacing: "-0.025em" }}
           >
             {title}
@@ -180,7 +180,7 @@ const HeroSection = ({
           {/* Sub-text */}
           <motion.p
             {...fadeUp(0.3)}
-            className="mb-8 max-w-[400px] text-[15px] leading-relaxed text-white/75"
+            className="mb-5 max-w-[400px] text-[15px] leading-relaxed text-white/75 sm:mb-8"
           >
             {description}
           </motion.p>
@@ -188,7 +188,7 @@ const HeroSection = ({
           {/* CTAs */}
           <motion.div
             {...fadeUp(0.38)}
-            className="mb-8 flex flex-wrap items-center gap-2 sm:gap-3"
+            className="mb-5 flex flex-wrap items-center gap-2 sm:mb-8 sm:gap-3"
           >
             {/* Primary — golden yellow, deep blue text. Carries the exam
                 ticker directly (used to be a separate button) so there's one
@@ -250,7 +250,7 @@ const HeroSection = ({
           {showStats && (
             <motion.div
               {...fadeUp(0.46)}
-              className="border-t border-white/[0.07] pt-6"
+              className="border-t border-white/[0.07] pt-4 sm:pt-6"
             >
               {/* Bento wrapper */}
               <div
@@ -310,36 +310,35 @@ const HeroSection = ({
 
         </motion.div>
 
-        {/* Mobile-only student strip — its own block (not merged into the
-            glass card) sitting flush against the card's bottom edge, so
-            faces are visible on first paint instead of behind a scroll.
-            Portrait cards (photo on top, name/info on the bottom) read
-            faster than the desktop marquee's side-by-side layout. Desktop
-            keeps the full marquee below the hero. */}
-        {showCarousel && (
-          <motion.div {...fadeUp(0.54)} className="mt-2 w-full max-w-[720px] overflow-hidden sm:hidden">
-            <motion.div
-              className="flex gap-2.5 w-max"
-              animate={{ x: ["0%", "-50%"] }}
-              transition={{ duration: candidateStories.length * 2.2, ease: "linear", repeat: Infinity }}
-            >
-              {duplicatedStories.map((story, index) => (
-                <div key={index} className="w-[92px] shrink-0 overflow-hidden rounded-lg border border-white/15 bg-white/[0.06]">
-                  <img src={story.image} alt={story.name} className="block h-20 w-full object-cover object-[center_20%]" />
-                  <div className="px-1.5 py-1.5">
-                    <p className="truncate font-serif text-[10px] font-semibold leading-tight text-white">{story.name}</p>
-                    <p className="truncate font-sans text-[8.5px] leading-tight text-white/60">{story.info.split("\n")[0]}</p>
-                  </div>
-                </div>
-              ))}
-            </motion.div>
-          </motion.div>
-        )}
-
       </div>
     </section>
 
-    {/* Moving Image Section — Selections Carousel (tablet/desktop; mobile has its own strip inside the hero above) */}
+    {/* Moving Image Section — Selections Carousel. Sits below the hero
+        (its own section, same as desktop) on every breakpoint; mobile just
+        gets a shorter, more compact strip so hero + strip together still
+        fit one screen without scrolling. */}
+    {showCarousel && (
+      <div className="w-full bg-white py-4 border-b border-[#e5e7eb] sm:hidden">
+        <div className="relative overflow-hidden w-full max-w-full">
+          <motion.div
+            className="flex gap-2.5 px-4 w-max"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: candidateStories.length * 2.2, ease: "linear", repeat: Infinity }}
+          >
+            {duplicatedStories.map((story, index) => (
+              <div key={index} className="w-[92px] shrink-0 overflow-hidden rounded-lg border border-[#e5e7eb]">
+                <img src={story.image} alt={story.name} className="block h-20 w-full object-cover object-[center_20%]" />
+                <div className="px-1.5 py-1.5">
+                  <p className="truncate font-serif text-[10px] font-semibold leading-tight text-[#00568C]">{story.name}</p>
+                  <p className="truncate font-sans text-[8.5px] leading-tight text-[#6B7280]">{story.info.split("\n")[0]}</p>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+    )}
+
     {showCarousel && (
       <div className="hidden w-full bg-white py-12 border-b border-[#e5e7eb] sm:block">
       <div className="relative overflow-hidden w-full max-w-full">
