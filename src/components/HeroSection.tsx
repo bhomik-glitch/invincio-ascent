@@ -156,7 +156,7 @@ const HeroSection = ({
           initial={{ opacity: 0, y: 28, scale: 0.97 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6, ease: EASE_OUT, delay: 0.05 }}
-          className="w-full max-w-[580px] rounded-2xl border border-white/10 bg-black/35 backdrop-blur-md p-6 sm:p-8 md:p-10"
+          className="w-full max-w-[640px] rounded-2xl border border-white/10 bg-black/35 backdrop-blur-md p-6 sm:p-8 md:p-10"
           style={{ boxShadow: "0 8px 48px rgba(0,0,0,0.40), inset 0 1px 0 rgba(255,255,255,0.06)" }}
         >
 
@@ -187,15 +187,17 @@ const HeroSection = ({
           {/* CTAs */}
           <motion.div
             {...fadeUp(0.38)}
-            className="mb-8 grid grid-cols-2 gap-2 sm:gap-3"
+            className="mb-8 flex flex-wrap items-center gap-2 sm:gap-3"
           >
             {/* Primary — golden yellow, deep blue text. Carries the exam
                 ticker directly (used to be a separate button) so there's one
-                consultation CTA instead of two doing the same thing. */}
+                consultation CTA instead of two doing the same thing.
+                Content-sized (not stretched) and nowrap so it stays on one
+                line — the card is sized to fit the longest ticker entry. */}
             <button
               onClick={() => openConsultation(SSB_ENTRIES[entryIdx])}
               onPointerDown={() => setTickerPaused(true)}
-              className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#F6B828] px-3 py-4 text-[11px] font-semibold tracking-wide text-[#00568C] sm:gap-2 sm:px-6 sm:py-3.5 sm:text-sm"
+              className="inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-xl bg-[#F6B828] px-4 py-3 text-xs font-semibold tracking-wide text-[#00568C] sm:gap-2 sm:px-6 sm:py-3.5 sm:text-sm"
               style={{
                 boxShadow: "0 4px 16px rgba(246,184,40,0.35)",
                 transition: "background-color 200ms ease, box-shadow 200ms ease, transform 120ms ease",
@@ -215,7 +217,7 @@ const HeroSection = ({
               onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
             >
               <CalendarCheck className="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" />
-              <span className="leading-tight">
+              <span>
                 Book Free Consultation for <TickerText idx={entryIdx} />
               </span>
             </button>
@@ -224,7 +226,7 @@ const HeroSection = ({
                 the freed-up slot still carries its own lead-capture path. */}
             <button
               onClick={() => setNewCoursesOpen(true)}
-              className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl border border-white/15 px-3 py-4 text-[11px] font-semibold tracking-wide text-white/60 sm:gap-2 sm:border-white/25 sm:px-6 sm:py-3.5 sm:text-sm sm:text-white"
+              className="inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-xl border border-white/15 px-4 py-3 text-xs font-semibold tracking-wide text-white/60 sm:gap-2 sm:border-white/25 sm:px-6 sm:py-3.5 sm:text-sm sm:text-white"
               style={{ transition: "background-color 200ms ease, border-color 200ms ease, transform 120ms ease" }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = "rgba(255,255,255,0.45)";
@@ -238,7 +240,7 @@ const HeroSection = ({
               onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
               onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
             >
-              Join the Course <span className="opacity-70">(Latest Course)</span>
+              Join the Course <span className="opacity-70">(Latest)</span>
             </button>
           </motion.div>
 
