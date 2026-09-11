@@ -146,6 +146,12 @@ const TakeTest = () => {
                     );
                   })}
                 </div>
+                {result?.explanations?.[i] && (
+                  <p className="mt-4 font-sans text-sm text-[#374151] bg-[#eaf6f8] rounded-lg p-4">
+                    <span className="font-semibold text-[#00568C]">Explanation: </span>
+                    {result.explanations[i]}
+                  </p>
+                )}
               </li>
             );
           })}

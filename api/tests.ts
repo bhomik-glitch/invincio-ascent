@@ -20,9 +20,10 @@ export default async function handler(req: Req, res: Res) {
   if (req.method === "POST") {
     const answers = ((await readJson(req)).answers || {}) as Record<string, number>;
     const key = test.questions.map((q) => q.answer);
+    const explanations = test.questions.map((q) => q.explanation || "");
     const score = key.filter((a, i) => answers[i] === a).length;
-    return json(res, 200, { score, total: key.length, key });
+    return json(res, 200, { score, total: key.length, key, explanations });
   }
 
-  json(res, 200, { ...test, questions: test.questions.map(({ answer: _a, ...q }) => q) });
+  json(res, 200, { ...test, questions: test.questions.map(({ answer: _a, explanation: _e, ...q }) => q) });
 }

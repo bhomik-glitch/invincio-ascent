@@ -14,6 +14,7 @@ export type Question = {
   image?: string;      // optional figure, e.g. "/assets/oir/1-q12.png"
   options: string[];
   answer: number;      // index into options
+  explanation?: string;
 };
 
 export type Test = {

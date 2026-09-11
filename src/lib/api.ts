@@ -20,7 +20,7 @@ export async function api<T>(path: string, body?: unknown): Promise<T> {
 export type TestSummary = { id: string; title: string; durationMinutes: number; questionCount: number };
 export type Question = { q: string; image?: string; options: string[] };
 export type Test = { id: string; title: string; durationMinutes: number; questions: Question[] };
-export type Result = { score: number; total: number; key: number[] };
+export type Result = { score: number; total: number; key: number[]; explanations: string[] };
 
 const scoreKey = (id: string) => `oir:score:${id}`;
 export function saveScore(id: string, r: Result) {
