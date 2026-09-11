@@ -300,7 +300,7 @@ const RemtabSection = () => {
         >
           <div className="w-10 h-px bg-[#e5e7eb] mx-auto mb-6" />
           <p className="font-serif text-lg md:text-xl text-[#00568C]">
-            Because every student deserves a chance.
+            Because every student deserves a chance
           </p>
           <p className="mt-2 font-sans text-xs font-semibold tracking-[0.2em] uppercase text-[#6B7280]/70">
             Together, We Invest in Futures

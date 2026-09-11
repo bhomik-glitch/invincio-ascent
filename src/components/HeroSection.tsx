@@ -89,7 +89,7 @@ interface HeroSectionProps {
 
 const HeroSection = ({
   title = "Transforming Defence Aspirants Into Officers",
-  description = "Mentored by only Ex-SSB Assessors, we deliver authentic personality development and proven success across all branches of the armed forces.",
+  description = "Mentored by only Ex-SSB Assessors, we deliver authentic personality development and proven success across all branches of the armed forces",
   subtitle = "Defence Leadership Institute",
   backgroundImage = "/assets/hero-bg.png",
   backgroundPosition = "top",
