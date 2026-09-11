@@ -23,11 +23,16 @@ const SSB_ENTRIES = [
   "SSC Tech", "TGC", "TES Entry", "NCC Entry", "Navy B.Tech", "Coast Guard",
 ];
 
+// Reserves enough space for the longest entry so the button never resizes
+// (and its text never wraps to a second line) as the ticker rotates.
+const TICKER_MIN_CH = Math.max(...SSB_ENTRIES.map((s) => s.length));
+
 /**
  * Index is owned by HeroSection so the button can open the consultation modal
- * for whichever entry is on screen. Rotation is deliberately slow and pauses on
- * hover/touch: at the old 2s it changed faster than someone could read it and
- * reach it, so a tap aimed at "NDA" could land on "Coast Guard".
+ * for whichever entry is on screen. The ticker still pauses on hover/touch so
+ * you can read the entry before tapping, but the button itself is the tap
+ * target now (not a separate label you have to aim for), so the rotation can
+ * run faster without risking a mis-tap.
  */
 const TickerText = ({ idx }: { idx: number }) => {
   return (
@@ -38,7 +43,12 @@ const TickerText = ({ idx }: { idx: number }) => {
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: -10 }}
         transition={{ duration: 0.28, ease: EASE_OUT }}
-        style={{ display: "inline-block", whiteSpace: "nowrap", verticalAlign: "middle" }}
+        style={{
+          display: "inline-block",
+          whiteSpace: "nowrap",
+          verticalAlign: "middle",
+          minWidth: `${TICKER_MIN_CH}ch`,
+        }}
       >
         {SSB_ENTRIES[idx]}
       </motion.span>
@@ -110,7 +120,7 @@ const HeroSection = ({
 
   useEffect(() => {
     if (tickerPaused) return;
-    const id = setInterval(() => setEntryIdx(i => (i + 1) % SSB_ENTRIES.length), 5000);
+    const id = setInterval(() => setEntryIdx(i => (i + 1) % SSB_ENTRIES.length), 2000);
     return () => clearInterval(id);
   }, [tickerPaused]);
 
