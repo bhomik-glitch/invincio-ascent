@@ -187,7 +187,7 @@ const HeroSection = ({
           {/* CTAs */}
           <motion.div
             {...fadeUp(0.38)}
-            className="mb-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
+            className="mb-8 grid grid-cols-2 gap-2 sm:gap-3"
           >
             {/* Primary — golden yellow, deep blue text. Carries the exam
                 ticker directly (used to be a separate button) so there's one
@@ -195,7 +195,7 @@ const HeroSection = ({
             <button
               onClick={() => openConsultation(SSB_ENTRIES[entryIdx])}
               onPointerDown={() => setTickerPaused(true)}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#F6B828] px-6 py-4 text-base font-semibold tracking-wide text-[#00568C] sm:w-auto sm:py-3.5 sm:text-sm"
+              className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#F6B828] px-3 py-4 text-[11px] font-semibold tracking-wide text-[#00568C] sm:gap-2 sm:px-6 sm:py-3.5 sm:text-sm"
               style={{
                 boxShadow: "0 4px 16px rgba(246,184,40,0.35)",
                 transition: "background-color 200ms ease, box-shadow 200ms ease, transform 120ms ease",
@@ -214,8 +214,8 @@ const HeroSection = ({
               onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
               onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
             >
-              <CalendarCheck className="h-4 w-4 shrink-0" />
-              <span>
+              <CalendarCheck className="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" />
+              <span className="leading-tight">
                 Book Free Consultation for <TickerText idx={entryIdx} />
               </span>
             </button>
@@ -224,7 +224,7 @@ const HeroSection = ({
                 the freed-up slot still carries its own lead-capture path. */}
             <button
               onClick={() => setNewCoursesOpen(true)}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-white/15 px-6 py-4 text-base font-semibold tracking-wide text-white/60 sm:w-auto sm:border-white/25 sm:py-3.5 sm:text-sm sm:text-white"
+              className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl border border-white/15 px-3 py-4 text-[11px] font-semibold tracking-wide text-white/60 sm:gap-2 sm:border-white/25 sm:px-6 sm:py-3.5 sm:text-sm sm:text-white"
               style={{ transition: "background-color 200ms ease, border-color 200ms ease, transform 120ms ease" }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = "rgba(255,255,255,0.45)";
