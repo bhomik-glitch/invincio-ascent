@@ -189,20 +189,24 @@ const HeroSection = ({
             {...fadeUp(0.38)}
             className="mb-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
           >
-            {/* Primary — golden yellow, deep blue text. Full-width and larger
-                on mobile so nothing else on the card matches its weight. */}
+            {/* Primary — golden yellow, deep blue text. Carries the exam
+                ticker directly (used to be a separate button) so there's one
+                consultation CTA instead of two doing the same thing. */}
             <button
-              onClick={() => openConsultation()}
+              onClick={() => openConsultation(SSB_ENTRIES[entryIdx])}
+              onPointerDown={() => setTickerPaused(true)}
               className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#F6B828] px-6 py-4 text-base font-semibold tracking-wide text-[#00568C] sm:w-auto sm:py-3.5 sm:text-sm"
               style={{
                 boxShadow: "0 4px 16px rgba(246,184,40,0.35)",
                 transition: "background-color 200ms ease, box-shadow 200ms ease, transform 120ms ease",
               }}
               onMouseEnter={(e) => {
+                setTickerPaused(true);
                 e.currentTarget.style.backgroundColor = "#e0a720";
                 e.currentTarget.style.boxShadow = "0 6px 24px rgba(246,184,40,0.50)";
               }}
               onMouseLeave={(e) => {
+                setTickerPaused(false);
                 e.currentTarget.style.backgroundColor = "#F6B828";
                 e.currentTarget.style.boxShadow = "0 4px 16px rgba(246,184,40,0.35)";
                 e.currentTarget.style.transform = "scale(1)";
@@ -211,25 +215,22 @@ const HeroSection = ({
               onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
             >
               <CalendarCheck className="h-4 w-4 shrink-0" />
-              Book Free Consultation
+              <span>
+                Book Free Consultation for <TickerText idx={entryIdx} />
+              </span>
             </button>
 
-            {/* Secondary — glass outline with ticker. Opens the consultation
-                modal pre-tagged with the entry on screen; it used to be a
-                wa.me link, so all ten labels led to the same chat window.
-                Demoted on mobile: shrink-wrapped, smaller, lower contrast. */}
+            {/* Secondary — glass outline. Opens the batch/course picker so
+                the freed-up slot still carries its own lead-capture path. */}
             <button
-              onClick={() => openConsultation(SSB_ENTRIES[entryIdx])}
-              onPointerDown={() => setTickerPaused(true)}
-              className="inline-flex self-start items-center justify-center gap-2 rounded-xl border border-white/15 px-4 py-2.5 text-xs font-semibold tracking-wide text-white/60 sm:self-auto sm:border-white/25 sm:px-6 sm:py-3.5 sm:text-sm sm:text-white"
+              onClick={() => setNewCoursesOpen(true)}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-white/15 px-6 py-4 text-base font-semibold tracking-wide text-white/60 sm:w-auto sm:border-white/25 sm:py-3.5 sm:text-sm sm:text-white"
               style={{ transition: "background-color 200ms ease, border-color 200ms ease, transform 120ms ease" }}
               onMouseEnter={(e) => {
-                setTickerPaused(true);
                 e.currentTarget.style.borderColor = "rgba(255,255,255,0.45)";
                 e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.08)";
               }}
               onMouseLeave={(e) => {
-                setTickerPaused(false);
                 e.currentTarget.style.borderColor = "";
                 e.currentTarget.style.backgroundColor = "transparent";
                 e.currentTarget.style.transform = "scale(1)";
@@ -237,7 +238,7 @@ const HeroSection = ({
               onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
               onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
             >
-              <TickerText idx={entryIdx} />
+              Join the Course <span className="opacity-70">(Latest Course)</span>
             </button>
           </motion.div>
 
