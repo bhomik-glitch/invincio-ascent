@@ -1,4 +1,4 @@
-import { getSession, json, type Req, type Res } from "./_lib";
+import { getSession, json, type Req, type Res } from "./_lib.js";
 
 export default function handler(req: Req, res: Res) {
   const phone = getSession(req);

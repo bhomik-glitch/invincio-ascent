@@ -1,5 +1,5 @@
-import { getSession, readJson, json, type Req, type Res } from "./_lib";
-import tests from "./_tests/index";
+import { getSession, readJson, json, type Req, type Res } from "./_lib.js";
+import tests from "./_tests/index.js";
 
 // GET  /api/tests         → list of tests (no questions)
 // GET  /api/tests?id=X    → one test, answers stripped

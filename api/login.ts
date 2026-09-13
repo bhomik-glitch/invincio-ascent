@@ -1,4 +1,4 @@
-import { findUser, normalizePhone, setSession, readJson, json, type Req, type Res } from "./_lib";
+import { findUser, normalizePhone, setSession, readJson, json, type Req, type Res } from "./_lib.js";
 
 export default async function handler(req: Req, res: Res) {
   if (req.method !== "POST") return json(res, 405, { error: "Method not allowed" });

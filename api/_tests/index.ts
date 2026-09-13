@@ -1,13 +1,13 @@
-import oir1 from "./oir-1";
-import oir2 from "./oir-2";
-import oir3 from "./oir-3";
-import oir4 from "./oir-4";
-import oir5 from "./oir-5";
-import oir6 from "./oir-6";
-import oir7 from "./oir-7";
-import oir8 from "./oir-8";
-import oir9 from "./oir-9";
-import oir10 from "./oir-10";
+import oir1 from "./oir-1.js";
+import oir2 from "./oir-2.js";
+import oir3 from "./oir-3.js";
+import oir4 from "./oir-4.js";
+import oir5 from "./oir-5.js";
+import oir6 from "./oir-6.js";
+import oir7 from "./oir-7.js";
+import oir8 from "./oir-8.js";
+import oir9 from "./oir-9.js";
+import oir10 from "./oir-10.js";
 
 export type Question = {
   q: string;
