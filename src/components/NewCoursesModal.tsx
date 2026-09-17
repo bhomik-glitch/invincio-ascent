@@ -51,7 +51,10 @@ const NewCoursesModal = ({ isOpen, onClose, initialBatch }: NewCoursesModalProps
       return;
     }
     const idx = initialBatch ? batches.findIndex((b) => b.id === initialBatch) : -1;
-    if (idx >= 0) setActiveBatch(idx);
+    if (idx >= 0) {
+      setActiveBatch(idx);
+      setSelectedSlot(batches[idx].slots[0].label); // soonest date preselected
+    }
   }, [isOpen, initialBatch]);
 
   // Default to the first fee option whenever the batch changes.

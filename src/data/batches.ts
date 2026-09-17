@@ -4,6 +4,7 @@ import { plusDays, isCurrent, SSB_VISIBLE_DAYS, WRITTEN_EXAM_END } from "@/lib/b
 import { CATALOGUE } from "./catalogue";
 
 export interface Slot {
+  start: string; // YYYY-MM-DD
   label: string; // "15 Sep 2026" — also goes into the WhatsApp message
   until: string; // last day the slot stays listed (YYYY-MM-DD)
 }
@@ -28,9 +29,10 @@ const label = (iso: string) => {
 };
 
 // SSB slots drop off the day after they start.
-const ssbSlot = (iso: string): Slot => ({ label: label(iso), until: plusDays(iso, SSB_VISIBLE_DAYS) });
+const ssbSlot = (iso: string): Slot => ({ start: iso, label: label(iso), until: plusDays(iso, SSB_VISIBLE_DAYS) });
 // Integrated (written + SSB) slots stay until the exam.
 const writtenSlot = (iso: string, exam: keyof typeof WRITTEN_EXAM_END): Slot => ({
+  start: iso,
   label: label(iso),
   until: WRITTEN_EXAM_END[exam],
 });
@@ -112,3 +114,8 @@ const allBatches: Batch[] = [
 export const batches: Batch[] = allBatches
   .map((b) => ({ ...b, slots: b.slots.filter(isCurrent) }))
   .filter((b) => b.slots.length > 0);
+
+// The batch starting soonest, for the hero "Join" button. Undefined when nothing is open.
+export const nextBatch: { batch: Batch; slot: Slot } | undefined = batches
+  .flatMap((batch) => batch.slots.map((slot) => ({ batch, slot })))
+  .sort((a, b) => a.slot.start.localeCompare(b.slot.start))[0];

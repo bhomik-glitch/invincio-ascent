@@ -9,12 +9,10 @@ describe("NewCoursesModal enrolment", () => {
     render(<NewCoursesModal isOpen onClose={() => {}} initialBatch="ssb-offline" />);
 
     // The grid animates out before the slot view mounts, so wait for the pay button.
-    const pay = await screen.findByRole("button", { name: /select a date to continue/i });
+    // The soonest date is preselected, so the amount already shows but details are missing.
+    const pay = await screen.findByRole("button", { name: /pay ₹3,600 & enroll/i });
     expect(pay).toBeDisabled();
     expect(screen.getAllByText(batch.title).length).toBeGreaterThan(0);
-
-    fireEvent.click(screen.getByText(batch.slots[0].label));
-    expect(screen.getByRole("button", { name: /pay ₹3,600 & enroll/i })).toBeDisabled();
 
     fireEvent.change(screen.getByPlaceholderText("Full name"), { target: { value: "Aryan Sharma" } });
     fireEvent.change(screen.getByPlaceholderText(/email/i), { target: { value: "aryan@example.com" } });

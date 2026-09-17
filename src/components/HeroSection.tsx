@@ -5,6 +5,7 @@ import ConsultationModal from "./ConsultationModal";
 import NotificationsModal from "./NotificationsModal";
 import ResultsModal from "./ResultsModal";
 import NewCoursesModal from "./NewCoursesModal";
+import { nextBatch } from "@/data/batches";
 import GtoGroundOverlay from "./GtoGroundOverlay";
 import { candidateStories } from "@/data/candidate-selections";
 
@@ -224,11 +225,11 @@ const HeroSection = ({
               </span>
             </button>
 
-            {/* Secondary — glass outline. Opens the batch/course picker so
-                the freed-up slot still carries its own lead-capture path. */}
+            {/* Secondary — glass outline. Names the batch starting soonest and
+                opens the enrol modal straight on it. */}
             <button
               onClick={() => setNewCoursesOpen(true)}
-              className="inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-xl border border-white/15 px-3.5 py-3 text-[13px] font-semibold tracking-wide text-white/60 sm:border-white/25 sm:px-5 sm:py-3.5 sm:text-white"
+              className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-white/15 px-3.5 py-3 text-center text-[13px] font-semibold tracking-wide text-white/60 sm:border-white/25 sm:px-5 sm:py-3.5 sm:text-white"
               style={{ transition: "background-color 200ms ease, border-color 200ms ease, transform 120ms ease" }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = "rgba(255,255,255,0.45)";
@@ -242,7 +243,11 @@ const HeroSection = ({
               onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
               onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
             >
-              Join the Course <span className="opacity-70">(Latest)</span>
+              {nextBatch ? (
+                <>Join {nextBatch.batch.title} <span className="opacity-70">· {nextBatch.slot.label}</span></>
+              ) : (
+                "View Upcoming Batches"
+              )}
             </button>
           </motion.div>
 
@@ -399,7 +404,7 @@ const HeroSection = ({
     <ConsultationModal open={modalOpen} onClose={() => setModalOpen(false)} program={modalProgram} />
     <NotificationsModal isOpen={notifOpen} onClose={() => setNotifOpen(false)} />
     <ResultsModal isOpen={resultsOpen} onClose={() => setResultsOpen(false)} />
-    <NewCoursesModal isOpen={newCoursesOpen} onClose={() => setNewCoursesOpen(false)} />
+    <NewCoursesModal isOpen={newCoursesOpen} initialBatch={nextBatch?.batch.id} onClose={() => setNewCoursesOpen(false)} />
     <GtoGroundOverlay isOpen={gtoOpen} onClose={() => setGtoOpen(false)} />
     </>
   );

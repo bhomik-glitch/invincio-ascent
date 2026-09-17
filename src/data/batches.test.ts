@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { batches } from "./batches";
+import { batches, nextBatch } from "./batches";
 import { today } from "@/lib/batch-visibility";
 
 describe("batches data", () => {
@@ -12,5 +12,11 @@ describe("batches data", () => {
       }
       expect(b.fee).toMatch(/₹/);
     }
+  });
+
+  it("picks the soonest start date across all batches as the next batch", () => {
+    const starts = batches.flatMap((b) => b.slots.map((s) => s.start)).sort();
+    expect(nextBatch?.slot.start).toBe(starts[0]);
+    expect(nextBatch?.batch.slots.some((s) => s.start === starts[0])).toBe(true);
   });
 });
