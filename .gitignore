@@ -23,3 +23,5 @@ dist-ssr
 *.sln
 *.sw?
 
+# Payment credentials — never commit
+rzp-key.csv

@@ -10,16 +10,15 @@ export const plusDays = (iso: string, days: number) => {
   return d.toLocaleDateString("en-CA");
 };
 
-// SSB batches stay listed for a week after they start.
-export const SSB_VISIBLE_DAYS = 7;
+// SSB batches are listed up to and including their start day, then drop off.
+export const SSB_VISIBLE_DAYS = 0;
 
 // Written prep batches run until their exam.
 // ponytail: placeholder end dates based on the usual exam months — update when
-// the official NDA 1/2027, CDS 1/2027 and AFCAT 1/2027 dates are announced.
-export const WRITTEN_EXAM_END: Record<"NDA" | "CDS" | "AFCAT", string> = {
+// the official NDA 1/2027 and CDS 1/2027 dates are announced.
+export const WRITTEN_EXAM_END: Record<"NDA" | "CDS", string> = {
   NDA: "2027-04-30",
   CDS: "2027-04-30",
-  AFCAT: "2027-02-28",
 };
 
 export const isCurrent = (batch: { until: string }) => batch.until >= today();

@@ -1,7 +1,9 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { X, BookOpen, Calendar, ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react";
+import { X, BookOpen, Calendar, ArrowRight, ArrowLeft, CheckCircle2, Lock } from "lucide-react";
 import { EASE_OUT, TAP_SCALE } from "@/lib/design-system";
-import { plusDays, isCurrent, SSB_VISIBLE_DAYS, WRITTEN_EXAM_END } from "@/lib/batch-visibility";
+import { batches } from "@/data/batches";
+import { CATALOGUE } from "@/data/catalogue";
+import { payForBatch } from "@/lib/razorpay";
 import { useModalLock } from "@/lib/modal-lock";
 import { WA_LABEL_SITE, trackWhatsApp } from "@/lib/whatsapp";
 import { useEffect, useState } from "react";
@@ -9,62 +11,20 @@ import { useEffect, useState } from "react";
 interface NewCoursesModalProps {
   isOpen: boolean;
   onClose: () => void;
+  /** Open straight on this batch (id from the catalogue) instead of the grid. */
+  initialBatch?: string;
 }
 
 const WA_NUMBER = "918601407444";
 
-const ssbBatch = (label: string, start: string, date: string, mode: "Offline" | "Online", sessions?: string[]) => ({
-  until: plusDays(start, SSB_VISIBLE_DAYS),
-  title: `SSB Mentorship — ${label} (${mode})`,
-  tagline:
-    mode === "Offline"
-      ? "The Ultimate 21-Day Immersive SSB Simulation."
-      : "Structured SSB guidance without geographical limits.",
-  description:
-    mode === "Offline"
-      ? "A holistic, offline module conducted strictly on SSB lines. Starts with 21 days of intensive ground training, followed by online support until your SSB."
-      : "Designed for aspirants balancing college or work who need absolute clarity and personality orientation before their SSB.",
-  highlight: `${mode} Mode`,
-  slots: sessions ? sessions.map((s) => `${date} (${s})`) : [date],
-});
 
-const writtenBatch = (exam: "NDA" | "CDS" | "AFCAT", mode: "Offline" | "Online") => ({
-  until: WRITTEN_EXAM_END[exam],
-  title: `${exam} Written Prep Batch (${mode})`,
-  tagline:
-    mode === "Offline"
-      ? `Offline classroom preparation for the ${exam} written exam.`
-      : `Live interactive online preparation for the ${exam} written exam.`,
-  description:
-    mode === "Offline"
-      ? `Full-syllabus offline classroom batch for ${exam} with daily practice, doubt-solving sessions and regular mock tests right up to the exam.`
-      : `Live online batch for ${exam} with interactive classes, daily practice sets, doubt clearing and regular mock tests right up to the exam.`,
-  highlight: `${mode} Mode`,
-  slots: ["01 October 2026"],
-});
-
-const allBatches = [
-  ssbBatch("10 Aug", "2026-08-10", "10 August 2026", "Offline"),
-  ssbBatch("17 Aug", "2026-08-17", "17 August 2026", "Offline"),
-  ssbBatch("24 Aug", "2026-08-24", "24 August 2026", "Offline"),
-  ssbBatch("14 Sep", "2026-09-14", "14 September 2026", "Offline", ["Forenoon", "Afternoon"]),
-  ssbBatch("21 Sep", "2026-09-21", "21 September 2026", "Offline", ["Forenoon", "Afternoon"]),
-  ssbBatch("24 Aug", "2026-08-24", "24 August 2026", "Online"),
-  ssbBatch("07 Sep", "2026-09-07", "07 September 2026", "Online"),
-  writtenBatch("NDA", "Offline"),
-  writtenBatch("NDA", "Online"),
-  writtenBatch("CDS", "Offline"),
-  writtenBatch("CDS", "Online"),
-  writtenBatch("AFCAT", "Offline"),
-  writtenBatch("AFCAT", "Online"),
-];
-
-// SSB batches drop off a week after they start; written batches stay until their exam.
-const batches = allBatches.filter(isCurrent);
-
-const NewCoursesModal = ({ isOpen, onClose }: NewCoursesModalProps) => {
+const NewCoursesModal = ({ isOpen, onClose, initialBatch }: NewCoursesModalProps) => {
   const [activeBatch, setActiveBatch] = useState<number | null>(null);
   const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
+  const [form, setForm] = useState({ name: "", email: "", phone: "" });
+  const [optionId, setOptionId] = useState<string>("");
+  const [paying, setPaying] = useState(false);
+  const [payError, setPayError] = useState("");
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -87,30 +47,46 @@ const NewCoursesModal = ({ isOpen, onClose }: NewCoursesModalProps) => {
     if (!isOpen) {
       setActiveBatch(null);
       setSelectedSlot(null);
+      setPayError("");
+      return;
     }
-  }, [isOpen]);
+    const idx = initialBatch ? batches.findIndex((b) => b.id === initialBatch) : -1;
+    if (idx >= 0) setActiveBatch(idx);
+  }, [isOpen, initialBatch]);
+
+  // Default to the first fee option whenever the batch changes.
+  useEffect(() => {
+    if (activeBatch !== null) setOptionId(CATALOGUE[batches[activeBatch].id].options[0].id);
+    setPayError("");
+  }, [activeBatch]);
 
   const handleBook = () => {
-    if (activeBatch === null) return;
-    const batch = batches[activeBatch];
-    const hasSlots = batch.slots && batch.slots.length > 0;
-    
-    let text = "";
-    if (hasSlots) {
-      if (!selectedSlot) return;
-      text = `Hi Invincio, I'd like to book a slot for *${batch.title}* starting *${selectedSlot}*. Please confirm availability.`;
-    } else {
-      text = `Hi Invincio, I'd like to register for *${batch.title}*. Please confirm availability and share registration details.`;
-    }
-    
+    if (activeBatch === null || !selectedSlot) return;
+    const text = `Hi Invincio, I'd like to book a slot for *${batches[activeBatch].title}* starting *${selectedSlot}*. Please confirm availability.`;
     trackWhatsApp(WA_LABEL_SITE);
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
+  };
 
-    // Message is already batch-specific, so it needs no extra prefill.
-    const msg = encodeURIComponent(text);
-    window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, "_blank", "noopener,noreferrer");
+  const handlePay = async () => {
+    if (activeBatch === null || !selectedSlot || paying) return;
+    setPaying(true);
+    setPayError("");
+    try {
+      const { paymentId, token } = await payForBatch({
+        batchId: batches[activeBatch].id, optionId, slot: selectedSlot, ...form,
+      });
+      window.location.assign(`/invoice/${paymentId}?t=${token}`);
+    } catch (e) {
+      setPayError(e instanceof Error ? e.message : "Payment failed. Please try again.");
+      setPaying(false);
+    }
   };
 
   const batch = activeBatch !== null ? batches[activeBatch] : null;
+  const options = batch ? CATALOGUE[batch.id].options : [];
+  const amount = options.find((o) => o.id === optionId)?.amount ?? options[0]?.amount ?? 0;
+  const canPay =
+    !!selectedSlot && !paying && form.name.trim().length >= 2 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email) && form.phone.replace(/\D/g, "").length >= 10;
 
   return (
     <AnimatePresence>
@@ -156,7 +132,7 @@ const NewCoursesModal = ({ isOpen, onClose }: NewCoursesModalProps) => {
                       {batch ? batch.title : "New Course Batches"}
                     </h2>
                     <p className="text-[11px] text-white/60 font-sans uppercase tracking-widest">
-                      {batch ? (batch.slots.length > 0 ? "Select a batch start date" : "Registration Details") : "Admissions Open — 2026"}
+                      {batch ? "Select a start date & enroll" : "Admissions Open — 2026"}
                     </p>
                   </div>
                 </div>
@@ -216,7 +192,7 @@ const NewCoursesModal = ({ isOpen, onClose }: NewCoursesModalProps) => {
                             {b.slots.length > 0 ? (
                               <>
                                 <Calendar className="w-3 h-3 text-gray-400" />
-                                {b.slots[0]}{b.slots.length > 1 ? ` + ${b.slots.length - 1} more` : ""}
+                                {b.slots[0].label}{b.slots.length > 1 ? ` + ${b.slots.length - 1} more` : ""}
                               </>
                             ) : (
                               <span className="text-green-600 font-semibold uppercase tracking-wider text-[10px]">
@@ -242,60 +218,97 @@ const NewCoursesModal = ({ isOpen, onClose }: NewCoursesModalProps) => {
                     className="p-6 bg-gray-50/50"
                   >
                     <p className="text-[11px] text-[#C6A15B] font-medium italic mb-4">{batch!.tagline}</p>
-                    <p className="text-[12px] text-gray-500 mb-5">{batch!.description}</p>
+                    <p className="text-[12px] text-gray-500 mb-3">{batch!.description}</p>
+                    <div className="mb-5">
+                      <p className="text-[15px] font-bold text-[#1F2937]">{batch!.fee}</p>
+                      {batch!.note && <p className="text-[11px] text-gray-500 mt-1">{batch!.note}</p>}
+                    </div>
 
-                    {batch!.slots && batch!.slots.length > 0 ? (
-                      <>
-                        <p className="text-[11px] font-bold text-[#00568C]/60 uppercase tracking-widest mb-3">
-                          Available Start Dates
-                        </p>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mb-6">
-                          {batch!.slots.map((slot) => {
-                            const isSelected = selectedSlot === slot;
-                            return (
-                              <motion.button
-                                key={slot}
-                                whileTap={TAP_SCALE}
-                                onClick={() => setSelectedSlot(slot)}
-                                className={`relative flex items-center justify-center gap-2 p-3 rounded-xl border text-[13px] font-semibold transition-all duration-200 ${
-                                  isSelected
-                                    ? "bg-[#00568C] border-[#00568C] text-white shadow-md"
-                                    : "bg-white border-gray-200 text-[#374151] hover:border-[#00568C]/40 hover:shadow-sm"
-                                }`}
-                              >
-                                {isSelected && <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />}
-                                {slot}
-                              </motion.button>
-                            );
-                          })}
-                        </div>
+                    <p className="text-[11px] font-bold text-[#00568C]/60 uppercase tracking-widest mb-3">
+                      Available Start Dates
+                    </p>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mb-6">
+                      {batch!.slots.map(({ label: slot }) => {
+                        const isSelected = selectedSlot === slot;
+                        return (
+                          <motion.button
+                            key={slot}
+                            whileTap={TAP_SCALE}
+                            onClick={() => setSelectedSlot(slot)}
+                            className={`relative flex items-center justify-center gap-2 p-3 rounded-xl border text-[13px] font-semibold transition-all duration-200 ${
+                              isSelected
+                                ? "bg-[#00568C] border-[#00568C] text-white shadow-md"
+                                : "bg-white border-gray-200 text-[#374151] hover:border-[#00568C]/40 hover:shadow-sm"
+                            }`}
+                          >
+                            {isSelected && <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />}
+                            {slot}
+                          </motion.button>
+                        );
+                      })}
+                    </div>
 
-                        <motion.button
-                          whileTap={TAP_SCALE}
-                          onClick={handleBook}
-                          disabled={!selectedSlot}
-                          className={`w-full py-3.5 rounded-xl font-bold text-[14px] flex items-center justify-center gap-2 transition-all duration-200 ${
-                            selectedSlot
-                              ? "bg-[#00568C] text-white hover:bg-[#004471] shadow-md hover:shadow-lg"
-                              : "bg-gray-100 text-gray-400 cursor-not-allowed"
-                          }`}
-                        >
-                          {selectedSlot ? (
-                            <>Book via WhatsApp — {selectedSlot} <ArrowRight className="w-4 h-4" /></>
-                          ) : (
-                            "Select a date to continue"
-                          )}
-                        </motion.button>
-                      </>
-                    ) : (
-                      <motion.button
-                        whileTap={TAP_SCALE}
-                        onClick={handleBook}
-                        className="w-full py-3.5 rounded-xl font-bold text-[14px] flex items-center justify-center gap-2 transition-all duration-200 bg-[#00568C] text-white hover:bg-[#004471] shadow-md hover:shadow-lg"
-                      >
-                        Register Now via WhatsApp <ArrowRight className="w-4 h-4" />
-                      </motion.button>
+                    <p className="text-[11px] font-bold text-[#00568C]/60 uppercase tracking-widest mb-3">
+                      Your Details
+                    </p>
+                    <div className="grid sm:grid-cols-3 gap-2.5 mb-4">
+                      {(["name", "email", "phone"] as const).map((field) => (
+                        <input
+                          key={field}
+                          type={field === "email" ? "email" : field === "phone" ? "tel" : "text"}
+                          inputMode={field === "phone" ? "numeric" : undefined}
+                          autoComplete={field === "phone" ? "tel" : field}
+                          placeholder={field === "name" ? "Full name" : field === "email" ? "Email (invoice is sent here)" : "10-digit mobile"}
+                          value={form[field]}
+                          onChange={(e) => setForm({ ...form, [field]: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-gray-200 bg-white text-[13px] text-[#374151] placeholder:text-gray-400 focus:outline-none focus:border-[#00568C]/60 focus:ring-2 focus:ring-[#00568C]/10"
+                        />
+                      ))}
+                    </div>
+
+                    {options.length > 1 && (
+                      <div className="flex flex-col sm:flex-row gap-2.5 mb-4">
+                        {options.map((o) => (
+                          <label
+                            key={o.id}
+                            className={`flex-1 flex items-center justify-between gap-3 p-3 rounded-xl border text-[13px] cursor-pointer transition-colors ${
+                              optionId === o.id ? "border-[#00568C] bg-[#f0f9ff]" : "border-gray-200 bg-white hover:border-[#00568C]/40"
+                            }`}
+                          >
+                            <span className="flex items-center gap-2 text-[#374151]">
+                              <input type="radio" name="fee-option" checked={optionId === o.id} onChange={() => setOptionId(o.id)} className="accent-[#00568C]" />
+                              {o.label}
+                            </span>
+                            <span className="font-bold text-[#1F2937]">₹{o.amount.toLocaleString("en-IN")}</span>
+                          </label>
+                        ))}
+                      </div>
                     )}
+
+                    {payError && <p className="text-[12px] text-red-600 mb-3">{payError}</p>}
+
+                    <motion.button
+                      whileTap={TAP_SCALE}
+                      onClick={handlePay}
+                      disabled={!canPay}
+                      className={`w-full py-3.5 rounded-xl font-bold text-[14px] flex items-center justify-center gap-2 transition-all duration-200 ${
+                        canPay
+                          ? "bg-[#00568C] text-white hover:bg-[#004471] shadow-md hover:shadow-lg"
+                          : "bg-gray-100 text-gray-400 cursor-not-allowed"
+                      }`}
+                    >
+                      <Lock className="w-4 h-4" />
+                      {paying ? "Opening secure payment…" : selectedSlot ? `Pay ₹${amount.toLocaleString("en-IN")} & Enroll` : "Select a date to continue"}
+                    </motion.button>
+
+                    <button
+                      type="button"
+                      onClick={handleBook}
+                      disabled={!selectedSlot}
+                      className="w-full mt-3 text-[12px] font-semibold text-[#00568C] hover:underline disabled:text-gray-400 disabled:no-underline"
+                    >
+                      Prefer bank transfer / UPI to our account? Book via WhatsApp instead
+                    </button>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -303,7 +316,7 @@ const NewCoursesModal = ({ isOpen, onClose }: NewCoursesModalProps) => {
               {/* Footer */}
               <div className="p-4 bg-white border-t border-gray-100 flex items-center justify-between">
                 <p className="text-[10px] text-gray-400 font-sans uppercase tracking-[0.1em]">
-                  Limited seats per batch
+                  Secure payments via Razorpay · Invoice emailed instantly
                 </p>
                 <a
                   href="/programs"

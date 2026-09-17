@@ -1,97 +1,14 @@
 import { motion } from "framer-motion";
 import { Calendar, CheckCircle2, ArrowRight } from "lucide-react";
-import { plusDays, isCurrent, SSB_VISIBLE_DAYS, WRITTEN_EXAM_END } from "@/lib/batch-visibility";
+import { useState } from "react";
+import { batches } from "@/data/batches";
+import NewCoursesModal from "./NewCoursesModal";
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as [number, number, number, number];
 
-const ssbBatch = (date: string, start: string, mode: "Offline" | "Online", session?: string) => ({
-  until: plusDays(start, SSB_VISIBLE_DAYS),
-  title: `SSB Mentorship — ${date} (${mode})`,
-  tagline:
-    mode === "Offline"
-      ? "The Ultimate 21-Day Immersive SSB Simulation."
-      : "Structured SSB guidance without geographical limits.",
-  description:
-    mode === "Offline"
-      ? "A holistic, offline module conducted strictly on SSB lines. Starts with 21 days of intensive ground training, followed by continuous online support until your actual SSB."
-      : "Designed for aspirants balancing college or work who need absolute clarity, personality orientation, and discipline before their SSB.",
-  points:
-    mode === "Offline"
-      ? [
-          "SSB-style personality assessment & psych tests",
-          "Live GTO practice on real GTO grounds",
-          "Orientation by Ex-Interviewing Officers & GTOs",
-          "Individual hand-holding through every stage",
-        ]
-      : [
-          "21-Day focus on officer-like mindset & routine",
-          "Continuous interactive live sessions & guided tasks",
-          "Personal feedback to fix strengths and weaknesses",
-          "Exposure to real SSB expectations & assessment logic",
-        ],
-  dates: session ? `Starts: ${date} 2026 — ${session}` : `Starts: ${date} 2026`,
-  duration: `21 Days ${mode} + Support`,
-  highlight: `${mode} Mode`,
-});
-
-const writtenPoints: Record<string, string[]> = {
-  NDA: [
-    "Complete Mathematics & General Ability Test coverage",
-    "Physics, Chemistry, Biology, History, Geography & Polity",
-    "Daily Practice Problems (DPPs) & weekly mock tests",
-    "Current affairs, map work & post-written SSB guidance",
-  ],
-  CDS: [
-    "English, General Knowledge & Elementary Mathematics",
-    "Sectional drills for speed and accuracy",
-    "Weekly full-length mock tests with detailed analysis",
-    "Post-written SSB specialization & interview guidance",
-  ],
-  AFCAT: [
-    "General Awareness, Verbal Ability & Numerical Ability",
-    "Reasoning & Military Aptitude Test practice",
-    "Weekly full-length mock tests with detailed analysis",
-    "Post-written AFSB interview guidance",
-  ],
-};
-
-const writtenBatch = (exam: "NDA" | "CDS" | "AFCAT", mode: "Offline" | "Online") => ({
-  until: WRITTEN_EXAM_END[exam],
-  title: `${exam} Written Prep Batch (${mode})`,
-  tagline:
-    mode === "Offline"
-      ? `Offline classroom preparation for the ${exam} written exam.`
-      : `Live interactive online preparation for the ${exam} written exam.`,
-  description:
-    mode === "Offline"
-      ? `Full-syllabus offline classroom batch for ${exam}, taught by veteran faculty with daily practice, doubt-solving sessions and regular mock tests right up to the exam.`
-      : `Live online batch for ${exam} with interactive classes, recorded sessions, daily practice sets, doubt clearing and regular mock tests right up to the exam.`,
-  points: writtenPoints[exam],
-  dates: "Starts: 01 Oct 2026",
-  duration: "01 Oct 2026 till Exam",
-  highlight: `${mode} Mode`,
-});
-
-const allBatches = [
-  ssbBatch("10 Aug", "2026-08-10", "Offline"),
-  ssbBatch("17 Aug", "2026-08-17", "Offline"),
-  ssbBatch("24 Aug", "2026-08-24", "Offline"),
-  ssbBatch("14 Sep", "2026-09-14", "Offline", "Forenoon / Afternoon"),
-  ssbBatch("21 Sep", "2026-09-21", "Offline", "Forenoon / Afternoon"),
-  ssbBatch("24 Aug", "2026-08-24", "Online"),
-  ssbBatch("07 Sep", "2026-09-07", "Online"),
-  writtenBatch("NDA", "Offline"),
-  writtenBatch("NDA", "Online"),
-  writtenBatch("CDS", "Offline"),
-  writtenBatch("CDS", "Online"),
-  writtenBatch("AFCAT", "Offline"),
-  writtenBatch("AFCAT", "Online"),
-];
-
-// SSB batches drop off a week after they start; written batches stay until their exam.
-const batches = allBatches.filter(isCurrent);
 
 const UpcomingBatches = () => {
+  const [enrolling, setEnrolling] = useState<string | null>(null);
   return (
     <section className="py-20 md:py-28 bg-[#FAFAFA] border-t border-[#e5e7eb]">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -162,38 +79,35 @@ const UpcomingBatches = () => {
                 ))}
               </div>
 
-              <div className="mt-auto pt-6 border-t border-neutral-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                {batch.dates ? (
-                  <>
-                    <div className="flex items-center gap-2">
-                      <Calendar className="w-4 h-4 text-neutral-400" />
-                      <span className="text-sm font-bold text-neutral-800">
-                        {batch.dates}
-                      </span>
-                    </div>
-                    
-                    <a
-                      href="#contact"
-                      className="inline-flex items-center justify-center gap-2 text-sm font-bold text-[#00568C] hover:text-[#004a7a] transition-colors group/btn"
-                    >
-                      Enroll Now
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                    </a>
-                  </>
-                ) : (
-                  <a
-                    href="#contact"
-                    className="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl border text-sm font-bold text-white bg-[#00568C] hover:bg-[#004471] transition-colors shadow-sm hover:shadow-md"
-                  >
-                    Register Now
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
+              <div className="mb-6 pt-6 border-t border-neutral-100">
+                <p className="text-lg font-serif font-bold text-neutral-900">{batch.fee}</p>
+                {batch.note && (
+                  <p className="text-xs text-neutral-500 font-sans mt-1 leading-relaxed">{batch.note}</p>
                 )}
+              </div>
+
+              <div className="mt-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="flex items-start gap-2">
+                  <Calendar className="w-4 h-4 text-neutral-400 mt-0.5 shrink-0" />
+                  <span className="text-sm font-bold text-neutral-800">
+                    Starts: {batch.slots.map((s) => s.label).join(" · ")}
+                  </span>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setEnrolling(batch.id)}
+                  className="inline-flex items-center justify-center gap-2 text-sm font-bold text-[#00568C] hover:text-[#004a7a] transition-colors group/btn shrink-0"
+                >
+                  Enroll Now
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                </button>
               </div>
             </motion.div>
           ))}
         </div>
       </div>
+      <NewCoursesModal isOpen={enrolling !== null} initialBatch={enrolling ?? undefined} onClose={() => setEnrolling(null)} />
     </section>
   );
 };

@@ -7,16 +7,13 @@ describe("batch visibility", () => {
   });
 
   it("adds days across month and year boundaries", () => {
-    expect(plusDays("2026-09-14", SSB_VISIBLE_DAYS)).toBe("2026-09-21");
     expect(plusDays("2026-08-28", 7)).toBe("2026-09-04");
     expect(plusDays("2026-12-29", 7)).toBe("2027-01-05");
   });
 
-  it("keeps an SSB batch for a week after it starts, then drops it", () => {
-    const startedSixDaysAgo = plusDays(today(), -6);
-    const startedEightDaysAgo = plusDays(today(), -8);
-    expect(isCurrent({ until: plusDays(startedSixDaysAgo, SSB_VISIBLE_DAYS) })).toBe(true);
-    expect(isCurrent({ until: plusDays(startedEightDaysAgo, SSB_VISIBLE_DAYS) })).toBe(false);
+  it("keeps an SSB batch on its start day and drops it the day after", () => {
+    expect(isCurrent({ until: plusDays(today(), SSB_VISIBLE_DAYS) })).toBe(true);
+    expect(isCurrent({ until: plusDays(plusDays(today(), -1), SSB_VISIBLE_DAYS) })).toBe(false);
   });
 
   it("keeps a batch on its final day and drops it the next", () => {
