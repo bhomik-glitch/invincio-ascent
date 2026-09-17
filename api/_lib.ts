@@ -7,7 +7,7 @@ export type Res = ServerResponse;
 const COOKIE = "session";
 const TTL = 30 * 24 * 3600; // 30 days
 
-function secret() {
+export function secret() {
   const s = process.env.AUTH_SECRET;
   if (s) return s;
   if (process.env.VERCEL) throw new Error("AUTH_SECRET env var is not set");

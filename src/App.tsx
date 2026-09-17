@@ -24,6 +24,8 @@ const Terms = lazy(() => import("./pages/Terms"));
 const Login = lazy(() => import("./pages/Login"));
 const Tests = lazy(() => import("./pages/Tests"));
 const TakeTest = lazy(() => import("./pages/TakeTest"));
+const InvoiceDemo = lazy(() => import("./pages/InvoiceDemo"));
+const Invoice = lazy(() => import("./pages/Invoice"));
 
 const queryClient = new QueryClient();
 
@@ -63,6 +65,8 @@ const App = () => (
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Route>
+            <Route path="/invoice-demo" element={<InvoiceDemo />} />
+            <Route path="/invoice/:id" element={<Invoice />} />
           </Routes>
         </Suspense>
       </BrowserRouter>
