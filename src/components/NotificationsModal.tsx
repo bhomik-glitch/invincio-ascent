@@ -112,9 +112,9 @@ const notifications: Notification[] = [
       {
         heading: "Programs Available",
         points: [
-          "NDA Integrated Program — Written + SSB",
-          "NDA Foundation Program — Written + SSB",
-          "CDS Integrated Program — Written + SSB",
+          "NDA Integrated Program (Written + SSB) — online & offline",
+          "NDA Foundation Program (Written + SSB) — online",
+          "CDS Integrated Program (Written + SSB) — online & offline",
         ],
       },
       {
@@ -132,7 +132,8 @@ const notifications: Notification[] = [
         points: [
           "Batch Commencement: 01st October 2026",
           "Phases run Oct 2026 to Apr 2027 (exam mode Mar – Apr 2027)",
-          "Fees: Rs 60,000/- + GST",
+          "Fees (NDA & CDS Written): Online Rs 30,000/- + GST · Offline Rs 60,000/- + GST",
+          "Fees (NDA Foundation): Online Rs 30,000/- + GST",
         ],
       },
     ],

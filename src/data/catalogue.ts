@@ -9,6 +9,10 @@ export interface PayOption {
   amount: number;
 }
 
+// Written-prep modes. Offline is classroom; NDA Foundation runs online only.
+const ONLINE: PayOption = { id: "online", label: "Online", amount: 35400 };
+const OFFLINE: PayOption = { id: "offline", label: "Offline", amount: 70800 };
+
 export const CATALOGUE: Record<string, { title: string; options: PayOption[] }> = {
   "ssb-offline": {
     title: "SSB Mentorship Program (Offline)",
@@ -21,18 +25,9 @@ export const CATALOGUE: Record<string, { title: string; options: PayOption[] }> 
     title: "Online Officer Mentorship Program",
     options: [{ id: "full", label: "Program fee", amount: 17700 }],
   },
-  "nda-integrated": {
-    title: "NDA Integrated Program (Written + SSB)",
-    options: [{ id: "full", label: "Program fee (₹60,000 + 18% GST)", amount: 70800 }],
-  },
-  "nda-foundation": {
-    title: "NDA Foundation Program (Written + SSB)",
-    options: [{ id: "full", label: "Program fee (₹60,000 + 18% GST)", amount: 70800 }],
-  },
-  "cds-integrated": {
-    title: "CDS Integrated Program (Written + SSB)",
-    options: [{ id: "full", label: "Program fee (₹60,000 + 18% GST)", amount: 70800 }],
-  },
+  "nda-integrated": { title: "NDA Integrated Program (Written + SSB)", options: [ONLINE, OFFLINE] },
+  "nda-foundation": { title: "NDA Foundation Program (Written + SSB)", options: [ONLINE] },
+  "cds-integrated": { title: "CDS Integrated Program (Written + SSB)", options: [ONLINE, OFFLINE] },
 };
 
 export function findPrice(batchId: string, optionId: string) {

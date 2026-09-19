@@ -42,7 +42,7 @@ const integrated = (exam: "NDA" | "CDS", id: string, focus: string): Batch => ({
   title: CATALOGUE[id].title,
   highlight: "Written + SSB",
   tagline: "The objective: your name in the final merit.",
-  description: `Integrated written + SSB mentorship for ${exam} in small batches, Oct 2026 to Apr 2027. A progressive learn → practice → revise → test → analyse → correct model, with SSB orientation running alongside the written syllabus so no one is left behind.`,
+  description: `Integrated written + SSB mentorship for ${exam} in small batches, Oct 2026 to Apr 2027, available ${CATALOGUE[id].options.length > 1 ? "in both online and offline (classroom) mode" : "in online mode"}. A progressive learn → practice → revise → test → analyse → correct model, with SSB orientation running alongside the written syllabus so no one is left behind.`,
   points: [
     "185 structured touchpoints: 131 training days, 17 mocks, 15 feedback sessions, 22 doubt-clearing sessions",
     focus,
@@ -50,7 +50,11 @@ const integrated = (exam: "NDA" | "CDS", id: string, focus: string): Batch => ({
     "Individual feedback report after every mock & one-to-one mentoring (Vyaktigat Margdarshan)",
     "Psychology & performance support: time optimisation, stress management, answering techniques",
   ],
-  fee: "₹60,000 + GST",
+  fee: CATALOGUE[id].options.map((o) => `${o.label} ₹${o.amount.toLocaleString("en-IN")}`).join("  ·  "),
+  note:
+    CATALOGUE[id].options.length > 1
+      ? "Online ₹30,000 + 18% GST · Offline ₹60,000 + 18% GST"
+      : "Online mode only · ₹30,000 + 18% GST",
   duration: "Oct 2026 – Apr 2027",
   slots: [writtenSlot("2026-10-01", exam)],
 });
