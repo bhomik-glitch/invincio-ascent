@@ -133,5 +133,17 @@
     "name": "Tejasvi",
     "info": "TNDA-12401\nSSC NT 124\n32 SSB Kapurthala",
     "image": "/assets/client_photo/tejasvi cds ota course ssc nt 124.jpeg"
+  },
+  {
+    "name": "Ignatius Hashah",
+    "info": "SCO Entry\n24 SSB Bangalore\nChest No. 92",
+    "image": "/assets/client_photo/ignatius hashah 24 ssb bangalore sco entry.jpeg",
+    "addedAt": "2026-09-22"
+  },
+  {
+    "name": "Aritro",
+    "info": "TES Entry\nSSB Bangalore\nChest No. 40",
+    "image": "/assets/client_photo/aritro ssb bangalore tes entry.jpeg",
+    "addedAt": "2026-09-22"
   }
 ]
