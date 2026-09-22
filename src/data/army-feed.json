@@ -3,6 +3,15 @@
   "note": "Curated Indian Army notification feed. scripts/track-army.mjs (GitHub Actions, every 6h) auto-publishes new curated items straight to this file, with each link resolved to the real publisher article URL. To remove an item, set its status to \"hidden\" — it renders nowhere and won't come back.",
   "items": [
     {
+      "id": "tgc-145-notification-2026",
+      "title": "Indian Army TGC 145 Notification 2026 Out, Apply Online from September 30",
+      "link": "https://www.pw.live/defence/exams/indian-army-tgc-145-notification-2026",
+      "source": "PW",
+      "date": "2026-09-22",
+      "category": "general",
+      "status": "published"
+    },
+    {
       "id": "tgc-145-recruitment-2026",
       "title": "Indian Army TGC 145 Recruitment 2026 – Notification Out, Apply Online",
       "link": "https://www.freejobalert.com/articles/indian-army-tgc-145-recruitment-2026-3068772",
