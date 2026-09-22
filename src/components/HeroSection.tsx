@@ -17,7 +17,16 @@ const fadeUp = (delay: number) => ({
   transition: { duration: 0.55, ease: EASE_OUT, delay },
 });
 
-const duplicatedStories = [...sortedCandidateStories, ...sortedCandidateStories];
+// The marquee is already running while someone scrolls down to it, so cards
+// at the head of the loop are gone by the time it is on screen. Rotate the
+// oldest LEAD_IN cards to the front so the newest recommendations arrive a
+// few seconds in. Literal mid-list would be ~40s of travel away — too far.
+const LEAD_IN = 3;
+const heroStories = [
+  ...sortedCandidateStories.slice(-LEAD_IN),
+  ...sortedCandidateStories.slice(0, -LEAD_IN),
+];
+const duplicatedStories = [...heroStories, ...heroStories];
 
 const SSB_ENTRIES = [
   "NDA", "CDS – IMA", "CDS – OTA", "AFCAT – Flying",
