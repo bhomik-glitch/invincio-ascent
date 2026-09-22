@@ -6,7 +6,10 @@ import {
   EYEBROW,
   EASE_OUT,
 } from "@/lib/design-system";
-import { candidateStories as stories } from "@/data/candidate-selections";
+import {
+  candidateStories as stories,
+  sortedCandidateStories as sortedStories,
+} from "@/data/candidate-selections";
 
 const echoes = [
   {
@@ -62,9 +65,6 @@ const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 const isThisWeek = (addedAt?: string) =>
   !!addedAt && Date.now() - new Date(addedAt).getTime() < WEEK_MS;
 
-const sortedStories = [...stories].sort((a, b) =>
-  (b.addedAt ?? "").localeCompare(a.addedAt ?? "")
-);
 const freshStories = sortedStories.filter((s) => isThisWeek(s.addedAt));
 
 const PhotoCard = ({ story, fresh }: { story: Story; fresh?: boolean }) => (

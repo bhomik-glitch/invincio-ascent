@@ -11,3 +11,9 @@ export const candidateStories = data as {
   image: string;
   addedAt?: string;
 }[];
+
+// Newest first, so the latest recommendations lead every surface that shows
+// them (hero marquee, /results grid). Undated entries keep their JSON order.
+export const sortedCandidateStories = [...candidateStories].sort((a, b) =>
+  (b.addedAt ?? "").localeCompare(a.addedAt ?? "")
+);

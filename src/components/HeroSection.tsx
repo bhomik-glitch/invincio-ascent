@@ -7,7 +7,7 @@ import ResultsModal from "./ResultsModal";
 import NewCoursesModal from "./NewCoursesModal";
 import { nextBatch } from "@/data/batches";
 import GtoGroundOverlay from "./GtoGroundOverlay";
-import { candidateStories } from "@/data/candidate-selections";
+import { candidateStories, sortedCandidateStories } from "@/data/candidate-selections";
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as [number, number, number, number];
 
@@ -17,7 +17,7 @@ const fadeUp = (delay: number) => ({
   transition: { duration: 0.55, ease: EASE_OUT, delay },
 });
 
-const duplicatedStories = [...candidateStories, ...candidateStories];
+const duplicatedStories = [...sortedCandidateStories, ...sortedCandidateStories];
 
 const SSB_ENTRIES = [
   "NDA", "CDS – IMA", "CDS – OTA", "AFCAT – Flying",
