@@ -1,0 +1,41 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-11",
+  title: "OIR Test 11",
+  durationMinutes: 20,
+  questions: [
+    { q: "Find the next number: 7, 43, 16, 37, 25, 31, 34, ?", options: ["31", "43", "25", "19"], answer: 2, explanation: "Here two series alternate: 7, 16, 25, … (+9) and 43, 37, 31, … (-6). Next: 31 − 6 = 25." },
+    { q: "Find the next number: 83, 102, 123, 146, 171, ?", options: ["227", "199", "198", "197"], answer: 2, explanation: "Here the terms are n² + 2 for consecutive n. Next: 14² + 2 = 198." },
+    { q: "Find the next number: 11, 13, 19, 37, 91, ?", options: ["253", "307", "254", "273"], answer: 0, explanation: "Here the differences 2, 6, 18, 54, 162 are each 3 times the previous difference. Next: 91 + 162 = 253." },
+    { q: "Find the missing number: 6250, 1250, 250, ?, 10", options: ["52", "50", "130", "210"], answer: 1, explanation: "Here each term is the previous term divided by 5, so the missing term is 50." },
+    { q: "Find the next letter: C, G, K, O, S, ?", options: ["Y", "W", "X", "V"], answer: 1, explanation: "By alphabet positions (3, 7, 11, 15, 19), each letter is 4 places after the previous one: S(19) + 4 = W(23)." },
+    { q: "Find the next pair: BX, FU, JR, NO, ?", options: ["SL", "RL", "QK", "RK"], answer: 1, explanation: "The first letters move 4 forward each time and the second letters move 3 back: next is RL." },
+    { q: "Doctor : Hospital :: Teacher : ?", options: ["Factory", "School", "Court", "Office"], answer: 1, explanation: "A doctor works in a hospital; a teacher works in a school." },
+    { q: "10 : 120 :: 5 : ?", options: ["28", "124", "35", "130"], answer: 2, explanation: "10 → 10 × 12 = 120; likewise 5 → 5 × 7 = 35." },
+    { q: "Lieutenant : Army :: Sub-Lieutenant : ?", options: ["Air Force", "BSF", "Coast Guard", "Navy"], answer: 3, explanation: "Lieutenant is an Army rank; Sub-Lieutenant is a Navy rank." },
+    { q: "Which one does not belong with the others?", options: ["Mercury", "Pluto", "Mars", "Jupiter"], answer: 1, explanation: "Pluto is a dwarf planet; the others are planets." },
+    { q: "Which number does not belong with the others?", options: ["63", "109", "13", "41"], answer: 0, explanation: "63 = 3 × 21 is not prime; the others are prime numbers." },
+    { q: "Choose the word most similar in meaning to VALIANT.", options: ["Wealthy", "Timid", "Clever", "Brave"], answer: 3, explanation: "Valiant means brave." },
+    { q: "If TARGET is coded as SDFQZS, how is MONKEY coded?", options: ["XDJMNL", "XDJMPL", "NNOJFX", "XDJLNL"], answer: 0, explanation: "In this code the letters are reversed and each is moved 1 place back, so MONKEY becomes XDJMNL." },
+    { q: "In a code language, 'proud boys fight' is written as 'ri ja fe', 'loyal boys' is written as 'ma ri' and 'fight quietly' is written as 'su ja'. What is the code for 'proud'?", options: ["su", "ma", "fe", "ri"], answer: 2, explanation: "'boys' is common to the first two sentences, so boys = ri; 'fight' is common to the first and third, so fight = ja. The remaining code in the first sentence, fe, means 'proud'." },
+    { q: "If '×' means '+', '+' means '−', '÷' means '×' and '−' means '÷', what is the value of 20 ÷ 11 × 3 + 63 − 7?", options: ["200", "221", "214", "213"], answer: 2, explanation: "Replacing the symbols gives 20 × 11 + 3 − 63 ÷ 7; following BODMAS, this equals 214." },
+    { q: "A is the father of B. B is the brother of C. C is the daughter of D. How is D related to A?", options: ["Wife", "Sister", "Daughter", "Mother"], answer: 0, explanation: "B and C are siblings, so A is also C's father; C's other parent D is A's wife." },
+    { q: "Pointing to a man, Arun said, \"His mother is the only daughter of my mother.\" How is Arun related to the man?", options: ["Father", "Grandfather", "Maternal uncle", "Brother"], answer: 2, explanation: "The only daughter of Arun's mother is Arun's sister; she is the man's mother, so Arun is his maternal uncle." },
+    { q: "Starting from his house, Deepak walks 110 m towards the east, turns left and walks 65 m, turns left and walks 20 m, finally turns left and walks 120 m. In which direction is he now from his house?", options: ["South-East", "South-West", "North-East", "North-West"], answer: 0, explanation: "He ends up 90 m east and 55 m south of his house, so he is to the South-East of his house." },
+    { q: "A man is facing North-East. He turns 90° clockwise, then 90° clockwise, then 180° clockwise. Which direction is he facing now?", options: ["South-West", "North-East", "South-East", "North-West"], answer: 1, explanation: "The turns cancel out completely from North-East, so he faces North-East." },
+    { q: "Yash is 25th from the top and 12th from the bottom in his class. How many students are there in the class?", options: ["36", "35", "37", "26"], answer: 0, explanation: "Total = 25 + 12 − 1 = 36 (Yash is counted in both ranks)." },
+    { q: "Chetan is faster than Asha. Dinesh is slower than Farhan. Dinesh is faster than Jatin. Asha is faster than Farhan. Who is the fastest?", options: ["Farhan", "Dinesh", "Chetan", "Asha"], answer: 2, explanation: "The order from fastest to slowest is Chetan > Asha > Farhan > Dinesh > Jatin, so the fastest is Chetan." },
+    { q: "A bag contains an equal number of ₹2, ₹5 and ₹10 coins worth ₹85 in all. How many of each are there?", options: ["5", "15", "4", "8"], answer: 0, explanation: "Each set of one of each is worth ₹17; 85/17 = 5." },
+    { q: "A number is multiplied by 4, then 9 is added, and the result is multiplied by 2. The final answer is 154. What was the number?", options: ["27", "17", "16", "15"], answer: 1, explanation: "Working backwards: 154 ÷ 2 = 77; − 9 = 68; ÷ 4 = 17." },
+    { q: "What is the angle between the hands of a clock at 7:25?", options: ["60°", "72.5°", "102.5°", "87.5°"], answer: 1, explanation: "Angle = |30 × 7 − 5.5 × 25| = 72.5°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "If today is Tuesday, what day of the week will it be 188 days from today?", options: ["Wednesday", "Tuesday", "Monday", "Sunday"], answer: 2, explanation: "188 = 7 × 26 + 6; 6 days after Tuesday is Monday." },
+    { q: "Statements: Some flowers are pilots. No pilot is a lamp. Conclusions: I. Some flowers are not lamps. II. No flower is a lamp.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "The flowers that are pilots cannot be lamps, so some flowers are not lamps (I); other flowers might be lamps, so II is not certain." },
+    { q: "Statement: \"Wear a helmet while riding a two-wheeler,\" says a traffic police notice. Assumptions: I. Helmets reduce head injuries in accidents. II. All riders already wear helmets.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0, explanation: "The notice assumes helmets help (I); if everyone already wore them the notice would be pointless, so II is not assumed." },
+    { q: "A cube of side 3 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have exactly two faces painted?", options: ["1", "12", "6", "8"], answer: 1, explanation: "There are 27 small cubes; exactly two faces painted: 12 edges × (3 − 2) = 12." },
+    { q: "How many letters are there between G and S in the English alphabet?", options: ["12", "9", "13", "11"], answer: 3, explanation: "G is 7 and S is 19; the letters strictly between them number 19 − 7 − 1 = 11." },
+    { q: "If the letters of the word DESTROYER are arranged in alphabetical order, how many letters remain in the same position?", options: ["3", "5", "4", "2"], answer: 0, explanation: "Alphabetical order: DEEORRSTY. Comparing with DESTROYER, 3 letters (D, E, R) stay in place." },
+  ],
+};
+
+export default test;

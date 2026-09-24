@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-50",
+  title: "OIR Test 50",
+  durationMinutes: 20,
+  releaseAt: "2026-11-08T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 5, 6, 9, 18, 45, ?", options: ["127", "126", "153", "135"], answer: 1, explanation: "Here the differences 1, 3, 9, 27, 81 are each 3 times the previous difference. Next: 45 + 81 = 126." },
+    { q: "Find the next number: 11, 55, 275, 1375, ?", options: ["6873", "8250", "6864", "6875"], answer: 3, explanation: "Here each term is 5 times the previous term. Next: 1375 × 5 = 6875." },
+    { q: "Find the next number: 130, 126, 119, 109, 96, ?", options: ["83", "79", "77", "80"], answer: 3, explanation: "Here the differences subtracted are 4, 7, 10, 13, 16 — each 3 more than the last. Next: 96 − 16 = 80." },
+    { q: "Find the missing number: 9, 21, ?, 93, 189, 381", options: ["45", "69", "46", "57"], answer: 0, explanation: "Here each term is 2 times the previous term plus 3, so the missing term is 45." },
+    { q: "Find the next letter: G, I, N, P, U, ?", options: ["W", "Y", "X", "V"], answer: 0, explanation: "By alphabet positions (7, 9, 14, 16, 21), the letters move alternately +2 and +5: U(21) + 2 = W(23)." },
+    { q: "Find the next group: BCD, FGH, JKL, ?", options: ["OPQ", "MNO", "NPO", "NOP"], answer: 3, explanation: "Each group is three consecutive letters, and 1 letter is skipped between groups: after JKL comes NOP." },
+    { q: "Astronomy : Stars :: Meteorology : ?", options: ["Minerals", "Meteors", "Weather", "Oceans"], answer: 2, explanation: "Astronomy studies stars; meteorology studies the weather (not meteors)." },
+    { q: "4 : 68 :: 10 : ?", options: ["1010", "101", "990", "100"], answer: 0, explanation: "4 → 4³ + 4 = 68; likewise 10 → 10³ + 10 = 1010." },
+    { q: "Nepal : Kathmandu :: Bhutan : ?", options: ["Lhasa", "Dhaka", "Thimphu", "Paro"], answer: 2, explanation: "Kathmandu is the capital of Nepal; Thimphu is the capital of Bhutan." },
+    { q: "Which one does not belong with the others?", options: ["Bronze", "Iron", "Copper", "Aluminium"], answer: 0, explanation: "Bronze is an alloy; the others are pure metals." },
+    { q: "Which pair does not belong with the others?", options: ["7 – 42", "5 – 20", "8 – 80", "9 – 72"], answer: 2, explanation: "In the other pairs the second number is n² − n, where n is the first (e.g. 9² − 9 = 72); but 8² − 8 = 56, not 80." },
+    { q: "Choose the word most opposite in meaning to MAXIMUM.", options: ["Most", "Highest", "Greatest", "Minimum"], answer: 3, explanation: "The opposite of maximum is minimum; the other options are similar in meaning or unrelated." },
+    { q: "If BREAD is coded as EBFSC, how is EAGLE coded?", options: ["FMGBF", "FZHKF", "FMIBF", "FMHBF"], answer: 3, explanation: "In this code the letters are reversed and each is moved 1 place forward, so EAGLE becomes FMHBF." },
+    { q: "In a code language, 'tall students fight' is written as 'si mu ri', 'quick students' is written as 'ki ri' and 'fight again' is written as 'mu ze'. What is the code for 'tall'?", options: ["si", "ze", "ki", "mu"], answer: 0, explanation: "'students' is common to the first two sentences, so students = ri; 'fight' is common to the first and third, so fight = mu. The remaining code in the first sentence, si, means 'tall'." },
+    { q: "If A = 1, B = 2, …, Z = 26 and BREAD = 30 (the sum of its letter values), what is TROPHY?", options: ["103", "60", "102", "122"], answer: 2, explanation: "TROPHY = 20 + 18 + 15 + 16 + 8 + 25 = 102." },
+    { q: "B is the son of C. D is the brother of C. E is the wife of D. How is E related to B?", options: ["Sister", "Aunt", "Mother", "Grandmother"], answer: 1, explanation: "D is B's uncle, so D's wife E is B's aunt." },
+    { q: "Pointing to a man, Tanvir said, \"His wife's father-in-law is my father's only brother.\" How is the man related to Tanvir?", options: ["Uncle", "Nephew", "Cousin", "Brother"], answer: 2, explanation: "The man's wife's father-in-law is the man's father, who is Tanvir's uncle; so the man is Tanvir's cousin." },
+    { q: "Starting from his house, Suresh walks 150 m towards the west, turns left and walks 120 m, turns left and walks 100 m, finally turns right and walks 90 m. In which direction is he now from his house?", options: ["South-East", "North-West", "North-East", "South-West"], answer: 3, explanation: "He ends up 50 m west and 210 m south of his house, so he is to the South-West of his house." },
+    { q: "A man is facing North-East. He turns 135° anticlockwise, then 180° anticlockwise. Which direction is he facing now?", options: ["South", "West", "East", "North"], answer: 2, explanation: "The net turn is 45° clockwise from North-East, so he faces East." },
+    { q: "In a row, Mohan is 8th from the left and Arjun is 9th from the right. When they interchange places, Mohan becomes 19th from the left. How many people are in the row?", options: ["28", "17", "27", "26"], answer: 2, explanation: "After the swap Mohan takes Arjun's old place, which is 19th from the left and 9th from the right, so total = 19 + 9 − 1 = 27." },
+    { q: "Isha is slower than Esha. Manoj is faster than Esha. Asha is slower than Bina. Manoj is slower than Asha. Who is the second slowest?", options: ["Esha", "Bina", "Asha", "Manoj"], answer: 0, explanation: "The order from fastest to slowest is Bina > Asha > Manoj > Esha > Isha, so the second slowest is Esha." },
+    { q: "Two trains start at the same time from stations 336 km apart and travel towards each other at 40 km/h and 44 km/h. After how many hours will they meet?", options: ["5", "3", "4", "7"], answer: 2, explanation: "They close the gap at 40 + 44 = 84 km/h, so they meet after 336/84 = 4 hours." },
+    { q: "A train 250 m long running at 90 km/h crosses a platform 400 m long. How many seconds does it take?", options: ["16", "32", "10", "26"], answer: 3, explanation: "It must cover 250 + 400 = 650 m at 90 km/h = 25 m/s, taking 650/25 = 26 s." },
+    { q: "In a mirror, a clock appears to show 8:11. What is the actual time?", options: ["3:49", "3:19", "4:49", "4:11"], answer: 0, explanation: "Actual time = 11:60 − 8:11 = 3:49." },
+    { q: "If today is Tuesday, what day of the week will it be 714 days from today?", options: ["Monday", "Tuesday", "Thursday", "Wednesday"], answer: 1, explanation: "714 = 7 × 102 + 0; 0 days after Tuesday is Tuesday." },
+    { q: "Statements: All boxes are cups. No cup is a sailor. Conclusions: I. No sailor is a box. II. Some cups are not sailors.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "No a box is a sailor, so equally no a sailor is a box (I); and since no a cup is a sailor, the cups are certainly not sailors (II)." },
+    { q: "Statement: The match was cancelled because of heavy rain. Conclusions: I. It rained heavily. II. The match will never be played.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "The reason given is heavy rain (I); a rescheduled match remains possible." },
+    { q: "A wooden block measuring 7 cm × 5 cm × 4 cm is painted on all faces and cut into 1 cm cubes. How many cubes have no face painted?", options: ["40", "62", "8", "30"], answer: 3, explanation: "Cubes with no face painted: (7 − 2)(5 − 2)(4 − 2) = 30." },
+    { q: "How many letters are there between J and V in the English alphabet?", options: ["11", "13", "12", "9"], answer: 0, explanation: "J is 10 and V is 22; the letters strictly between them number 22 − 10 − 1 = 11." },
+    { q: "If the following words are arranged in dictionary order, which word comes last? Flag, Friendship, Farmer, Frigate", options: ["Farmer", "Frigate", "Flag", "Friendship"], answer: 1, explanation: "In dictionary order: Farmer, Flag, Friendship, Frigate." },
+  ],
+};
+
+export default test;

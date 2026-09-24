@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-65",
+  title: "OIR Test 65",
+  durationMinutes: 20,
+  releaseAt: "2026-11-29T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 37, 41, 43, 47, 53, ?", options: ["61", "59", "60", "55"], answer: 1, explanation: "Here the terms are consecutive prime numbers. Next: the prime after 53 = 59." },
+    { q: "Find the next number: 15, 16, 19, 28, 55, ?", options: ["163", "136", "137", "165"], answer: 1, explanation: "Here the differences 1, 3, 9, 27, 81 are each 3 times the previous difference. Next: 55 + 81 = 136." },
+    { q: "Find the next number: 7, 21, 17, 51, 47, 141, ?", options: ["138", "137", "423", "135"], answer: 1, explanation: "Here the operations alternate: × 3, − 4, × 3, − 4 and so on. Next: 141 − 4 = 137." },
+    { q: "Find the missing number: 3, 8, 27, 112, ?, 3396", options: ["565", "1754", "2943", "563"], answer: 0, explanation: "Here the multipliers increase by one each step (×2, ×3, ×4, …), then add the same number (×2 + 2, ×3 + 3, …), so the missing term is 565." },
+    { q: "Find the next letter: L, N, P, R, T, ?", options: ["U", "X", "V", "W"], answer: 2, explanation: "By alphabet positions (12, 14, 16, 18, 20), each letter is 2 places after the previous one: T(20) + 2 = V(22)." },
+    { q: "Find the next group: EFG, JKL, OPQ, ?", options: ["UVW", "TUV", "STU", "TVU"], answer: 1, explanation: "Each group is three consecutive letters, and 2 letters are skipped between groups: after OPQ comes TUV." },
+    { q: "Seed : Tree :: Egg : ?", options: ["Yolk", "Shell", "Nest", "Bird"], answer: 3, explanation: "A seed grows into a tree; an egg hatches into a bird." },
+    { q: "6 : 30 :: 2 : ?", options: ["8", "7", "2", "6"], answer: 2, explanation: "6 → 6² − 6 = 30; likewise 2 → 2² − 2 = 2." },
+    { q: "Cricket : Ranji Trophy :: Football : ?", options: ["Duleep Trophy", "Santosh Trophy", "Davis Cup", "Thomas Cup"], answer: 1, explanation: "The Ranji Trophy is a cricket tournament; the Santosh Trophy is a football tournament." },
+    { q: "Which one does not belong with the others?", options: ["Poet", "Novelist", "Dramatist", "Painter"], answer: 3, explanation: "A painter is not a writer; the others are writers." },
+    { q: "Which pair does not belong with the others?", options: ["5 – 50", "9 – 162", "7 – 342", "4 – 32"], answer: 2, explanation: "In the other pairs the second number is 2n², where n is the first (e.g. 2 × 9² = 162); but 2 × 7² = 98, not 342." },
+    { q: "Choose the word most opposite in meaning to MAJORITY.", options: ["Bulk", "Mass", "Most", "Minority"], answer: 3, explanation: "The opposite of majority is minority; the other options are similar in meaning or unrelated." },
+    { q: "If OCEAN is written as 15-3-5-1-14, how is WHEEL written in the same code?", options: ["23-8-5-5-12", "23-8-6-5-12", "4-19-22-22-15", "23-8-5-5-11"], answer: 0, explanation: "Each letter is replaced by its position in the alphabet (A = 1, …, Z = 26), so WHEEL → 23-8-5-5-12." },
+    { q: "In a code language, 'calm pilots lead' is written as 'pi ne yo', 'strong pilots' is written as 'po yo' and 'lead bravely' is written as 'pi ze'. Which word is coded as 'yo'?", options: ["pilots", "bravely", "strong", "lead"], answer: 0, explanation: "'pilots' is common to the first two sentences, so pilots = yo; 'lead' is common to the first and third, so lead = pi." },
+    { q: "If '÷' means '+', '+' means '−', '−' means '×' and '×' means '÷', what is the value of 20 ÷ 8 × 2 − 3 + 9?", options: ["23", "25", "5", "32"], answer: 0, explanation: "Replacing the symbols gives 20 + 8 ÷ 2 × 3 − 9; following BODMAS, this equals 23." },
+    { q: "Om is the father of Pari. Pari is married to Qasim. Qasim's sister is Rukhsana. How is Rukhsana related to Pari?", options: ["Cousin", "Sister", "Mother-in-law", "Sister-in-law"], answer: 3, explanation: "Rukhsana is the sister of Pari's husband, so she is Pari's sister-in-law." },
+    { q: "Pointing to a boy, Poonam said, \"His father's only sister is my mother.\" How is the boy related to Poonam?", options: ["Brother", "Nephew", "Cousin", "Uncle"], answer: 2, explanation: "The boy's father is Poonam's maternal uncle, so the boy is her cousin." },
+    { q: "Starting from his house, Sanjay walks 2 km towards the west, turns right and walks 15 km, finally turns right and walks 8 km. In which direction is he now from his house?", options: ["South-West", "South-East", "North-East", "North-West"], answer: 2, explanation: "He ends up 6 km east and 15 km north of his house, so he is to the North-East of his house." },
+    { q: "A man is facing North. He turns 90° anticlockwise, then 45° anticlockwise. Which direction is he facing now?", options: ["South-East", "South-West", "North-East", "North-West"], answer: 1, explanation: "The net turn is 135° anticlockwise from North, so he faces South-West." },
+    { q: "Mohan is 25th from the top and 18th from the bottom in his class. How many students are there in the class?", options: ["41", "42", "43", "44"], answer: 1, explanation: "Total = 25 + 18 − 1 = 42 (Mohan is counted in both ranks)." },
+    { q: "Manoj is lighter than Farhan. Nisha is lighter than Dinesh. Uma is lighter than Nisha. Dinesh is lighter than Manoj. Who is in the middle (third)?", options: ["Manoj", "Dinesh", "Nisha", "Farhan"], answer: 1, explanation: "The order from heaviest to lightest is Farhan > Manoj > Dinesh > Nisha > Uma, so in the middle (third) is Dinesh." },
+    { q: "A pipe can fill a tank in 3 hours and another pipe can empty it in 4 hours. If both are opened together on an empty tank, in how many hours will it be full?", options: ["1", "13", "22", "12"], answer: 3, explanation: "Net filling per hour = 1/3 − 1/4 = 1/12 = 1/12, so it fills in 12 hours." },
+    { q: "30% of a number is 30. What is 50% of the same number?", options: ["50", "150", "49", "80"], answer: 0, explanation: "The number is 30 × 100/30 = 100, and 50% of 100 = 50." },
+    { q: "A clock gains 2 minutes every hour. It is set right at 10 am. What time will it show when the correct time is 5:00 pm the same day?", options: ["5:16 pm", "5:12 pm", "4:46 pm", "5:14 pm"], answer: 3, explanation: "In 7 hours it gains 2 × 7 = 14 minutes, so it shows 5:14 pm." },
+    { q: "3 July 2031 is a Thursday. What day of the week is 20 September 2030?", options: ["Friday", "Sunday", "Saturday", "Thursday"], answer: 0, explanation: "20 September 2030 is 286 days before 3 July 2031. 286 = 7 × 40 + 6, so the day shifts 6 back: Friday." },
+    { q: "Statements: Some watches are cups. All cups are doctors. Conclusions: I. Some watches are doctors. II. Some doctors are watches.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "The watches that are cups are also doctors, so some watches are doctors (I), and conversely some doctors are watches (II)." },
+    { q: "Statement: Anil scored the highest marks in the class. Conclusions: I. No one in the class scored more than Anil. II. Anil scored full marks.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Highest means nobody scored more (I); it need not be full marks." },
+    { q: "A wooden block measuring 5 cm × 4 cm × 3 cm is painted on all faces and cut into 1 cm cubes. How many cubes have no face painted?", options: ["24", "6", "8", "22"], answer: 1, explanation: "Cubes with no face painted: (5 − 2)(4 − 2)(3 − 2) = 6." },
+    { q: "Which letter is 11th to the right of the 9th letter from the left in the English alphabet?", options: ["S", "R", "T", "U"], answer: 2, explanation: "The 9th letter from the left is I; 11 places to its right is the 20th letter, T." },
+    { q: "If the following words are arranged in dictionary order, which word comes first? Player, Pillow, Patrol, Painter", options: ["Patrol", "Player", "Painter", "Pillow"], answer: 2, explanation: "In dictionary order: Painter, Patrol, Pillow, Player." },
+  ],
+};
+
+export default test;

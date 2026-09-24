@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-92",
+  title: "OIR Test 92",
+  durationMinutes: 20,
+  releaseAt: "2027-01-10T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 17, 19, 23, 29, 31, ?", options: ["38", "37", "33", "39"], answer: 1, explanation: "Here the terms are consecutive prime numbers. Next: the prime after 31 = 37." },
+    { q: "Find the next number: 7, 15, 31, 63, 127, ?", options: ["254", "257", "255", "253"], answer: 2, explanation: "Here each term is 2 times the previous term plus 1. Next: 127 × 2 + 1 = 255." },
+    { q: "Find the next number: 9, 27, 29, 87, 89, 267, ?", options: ["269", "801", "270", "267"], answer: 0, explanation: "Here the operations alternate: × 3, + 2, × 3, + 2 and so on. Next: 267 + 2 = 269." },
+    { q: "Find the missing number: 2, 5, 10, 17, ?, 37", options: ["28", "26", "29", "27"], answer: 1, explanation: "Here the terms are n² + 1 for consecutive n, so the missing term is 26." },
+    { q: "Find the next letter: J, L, N, P, R, ?", options: ["S", "U", "T", "V"], answer: 2, explanation: "By alphabet positions (10, 12, 14, 16, 18), each letter is 2 places after the previous one: R(18) + 2 = T(20)." },
+    { q: "Find the next pair: QB, RE, SH, TK, ?", options: ["UO", "TM", "VN", "UN"], answer: 3, explanation: "The first letters move 1 forward each time and the second letters move 3 forward: next is UN." },
+    { q: "Pearl : Oyster :: Ivory : ?", options: ["Rhinoceros", "Elephant", "Deer", "Whale"], answer: 1, explanation: "Pearls come from oysters; ivory comes from elephant tusks." },
+    { q: "5 : 50 :: 6 : ?", options: ["37", "36", "72", "30"], answer: 2, explanation: "5 → 2 × 5² = 50; likewise 6 → 2 × 6² = 72." },
+    { q: "Narmada : Amarkantak :: Godavari : ?", options: ["Trimbakeshwar", "Amarkantak", "Talakaveri", "Mahabaleshwar"], answer: 0, explanation: "The Narmada rises at Amarkantak; the Godavari rises at Trimbakeshwar near Nashik." },
+    { q: "Which one does not belong with the others?", options: ["Hydrogen", "Oxygen", "Carbon dioxide", "Nitrogen"], answer: 2, explanation: "Carbon dioxide is a compound; the others are elements." },
+    { q: "Which pair does not belong with the others?", options: ["7 – 64", "5 – 36", "6 – 39", "2 – 9"], answer: 2, explanation: "In the other pairs the second number is (n + 1)², where n is the first (e.g. (2 + 1)² = 9); but (6 + 1)² = 49, not 39." },
+    { q: "Choose the one word for: \"A person who flies an aircraft\"", options: ["Mariner", "Navigator", "Aviator", "Astronaut"], answer: 2, explanation: "Aviator: a person who flies an aircraft." },
+    { q: "If PARADE is coded as QCUEIK, how is COLLEGE coded?", options: ["DQOOJML", "CQOPJML", "XLOOVTV", "DQOPJML"], answer: 3, explanation: "In this code the 1st letter moves 1 place forward, the 2nd moves 2, the 3rd moves 3, and so on, so COLLEGE becomes DQOPJML." },
+    { q: "In a code language, 'young farmers sail' is written as 'ja da po', 'proud farmers' is written as 'ta da' and 'sail together' is written as 'ma ja'. What is the code for 'together'?", options: ["po", "da", "ma", "ja"], answer: 2, explanation: "'farmers' is common to the first two sentences, so farmers = da; 'sail' is common to the first and third, so sail = ja. The other code in the third sentence, ma, means 'together'." },
+    { q: "If A = 1, B = 2, …, Z = 26 and CHEESE = 45 (the sum of its letter values), what is EAGLE?", options: ["30", "35", "20", "105"], answer: 0, explanation: "EAGLE = 5 + 1 + 7 + 12 + 5 = 30." },
+    { q: "Yamini's brother Zubin has a son Aarav. Aarav's mother is Bela. How is Bela related to Yamini?", options: ["Sister", "Mother", "Cousin", "Sister-in-law"], answer: 3, explanation: "Bela is Zubin's wife, i.e. Yamini's brother's wife — her sister-in-law." },
+    { q: "Pointing to a lady, Jay said, \"Her only son's wife is my sister.\" How is the lady related to Jay?", options: ["Mother", "Aunt", "Mother-in-law", "Sister's mother-in-law"], answer: 3, explanation: "Jay's sister is married to the lady's son, so the lady is his sister's mother-in-law." },
+    { q: "Starting from his house, Sanjay walks 8 km towards the north, turns right and walks 10 km, turns right and walks 9 km, finally turns right and walks 11 km. In which direction is he now from his house?", options: ["North-East", "North-West", "South-West", "South-East"], answer: 2, explanation: "He ends up 1 km west and 1 km south of his house, so he is to the South-West of his house." },
+    { q: "One morning, just after sunrise, Mohan was standing in a field. His shadow fell exactly to his left. Which direction was he facing?", options: ["South", "East", "West", "North"], answer: 3, explanation: "In the morning the sun is in the east, so shadows fall to the west. With the shadow (West) on his left, he must be facing North." },
+    { q: "In a row of 34 children, Vikram is 15th from the left. Varun is 10th to the right of Vikram. What is Varun's position from the right end?", options: ["10th", "11th", "12th", "9th"], answer: 0, explanation: "Varun is 25th from the left, so from the right he is 34 − 25 + 1 = 10." },
+    { q: "Lata is taller than Uma. Lata is shorter than Jatin. Tarun is shorter than Farhan. Farhan is shorter than Uma. Who is the shortest?", options: ["Lata", "Jatin", "Tarun", "Uma"], answer: 2, explanation: "The order from tallest to shortest is Jatin > Lata > Uma > Farhan > Tarun, so the shortest is Tarun." },
+    { q: "₹3900 is divided among X, Y and Z in the ratio 3 : 6 : 4. What is Y's share?", options: ["₹900", "₹2100", "₹1200", "₹1800"], answer: 3, explanation: "Total parts = 13; one part = ₹300; Y gets 6 × 300 = ₹1800." },
+    { q: "The average of 6 numbers is 58. When one number is removed, the average of the rest becomes 60. Which number was removed?", options: ["54", "58", "48", "49"], answer: 2, explanation: "Total before = 6 × 58 = 348; after = 5 × 60 = 300; removed = 48." },
+    { q: "What is the angle between the hands of a clock at 8:20?", options: ["160°", "145°", "120°", "130°"], answer: 3, explanation: "Angle = |30 × 8 − 5.5 × 20| = 130°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "6 November 2031 is a Thursday. What day of the week is 26 May 2031?", options: ["Monday", "Wednesday", "Sunday", "Tuesday"], answer: 0, explanation: "26 May 2031 is 164 days before 6 November 2031. 164 = 7 × 23 + 3, so the day shifts 3 back: Monday." },
+    { q: "Statements: All stones are bats. No bat is a coin. Conclusions: I. No stone is a coin. II. Some stones are coins.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "All stones are bats and no a bat is a coin, so no a stone can be a coin (I); II contradicts this." },
+    { q: "Statement: Onion prices have risen sharply because of a poor harvest. Courses of action: I. The government should release onions from its buffer stock. II. Onion farmers should be punished. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Releasing stock eases supply (I); the harvest failure is not the farmers' fault." },
+    { q: "A cube of side 8 cm is painted on two opposite faces only and then cut into 1 cm cubes. How many small cubes have exactly one painted face?", options: ["64", "384", "128", "216"], answer: 2, explanation: "The two opposite faces each have 64 cubes with exactly one painted face (128 in all), and the remaining 8³ − 128 = 384 cubes have no paint." },
+    { q: "Which letter is exactly midway between P and X in the English alphabet?", options: ["U", "S", "T", "V"], answer: 2, explanation: "P = 16 and X = 24; the midpoint is 20 = T." },
+    { q: "If the following words are arranged in dictionary order, which word comes second? Butter, Banker, Bunker, Bronze", options: ["Banker", "Bronze", "Butter", "Bunker"], answer: 1, explanation: "In dictionary order: Banker, Bronze, Bunker, Butter." },
+  ],
+};
+
+export default test;

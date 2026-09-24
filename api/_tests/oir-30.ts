@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-30",
+  title: "OIR Test 30",
+  durationMinutes: 20,
+  releaseAt: "2026-10-11T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 8, 24, 48, 120, 168, ?", options: ["288", "290", "224", "323"], answer: 0, explanation: "Here the terms are one less than the squares of consecutive primes. Next: 17² − 1 = 288." },
+    { q: "Find the next number: 3, 3, 2, 8, 13, 23, 44, ?", options: ["80", "57", "68", "88"], answer: 0, explanation: "Here each term is the sum of the previous three terms. Next: 13 + 23 + 44 = 80." },
+    { q: "Find the next number: 3750, 750, 150, 30, ?", options: ["5", "7", "6", "24"], answer: 2, explanation: "Here each term is the previous term divided by 5. Next: 30 ÷ 5 = 6." },
+    { q: "Find the missing number: 3, 9, ?, 180, 1080, 7560", options: ["36", "95", "153", "38"], answer: 0, explanation: "Here the multipliers increase by one each step (×3, ×4, ×5, …), so the missing term is 36." },
+    { q: "Find the next letter: B, C, E, H, L, ?", options: ["Q", "R", "S", "P"], answer: 0, explanation: "By alphabet positions (2, 3, 5, 8, 12), the gaps grow by one each time (+1, 2, 3, 4, …): L(12) + 5 = Q(17)." },
+    { q: "Find the next pair: AF, CG, EH, GI, ?", options: ["JJ", "HI", "IJ", "IK"], answer: 2, explanation: "The first letters move 2 forward each time and the second letters move 1 forward: next is IJ." },
+    { q: "Anemometer : Wind speed :: Hygrometer : ?", options: ["Pressure", "Temperature", "Rainfall", "Humidity"], answer: 3, explanation: "An anemometer measures wind speed; a hygrometer measures humidity." },
+    { q: "5 : 36 :: 3 : ?", options: ["10", "12", "16", "15"], answer: 2, explanation: "5 → (5 + 1)² = 36; likewise 3 → (3 + 1)² = 16." },
+    { q: "Mirage 2000 : France :: MiG-21 : ?", options: ["Sweden", "USA", "UK", "Russia"], answer: 3, explanation: "The Mirage 2000 is a French aircraft; the MiG-21 is of Soviet/Russian origin." },
+    { q: "Which one does not belong with the others?", options: ["June", "May", "March", "January"], answer: 0, explanation: "June has 30 days; the others have 31." },
+    { q: "Which number does not belong with the others?", options: ["130", "88", "154", "132"], answer: 0, explanation: "154, 88, 132 are all multiples of 11; 130 is not." },
+    { q: "Choose the word most similar in meaning to IMMINENT.", options: ["About to happen", "Famous", "Distant", "Important"], answer: 0, explanation: "Imminent means about to happen." },
+    { q: "If DANCER is coded as CZMBDQ, how is WHEEL coded?", options: ["WGDDK", "LEEHW", "UGDDK", "VGDDK"], answer: 3, explanation: "In this code each letter is moved 1 place back in the alphabet, so WHEEL becomes VGDDK." },
+    { q: "In a code language, 'loyal doctors lead' is written as 'ri ze ta', 'calm doctors' is written as 'tu ze' and 'lead fast' is written as 'ri ve'. What is the code for 'calm'?", options: ["ve", "ze", "ri", "tu"], answer: 3, explanation: "'doctors' is common to the first two sentences, so doctors = ze; 'lead' is common to the first and third, so lead = ri. The other code in the second sentence, tu, means 'calm'." },
+    { q: "If A = 1, B = 2, …, Z = 26 and GUARD = 51 (the sum of its letter values), what is SCHOOL?", options: ["75", "90", "72", "91"], answer: 2, explanation: "SCHOOL = 19 + 3 + 8 + 15 + 15 + 12 = 72." },
+    { q: "P is the son of Q. Q is the only daughter of R. R is the husband of S. How is P related to S?", options: ["Brother", "Nephew", "Son", "Grandson"], answer: 3, explanation: "Q is S's daughter, so Q's son P is S's grandson." },
+    { q: "Pointing to a girl, Nikhil said, \"She is the only daughter of my wife's mother-in-law.\" How is the girl related to Nikhil?", options: ["Daughter", "Sister", "Niece", "Wife"], answer: 1, explanation: "Nikhil's wife's mother-in-law is Nikhil's mother; her only daughter is Nikhil's sister." },
+    { q: "Starting from his house, Varun walks 4 km towards the east, turns right and walks 4 km, finally turns left and walks 14 km. In which direction is he now from his house?", options: ["South-West", "South-East", "North-West", "North-East"], answer: 1, explanation: "He ends up 18 km east and 4 km south of his house, so he is to the South-East of his house." },
+    { q: "One morning, just after sunrise, Ravi was standing in a field. His shadow fell exactly behind him. Which direction was he facing?", options: ["North", "East", "South", "West"], answer: 1, explanation: "In the morning the sun is in the east, so shadows fall to the west. With the shadow (West) behind him, he must be facing East." },
+    { q: "In a class of 59 students, Dev ranks 41st from the top. What is his rank from the bottom?", options: ["19th", "18th", "20th", "21st"], answer: 0, explanation: "Rank from bottom = 59 − 41 + 1 = 19." },
+    { q: "Lata is shorter than Esha. Pooja is taller than Om. Uma is shorter than Lata. Pooja is shorter than Uma. Who is the shortest?", options: ["Uma", "Om", "Esha", "Lata"], answer: 1, explanation: "The order from tallest to shortest is Esha > Lata > Uma > Pooja > Om, so the shortest is Om." },
+    { q: "₹2100 is divided among X, Y and Z in the ratio 2 : 1 : 4. What is Y's share?", options: ["₹700", "₹300", "₹600", "₹1200"], answer: 1, explanation: "Total parts = 7; one part = ₹300; Y gets 1 × 300 = ₹300." },
+    { q: "A number is multiplied by 5, then 7 is added, and the result is multiplied by 4. The final answer is 328. What was the number?", options: ["13", "15", "17", "14"], answer: 1, explanation: "Working backwards: 328 ÷ 4 = 82; − 7 = 75; ÷ 5 = 15." },
+    { q: "Through how many degrees does the hour hand of a clock turn from 6:15 to 8:35?", options: ["70°", "120°", "85°", "100°"], answer: 0, explanation: "The hour hand turns 0.5° per minute; 140 minutes × 0.5° = 70°." },
+    { q: "If today is Friday, what day of the week will it be 693 days from today?", options: ["Saturday", "Sunday", "Friday", "Thursday"], answer: 2, explanation: "693 = 7 × 99 + 0; 0 days after Friday is Friday." },
+    { q: "Statements: All clouds are bridges. No painter is a cloud. Conclusions: I. No painter is a bridge. II. Some bridges are clouds.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "All clouds are bridges, so some bridges are clouds (II); painters may overlap with the bridges that are not clouds, so I fails." },
+    { q: "Statement: The coach made the team practise in the rain. Assumptions: I. Matches may have to be played in rainy conditions. II. The players dislike the rain.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0, explanation: "Practising in rain assumes such conditions may occur in matches (I); the players' likes are irrelevant." },
+    { q: "A wooden block measuring 5 cm × 4 cm × 4 cm is painted on all faces and cut into 1 cm cubes. How many cubes have no face painted?", options: ["28", "12", "8", "32"], answer: 1, explanation: "Cubes with no face painted: (5 − 2)(4 − 2)(4 − 2) = 12." },
+    { q: "How many letters are there between K and Z in the English alphabet?", options: ["15", "14", "4", "16"], answer: 1, explanation: "K is 11 and Z is 26; the letters strictly between them number 26 − 11 − 1 = 14." },
+    { q: "In the word CHAMPION, the 1st and 2nd letters are interchanged, the 3rd and 4th letters are interchanged, and so on. Which letter will be 3rd from the right end?", options: ["P", "I", "M", "N"], answer: 0, explanation: "The new arrangement is HCMAIPNO; the 3rd letter from the right is P." },
+  ],
+};
+
+export default test;

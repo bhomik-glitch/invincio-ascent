@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-72",
+  title: "OIR Test 72",
+  durationMinutes: 20,
+  releaseAt: "2026-12-13T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 2, 66, 6, 59, 10, 52, 14, ?", options: ["52", "18", "38", "45"], answer: 3, explanation: "Here two series alternate: 2, 6, 10, … (+4) and 66, 59, 52, … (-7). Next: 52 − 7 = 45." },
+    { q: "Find the next number: 79, 98, 119, 142, 167, ?", options: ["193", "195", "223", "194"], answer: 3, explanation: "Here the terms are n² − 2 for consecutive n. Next: 14² − 2 = 194." },
+    { q: "Find the next number: 4, 13, 31, 67, 139, ?", options: ["283", "285", "273", "278"], answer: 0, explanation: "Here each term is 2 times the previous term plus 5. Next: 139 × 2 + 5 = 283." },
+    { q: "Find the missing number: 4, 8, ?, 56, 164, 488", options: ["21", "44", "32", "20"], answer: 3, explanation: "Here the differences 4, 12, 36, 108, 324 are each 3 times the previous difference, so the missing term is 20." },
+    { q: "Find the next letter: E, G, I, K, M, ?", options: ["P", "Q", "O", "N"], answer: 2, explanation: "By alphabet positions (5, 7, 9, 11, 13), each letter is 2 places after the previous one: M(13) + 2 = O(15)." },
+    { q: "Find the next term: I9, K11, M13, O15, ?", options: ["Q18", "Q17", "R18", "Q10"], answer: 1, explanation: "The letters move 2 forward each time, and each number is the letter's position in the alphabet: Q → 17." },
+    { q: "Atlas : Maps :: Anthology : ?", options: ["Stamps", "Poems", "Coins", "Laws"], answer: 1, explanation: "An atlas is a collection of maps; an anthology is a collection of poems." },
+    { q: "7 : 336 :: 3 : ?", options: ["28", "26", "18", "24"], answer: 3, explanation: "7 → 7³ − 7 = 336; likewise 3 → 3³ − 3 = 24." },
+    { q: "Pulitzer Prize : Journalism :: Booker Prize : ?", options: ["Peace", "Fiction", "Film", "Physics"], answer: 1, explanation: "The Pulitzer honours journalism (among others); the Booker Prize honours fiction." },
+    { q: "Which one does not belong with the others?", options: ["Sundarbans", "Kalahari", "Thar", "Sahara"], answer: 0, explanation: "The Sundarbans is a mangrove forest; the others are deserts." },
+    { q: "Which number does not belong with the others?", options: ["17", "111", "41", "29"], answer: 1, explanation: "111 = 3 × 37 is not prime; the others are prime numbers." },
+    { q: "Choose the one word for: \"A person who does not believe in the existence of God\"", options: ["Pagan", "Atheist", "Theist", "Agnostic"], answer: 1, explanation: "Atheist: a person who does not believe in the existence of god." },
+    { q: "If MOTOR is coded as NNUNS, how is BOOTS coded?", options: ["CNPST", "CQRXX", "CMPST", "CNPSS"], answer: 0, explanation: "In this code letters are moved alternately one place forward and one place back, so BOOTS becomes CNPST." },
+    { q: "In a code language, 'young players train' is written as 'ru li su', 'calm players' is written as 'su ta' and 'train together' is written as 'ru tu'. Which word is coded as 'tu'?", options: ["calm", "train", "together", "young"], answer: 2, explanation: "'players' is common to the first two sentences, so players = su; 'train' is common to the first and third, so train = ru. The other code in the third sentence, tu, means 'together'." },
+    { q: "If A = 1, B = 2, …, Z = 26 and TICKET = 68 (the sum of its letter values), what is FOREST?", options: ["83", "86", "89", "79"], answer: 0, explanation: "FOREST = 6 + 15 + 18 + 5 + 19 + 20 = 83." },
+    { q: "Kamal is the father of Lokesh. Lokesh is the father of Manav. Manav is the father of Nakul. How is Kamal related to Nakul?", options: ["Grandfather", "Father", "Great-grandfather", "Great-uncle"], answer: 2, explanation: "Kamal → Lokesh → Manav → Nakul spans three generations, so Kamal is Nakul's great-grandfather." },
+    { q: "Pointing to a man, Kriti said, \"He is the husband of the only daughter of my maternal grandmother.\" How is the man related to Kriti?", options: ["Brother", "Uncle", "Father", "Grandfather"], answer: 2, explanation: "The only daughter of Kriti's maternal grandmother is Kriti's mother; her husband is Kriti's father." },
+    { q: "Starting from his house, Ravi walks 145 m towards the south, turns right and walks 45 m, turns right and walks 90 m, finally turns left and walks 140 m. In which direction is he now from his house?", options: ["North-West", "South-East", "North-East", "South-West"], answer: 3, explanation: "He ends up 185 m west and 55 m south of his house, so he is to the South-West of his house." },
+    { q: "A man is facing West. He turns 180° anticlockwise, then 180° clockwise. Which direction is he facing now?", options: ["North", "East", "West", "South"], answer: 2, explanation: "The turns cancel out completely from West, so he faces West." },
+    { q: "In a row of 37 students, Yash is 10th from the left end and Arjun is 19th from the right end. How many students are there between them?", options: ["10", "9", "11", "8"], answer: 3, explanation: "Yash and Arjun with everyone to their outer sides account for 10 + 19 = 29 students, so 37 − 29 = 8 are between them." },
+    { q: "Tarun is lighter than Gita. Dinesh is lighter than Tarun. Bina is heavier than Gita. Dinesh is heavier than Manoj. Who is the lightest?", options: ["Tarun", "Manoj", "Gita", "Bina"], answer: 1, explanation: "The order from heaviest to lightest is Bina > Gita > Tarun > Dinesh > Manoj, so the lightest is Manoj." },
+    { q: "A shopkeeper marks his goods 40% above the cost price and then gives a discount of 25%. What is his net profit or loss?", options: ["7% profit", "5% loss", "15% profit", "5% profit"], answer: 3, explanation: "On a cost of ₹100 the marked price is ₹140; after 25% off it sells for ₹105, a 5% profit." },
+    { q: "A can complete a piece of work in 18 days and B in 90 days. Working together, in how many days will they complete it?", options: ["17", "54", "72", "15"], answer: 3, explanation: "Together they do 1/18 + 1/90 = 108/1620 = 1/15 of the work per day, so they need 15 days." },
+    { q: "What is the angle between the hands of a clock at 11:15?", options: ["120°", "142.5°", "112.5°", "127.5°"], answer: 2, explanation: "Angle = |30 × 11 − 5.5 × 15| = 247.5°, i.e. 360° − that = 112.5°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "13 October 2026 is a Tuesday. What day of the week is 15 August 2027?", options: ["Sunday", "Saturday", "Monday", "Tuesday"], answer: 0, explanation: "15 August 2027 is 306 days after 13 October 2026. 306 = 7 × 43 + 5, so the day shifts 5 forward: Sunday." },
+    { q: "Statements: Some bridges are rings. No bird is a ring. Conclusions: I. Some bridges are not birds. II. Some rings are bridges.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "The bridges that are rings cannot be birds, so some bridges are not birds (I); 'Some bridges are rings' reverses to 'Some rings are bridges' (II)." },
+    { q: "Statement: The cost of fuel has gone up, and airlines have raised their fares. Conclusions: I. Air travel has become costlier. II. Fewer people will travel by train.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Higher fares make flying costlier (I); nothing follows about train travel." },
+    { q: "How many cubes of side 3 cm can be cut from a solid cube of side 15 cm?", options: ["125", "15", "25", "1125"], answer: 0, explanation: "(15/3)³ = 5³ = 125." },
+    { q: "Which letter is exactly midway between J and R in the English alphabet?", options: ["N", "P", "M", "O"], answer: 0, explanation: "J = 10 and R = 18; the midpoint is 14 = N." },
+    { q: "If the following words are arranged in dictionary order, which word comes first? Wheel, Writer, Window, Winter", options: ["Window", "Writer", "Wheel", "Winter"], answer: 2, explanation: "In dictionary order: Wheel, Window, Winter, Writer." },
+  ],
+};
+
+export default test;

@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-95",
+  title: "OIR Test 95",
+  durationMinutes: 20,
+  releaseAt: "2027-01-10T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 12, 36, 108, 324, ?", options: ["972", "960", "1296", "974"], answer: 0, explanation: "Here each term is 3 times the previous term. Next: 324 × 3 = 972." },
+    { q: "Find the next number: 202, 198, 190, 178, 162, ?", options: ["142", "146", "132", "138"], answer: 0, explanation: "Here the differences subtracted are 4, 8, 12, 16, 20 — each 4 more than the last. Next: 162 − 20 = 142." },
+    { q: "Find the next number: 5, 9, 21, 57, 165, ?", options: ["495", "597", "490", "489"], answer: 3, explanation: "Here the differences 4, 12, 36, 108, 324 are each 3 times the previous difference. Next: 165 + 324 = 489." },
+    { q: "Find the missing number: 5, 14, 32, ?, 140, 284", options: ["71", "86", "104", "68"], answer: 3, explanation: "Here each term is 2 times the previous term plus 4, so the missing term is 68." },
+    { q: "Find the next letter: N, O, S, T, X, ?", options: ["W", "Y", "Z", "X"], answer: 1, explanation: "By alphabet positions (14, 15, 19, 20, 24), the letters move alternately +1 and +4: X(24) + 1 = Y(25)." },
+    { q: "Find the next term: D23, H19, L15, P11, ?", options: ["T8", "U6", "T20", "T7"], answer: 3, explanation: "The letters move 4 forward each time, and each number is the letter's position in the reversed alphabet (A = 26 … Z = 1): T → 7." },
+    { q: "Microscope : Small :: Telescope : ?", options: ["Large", "Distant", "Hidden", "Bright"], answer: 1, explanation: "A microscope shows very small things; a telescope shows distant things." },
+    { q: "8 : 520 :: 9 : ?", options: ["82", "90", "738", "729"], answer: 2, explanation: "8 → 8³ + 8 = 520; likewise 9 → 9³ + 9 = 738." },
+    { q: "Sardar Sarovar : Narmada :: Tehri Dam : ?", options: ["Bhagirathi", "Chenab", "Sutlej", "Yamuna"], answer: 0, explanation: "Sardar Sarovar is on the Narmada; the Tehri Dam is on the Bhagirathi." },
+    { q: "Which one does not belong with the others?", options: ["Tuberculosis", "Polio", "Typhoid", "Cholera"], answer: 1, explanation: "Polio is a viral disease; the others are bacterial." },
+    { q: "Which pair does not belong with the others?", options: ["8 – 67", "7 – 64", "5 – 36", "3 – 16"], answer: 0, explanation: "In the other pairs the second number is (n + 1)², where n is the first (e.g. (7 + 1)² = 64); but (8 + 1)² = 81, not 67." },
+    { q: "Choose the one word for: \"A soldier who fights for money in a foreign army\"", options: ["Cadet", "Veteran", "Mercenary", "Volunteer"], answer: 2, explanation: "Mercenary: a soldier who fights for money in a foreign army." },
+    { q: "If FOREST is written as 6-15-18-5-19-20, how is BOOTS written in the same code?", options: ["2-14-15-20-19", "2-15-15-20-19", "25-12-12-7-8", "2-15-16-20-19"], answer: 1, explanation: "Each letter is replaced by its position in the alphabet (A = 1, …, Z = 26), so BOOTS → 2-15-15-20-19." },
+    { q: "In a code language, 'proud pilots work' is written as 'ma ta ja', 'bold pilots' is written as 'ne ta' and 'work early' is written as 'ja yo'. What is the code for 'pilots'?", options: ["ta", "ma", "yo", "ne"], answer: 0, explanation: "'pilots' is common to the first two sentences, so pilots = ta; 'work' is common to the first and third, so work = ja." },
+    { q: "If '×' means '+', '÷' means '−', '+' means '×' and '−' means '÷', what is the value of 11 + 9 × 6 ÷ 21 − 7?", options: ["88", "109", "102", "92"], answer: 2, explanation: "Replacing the symbols gives 11 × 9 + 6 − 21 ÷ 7; following BODMAS, this equals 102." },
+    { q: "Lokesh is the only son of Maya and Narayan. Om is the only son of Lokesh. How is Narayan related to Om?", options: ["Father", "Grandfather", "Uncle", "Great-grandfather"], answer: 1, explanation: "Narayan is the father of Om's father Lokesh, so he is Om's grandfather." },
+    { q: "Pointing to an old man, Sheetal said, \"He is the father of my father's father.\" How is the old man related to Sheetal?", options: ["Father", "Grandfather", "Great-uncle", "Great-grandfather"], answer: 3, explanation: "The father of one's grandfather is one's great-grandfather." },
+    { q: "Starting from his house, Vikram walks 14 km towards the west, turns left and walks 13 km, turns right and walks 6 km, finally turns right and walks 14 km. In which direction is he now from his house?", options: ["North-East", "South-East", "North-West", "South-West"], answer: 2, explanation: "He ends up 20 km west and 1 km north of his house, so he is to the North-West of his house." },
+    { q: "If South is called North-East, and all other directions are renamed in the same way, what will South-West be called?", options: ["South", "East", "North", "North-East"], answer: 1, explanation: "South → North-East is a rotation of 225° clockwise; rotating South-West by the same amount gives East." },
+    { q: "In a row, Karan is 7th from the left and Sanjay is 12th from the right. When they interchange places, Karan becomes 18th from the left. How many people are in the row?", options: ["39", "24", "29", "30"], answer: 2, explanation: "After the swap Karan takes Sanjay's old place, which is 18th from the left and 12th from the right, so total = 18 + 12 − 1 = 29." },
+    { q: "Sita is lighter than Hari. Isha is heavier than Ravi. Sita is heavier than Manoj. Isha is lighter than Manoj. Who is the second heaviest?", options: ["Isha", "Manoj", "Sita", "Hari"], answer: 2, explanation: "The order from heaviest to lightest is Hari > Sita > Manoj > Isha > Ravi, so the second heaviest is Sita." },
+    { q: "A train 220 m long running at 36 km/h crosses a platform 180 m long. How many seconds does it take?", options: ["18", "40", "22", "30"], answer: 1, explanation: "It must cover 220 + 180 = 400 m at 36 km/h = 10 m/s, taking 400/10 = 40 s." },
+    { q: "The average of 6 numbers is 60. When one number is removed, the average of the rest becomes 63. Which number was removed?", options: ["51", "60", "45", "43"], answer: 2, explanation: "Total before = 6 × 60 = 360; after = 5 × 63 = 315; removed = 45." },
+    { q: "A clock gains 2 minutes every hour. It is set right at 7 am. What time will it show when the correct time is 11:00 am the same day?", options: ["11:06 am", "10:52 am", "11:08 am", "11:10 am"], answer: 2, explanation: "In 4 hours it gains 2 × 4 = 8 minutes, so it shows 11:08 am." },
+    { q: "Which year will have exactly the same calendar as 2037?", options: ["2044", "2043", "2041", "2042"], answer: 1, explanation: "A year has the same calendar when it starts on the same weekday and is also an ordinary year. Counting odd days (1 per ordinary year, 2 per leap year) from 2037 until they total a multiple of 7 gives 2043." },
+    { q: "Statements: Some writers are cups. Some cups are shirts. Conclusions: I. Some writers are shirts. II. All shirts are writers.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 3, explanation: "Two 'some' statements give no definite link between writers and shirts, so neither conclusion is certain." },
+    { q: "Statement: Children in a village school are often absent during the harvest season. Courses of action: I. The school calendar could give a break during harvest. II. Parents should be counselled about the importance of regular schooling. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "Adjusting the calendar (I) and counselling parents (II) are both practical." },
+    { q: "A wooden block measuring 5 cm × 4 cm × 3 cm is painted on all faces and cut into 1 cm cubes. How many cubes have exactly one face painted?", options: ["24", "8", "22", "6"], answer: 2, explanation: "Cubes with exactly one face painted: 2[(3)(2) + (2)(1) + (3)(1)] = 22." },
+    { q: "If the English alphabet is written in reverse order (Z to A), which letter will be 6th to the right of the 17th letter from the left?", options: ["D", "W", "C", "E"], answer: 0, explanation: "In the reversed alphabet the 23rd letter from the left is D (position n holds letter 27 − n)." },
+    { q: "If the letters of the word CAVALRY are arranged in alphabetical order, how many letters remain in the same position?", options: ["3", "4", "2", "1"], answer: 2, explanation: "Alphabetical order: AACLRVY. Comparing with CAVALRY, 2 letters (A, Y) stay in place." },
+  ],
+};
+
+export default test;

@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-28",
+  title: "OIR Test 28",
+  durationMinutes: 20,
+  releaseAt: "2026-10-11T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 9, 18, 36, 72, 144, ?", options: ["278", "288", "279", "432"], answer: 1, explanation: "Here each term is 2 times the previous term. Next: 144 × 2 = 288." },
+    { q: "Find the next number: 6, 3, 9, 12, 21, 33, 54, ?", options: ["88", "108", "75", "87"], answer: 3, explanation: "Here each term is the sum of the previous two terms. Next: 33 + 54 = 87." },
+    { q: "Find the next number: 20, 22, 27, 35, 46, ?", options: ["60", "63", "62", "57"], answer: 0, explanation: "Here the differences added are 2, 5, 8, 11, 14 — each 3 more than the last. Next: 46 + 14 = 60." },
+    { q: "Find the missing number: 8, 27, ?, 255, 768", options: ["198", "84", "141", "74"], answer: 1, explanation: "Here each term is 3 times the previous term plus 3, so the missing term is 84." },
+    { q: "Find the next letter: N, L, J, H, F, ?", options: ["F", "E", "D", "C"], answer: 2, explanation: "By alphabet positions (14, 12, 10, 8, 6), each letter is 2 places before the previous one: F(6) − 2 = D(4)." },
+    { q: "Find the next group: CDE, HIJ, MNO, ?", options: ["STU", "RTS", "RST", "QRS"], answer: 2, explanation: "Each group is three consecutive letters, and 2 letters are skipped between groups: after MNO comes RST." },
+    { q: "Artist : Brush :: Writer : ?", options: ["Canvas", "Desk", "Book", "Pen"], answer: 3, explanation: "A brush is the artist's instrument; a pen is the writer's instrument." },
+    { q: "9 : 99 :: 13 : ?", options: ["2197", "2210", "195", "170"], answer: 2, explanation: "9 → 9 × 11 = 99; likewise 13 → 13 × 15 = 195." },
+    { q: "INS Vikrant : Aircraft carrier :: INS Kalvari : ?", options: ["Corvette", "Frigate", "Submarine", "Destroyer"], answer: 2, explanation: "INS Vikrant is an aircraft carrier; INS Kalvari is a Scorpene-class submarine." },
+    { q: "Which one does not belong with the others?", options: ["Atlantic", "Pacific", "Caspian", "Indian"], answer: 2, explanation: "The Caspian is a sea; the others are oceans." },
+    { q: "Which number does not belong with the others?", options: ["125", "1000", "64", "999"], answer: 3, explanation: "64 = 4³, 1000 = 10³, 125 = 5³ are perfect cubes; 999 is not." },
+    { q: "Choose the word most similar in meaning to GALLANT.", options: ["Cowardly", "Slow", "Heroic", "Rude"], answer: 2, explanation: "Gallant means heroic." },
+    { q: "If MOTOR is written as 13-15-20-15-18, how is HORSE written in the same code?", options: ["9-15-18-19-5", "7-15-18-19-5", "19-12-9-8-22", "8-15-18-19-5"], answer: 3, explanation: "Each letter is replaced by its position in the alphabet (A = 1, …, Z = 26), so HORSE → 8-15-18-19-5." },
+    { q: "In a code language, 'young officers sail' is written as 've da re', 'calm officers' is written as 're zo' and 'sail bravely' is written as 'da si'. What is the code for 'calm'?", options: ["ve", "da", "zo", "re"], answer: 2, explanation: "'officers' is common to the first two sentences, so officers = re; 'sail' is common to the first and third, so sail = da. The other code in the second sentence, zo, means 'calm'." },
+    { q: "If A = 26, B = 25, …, Z = 1 and FALCON = 111 (the sum of its letter values), what is CAMEL?", options: ["100", "125", "101", "34"], answer: 2, explanation: "CAMEL = 24 + 26 + 14 + 22 + 15 = 101." },
+    { q: "Kiran's mother is the sister of Lokesh. How is Lokesh related to Kiran?", options: ["Paternal uncle", "Father", "Grandfather", "Maternal uncle"], answer: 3, explanation: "Lokesh is the brother of Kiran's mother, so he is Kiran's maternal uncle." },
+    { q: "Pointing to a woman, Sanjay said, \"Her father is the father-in-law of my mother.\" How is the woman related to Sanjay?", options: ["Mother", "Paternal aunt", "Sister", "Grandmother"], answer: 1, explanation: "The father-in-law of Sanjay's mother is his paternal grandfather; his daughter is Sanjay's father's sister." },
+    { q: "Starting from his house, Ajay walks 1 km towards the north, turns right and walks 2 km, turns right and walks 13 km, finally turns right and walks 5 km. In which direction is he now from his house?", options: ["South-West", "South-East", "North-West", "North-East"], answer: 0, explanation: "He ends up 3 km west and 12 km south of his house, so he is to the South-West of his house." },
+    { q: "A man is facing North. He turns 90° clockwise, then 180° anticlockwise, then 90° clockwise. Which direction is he facing now?", options: ["East", "West", "North", "South"], answer: 2, explanation: "The turns cancel out completely from North, so he faces North." },
+    { q: "In a row of 30 children, Karan is 13th from the left. Kabir is 7th to the right of Karan. What is Kabir's position from the right end?", options: ["11th", "12th", "13th", "10th"], answer: 0, explanation: "Kabir is 20th from the left, so from the right he is 30 − 20 + 1 = 11." },
+    { q: "Asha is faster than Uma. Asha is slower than Nisha. Sita is faster than Dinesh. Uma is faster than Sita. Who is the fastest?", options: ["Nisha", "Uma", "Asha", "Sita"], answer: 0, explanation: "The order from fastest to slowest is Nisha > Asha > Uma > Sita > Dinesh, so the fastest is Nisha." },
+    { q: "A train 135 m long passes a signal post in 9 seconds. What is its speed in km/h?", options: ["15", "63", "45", "54"], answer: 3, explanation: "Speed = 135/9 = 15 m/s = 15 × 18/5 = 54 km/h." },
+    { q: "A shopkeeper marks his goods 15% above the cost price and then gives a discount of 20%. What is his net profit or loss?", options: ["-5% profit", "8% loss", "10% loss", "8% profit"], answer: 1, explanation: "On a cost of ₹100 the marked price is ₹115; after 20% off it sells for ₹92, a 8% loss." },
+    { q: "What is the angle between the hands of a clock at 4:15?", options: ["37.5°", "30°", "52.5°", "67.5°"], answer: 0, explanation: "Angle = |30 × 4 − 5.5 × 15| = 37.5°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "12 August 2028 is a Saturday. What day of the week is 11 February 2029?", options: ["Tuesday", "Saturday", "Sunday", "Monday"], answer: 2, explanation: "11 February 2029 is 183 days after 12 August 2028. 183 = 7 × 26 + 1, so the day shifts 1 forward: Sunday." },
+    { q: "Statements: All lamps are officers. No plate is a lamp. Conclusions: I. No plate is an officer. II. Some officers are lamps.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "All lamps are officers, so some officers are lamps (II); plates may overlap with the officers that are not lamps, so I fails." },
+    { q: "Statement: The bank has reduced its interest rate on home loans. Assumptions: I. More people may take home loans at a lower rate. II. The bank will close its other services.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0, explanation: "Lower rates are meant to attract borrowers (I); nothing suggests closing other services." },
+    { q: "How many cubes of side 5 cm can be cut from a solid cube of side 10 cm?", options: ["4", "200", "6", "8"], answer: 3, explanation: "(10/5)³ = 2³ = 8." },
+    { q: "If the English alphabet is written in reverse order (Z to A), which letter will be 3rd to the right of the 10th letter from the left?", options: ["Q", "M", "O", "N"], answer: 3, explanation: "In the reversed alphabet the 13th letter from the left is N (position n holds letter 27 − n)." },
+    { q: "If the letters of the word PATIENCE are arranged in alphabetical order, how many letters remain in the same position?", options: ["1", "2", "0", "3"], answer: 0, explanation: "Alphabetical order: ACEEINPT. Comparing with PATIENCE, 1 letter (N) stays in place." },
+  ],
+};
+
+export default test;

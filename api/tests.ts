@@ -1,5 +1,5 @@
 import { getSession, readJson, json, type Req, type Res } from "./_lib.js";
-import tests from "./_tests/index.js";
+import allTests, { isLive } from "./_tests/index.js";
 
 // GET  /api/tests         → list of tests (no questions)
 // GET  /api/tests?id=X    → one test, answers stripped
@@ -7,9 +7,11 @@ import tests from "./_tests/index.js";
 export default async function handler(req: Req, res: Res) {
   if (!getSession(req)) return json(res, 401, { error: "Please log in" });
 
+  // Unreleased tests don't exist as far as students can tell — five more go live every Sunday.
+  const tests = allTests.filter((t) => isLive(t));
   const id = new URL(req.url || "/", "http://x").searchParams.get("id");
   if (!id) {
-    return json(res, 200, tests.map((t) => ({
+    return json(res, 200, [...tests].reverse().map((t) => ({
       id: t.id, title: t.title, durationMinutes: t.durationMinutes, questionCount: t.questions.length,
     })));
   }

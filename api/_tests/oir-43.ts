@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-43",
+  title: "OIR Test 43",
+  durationMinutes: 20,
+  releaseAt: "2026-11-01T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 4, 7, 15, 28, 46, ?", options: ["69", "64", "67", "74"], answer: 0, explanation: "Here the differences added are 3, 8, 13, 18, 23 — each 5 more than the last. Next: 46 + 23 = 69." },
+    { q: "Find the next number: 8, 18, 38, 78, 158, ?", options: ["320", "318", "314", "316"], answer: 1, explanation: "Here each term is 2 times the previous term plus 2. Next: 158 × 2 + 2 = 318." },
+    { q: "Find the next number: 8, 24, 72, 216, ?", options: ["658", "648", "864", "640"], answer: 1, explanation: "Here each term is 3 times the previous term. Next: 216 × 3 = 648." },
+    { q: "Find the missing number: 124, 215, ?, 511, 728, 999", options: ["342", "384", "344", "363"], answer: 0, explanation: "Here the terms are n³ − 1 for consecutive n, so the missing term is 342." },
+    { q: "Find the next letter: D, F, I, M, R, ?", options: ["Y", "W", "Z", "X"], answer: 3, explanation: "By alphabet positions (4, 6, 9, 13, 18), the gaps grow by one each time (+2, 3, 4, 5, …): R(18) + 6 = X(24)." },
+    { q: "Find the next term: B2, D4, F6, H8, ?", options: ["J10", "J17", "K11", "J11"], answer: 0, explanation: "The letters move 2 forward each time, and each number is the letter's position in the alphabet: J → 10." },
+    { q: "Newton : Force :: Pascal : ?", options: ["Frequency", "Pressure", "Energy", "Power"], answer: 1, explanation: "The newton is the unit of force; the pascal is the unit of pressure." },
+    { q: "8 : 520 :: 13 : ?", options: ["170", "2210", "2184", "2197"], answer: 1, explanation: "8 → 8³ + 8 = 520; likewise 13 → 13³ + 13 = 2210." },
+    { q: "Nagaland : Kohima :: Tripura : ?", options: ["Gangtok", "Agartala", "Kohima", "Dispur"], answer: 1, explanation: "Kohima is the capital of Nagaland; Agartala is the capital of Tripura." },
+    { q: "Which one does not belong with the others?", options: ["Lily", "Jasmine", "Rose", "Oak"], answer: 3, explanation: "The oak is a tree; the others are flowers." },
+    { q: "Which pair does not belong with the others?", options: ["6 – 30", "3 – 16", "2 – 2", "7 – 42"], answer: 1, explanation: "In the other pairs the second number is n² − n, where n is the first (e.g. 7² − 7 = 42); but 3² − 3 = 6, not 16." },
+    { q: "Choose the word most opposite in meaning to ARTIFICIAL.", options: ["Fake", "Man-made", "Synthetic", "Natural"], answer: 3, explanation: "The opposite of artificial is natural; the other options are similar in meaning or unrelated." },
+    { q: "If BUCKET is coded as CWFOJZ, how is BRONZE coded?", options: ["CTRREK", "CTQREK", "CSRREK", "YILMAV"], answer: 0, explanation: "In this code the 1st letter moves 1 place forward, the 2nd moves 2, the 3rd moves 3, and so on, so BRONZE becomes CTRREK." },
+    { q: "In a code language, 'calm girls sail' is written as 'ga si bu', 'brave girls' is written as 'ja bu' and 'sail early' is written as 'ta si'. Which word is coded as 'ta'?", options: ["calm", "girls", "sail", "early"], answer: 3, explanation: "'girls' is common to the first two sentences, so girls = bu; 'sail' is common to the first and third, so sail = si. The other code in the third sentence, ta, means 'early'." },
+    { q: "If '×' means '+', '+' means '−', '÷' means '×' and '−' means '÷', what is the value of 16 ÷ 11 + 4 × 35 − 5?", options: ["178", "179", "169", "184"], answer: 1, explanation: "Replacing the symbols gives 16 × 11 − 4 + 35 ÷ 5; following BODMAS, this equals 179." },
+    { q: "W is the husband of X. Y is the son of X. Z is the wife of Y. How is W related to Z?", options: ["Brother-in-law", "Father-in-law", "Husband", "Father"], answer: 1, explanation: "W is the father of Z's husband Y, so W is Z's father-in-law." },
+    { q: "Pointing to a lady, Hemant said, \"Her brother's father is the only son of my paternal grandfather.\" How is the lady related to Hemant?", options: ["Cousin", "Aunt", "Sister", "Mother"], answer: 2, explanation: "The only son of Hemant's paternal grandfather is his father; the lady is also that man's child — Hemant's sister." },
+    { q: "Starting from his house, Dev walks 25 m towards the east, turns right and walks 135 m, finally turns right and walks 95 m. In which direction is he now from his house?", options: ["North-West", "South-West", "South-East", "North-East"], answer: 1, explanation: "He ends up 70 m west and 135 m south of his house, so he is to the South-West of his house." },
+    { q: "One evening, just before sunset, Dev was standing in a field. His shadow fell exactly in front of him. Which direction was he facing?", options: ["South", "East", "North", "West"], answer: 1, explanation: "In the evening the sun is in the west, so shadows fall to the east. With the shadow (East) in front of him, he must be facing East." },
+    { q: "In a row of 35 children, Rohit is 8th from the left. Mohan is 3rd to the right of Rohit. What is Mohan's position from the right end?", options: ["27th", "26th", "25th", "24th"], answer: 2, explanation: "Mohan is 11th from the left, so from the right he is 35 − 11 + 1 = 25." },
+    { q: "Sita is younger than Jatin. Asha is older than Jatin. Hari is older than Ravi. Sita is older than Hari. Who is the youngest?", options: ["Jatin", "Ravi", "Sita", "Asha"], answer: 1, explanation: "The order from oldest to youngest is Asha > Jatin > Sita > Hari > Ravi, so the youngest is Ravi." },
+    { q: "What is the simple interest on ₹3000 at 3% per annum for 3 years?", options: ["₹180", "₹3270", "₹360", "₹270"], answer: 3, explanation: "SI = P × R × T / 100 = 3000 × 3 × 3 / 100 = ₹270." },
+    { q: "10% of a number is 8. What is 60% of the same number?", options: ["56", "38", "47", "48"], answer: 3, explanation: "The number is 8 × 100/10 = 80, and 60% of 80 = 48." },
+    { q: "Through how many degrees does the hour hand of a clock turn from 5:40 to 11:10?", options: ["165°", "195°", "180°", "160°"], answer: 0, explanation: "The hour hand turns 0.5° per minute; 330 minutes × 0.5° = 165°." },
+    { q: "Which year will have exactly the same calendar as 2040?", options: ["2067", "2069", "2068", "2044"], answer: 2, explanation: "A year has the same calendar when it starts on the same weekday and is also a leap year. Counting odd days (1 per ordinary year, 2 per leap year) from 2040 until they total a multiple of 7 gives 2068." },
+    { q: "Statements: All flowers are pens. All pens are cadets. Conclusions: I. All cadets are flowers. II. Some pens are flowers.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "All flowers are pens, so some pens are flowers (II); but cadets may include much more than flowers, so I does not follow." },
+    { q: "Statement: \"Keep left,\" says a road sign. Assumptions: I. Drivers understand road signs. II. Nobody ever drives on the right.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0, explanation: "A sign assumes it will be understood (I); if nobody drove on the right, the sign would be unnecessary." },
+    { q: "A cube of side 6 cm is painted on two adjacent faces only and then cut into 1 cm cubes. How many small cubes have exactly one painted face?", options: ["150", "60", "96", "6"], answer: 1, explanation: "Each painted face has 6² = 36 cubes; the 6 cubes on the shared edge have two painted faces. Exactly one face: 2 × (36 − 6) = 60. Painted cubes total 66, so 150 have no paint." },
+    { q: "Which letter is 14th to the left of the 12th letter from the right in the English alphabet?", options: ["Z", "A", "B", "C"], answer: 1, explanation: "The 12th letter from the right is the 15th from the left (O); 14 to its left is the 1st letter, A." },
+    { q: "If the following words are arranged in dictionary order, which word comes last? Anchor, Aircraft, Ammunition, Autumn", options: ["Anchor", "Ammunition", "Autumn", "Aircraft"], answer: 2, explanation: "In dictionary order: Aircraft, Ammunition, Anchor, Autumn." },
+  ],
+};
+
+export default test;

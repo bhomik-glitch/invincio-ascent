@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-109",
+  title: "OIR Test 109",
+  durationMinutes: 20,
+  releaseAt: "2027-01-31T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 6, 9, 18, 45, 126, ?", options: ["370", "450", "378", "369"], answer: 3, explanation: "Here the differences 3, 9, 27, 81, 243 are each 3 times the previous difference. Next: 126 + 243 = 369." },
+    { q: "Find the next number: 42, 56, 72, 90, 110, ?", options: ["156", "133", "131", "132"], answer: 3, explanation: "Here the terms are n × (n + 1) for consecutive n. Next: 11 × 12 = 132." },
+    { q: "Find the next number: 6, 23, 74, 227, ?", options: ["681", "686", "676", "689"], answer: 1, explanation: "Here each term is 3 times the previous term plus 5. Next: 227 × 3 + 5 = 686." },
+    { q: "Find the missing number: 648, 216, 72, ?, 8", options: ["56", "40", "24", "25"], answer: 2, explanation: "Here each term is the previous term divided by 3, so the missing term is 24." },
+    { q: "Find the next letter: A, D, I, L, Q, ?", options: ["S", "T", "V", "U"], answer: 1, explanation: "By alphabet positions (1, 4, 9, 12, 17), the letters move alternately +3 and +5: Q(17) + 3 = T(20)." },
+    { q: "Find the next group: CDE, IJK, OPQ, ?", options: ["UVW", "UWV", "VWX", "TUV"], answer: 0, explanation: "Each group is three consecutive letters, and 3 letters are skipped between groups: after OPQ comes UVW." },
+    { q: "Diamond : Carat :: Land : ?", options: ["Kilogram", "Acre", "Tonne", "Litre"], answer: 1, explanation: "Diamonds are measured in carats; land is measured in acres." },
+    { q: "12 : 1729 :: 8 : ?", options: ["513", "64", "67", "56"], answer: 0, explanation: "12 → 12³ + 1 = 1729; likewise 8 → 8³ + 1 = 513." },
+    { q: "INS : Navy ship :: ICGS : ?", options: ["Merchant ship", "Army vehicle", "Air Force base", "Coast Guard ship"], answer: 3, explanation: "'INS' prefixes Navy ships; 'ICGS' prefixes Coast Guard ships." },
+    { q: "Which one does not belong with the others?", options: ["Heart", "Kidneys", "Skin", "Lungs"], answer: 0, explanation: "The heart is not an excretory organ; the others remove waste from the body." },
+    { q: "Which number does not belong with the others?", options: ["147", "128", "254", "146"], answer: 0, explanation: "The digits of 128, 254, 146 each add up to 11; the digits of 147 add up to 12." },
+    { q: "Choose the one word for: \"Water that is fit for drinking\"", options: ["Potable", "Portable", "Soluble", "Palatable"], answer: 0, explanation: "Potable: water that is fit for drinking." },
+    { q: "If BOXING is written as 25-12-3-18-13-20, how is VILLAGE written in the same code?", options: ["6-18-15-15-26-20-22", "5-18-15-15-26-20-22", "22-9-12-12-1-7-5", "5-18-15-15-26-19-22"], answer: 1, explanation: "Each letter is replaced by its position in the reversed alphabet (A = 26, B = 25, …, Z = 1), so VILLAGE → 5-18-15-15-26-20-22." },
+    { q: "In a code language, 'tall students fight' is written as 'ja ma ri', 'young students' is written as 'ru ma' and 'fight daily' is written as 'ja bu'. What is the code for 'young'?", options: ["ja", "bu", "ri", "ru"], answer: 3, explanation: "'students' is common to the first two sentences, so students = ma; 'fight' is common to the first and third, so fight = ja. The other code in the second sentence, ru, means 'young'." },
+    { q: "If '÷' means '+', '×' means '−', '+' means '×' and '−' means '÷', what is the value of 32 − 8 ÷ 4 + 9 × 12?", options: ["40", "28", "4", "30"], answer: 1, explanation: "Replacing the symbols gives 32 ÷ 8 + 4 × 9 − 12; following BODMAS, this equals 28." },
+    { q: "Vaibhav's mother's father is Yashwant. Yashwant's wife is Aruna. How is Aruna related to Vaibhav?", options: ["Mother", "Maternal grandmother", "Aunt", "Paternal grandmother"], answer: 1, explanation: "Aruna is the mother of Vaibhav's mother, so she is his maternal grandmother." },
+    { q: "Pointing to a woman, Laksh said, \"Her mother-in-law is my paternal grandmother, and my father has no brothers.\" How is the woman related to Laksh?", options: ["Mother", "Sister", "Grandmother", "Aunt"], answer: 0, explanation: "Her husband is a son of Laksh's paternal grandmother; the only such son is Laksh's father, so she is Laksh's mother." },
+    { q: "Starting from his house, Nikhil walks 105 m towards the south, turns left and walks 115 m, finally turns right and walks 45 m. In which direction is he now from his house?", options: ["South-West", "North-West", "North-East", "South-East"], answer: 3, explanation: "He ends up 115 m east and 150 m south of his house, so he is to the South-East of his house." },
+    { q: "One evening, just before sunset, Yash was standing in a field. His shadow fell exactly in front of him. Which direction was he facing?", options: ["North", "South", "West", "East"], answer: 3, explanation: "In the evening the sun is in the west, so shadows fall to the east. With the shadow (East) in front of him, he must be facing East." },
+    { q: "In a row of 36 children, Rohit is 9th from the left. Vikram is 10th to the right of Rohit. What is Vikram's position from the right end?", options: ["18th", "17th", "19th", "20th"], answer: 0, explanation: "Vikram is 19th from the left, so from the right he is 36 − 19 + 1 = 18." },
+    { q: "Lata is younger than Chetan. Esha is younger than Dinesh. Lata is older than Farhan. Dinesh is younger than Farhan. Who is the youngest?", options: ["Lata", "Esha", "Chetan", "Farhan"], answer: 1, explanation: "The order from oldest to youngest is Chetan > Lata > Farhan > Dinesh > Esha, so the youngest is Esha." },
+    { q: "A train 140 m long running at 54 km/h crosses a platform 100 m long. How many seconds does it take?", options: ["9.333333333333334", "16", "6", "6.666666666666667"], answer: 1, explanation: "It must cover 140 + 100 = 240 m at 54 km/h = 15 m/s, taking 240/15 = 16 s." },
+    { q: "The sum of 4 consecutive even numbers is 148. What is the largest of them?", options: ["42", "37", "40", "38"], answer: 2, explanation: "The middle value is 148/4 = 37; the numbers are 34, 36, 38, 40, so the largest is 40." },
+    { q: "What is the angle between the hands of a clock at 12:39?", options: ["126°", "145.5°", "160.5°", "175.5°"], answer: 1, explanation: "Angle = |30 × 0 − 5.5 × 39| = 214.5°, i.e. 360° − that = 145.5°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "If today is Friday, what day of the week will it be 620 days from today?", options: ["Tuesday", "Wednesday", "Thursday", "Monday"], answer: 0, explanation: "620 = 7 × 88 + 4; 4 days after Friday is Tuesday." },
+    { q: "Statements: Some dancers are birds. Some birds are runners. Conclusions: I. Some dancers are runners. II. All runners are dancers.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 3, explanation: "Two 'some' statements give no definite link between dancers and runners, so neither conclusion is certain." },
+    { q: "Statement: A team keeps losing matches in the last ten minutes because of fatigue. Courses of action: I. The players' fitness training should be improved. II. The team should stop playing matches. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Better fitness addresses fatigue (I); quitting is not a solution." },
+    { q: "A wooden block measuring 7 cm × 5 cm × 3 cm is painted on all faces and cut into 1 cm cubes. How many cubes have exactly one face painted?", options: ["8", "36", "46", "15"], answer: 2, explanation: "Cubes with exactly one face painted: 2[(5)(3) + (3)(1) + (5)(1)] = 46." },
+    { q: "Which letter is 14th to the right of the 6th letter from the left in the English alphabet?", options: ["R", "S", "T", "U"], answer: 2, explanation: "The 6th letter from the left is F; 14 places to its right is the 20th letter, T." },
+    { q: "If the following words are arranged in dictionary order, which word comes first? Territory, Telescope, Tiger, Tunnel", options: ["Telescope", "Tunnel", "Tiger", "Territory"], answer: 0, explanation: "In dictionary order: Telescope, Territory, Tiger, Tunnel." },
+  ],
+};
+
+export default test;

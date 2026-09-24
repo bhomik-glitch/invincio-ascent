@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-103",
+  title: "OIR Test 103",
+  durationMinutes: 20,
+  releaseAt: "2027-01-24T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 8, 33, 11, 26, 14, 19, 17, ?", options: ["5", "20", "12", "19"], answer: 2, explanation: "Here two series alternate: 8, 11, 14, … (+3) and 33, 26, 19, … (-7). Next: 19 − 7 = 12." },
+    { q: "Find the next number: 8, 16, 21, 42, 47, 94, ?", options: ["100", "188", "99", "97"], answer: 2, explanation: "Here the operations alternate: × 2, + 5, × 2, + 5 and so on. Next: 94 + 5 = 99." },
+    { q: "Find the next number: 21, 22, 28, 39, 55, ?", options: ["76", "75", "81", "71"], answer: 0, explanation: "Here the differences added are 1, 6, 11, 16, 21 — each 5 more than the last. Next: 55 + 21 = 76." },
+    { q: "Find the missing number: 7, 14, ?, 34, 47, 62", options: ["23", "24", "25", "13"], answer: 0, explanation: "Here the terms are n² − 2 for consecutive n, so the missing term is 23." },
+    { q: "Find the next letter: C, D, J, K, Q, ?", options: ["S", "R", "T", "Q"], answer: 1, explanation: "By alphabet positions (3, 4, 10, 11, 17), the letters move alternately +1 and +6: Q(17) + 1 = R(18)." },
+    { q: "Find the next group: IJK, MNO, QRS, ?", options: ["TUV", "UVW", "UWV", "VWX"], answer: 1, explanation: "Each group is three consecutive letters, and 1 letter is skipped between groups: after QRS comes UVW." },
+    { q: "Letter : Post office :: Money : ?", options: ["Purse", "Bank", "Wallet", "Shop"], answer: 1, explanation: "Letters are handled by a post office; money is handled by a bank." },
+    { q: "4 : 25 :: 9 : ?", options: ["81", "99", "720", "100"], answer: 3, explanation: "4 → (4 + 1)² = 25; likewise 9 → (9 + 1)² = 100." },
+    { q: "ISRO : Bengaluru :: DRDO : ?", options: ["Hyderabad", "New Delhi", "Pune", "Bengaluru"], answer: 1, explanation: "ISRO is headquartered in Bengaluru; DRDO in New Delhi." },
+    { q: "Which one does not belong with the others?", options: ["Goa", "Gujarat", "Bihar", "Maharashtra"], answer: 2, explanation: "Bihar has no coastline; the others do." },
+    { q: "Which number does not belong with the others?", options: ["60", "42", "18", "61"], answer: 3, explanation: "60, 42, 18 are all multiples of 6; 61 is not." },
+    { q: "Choose the one word for: \"A medicine that counteracts a poison\"", options: ["Antibiotic", "Antidote", "Panacea", "Vaccine"], answer: 1, explanation: "Antidote: a medicine that counteracts a poison." },
+    { q: "If FALCON is coded as OPDMBG, how is HOCKEY coded?", options: ["ZFLDPI", "INDJFX", "ZFLDPJ", "ZFLCPI"], answer: 0, explanation: "In this code the letters are reversed and each is moved 1 place forward, so HOCKEY becomes ZFLDPI." },
+    { q: "In a code language, 'young sailors study' is written as 're po ka', 'brave sailors' is written as 'ho ka' and 'study together' is written as 're ve'. Which word is coded as 're'?", options: ["brave", "sailors", "study", "young"], answer: 2, explanation: "'sailors' is common to the first two sentences, so sailors = ka; 'study' is common to the first and third, so study = re." },
+    { q: "If '÷' means '+', '+' means '−', '−' means '×' and '×' means '÷', what is the value of 9 ÷ 3 − 7 + 30 × 6?", options: ["15", "25", "31", "13"], answer: 1, explanation: "Replacing the symbols gives 9 + 3 × 7 − 30 ÷ 6; following BODMAS, this equals 25." },
+    { q: "Ujjwal is the father of Vikram. Vikram's brother Yuvraj has a son, Zoravar. How is Ujjwal related to Zoravar?", options: ["Father", "Great-grandfather", "Grandfather", "Uncle"], answer: 2, explanation: "Yuvraj is also Ujjwal's son, so Yuvraj's son Zoravar is Ujjwal's grandson." },
+    { q: "Pointing to a man, Hina said, \"His father is my son's maternal grandfather.\" How is the man related to Hina?", options: ["Uncle", "Husband", "Father", "Brother"], answer: 3, explanation: "Hina's son's maternal grandfather is Hina's father; the man is also his son, so he is Hina's brother." },
+    { q: "Starting from his house, Aditya walks 35 m towards the south, turns left and walks 50 m, turns right and walks 145 m, finally turns right and walks 120 m. In which direction is he now from his house?", options: ["North-East", "South-West", "North-West", "South-East"], answer: 1, explanation: "He ends up 70 m west and 180 m south of his house, so he is to the South-West of his house." },
+    { q: "If North is called North-East, and all other directions are renamed in the same way, what will South-East be called?", options: ["East", "South", "West", "North-West"], answer: 1, explanation: "North → North-East is a rotation of 45° clockwise; rotating South-East by the same amount gives South." },
+    { q: "In a row, Ajay is 5th from the left and Mohan is 18th from the right. When they interchange places, Ajay becomes 21st from the left. How many people are in the row?", options: ["25", "38", "39", "40"], answer: 1, explanation: "After the swap Ajay takes Mohan's old place, which is 21st from the left and 18th from the right, so total = 21 + 18 − 1 = 38." },
+    { q: "Uma is faster than Om. Esha is faster than Uma. Esha is slower than Isha. Who is the second slowest?", options: ["Isha", "Uma", "Esha", "Om"], answer: 1, explanation: "The order from fastest to slowest is Isha > Esha > Uma > Om, so the second slowest is Uma." },
+    { q: "A boat goes 19 km downstream in 1 hour and 11 km upstream in 1 hour. What is the speed of the boat in still water?", options: ["8 km/h", "4 km/h", "16 km/h", "15 km/h"], answer: 3, explanation: "Boat speed = (19 + 11)/2 = 15 km/h; stream speed = (19 − 11)/2 = 4 km/h." },
+    { q: "₹43200 is divided among X, Y and Z in the ratio 6 : 6 : 4. What is Y's share?", options: ["₹14400", "₹10800", "₹18900", "₹16200"], answer: 3, explanation: "Total parts = 16; one part = ₹2700; Y gets 6 × 2700 = ₹16200." },
+    { q: "What is the angle between the hands of a clock at 2:25?", options: ["107.5°", "90°", "77.5°", "92.5°"], answer: 2, explanation: "Angle = |30 × 2 − 5.5 × 25| = 77.5°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "Which year will have exactly the same calendar as 2039?", options: ["2050", "2043", "2049", "2051"], answer: 0, explanation: "A year has the same calendar when it starts on the same weekday and is also an ordinary year. Counting odd days (1 per ordinary year, 2 per leap year) from 2039 until they total a multiple of 7 gives 2050." },
+    { q: "Statements: All birds are swimmers. No swimmer is a soldier. Conclusions: I. No bird is a soldier. II. Some birds are soldiers.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "All birds are swimmers and no a swimmer is a soldier, so no a bird can be a soldier (I); II contradicts this." },
+    { q: "Statement: Several students fainted during the morning assembly on a very hot day. Courses of action: I. On hot days the assembly should be held in the shade or shortened. II. The students who fainted should be given water and first aid. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "Changing the assembly prevents a repeat (I) and first aid helps those affected (II)." },
+    { q: "A cube of side 6 cm is painted on two adjacent faces only and then cut into 1 cm cubes. How many small cubes have no paint on them?", options: ["150", "96", "60", "6"], answer: 0, explanation: "Each painted face has 6² = 36 cubes; the 6 cubes on the shared edge have two painted faces. Exactly one face: 2 × (36 − 6) = 60. Painted cubes total 66, so 150 have no paint." },
+    { q: "Which letter is 11th to the right of the 7th letter from the left in the English alphabet?", options: ["S", "Q", "P", "R"], answer: 3, explanation: "The 7th letter from the left is G; 11 places to its right is the 18th letter, R." },
+    { q: "If the letters of the word FESTIVAL are arranged in alphabetical order, how many letters remain in the same position?", options: ["2", "3", "4", "1"], answer: 3, explanation: "Alphabetical order: AEFILSTV. Comparing with FESTIVAL, 1 letter (E) stays in place." },
+  ],
+};
+
+export default test;

@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-89",
+  title: "OIR Test 89",
+  durationMinutes: 20,
+  releaseAt: "2027-01-03T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 5, 15, 60, 300, 1800, ?", options: ["12601", "14400", "12600", "10800"], answer: 2, explanation: "Here the multipliers increase by one each step (×3, ×4, ×5, …). Next: 1800 × 7 = 12600." },
+    { q: "Find the next number: 5, 10, 20, 40, 80, ?", options: ["160", "150", "161", "200"], answer: 0, explanation: "Here the differences 5, 10, 20, 40, 80 are each 2 times the previous difference. Next: 80 + 80 = 160." },
+    { q: "Find the next number: 1053, 351, 117, 39, ?", options: ["26", "13", "14", "10"], answer: 1, explanation: "Here each term is the previous term divided by 3. Next: 39 ÷ 3 = 13." },
+    { q: "Find the missing number: 8, 18, 32, 50, ?, 98", options: ["74", "70", "72", "76"], answer: 2, explanation: "Here the terms are twice the square of consecutive numbers, so the missing term is 72." },
+    { q: "Find the next letter: F, H, J, L, N, ?", options: ["O", "P", "R", "Q"], answer: 1, explanation: "By alphabet positions (6, 8, 10, 12, 14), each letter is 2 places after the previous one: N(14) + 2 = P(16)." },
+    { q: "Find the next pair: LG, MF, NE, OD, ?", options: ["QC", "OB", "PB", "PC"], answer: 3, explanation: "The first letters move 1 forward each time and the second letters move 1 back: next is PC." },
+    { q: "Fire : Ashes :: Explosion : ?", options: ["Flame", "Heat", "Debris", "Sound"], answer: 2, explanation: "Fire leaves ashes behind; an explosion leaves debris." },
+    { q: "11 : 143 :: 7 : ?", options: ["343", "42", "56", "63"], answer: 3, explanation: "11 → 11 × 13 = 143; likewise 7 → 7 × 9 = 63." },
+    { q: "Jana Gana Mana : Rabindranath Tagore :: Saare Jahan Se Achha : ?", options: ["Subramania Bharati", "Bankim Chandra Chatterjee", "Muhammad Iqbal", "Sarojini Naidu"], answer: 2, explanation: "Tagore wrote Jana Gana Mana; Muhammad Iqbal wrote Saare Jahan Se Achha." },
+    { q: "Which one does not belong with the others?", options: ["Celsius", "Kelvin", "Pascal", "Fahrenheit"], answer: 2, explanation: "The pascal is a unit of pressure; the others are temperature scales." },
+    { q: "Which pair does not belong with the others?", options: ["5 – 126", "9 – 82", "4 – 17", "6 – 37"], answer: 0, explanation: "In the other pairs the second number is n² + 1, where n is the first (e.g. 6² + 1 = 37); but 5² + 1 = 26, not 126." },
+    { q: "Choose the one word for: \"The life story of a person written by himself or herself\"", options: ["Obituary", "Biography", "Epitaph", "Autobiography"], answer: 3, explanation: "Autobiography: the life story of a person written by himself or herself." },
+    { q: "If SIGNAL is coded as LANGIS, how is TICKET coded?", options: ["SDJBHS", "TEKDIT", "TEKCIT", "TEKCIS"], answer: 2, explanation: "In this code the letters are written in reverse order, so TICKET becomes TEKCIT." },
+    { q: "In a code language, 'calm boys climb' is written as 'yo ho ga', 'quick boys' is written as 'ze ho' and 'climb well' is written as 'yo fe'. What is the code for 'calm'?", options: ["ga", "ze", "ho", "yo"], answer: 0, explanation: "'boys' is common to the first two sentences, so boys = ho; 'climb' is common to the first and third, so climb = yo. The remaining code in the first sentence, ga, means 'calm'." },
+    { q: "If '÷' means '+', '×' means '−', '−' means '×' and '+' means '÷', what is the value of 14 × 16 + 2 ÷ 3 − 10?", options: ["46", "37", "16", "36"], answer: 3, explanation: "Replacing the symbols gives 14 − 16 ÷ 2 + 3 × 10; following BODMAS, this equals 36." },
+    { q: "Lalit and Mohit are brothers. Nisha is Lalit's wife. Ojasvi is Mohit's daughter. How is Nisha related to Ojasvi?", options: ["Aunt", "Sister", "Mother", "Grandmother"], answer: 0, explanation: "Lalit is Ojasvi's uncle, so his wife Nisha is her aunt." },
+    { q: "Pointing to a boy, Irfan said, \"His mother's brother is the only son of my mother.\" How is the boy related to Irfan?", options: ["Brother", "Son", "Cousin", "Nephew"], answer: 3, explanation: "The only son of Irfan's mother is Irfan; the boy's mother is Irfan's sister, so the boy is his nephew." },
+    { q: "Starting from his house, Mohan walks 25 m towards the east, turns left and walks 130 m, turns right and walks 80 m, finally turns right and walks 40 m. In which direction is he now from his house?", options: ["South-West", "North-East", "North-West", "South-East"], answer: 1, explanation: "He ends up 105 m east and 90 m north of his house, so he is to the North-East of his house." },
+    { q: "One morning, just after sunrise, Arjun was standing in a field. His shadow fell exactly to his right. Which direction was he facing?", options: ["East", "South", "North", "West"], answer: 1, explanation: "In the morning the sun is in the east, so shadows fall to the west. With the shadow (West) on his right, he must be facing South." },
+    { q: "In a class of 49 students, Rohit ranks 40th from the top. What is his rank from the bottom?", options: ["11th", "10th", "12th", "9th"], answer: 1, explanation: "Rank from bottom = 49 − 40 + 1 = 10." },
+    { q: "Dinesh is faster than Sita. Dinesh is slower than Manoj. Sita is faster than Om. Om is faster than Tarun. Who is the slowest?", options: ["Sita", "Tarun", "Manoj", "Dinesh"], answer: 1, explanation: "The order from fastest to slowest is Manoj > Dinesh > Sita > Om > Tarun, so the slowest is Tarun." },
+    { q: "The sum of 5 consecutive odd numbers is 225. What is the largest of them?", options: ["49", "47", "45", "51"], answer: 0, explanation: "The middle value is 225/5 = 45; the numbers are 41, 43, 45, 47, 49, so the largest is 49." },
+    { q: "The average of 7 numbers is 58. When one number is removed, the average of the rest becomes 60. Which number was removed?", options: ["56", "58", "46", "53"], answer: 2, explanation: "Total before = 7 × 58 = 406; after = 6 × 60 = 360; removed = 46." },
+    { q: "In a mirror, a clock appears to show 8:09. What is the actual time?", options: ["3:51", "4:51", "3:21", "4:09"], answer: 0, explanation: "Actual time = 11:60 − 8:09 = 3:51." },
+    { q: "8 October 1932 was the day the Indian Air Force was established. What day of the week was it?", options: ["Friday", "Sunday", "Tuesday", "Saturday"], answer: 3, explanation: "1 January 2001 was a Monday. 8 October 1932 is 24922 days before it, leaving 2 odd day(s) backwards from Monday, so it was a Saturday." },
+    { q: "Statements: All bats are trucks. All trucks are rings. Conclusions: I. All bats are rings. II. Some rings are bats.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "All bats are trucks and all trucks are rings, so all bats are rings (I), and hence some rings are bats (II)." },
+    { q: "Statement: Many villagers fall ill because they drink water from a polluted pond. Courses of action: I. A safe drinking-water supply should be arranged. II. Villagers should be told to boil water before drinking it. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "A safe supply is the long-term fix (I) and boiling water is an immediate precaution (II)." },
+    { q: "A cube of side 7 cm is painted on two opposite faces only and then cut into 1 cm cubes. How many small cubes have no paint on them?", options: ["245", "98", "150", "49"], answer: 0, explanation: "The two opposite faces each have 49 cubes with exactly one painted face (98 in all), and the remaining 7³ − 98 = 245 cubes have no paint." },
+    { q: "If the English alphabet is written in reverse order (Z to A), which letter will be 14th to the right of the 9th letter from the left?", options: ["W", "E", "D", "C"], answer: 2, explanation: "In the reversed alphabet the 23rd letter from the left is D (position n holds letter 27 − n)." },
+    { q: "If the following words are arranged in dictionary order, which word comes second? Cherry, Compass, Cloud, Cheese", options: ["Cherry", "Cheese", "Cloud", "Compass"], answer: 0, explanation: "In dictionary order: Cheese, Cherry, Cloud, Compass." },
+  ],
+};
+
+export default test;

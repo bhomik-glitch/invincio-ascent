@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-98",
+  title: "OIR Test 98",
+  durationMinutes: 20,
+  releaseAt: "2027-01-17T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 132, 128, 119, 105, 86, ?", options: ["57", "62", "67", "60"], answer: 1, explanation: "Here the differences subtracted are 4, 9, 14, 19, 24 — each 5 more than the last. Next: 86 − 24 = 62." },
+    { q: "Find the next number: 7, 14, 11, 18, 15, 22, ?", options: ["19", "20", "29", "17"], answer: 0, explanation: "Here the operations alternate: + 7, − 3, + 7, − 3 and so on. Next: 22 − 3 = 19." },
+    { q: "Find the next number: 4, 12, 28, 60, 124, ?", options: ["248", "254", "244", "252"], answer: 3, explanation: "Here each term is 2 times the previous term plus 4. Next: 124 × 2 + 4 = 252." },
+    { q: "Find the missing number: 7, 8, 11, 20, ?, 128", options: ["47", "101", "57", "74"], answer: 0, explanation: "Here the differences 1, 3, 9, 27, 81 are each 3 times the previous difference, so the missing term is 47." },
+    { q: "Find the next letter: B, E, I, L, P, ?", options: ["R", "T", "S", "U"], answer: 2, explanation: "By alphabet positions (2, 5, 9, 12, 16), the letters move alternately +3 and +4: P(16) + 3 = S(19)." },
+    { q: "Find the next pair: CG, EF, GE, ID, ?", options: ["JB", "KB", "LC", "KC"], answer: 3, explanation: "The first letters move 2 forward each time and the second letters move 1 back: next is KC." },
+    { q: "Monday : Tuesday :: January : ?", options: ["June", "February", "December", "March"], answer: 1, explanation: "Tuesday follows Monday; February follows January." },
+    { q: "4 : 12 :: 2 : ?", options: ["10", "9", "2", "3"], answer: 2, explanation: "4 → 4² − 4 = 12; likewise 2 → 2² − 2 = 2." },
+    { q: "Nathu La : Sikkim :: Shipki La : ?", options: ["Uttarakhand", "Ladakh", "Arunachal Pradesh", "Himachal Pradesh"], answer: 3, explanation: "Nathu La is in Sikkim; Shipki La is in Himachal Pradesh." },
+    { q: "Which one does not belong with the others?", options: ["Groundnut", "Mustard", "Sunflower", "Jute"], answer: 3, explanation: "Jute is a fibre crop; the others are oilseeds." },
+    { q: "Which number does not belong with the others?", options: ["144", "66", "121", "143"], answer: 0, explanation: "143, 121, 66 are all multiples of 11; 144 is not." },
+    { q: "Choose the one word for: \"A soldier who runs away from duty\"", options: ["Sentry", "Deserter", "Mercenary", "Recruit"], answer: 1, explanation: "Deserter: a soldier who runs away from duty." },
+    { q: "If CASTLE is coded as DZTSMD, how is THUNDER coded?", options: ["UGVMEDS", "UJXRIKY", "VGVMEDS", "UFVMEDS"], answer: 0, explanation: "In this code letters are moved alternately one place forward and one place back, so THUNDER becomes UGVMEDS." },
+    { q: "In a code language, 'smart leaders run' is written as 'ho ri ze', 'strong leaders' is written as 'ri ga' and 'run today' is written as 'ho pi'. What is the code for 'strong'?", options: ["ga", "ri", "ze", "ho"], answer: 0, explanation: "'leaders' is common to the first two sentences, so leaders = ri; 'run' is common to the first and third, so run = ho. The other code in the second sentence, ga, means 'strong'." },
+    { q: "If A = 1, B = 2, …, Z = 26 and RADAR = 42 (the sum of its letter values), what is GUARD?", options: ["58", "61", "51", "84"], answer: 2, explanation: "GUARD = 7 + 21 + 1 + 18 + 4 = 51." },
+    { q: "Aditi is Bhushan's daughter-in-law. Bhushan's daughter is Chhaya. How is Chhaya related to Aditi?", options: ["Sister-in-law", "Cousin", "Mother-in-law", "Sister"], answer: 0, explanation: "Chhaya is the sister of Aditi's husband (Bhushan's son), so she is Aditi's sister-in-law." },
+    { q: "Pointing to a man, Kartik said, \"He is the father of the only sister of my father.\" How is the man related to Kartik?", options: ["Uncle", "Great-grandfather", "Father-in-law", "Grandfather"], answer: 3, explanation: "The father of Kartik's father's sister is Kartik's father's father — his grandfather." },
+    { q: "Starting from his house, Ajay walks 8 km towards the north, turns right and walks 14 km, finally turns left and walks 10 km. In which direction is he now from his house?", options: ["South-West", "North-East", "North-West", "South-East"], answer: 1, explanation: "He ends up 14 km east and 18 km north of his house, so he is to the North-East of his house." },
+    { q: "A man is facing South-West. He turns 180° anticlockwise, then 90° anticlockwise. Which direction is he facing now?", options: ["North-East", "South-West", "South-East", "North-West"], answer: 3, explanation: "The net turn is 90° clockwise from South-West, so he faces North-West." },
+    { q: "In a row of 46 students, Deepak is 10th from the left end and Rahul is 5th from the right end. How many students are there between them?", options: ["33", "32", "30", "31"], answer: 3, explanation: "Deepak and Rahul with everyone to their outer sides account for 10 + 5 = 15 students, so 46 − 15 = 31 are between them." },
+    { q: "Chetan is richer than Ravi. Uma is richer than Chetan. Gita is richer than Isha. Isha is richer than Uma. Who is the second richest?", options: ["Gita", "Chetan", "Uma", "Isha"], answer: 3, explanation: "The order from richest to poorest is Gita > Isha > Uma > Chetan > Ravi, so the second richest is Isha." },
+    { q: "A pipe can fill a tank in 12 hours and another pipe can empty it in 21 hours. If both are opened together on an empty tank, in how many hours will it be full?", options: ["31", "38", "28", "9"], answer: 2, explanation: "Net filling per hour = 1/12 − 1/21 = 9/252 = 1/28, so it fills in 28 hours." },
+    { q: "30% of a number is 54. What is 80% of the same number?", options: ["143", "432", "198", "144"], answer: 3, explanation: "The number is 54 × 100/30 = 180, and 80% of 180 = 144." },
+    { q: "In a mirror, a clock appears to show 4:16. What is the actual time?", options: ["7:14", "8:16", "8:44", "7:44"], answer: 3, explanation: "Actual time = 11:60 − 4:16 = 7:44." },
+    { q: "13 May 2027 is a Thursday. What day of the week is 25 May 2028?", options: ["Thursday", "Friday", "Wednesday", "Saturday"], answer: 0, explanation: "25 May 2028 is 378 days after 13 May 2027. 378 = 7 × 54 + 0, so the day shifts 0 forward: Thursday." },
+    { q: "Statements: Some rivers are not farmers. All farmers are shirts. Conclusions: I. Some rivers are not shirts. II. Some shirts are farmers.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "All farmers are shirts, so some shirts are farmers (II); the rivers that are not farmers may still be shirts, so I is uncertain." },
+    { q: "Statement: A school's board-exam results have been poor for three years. Courses of action: I. The reasons should be studied and teaching improved. II. The school should be closed at once. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Finding and fixing causes is sensible (I); immediate closure is extreme." },
+    { q: "A wooden block measuring 7 cm × 3 cm × 3 cm is painted on all faces and cut into 1 cm cubes. How many cubes have no face painted?", options: ["28", "22", "5", "8"], answer: 2, explanation: "Cubes with no face painted: (7 − 2)(3 − 2)(3 − 2) = 5." },
+    { q: "How many letters are there between J and Y in the English alphabet?", options: ["16", "15", "24", "14"], answer: 3, explanation: "J is 10 and Y is 25; the letters strictly between them number 25 − 10 − 1 = 14." },
+    { q: "If the following words are arranged in dictionary order, which word comes third? Symbol, Signal, Strategy, Screen", options: ["Symbol", "Screen", "Strategy", "Signal"], answer: 2, explanation: "In dictionary order: Screen, Signal, Strategy, Symbol." },
+  ],
+};
+
+export default test;

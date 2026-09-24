@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-39",
+  title: "OIR Test 39",
+  durationMinutes: 20,
+  releaseAt: "2026-10-25T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 5, 7, 11, 13, 17, ?", options: ["19", "20", "9", "21"], answer: 0, explanation: "Here the terms are consecutive prime numbers. Next: the prime after 17 = 19." },
+    { q: "Find the next number: 10, 20, 18, 36, 34, 68, ?", options: ["66", "64", "67", "136"], answer: 0, explanation: "Here the operations alternate: × 2, − 2, × 2, − 2 and so on. Next: 68 − 2 = 66." },
+    { q: "Find the next number: 12960, 2160, 360, 60, ?", options: ["11", "10", "50", "9"], answer: 1, explanation: "Here each term is the previous term divided by 6. Next: 60 ÷ 6 = 10." },
+    { q: "Find the missing number: 126, 217, ?, 513, 730, 1001", options: ["344", "386", "342", "365"], answer: 0, explanation: "Here the terms are n³ + 1 for consecutive n, so the missing term is 344." },
+    { q: "Find the next letter: G, H, J, M, Q, ?", options: ["V", "X", "W", "U"], answer: 0, explanation: "By alphabet positions (7, 8, 10, 13, 17), the gaps grow by one each time (+1, 2, 3, 4, …): Q(17) + 5 = V(22)." },
+    { q: "Find the next term: C24, H19, M14, R9, ?", options: ["W23", "W4", "X3", "W5"], answer: 1, explanation: "The letters move 5 forward each time, and each number is the letter's position in the reversed alphabet (A = 26 … Z = 1): W → 4." },
+    { q: "Book : Chapter :: Building : ?", options: ["Door", "Roof", "Brick", "Storey"], answer: 3, explanation: "A book is divided into chapters; a building is divided into storeys." },
+    { q: "9 : 162 :: 8 : ?", options: ["504", "512", "128", "81"], answer: 2, explanation: "9 → 2 × 9² = 162; likewise 8 → 2 × 8² = 128." },
+    { q: "Operation Devi Shakti : Afghanistan :: Operation Ajay : ?", options: ["Yemen", "Ukraine", "Israel", "Sudan"], answer: 2, explanation: "Operation Devi Shakti evacuated Indians from Afghanistan; Operation Ajay evacuated them from Israel (2023)." },
+    { q: "Which one does not belong with the others?", options: ["Cricket", "Football", "Hockey", "Tennis"], answer: 3, explanation: "Tennis is played by individuals or pairs; the others are eleven-a-side team games." },
+    { q: "Which number does not belong with the others?", options: ["513", "512", "27", "216"], answer: 0, explanation: "27 = 3³, 512 = 8³, 216 = 6³ are perfect cubes; 513 is not." },
+    { q: "Choose the word most similar in meaning to VALOUR.", options: ["Wealth", "Wisdom", "Fear", "Courage"], answer: 3, explanation: "Valour means courage." },
+    { q: "If CANNON is coded as NONNAC, how is DONKEY coded?", options: ["YEKNOD", "YEKNND", "YEKNOC", "WCILMB"], answer: 0, explanation: "In this code the letters are written in reverse order, so DONKEY becomes YEKNOD." },
+    { q: "In a code language, 'brave girls lead' is written as 'ki li ga', 'calm girls' is written as 'ki ri' and 'lead fast' is written as 'ga fe'. Which word is coded as 'ri'?", options: ["lead", "brave", "fast", "calm"], answer: 3, explanation: "'girls' is common to the first two sentences, so girls = ki; 'lead' is common to the first and third, so lead = ga. The other code in the second sentence, ri, means 'calm'." },
+    { q: "If '÷' means '+', '×' means '−', '−' means '×' and '+' means '÷', what is the value of 14 − 7 × 12 + 4 ÷ 5?", options: ["100", "90", "105", "101"], answer: 0, explanation: "Replacing the symbols gives 14 × 7 − 12 ÷ 4 + 5; following BODMAS, this equals 100." },
+    { q: "E is the son of F. F is the brother of G. G is the mother of H. How is E related to H?", options: ["Brother", "Cousin", "Uncle", "Nephew"], answer: 1, explanation: "E's father F and H's mother G are siblings, so E and H are cousins." },
+    { q: "Pointing to a man, Nitin said, \"His father is the only brother of my father.\" How is the man related to Nitin?", options: ["Cousin", "Uncle", "Nephew", "Brother"], answer: 0, explanation: "The man's father is Nitin's uncle, so the man is Nitin's cousin." },
+    { q: "Starting from his house, Dev walks 1 km towards the east, turns right and walks 14 km, finally turns left and walks 15 km. In which direction is he now from his house?", options: ["South-East", "North-East", "South-West", "North-West"], answer: 0, explanation: "He ends up 16 km east and 14 km south of his house, so he is to the South-East of his house." },
+    { q: "One morning, just after sunrise, Arjun was standing in a field. His shadow fell exactly to his left. Which direction was he facing?", options: ["South", "North", "West", "East"], answer: 1, explanation: "In the morning the sun is in the east, so shadows fall to the west. With the shadow (West) on his left, he must be facing North." },
+    { q: "In a row of 49 students, Rohit is 13th from the left end and Ajay is 13th from the right end. How many students are there between them?", options: ["26", "25", "23", "24"], answer: 2, explanation: "Rohit and Ajay with everyone to their outer sides account for 13 + 13 = 26 students, so 49 − 26 = 23 are between them." },
+    { q: "Bina is taller than Tarun. Bina is shorter than Nisha. Asha is shorter than Sita. Tarun is taller than Sita. Who is the shortest?", options: ["Tarun", "Asha", "Bina", "Nisha"], answer: 1, explanation: "The order from tallest to shortest is Nisha > Bina > Tarun > Sita > Asha, so the shortest is Asha." },
+    { q: "Two trains start at the same time from stations 515 km apart and travel towards each other at 60 km/h and 43 km/h. After how many hours will they meet?", options: ["4", "6", "8", "5"], answer: 3, explanation: "They close the gap at 60 + 43 = 103 km/h, so they meet after 515/103 = 5 hours." },
+    { q: "₹9000 is divided among X, Y and Z in the ratio 6 : 3 : 6. What is Y's share?", options: ["₹2400", "₹3600", "₹3000", "₹1800"], answer: 3, explanation: "Total parts = 15; one part = ₹600; Y gets 3 × 600 = ₹1800." },
+    { q: "Through how many degrees does the hour hand of a clock turn from 6:45 to 10:15?", options: ["135°", "120°", "180°", "105°"], answer: 3, explanation: "The hour hand turns 0.5° per minute; 210 minutes × 0.5° = 105°." },
+    { q: "Which year will have exactly the same calendar as 2042?", options: ["2046", "2054", "2052", "2053"], answer: 3, explanation: "A year has the same calendar when it starts on the same weekday and is also an ordinary year. Counting odd days (1 per ordinary year, 2 per leap year) from 2042 until they total a multiple of 7 gives 2053." },
+    { q: "Statements: All runners are sailors. All runners are bottles. Conclusions: I. Some sailors are bottles. II. All sailors are bottles.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Every one of the runners is both a sailor and a bottle, so some sailors are bottles (I); there may be sailors that are not bottles, so II fails." },
+    { q: "Statement: The hospital has installed solar panels on its roof. Assumptions: I. Solar power can meet part of its electricity needs. II. The hospital will never face a power cut again.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0, explanation: "Installing panels assumes they will help (I); a guarantee against all power cuts is not implied." },
+    { q: "A cube of side 5 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have exactly three faces painted?", options: ["36", "8", "54", "27"], answer: 1, explanation: "There are 125 small cubes; exactly three faces painted: only the 8 corner cubes." },
+    { q: "How many letters are there between L and T in the English alphabet?", options: ["7", "8", "5", "9"], answer: 0, explanation: "L is 12 and T is 20; the letters strictly between them number 20 − 12 − 1 = 7." },
+    { q: "If the letters of the word REGIMENT are arranged in alphabetical order, how many letters remain in the same position?", options: ["6", "7", "5", "3"], answer: 2, explanation: "Alphabetical order: EEGIMNRT. Comparing with REGIMENT, 5 letters (E, G, I, M, T) stay in place." },
+  ],
+};
+
+export default test;

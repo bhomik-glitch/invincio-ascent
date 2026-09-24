@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-44",
+  title: "OIR Test 44",
+  durationMinutes: 20,
+  releaseAt: "2026-11-01T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 528, 840, 960, 1368, 1680, ?", options: ["1847", "1850", "1935", "1848"], answer: 3, explanation: "Here the terms are one less than the squares of consecutive primes. Next: 43² − 1 = 1848." },
+    { q: "Find the next number: 10368, 1728, 288, 48, ?", options: ["40", "9", "7", "8"], answer: 3, explanation: "Here each term is the previous term divided by 6. Next: 48 ÷ 6 = 8." },
+    { q: "Find the next number: 1, 1, 2, 4, 7, 13, 24, ?", options: ["38", "48", "44", "31"], answer: 2, explanation: "Here each term is the sum of the previous three terms. Next: 7 + 13 + 24 = 44." },
+    { q: "Find the missing number: 16, 25, ?, 49, 64, 81", options: ["37", "38", "34", "36"], answer: 3, explanation: "Here the terms are the squares of consecutive numbers, so the missing term is 36." },
+    { q: "Find the next letter: A, F, H, M, O, ?", options: ["U", "T", "S", "V"], answer: 1, explanation: "By alphabet positions (1, 6, 8, 13, 15), the letters move alternately +5 and +2: O(15) + 5 = T(20)." },
+    { q: "Find the next term: I18, L15, O12, R9, ?", options: ["V5", "U7", "U6", "U21"], answer: 2, explanation: "The letters move 3 forward each time, and each number is the letter's position in the reversed alphabet (A = 26 … Z = 1): U → 6." },
+    { q: "Hertz : Frequency :: Ohm : ?", options: ["Power", "Resistance", "Charge", "Current"], answer: 1, explanation: "The hertz is the unit of frequency; the ohm is the unit of resistance." },
+    { q: "2 : 4 :: 10 : ?", options: ["121", "100", "103", "1000"], answer: 1, explanation: "2 → 2² = 4; likewise 10 → 10² = 100." },
+    { q: "Sikkim : Gangtok :: Meghalaya : ?", options: ["Dispur", "Shillong", "Imphal", "Aizawl"], answer: 1, explanation: "Gangtok is the capital of Sikkim; Shillong is the capital of Meghalaya." },
+    { q: "Which one does not belong with the others?", options: ["Deodar", "Bamboo", "Sal", "Teak"], answer: 1, explanation: "Bamboo is a grass; the others are trees." },
+    { q: "Which number does not belong with the others?", options: ["400", "402", "81", "169"], answer: 1, explanation: "400 = 20², 169 = 13², 81 = 9² are perfect squares; 402 is not." },
+    { q: "Choose the word most opposite in meaning to BOLD.", options: ["Timid", "Loud", "Daring", "Brave"], answer: 0, explanation: "The opposite of bold is timid; the other options are similar in meaning or unrelated." },
+    { q: "If UNIFORM is coded as MROFINU, how is ARROW coded?", options: ["YQTTC", "WPRRA", "WORRA", "WORQA"], answer: 2, explanation: "In this code the letters are written in reverse order, so ARROW becomes WORRA." },
+    { q: "In a code language, 'smart doctors study' is written as 'ka su tu', 'bold doctors' is written as 'bu ka' and 'study daily' is written as 'su lo'. Which word is coded as 'ka'?", options: ["doctors", "study", "smart", "daily"], answer: 0, explanation: "'doctors' is common to the first two sentences, so doctors = ka; 'study' is common to the first and third, so study = su." },
+    { q: "If A = 26, B = 25, …, Z = 1 and RABBIT = 110 (the sum of its letter values), what is MEDAL?", options: ["35", "100", "110", "114"], answer: 1, explanation: "MEDAL = 14 + 22 + 23 + 26 + 15 = 100." },
+    { q: "C is the wife of D. E is the mother of D. F is the only son of E. How is F related to C?", options: ["Son", "Brother-in-law", "Father-in-law", "Husband"], answer: 3, explanation: "D is E's son; since F is E's only son, F is D himself — C's husband." },
+    { q: "Pointing to a woman, Mahesh said, \"She is the daughter-in-law of my mother's only child.\" How is the woman related to Mahesh?", options: ["Sister-in-law", "Daughter", "Daughter-in-law", "Wife"], answer: 2, explanation: "Mahesh is his mother's only child, so the woman is Mahesh's own daughter-in-law." },
+    { q: "Starting from his house, Suresh walks 10 m towards the east, turns left and walks 90 m, turns right and walks 140 m, finally turns right and walks 85 m. In which direction is he now from his house?", options: ["South-West", "North-West", "South-East", "North-East"], answer: 3, explanation: "He ends up 150 m east and 5 m north of his house, so he is to the North-East of his house." },
+    { q: "A man is facing North-West. He turns 180° clockwise, then 90° anticlockwise, then 135° anticlockwise. Which direction is he facing now?", options: ["West", "East", "North", "South"], answer: 0, explanation: "The net turn is 45° anticlockwise from North-West, so he faces West." },
+    { q: "In a row, Kabir is 5th from the left and Vikram is 16th from the right. When they interchange places, Kabir becomes 22nd from the left. How many people are in the row?", options: ["37", "26", "38", "40"], answer: 0, explanation: "After the swap Kabir takes Vikram's old place, which is 22nd from the left and 16th from the right, so total = 22 + 16 − 1 = 37." },
+    { q: "Dinesh is taller than Manoj. Chetan is taller than Dinesh. Manoj is taller than Ravi. Hari is shorter than Ravi. Who is the shortest?", options: ["Hari", "Chetan", "Dinesh", "Manoj"], answer: 0, explanation: "The order from tallest to shortest is Chetan > Dinesh > Manoj > Ravi > Hari, so the shortest is Hari." },
+    { q: "Two trains start at the same time from stations 410 km apart and travel towards each other at 47 km/h and 35 km/h. After how many hours will they meet?", options: ["7", "5", "6", "4"], answer: 1, explanation: "They close the gap at 47 + 35 = 82 km/h, so they meet after 410/82 = 5 hours." },
+    { q: "A bag contains an equal number of ₹1, ₹5 and ₹10 coins worth ₹208 in all. How many of each are there?", options: ["11", "3", "39", "13"], answer: 3, explanation: "Each set of one of each is worth ₹16; 208/16 = 13." },
+    { q: "What is the angle between the hands of a clock at 3:55?", options: ["120°", "162.5°", "147.5°", "177.5°"], answer: 2, explanation: "Angle = |30 × 3 − 5.5 × 55| = 212.5°, i.e. 360° − that = 147.5°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "15 August 1947 was India's first Independence Day. What day of the week was it?", options: ["Thursday", "Friday", "Monday", "Saturday"], answer: 1, explanation: "1 January 2001 was a Monday. 15 August 1947 is 19498 days before it, leaving 3 odd day(s) backwards from Monday, so it was a Friday." },
+    { q: "Statements: All tables are coins. All dancers are coins. Conclusions: I. Some tables are dancers. II. Some coins are dancers.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "All dancers are coins, so some coins are dancers (II); tables and dancers both lie within coins but need not overlap, so I fails." },
+    { q: "Statement: The college will hold a blood donation camp next week. Assumptions: I. Some people will volunteer to donate blood. II. Donated blood is needed by hospitals and patients.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 2, explanation: "A camp assumes donors will come (I) and that the blood is needed (II)." },
+    { q: "A cube of side 5 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have no face painted?", options: ["54", "36", "27", "8"], answer: 2, explanation: "There are 125 small cubes; no face painted: the inner (5 − 2)³ = 27 cubes." },
+    { q: "Which letter is 7th to the right of the 15th letter from the left in the English alphabet?", options: ["U", "V", "T", "W"], answer: 1, explanation: "The 15th letter from the left is O; 7 places to its right is the 22nd letter, V." },
+    { q: "If the letters of the word TELESCOPE are arranged in alphabetical order, how many letters remain in the same position?", options: ["2", "0", "3", "4"], answer: 0, explanation: "Alphabetical order: CEEELOPST. Comparing with TELESCOPE, 2 letters (E, E) stay in place." },
+  ],
+};
+
+export default test;

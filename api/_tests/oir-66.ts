@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-66",
+  title: "OIR Test 66",
+  durationMinutes: 20,
+  releaseAt: "2026-12-06T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 27, 64, 125, 216, 343, ?", options: ["729", "511", "512", "513"], answer: 2, explanation: "Here the terms are the cubes of consecutive numbers. Next: 8³ = 512." },
+    { q: "Find the next number: 83, 87, 95, 107, 119, ?", options: ["123", "125", "126", "113"], answer: 0, explanation: "Here the terms are 2p + 1 for consecutive primes p. Next: 2 × 61 + 1 = 123." },
+    { q: "Find the next number: 14, 17, 23, 35, 59, ?", options: ["131", "108", "107", "118"], answer: 2, explanation: "Here the differences 3, 6, 12, 24, 48 are each 2 times the previous difference. Next: 59 + 48 = 107." },
+    { q: "Find the missing number: 239, 235, 226, ?, 193, 169", options: ["212", "207", "222", "210"], answer: 0, explanation: "Here the differences subtracted are 4, 9, 14, 19, 24 — each 5 more than the last, so the missing term is 212." },
+    { q: "Find the next letter: A, F, J, O, S, ?", options: ["Z", "W", "Y", "X"], answer: 3, explanation: "By alphabet positions (1, 6, 10, 15, 19), the letters move alternately +5 and +4: S(19) + 5 = X(24)." },
+    { q: "Find the next pair: EE, IF, MG, QH, ?", options: ["UJ", "VI", "UI", "TH"], answer: 2, explanation: "The first letters move 4 forward each time and the second letters move 1 forward: next is UI." },
+    { q: "Scissors : Cut :: Needle : ?", options: ["Prick", "Knit", "Stitch", "Thread"], answer: 2, explanation: "Scissors are used to cut; a needle is used to stitch." },
+    { q: "4 : 63 :: 5 : ?", options: ["30", "124", "125", "20"], answer: 1, explanation: "4 → 4³ − 1 = 63; likewise 5 → 5³ − 1 = 124." },
+    { q: "Tennis : Davis Cup :: Badminton : ?", options: ["Durand Cup", "Ranji Trophy", "Thomas Cup", "Ryder Cup"], answer: 2, explanation: "The Davis Cup is for tennis; the Thomas Cup is for badminton." },
+    { q: "Which one does not belong with the others?", options: ["Anger", "Honesty", "Joy", "Sorrow"], answer: 1, explanation: "Honesty is a virtue; the others are emotions." },
+    { q: "Which pair does not belong with the others?", options: ["6 – 39", "9 – 84", "2 – 7", "4 – 24"], answer: 3, explanation: "In the other pairs the second number is n² + 3, where n is the first (e.g. 2² + 3 = 7); but 4² + 3 = 19, not 24." },
+    { q: "Choose the word most opposite in meaning to EXPORT.", options: ["Send", "Ship", "Trade", "Import"], answer: 3, explanation: "The opposite of export is import; the other options are similar in meaning or unrelated." },
+    { q: "If COMPASS is coded as XLNKZHH, how is CAMP coded?", options: ["BZLO", "XZNK", "XZOK", "YZNK"], answer: 1, explanation: "In this code each letter is replaced by its opposite letter (A↔Z, B↔Y, C↔X, …), so CAMP becomes XZNK." },
+    { q: "In a code language, 'proud farmers run' is written as 'ki ga fe', 'calm farmers' is written as 'ka ki' and 'run today' is written as 'fe si'. Which word is coded as 'si'?", options: ["run", "today", "proud", "calm"], answer: 1, explanation: "'farmers' is common to the first two sentences, so farmers = ki; 'run' is common to the first and third, so run = fe. The other code in the third sentence, si, means 'today'." },
+    { q: "If A = 26, B = 25, …, Z = 1 and ROCKET = 90 (the sum of its letter values), what is BREAD?", options: ["130", "30", "115", "105"], answer: 3, explanation: "BREAD = 25 + 9 + 22 + 26 + 23 = 105." },
+    { q: "Sunil is Tina's brother. Tina is Uday's mother. Uday's sister is Vani. How is Sunil related to Vani?", options: ["Grandfather", "Father", "Maternal uncle", "Brother"], answer: 2, explanation: "Tina is Vani's mother too, so Tina's brother Sunil is Vani's maternal uncle." },
+    { q: "Pointing to a man, Garima said, \"He is the father of my mother's brother's son.\" How is the man related to Garima?", options: ["Maternal uncle", "Father", "Cousin", "Grandfather"], answer: 0, explanation: "The father of her mother's brother's son is her mother's brother himself — Garima's maternal uncle." },
+    { q: "Starting from his house, Vikram walks 85 m towards the north, turns left and walks 75 m, finally turns left and walks 75 m. In which direction is he now from his house?", options: ["South-West", "South-East", "North-West", "North-East"], answer: 2, explanation: "He ends up 75 m west and 10 m north of his house, so he is to the North-West of his house." },
+    { q: "One evening, just before sunset, Mohan was standing in a field. His shadow fell exactly in front of him. Which direction was he facing?", options: ["North", "West", "South", "East"], answer: 3, explanation: "In the evening the sun is in the west, so shadows fall to the east. With the shadow (East) in front of him, he must be facing East." },
+    { q: "In a row of 28 children, Suresh is 10th from the left. Sanjay is 8th to the right of Suresh. What is Sanjay's position from the right end?", options: ["11th", "10th", "12th", "13th"], answer: 0, explanation: "Sanjay is 18th from the left, so from the right he is 28 − 18 + 1 = 11." },
+    { q: "Nisha is lighter than Om. Kiran is lighter than Bina. Kiran is heavier than Uma. Uma is heavier than Om. Who is the heaviest?", options: ["Uma", "Bina", "Kiran", "Om"], answer: 1, explanation: "The order from heaviest to lightest is Bina > Kiran > Uma > Om > Nisha, so the heaviest is Bina." },
+    { q: "A shopkeeper marks his goods 60% above the cost price and then gives a discount of 20%. What is his net profit or loss?", options: ["28% loss", "40% profit", "28% profit", "30% profit"], answer: 2, explanation: "On a cost of ₹100 the marked price is ₹160; after 20% off it sells for ₹128, a 28% profit." },
+    { q: "The sum of 3 consecutive even numbers is 240. What is the largest of them?", options: ["82", "84", "78", "80"], answer: 0, explanation: "The middle value is 240/3 = 80; the numbers are 78, 80, 82, so the largest is 82." },
+    { q: "In a mirror, a clock appears to show 10:19. What is the actual time?", options: ["1:41", "2:41", "1:11", "2:19"], answer: 0, explanation: "Actual time = 11:60 − 10:19 = 1:41." },
+    { q: "How many days are there from 10 July 2029 to 11 August 2029, both days included?", options: ["33", "32", "36", "34"], answer: 0, explanation: "Counting the days in each month from 10 July 2029 to 11 August 2029 inclusive gives 33." },
+    { q: "Statements: No cloud is an engineer. All phones are clouds. Conclusions: I. No phone is an engineer. II. Some clouds are phones.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "All phones are clouds and no a cloud is an engineer, so no a phone is an engineer (I); all phones being clouds means some clouds are phones (II)." },
+    { q: "Statement: Two-thirds of the seats in the train are reserved. Conclusions: I. One-third of the seats are unreserved. II. Reserved seats cost more.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "The remaining third is unreserved (I); nothing is said about fares." },
+    { q: "A cube of side 7 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have exactly two faces painted?", options: ["60", "150", "8", "125"], answer: 0, explanation: "There are 343 small cubes; exactly two faces painted: 12 edges × (7 − 2) = 60." },
+    { q: "Which letter is 12th to the right of the 13th letter from the left in the English alphabet?", options: ["Y", "X", "W", "Z"], answer: 0, explanation: "The 13th letter from the left is M; 12 places to its right is the 25th letter, Y." },
+    { q: "How many pairs of letters in the word HELICOPTER have as many letters between them in the word as there are between them in the English alphabet (in either direction)?", options: ["6", "14", "4", "5"], answer: 2, explanation: "The pairs are LO, LP, OP, TR — 4 in all." },
+  ],
+};
+
+export default test;

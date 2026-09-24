@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-106",
+  title: "OIR Test 106",
+  durationMinutes: 20,
+  releaseAt: "2027-01-31T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 10, 20, 11, 21, 12, 22, ?", options: ["14", "32", "13", "11"], answer: 2, explanation: "Here the operations alternate: + 10, − 9, + 10, − 9 and so on. Next: 22 − 9 = 13." },
+    { q: "Find the next number: 7, 5, 12, 17, 29, 46, 75, ?", options: ["121", "122", "104", "150"], answer: 0, explanation: "Here each term is the sum of the previous two terms. Next: 46 + 75 = 121." },
+    { q: "Find the next number: 26, 27, 33, 44, 60, ?", options: ["86", "76", "83", "81"], answer: 3, explanation: "Here the differences added are 1, 6, 11, 16, 21 — each 5 more than the last. Next: 60 + 21 = 81." },
+    { q: "Find the missing number: 7, 10, ?, 46, 127, 370", options: ["28", "37", "29", "19"], answer: 3, explanation: "Here the differences 3, 9, 27, 81, 243 are each 3 times the previous difference, so the missing term is 19." },
+    { q: "Find the next letter: J, M, O, R, T, ?", options: ["X", "Y", "V", "W"], answer: 3, explanation: "By alphabet positions (10, 13, 15, 18, 20), the letters move alternately +3 and +2: T(20) + 3 = W(23)." },
+    { q: "Find the next pair: NO, PM, RK, TI, ?", options: ["UF", "WG", "VF", "VG"], answer: 3, explanation: "The first letters move 2 forward each time and the second letters move 2 back: next is VG." },
+    { q: "Pistol : Holster :: Letter : ?", options: ["Stamp", "Paper", "Envelope", "Postbox"], answer: 2, explanation: "A pistol is carried in a holster; a letter is put in an envelope." },
+    { q: "12 : 1740 :: 10 : ?", options: ["1010", "99", "990", "1000"], answer: 0, explanation: "12 → 12³ + 12 = 1740; likewise 10 → 10³ + 10 = 1010." },
+    { q: "Satish Dhawan Space Centre : Sriharikota :: Vikram Sarabhai Space Centre : ?", options: ["Thiruvananthapuram", "Hyderabad", "Ahmedabad", "Bengaluru"], answer: 0, explanation: "The launch centre is at Sriharikota; VSSC is at Thiruvananthapuram." },
+    { q: "Which one does not belong with the others?", options: ["Sentence", "Adjective", "Noun", "Verb"], answer: 0, explanation: "A sentence is not a part of speech." },
+    { q: "Which number does not belong with the others?", options: ["729", "728", "125", "343"], answer: 1, explanation: "125 = 5³, 729 = 9³, 343 = 7³ are perfect cubes; 728 is not." },
+    { q: "Choose the one word for: \"A person who travels on foot\"", options: ["Pedestrian", "Passenger", "Pilgrim", "Commuter"], answer: 0, explanation: "Pedestrian: a person who travels on foot." },
+    { q: "If BOXING is coded as HOJYPC, how is TOMATO coded?", options: ["UNNZUN", "PUANPU", "PUBMPU", "PUBNPU"], answer: 3, explanation: "In this code the letters are reversed and each is moved 1 place forward, so TOMATO becomes PUBNPU." },
+    { q: "In a code language, 'quick soldiers march' is written as 'su mu ne', 'strong soldiers' is written as 'ho ne' and 'march together' is written as 'tu su'. What is the code for 'quick'?", options: ["ne", "ho", "tu", "mu"], answer: 3, explanation: "'soldiers' is common to the first two sentences, so soldiers = ne; 'march' is common to the first and third, so march = su. The remaining code in the first sentence, mu, means 'quick'." },
+    { q: "If A = 1, B = 2, …, Z = 26 and TROOP = 84 (the sum of its letter values), what is PLANET?", options: ["68", "94", "66", "84"], answer: 0, explanation: "PLANET = 16 + 12 + 1 + 14 + 5 + 20 = 68." },
+    { q: "Kamla is the mother of Lalit's father. How is Kamla related to Lalit?", options: ["Aunt", "Great-grandmother", "Mother", "Grandmother"], answer: 3, explanation: "The mother of one's father is one's (paternal) grandmother." },
+    { q: "Pointing to a girl, Bharat said, \"Her mother is my wife's only sister.\" How is the girl related to Bharat?", options: ["Daughter", "Cousin", "Niece", "Sister"], answer: 2, explanation: "The girl is the daughter of Bharat's sister-in-law, so she is his niece." },
+    { q: "Starting from his house, Ravi walks 2 km towards the east, turns left and walks 9 km, finally turns right and walks 13 km. In which direction is he now from his house?", options: ["North-West", "South-East", "South-West", "North-East"], answer: 3, explanation: "He ends up 15 km east and 9 km north of his house, so he is to the North-East of his house." },
+    { q: "A man is facing South. He turns 135° anticlockwise, then 45° anticlockwise. Which direction is he facing now?", options: ["East", "West", "South", "North"], answer: 3, explanation: "The net turn is 180° clockwise from South, so he faces North." },
+    { q: "In a row, Arjun is 12th from the left and Suresh is 12th from the right. When they interchange places, Arjun becomes 25th from the left. How many people are in the row?", options: ["36", "37", "38", "39"], answer: 0, explanation: "After the swap Arjun takes Suresh's old place, which is 25th from the left and 12th from the right, so total = 25 + 12 − 1 = 36." },
+    { q: "Gita is slower than Kiran. Hari is faster than Kiran. Tarun is slower than Farhan. Hari is slower than Tarun. Who is the second fastest?", options: ["Kiran", "Tarun", "Hari", "Farhan"], answer: 1, explanation: "The order from fastest to slowest is Farhan > Tarun > Hari > Kiran > Gita, so the second fastest is Tarun." },
+    { q: "A number is multiplied by 5, then 5 is added, and the result is multiplied by 2. The final answer is 160. What was the number?", options: ["15", "25", "17", "5"], answer: 0, explanation: "Working backwards: 160 ÷ 2 = 80; − 5 = 75; ÷ 5 = 15." },
+    { q: "The sum of the present ages of a father and his son is 66 years. 3 years ago, the father was 4 times as old as the son. What is the son's present age?", options: ["15 years", "18 years", "17 years", "13 years"], answer: 0, explanation: "Let the son be x: (66 − x − 3) = 4(x − 3) gives x = 15; the father is 51." },
+    { q: "What is the angle between the hands of a clock at 7:50?", options: ["95°", "90°", "65°", "80°"], answer: 2, explanation: "Angle = |30 × 7 − 5.5 × 50| = 65°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "11 October 2028 is a Wednesday. What day of the week is 12 June 2028?", options: ["Monday", "Wednesday", "Sunday", "Tuesday"], answer: 0, explanation: "12 June 2028 is 121 days before 11 October 2028. 121 = 7 × 17 + 2, so the day shifts 2 back: Monday." },
+    { q: "Statements: All rings are pens. No pen is a car. Conclusions: I. No ring is a car. II. Some rings are cars.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "All rings are pens and no a pen is a car, so no a ring can be a car (I); II contradicts this." },
+    { q: "Statement: Unknown persons have been seen near the ammunition depot at night. Courses of action: I. Security around the depot should be tightened. II. The matter should be reported to higher authorities. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "Both tighter security (I) and reporting (II) are appropriate." },
+    { q: "A cube of side 5 cm is painted on two opposite faces only and then cut into 1 cm cubes. How many small cubes have exactly one painted face?", options: ["50", "25", "75", "54"], answer: 0, explanation: "The two opposite faces each have 25 cubes with exactly one painted face (50 in all), and the remaining 5³ − 50 = 75 cubes have no paint." },
+    { q: "If the English alphabet is written in reverse order (Z to A), which letter will be 4th to the right of the 6th letter from the left?", options: ["J", "P", "Q", "R"], answer: 2, explanation: "In the reversed alphabet the 10th letter from the left is Q (position n holds letter 27 − n)." },
+    { q: "If the letters of the word GEOGRAPHY are arranged in alphabetical order, how many letters remain in the same position?", options: ["5", "3", "6", "4"], answer: 3, explanation: "Alphabetical order: AEGGHOPRY. Comparing with GEOGRAPHY, 4 letters (E, G, P, Y) stay in place." },
+  ],
+};
+
+export default test;

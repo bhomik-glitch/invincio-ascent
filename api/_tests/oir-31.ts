@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-31",
+  title: "OIR Test 31",
+  durationMinutes: 20,
+  releaseAt: "2026-10-18T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 168, 288, 360, 528, 840, ?", options: ["960", "1023", "959", "962"], answer: 0, explanation: "Here the terms are one less than the squares of consecutive primes. Next: 31² − 1 = 960." },
+    { q: "Find the next number: 9, 15, 27, 51, 99, ?", options: ["201", "198", "197", "195"], answer: 3, explanation: "Here each term is 2 times the previous term minus 3. Next: 99 × 2 − 3 = 195." },
+    { q: "Find the next number: 3, 8, 31, 154, 923, ?", options: ["5537", "6460", "6461", "7384"], answer: 1, explanation: "Here the multipliers increase by one each step (×3, ×4, ×5, …), then subtract 1. Next: 923 × 7 − 1 = 6460." },
+    { q: "Find the missing number: 15, 45, 135, ?, 1215", options: ["675", "945", "405", "403"], answer: 2, explanation: "Here each term is 3 times the previous term, so the missing term is 405." },
+    { q: "Find the next letter: C, D, F, I, M, ?", options: ["R", "T", "S", "Q"], answer: 0, explanation: "By alphabet positions (3, 4, 6, 9, 13), the gaps grow by one each time (+1, 2, 3, 4, …): M(13) + 5 = R(18)." },
+    { q: "Find the next term: C3, G7, K11, O15, ?", options: ["T20", "S19", "S20", "S8"], answer: 1, explanation: "The letters move 4 forward each time, and each number is the letter's position in the alphabet: S → 19." },
+    { q: "Seismograph : Earthquakes :: Ammeter : ?", options: ["Resistance", "Power", "Voltage", "Electric current"], answer: 3, explanation: "A seismograph records earthquakes; an ammeter measures electric current." },
+    { q: "7 : 336 :: 12 : ?", options: ["1716", "147", "288", "168"], answer: 0, explanation: "7 → 7³ − 7 = 336; likewise 12 → 12³ − 12 = 1716." },
+    { q: "Apache : Attack helicopter :: Chinook : ?", options: ["Heavy-lift helicopter", "Fighter jet", "Tanker aircraft", "Drone"], answer: 0, explanation: "The Apache is an attack helicopter; the Chinook is a heavy-lift transport helicopter." },
+    { q: "Which one does not belong with the others?", options: ["April", "June", "December", "September"], answer: 2, explanation: "December has 31 days; the others have 30." },
+    { q: "Which number does not belong with the others?", options: ["121", "56", "55", "132"], answer: 1, explanation: "55, 132, 121 are all multiples of 11; 56 is not." },
+    { q: "Choose the word most similar in meaning to LUCID.", options: ["Confusing", "Dark", "Clear", "Lazy"], answer: 2, explanation: "Lucid means clear." },
+    { q: "If ANCHOR is written as 26-13-24-19-12-9, how is BUNKER written in the same code?", options: ["26-6-13-16-22-9", "25-6-13-15-22-9", "2-21-14-11-5-18", "25-6-13-16-22-9"], answer: 3, explanation: "Each letter is replaced by its position in the reversed alphabet (A = 26, B = 25, …, Z = 1), so BUNKER → 25-6-13-16-22-9." },
+    { q: "In a code language, 'tall cadets work' is written as 'zo ze ho', 'bold cadets' is written as 'ja zo' and 'work well' is written as 'ze ri'. What is the code for 'tall'?", options: ["zo", "ze", "ho", "ja"], answer: 2, explanation: "'cadets' is common to the first two sentences, so cadets = zo; 'work' is common to the first and third, so work = ze. The remaining code in the first sentence, ho, means 'tall'." },
+    { q: "If '−' means '+', '÷' means '−', '+' means '×' and '×' means '÷', what is the value of 60 × 12 + 4 − 9 ÷ 6?", options: ["23", "11", "29", "13"], answer: 0, explanation: "Replacing the symbols gives 60 ÷ 12 × 4 + 9 − 6; following BODMAS, this equals 23." },
+    { q: "J is the brother of K. K is the mother of L. L is the brother of M. How is J related to M?", options: ["Maternal uncle", "Cousin", "Grandfather", "Father"], answer: 0, explanation: "K is M's mother too, and J is K's brother, so J is M's maternal uncle." },
+    { q: "Pointing to a man, Radha said, \"He is the son of the only son of my father's wife.\" Radha's father has only one wife. How is the man related to Radha?", options: ["Brother", "Cousin", "Nephew", "Son"], answer: 2, explanation: "Her father's wife is her mother; her mother's only son is Radha's brother, whose son is Radha's nephew." },
+    { q: "Starting from his house, Kabir walks 15 km towards the south, turns left and walks 11 km, finally turns right and walks 11 km. In which direction is he now from his house?", options: ["South-West", "South-East", "North-East", "North-West"], answer: 1, explanation: "He ends up 11 km east and 26 km south of his house, so he is to the South-East of his house." },
+    { q: "A man is facing North-East. He turns 45° clockwise, then 180° anticlockwise, then 180° anticlockwise. Which direction is he facing now?", options: ["South", "East", "North", "West"], answer: 1, explanation: "The net turn is 45° clockwise from North-East, so he faces East." },
+    { q: "In a class of 36 students, Nikhil ranks 8th from the top. What is his rank from the bottom?", options: ["28th", "31st", "29th", "30th"], answer: 2, explanation: "Rank from bottom = 36 − 8 + 1 = 29." },
+    { q: "Sita is heavier than Esha. Sita is lighter than Jatin. Jatin is lighter than Isha. Who is the lightest?", options: ["Isha", "Sita", "Esha", "Jatin"], answer: 2, explanation: "The order from heaviest to lightest is Isha > Jatin > Sita > Esha, so the lightest is Esha." },
+    { q: "A number is multiplied by 3, then 15 is added, and the result is multiplied by 3. The final answer is 189. What was the number?", options: ["17", "6", "15", "16"], answer: 3, explanation: "Working backwards: 189 ÷ 3 = 63; − 15 = 48; ÷ 3 = 16." },
+    { q: "25% of a number is 15. What is 20% of the same number?", options: ["27", "30", "12", "22"], answer: 2, explanation: "The number is 15 × 100/25 = 60, and 20% of 60 = 12." },
+    { q: "Through how many degrees does the hour hand of a clock turn from 4:15 to 7:15?", options: ["90°", "120°", "105°", "0°"], answer: 0, explanation: "The hour hand turns 0.5° per minute; 180 minutes × 0.5° = 90°." },
+    { q: "25 June 2028 is a Sunday. What day of the week is 19 May 2029?", options: ["Saturday", "Friday", "Monday", "Sunday"], answer: 0, explanation: "19 May 2029 is 328 days after 25 June 2028. 328 = 7 × 46 + 6, so the day shifts 6 forward: Saturday." },
+    { q: "Statements: Some clouds are coins. No flower is a coin. Conclusions: I. Some clouds are not flowers. II. Some coins are clouds.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "The clouds that are coins cannot be flowers, so some clouds are not flowers (I); 'Some clouds are coins' reverses to 'Some coins are clouds' (II)." },
+    { q: "Statement: \"Learn a new language in 30 days,\" claims an online course. Assumptions: I. People want to learn languages quickly. II. Every language has exactly 30 lessons.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0, explanation: "The claim appeals to people wanting quick learning (I); II is absurd and not implied." },
+    { q: "How many cubes of side 4 cm can be cut from a solid cube of side 12 cm?", options: ["27", "9", "432", "30"], answer: 0, explanation: "(12/4)³ = 3³ = 27." },
+    { q: "Which letter is 9th to the right of the 5th letter from the left in the English alphabet?", options: ["N", "O", "M", "L"], answer: 0, explanation: "The 5th letter from the left is E; 9 places to its right is the 14th letter, N." },
+    { q: "How many pairs of letters in the word FRIENDSHIP have as many letters between them in the word as there are between them in the English alphabet (in either direction)?", options: ["6", "5", "3", "4"], answer: 2, explanation: "The pairs are IP, SP, HI — 3 in all." },
+  ],
+};
+
+export default test;

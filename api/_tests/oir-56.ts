@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-56",
+  title: "OIR Test 56",
+  durationMinutes: 20,
+  releaseAt: "2026-11-22T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 12, 13, 16, 25, 52, ?", options: ["160", "134", "133", "156"], answer: 2, explanation: "Here the differences 1, 3, 9, 27, 81 are each 3 times the previous difference. Next: 52 + 81 = 133." },
+    { q: "Find the next number: 6, 17, 67, 334, 2003, ?", options: ["12017", "16024", "14020", "14021"], answer: 2, explanation: "Here the multipliers increase by one each step (×3, ×4, ×5, …), then subtract 1. Next: 2003 × 7 − 1 = 14020." },
+    { q: "Find the next number: 8, 2, 10, 12, 22, 34, 56, ?", options: ["91", "90", "78", "112"], answer: 1, explanation: "Here each term is the sum of the previous two terms. Next: 34 + 56 = 90." },
+    { q: "Find the missing number: 5, 11, 23, ?, 95, 191", options: ["59", "47", "71", "57"], answer: 1, explanation: "Here each term is 2 times the previous term plus 1, so the missing term is 47." },
+    { q: "Find the next letter: Y, W, U, S, Q, ?", options: ["P", "N", "Q", "O"], answer: 3, explanation: "By alphabet positions (25, 23, 21, 19, 17), each letter is 2 places before the previous one: Q(17) − 2 = O(15)." },
+    { q: "Find the next pair: TT, US, VR, WQ, ?", options: ["YP", "XP", "XO", "WO"], answer: 1, explanation: "The first letters move 1 forward each time and the second letters move 1 back: next is XP." },
+    { q: "Ignite : Extinguish :: Advance : ?", options: ["Halt", "Retreat", "Attack", "March"], answer: 1, explanation: "These are opposites: ignite–extinguish, advance–retreat." },
+    { q: "8 : 512 :: 3 : ?", options: ["26", "24", "27", "9"], answer: 2, explanation: "8 → 8³ = 512; likewise 3 → 3³ = 27." },
+    { q: "Israel : Knesset :: Russia : ?", options: ["Congress", "Diet", "Storting", "Duma"], answer: 3, explanation: "Israel's legislature is the Knesset; Russia's lower house is the State Duma." },
+    { q: "Which one does not belong with the others?", options: ["Saturn", "Sirius", "Jupiter", "Venus"], answer: 1, explanation: "Sirius is a star; the others are planets." },
+    { q: "Which number does not belong with the others?", options: ["256", "403", "144", "400"], answer: 1, explanation: "144 = 12², 256 = 16², 400 = 20² are perfect squares; 403 is not." },
+    { q: "Choose the word most opposite in meaning to TRANSPARENT.", options: ["Opaque", "Thin", "Clear", "Visible"], answer: 0, explanation: "The opposite of transparent is opaque; the other options are similar in meaning or unrelated." },
+    { q: "If LETTER is coded as QDSSDK, how is SCHOOL coded?", options: ["KNNGBR", "KONGBR", "LNNGBR", "TBINPK"], answer: 0, explanation: "In this code the letters are reversed and each is moved 1 place back, so SCHOOL becomes KNNGBR." },
+    { q: "In a code language, 'strong boys work' is written as 'yo li tu', 'quick boys' is written as 'yo ze' and 'work quietly' is written as 'ru li'. What is the code for 'strong'?", options: ["li", "ze", "tu", "ru"], answer: 2, explanation: "'boys' is common to the first two sentences, so boys = yo; 'work' is common to the first and third, so work = li. The remaining code in the first sentence, tu, means 'strong'." },
+    { q: "If A = 26, B = 25, …, Z = 1 and HUNTER = 76 (the sum of its letter values), what is BANANA?", options: ["33", "130", "129", "154"], answer: 2, explanation: "BANANA = 25 + 26 + 13 + 26 + 13 + 26 = 129." },
+    { q: "Neha is the sister of Arjun. Arjun is the father of Dev. Dev's wife is Pooja. How is Neha related to Pooja?", options: ["Husband's aunt", "Husband's sister", "Sister-in-law", "Mother-in-law"], answer: 0, explanation: "Neha is Dev's aunt (father's sister), so she is the aunt of Pooja's husband." },
+    { q: "Pointing to a man, Esha said, \"He is the father-in-law of my brother's wife.\" How is the man related to Esha?", options: ["Father", "Uncle", "Father-in-law", "Grandfather"], answer: 0, explanation: "The father-in-law of Esha's brother's wife is her brother's father, i.e. Esha's father." },
+    { q: "Starting from his house, Mohan walks 80 m towards the west, turns right and walks 85 m, finally turns right and walks 60 m. In which direction is he now from his house?", options: ["South-East", "North-East", "South-West", "North-West"], answer: 3, explanation: "He ends up 20 m west and 85 m north of his house, so he is to the North-West of his house." },
+    { q: "A man is facing North. He turns 135° anticlockwise, then 90° clockwise. Which direction is he facing now?", options: ["South-East", "South-West", "North-East", "North-West"], answer: 3, explanation: "The net turn is 45° anticlockwise from North, so he faces North-West." },
+    { q: "In a row of 45 students, Aditya is 8th from the left end and Kabir is 5th from the right end. How many students are there between them?", options: ["22", "34", "33", "32"], answer: 3, explanation: "Aditya and Kabir with everyone to their outer sides account for 8 + 5 = 13 students, so 45 − 13 = 32 are between them." },
+    { q: "Ravi is older than Nisha. Chetan is older than Ravi. Chetan is younger than Bina. Tarun is younger than Nisha. Who is the second youngest?", options: ["Bina", "Nisha", "Ravi", "Chetan"], answer: 1, explanation: "The order from oldest to youngest is Bina > Chetan > Ravi > Nisha > Tarun, so the second youngest is Nisha." },
+    { q: "A train 210 m long passes a signal post in 14 seconds. What is its speed in km/h?", options: ["54", "15", "45", "63"], answer: 0, explanation: "Speed = 210/14 = 15 m/s = 15 × 18/5 = 54 km/h." },
+    { q: "Two trains start at the same time from stations 224 km apart and travel towards each other at 54 km/h and 58 km/h. After how many hours will they meet?", options: ["4", "1", "3", "2"], answer: 3, explanation: "They close the gap at 54 + 58 = 112 km/h, so they meet after 224/112 = 2 hours." },
+    { q: "In a mirror, a clock appears to show 4:58. What is the actual time?", options: ["8:58", "8:02", "7:32", "7:02"], answer: 3, explanation: "Actual time = 11:60 − 4:58 = 7:02." },
+    { q: "If today is Monday, what day of the week will it be 725 days from today?", options: ["Saturday", "Friday", "Thursday", "Sunday"], answer: 1, explanation: "725 = 7 × 103 + 4; 4 days after Monday is Friday." },
+    { q: "Statements: No bat is a sailor. All cadets are bats. Conclusions: I. No cadet is a sailor. II. Some bats are cadets.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "All cadets are bats and no a bat is a sailor, so no a cadet is a sailor (I); all cadets being bats means some bats are cadets (II)." },
+    { q: "Statement: The river water is polluted by factory waste. Conclusions: I. Factories release waste into the river. II. Drinking the river water directly may be harmful.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "The pollution comes from factory waste (I), and polluted water may be harmful to drink (II)." },
+    { q: "A cube of side 4 cm is painted on two adjacent faces only and then cut into 1 cm cubes. How many small cubes have no paint on them?", options: ["38", "36", "24", "4"], answer: 1, explanation: "Each painted face has 4² = 16 cubes; the 4 cubes on the shared edge have two painted faces. Exactly one face: 2 × (16 − 4) = 24. Painted cubes total 28, so 36 have no paint." },
+    { q: "If the English alphabet is written in reverse order (Z to A), which letter will be 3rd to the right of the 17th letter from the left?", options: ["G", "H", "F", "T"], answer: 0, explanation: "In the reversed alphabet the 20th letter from the left is G (position n holds letter 27 − n)." },
+    { q: "How many pairs of letters in the word TERRITORY have as many letters between them in the word as there are between them in the English alphabet (in either direction)?", options: ["5", "4", "2", "6"], answer: 1, explanation: "The pairs are TR, RT, RO, TR — 4 in all." },
+  ],
+};
+
+export default test;

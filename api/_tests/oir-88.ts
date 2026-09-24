@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-88",
+  title: "OIR Test 88",
+  durationMinutes: 20,
+  releaseAt: "2027-01-03T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 288, 360, 528, 840, 960, ?", options: ["1368", "1088", "1370", "1443"], answer: 0, explanation: "Here the terms are one less than the squares of consecutive primes. Next: 37² − 1 = 1368." },
+    { q: "Find the next number: 28, 34, 45, 61, 82, ?", options: ["103", "113", "110", "108"], answer: 3, explanation: "Here the differences added are 6, 11, 16, 21, 26 — each 5 more than the last. Next: 82 + 26 = 108." },
+    { q: "Find the next number: 2, 3, 6, 15, ?", options: ["48", "45", "32", "42"], answer: 3, explanation: "Here each term is 3 times the previous term minus 3. Next: 15 × 3 − 3 = 42." },
+    { q: "Find the missing number: 7, 20, ?, 394, 2363, 16540", options: ["335", "69", "79", "207"], answer: 2, explanation: "Here the multipliers increase by one each step (×3, ×4, ×5, …), then subtract 1, so the missing term is 79." },
+    { q: "Find the next letter: A, C, F, H, K, ?", options: ["M", "O", "N", "L"], answer: 0, explanation: "By alphabet positions (1, 3, 6, 8, 11), the letters move alternately +2 and +3: K(11) + 2 = M(13)." },
+    { q: "Find the next pair: AR, BS, CT, DU, ?", options: ["EW", "FV", "DU", "EV"], answer: 3, explanation: "The first letters move 1 forward each time and the second letters move 1 forward: next is EV." },
+    { q: "Rudder : Ship :: Steering wheel : ?", options: ["Rocket", "Train", "Car", "Bicycle"], answer: 2, explanation: "A rudder steers a ship; a steering wheel steers a car." },
+    { q: "8 : 72 :: 9 : ?", options: ["90", "99", "81", "162"], answer: 0, explanation: "8 → 8² + 8 = 72; likewise 9 → 9² + 9 = 90." },
+    { q: "Satyameva Jayate : Mundaka Upanishad :: Vande Mataram : ?", options: ["Rigveda", "Godan", "Anandamath", "Gitanjali"], answer: 2, explanation: "'Satyameva Jayate' is from the Mundaka Upanishad; 'Vande Mataram' is from Bankim Chandra's Anandamath." },
+    { q: "Which one does not belong with the others?", options: ["Heptagon", "Octagon", "Ellipse", "Decagon"], answer: 2, explanation: "An ellipse has no straight sides; the others are polygons." },
+    { q: "Which number does not belong with the others?", options: ["41", "27", "23", "103"], answer: 1, explanation: "27 = 3 × 9 is not prime; the others are prime numbers." },
+    { q: "Choose the one word for: \"That which cannot be erased\"", options: ["Invincible", "Inaudible", "Illegible", "Indelible"], answer: 3, explanation: "Indelible: that which cannot be erased." },
+    { q: "If CLOUD is coded as EVPMD, how is SPOON coded?", options: ["OPPQT", "OPOQT", "TOPNO", "PPPQT"], answer: 0, explanation: "In this code the letters are reversed and each is moved 1 place forward, so SPOON becomes OPPQT." },
+    { q: "In a code language, 'tall pilots train' is written as 'si zo lo', 'bold pilots' is written as 'zo tu' and 'train together' is written as 'ho lo'. What is the code for 'train'?", options: ["ho", "lo", "si", "zo"], answer: 1, explanation: "'pilots' is common to the first two sentences, so pilots = zo; 'train' is common to the first and third, so train = lo." },
+    { q: "If A = 26, B = 25, …, Z = 1 and CAMP = 75 (the sum of its letter values), what is TARGET?", options: ["98", "71", "91", "89"], answer: 2, explanation: "TARGET = 7 + 26 + 9 + 20 + 22 + 7 = 91." },
+    { q: "Himesh is the father of Ira. Ira is the mother of Jai. Jai's wife is Kaira. How is Himesh related to Kaira?", options: ["Father-in-law", "Husband's maternal grandfather", "Husband's paternal grandfather", "Uncle"], answer: 1, explanation: "Himesh is the father of Jai's mother, i.e. the maternal grandfather of Kaira's husband." },
+    { q: "Pointing to an old man, Zoya said, \"His wife is the mother of my mother's only brother.\" How is the old man related to Zoya?", options: ["Paternal grandfather", "Uncle", "Maternal grandfather", "Father"], answer: 2, explanation: "His wife is Zoya's maternal grandmother, so he is Zoya's maternal grandfather." },
+    { q: "Starting from his house, Yash walks 25 m towards the south, turns right and walks 10 m, turns left and walks 140 m, finally turns right and walks 90 m. In which direction is he now from his house?", options: ["North-East", "South-East", "North-West", "South-West"], answer: 3, explanation: "He ends up 100 m west and 165 m south of his house, so he is to the South-West of his house." },
+    { q: "A man is facing North. He turns 135° clockwise, then 180° clockwise, then 180° clockwise. Which direction is he facing now?", options: ["North-East", "South-East", "South-West", "North-West"], answer: 1, explanation: "The net turn is 135° clockwise from North, so he faces South-East." },
+    { q: "In a row of 37 students, Suresh is 13th from the left end and Yash is 19th from the right end. How many students are there between them?", options: ["8", "7", "6", "5"], answer: 3, explanation: "Suresh and Yash with everyone to their outer sides account for 13 + 19 = 32 students, so 37 − 32 = 5 are between them." },
+    { q: "Gita is richer than Lata. Lata is richer than Dinesh. Chetan is richer than Gita. Who is the second richest?", options: ["Dinesh", "Chetan", "Lata", "Gita"], answer: 3, explanation: "The order from richest to poorest is Chetan > Gita > Lata > Dinesh, so the second richest is Gita." },
+    { q: "The sum of 4 consecutive even numbers is 252. What is the largest of them?", options: ["63", "66", "64", "68"], answer: 1, explanation: "The middle value is 252/4 = 63; the numbers are 60, 62, 64, 66, so the largest is 66." },
+    { q: "The sum of the present ages of a father and his son is 68 years. 4 years ago, the father was 4 times as old as the son. What is the son's present age?", options: ["14 years", "16 years", "18 years", "20 years"], answer: 1, explanation: "Let the son be x: (68 − x − 4) = 4(x − 4) gives x = 16; the father is 52." },
+    { q: "In a mirror, a clock appears to show 6:58. What is the actual time?", options: ["6:02", "6:58", "5:32", "5:02"], answer: 3, explanation: "Actual time = 11:60 − 6:58 = 5:02." },
+    { q: "If today is Tuesday, what day of the week will it be 225 days from today?", options: ["Thursday", "Friday", "Wednesday", "Tuesday"], answer: 2, explanation: "225 = 7 × 32 + 1; 1 days after Tuesday is Wednesday." },
+    { q: "Statements: All pilots are teachers. All teachers are swimmers. Conclusions: I. All swimmers are pilots. II. Some teachers are pilots.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "All pilots are teachers, so some teachers are pilots (II); but swimmers may include much more than pilots, so I does not follow." },
+    { q: "Statement: A fire broke out in a factory because of faulty wiring. Courses of action: I. The wiring in all factories of the area should be inspected. II. All factories should be shut down permanently. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Inspections prevent repeats (I); permanent closure is extreme." },
+    { q: "A cube of side 8 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have exactly three faces painted?", options: ["296", "216", "8", "72"], answer: 2, explanation: "There are 512 small cubes; exactly three faces painted: only the 8 corner cubes." },
+    { q: "How many letters are there between F and S in the English alphabet?", options: ["14", "12", "13", "15"], answer: 1, explanation: "F is 6 and S is 19; the letters strictly between them number 19 − 6 − 1 = 12." },
+    { q: "If the letters of the word CORVETTE are arranged in alphabetical order, how many letters remain in the same position?", options: ["3", "5", "4", "2"], answer: 0, explanation: "Alphabetical order: CEEORTTV. Comparing with CORVETTE, 3 letters (C, T, T) stay in place." },
+  ],
+};
+
+export default test;

@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-25",
+  title: "OIR Test 25",
+  durationMinutes: 20,
+  releaseAt: "2026-10-04T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 9, 8, 17, 25, 42, 67, 109, ?", options: ["218", "176", "151", "177"], answer: 1, explanation: "Here each term is the sum of the previous two terms. Next: 67 + 109 = 176." },
+    { q: "Find the next number: 2, 5, 14, 41, ?", options: ["125", "123", "124", "122"], answer: 3, explanation: "Here each term is 3 times the previous term minus 1. Next: 41 × 3 − 1 = 122." },
+    { q: "Find the next number: 124, 215, 342, 511, 728, ?", options: ["1330", "998", "1000", "999"], answer: 3, explanation: "Here the terms are n³ − 1 for consecutive n. Next: 10³ − 1 = 999." },
+    { q: "Find the missing number: 1, 2, ?, 14, 41, 122", options: ["8", "4", "11", "5"], answer: 3, explanation: "Here the differences 1, 3, 9, 27, 81 are each 3 times the previous difference, so the missing term is 5." },
+    { q: "Find the next letter: U, S, Q, O, M, ?", options: ["K", "M", "L", "J"], answer: 0, explanation: "By alphabet positions (21, 19, 17, 15, 13), each letter is 2 places before the previous one: M(13) − 2 = K(11)." },
+    { q: "Find the next term: I18, K16, M14, O12, ?", options: ["Q11", "Q17", "Q10", "R9"], answer: 2, explanation: "The letters move 2 forward each time, and each number is the letter's position in the reversed alphabet (A = 26 … Z = 1): Q → 10." },
+    { q: "Day : Night :: Summer : ?", options: ["Autumn", "Monsoon", "Winter", "Spring"], answer: 2, explanation: "Day is the opposite of night; summer is the opposite of winter." },
+    { q: "4 : 25 :: 6 : ?", options: ["49", "210", "222", "35"], answer: 0, explanation: "4 → (4 + 1)² = 25; likewise 6 → (6 + 1)² = 49." },
+    { q: "Agni : Missile :: Arihant : ?", options: ["Rifle", "Tank", "Aircraft", "Submarine"], answer: 3, explanation: "Agni is a ballistic missile; INS Arihant is a nuclear-powered submarine." },
+    { q: "Which one does not belong with the others?", options: ["Dal", "Loktak", "Kaveri", "Wular"], answer: 2, explanation: "Kaveri is a river; the others are lakes." },
+    { q: "Which number does not belong with the others?", options: ["35", "70", "21", "22"], answer: 3, explanation: "35, 21, 70 are all multiples of 7; 22 is not." },
+    { q: "Choose the word most similar in meaning to ERRONEOUS.", options: ["Honest", "Careful", "Correct", "Wrong"], answer: 3, explanation: "Erroneous means wrong." },
+    { q: "If HORSE is coded as IQUWJ, how is CHESS coded?", options: ["DJGWX", "XSVHH", "DJHWX", "DJIWX"], answer: 2, explanation: "In this code the 1st letter moves 1 place forward, the 2nd moves 2, the 3rd moves 3, and so on, so CHESS becomes DJHWX." },
+    { q: "In a code language, 'bold soldiers work' is written as 'ga bu tu', 'proud soldiers' is written as 'ma bu' and 'work again' is written as 'ga fe'. What is the code for 'bold'?", options: ["tu", "ma", "fe", "bu"], answer: 0, explanation: "'soldiers' is common to the first two sentences, so soldiers = bu; 'work' is common to the first and third, so work = ga. The remaining code in the first sentence, tu, means 'bold'." },
+    { q: "If '×' means '+', '+' means '−', '÷' means '×' and '−' means '÷', what is the value of 16 + 80 − 10 × 7 ÷ 11?", options: ["85", "63", "86", "96"], answer: 0, explanation: "Replacing the symbols gives 16 − 80 ÷ 10 + 7 × 11; following BODMAS, this equals 85." },
+    { q: "Q is the daughter of R. S is the father of R. T is the brother of S. How is T related to Q?", options: ["Grandfather", "Grand-uncle", "Uncle", "Brother"], answer: 1, explanation: "S is Q's grandfather, and T is S's brother, so T is Q's grand-uncle." },
+    { q: "Pointing to a lady, Vikas said, \"She is the mother-in-law of the wife of my father's only son.\" How is the lady related to Vikas?", options: ["Mother-in-law", "Mother", "Grandmother", "Aunt"], answer: 1, explanation: "Vikas is his father's only son; his wife's mother-in-law is Vikas's mother." },
+    { q: "Starting from his house, Suresh walks 1 km towards the east, turns right and walks 8 km, turns right and walks 8 km, finally turns left and walks 15 km. In which direction is he now from his house?", options: ["South-West", "North-West", "North-East", "South-East"], answer: 0, explanation: "He ends up 7 km west and 23 km south of his house, so he is to the South-West of his house." },
+    { q: "A man is facing North-West. He turns 45° clockwise, then 180° clockwise, then 180° clockwise. Which direction is he facing now?", options: ["North", "West", "South", "East"], answer: 0, explanation: "The net turn is 45° clockwise from North-West, so he faces North." },
+    { q: "In a row of 38 children, Rohit is 14th from the left. Sanjay is 6th to the right of Rohit. What is Sanjay's position from the right end?", options: ["21st", "18th", "19th", "20th"], answer: 2, explanation: "Sanjay is 20th from the left, so from the right he is 38 − 20 + 1 = 19." },
+    { q: "Jatin is shorter than Sita. Kiran is shorter than Jatin. Sita is shorter than Bina. Who is the second tallest?", options: ["Bina", "Sita", "Jatin", "Kiran"], answer: 1, explanation: "The order from tallest to shortest is Bina > Sita > Jatin > Kiran, so the second tallest is Sita." },
+    { q: "A train 180 m long running at 36 km/h crosses a platform 290 m long. How many seconds does it take?", options: ["43", "29", "18", "47"], answer: 3, explanation: "It must cover 180 + 290 = 470 m at 36 km/h = 10 m/s, taking 470/10 = 47 s." },
+    { q: "₹29000 is divided among X, Y and Z in the ratio 3 : 4 : 3. What is Y's share?", options: ["₹8700", "₹11600", "₹9666.666666666666", "₹14500"], answer: 1, explanation: "Total parts = 10; one part = ₹2900; Y gets 4 × 2900 = ₹11600." },
+    { q: "At what time between 2 and 3 o'clock are the hands of a clock together?", options: ["2:09 4/11", "2:10 10/11", "2:11 10/11", "2:10 2/11"], answer: 1, explanation: "The minute hand gains 11/2° per minute. It must gain 60° on the hour hand, which takes 120/11 = 10 10/11 minutes past 2." },
+    { q: "How many days are there from 9 January 2030 to 17 July 2030, both days included?", options: ["189", "200", "191", "190"], answer: 3, explanation: "Counting the days in each month from 9 January 2030 to 17 July 2030 inclusive gives 190." },
+    { q: "Statements: Some cadets are plates. No bottle is a plate. Conclusions: I. Some cadets are not bottles. II. Some plates are cadets.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "The cadets that are plates cannot be bottles, so some cadets are not bottles (I); 'Some cadets are plates' reverses to 'Some plates are cadets' (II)." },
+    { q: "Statement: \"Drink only boiled water during the monsoon,\" the health department advised. Assumptions: I. Water may be contaminated during the monsoon. II. Boiling makes water safer to drink.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 2, explanation: "The advice assumes contamination is possible (I) and that boiling helps (II)." },
+    { q: "How many cubes of side 3 cm can be cut from a solid cube of side 9 cm?", options: ["25", "9", "243", "27"], answer: 3, explanation: "(9/3)³ = 3³ = 27." },
+    { q: "If the English alphabet is written in reverse order (Z to A), which letter will be 7th to the right of the 8th letter from the left?", options: ["O", "K", "M", "L"], answer: 3, explanation: "In the reversed alphabet the 15th letter from the left is L (position n holds letter 27 − n)." },
+    { q: "If the following words are arranged in dictionary order, which word comes third? Frigate, Family, Flag, Falcon", options: ["Falcon", "Family", "Frigate", "Flag"], answer: 3, explanation: "In dictionary order: Falcon, Family, Flag, Frigate." },
+  ],
+};
+
+export default test;

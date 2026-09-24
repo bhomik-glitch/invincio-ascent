@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-38",
+  title: "OIR Test 38",
+  durationMinutes: 20,
+  releaseAt: "2026-10-25T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 4, 15, 48, 147, ?", options: ["447", "444", "441", "438"], answer: 1, explanation: "Here each term is 3 times the previous term plus 3. Next: 147 × 3 + 3 = 444." },
+    { q: "Find the next number: 102, 123, 146, 171, 198, ?", options: ["227", "226", "258", "228"], answer: 0, explanation: "Here the terms are n² + 2 for consecutive n. Next: 15² + 2 = 227." },
+    { q: "Find the next number: 1, 2, 3, 5, 8, 13, 21, ?", options: ["34", "29", "42", "35"], answer: 0, explanation: "Here each term is the sum of the previous two terms. Next: 13 + 21 = 34." },
+    { q: "Find the missing number: 30, 35, 42, 51, ?, 75", options: ["63", "62", "52", "64"], answer: 1, explanation: "Here the differences added are 5, 7, 9, 11, 13 — each 2 more than the last, so the missing term is 62." },
+    { q: "Find the next letter: B, D, G, K, P, ?", options: ["X", "W", "V", "U"], answer: 2, explanation: "By alphabet positions (2, 4, 7, 11, 16), the gaps grow by one each time (+2, 3, 4, 5, …): P(16) + 6 = V(22)." },
+    { q: "Find the next pair: JA, MD, PG, SJ, ?", options: ["VM", "WM", "VN", "UL"], answer: 0, explanation: "The first letters move 3 forward each time and the second letters move 3 forward: next is VM." },
+    { q: "Star : Galaxy :: Island : ?", options: ["Archipelago", "Continent", "Peninsula", "Ocean"], answer: 0, explanation: "A galaxy is a large group of stars; an archipelago is a group of islands." },
+    { q: "8 : 512 :: 10 : ?", options: ["121", "99", "110", "1000"], answer: 3, explanation: "8 → 8³ = 512; likewise 10 → 10³ = 1000." },
+    { q: "Operation Ganga : Ukraine :: Operation Kaveri : ?", options: ["Yemen", "Sudan", "Afghanistan", "Israel"], answer: 1, explanation: "Operation Ganga evacuated Indians from Ukraine; Operation Kaveri evacuated them from Sudan (2023)." },
+    { q: "Which one does not belong with the others?", options: ["Surgeon", "Doctor", "Nurse", "Lawyer"], answer: 3, explanation: "A lawyer is not a medical professional." },
+    { q: "Which number does not belong with the others?", options: ["113", "43", "93", "11"], answer: 2, explanation: "93 = 3 × 31 is not prime; the others are prime numbers." },
+    { q: "Choose the word most similar in meaning to ZEAL.", options: ["Apathy", "Fear", "Enthusiasm", "Anger"], answer: 2, explanation: "Zeal means enthusiasm." },
+    { q: "If WRITER is coded as XSJUFS, how is THUNDER coded?", options: ["REDNUHT", "UIVOEFR", "UIVOEFS", "UIVNFFS"], answer: 2, explanation: "In this code each letter is moved 1 place forward in the alphabet, so THUNDER becomes UIVOEFS." },
+    { q: "In a code language, 'strong doctors fight' is written as 'li ja lo', 'calm doctors' is written as 'zo lo' and 'fight well' is written as 'ma ja'. What is the code for 'strong'?", options: ["li", "ja", "lo", "ma"], answer: 0, explanation: "'doctors' is common to the first two sentences, so doctors = lo; 'fight' is common to the first and third, so fight = ja. The remaining code in the first sentence, li, means 'strong'." },
+    { q: "If A = 1, B = 2, …, Z = 26 and OCEAN = 38 (the sum of its letter values), what is KNIFE?", options: ["46", "45", "90", "56"], answer: 1, explanation: "KNIFE = 11 + 14 + 9 + 6 + 5 = 45." },
+    { q: "R is the brother of S. T is the father of R. U is the sister of T. V is the son of U. How is V related to S?", options: ["Brother", "Uncle", "Nephew", "Cousin"], answer: 3, explanation: "T is S's father too; U is T's sister, so U's son V is S's cousin." },
+    { q: "Pointing to a girl, Babita said, \"She is the granddaughter of the only son of my father.\" How is the girl related to Babita?", options: ["Niece", "Grand-niece", "Daughter", "Granddaughter"], answer: 1, explanation: "Babita's father's only son is her brother; his granddaughter is Babita's grand-niece." },
+    { q: "Starting from his house, Aditya walks 7 km towards the north, turns right and walks 4 km, finally turns right and walks 11 km. In which direction is he now from his house?", options: ["South-West", "South-East", "North-West", "North-East"], answer: 1, explanation: "He ends up 4 km east and 4 km south of his house, so he is to the South-East of his house." },
+    { q: "A man is facing South. He turns 45° anticlockwise, then 90° clockwise. Which direction is he facing now?", options: ["South-East", "North-West", "North-East", "South-West"], answer: 3, explanation: "The net turn is 45° clockwise from South, so he faces South-West." },
+    { q: "In a row of 28 students, Sanjay is 12th from the left end and Deepak is 13th from the right end. How many students are there between them?", options: ["4", "1", "3", "5"], answer: 2, explanation: "Sanjay and Deepak with everyone to their outer sides account for 12 + 13 = 25 students, so 28 − 25 = 3 are between them." },
+    { q: "Kiran is younger than Hari. Farhan is older than Bina. Bina is older than Hari. Jatin is younger than Kiran. Who is in the middle (third)?", options: ["Kiran", "Farhan", "Bina", "Hari"], answer: 3, explanation: "The order from oldest to youngest is Farhan > Bina > Hari > Kiran > Jatin, so in the middle (third) is Hari." },
+    { q: "Two trains start at the same time from stations 232 km apart and travel towards each other at 54 km/h and 62 km/h. After how many hours will they meet?", options: ["3", "12", "2", "1"], answer: 2, explanation: "They close the gap at 54 + 62 = 116 km/h, so they meet after 232/116 = 2 hours." },
+    { q: "The sum of 5 consecutive odd numbers is 175. What is the largest of them?", options: ["37", "39", "41", "35"], answer: 1, explanation: "The middle value is 175/5 = 35; the numbers are 31, 33, 35, 37, 39, so the largest is 39." },
+    { q: "A clock loses 5 minutes every hour. It is set right at 6 am. What time will it show when the correct time is 2:00 pm the same day?", options: ["2:40 pm", "1:20 pm", "1:15 pm", "1:25 pm"], answer: 1, explanation: "In 8 hours it loses 5 × 8 = 40 minutes, so it shows 1:20 pm." },
+    { q: "How many days are there from 21 March 2025 to 23 October 2025, both days included?", options: ["219", "216", "217", "218"], answer: 2, explanation: "Counting the days in each month from 21 March 2025 to 23 October 2025 inclusive gives 217." },
+    { q: "Statements: All phones are stones. All phones are flowers. Conclusions: I. Some stones are flowers. II. All stones are flowers.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Every one of the phones is both a stone and a flower, so some stones are flowers (I); there may be stones that are not flowers, so II fails." },
+    { q: "Statement: \"Do not feed the animals,\" says a board in the zoo. Assumptions: I. Visitors might feed the animals. II. Wrong food may harm the animals.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 2, explanation: "The board assumes visitors might feed them (I) and that doing so may be harmful (II)." },
+    { q: "A cube of side 4 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have exactly three faces painted?", options: ["8", "24", "18", "56"], answer: 0, explanation: "There are 64 small cubes; exactly three faces painted: only the 8 corner cubes." },
+    { q: "Which letter is 4th to the right of the 17th letter from the left in the English alphabet?", options: ["V", "U", "S", "T"], answer: 1, explanation: "The 17th letter from the left is Q; 4 places to its right is the 21st letter, U." },
+    { q: "If the letters of the word DISCIPLINE are arranged in alphabetical order, how many letters remain in the same position?", options: ["12", "4", "2", "3"], answer: 2, explanation: "Alphabetical order: CDEIIILNPS. Comparing with DISCIPLINE, 2 letters (I, L) stay in place." },
+  ],
+};
+
+export default test;

@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-102",
+  title: "OIR Test 102",
+  durationMinutes: 20,
+  releaseAt: "2027-01-24T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 3, 14, 47, 146, ?", options: ["433", "438", "446", "443"], answer: 3, explanation: "Here each term is 3 times the previous term plus 5. Next: 146 × 3 + 5 = 443." },
+    { q: "Find the next number: 64, 32, 16, 8, 4, ?", options: ["2", "1", "3", "5"], answer: 0, explanation: "Here each term is the previous term divided by 2. Next: 4 ÷ 2 = 2." },
+    { q: "Find the next number: 5, 10, 6, 12, 8, 16, ?", options: ["13", "32", "12", "10"], answer: 2, explanation: "Here the operations alternate: × 2, − 4, × 2, − 4 and so on. Next: 16 − 4 = 12." },
+    { q: "Find the missing number: 176, 172, 165, ?, 142, 126", options: ["152", "157", "154", "155"], answer: 3, explanation: "Here the differences subtracted are 4, 7, 10, 13, 16 — each 3 more than the last, so the missing term is 155." },
+    { q: "Find the next letter: J, K, M, P, T, ?", options: ["Y", "Z", "X", "W"], answer: 0, explanation: "By alphabet positions (10, 11, 13, 16, 20), the gaps grow by one each time (+1, 2, 3, 4, …): T(20) + 5 = Y(25)." },
+    { q: "Find the next pair: LY, MW, NU, OS, ?", options: ["PP", "QQ", "OP", "PQ"], answer: 3, explanation: "The first letters move 1 forward each time and the second letters move 2 back: next is PQ." },
+    { q: "Engine : Car :: Heart : ?", options: ["Chest", "Blood", "Lungs", "Body"], answer: 3, explanation: "The engine drives a car; the heart drives the body." },
+    { q: "3 : 8 :: 8 : ?", options: ["56", "67", "63", "64"], answer: 2, explanation: "3 → 3² − 1 = 8; likewise 8 → 8² − 1 = 63." },
+    { q: "Suez Canal : Mediterranean–Red Sea :: Panama Canal : ?", options: ["Atlantic–Indian", "Pacific–Arctic", "Red Sea–Arabian Sea", "Atlantic–Pacific"], answer: 3, explanation: "The Suez Canal links the Mediterranean and Red Sea; the Panama Canal links the Atlantic and Pacific." },
+    { q: "Which one does not belong with the others?", options: ["Kerala", "Assam", "Meghalaya", "Nagaland"], answer: 0, explanation: "Kerala is not a north-eastern state." },
+    { q: "Which pair does not belong with the others?", options: ["7 – 343", "5 – 126", "9 – 730", "8 – 513"], answer: 0, explanation: "In the other pairs the second number is n³ + 1, where n is the first (e.g. 8³ + 1 = 513); but 7³ + 1 = 344, not 343." },
+    { q: "Choose the one word for: \"A remedy for all diseases\"", options: ["Vaccine", "Antidote", "Placebo", "Panacea"], answer: 3, explanation: "Panacea: a remedy for all diseases." },
+    { q: "If ARROW is coded as BQSNX, how is EAGLE coded?", options: ["FYHKF", "FZHKG", "FZHKF", "FCJPJ"], answer: 2, explanation: "In this code letters are moved alternately one place forward and one place back, so EAGLE becomes FZHKF." },
+    { q: "In a code language, 'tall pilots swim' is written as 'ga mu si', 'loyal pilots' is written as 'ri si' and 'swim well' is written as 'mu pi'. Which word is coded as 'mu'?", options: ["pilots", "swim", "well", "loyal"], answer: 1, explanation: "'pilots' is common to the first two sentences, so pilots = si; 'swim' is common to the first and third, so swim = mu." },
+    { q: "If A = 1, B = 2, …, Z = 26 and BUCKET = 62 (the sum of its letter values), what is MIRROR?", options: ["91", "101", "104", "71"], answer: 0, explanation: "MIRROR = 13 + 9 + 18 + 18 + 15 + 18 = 91." },
+    { q: "Prem's wife Rekha is the daughter of Sohan. Sohan's other daughter is Tanu. How is Tanu related to Prem?", options: ["Mother-in-law", "Sister-in-law", "Wife", "Sister"], answer: 1, explanation: "Tanu is the sister of Prem's wife, so she is his sister-in-law." },
+    { q: "Pointing to a woman, Yusuf said, \"She is the only daughter of my mother's father.\" How is the woman related to Yusuf?", options: ["Grandmother", "Aunt", "Sister", "Mother"], answer: 3, explanation: "The only daughter of Yusuf's maternal grandfather is Yusuf's mother." },
+    { q: "Starting from his house, Kabir walks 9 km towards the north, turns right and walks 15 km, turns right and walks 5 km, finally turns left and walks 5 km. In which direction is he now from his house?", options: ["North-East", "South-East", "North-West", "South-West"], answer: 0, explanation: "He ends up 20 km east and 4 km north of his house, so he is to the North-East of his house." },
+    { q: "One morning, just after sunrise, Rohit was standing in a field. His shadow fell exactly to his left. Which direction was he facing?", options: ["North", "East", "West", "South"], answer: 0, explanation: "In the morning the sun is in the east, so shadows fall to the west. With the shadow (West) on his left, he must be facing North." },
+    { q: "Deepak is 8th from the top and 18th from the bottom in his class. How many students are there in the class?", options: ["24", "26", "25", "27"], answer: 2, explanation: "Total = 8 + 18 − 1 = 25 (Deepak is counted in both ranks)." },
+    { q: "Dinesh is lighter than Asha. Asha is lighter than Pooja. Tarun is lighter than Dinesh. Who is the second lightest?", options: ["Pooja", "Dinesh", "Tarun", "Asha"], answer: 1, explanation: "The order from heaviest to lightest is Pooja > Asha > Dinesh > Tarun, so the second lightest is Dinesh." },
+    { q: "15% of a number is 9. What is 50% of the same number?", options: ["30", "45", "20", "39"], answer: 0, explanation: "The number is 9 × 100/15 = 60, and 50% of 60 = 30." },
+    { q: "What is the simple interest on ₹2000 at 6% per annum for 5 years?", options: ["₹600", "₹2600", "₹480", "₹720"], answer: 0, explanation: "SI = P × R × T / 100 = 2000 × 6 × 5 / 100 = ₹600." },
+    { q: "In a mirror, a clock appears to show 7:13. What is the actual time?", options: ["5:47", "4:17", "4:47", "5:13"], answer: 2, explanation: "Actual time = 11:60 − 7:13 = 4:47." },
+    { q: "11 May 2031 is a Sunday. What day of the week is 29 June 2030?", options: ["Sunday", "Monday", "Friday", "Saturday"], answer: 3, explanation: "29 June 2030 is 316 days before 11 May 2031. 316 = 7 × 45 + 1, so the day shifts 1 back: Saturday." },
+    { q: "Statements: All tables are rivers. Some rivers are chairs. Conclusions: I. Some tables are chairs. II. Some chairs are rivers.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "Some rivers are chairs, so some chairs are rivers (II); the rivers that are chairs need not include any tables, so I is uncertain." },
+    { q: "Statement: A narrow bridge is getting dangerously crowded during a festival. Courses of action: I. Police should regulate the flow of people onto the bridge. II. The festival should be banned forever. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Crowd control addresses the danger (I); a permanent ban is extreme." },
+    { q: "A wooden block measuring 6 cm × 5 cm × 4 cm is painted on all faces and cut into 1 cm cubes. How many cubes have exactly two faces painted?", options: ["24", "8", "52", "36"], answer: 3, explanation: "Cubes with exactly two faces painted: 4[(6 − 2) + (5 − 2) + (4 − 2)] = 36." },
+    { q: "Which letter is 16th to the left of the 3rd letter from the right in the English alphabet?", options: ["S", "I", "G", "H"], answer: 3, explanation: "The 3rd letter from the right is the 24th from the left (X); 16 to its left is the 8th letter, H." },
+    { q: "If the following words are arranged in dictionary order, which word comes third? Radar, Referee, Regiment, Rabbit", options: ["Regiment", "Rabbit", "Referee", "Radar"], answer: 2, explanation: "In dictionary order: Rabbit, Radar, Referee, Regiment." },
+  ],
+};
+
+export default test;

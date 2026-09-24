@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-26",
+  title: "OIR Test 26",
+  durationMinutes: 20,
+  releaseAt: "2026-10-11T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 8, 10, 18, 28, 46, 74, 120, ?", options: ["194", "195", "240", "166"], answer: 0, explanation: "Here each term is the sum of the previous two terms. Next: 74 + 120 = 194." },
+    { q: "Find the next number: 23, 34, 47, 62, 79, ?", options: ["97", "99", "119", "98"], answer: 3, explanation: "Here the terms are n² − 2 for consecutive n. Next: 10² − 2 = 98." },
+    { q: "Find the next number: 14, 84, 504, 3024, ?", options: ["18144", "21168", "18130", "18142"], answer: 0, explanation: "Here each term is 6 times the previous term. Next: 3024 × 6 = 18144." },
+    { q: "Find the missing number: 4, 10, 33, 136, ?, 4116", options: ["685", "2126", "688", "3567"], answer: 0, explanation: "Here the multipliers increase by one each step (×2, ×3, ×4, …), then add the same number (×2 + 2, ×3 + 3, …), so the missing term is 685." },
+    { q: "Find the next letter: F, I, L, O, R, ?", options: ["V", "W", "U", "T"], answer: 2, explanation: "By alphabet positions (6, 9, 12, 15, 18), each letter is 3 places after the previous one: R(18) + 3 = U(21)." },
+    { q: "Find the next term: E22, J17, O12, T7, ?", options: ["Z1", "Y25", "Y2", "Y3"], answer: 2, explanation: "The letters move 5 forward each time, and each number is the letter's position in the reversed alphabet (A = 26 … Z = 1): Y → 2." },
+    { q: "Hot : Cold :: Brave : ?", options: ["Loyal", "Cowardly", "Bold", "Strong"], answer: 1, explanation: "These are pairs of opposites: hot–cold, brave–cowardly." },
+    { q: "7 : 98 :: 10 : ?", options: ["121", "200", "1001", "99"], answer: 1, explanation: "7 → 2 × 7² = 98; likewise 10 → 2 × 10² = 200." },
+    { q: "Prithvi : Surface-to-surface :: Akash : ?", options: ["Anti-ship", "Air-to-air", "Anti-tank", "Surface-to-air"], answer: 3, explanation: "Prithvi is a surface-to-surface missile; Akash is a surface-to-air missile." },
+    { q: "Which one does not belong with the others?", options: ["Nanda Devi", "Sahara", "Everest", "Kangchenjunga"], answer: 1, explanation: "The Sahara is a desert; the others are mountain peaks." },
+    { q: "Which number does not belong with the others?", options: ["289", "196", "361", "364"], answer: 3, explanation: "196 = 14², 361 = 19², 289 = 17² are perfect squares; 364 is not." },
+    { q: "Choose the word most similar in meaning to FEEBLE.", options: ["Brave", "Weak", "Loud", "Strong"], answer: 1, explanation: "Feeble means weak." },
+    { q: "If PEOPLE is coded as NCMNJC, how is NUMBER coded?", options: ["KSKZCP", "REBMUN", "LSKZCP", "LSKZBP"], answer: 2, explanation: "In this code each letter is moved 2 places back in the alphabet, so NUMBER becomes LSKZCP." },
+    { q: "In a code language, 'tall sailors march' is written as 'po su pi', 'strong sailors' is written as 'tu pi' and 'march well' is written as 'ta po'. Which word is coded as 'su'?", options: ["well", "tall", "march", "strong"], answer: 1, explanation: "'sailors' is common to the first two sentences, so sailors = pi; 'march' is common to the first and third, so march = po. The remaining code in the first sentence, su, means 'tall'." },
+    { q: "If A = 1, B = 2, …, Z = 26 and ERASER = 66 (the sum of its letter values), what is PATROL?", options: ["80", "98", "72", "82"], answer: 3, explanation: "PATROL = 16 + 1 + 20 + 18 + 15 + 12 = 82." },
+    { q: "D is the brother of E. E is the husband of F. G is the son of F. How is D related to G?", options: ["Grandfather", "Uncle", "Brother", "Father"], answer: 1, explanation: "E is G's father, and D is E's brother, so D is G's uncle." },
+    { q: "Pointing to a boy, Kiran said, \"He is the son of my brother's only sister.\" Kiran is a woman. How is the boy related to Kiran?", options: ["Cousin", "Son", "Nephew", "Brother"], answer: 1, explanation: "Her brother's only sister is Kiran herself, so the boy is her son." },
+    { q: "Starting from his house, Ajay walks 12 km towards the north, turns left and walks 10 km, finally turns left and walks 13 km. In which direction is he now from his house?", options: ["South-East", "South-West", "North-West", "North-East"], answer: 1, explanation: "He ends up 10 km west and 1 km south of his house, so he is to the South-West of his house." },
+    { q: "One morning, just after sunrise, Nikhil was standing in a field. His shadow fell exactly behind him. Which direction was he facing?", options: ["North", "South", "West", "East"], answer: 3, explanation: "In the morning the sun is in the east, so shadows fall to the west. With the shadow (West) behind him, he must be facing East." },
+    { q: "Yash is 30th from the top and 22nd from the bottom in his class. How many students are there in the class?", options: ["52", "49", "51", "50"], answer: 2, explanation: "Total = 30 + 22 − 1 = 51 (Yash is counted in both ranks)." },
+    { q: "Chetan is heavier than Pooja. Farhan is heavier than Tarun. Farhan is lighter than Hari. Chetan is lighter than Tarun. Who is the heaviest?", options: ["Hari", "Tarun", "Chetan", "Farhan"], answer: 0, explanation: "The order from heaviest to lightest is Hari > Farhan > Tarun > Chetan > Pooja, so the heaviest is Hari." },
+    { q: "A train 210 m long running at 72 km/h crosses a platform 130 m long. How many seconds does it take?", options: ["10.5", "17", "15", "6.5"], answer: 1, explanation: "It must cover 210 + 130 = 340 m at 72 km/h = 20 m/s, taking 340/20 = 17 s." },
+    { q: "At a meeting, each of the 22 officers shakes hands exactly once with every other officer. How many handshakes take place?", options: ["253", "231", "484", "462"], answer: 1, explanation: "Handshakes = n(n − 1)/2 = 22 × 21/2 = 231." },
+    { q: "A clock gains 3 minutes every hour. It is set right at 7 am. What time will it show when the correct time is 1:00 pm the same day?", options: ["1:15 pm", "12:42 pm", "1:18 pm", "1:21 pm"], answer: 2, explanation: "In 6 hours it gains 3 × 6 = 18 minutes, so it shows 1:18 pm." },
+    { q: "24 March 2031 is a Monday. What day of the week is 9 October 2030?", options: ["Thursday", "Tuesday", "Friday", "Wednesday"], answer: 3, explanation: "9 October 2030 is 166 days before 24 March 2031. 166 = 7 × 23 + 5, so the day shifts 5 back: Wednesday." },
+    { q: "Statements: All cars are swimmers. No phone is a swimmer. Conclusions: I. No car is a phone. II. All phones are cars.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "All cars are swimmers and no a phone is a swimmer, so no a car is a phone (I); II contradicts this." },
+    { q: "Statement: The library will remain open till 10 pm during the exams. Assumptions: I. Students will use the library late in the evening. II. The library is normally open till 10 pm.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0, explanation: "Extending hours assumes students will use them (I); it implies the library normally closes earlier, contradicting II." },
+    { q: "A cube of side 10 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have exactly two faces painted?", options: ["96", "384", "512", "8"], answer: 0, explanation: "There are 1000 small cubes; exactly two faces painted: 12 edges × (10 − 2) = 96." },
+    { q: "Which letter is 8th to the left of the 4th letter from the right in the English alphabet?", options: ["P", "N", "O", "L"], answer: 2, explanation: "The 4th letter from the right is the 23rd from the left (W); 8 to its left is the 15th letter, O." },
+    { q: "How many pairs of letters in the word MONSOON have as many letters between them in the word as there are between them in the English alphabet (in either direction)?", options: ["2", "0", "4", "3"], answer: 0, explanation: "The pairs are ON, ON — 2 in all." },
+  ],
+};
+
+export default test;

@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-52",
+  title: "OIR Test 52",
+  durationMinutes: 20,
+  releaseAt: "2026-11-15T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 5, 5, 10, 15, 25, 40, 65, ?", options: ["130", "106", "105", "90"], answer: 2, explanation: "Here each term is the sum of the previous two terms. Next: 40 + 65 = 105." },
+    { q: "Find the next number: 173, 171, 168, 164, 159, ?", options: ["153", "154", "151", "152"], answer: 0, explanation: "Here the differences subtracted are 2, 3, 4, 5, 6 — each 1 more than the last. Next: 159 − 6 = 153." },
+    { q: "Find the next number: 60, 120, 210, 336, 504, ?", options: ["719", "720", "721", "990"], answer: 1, explanation: "Here the terms are n³ − n for consecutive n. Next: 9³ − 9 = 720." },
+    { q: "Find the missing number: 7, 20, 79, 394, ?, 16540", options: ["2363", "14571", "8467", "2373"], answer: 0, explanation: "Here the multipliers increase by one each step (×3, ×4, ×5, …), then subtract 1, so the missing term is 2363." },
+    { q: "Find the next letter: O, Q, S, U, W, ?", options: ["Y", "W", "Z", "X"], answer: 0, explanation: "By alphabet positions (15, 17, 19, 21, 23), each letter is 2 places after the previous one: W(23) + 2 = Y(25)." },
+    { q: "Find the next pair: HU, LV, PW, TX, ?", options: ["WX", "YY", "XZ", "XY"], answer: 3, explanation: "The first letters move 4 forward each time and the second letters move 1 forward: next is XY." },
+    { q: "Palaeontology : Fossils :: Anthropology : ?", options: ["Stars", "Soil", "Animals", "Mankind"], answer: 3, explanation: "Palaeontology studies fossils; anthropology studies mankind." },
+    { q: "6 : 37 :: 9 : ?", options: ["100", "728", "82", "730"], answer: 2, explanation: "6 → 6² + 1 = 37; likewise 9 → 9² + 1 = 82." },
+    { q: "Russia : Rouble :: South Korea : ?", options: ["Ringgit", "Yen", "Yuan", "Won"], answer: 3, explanation: "Russia's currency is the rouble; South Korea's is the won." },
+    { q: "Which one does not belong with the others?", options: ["Femur", "Liver", "Heart", "Kidney"], answer: 0, explanation: "The femur is a bone; the others are organs." },
+    { q: "Which number does not belong with the others?", options: ["30", "24", "66", "67"], answer: 3, explanation: "24, 66, 30 are all multiples of 6; 67 is not." },
+    { q: "Choose the word most opposite in meaning to PERMANENT.", options: ["Temporary", "Fixed", "Stable", "Lasting"], answer: 0, explanation: "The opposite of permanent is temporary; the other options are similar in meaning or unrelated." },
+    { q: "If TARGET is coded as TEGRAT, how is BOOTS coded?", options: ["STONB", "UVQQD", "STOOB", "STPOB"], answer: 2, explanation: "In this code the letters are written in reverse order, so BOOTS becomes STOOB." },
+    { q: "In a code language, 'smart soldiers fight' is written as 'da ve lo', 'calm soldiers' is written as 're da' and 'fight again' is written as 'yo ve'. What is the code for 'again'?", options: ["yo", "lo", "da", "re"], answer: 0, explanation: "'soldiers' is common to the first two sentences, so soldiers = da; 'fight' is common to the first and third, so fight = ve. The other code in the third sentence, yo, means 'again'." },
+    { q: "If A = 26, B = 25, …, Z = 1 and PEOPLE = 93 (the sum of its letter values), what is STADIUM?", options: ["104", "110", "102", "87"], answer: 2, explanation: "STADIUM = 8 + 7 + 26 + 23 + 18 + 6 + 14 = 102." },
+    { q: "J is the brother of K. L is the husband of K. M is the daughter of K and L. How is J related to M?", options: ["Father", "Maternal uncle", "Cousin", "Grandfather"], answer: 1, explanation: "J is the brother of M's mother K, so J is M's maternal uncle." },
+    { q: "Pointing to a man, Prachi said, \"His father-in-law is the father of my only brother, and I have no sister.\" How is the man related to Prachi?", options: ["Brother-in-law", "Brother", "Father", "Husband"], answer: 3, explanation: "The man's father-in-law is Prachi's father, whose only daughter is Prachi, so the man is Prachi's husband." },
+    { q: "Starting from his house, Suresh walks 10 m towards the east, turns right and walks 40 m, turns right and walks 145 m, finally turns right and walks 35 m. In which direction is he now from his house?", options: ["North-East", "North-West", "South-East", "South-West"], answer: 3, explanation: "He ends up 135 m west and 5 m south of his house, so he is to the South-West of his house." },
+    { q: "A man is facing North-East. He turns 180° anticlockwise, then 180° anticlockwise, then 180° clockwise. Which direction is he facing now?", options: ["South-East", "North-West", "North-East", "South-West"], answer: 3, explanation: "The net turn is 180° clockwise from North-East, so he faces South-West." },
+    { q: "In a row of 36 children, Vikram is 14th from the left. Aman is 3rd to the right of Vikram. What is Aman's position from the right end?", options: ["20th", "19th", "21st", "22nd"], answer: 0, explanation: "Aman is 17th from the left, so from the right he is 36 − 17 + 1 = 20." },
+    { q: "Kiran is lighter than Ravi. Dinesh is lighter than Asha. Dinesh is heavier than Ravi. Kiran is heavier than Gita. Who is the heaviest?", options: ["Asha", "Dinesh", "Kiran", "Ravi"], answer: 0, explanation: "The order from heaviest to lightest is Asha > Dinesh > Ravi > Kiran > Gita, so the heaviest is Asha." },
+    { q: "A train 290 m long running at 36 km/h crosses a platform 350 m long. How many seconds does it take?", options: ["64", "74", "29", "35"], answer: 0, explanation: "It must cover 290 + 350 = 640 m at 36 km/h = 10 m/s, taking 640/10 = 64 s." },
+    { q: "A can complete a piece of work in 55 days and B in 66 days. Working together, in how many days will they complete it?", options: ["40", "30", "11", "60.5"], answer: 1, explanation: "Together they do 1/55 + 1/66 = 121/3630 = 1/30 of the work per day, so they need 30 days." },
+    { q: "What is the angle between the hands of a clock at 3:25?", options: ["60°", "47.5°", "62.5°", "77.5°"], answer: 1, explanation: "Angle = |30 × 3 − 5.5 × 25| = 47.5°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "15 January 1949 was the day General Cariappa took over as Commander-in-Chief. What day of the week was it?", options: ["Saturday", "Sunday", "Tuesday", "Friday"], answer: 0, explanation: "1 January 2001 was a Monday. 15 January 1949 is 18979 days before it, leaving 2 odd day(s) backwards from Monday, so it was a Saturday." },
+    { q: "Statements: All rings are books. All books are runners. Conclusions: I. All runners are rings. II. Some books are rings.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "All rings are books, so some books are rings (II); but runners may include much more than rings, so I does not follow." },
+    { q: "Statement: The new metro line has halved travel time between the two ends of the city. Conclusions: I. The metro is faster than the earlier ways of travelling that route. II. Everyone in the city now uses the metro.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Halving travel time means it is faster (I); universal use does not follow." },
+    { q: "A cube of side 8 cm is painted on two adjacent faces only and then cut into 1 cm cubes. How many small cubes have exactly one painted face?", options: ["8", "216", "112", "392"], answer: 2, explanation: "Each painted face has 8² = 64 cubes; the 8 cubes on the shared edge have two painted faces. Exactly one face: 2 × (64 − 8) = 112. Painted cubes total 120, so 392 have no paint." },
+    { q: "Which letter is exactly midway between H and N in the English alphabet?", options: ["L", "M", "K", "J"], answer: 2, explanation: "H = 8 and N = 14; the midpoint is 11 = K." },
+    { q: "In the word SQUADRON, the 1st and 2nd letters are interchanged, the 3rd and 4th letters are interchanged, and so on. Which letter will be 3rd from the right end?", options: ["R", "A", "N", "D"], answer: 3, explanation: "The new arrangement is QSAURDNO; the 3rd letter from the right is D." },
+  ],
+};
+
+export default test;

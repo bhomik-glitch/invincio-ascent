@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-68",
+  title: "OIR Test 68",
+  durationMinutes: 20,
+  releaseAt: "2026-12-06T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 1, 1, 5, 7, 13, 25, 45, ?", options: ["83", "71", "58", "90"], answer: 0, explanation: "Here each term is the sum of the previous three terms. Next: 13 + 25 + 45 = 83." },
+    { q: "Find the next number: 7, 45, 13, 38, 19, 31, 25, ?", options: ["31", "25", "24", "17"], answer: 2, explanation: "Here two series alternate: 7, 13, 19, … (+6) and 45, 38, 31, … (-7). Next: 31 − 7 = 24." },
+    { q: "Find the next number: 128, 162, 200, 242, 288, ?", options: ["338", "392", "337", "339"], answer: 0, explanation: "Here the terms are twice the square of consecutive numbers. Next: 2 × 13² = 338." },
+    { q: "Find the missing number: 9375, 1875, 375, ?, 15", options: ["85", "315", "75", "195"], answer: 2, explanation: "Here each term is the previous term divided by 5, so the missing term is 75." },
+    { q: "Find the next letter: I, L, N, Q, S, ?", options: ["V", "X", "U", "W"], answer: 0, explanation: "By alphabet positions (9, 12, 14, 17, 19), the letters move alternately +3 and +2: S(19) + 3 = V(22)." },
+    { q: "Find the next term: F21, J17, N13, R9, ?", options: ["W4", "V5", "V22", "V6"], answer: 1, explanation: "The letters move 4 forward each time, and each number is the letter's position in the reversed alphabet (A = 26 … Z = 1): V → 5." },
+    { q: "Captain : Team :: Principal : ?", options: ["Class", "Student", "Teacher", "School"], answer: 3, explanation: "A captain heads a team; a principal heads a school." },
+    { q: "10 : 1001 :: 5 : ?", options: ["24", "120", "20", "126"], answer: 3, explanation: "10 → 10³ + 1 = 1001; likewise 5 → 5³ + 1 = 126." },
+    { q: "Wimbledon : Tennis :: Tour de France : ?", options: ["Motor racing", "Sailing", "Athletics", "Cycling"], answer: 3, explanation: "Wimbledon is a tennis event; the Tour de France is a cycling race." },
+    { q: "Which one does not belong with the others?", options: ["Glad", "Gloomy", "Cheerful", "Happy"], answer: 1, explanation: "Gloomy means sad; the others mean happy." },
+    { q: "Which number does not belong with the others?", options: ["121", "120", "81", "16"], answer: 1, explanation: "121 = 11², 16 = 4², 81 = 9² are perfect squares; 120 is not." },
+    { q: "Choose the word most opposite in meaning to VOLUNTARY.", options: ["Free", "Forced", "Optional", "Willing"], answer: 1, explanation: "The opposite of voluntary is forced; the other options are similar in meaning or unrelated." },
+    { q: "If PILOT is written as 11-18-15-12-7, how is BLANKET written in the same code?", options: ["2-12-1-14-11-5-20", "25-15-26-13-17-22-7", "25-15-25-13-16-22-7", "25-15-26-13-16-22-7"], answer: 3, explanation: "Each letter is replaced by its position in the reversed alphabet (A = 26, B = 25, …, Z = 1), so BLANKET → 25-15-26-13-16-22-7." },
+    { q: "In a code language, 'young soldiers study' is written as 'fe re ho', 'smart soldiers' is written as 'ho ta' and 'study today' is written as 're yo'. What is the code for 'today'?", options: ["yo", "re", "fe", "ho"], answer: 0, explanation: "'soldiers' is common to the first two sentences, so soldiers = ho; 'study' is common to the first and third, so study = re. The other code in the third sentence, yo, means 'today'." },
+    { q: "If A = 1, B = 2, …, Z = 26 and CAMEL = 34 (the sum of its letter values), what is AUTUMN?", options: ["90", "91", "80", "72"], answer: 0, explanation: "AUTUMN = 1 + 21 + 20 + 21 + 13 + 14 = 90." },
+    { q: "Chetan's father is the only son of Dhruv. Dhruv's wife is Ela. How is Ela related to Chetan?", options: ["Mother", "Grandmother", "Great-grandmother", "Aunt"], answer: 1, explanation: "Chetan's father is Dhruv's son, so Dhruv's wife Ela is Chetan's grandmother." },
+    { q: "Pointing to an old man, Lina said, \"His son's son is my father's only son.\" Lina is a girl. How is the old man related to Lina?", options: ["Father", "Grandfather", "Uncle", "Great-grandfather"], answer: 1, explanation: "Lina's father's only son is her brother; the old man's grandson is her brother, so the old man is Lina's grandfather." },
+    { q: "Starting from his house, Dev walks 14 km towards the east, turns right and walks 1 km, finally turns right and walks 3 km. In which direction is he now from his house?", options: ["South-East", "North-East", "North-West", "South-West"], answer: 0, explanation: "He ends up 11 km east and 1 km south of his house, so he is to the South-East of his house." },
+    { q: "If South-East is called North-East, and all other directions are renamed in the same way, what will North be called?", options: ["South", "West", "North", "East"], answer: 1, explanation: "South-East → North-East is a rotation of 270° clockwise; rotating North by the same amount gives West." },
+    { q: "In a row, Deepak is 7th from the left and Nikhil is 17th from the right. When they interchange places, Deepak becomes 22nd from the left. How many people are in the row?", options: ["37", "28", "38", "39"], answer: 2, explanation: "After the swap Deepak takes Nikhil's old place, which is 22nd from the left and 17th from the right, so total = 22 + 17 − 1 = 38." },
+    { q: "Hari is younger than Manoj. Lata is younger than Hari. Farhan is younger than Lata. Who is the youngest?", options: ["Farhan", "Hari", "Manoj", "Lata"], answer: 0, explanation: "The order from oldest to youngest is Manoj > Hari > Lata > Farhan, so the youngest is Farhan." },
+    { q: "A car goes from town P to town Q at 80 km/h and returns at 120 km/h. What is its average speed for the whole journey?", options: ["100 km/h", "98 km/h", "93 km/h", "96 km/h"], answer: 3, explanation: "For equal distances, average speed = 2uv/(u + v) = 2 × 80 × 120/200 = 96 km/h (not the simple mean)." },
+    { q: "At a meeting, each of the 25 officers shakes hands exactly once with every other officer. How many handshakes take place?", options: ["325", "300", "600", "625"], answer: 1, explanation: "Handshakes = n(n − 1)/2 = 25 × 24/2 = 300." },
+    { q: "What is the angle between the hands of a clock at 1:35?", options: ["180°", "162.5°", "177.5°", "132.5°"], answer: 1, explanation: "Angle = |30 × 1 − 5.5 × 35| = 162.5°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "If today is Tuesday, what day of the week will it be 299 days from today?", options: ["Tuesday", "Sunday", "Monday", "Saturday"], answer: 1, explanation: "299 = 7 × 42 + 5; 5 days after Tuesday is Sunday." },
+    { q: "Statements: Some farmers are not engineers. All engineers are bridges. Conclusions: I. Some farmers are not bridges. II. Some bridges are engineers.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "All engineers are bridges, so some bridges are engineers (II); the farmers that are not engineers may still be bridges, so I is uncertain." },
+    { q: "Statement: The patrol left the base at 0600 hours and returned at 1400 hours. Conclusions: I. The patrol was away from the base for eight hours. II. The patrol completed its task.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "0600 to 1400 is eight hours (I); success of the task is not stated." },
+    { q: "A cube of side 4 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have exactly one face painted?", options: ["26", "24", "8", "56"], answer: 1, explanation: "There are 64 small cubes; exactly one face painted: 6 faces × (4 − 2)² = 24." },
+    { q: "Which letter is exactly midway between P and Z in the English alphabet?", options: ["V", "T", "W", "U"], answer: 3, explanation: "P = 16 and Z = 26; the midpoint is 21 = U." },
+    { q: "How many pairs of letters in the word PHYSICS have as many letters between them in the word as there are between them in the English alphabet (in either direction)?", options: ["0", "2", "3", "1"], answer: 3, explanation: "The pairs are PS — 1 in all." },
+  ],
+};
+
+export default test;

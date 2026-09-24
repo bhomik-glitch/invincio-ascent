@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-17",
+  title: "OIR Test 17",
+  durationMinutes: 20,
+  releaseAt: "2026-09-27T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 15, 18, 24, 36, 60, ?", options: ["120", "132", "109", "108"], answer: 3, explanation: "Here the differences 3, 6, 12, 24, 48 are each 2 times the previous difference. Next: 60 + 48 = 108." },
+    { q: "Find the next number: 1, 12, 13, 25, 38, 63, 101, ?", options: ["165", "202", "164", "139"], answer: 2, explanation: "Here each term is the sum of the previous two terms. Next: 63 + 101 = 164." },
+    { q: "Find the next number: 169, 165, 160, 154, 147, ?", options: ["139", "138", "140", "137"], answer: 0, explanation: "Here the differences subtracted are 4, 5, 6, 7, 8 — each 1 more than the last. Next: 147 − 8 = 139." },
+    { q: "Find the missing number: 4, 7, 20, 79, ?, 2363", options: ["1221", "394", "397", "2048"], answer: 1, explanation: "Here the multipliers increase by one each step (×2, ×3, ×4, …), then subtract 1, so the missing term is 394." },
+    { q: "Find the next letter: A, C, F, J, O, ?", options: ["U", "W", "V", "T"], answer: 0, explanation: "By alphabet positions (1, 3, 6, 10, 15), the gaps grow by one each time (+2, 3, 4, 5, …): O(15) + 6 = U(21)." },
+    { q: "Find the next pair: NZ, PW, RT, TQ, ?", options: ["VM", "VN", "UM", "WN"], answer: 1, explanation: "The first letters move 2 forward each time and the second letters move 3 back: next is VN." },
+    { q: "Kid : Goat :: Cub : ?", options: ["Horse", "Lion", "Deer", "Cow"], answer: 1, explanation: "A kid is a young goat; a cub is a young lion." },
+    { q: "11 : 132 :: 10 : ?", options: ["110", "1010", "1000", "1001"], answer: 0, explanation: "11 → 11² + 11 = 132; likewise 10 → 10² + 10 = 110." },
+    { q: "IMA : Dehradun :: NDA : ?", options: ["Ezhimala", "Chennai", "Dehradun", "Khadakwasla"], answer: 3, explanation: "The Indian Military Academy is at Dehradun; the National Defence Academy is at Khadakwasla, Pune." },
+    { q: "Which one does not belong with the others?", options: ["Veena", "Tabla", "Sarod", "Sitar"], answer: 1, explanation: "The tabla is a percussion instrument; the others are string instruments." },
+    { q: "Which pair does not belong with the others?", options: ["6 – 217", "4 – 24", "5 – 35", "8 – 80"], answer: 0, explanation: "In the other pairs the second number is n × (n + 2), where n is the first (e.g. 8 × 10 = 80); but 6 × 8 = 48, not 217." },
+    { q: "Choose the word most similar in meaning to ADVERSITY.", options: ["Hardship", "Help", "Prosperity", "Victory"], answer: 0, explanation: "Adversity means hardship." },
+    { q: "If HARBOUR is written as 8-1-18-2-15-21-18, how is TROPHY written in the same code?", options: ["20-18-15-16-9-25", "20-18-15-16-8-25", "7-9-12-11-19-2", "20-18-15-16-8-24"], answer: 1, explanation: "Each letter is replaced by its position in the alphabet (A = 1, …, Z = 26), so TROPHY → 20-18-15-16-8-25." },
+    { q: "In a code language, 'proud doctors study' is written as 'ta yo ga', 'smart doctors' is written as 'li ta' and 'study hard' is written as 'da yo'. Which word is coded as 'li'?", options: ["hard", "proud", "study", "smart"], answer: 3, explanation: "'doctors' is common to the first two sentences, so doctors = ta; 'study' is common to the first and third, so study = yo. The other code in the second sentence, li, means 'smart'." },
+    { q: "If '×' means '+', '÷' means '−', '+' means '×' and '−' means '÷', what is the value of 45 − 5 ÷ 2 × 6 + 2?", options: ["22", "15", "21", "19"], answer: 3, explanation: "Replacing the symbols gives 45 ÷ 5 − 2 + 6 × 2; following BODMAS, this equals 19." },
+    { q: "E is the mother of F. F is the father of G. G is the sister of H. How is E related to H?", options: ["Grandmother", "Mother", "Sister", "Aunt"], answer: 0, explanation: "F is H's father too, and E is F's mother, so E is H's grandmother." },
+    { q: "Pointing to a woman, Arjun said, \"She is the daughter of my mother's only brother.\" How is the woman related to Arjun?", options: ["Niece", "Cousin", "Sister", "Aunt"], answer: 1, explanation: "She is the daughter of Arjun's maternal uncle, so she is Arjun's cousin." },
+    { q: "Starting from his house, Arjun walks 10 km towards the south, turns left and walks 10 km, finally turns left and walks 8 km. In which direction is he now from his house?", options: ["South-East", "South-West", "North-East", "North-West"], answer: 0, explanation: "He ends up 10 km east and 2 km south of his house, so he is to the South-East of his house." },
+    { q: "A man is facing North-West. He turns 135° clockwise, then 90° anticlockwise. Which direction is he facing now?", options: ["South", "North", "West", "East"], answer: 1, explanation: "The net turn is 45° clockwise from North-West, so he faces North." },
+    { q: "In a row, Dev is 6th from the left and Aditya is 20th from the right. When they interchange places, Dev becomes 11th from the left. How many people are in the row?", options: ["16", "31", "32", "30"], answer: 3, explanation: "After the swap Dev takes Aditya's old place, which is 11th from the left and 20th from the right, so total = 11 + 20 − 1 = 30." },
+    { q: "Chetan is poorer than Dinesh. Dinesh is poorer than Tarun. Sita is richer than Tarun. Who is the second richest?", options: ["Chetan", "Dinesh", "Sita", "Tarun"], answer: 3, explanation: "The order from richest to poorest is Sita > Tarun > Dinesh > Chetan, so the second richest is Tarun." },
+    { q: "A number is multiplied by 5, then 2 is added, and the result is multiplied by 3. The final answer is 141. What was the number?", options: ["7", "11", "9", "10"], answer: 2, explanation: "Working backwards: 141 ÷ 3 = 47; − 2 = 45; ÷ 5 = 9." },
+    { q: "A boat goes 15 km downstream in 1 hour and 9 km upstream in 1 hour. What is the speed of the boat in still water?", options: ["13 km/h", "3 km/h", "6 km/h", "12 km/h"], answer: 3, explanation: "Boat speed = (15 + 9)/2 = 12 km/h; stream speed = (15 − 9)/2 = 3 km/h." },
+    { q: "What is the angle between the hands of a clock at 7:45?", options: ["37.5°", "60°", "67.5°", "52.5°"], answer: 0, explanation: "Angle = |30 × 7 − 5.5 × 45| = 37.5°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "7 May 2026 is a Thursday. What day of the week is 28 December 2025?", options: ["Monday", "Tuesday", "Saturday", "Sunday"], answer: 3, explanation: "28 December 2025 is 130 days before 7 May 2026. 130 = 7 × 18 + 4, so the day shifts 4 back: Sunday." },
+    { q: "Statements: All soldiers are books. No book is a chair. Conclusions: I. No soldier is a chair. II. Some soldiers are chairs.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "All soldiers are books and no a book is a chair, so no a soldier can be a chair (I); II contradicts this." },
+    { q: "Statement: \"Carry your identity card at all times inside the cantonment,\" says an order. Assumptions: I. Identity cards may be checked inside the cantonment. II. Some people do not have identity cards.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0, explanation: "The order assumes checks may happen (I); it does not assume anyone lacks a card." },
+    { q: "A cube of side 8 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have at least one face painted?", options: ["8", "72", "296", "216"], answer: 2, explanation: "There are 512 small cubes; at least one face painted: 8³ − (8 − 2)³ = 512 − 216 = 296." },
+    { q: "Which letter is 7th to the left of the 6th letter from the right in the English alphabet?", options: ["O", "N", "M", "P"], answer: 1, explanation: "The 6th letter from the right is the 21st from the left (U); 7 to its left is the 14th letter, N." },
+    { q: "If the following words are arranged in dictionary order, which word comes last? Knight, Knowledge, Kabaddi, Knife", options: ["Knight", "Kabaddi", "Knife", "Knowledge"], answer: 3, explanation: "In dictionary order: Kabaddi, Knife, Knight, Knowledge." },
+  ],
+};
+
+export default test;

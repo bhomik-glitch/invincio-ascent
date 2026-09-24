@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-57",
+  title: "OIR Test 57",
+  durationMinutes: 20,
+  releaseAt: "2026-11-22T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 12, 81, 20, 77, 28, 73, 36, ?", options: ["69", "73", "65", "44"], answer: 0, explanation: "Here two series alternate: 12, 20, 28, … (+8) and 81, 77, 73, … (-4). Next: 73 − 4 = 69." },
+    { q: "Find the next number: 7, 21, 22, 66, 67, 201, ?", options: ["200", "202", "603", "203"], answer: 1, explanation: "Here the operations alternate: × 3, + 1, × 3, + 1 and so on. Next: 201 + 1 = 202." },
+    { q: "Find the next number: 243, 81, 27, 9, ?", options: ["2", "3", "4", "6"], answer: 1, explanation: "Here each term is the previous term divided by 3. Next: 9 ÷ 3 = 3." },
+    { q: "Find the missing number: 729, 1000, 1331, ?, 2197, 2744", options: ["1764", "1738", "1800", "1728"], answer: 3, explanation: "Here the terms are the cubes of consecutive numbers, so the missing term is 1728." },
+    { q: "Find the next letter: D, F, H, J, L, ?", options: ["O", "M", "N", "P"], answer: 2, explanation: "By alphabet positions (4, 6, 8, 10, 12), each letter is 2 places after the previous one: L(12) + 2 = N(14)." },
+    { q: "Find the next pair: ES, IP, MM, QJ, ?", options: ["UG", "UF", "TF", "VG"], answer: 0, explanation: "The first letters move 4 forward each time and the second letters move 3 back: next is UG." },
+    { q: "Ally : Enemy :: Loyalty : ?", options: ["Courage", "Honour", "Duty", "Treachery"], answer: 3, explanation: "These are opposites: ally–enemy, loyalty–treachery." },
+    { q: "8 : 67 :: 2 : ?", options: ["4", "7", "2", "6"], answer: 1, explanation: "8 → 8² + 3 = 67; likewise 2 → 2² + 3 = 7." },
+    { q: "Lok Sabha : Speaker :: Rajya Sabha : ?", options: ["Prime Minister", "Leader", "Chairman", "Speaker"], answer: 2, explanation: "The Lok Sabha is presided over by the Speaker; the Rajya Sabha by its Chairman (the Vice-President)." },
+    { q: "Which one does not belong with the others?", options: ["Rain", "Snow", "Hail", "Fog"], answer: 3, explanation: "Fog is suspended water droplets; the others are forms of precipitation." },
+    { q: "Which number does not belong with the others?", options: ["13", "101", "97", "33"], answer: 3, explanation: "33 = 3 × 11 is not prime; the others are prime numbers." },
+    { q: "Choose the word most opposite in meaning to VICTORY.", options: ["Win", "Defeat", "Success", "Triumph"], answer: 1, explanation: "The opposite of victory is defeat; the other options are similar in meaning or unrelated." },
+    { q: "If CHESS is coded as DJHWX, how is PARROT coded?", options: ["QCUWSZ", "QCUVTA", "QCUVTZ", "KZIILG"], answer: 2, explanation: "In this code the 1st letter moves 1 place forward, the 2nd moves 2, the 3rd moves 3, and so on, so PARROT becomes QCUVTZ." },
+    { q: "In a code language, 'loyal doctors sail' is written as 'ri su li', 'brave doctors' is written as 'fe li' and 'sail early' is written as 'ka su'. What is the code for 'brave'?", options: ["ka", "fe", "su", "li"], answer: 1, explanation: "'doctors' is common to the first two sentences, so doctors = li; 'sail' is common to the first and third, so sail = su. The other code in the second sentence, fe, means 'brave'." },
+    { q: "If '×' means '+', '+' means '−', '÷' means '×' and '−' means '÷', what is the value of 7 × 11 + 20 − 10 ÷ 6?", options: ["4", "12", "5", "6"], answer: 3, explanation: "Replacing the symbols gives 7 + 11 − 20 ÷ 10 × 6; following BODMAS, this equals 6." },
+    { q: "Ravi is the son of Mohan. Mohan is the husband of Sita. Sita's father is Gopal. How is Gopal related to Ravi?", options: ["Maternal grandfather", "Father", "Uncle", "Paternal grandfather"], answer: 0, explanation: "Sita is Ravi's mother, and Gopal is her father, so Gopal is Ravi's maternal grandfather." },
+    { q: "Pointing to an old man, Bhavya said, \"His daughter's son is my father.\" How is the old man related to Bhavya?", options: ["Father", "Uncle", "Great-grandfather", "Grandfather"], answer: 2, explanation: "The old man's daughter is Bhavya's paternal grandmother, so the old man is Bhavya's great-grandfather." },
+    { q: "Starting from his house, Aditya walks 70 m towards the west, turns left and walks 10 m, turns right and walks 110 m, finally turns left and walks 115 m. In which direction is he now from his house?", options: ["South-East", "North-East", "North-West", "South-West"], answer: 3, explanation: "He ends up 180 m west and 125 m south of his house, so he is to the South-West of his house." },
+    { q: "One evening, just before sunset, Vikram was standing in a field. His shadow fell exactly to his right. Which direction was he facing?", options: ["North", "South", "East", "West"], answer: 0, explanation: "In the evening the sun is in the west, so shadows fall to the east. With the shadow (East) on his right, he must be facing North." },
+    { q: "In a class of 43 students, Dev ranks 33rd from the top. What is his rank from the bottom?", options: ["10th", "11th", "13th", "12th"], answer: 1, explanation: "Rank from bottom = 43 − 33 + 1 = 11." },
+    { q: "Pooja is younger than Lata. Pooja is older than Uma. Tarun is younger than Uma. Isha is older than Lata. Who is the youngest?", options: ["Pooja", "Tarun", "Lata", "Isha"], answer: 1, explanation: "The order from oldest to youngest is Isha > Lata > Pooja > Uma > Tarun, so the youngest is Tarun." },
+    { q: "The sum of 4 consecutive even numbers is 164. What is the largest of them?", options: ["44", "46", "42", "41"], answer: 0, explanation: "The middle value is 164/4 = 41; the numbers are 38, 40, 42, 44, so the largest is 44." },
+    { q: "30% of a number is 90. What is 60% of the same number?", options: ["183", "180", "270", "540"], answer: 1, explanation: "The number is 90 × 100/30 = 300, and 60% of 300 = 180." },
+    { q: "At what time between 6 and 7 o'clock are the hands of a clock together?", options: ["6:32 6/11", "6:33 8/11", "6:31 2/11", "6:32 8/11"], answer: 3, explanation: "The minute hand gains 11/2° per minute. It must gain 180° on the hour hand, which takes 360/11 = 32 8/11 minutes past 6." },
+    { q: "Which year will have exactly the same calendar as 2030?", options: ["2042", "2034", "2040", "2041"], answer: 3, explanation: "A year has the same calendar when it starts on the same weekday and is also an ordinary year. Counting odd days (1 per ordinary year, 2 per leap year) from 2030 until they total a multiple of 7 gives 2041." },
+    { q: "Statements: All teachers are bats. All bats are writers. Conclusions: I. All writers are teachers. II. Some bats are teachers.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "All teachers are bats, so some bats are teachers (II); but writers may include much more than teachers, so I does not follow." },
+    { q: "Statement: Raj is taller than Sunil, and Sunil is taller than Mohan. Conclusions: I. Raj is taller than Mohan. II. Mohan is the shortest of the three.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "Raj > Sunil > Mohan, so both follow." },
+    { q: "A wooden block measuring 7 cm × 7 cm × 4 cm is painted on all faces and cut into 1 cm cubes. How many cubes have no face painted?", options: ["8", "50", "48", "90"], answer: 1, explanation: "Cubes with no face painted: (7 − 2)(7 − 2)(4 − 2) = 50." },
+    { q: "Which letter is exactly midway between S and Y in the English alphabet?", options: ["X", "U", "W", "V"], answer: 3, explanation: "S = 19 and Y = 25; the midpoint is 22 = V." },
+    { q: "If the following words are arranged in dictionary order, which word comes second? Champion, Cherry, Cricket, City", options: ["Cherry", "Cricket", "Champion", "City"], answer: 0, explanation: "In dictionary order: Champion, Cherry, City, Cricket." },
+  ],
+};
+
+export default test;

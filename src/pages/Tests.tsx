@@ -24,7 +24,7 @@ const Tests = () => {
           <div>
             <p className={EYEBROW}>Student portal</p>
             <h1 className={`${H2_LIGHT} mt-2`}>OIR Practice Tests</h1>
-            <p className={`${BODY_LIGHT} mt-2`}>Timed tests. The timer starts the moment you open a test, and it auto-submits when time runs out.</p>
+            <p className={`${BODY_LIGHT} mt-2`}>Timed tests. The timer starts the moment you open a test, and it auto-submits when time runs out. Five new tests are added every Sunday.</p>
           </div>
           <button onClick={logout} className="inline-flex items-center gap-2 font-sans text-sm font-medium text-[#6B7280] hover:text-[#00568C] transition-colors">
             <LogOut className="w-4 h-4" /> Log out

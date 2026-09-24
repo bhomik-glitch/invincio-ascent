@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-110",
+  title: "OIR Test 110",
+  durationMinutes: 20,
+  releaseAt: "2027-01-31T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 30, 31, 34, 39, 46, ?", options: ["53", "57", "56", "55"], answer: 3, explanation: "Here the differences added are 1, 3, 5, 7, 9 — each 2 more than the last. Next: 46 + 9 = 55." },
+    { q: "Find the next number: 15, 24, 35, 48, 63, ?", options: ["79", "99", "81", "80"], answer: 3, explanation: "Here the terms are n² − 1 for consecutive n. Next: 9² − 1 = 80." },
+    { q: "Find the next number: 9, 31, 97, 295, ?", options: ["881", "885", "889", "892"], answer: 2, explanation: "Here each term is 3 times the previous term plus 4. Next: 295 × 3 + 4 = 889." },
+    { q: "Find the missing number: 6, 11, ?, 71, 206, 611", options: ["56", "26", "41", "28"], answer: 1, explanation: "Here the differences 5, 15, 45, 135, 405 are each 3 times the previous difference, so the missing term is 26." },
+    { q: "Find the next letter: K, L, P, Q, U, ?", options: ["V", "W", "U", "X"], answer: 0, explanation: "By alphabet positions (11, 12, 16, 17, 21), the letters move alternately +1 and +4: U(21) + 1 = V(22)." },
+    { q: "Find the next term: A26, F21, K16, P11, ?", options: ["U21", "V5", "U6", "U7"], answer: 2, explanation: "The letters move 5 forward each time, and each number is the letter's position in the reversed alphabet (A = 26 … Z = 1): U → 6." },
+    { q: "Fathom : Depth :: Knot : ?", options: ["Speed", "Time", "Distance", "Weight"], answer: 0, explanation: "The fathom measures depth of water; the knot measures speed at sea." },
+    { q: "4 : 17 :: 11 : ?", options: ["1320", "1342", "1332", "122"], answer: 3, explanation: "4 → 4² + 1 = 17; likewise 11 → 11² + 1 = 122." },
+    { q: "Rashtrapati Bhavan : President :: Raj Bhavan : ?", options: ["Chief Minister", "Speaker", "Prime Minister", "Governor"], answer: 3, explanation: "Rashtrapati Bhavan is the President's residence; a Raj Bhavan is a Governor's residence." },
+    { q: "Which one does not belong with the others?", options: ["Silk", "Cotton", "Wool", "Leather"], answer: 1, explanation: "Cotton comes from a plant; the others come from animals." },
+    { q: "Which number does not belong with the others?", options: ["80", "90", "43", "40"], answer: 2, explanation: "40, 80, 90 are all multiples of 10; 43 is not." },
+    { q: "Choose the one word for: \"A place where birds are kept\"", options: ["Apiary", "Kennel", "Aviary", "Aquarium"], answer: 2, explanation: "Aviary: a place where birds are kept." },
+    { q: "If COLLEGE is coded as FHFMMPD, how is CADET coded?", options: ["UEEBD", "UFEBD", "DZEDU", "UFEAD"], answer: 1, explanation: "In this code the letters are reversed and each is moved 1 place forward, so CADET becomes UFEBD." },
+    { q: "In a code language, 'calm girls fight' is written as 'mu pi fe', 'smart girls' is written as 've fe' and 'fight quietly' is written as 'pi ru'. What is the code for 'calm'?", options: ["mu", "fe", "pi", "ru"], answer: 0, explanation: "'girls' is common to the first two sentences, so girls = fe; 'fight' is common to the first and third, so fight = pi. The remaining code in the first sentence, mu, means 'calm'." },
+    { q: "If A = 1, B = 2, …, Z = 26 and ROCKET = 72 (the sum of its letter values), what is TEMPLE?", options: ["71", "69", "70", "91"], answer: 0, explanation: "TEMPLE = 20 + 5 + 13 + 16 + 12 + 5 = 71." },
+    { q: "Bimal is the brother of Deepali. Deepali's son is Eshan. How is Bimal related to Eshan?", options: ["Father", "Brother", "Grandfather", "Maternal uncle"], answer: 3, explanation: "Bimal is the brother of Eshan's mother, so he is Eshan's maternal uncle." },
+    { q: "Pointing to a man, Pallavi said, \"His son is my husband's only nephew. My husband has only one sibling, a brother.\" How is the man related to Pallavi?", options: ["Father-in-law", "Brother-in-law", "Brother", "Husband"], answer: 1, explanation: "The nephew's father must be her husband's only brother, i.e. Pallavi's brother-in-law." },
+    { q: "Starting from his house, Varun walks 55 m towards the north, turns right and walks 110 m, turns right and walks 125 m, finally turns right and walks 40 m. In which direction is he now from his house?", options: ["South-East", "North-East", "North-West", "South-West"], answer: 0, explanation: "He ends up 70 m east and 70 m south of his house, so he is to the South-East of his house." },
+    { q: "A man is facing South. He turns 180° anticlockwise, then 45° clockwise, then 180° clockwise. Which direction is he facing now?", options: ["South-West", "North-East", "South-East", "North-West"], answer: 0, explanation: "The net turn is 45° clockwise from South, so he faces South-West." },
+    { q: "In a class of 54 students, Arjun ranks 36th from the top. What is his rank from the bottom?", options: ["19th", "18th", "21st", "20th"], answer: 0, explanation: "Rank from bottom = 54 − 36 + 1 = 19." },
+    { q: "Bina is faster than Isha. Esha is slower than Hari. Sita is faster than Bina. Hari is slower than Isha. Who is the fastest?", options: ["Bina", "Isha", "Hari", "Sita"], answer: 3, explanation: "The order from fastest to slowest is Sita > Bina > Isha > Hari > Esha, so the fastest is Sita." },
+    { q: "30% of a number is 120. What is 50% of the same number?", options: ["200", "320", "199", "600"], answer: 0, explanation: "The number is 120 × 100/30 = 400, and 50% of 400 = 200." },
+    { q: "A boat goes 18 km downstream in 1 hour and 16 km upstream in 1 hour. What is the speed of the stream?", options: ["1 km/h", "3 km/h", "2 km/h", "17 km/h"], answer: 0, explanation: "Boat speed = (18 + 16)/2 = 17 km/h; stream speed = (18 − 16)/2 = 1 km/h." },
+    { q: "A clock loses 3 minutes every hour. It is set right at 8 am. What time will it show when the correct time is 3:00 pm the same day?", options: ["2:42 pm", "2:36 pm", "2:39 pm", "3:21 pm"], answer: 2, explanation: "In 7 hours it loses 3 × 7 = 21 minutes, so it shows 2:39 pm." },
+    { q: "21 June 2029 is a Thursday. What day of the week is 15 March 2030?", options: ["Thursday", "Saturday", "Sunday", "Friday"], answer: 3, explanation: "15 March 2030 is 267 days after 21 June 2029. 267 = 7 × 38 + 1, so the day shifts 1 forward: Friday." },
+    { q: "Statements: All bats are rings. No table is a bat. Conclusions: I. No table is a ring. II. Some rings are bats.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "All bats are rings, so some rings are bats (II); tables may overlap with the rings that are not bats, so I fails." },
+    { q: "Statement: A village is cut off every monsoon because its only road floods. Courses of action: I. The road should be raised or an alternative route built. II. Villagers should be warned early and supplies stocked before the monsoon. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "A better road is the permanent fix (I) and early preparation reduces hardship meanwhile (II)." },
+    { q: "A cube of side 3 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have at least two faces painted?", options: ["6", "20", "12", "1"], answer: 1, explanation: "There are 27 small cubes; at least two faces painted: corners + edges = 8 + 12 = 20." },
+    { q: "How many letters are there between B and T in the English alphabet?", options: ["17", "19", "15", "18"], answer: 0, explanation: "B is 2 and T is 20; the letters strictly between them number 20 − 2 − 1 = 17." },
+    { q: "If the following words are arranged in dictionary order, which word comes second? Window, Winter, Wheel, Writer", options: ["Winter", "Window", "Wheel", "Writer"], answer: 1, explanation: "In dictionary order: Wheel, Window, Winter, Writer." },
+  ],
+};
+
+export default test;

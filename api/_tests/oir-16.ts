@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-16",
+  title: "OIR Test 16",
+  durationMinutes: 20,
+  releaseAt: "2026-09-27T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 2, 4, 9, 18, 23, 46, ?", options: ["52", "51", "92", "49"], answer: 1, explanation: "Here the operations alternate: × 2, + 5, × 2, + 5 and so on. Next: 46 + 5 = 51." },
+    { q: "Find the next number: 2, 42, 11, 37, 20, 32, 29, ?", options: ["38", "27", "22", "32"], answer: 1, explanation: "Here two series alternate: 2, 11, 20, … (+9) and 42, 37, 32, … (-5). Next: 32 − 5 = 27." },
+    { q: "Find the next number: 10, 30, 68, 130, 222, ?", options: ["349", "351", "350", "520"], answer: 2, explanation: "Here the terms are n³ + n for consecutive n. Next: 7³ + 7 = 350." },
+    { q: "Find the missing number: 3328, 832, 208, ?, 13", options: ["52", "53", "111", "169"], answer: 0, explanation: "Here each term is the previous term divided by 4, so the missing term is 52." },
+    { q: "Find the next letter: D, H, L, P, T, ?", options: ["Z", "W", "X", "Y"], answer: 2, explanation: "By alphabet positions (4, 8, 12, 16, 20), each letter is 4 places after the previous one: T(20) + 4 = X(24)." },
+    { q: "Find the next pair: EK, GI, IG, KE, ?", options: ["LB", "MC", "MB", "NC"], answer: 1, explanation: "The first letters move 2 forward each time and the second letters move 2 back: next is MC." },
+    { q: "Puppy : Dog :: Calf : ?", options: ["Horse", "Cow", "Goat", "Sheep"], answer: 1, explanation: "A puppy is a young dog; a calf is a young cow." },
+    { q: "6 : 215 :: 12 : ?", options: ["147", "288", "168", "1727"], answer: 3, explanation: "6 → 6³ − 1 = 215; likewise 12 → 12³ − 1 = 1727." },
+    { q: "Field Marshal : Sam Manekshaw :: Marshal of the Indian Air Force : ?", options: ["K.M. Cariappa", "S. Krishnaswamy", "P.C. Lal", "Arjan Singh"], answer: 3, explanation: "Sam Manekshaw was India's first Field Marshal; Arjan Singh was the only Marshal of the IAF." },
+    { q: "Which one does not belong with the others?", options: ["Kathak", "Bharatanatyam", "Kuchipudi", "Bhangra"], answer: 3, explanation: "Bhangra is a folk dance; the others are classical dances." },
+    { q: "Which pair does not belong with the others?", options: ["3 – 30", "7 – 350", "8 – 512", "5 – 130"], answer: 2, explanation: "In the other pairs the second number is n³ + n, where n is the first (e.g. 7³ + 7 = 350); but 8³ + 8 = 520, not 512." },
+    { q: "Choose the word most similar in meaning to ABUNDANT.", options: ["Rare", "Empty", "Plentiful", "Scarce"], answer: 2, explanation: "Abundant means plentiful." },
+    { q: "If PISTON is coded as RKUVQP, how is PATROL coded?", options: ["RCVTQN", "RCVTPN", "QCVTQN", "LORTAP"], answer: 0, explanation: "In this code each letter is moved 2 places forward in the alphabet, so PATROL becomes RCVTQN." },
+    { q: "In a code language, 'brave officers climb' is written as 'ru mu lo', 'calm officers' is written as 'ru yo' and 'climb well' is written as 'lo tu'. What is the code for 'brave'?", options: ["mu", "ru", "tu", "lo"], answer: 0, explanation: "'officers' is common to the first two sentences, so officers = ru; 'climb' is common to the first and third, so climb = lo. The remaining code in the first sentence, mu, means 'brave'." },
+    { q: "If A = 1, B = 2, …, Z = 26 and CHEESE = 45 (the sum of its letter values), what is LEMON?", options: ["59", "76", "69", "71"], answer: 0, explanation: "LEMON = 12 + 5 + 13 + 15 + 14 = 59." },
+    { q: "K is the sister of L. L is the father of M. M is the brother of N. How is K related to N?", options: ["Mother", "Aunt", "Grandmother", "Sister"], answer: 1, explanation: "L is N's father too, and K is L's sister, so K is N's aunt." },
+    { q: "Pointing to a man, Priya said, \"His only brother is the father of my daughter.\" How is the man related to Priya?", options: ["Brother-in-law", "Husband", "Uncle", "Father-in-law"], answer: 0, explanation: "The father of Priya's daughter is Priya's husband; the man is his brother, so he is Priya's brother-in-law." },
+    { q: "Starting from his house, Rohit walks 15 km towards the east, turns left and walks 15 km, finally turns right and walks 4 km. In which direction is he now from his house?", options: ["North-East", "South-West", "South-East", "North-West"], answer: 0, explanation: "He ends up 19 km east and 15 km north of his house, so he is to the North-East of his house." },
+    { q: "One morning, just after sunrise, Rohit was standing in a field. His shadow fell exactly in front of him. Which direction was he facing?", options: ["South", "East", "West", "North"], answer: 2, explanation: "In the morning the sun is in the east, so shadows fall to the west. With the shadow (West) in front of him, he must be facing West." },
+    { q: "In a class of 30 students, Sanjay ranks 17th from the top. What is his rank from the bottom?", options: ["15th", "16th", "14th", "13th"], answer: 2, explanation: "Rank from bottom = 30 − 17 + 1 = 14." },
+    { q: "Om is shorter than Pooja. Dinesh is shorter than Lata. Dinesh is taller than Ravi. Om is taller than Lata. Who is the shortest?", options: ["Ravi", "Om", "Lata", "Pooja"], answer: 0, explanation: "The order from tallest to shortest is Pooja > Om > Lata > Dinesh > Ravi, so the shortest is Ravi." },
+    { q: "A can complete a piece of work in 21 days and B in 28 days. Working together, in how many days will they complete it?", options: ["24.5", "12", "15", "7"], answer: 1, explanation: "Together they do 1/21 + 1/28 = 49/588 = 1/12 of the work per day, so they need 12 days." },
+    { q: "A bag contains an equal number of ₹1, ₹2 and ₹5 coins worth ₹168 in all. How many of each are there?", options: ["21", "24", "23", "63"], answer: 0, explanation: "Each set of one of each is worth ₹8; 168/8 = 21." },
+    { q: "In a mirror, a clock appears to show 9:52. What is the actual time?", options: ["2:38", "3:52", "2:08", "3:08"], answer: 2, explanation: "Actual time = 11:60 − 9:52 = 2:08." },
+    { q: "How many days are there from 22 June 2029 to 26 November 2029, both days included?", options: ["158", "157", "159", "161"], answer: 0, explanation: "Counting the days in each month from 22 June 2029 to 26 November 2029 inclusive gives 158." },
+    { q: "Statements: No singer is a cloud. Some clouds are books. Conclusions: I. Some books are not singers. II. Some singers are books.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "The books that are clouds cannot be singers, so some books are not singers (I); nothing links singers and books directly, so II is uncertain." },
+    { q: "Statement: The government has launched a campaign to plant one crore trees this year. Assumptions: I. Planting trees is beneficial. II. Enough land and saplings are available.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 2, explanation: "A campaign assumes the goal is worthwhile (I) and achievable with available resources (II)." },
+    { q: "A cube of side 3 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have exactly one face painted?", options: ["1", "6", "8", "12"], answer: 1, explanation: "There are 27 small cubes; exactly one face painted: 6 faces × (3 − 2)² = 6." },
+    { q: "How many letters are there between E and J in the English alphabet?", options: ["5", "14", "4", "6"], answer: 2, explanation: "E is 5 and J is 10; the letters strictly between them number 10 − 5 − 1 = 4." },
+    { q: "If the following words are arranged in dictionary order, which word comes last? Mirror, Marker, Motivate, Medal", options: ["Marker", "Mirror", "Motivate", "Medal"], answer: 2, explanation: "In dictionary order: Marker, Medal, Mirror, Motivate." },
+  ],
+};
+
+export default test;

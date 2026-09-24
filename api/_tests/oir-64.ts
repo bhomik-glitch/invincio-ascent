@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-64",
+  title: "OIR Test 64",
+  durationMinutes: 20,
+  releaseAt: "2026-11-29T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 7, 21, 23, 69, 71, 213, ?", options: ["215", "213", "216", "639"], answer: 0, explanation: "Here the operations alternate: × 3, + 2, × 3, + 2 and so on. Next: 213 + 2 = 215." },
+    { q: "Find the next number: 7, 14, 23, 34, 47, ?", options: ["62", "61", "79", "63"], answer: 0, explanation: "Here the terms are n² − 2 for consecutive n. Next: 8² − 2 = 62." },
+    { q: "Find the next number: 15, 18, 27, 54, 135, ?", options: ["459", "378", "379", "405"], answer: 1, explanation: "Here the differences 3, 9, 27, 81, 243 are each 3 times the previous difference. Next: 135 + 243 = 378." },
+    { q: "Find the missing number: 3, 5, 14, 55, ?, 1643", options: ["274", "1424", "849", "273"], answer: 0, explanation: "Here the multipliers increase by one each step (×2, ×3, ×4, …), then subtract 1, so the missing term is 274." },
+    { q: "Find the next letter: A, E, J, N, S, ?", options: ["W", "X", "Y", "V"], answer: 0, explanation: "By alphabet positions (1, 5, 10, 14, 19), the letters move alternately +4 and +5: S(19) + 4 = W(23)." },
+    { q: "Find the next group: HIJ, MNO, RST, ?", options: ["VWX", "WYX", "WXY", "XYZ"], answer: 2, explanation: "Each group is three consecutive letters, and 2 letters are skipped between groups: after RST comes WXY." },
+    { q: "Tadpole : Frog :: Caterpillar : ?", options: ["Worm", "Butterfly", "Snake", "Beetle"], answer: 1, explanation: "A tadpole grows into a frog; a caterpillar grows into a butterfly." },
+    { q: "12 : 1727 :: 7 : ?", options: ["63", "49", "42", "342"], answer: 3, explanation: "12 → 12³ − 1 = 1727; likewise 7 → 7³ − 1 = 342." },
+    { q: "Milkha Singh : Flying Sikh :: P.T. Usha : ?", options: ["Payyoli Express", "Little Master", "The Wall", "Flying Sikh"], answer: 0, explanation: "Milkha Singh was called the Flying Sikh; P.T. Usha is called the Payyoli Express." },
+    { q: "Which one does not belong with the others?", options: ["Physician", "Surgeon", "Pharmacist", "Dentist"], answer: 2, explanation: "A pharmacist dispenses medicines; the others are doctors who treat patients." },
+    { q: "Which number does not belong with the others?", options: ["21", "103", "47", "83"], answer: 0, explanation: "21 = 3 × 7 is not prime; the others are prime numbers." },
+    { q: "Choose the word most opposite in meaning to GRADUAL.", options: ["Gentle", "Sudden", "Slow", "Steady"], answer: 1, explanation: "The opposite of gradual is sudden; the other options are similar in meaning or unrelated." },
+    { q: "If HOCKEY is coded as IPDLFZ, how is CHEESE coded?", options: ["CIFFTF", "ESEEHC", "DIEFTF", "DIFFTF"], answer: 3, explanation: "In this code each letter is moved 1 place forward in the alphabet, so CHEESE becomes DIFFTF." },
+    { q: "In a code language, 'strong girls study' is written as 'da bu ve', 'smart girls' is written as 've tu' and 'study together' is written as 'si bu'. Which word is coded as 'da'?", options: ["girls", "strong", "together", "smart"], answer: 1, explanation: "'girls' is common to the first two sentences, so girls = ve; 'study' is common to the first and third, so study = bu. The remaining code in the first sentence, da, means 'strong'." },
+    { q: "If A = 26, B = 25, …, Z = 1 and TARGET = 91 (the sum of its letter values), what is MARKET?", options: ["94", "68", "92", "108"], answer: 0, explanation: "MARKET = 14 + 26 + 9 + 16 + 22 + 7 = 94." },
+    { q: "Lata is the daughter-in-law of Mahesh. Mahesh has only one son, Nitin. How is Nitin related to Lata?", options: ["Brother-in-law", "Father-in-law", "Husband", "Brother"], answer: 2, explanation: "A daughter-in-law is a son's wife; Mahesh's only son is Nitin, so Nitin is Lata's husband." },
+    { q: "Pointing to a woman, Mukul said, \"Her father is the brother of my mother.\" How is the woman related to Mukul?", options: ["Niece", "Aunt", "Sister", "Cousin"], answer: 3, explanation: "Her father is Mukul's maternal uncle, so she is Mukul's cousin." },
+    { q: "Starting from his house, Vikram walks 11 km towards the east, turns right and walks 4 km, finally turns left and walks 15 km. In which direction is he now from his house?", options: ["South-East", "South-West", "North-West", "North-East"], answer: 0, explanation: "He ends up 26 km east and 4 km south of his house, so he is to the South-East of his house." },
+    { q: "One morning, just after sunrise, Nikhil was standing in a field. His shadow fell exactly in front of him. Which direction was he facing?", options: ["North", "West", "East", "South"], answer: 1, explanation: "In the morning the sun is in the east, so shadows fall to the west. With the shadow (West) in front of him, he must be facing West." },
+    { q: "Sanjay is 16th from the top and 24th from the bottom in his class. How many students are there in the class?", options: ["42", "38", "40", "39"], answer: 3, explanation: "Total = 16 + 24 − 1 = 39 (Sanjay is counted in both ranks)." },
+    { q: "Manoj is heavier than Sita. Sita is heavier than Farhan. Hari is heavier than Om. Hari is lighter than Farhan. Who is the lightest?", options: ["Manoj", "Om", "Sita", "Farhan"], answer: 1, explanation: "The order from heaviest to lightest is Manoj > Sita > Farhan > Hari > Om, so the lightest is Om." },
+    { q: "A bag contains an equal number of ₹1, ₹5 and ₹10 coins worth ₹400 in all. How many of each are there?", options: ["40", "75", "26", "25"], answer: 3, explanation: "Each set of one of each is worth ₹16; 400/16 = 25." },
+    { q: "A train 250 m long running at 36 km/h crosses a platform 220 m long. How many seconds does it take?", options: ["37", "25", "22", "47"], answer: 3, explanation: "It must cover 250 + 220 = 470 m at 36 km/h = 10 m/s, taking 470/10 = 47 s." },
+    { q: "What is the angle between the hands of a clock at 11:25?", options: ["180°", "167.5°", "175°", "137.5°"], answer: 1, explanation: "Angle = |30 × 11 − 5.5 × 25| = 192.5°, i.e. 360° − that = 167.5°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "26 July 1999 was Kargil Vijay Diwas (1999). What day of the week was it?", options: ["Tuesday", "Monday", "Sunday", "Thursday"], answer: 1, explanation: "1 January 2001 was a Monday. 26 July 1999 is 525 days before it, leaving 0 odd day(s) backwards from Monday, so it was a Monday." },
+    { q: "Statements: All chairs are books. No book is a writer. Conclusions: I. No writer is a chair. II. Some books are not writers.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "No a chair is a writer, so equally no a writer is a chair (I); and since no a book is a writer, the books are certainly not writers (II)." },
+    { q: "Statement: Books are the best friends of man. Conclusions: I. Books are valuable to man. II. Man has no other friends.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Calling books the best friends shows their value (I); it doesn't mean there are no other friends." },
+    { q: "A cube of side 3 cm is painted on two opposite faces only and then cut into 1 cm cubes. How many small cubes have no paint on them?", options: ["9", "6", "11", "18"], answer: 0, explanation: "The two opposite faces each have 9 cubes with exactly one painted face (18 in all), and the remaining 3³ − 18 = 9 cubes have no paint." },
+    { q: "Which letter is 4th to the right of the 18th letter from the left in the English alphabet?", options: ["W", "U", "V", "T"], answer: 2, explanation: "The 18th letter from the left is R; 4 places to its right is the 22nd letter, V." },
+    { q: "How many pairs of letters in the word PATIENCE have as many letters between them in the word as there are between them in the English alphabet (in either direction)?", options: ["1", "4", "3", "2"], answer: 3, explanation: "The pairs are IE, EC — 2 in all." },
+  ],
+};
+
+export default test;

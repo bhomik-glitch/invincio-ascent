@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-108",
+  title: "OIR Test 108",
+  durationMinutes: 20,
+  releaseAt: "2027-01-31T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 4, 9, 24, 69, ?", options: ["205", "210", "204", "207"], answer: 2, explanation: "Here each term is 3 times the previous term minus 3. Next: 69 × 3 − 3 = 204." },
+    { q: "Find the next number: 12, 41, 18, 37, 24, 33, 30, ?", options: ["33", "36", "25", "29"], answer: 3, explanation: "Here two series alternate: 12, 18, 24, … (+6) and 41, 37, 33, … (-4). Next: 33 − 4 = 29." },
+    { q: "Find the next number: 19, 23, 29, 31, 37, ?", options: ["43", "41", "39", "42"], answer: 1, explanation: "Here the terms are consecutive prime numbers. Next: the prime after 37 = 41." },
+    { q: "Find the missing number: 7, 9, 13, 21, ?, 69", options: ["45", "37", "39", "53"], answer: 1, explanation: "Here the differences 2, 4, 8, 16, 32 are each 2 times the previous difference, so the missing term is 37." },
+    { q: "Find the next letter: J, K, N, O, R, ?", options: ["T", "U", "S", "R"], answer: 2, explanation: "By alphabet positions (10, 11, 14, 15, 18), the letters move alternately +1 and +3: R(18) + 1 = S(19)." },
+    { q: "Find the next pair: KD, MH, OL, QP, ?", options: ["SU", "TT", "RS", "ST"], answer: 3, explanation: "The first letters move 2 forward each time and the second letters move 4 forward: next is ST." },
+    { q: "Ice : Water :: Water : ?", options: ["Rain", "Cloud", "Snow", "Steam"], answer: 3, explanation: "Ice melts into water; water boils into steam." },
+    { q: "8 : 513 :: 13 : ?", options: ["195", "182", "2198", "172"], answer: 2, explanation: "8 → 8³ + 1 = 513; likewise 13 → 13³ + 1 = 2198." },
+    { q: "CISF : Industrial security :: RPF : ?", options: ["Border security", "Coastal security", "Railway security", "Forest protection"], answer: 2, explanation: "The CISF protects industrial units; the RPF protects railway property and passengers." },
+    { q: "Which one does not belong with the others?", options: ["Dolphin", "Seal", "Shark", "Whale"], answer: 2, explanation: "The shark is a fish; the others are mammals." },
+    { q: "Which number does not belong with the others?", options: ["103", "37", "29", "69"], answer: 3, explanation: "69 = 3 × 23 is not prime; the others are prime numbers." },
+    { q: "Choose the one word for: \"Something that can be carried easily\"", options: ["Edible", "Portable", "Potable", "Durable"], answer: 1, explanation: "Portable: something that can be carried easily." },
+    { q: "If KNIFE is coded as FGJOL, how is BUTTER coded?", options: ["SFUUVC", "SFUVVC", "CTUSFQ", "SFVUVC"], answer: 0, explanation: "In this code the letters are reversed and each is moved 1 place forward, so BUTTER becomes SFUUVC." },
+    { q: "In a code language, 'bold officers fight' is written as 'ze ta ga', 'brave officers' is written as 'ga ve' and 'fight early' is written as 'ki ta'. What is the code for 'officers'?", options: ["ki", "ga", "ve", "ta"], answer: 1, explanation: "'officers' is common to the first two sentences, so officers = ga; 'fight' is common to the first and third, so fight = ta." },
+    { q: "If A = 1, B = 2, …, Z = 26 and MARKER = 66 (the sum of its letter values), what is BANKER?", options: ["52", "51", "53", "111"], answer: 1, explanation: "BANKER = 2 + 1 + 14 + 11 + 5 + 18 = 51." },
+    { q: "Ruchi is the sister of Sahil. Sahil is the son of Tejas. Tejas is the husband of Urmila. How is Ruchi related to Urmila?", options: ["Niece", "Sister", "Daughter", "Granddaughter"], answer: 2, explanation: "Ruchi and Sahil are the children of Tejas and Urmila, so Ruchi is Urmila's daughter." },
+    { q: "Pointing to a girl, Shekhar said, \"She is the daughter of my wife's mother-in-law's only son.\" How is the girl related to Shekhar?", options: ["Daughter", "Sister", "Wife", "Niece"], answer: 0, explanation: "His wife's mother-in-law is Shekhar's mother, whose only son is Shekhar, so the girl is his daughter." },
+    { q: "Starting from his house, Vikram walks 25 m towards the north, turns right and walks 130 m, finally turns left and walks 85 m. In which direction is he now from his house?", options: ["South-West", "North-West", "South-East", "North-East"], answer: 3, explanation: "He ends up 130 m east and 110 m north of his house, so he is to the North-East of his house." },
+    { q: "A man is facing North-West. He turns 45° anticlockwise, then 45° anticlockwise, then 135° anticlockwise. Which direction is he facing now?", options: ["South", "North", "West", "East"], answer: 3, explanation: "The net turn is 135° clockwise from North-West, so he faces East." },
+    { q: "Karan is 7th from the top and 7th from the bottom in his class. How many students are there in the class?", options: ["14", "12", "15", "13"], answer: 3, explanation: "Total = 7 + 7 − 1 = 13 (Karan is counted in both ranks)." },
+    { q: "Gita is slower than Pooja. Kiran is slower than Chetan. Farhan is slower than Kiran. Chetan is slower than Gita. Who is the second fastest?", options: ["Kiran", "Chetan", "Gita", "Pooja"], answer: 2, explanation: "The order from fastest to slowest is Pooja > Gita > Chetan > Kiran > Farhan, so the second fastest is Gita." },
+    { q: "The sum of the present ages of a father and his son is 85 years. 5 years ago, the father was 4 times as old as the son. What is the son's present age?", options: ["20 years", "18 years", "25 years", "22 years"], answer: 0, explanation: "Let the son be x: (85 − x − 5) = 4(x − 5) gives x = 20; the father is 65." },
+    { q: "A boat goes 22 km downstream in 1 hour and 12 km upstream in 1 hour. What is the speed of the boat in still water?", options: ["10 km/h", "18 km/h", "17 km/h", "5 km/h"], answer: 2, explanation: "Boat speed = (22 + 12)/2 = 17 km/h; stream speed = (22 − 12)/2 = 5 km/h." },
+    { q: "Through how many degrees does the hour hand of a clock turn from 4:10 to 8:00?", options: ["145°", "300°", "130°", "115°"], answer: 3, explanation: "The hour hand turns 0.5° per minute; 230 minutes × 0.5° = 115°." },
+    { q: "If today is Sunday, what day of the week will it be 143 days from today?", options: ["Tuesday", "Wednesday", "Friday", "Thursday"], answer: 1, explanation: "143 = 7 × 20 + 3; 3 days after Sunday is Wednesday." },
+    { q: "Statements: All cups are doctors. No doctor is a sailor. Conclusions: I. No sailor is a cup. II. Some doctors are not sailors.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "No a cup is a sailor, so equally no a sailor is a cup (I); and since no a doctor is a sailor, the doctors are certainly not sailors (II)." },
+    { q: "Statement: Many pedestrians are being hit while crossing a busy road near a school. Courses of action: I. A foot overbridge or signal-controlled zebra crossing should be built. II. The school should be moved to another city. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "A safe crossing solves the problem (I); moving the school is impractical." },
+    { q: "A cube of side 7 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have at least two faces painted?", options: ["60", "125", "150", "68"], answer: 3, explanation: "There are 343 small cubes; at least two faces painted: corners + edges = 8 + 60 = 68." },
+    { q: "Which letter is exactly midway between D and N in the English alphabet?", options: ["I", "H", "J", "K"], answer: 0, explanation: "D = 4 and N = 14; the midpoint is 9 = I." },
+    { q: "If the following words are arranged in dictionary order, which word comes third? Glass, Gallantry, Generation, Ground", options: ["Generation", "Gallantry", "Ground", "Glass"], answer: 3, explanation: "In dictionary order: Gallantry, Generation, Glass, Ground." },
+  ],
+};
+
+export default test;

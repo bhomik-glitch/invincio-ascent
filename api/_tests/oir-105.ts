@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-105",
+  title: "OIR Test 105",
+  durationMinutes: 20,
+  releaseAt: "2027-01-24T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 8, 29, 92, 281, ?", options: ["848", "851", "843", "838"], answer: 0, explanation: "Here each term is 3 times the previous term plus 5. Next: 281 × 3 + 5 = 848." },
+    { q: "Find the next number: 7, 21, 24, 72, 75, 225, ?", options: ["228", "229", "675", "226"], answer: 0, explanation: "Here the operations alternate: × 3, + 3, × 3, + 3 and so on. Next: 225 + 3 = 228." },
+    { q: "Find the next number: 96, 48, 24, 12, 6, ?", options: ["2", "3", "13", "4"], answer: 1, explanation: "Here each term is the previous term divided by 2. Next: 6 ÷ 2 = 3." },
+    { q: "Find the missing number: 102, 123, 146, ?, 198, 227", options: ["171", "172", "174", "173"], answer: 0, explanation: "Here the terms are n² + 2 for consecutive n, so the missing term is 171." },
+    { q: "Find the next letter: A, C, E, G, I, ?", options: ["M", "K", "L", "J"], answer: 1, explanation: "By alphabet positions (1, 3, 5, 7, 9), each letter is 2 places after the previous one: I(9) + 2 = K(11)." },
+    { q: "Find the next pair: BO, FQ, JS, NU, ?", options: ["RW", "RX", "QV", "SW"], answer: 0, explanation: "The first letters move 4 forward each time and the second letters move 2 forward: next is RW." },
+    { q: "Sword : Sheath :: Arrow : ?", options: ["Bow", "Quiver", "Target", "Holster"], answer: 1, explanation: "A sword is kept in a sheath; arrows are kept in a quiver." },
+    { q: "6 : 42 :: 7 : ?", options: ["48", "56", "343", "42"], answer: 1, explanation: "6 → 6² + 6 = 42; likewise 7 → 7² + 7 = 56." },
+    { q: "Aditya-L1 : Sun :: Gaganyaan : ?", options: ["Venus probe", "Moon landing", "Human spaceflight", "Mars orbit"], answer: 2, explanation: "Aditya-L1 studies the Sun; Gaganyaan is India's human spaceflight programme." },
+    { q: "Which one does not belong with the others?", options: ["Sonnet", "Stanza", "Couplet", "Paragraph"], answer: 3, explanation: "A paragraph belongs to prose; the others belong to poetry." },
+    { q: "Which number does not belong with the others?", options: ["57", "77", "70", "56"], answer: 0, explanation: "77, 70, 56 are all multiples of 7; 57 is not." },
+    { q: "Choose the one word for: \"Fear of closed spaces\"", options: ["Xenophobia", "Hydrophobia", "Claustrophobia", "Acrophobia"], answer: 2, explanation: "Claustrophobia: fear of closed spaces." },
+    { q: "If JUNGLE is coded as HSLEJC, how is MOTOR coded?", options: ["KMQMP", "KMSMP", "ROTOM", "KMRMP"], answer: 3, explanation: "In this code each letter is moved 2 places back in the alphabet, so MOTOR becomes KMRMP." },
+    { q: "In a code language, 'quick officers fight' is written as 're lo yo', 'young officers' is written as 'li re' and 'fight again' is written as 'yo ga'. Which word is coded as 'li'?", options: ["quick", "fight", "young", "again"], answer: 2, explanation: "'officers' is common to the first two sentences, so officers = re; 'fight' is common to the first and third, so fight = yo. The other code in the second sentence, li, means 'young'." },
+    { q: "If '−' means '+', '÷' means '−', '+' means '×' and '×' means '÷', what is the value of 12 × 3 + 10 − 11 ÷ 11?", options: ["40", "50", "51", "18"], answer: 0, explanation: "Replacing the symbols gives 12 ÷ 3 × 10 + 11 − 11; following BODMAS, this equals 40." },
+    { q: "Esha is the only daughter of Farhan's only sister. How is Farhan related to Esha?", options: ["Grandfather", "Maternal uncle", "Paternal uncle", "Father"], answer: 1, explanation: "Esha's mother is Farhan's sister, so Farhan is her maternal uncle." },
+    { q: "Pointing to a lady, Farah said, \"Her son is my father's only brother.\" How is the lady related to Farah?", options: ["Grandmother", "Aunt", "Great-grandmother", "Mother"], answer: 0, explanation: "The lady's son is Farah's uncle, the brother of Farah's father, so she is Farah's (paternal) grandmother." },
+    { q: "Starting from his house, Yash walks 13 km towards the north, turns right and walks 5 km, finally turns right and walks 14 km. In which direction is he now from his house?", options: ["North-East", "South-West", "North-West", "South-East"], answer: 3, explanation: "He ends up 5 km east and 1 km south of his house, so he is to the South-East of his house." },
+    { q: "One morning, just after sunrise, Ravi was standing in a field. His shadow fell exactly in front of him. Which direction was he facing?", options: ["West", "North", "East", "South"], answer: 0, explanation: "In the morning the sun is in the east, so shadows fall to the west. With the shadow (West) in front of him, he must be facing West." },
+    { q: "In a class of 34 students, Varun ranks 16th from the top. What is his rank from the bottom?", options: ["21st", "20th", "19th", "18th"], answer: 2, explanation: "Rank from bottom = 34 − 16 + 1 = 19." },
+    { q: "Sita is lighter than Om. Kiran is lighter than Sita. Kiran is heavier than Pooja. Hari is lighter than Pooja. Who is the heaviest?", options: ["Kiran", "Sita", "Om", "Pooja"], answer: 2, explanation: "The order from heaviest to lightest is Om > Sita > Kiran > Pooja > Hari, so the heaviest is Om." },
+    { q: "What is the simple interest on ₹3000 at 10% per annum for 2 years?", options: ["₹900", "₹300", "₹3600", "₹600"], answer: 3, explanation: "SI = P × R × T / 100 = 3000 × 10 × 2 / 100 = ₹600." },
+    { q: "A boat goes 18 km downstream in 1 hour and 12 km upstream in 1 hour. What is the speed of the boat in still water?", options: ["3 km/h", "15 km/h", "16 km/h", "6 km/h"], answer: 1, explanation: "Boat speed = (18 + 12)/2 = 15 km/h; stream speed = (18 − 12)/2 = 3 km/h." },
+    { q: "A clock loses 3 minutes every hour. It is set right at 8 am. What time will it show when the correct time is 1:00 pm the same day?", options: ["12:42 pm", "1:15 pm", "12:45 pm", "12:48 pm"], answer: 2, explanation: "In 5 hours it loses 3 × 5 = 15 minutes, so it shows 12:45 pm." },
+    { q: "26 June 2030 is a Wednesday. What day of the week is 24 February 2030?", options: ["Tuesday", "Monday", "Sunday", "Saturday"], answer: 2, explanation: "24 February 2030 is 122 days before 26 June 2030. 122 = 7 × 17 + 3, so the day shifts 3 back: Sunday." },
+    { q: "Statements: All tables are rivers. No river is a pen. Conclusions: I. No table is a pen. II. Some tables are pens.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "All tables are rivers and no a river is a pen, so no a table can be a pen (I); II contradicts this." },
+    { q: "Statement: Water is being wasted because of leaking pipes in the colony. Courses of action: I. The leaking pipes should be repaired. II. The water supply to the colony should be stopped permanently. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Repairing leaks solves the waste (I); cutting supply permanently is absurd." },
+    { q: "How many cubes of side 5 cm can be cut from a solid cube of side 15 cm?", options: ["27", "28", "675", "9"], answer: 0, explanation: "(15/5)³ = 3³ = 27." },
+    { q: "Which letter is exactly midway between B and N in the English alphabet?", options: ["J", "H", "G", "I"], answer: 1, explanation: "B = 2 and N = 14; the midpoint is 8 = H." },
+    { q: "If the following words are arranged in dictionary order, which word comes first? Lion, Loyalty, Lemon, Leadership", options: ["Lemon", "Loyalty", "Leadership", "Lion"], answer: 2, explanation: "In dictionary order: Leadership, Lemon, Lion, Loyalty." },
+  ],
+};
+
+export default test;

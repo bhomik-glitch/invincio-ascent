@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-36",
+  title: "OIR Test 36",
+  durationMinutes: 20,
+  releaseAt: "2026-10-25T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 1680, 1848, 2208, 2808, 3480, ?", options: ["3722", "3843", "3720", "3718"], answer: 2, explanation: "Here the terms are one less than the squares of consecutive primes. Next: 61² − 1 = 3720." },
+    { q: "Find the next number: 5, 17, 53, 161, ?", options: ["481", "488", "483", "485"], answer: 3, explanation: "Here each term is 3 times the previous term plus 2. Next: 161 × 3 + 2 = 485." },
+    { q: "Find the next number: 1, 4, 16, 64, ?", options: ["256", "320", "255", "259"], answer: 0, explanation: "Here each term is 4 times the previous term. Next: 64 × 4 = 256." },
+    { q: "Find the missing number: 6, 14, 45, ?, 925, 5556", options: ["786", "485", "182", "184"], answer: 3, explanation: "Here the multipliers increase by one each step (×2, ×3, ×4, …), then add the same number (×2 + 2, ×3 + 3, …), so the missing term is 184." },
+    { q: "Find the next letter: B, D, F, H, J, ?", options: ["N", "M", "K", "L"], answer: 3, explanation: "By alphabet positions (2, 4, 6, 8, 10), each letter is 2 places after the previous one: J(10) + 2 = L(12)." },
+    { q: "Find the next pair: GR, JQ, MP, PO, ?", options: ["SM", "SN", "RM", "TN"], answer: 1, explanation: "The first letters move 3 forward each time and the second letters move 1 back: next is SN." },
+    { q: "Grapes : Raisins :: Plums : ?", options: ["Figs", "Prunes", "Dates", "Apricots"], answer: 1, explanation: "Dried grapes are raisins; dried plums are prunes." },
+    { q: "12 : 1740 :: 8 : ?", options: ["64", "63", "520", "56"], answer: 2, explanation: "12 → 12³ + 12 = 1740; likewise 8 → 8³ + 8 = 520." },
+    { q: "Operation Vijay : Kargil (1999) :: Operation Meghdoot : ?", options: ["Siachen (1984)", "Goa (1961)", "Bangladesh (1971)", "Sri Lanka (1987)"], answer: 0, explanation: "Operation Vijay was fought in Kargil; Operation Meghdoot secured the Siachen Glacier in 1984." },
+    { q: "Which one does not belong with the others?", options: ["Century", "Kilometre", "Millennium", "Decade"], answer: 1, explanation: "The kilometre is a unit of length; the others are periods of time." },
+    { q: "Which pair does not belong with the others?", options: ["5 – 30", "9 – 90", "2 – 9", "6 – 42"], answer: 2, explanation: "In the other pairs the second number is n² + n, where n is the first (e.g. 6² + 6 = 42); but 2² + 2 = 6, not 9." },
+    { q: "Choose the word most similar in meaning to TENACIOUS.", options: ["Lazy", "Hesitant", "Persistent", "Weak"], answer: 2, explanation: "Tenacious means persistent." },
+    { q: "If TEAM is coded as GVZN, how is CANNON coded?", options: ["XZMMLM", "BZMMNM", "WZMMLM", "XZNMLM"], answer: 0, explanation: "In this code each letter is replaced by its opposite letter (A↔Z, B↔Y, C↔X, …), so CANNON becomes XZMMLM." },
+    { q: "In a code language, 'bold doctors march' is written as 'si mu ki', 'strong doctors' is written as 'ki yo' and 'march well' is written as 'si bu'. Which word is coded as 'si'?", options: ["strong", "bold", "doctors", "march"], answer: 3, explanation: "'doctors' is common to the first two sentences, so doctors = ki; 'march' is common to the first and third, so march = si." },
+    { q: "If A = 1, B = 2, …, Z = 26 and HONOUR = 91 (the sum of its letter values), what is JUNGLE?", options: ["69", "59", "93", "79"], answer: 0, explanation: "JUNGLE = 10 + 21 + 14 + 7 + 12 + 5 = 69." },
+    { q: "A is the mother of B. C is the father of A. D is the son of C. How is D related to B?", options: ["Grandfather", "Brother", "Father", "Maternal uncle"], answer: 3, explanation: "D is A's brother, and A is B's mother, so D is B's maternal uncle." },
+    { q: "Pointing to a boy, Anjali said, \"He is the only grandson of my father-in-law's only son.\" How is the boy related to Anjali?", options: ["Son", "Nephew", "Grandson", "Grand-nephew"], answer: 2, explanation: "Her father-in-law's only son is Anjali's husband; his only grandson is also Anjali's grandson." },
+    { q: "Starting from his house, Rohit walks 9 km towards the north, turns right and walks 6 km, finally turns left and walks 10 km. In which direction is he now from his house?", options: ["South-West", "South-East", "North-East", "North-West"], answer: 2, explanation: "He ends up 6 km east and 19 km north of his house, so he is to the North-East of his house." },
+    { q: "A man is facing South-East. He turns 90° clockwise, then 135° clockwise, then 180° clockwise. Which direction is he facing now?", options: ["North", "East", "South", "West"], answer: 2, explanation: "The net turn is 45° clockwise from South-East, so he faces South." },
+    { q: "In a class of 41 students, Dev ranks 8th from the top. What is his rank from the bottom?", options: ["33rd", "34th", "36th", "35th"], answer: 1, explanation: "Rank from bottom = 41 − 8 + 1 = 34." },
+    { q: "Nisha is richer than Manoj. Pooja is poorer than Esha. Farhan is poorer than Pooja. Nisha is poorer than Farhan. Who is the poorest?", options: ["Pooja", "Esha", "Farhan", "Manoj"], answer: 3, explanation: "The order from richest to poorest is Esha > Pooja > Farhan > Nisha > Manoj, so the poorest is Manoj." },
+    { q: "15% of a number is 51. What is 80% of the same number?", options: ["408", "271", "323", "272"], answer: 3, explanation: "The number is 51 × 100/15 = 340, and 80% of 340 = 272." },
+    { q: "At a meeting, each of the 13 officers shakes hands exactly once with every other officer. How many handshakes take place?", options: ["78", "169", "156", "91"], answer: 0, explanation: "Handshakes = n(n − 1)/2 = 13 × 12/2 = 78." },
+    { q: "In a mirror, a clock appears to show 7:49. What is the actual time?", options: ["5:11", "5:49", "4:41", "4:11"], answer: 3, explanation: "Actual time = 11:60 − 7:49 = 4:11." },
+    { q: "How many days are there from 13 April 2031 to 25 December 2031, both days included?", options: ["258", "259", "257", "256"], answer: 2, explanation: "Counting the days in each month from 13 April 2031 to 25 December 2031 inclusive gives 257." },
+    { q: "Statements: Some boxes are painters. Some painters are books. Conclusions: I. Some boxes are books. II. All books are boxes.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 3, explanation: "Two 'some' statements give no definite link between boxes and books, so neither conclusion is certain." },
+    { q: "Statement: \"Silence, please — examination in progress,\" reads a board. Assumptions: I. Noise may disturb the candidates. II. The examination will last the whole day.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0, explanation: "The board assumes noise disturbs candidates (I); nothing is implied about the duration." },
+    { q: "A cube of side 10 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have exactly one face painted?", options: ["96", "512", "8", "384"], answer: 3, explanation: "There are 1000 small cubes; exactly one face painted: 6 faces × (10 − 2)² = 384." },
+    { q: "How many letters are there between K and Q in the English alphabet?", options: ["7", "8", "5", "6"], answer: 2, explanation: "K is 11 and Q is 17; the letters strictly between them number 17 − 11 − 1 = 5." },
+    { q: "If the following words are arranged in dictionary order, which word comes third? Eraser, Eagle, Engine, Education", options: ["Eagle", "Engine", "Education", "Eraser"], answer: 1, explanation: "In dictionary order: Eagle, Education, Engine, Eraser." },
+  ],
+};
+
+export default test;

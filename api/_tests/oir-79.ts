@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-79",
+  title: "OIR Test 79",
+  durationMinutes: 20,
+  releaseAt: "2026-12-20T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 2, 4, 5, 11, 20, 36, 67, ?", options: ["104", "87", "134", "123"], answer: 3, explanation: "Here each term is the sum of the previous three terms. Next: 20 + 36 + 67 = 123." },
+    { q: "Find the next number: 169, 289, 361, 529, 841, ?", options: ["961", "971", "963", "1024"], answer: 0, explanation: "Here the terms are the squares of consecutive prime numbers. Next: 31² = 961." },
+    { q: "Find the next number: 513, 730, 1001, 1332, 1729, ?", options: ["2745", "2198", "2199", "2197"], answer: 1, explanation: "Here the terms are n³ + 1 for consecutive n. Next: 13³ + 1 = 2198." },
+    { q: "Find the missing number: 3, 4, ?, 33, 136, 685", options: ["27", "10", "19", "0"], answer: 1, explanation: "Here the multipliers increase by one each step (×1, ×2, ×3, …), then add the same number (×1 + 1, ×2 + 2, …), so the missing term is 10." },
+    { q: "Find the next letter: D, I, L, Q, T, ?", options: ["Y", "X", "W", "Z"], answer: 0, explanation: "By alphabet positions (4, 9, 12, 17, 20), the letters move alternately +5 and +3: T(20) + 5 = Y(25)." },
+    { q: "Find the next pair: LJ, ML, NN, OP, ?", options: ["QR", "PR", "PS", "OQ"], answer: 1, explanation: "The first letters move 1 forward each time and the second letters move 2 forward: next is PR." },
+    { q: "Paper : Wood :: Glass : ?", options: ["Sand", "Clay", "Stone", "Plastic"], answer: 0, explanation: "Paper is made from wood; glass is made from sand." },
+    { q: "7 : 64 :: 2 : ?", options: ["2", "7", "8", "9"], answer: 3, explanation: "7 → (7 + 1)² = 64; likewise 2 → (2 + 1)² = 9." },
+    { q: "Wings of Fire : A.P.J. Abdul Kalam :: My Experiments with Truth : ?", options: ["Jawaharlal Nehru", "B.G. Tilak", "Subhas Chandra Bose", "Mahatma Gandhi"], answer: 3, explanation: "Wings of Fire is Kalam's autobiography; My Experiments with Truth is Gandhi's." },
+    { q: "Which one does not belong with the others?", options: ["AK-47", "INSAS", "Pinaka", "SLR"], answer: 2, explanation: "Pinaka is a rocket launcher; the others are rifles." },
+    { q: "Which number does not belong with the others?", options: ["154", "46", "136", "48"], answer: 3, explanation: "The digits of 136, 46, 154 each add up to 10; the digits of 48 add up to 12." },
+    { q: "Choose the one word for: \"A person who leaves his or her own country to settle in another\"", options: ["Immigrant", "Emigrant", "Tourist", "Refugee"], answer: 1, explanation: "Emigrant: a person who leaves his or her own country to settle in another." },
+    { q: "If GLASS is coded as HNDWX, how is RABBIT coded?", options: ["IZYYRG", "SCEENZ", "SDEFNZ", "SCEFNZ"], answer: 3, explanation: "In this code the 1st letter moves 1 place forward, the 2nd moves 2, the 3rd moves 3, and so on, so RABBIT becomes SCEFNZ." },
+    { q: "In a code language, 'loyal boys sail' is written as 'mu ho yo', 'smart boys' is written as 'zo ho' and 'sail early' is written as 'yo ga'. Which word is coded as 'ga'?", options: ["early", "smart", "sail", "boys"], answer: 0, explanation: "'boys' is common to the first two sentences, so boys = ho; 'sail' is common to the first and third, so sail = yo. The other code in the third sentence, ga, means 'early'." },
+    { q: "If '×' means '+', '÷' means '−', '−' means '×' and '+' means '÷', what is the value of 18 − 2 × 2 ÷ 21 + 7?", options: ["42", "21", "35", "25"], answer: 2, explanation: "Replacing the symbols gives 18 × 2 + 2 − 21 ÷ 7; following BODMAS, this equals 35." },
+    { q: "Tushar is the son of Usha and her husband Mohan. Mohan's brother is Vinod. How is Vinod related to Tushar?", options: ["Grandfather", "Paternal uncle", "Maternal uncle", "Father"], answer: 1, explanation: "Vinod is the brother of Tushar's father Mohan, so he is Tushar's paternal uncle." },
+    { q: "Pointing to a man, Chaya said, \"His daughter is my son's only sister.\" How is the man related to Chaya?", options: ["Son", "Father", "Brother", "Husband"], answer: 3, explanation: "Chaya's son's only sister is Chaya's daughter; her father is Chaya's husband." },
+    { q: "Starting from his house, Ajay walks 145 m towards the north, turns right and walks 60 m, finally turns right and walks 45 m. In which direction is he now from his house?", options: ["South-East", "South-West", "North-East", "North-West"], answer: 2, explanation: "He ends up 60 m east and 100 m north of his house, so he is to the North-East of his house." },
+    { q: "A man is facing South-East. He turns 180° clockwise, then 135° clockwise. Which direction is he facing now?", options: ["East", "South", "North", "West"], answer: 0, explanation: "The net turn is 45° anticlockwise from South-East, so he faces East." },
+    { q: "In a row of 27 children, Ravi is 11th from the left. Karan is 3rd to the right of Ravi. What is Karan's position from the right end?", options: ["13th", "14th", "16th", "15th"], answer: 1, explanation: "Karan is 14th from the left, so from the right he is 27 − 14 + 1 = 14." },
+    { q: "Bina is faster than Isha. Bina is slower than Uma. Isha is faster than Esha. Who is the second fastest?", options: ["Uma", "Esha", "Bina", "Isha"], answer: 2, explanation: "The order from fastest to slowest is Uma > Bina > Isha > Esha, so the second fastest is Bina." },
+    { q: "A can complete a piece of work in 20 days and B in 30 days. Working together, in how many days will they complete it?", options: ["10", "12", "25", "13"], answer: 1, explanation: "Together they do 1/20 + 1/30 = 50/600 = 1/12 of the work per day, so they need 12 days." },
+    { q: "Two trains start at the same time from stations 500 km apart and travel towards each other at 31 km/h and 69 km/h. After how many hours will they meet?", options: ["5", "4", "6", "8"], answer: 0, explanation: "They close the gap at 31 + 69 = 100 km/h, so they meet after 500/100 = 5 hours." },
+    { q: "Through how many degrees does the hour hand of a clock turn from 1:00 to 7:10?", options: ["60°", "215°", "200°", "185°"], answer: 3, explanation: "The hour hand turns 0.5° per minute; 370 minutes × 0.5° = 185°." },
+    { q: "Which year will have exactly the same calendar as 2046?", options: ["2050", "2056", "2058", "2057"], answer: 3, explanation: "A year has the same calendar when it starts on the same weekday and is also an ordinary year. Counting odd days (1 per ordinary year, 2 per leap year) from 2046 until they total a multiple of 7 gives 2057." },
+    { q: "Statements: All dancers are runners. All dancers are tables. Conclusions: I. Some runners are tables. II. All runners are tables.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Every one of the dancers is both a runner and a table, so some runners are tables (I); there may be runners that are not tables, so II fails." },
+    { q: "Statement: Although the team lost the final, it played very well throughout the tournament. Conclusions: I. The team reached the final. II. The team played badly in the final.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "It lost the final, so it reached it (I); 'played well throughout' contradicts II." },
+    { q: "A cube of side 4 cm is painted on two opposite faces only and then cut into 1 cm cubes. How many small cubes have exactly one painted face?", options: ["32", "16", "24", "22"], answer: 0, explanation: "The two opposite faces each have 16 cubes with exactly one painted face (32 in all), and the remaining 4³ − 32 = 32 cubes have no paint." },
+    { q: "Which letter is exactly midway between P and V in the English alphabet?", options: ["R", "U", "T", "S"], answer: 3, explanation: "P = 16 and V = 22; the midpoint is 19 = S." },
+    { q: "How many pairs of letters in the word ARTILLERY have as many letters between them in the word as there are between them in the English alphabet (in either direction)?", options: ["0", "3", "1", "2"], answer: 2, explanation: "The pairs are RY — 1 in all." },
+  ],
+};
+
+export default test;

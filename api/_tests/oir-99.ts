@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-99",
+  title: "OIR Test 99",
+  durationMinutes: 20,
+  releaseAt: "2027-01-17T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 12, 16, 24, 40, 72, ?", options: ["144", "137", "168", "136"], answer: 3, explanation: "Here the differences 4, 8, 16, 32, 64 are each 2 times the previous difference. Next: 72 + 64 = 136." },
+    { q: "Find the next number: 1, 4, 6, 11, 21, 38, 70, ?", options: ["91", "109", "140", "129"], answer: 3, explanation: "Here each term is the sum of the previous three terms. Next: 21 + 38 + 70 = 129." },
+    { q: "Find the next number: 9, 68, 13, 63, 17, 58, 21, ?", options: ["48", "58", "25", "53"], answer: 3, explanation: "Here two series alternate: 9, 13, 17, … (+4) and 68, 63, 58, … (-5). Next: 58 − 5 = 53." },
+    { q: "Find the missing number: 12, 36, 108, ?, 972", options: ["540", "324", "326", "756"], answer: 1, explanation: "Here each term is 3 times the previous term, so the missing term is 324." },
+    { q: "Find the next letter: B, F, I, M, P, ?", options: ["S", "U", "T", "V"], answer: 2, explanation: "By alphabet positions (2, 6, 9, 13, 16), the letters move alternately +4 and +3: P(16) + 4 = T(20)." },
+    { q: "Find the next pair: FJ, GM, HP, IS, ?", options: ["KV", "JV", "JW", "IU"], answer: 1, explanation: "The first letters move 1 forward each time and the second letters move 3 forward: next is JV." },
+    { q: "Decade : Ten :: Century : ?", options: ["Hundred", "Thousand", "Twenty", "Fifty"], answer: 0, explanation: "A decade is ten years; a century is a hundred years." },
+    { q: "8 : 504 :: 12 : ?", options: ["147", "1716", "132", "156"], answer: 1, explanation: "8 → 8³ − 8 = 504; likewise 12 → 12³ − 12 = 1716." },
+    { q: "Bomdila : Arunachal Pradesh :: Rohtang Pass : ?", options: ["Uttarakhand", "Sikkim", "Himachal Pradesh", "Jammu & Kashmir"], answer: 2, explanation: "Bomdila pass is in Arunachal Pradesh; the Rohtang Pass is in Himachal Pradesh." },
+    { q: "Which one does not belong with the others?", options: ["Rubber", "Coffee", "Wheat", "Tea"], answer: 2, explanation: "Wheat is a food grain; the others are plantation crops." },
+    { q: "Which number does not belong with the others?", options: ["254", "361", "289", "256"], answer: 0, explanation: "289 = 17², 361 = 19², 256 = 16² are perfect squares; 254 is not." },
+    { q: "Choose the one word for: \"A soldier posted to keep guard\"", options: ["Deserter", "Sentry", "Veteran", "Recruit"], answer: 1, explanation: "Sentry: a soldier posted to keep guard." },
+    { q: "If BASKET is coded as CCVOJZ, how is SYMBOL coded?", options: ["TAPFTR", "HBNYLO", "SAPFTR", "TAPFSR"], answer: 0, explanation: "In this code the 1st letter moves 1 place forward, the 2nd moves 2, the 3rd moves 3, and so on, so SYMBOL becomes TAPFTR." },
+    { q: "In a code language, 'calm officers sail' is written as 'da ze ki', 'loyal officers' is written as 'ze ve' and 'sail early' is written as 'yo ki'. What is the code for 'officers'?", options: ["da", "ze", "yo", "ve"], answer: 1, explanation: "'officers' is common to the first two sentences, so officers = ze; 'sail' is common to the first and third, so sail = ki." },
+    { q: "If '−' means '+', '÷' means '−', '+' means '×' and '×' means '÷', what is the value of 55 × 11 + 5 ÷ 9 − 12?", options: ["40", "18", "28", "4"], answer: 2, explanation: "Replacing the symbols gives 55 ÷ 11 × 5 − 9 + 12; following BODMAS, this equals 28." },
+    { q: "Daman is married to Esha. Esha's father is Faiyaz. Faiyaz's wife is Gauri, Esha's mother. How is Gauri related to Daman?", options: ["Mother-in-law", "Mother", "Aunt", "Sister-in-law"], answer: 0, explanation: "Gauri is the mother of Daman's wife, so she is his mother-in-law." },
+    { q: "Pointing to a woman, Om said, \"She is the wife of my mother's only brother.\" How is the woman related to Om?", options: ["Maternal uncle's wife", "Mother", "Paternal aunt", "Sister-in-law"], answer: 0, explanation: "The wife of Om's maternal uncle is his mami, i.e. his maternal uncle's wife." },
+    { q: "Starting from his house, Rahul walks 40 m towards the north, turns right and walks 95 m, finally turns left and walks 60 m. In which direction is he now from his house?", options: ["North-East", "South-West", "North-West", "South-East"], answer: 0, explanation: "He ends up 95 m east and 100 m north of his house, so he is to the North-East of his house." },
+    { q: "One evening, just before sunset, Vikram was standing in a field. His shadow fell exactly in front of him. Which direction was he facing?", options: ["East", "South", "West", "North"], answer: 0, explanation: "In the evening the sun is in the west, so shadows fall to the east. With the shadow (East) in front of him, he must be facing East." },
+    { q: "In a row, Vikram is 7th from the left and Mohan is 15th from the right. When they interchange places, Vikram becomes 21st from the left. How many people are in the row?", options: ["27", "36", "35", "37"], answer: 2, explanation: "After the swap Vikram takes Mohan's old place, which is 21st from the left and 15th from the right, so total = 21 + 15 − 1 = 35." },
+    { q: "Dinesh is slower than Tarun. Tarun is slower than Pooja. Dinesh is faster than Chetan. Who is the slowest?", options: ["Pooja", "Dinesh", "Tarun", "Chetan"], answer: 3, explanation: "The order from fastest to slowest is Pooja > Tarun > Dinesh > Chetan, so the slowest is Chetan." },
+    { q: "What is the simple interest on ₹12000 at 12% per annum for 4 years?", options: ["₹5760", "₹7200", "₹4320", "₹17760"], answer: 0, explanation: "SI = P × R × T / 100 = 12000 × 12 × 4 / 100 = ₹5760." },
+    { q: "30% of a number is 84. What is 20% of the same number?", options: ["58", "140", "56", "168"], answer: 2, explanation: "The number is 84 × 100/30 = 280, and 20% of 280 = 56." },
+    { q: "Through how many degrees does the hour hand of a clock turn from 5:40 to 12:00?", options: ["220°", "205°", "190°", "120°"], answer: 2, explanation: "The hour hand turns 0.5° per minute; 380 minutes × 0.5° = 190°." },
+    { q: "24 August 2031 is a Sunday. What day of the week is 24 September 2032?", options: ["Thursday", "Saturday", "Sunday", "Friday"], answer: 3, explanation: "24 September 2032 is 397 days after 24 August 2031. 397 = 7 × 56 + 5, so the day shifts 5 forward: Friday." },
+    { q: "Statements: All bats are dancers. All swimmers are dancers. Conclusions: I. Some bats are swimmers. II. Some dancers are swimmers.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "All swimmers are dancers, so some dancers are swimmers (II); bats and swimmers both lie within dancers but need not overlap, so I fails." },
+    { q: "Statement: Plastic bags are choking the city's drains. Courses of action: I. The use of plastic bags should be restricted. II. The drains should be cleaned regularly. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "Restricting plastic stops the cause (I) and cleaning clears the blockage (II)." },
+    { q: "A wooden block measuring 7 cm × 5 cm × 4 cm is painted on all faces and cut into 1 cm cubes. How many cubes have exactly one face painted?", options: ["40", "8", "62", "30"], answer: 2, explanation: "Cubes with exactly one face painted: 2[(5)(3) + (3)(2) + (5)(2)] = 62." },
+    { q: "If the English alphabet is written in reverse order (Z to A), which letter will be 8th to the right of the 18th letter from the left?", options: ["A", "C", "Z", "B"], answer: 0, explanation: "In the reversed alphabet the 26th letter from the left is A (position n holds letter 27 − n)." },
+    { q: "How many pairs of letters in the word PARACHUTE have as many letters between them in the word as there are between them in the English alphabet (in either direction)?", options: ["3", "5", "4", "2"], answer: 0, explanation: "The pairs are PR, HE, UT — 3 in all." },
+  ],
+};
+
+export default test;

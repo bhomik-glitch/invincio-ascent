@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-29",
+  title: "OIR Test 29",
+  durationMinutes: 20,
+  releaseAt: "2026-10-11T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 4, 38, 9, 36, 14, 34, 19, ?", options: ["24", "32", "34", "30"], answer: 1, explanation: "Here two series alternate: 4, 9, 14, … (+5) and 38, 36, 34, … (-2). Next: 34 − 2 = 32." },
+    { q: "Find the next number: 5, 13, 29, 61, 125, ?", options: ["247", "250", "255", "253"], answer: 3, explanation: "Here each term is 2 times the previous term plus 3. Next: 125 × 2 + 3 = 253." },
+    { q: "Find the next number: 1681, 1849, 2209, 2809, 3481, ?", options: ["3721", "3844", "3723", "3722"], answer: 0, explanation: "Here the terms are the squares of consecutive prime numbers. Next: 61² = 3721." },
+    { q: "Find the missing number: 2, 6, 21, 88, ?, 2676", options: ["2319", "1382", "445", "446"], answer: 2, explanation: "Here the multipliers increase by one each step (×2, ×3, ×4, …), then add the same number (×2 + 2, ×3 + 3, …), so the missing term is 445." },
+    { q: "Find the next letter: V, T, R, P, N, ?", options: ["N", "K", "M", "L"], answer: 3, explanation: "By alphabet positions (22, 20, 18, 16, 14), each letter is 2 places before the previous one: N(14) − 2 = L(12)." },
+    { q: "Find the next group: DEF, JKL, PQR, ?", options: ["VWX", "VXW", "UVW", "WXY"], answer: 0, explanation: "Each group is three consecutive letters, and 3 letters are skipped between groups: after PQR comes VWX." },
+    { q: "Clock : Time :: Odometer : ?", options: ["Pressure", "Distance", "Fuel", "Speed"], answer: 1, explanation: "A clock measures time; an odometer measures distance travelled." },
+    { q: "11 : 121 :: 9 : ?", options: ["82", "728", "81", "90"], answer: 2, explanation: "11 → 11² = 121; likewise 9 → 9² = 81." },
+    { q: "Rafale : France :: Sukhoi Su-30 : ?", options: ["Sweden", "Russia", "Israel", "USA"], answer: 1, explanation: "The Rafale was designed in France; the Su-30 was designed in Russia." },
+    { q: "Which one does not belong with the others?", options: ["Nile", "Gobi", "Amazon", "Volga"], answer: 1, explanation: "The Gobi is a desert; the others are rivers." },
+    { q: "Which pair does not belong with the others?", options: ["5 – 20", "3 – 12", "8 – 72", "7 – 56"], answer: 0, explanation: "In the other pairs the second number is n² + n, where n is the first (e.g. 7² + 7 = 56); but 5² + 5 = 30, not 20." },
+    { q: "Choose the word most similar in meaning to HOSTILE.", options: ["Kind", "Unfriendly", "Calm", "Helpful"], answer: 1, explanation: "Hostile means unfriendly." },
+    { q: "If PARADE is written as 11-26-9-26-23-22, how is COACH written in the same code?", options: ["3-15-1-3-8", "24-11-26-24-19", "24-12-25-24-19", "24-12-26-24-19"], answer: 3, explanation: "Each letter is replaced by its position in the reversed alphabet (A = 26, B = 25, …, Z = 1), so COACH → 24-12-26-24-19." },
+    { q: "In a code language, 'smart students train' is written as 'ki si ve', 'brave students' is written as 've ga' and 'train again' is written as 'ki li'. Which word is coded as 'si'?", options: ["students", "train", "brave", "smart"], answer: 3, explanation: "'students' is common to the first two sentences, so students = ve; 'train' is common to the first and third, so train = ki. The remaining code in the first sentence, si, means 'smart'." },
+    { q: "If '÷' means '+', '×' means '−', '+' means '×' and '−' means '÷', what is the value of 12 − 6 + 7 ÷ 12 × 11?", options: ["15", "7", "16", "26"], answer: 0, explanation: "Replacing the symbols gives 12 ÷ 6 × 7 + 12 − 11; following BODMAS, this equals 15." },
+    { q: "Tina is a girl. Ayesha is the wife of the only son of Tina's father. How is Ayesha related to Tina?", options: ["Mother", "Cousin", "Sister", "Sister-in-law"], answer: 3, explanation: "The only son of Tina's father is Tina's brother; his wife Ayesha is Tina's sister-in-law." },
+    { q: "Pointing to a boy, Lata said, \"His mother's father is the only son of my father.\" How is the boy related to Lata?", options: ["Son", "Grandson", "Grand-nephew", "Nephew"], answer: 2, explanation: "Lata's father's only son is her brother; the boy is his daughter's son, i.e. Lata's grand-nephew." },
+    { q: "Starting from his house, Aman walks 10 km towards the south, turns right and walks 10 km, turns right and walks 4 km, finally turns left and walks 3 km. In which direction is he now from his house?", options: ["South-East", "North-East", "North-West", "South-West"], answer: 3, explanation: "He ends up 13 km west and 6 km south of his house, so he is to the South-West of his house." },
+    { q: "One morning, just after sunrise, Sanjay was standing in a field. His shadow fell exactly to his left. Which direction was he facing?", options: ["North", "South", "West", "East"], answer: 0, explanation: "In the morning the sun is in the east, so shadows fall to the west. With the shadow (West) on his left, he must be facing North." },
+    { q: "Yash is 16th from the top and 17th from the bottom in his class. How many students are there in the class?", options: ["31", "34", "33", "32"], answer: 3, explanation: "Total = 16 + 17 − 1 = 32 (Yash is counted in both ranks)." },
+    { q: "Gita is shorter than Kiran. Uma is taller than Bina. Bina is taller than Pooja. Uma is shorter than Gita. Who is in the middle (third)?", options: ["Gita", "Uma", "Kiran", "Bina"], answer: 1, explanation: "The order from tallest to shortest is Kiran > Gita > Uma > Bina > Pooja, so in the middle (third) is Uma." },
+    { q: "20% of a number is 36. What is 60% of the same number?", options: ["109", "108", "216", "144"], answer: 1, explanation: "The number is 36 × 100/20 = 180, and 60% of 180 = 108." },
+    { q: "A number is multiplied by 5, then 3 is added, and the result is multiplied by 4. The final answer is 612. What was the number?", options: ["32", "29", "30", "20"], answer: 2, explanation: "Working backwards: 612 ÷ 4 = 153; − 3 = 150; ÷ 5 = 30." },
+    { q: "What is the angle between the hands of a clock at 12:55?", options: ["72.5°", "87.5°", "57.5°", "30°"], answer: 2, explanation: "Angle = |30 × 0 − 5.5 × 55| = 302.5°, i.e. 360° − that = 57.5°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "If today is Thursday, what day of the week will it be 110 days from today?", options: ["Monday", "Wednesday", "Tuesday", "Thursday"], answer: 2, explanation: "110 = 7 × 15 + 5; 5 days after Thursday is Tuesday." },
+    { q: "Statements: Some rivers are sailors. All rivers are lamps. Conclusions: I. Some lamps are sailors. II. Some sailors are lamps.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "The rivers that are sailors are also lamps, so some lamps are sailors (I) and some sailors are lamps (II)." },
+    { q: "Statement: \"Apply before 30 June; late applications will not be accepted,\" says a notice. Assumptions: I. Some people may try to apply late. II. The office will shut down after 30 June.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0, explanation: "The warning assumes late applications may come (I); nothing implies the office will close." },
+    { q: "How many cubes of side 3 cm can be cut from a solid cube of side 12 cm?", options: ["16", "576", "64", "12"], answer: 2, explanation: "(12/3)³ = 4³ = 64." },
+    { q: "If the English alphabet is written in reverse order (Z to A), which letter will be 10th to the right of the 9th letter from the left?", options: ["H", "I", "G", "S"], answer: 0, explanation: "In the reversed alphabet the 19th letter from the left is H (position n holds letter 27 − n)." },
+    { q: "If the following words are arranged in dictionary order, which word comes first? Marble, Mission, Monsoon, Mirror", options: ["Monsoon", "Mission", "Mirror", "Marble"], answer: 3, explanation: "In dictionary order: Marble, Mirror, Mission, Monsoon." },
+  ],
+};
+
+export default test;

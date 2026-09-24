@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-35",
+  title: "OIR Test 35",
+  durationMinutes: 20,
+  releaseAt: "2026-10-18T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 5, 5, 10, 30, 120, ?", options: ["720", "480", "600", "601"], answer: 2, explanation: "Here the multipliers increase by one each step (×1, ×2, ×3, …). Next: 120 × 5 = 600." },
+    { q: "Find the next number: 7, 26, 63, 124, 215, ?", options: ["343", "341", "342", "511"], answer: 2, explanation: "Here the terms are n³ − 1 for consecutive n. Next: 7³ − 1 = 342." },
+    { q: "Find the next number: 4, 11, 25, 53, 109, ?", options: ["215", "223", "221", "218"], answer: 2, explanation: "Here each term is 2 times the previous term plus 3. Next: 109 × 2 + 3 = 221." },
+    { q: "Find the missing number: 4, 12, ?, 108, 324", options: ["60", "35", "84", "36"], answer: 3, explanation: "Here each term is 3 times the previous term, so the missing term is 36." },
+    { q: "Find the next letter: Y, V, S, P, M, ?", options: ["L", "I", "J", "K"], answer: 2, explanation: "By alphabet positions (25, 22, 19, 16, 13), each letter is 3 places before the previous one: M(13) − 3 = J(10)." },
+    { q: "Find the next pair: EF, FG, GH, HI, ?", options: ["JJ", "IJ", "IK", "HI"], answer: 1, explanation: "The first letters move 1 forward each time and the second letters move 1 forward: next is IJ." },
+    { q: "Wool : Sheep :: Silk : ?", options: ["Goat", "Silkworm", "Cotton plant", "Spider"], answer: 1, explanation: "Wool comes from sheep; silk comes from the silkworm." },
+    { q: "6 : 48 :: 11 : ?", options: ["143", "1332", "132", "1331"], answer: 0, explanation: "6 → 6 × 8 = 48; likewise 11 → 11 × 13 = 143." },
+    { q: "Kargil Vijay Diwas : 26 July :: Vijay Diwas : ?", options: ["4 December", "26 January", "15 August", "16 December"], answer: 3, explanation: "Kargil Vijay Diwas marks 26 July 1999; Vijay Diwas marks the 1971 victory on 16 December." },
+    { q: "Which one does not belong with the others?", options: ["Millilitre", "Gallon", "Metre", "Litre"], answer: 2, explanation: "The metre measures length; the others measure volume." },
+    { q: "Which number does not belong with the others?", options: ["59", "41", "21", "11"], answer: 2, explanation: "21 = 3 × 7 is not prime; the others are prime numbers." },
+    { q: "Choose the word most similar in meaning to RESILIENT.", options: ["Rigid", "Fragile", "Weak", "Tough"], answer: 3, explanation: "Resilient means tough." },
+    { q: "If SCHOOL is coded as TBINPK, how is BRONZE coded?", options: ["CTRREK", "CQPLAD", "CQPMAD", "DQPMAD"], answer: 2, explanation: "In this code letters are moved alternately one place forward and one place back, so BRONZE becomes CQPMAD." },
+    { q: "In a code language, 'tall doctors work' is written as 'bu li fe', 'strong doctors' is written as 'fe ma' and 'work hard' is written as 'ja bu'. What is the code for 'doctors'?", options: ["ma", "li", "fe", "bu"], answer: 2, explanation: "'doctors' is common to the first two sentences, so doctors = fe; 'work' is common to the first and third, so work = bu." },
+    { q: "If '×' means '+', '÷' means '−', '+' means '×' and '−' means '÷', what is the value of 4 + 10 × 6 ÷ 21 − 3?", options: ["38", "39", "42", "33"], answer: 1, explanation: "Replacing the symbols gives 4 × 10 + 6 − 21 ÷ 3; following BODMAS, this equals 39." },
+    { q: "N is the husband of O. O is the sister of P. P is the mother of Q. How is N related to Q?", options: ["Brother", "Grandfather", "Uncle", "Father"], answer: 2, explanation: "O is Q's aunt (mother's sister), so her husband N is Q's uncle." },
+    { q: "Pointing to an elderly lady, Rakesh said, \"Her only daughter is my wife's mother.\" How is the lady related to Rakesh?", options: ["Aunt", "Grandmother", "Wife's grandmother", "Mother-in-law"], answer: 2, explanation: "The lady is the mother of Rakesh's mother-in-law, i.e. his wife's maternal grandmother." },
+    { q: "Starting from his house, Rohit walks 75 m towards the west, turns right and walks 140 m, finally turns left and walks 145 m. In which direction is he now from his house?", options: ["South-East", "South-West", "North-West", "North-East"], answer: 2, explanation: "He ends up 220 m west and 140 m north of his house, so he is to the North-West of his house." },
+    { q: "A man is facing South. He turns 45° anticlockwise, then 45° anticlockwise. Which direction is he facing now?", options: ["North", "West", "South", "East"], answer: 3, explanation: "The net turn is 90° anticlockwise from South, so he faces East." },
+    { q: "Arjun is 9th from the top and 17th from the bottom in his class. How many students are there in the class?", options: ["24", "26", "23", "25"], answer: 3, explanation: "Total = 9 + 17 − 1 = 25 (Arjun is counted in both ranks)." },
+    { q: "Jatin is younger than Manoj. Ravi is older than Tarun. Manoj is younger than Tarun. Who is the youngest?", options: ["Ravi", "Tarun", "Jatin", "Manoj"], answer: 2, explanation: "The order from oldest to youngest is Ravi > Tarun > Manoj > Jatin, so the youngest is Jatin." },
+    { q: "A can complete a piece of work in 40 days and B in 60 days. Working together, in how many days will they complete it?", options: ["26", "50", "24", "20"], answer: 2, explanation: "Together they do 1/40 + 1/60 = 100/2400 = 1/24 of the work per day, so they need 24 days." },
+    { q: "25% of a number is 100. What is 80% of the same number?", options: ["320", "800", "420", "330"], answer: 0, explanation: "The number is 100 × 100/25 = 400, and 80% of 400 = 320." },
+    { q: "A clock loses 4 minutes every hour. It is set right at 9 am. What time will it show when the correct time is 1:00 pm the same day?", options: ["12:40 pm", "1:16 pm", "12:48 pm", "12:44 pm"], answer: 3, explanation: "In 4 hours it loses 4 × 4 = 16 minutes, so it shows 12:44 pm." },
+    { q: "15 March 2028 is a Wednesday. What day of the week is 22 May 2027?", options: ["Saturday", "Friday", "Sunday", "Monday"], answer: 0, explanation: "22 May 2027 is 298 days before 15 March 2028. 298 = 7 × 42 + 4, so the day shifts 4 back: Saturday." },
+    { q: "Statements: Some engineers are not athletes. All athletes are boxes. Conclusions: I. Some engineers are not boxes. II. Some boxes are athletes.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "All athletes are boxes, so some boxes are athletes (II); the engineers that are not athletes may still be boxes, so I is uncertain." },
+    { q: "Statement: The municipality announced that the water supply will be cut for two days for repairs. Assumptions: I. People will store water in advance after the announcement. II. The repairs cannot be done without cutting the supply.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 2, explanation: "Announcing in advance assumes people will prepare (I); cutting supply assumes it is necessary (II)." },
+    { q: "A wooden block measuring 4 cm × 4 cm × 3 cm is painted on all faces and cut into 1 cm cubes. How many cubes have exactly one face painted?", options: ["8", "20", "4", "16"], answer: 3, explanation: "Cubes with exactly one face painted: 2[(2)(2) + (2)(1) + (2)(1)] = 16." },
+    { q: "Which letter is 2nd to the left of the 7th letter from the right in the English alphabet?", options: ["S", "Q", "I", "R"], answer: 3, explanation: "The 7th letter from the right is the 20th from the left (T); 2 to its left is the 18th letter, R." },
+    { q: "In the word SQUADRON, the 1st and 2nd letters are interchanged, the 3rd and 4th letters are interchanged, and so on. Which letter will be 2nd from the right end?", options: ["S", "D", "N", "O"], answer: 2, explanation: "The new arrangement is QSAURDNO; the 2nd letter from the right is N." },
+  ],
+};
+
+export default test;

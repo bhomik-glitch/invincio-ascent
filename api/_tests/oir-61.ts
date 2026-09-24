@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-61",
+  title: "OIR Test 61",
+  durationMinutes: 20,
+  releaseAt: "2026-11-29T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 6, 72, 12, 70, 18, 68, 24, ?", options: ["30", "68", "66", "64"], answer: 2, explanation: "Here two series alternate: 6, 12, 18, … (+6) and 72, 70, 68, … (-2). Next: 68 − 2 = 66." },
+    { q: "Find the next number: 7, 24, 75, 228, ?", options: ["690", "684", "681", "687"], answer: 3, explanation: "Here each term is 3 times the previous term plus 3. Next: 228 × 3 + 3 = 687." },
+    { q: "Find the next number: 13, 15, 17, 21, 23, ?", options: ["29", "25", "28", "27"], answer: 3, explanation: "Here the terms are consecutive prime numbers plus 10. Next: 17 + 10 = 27." },
+    { q: "Find the missing number: 12, 16, ?, 40, 72, 136", options: ["28", "32", "34", "24"], answer: 3, explanation: "Here the differences 4, 8, 16, 32, 64 are each 2 times the previous difference, so the missing term is 24." },
+    { q: "Find the next letter: G, I, K, M, O, ?", options: ["R", "Q", "S", "P"], answer: 1, explanation: "By alphabet positions (7, 9, 11, 13, 15), each letter is 2 places after the previous one: O(15) + 2 = Q(17)." },
+    { q: "Find the next pair: FO, HL, JI, LF, ?", options: ["NC", "MB", "OC", "NB"], answer: 0, explanation: "The first letters move 2 forward each time and the second letters move 3 back: next is NC." },
+    { q: "Lion : Pride :: Crow : ?", options: ["School", "Gaggle", "Murder", "Pack"], answer: 2, explanation: "A group of lions is a pride; a group of crows is called a murder." },
+    { q: "12 : 288 :: 13 : ?", options: ["182", "2198", "338", "2184"], answer: 2, explanation: "12 → 2 × 12² = 288; likewise 13 → 2 × 13² = 338." },
+    { q: "Rakesh Sharma : Space :: Tenzing Norgay : ?", options: ["North Pole", "Antarctica", "English Channel", "Everest"], answer: 3, explanation: "Rakesh Sharma was the first Indian in space; Tenzing Norgay was among the first to climb Everest." },
+    { q: "Which one does not belong with the others?", options: ["ROM", "Monitor", "Cache", "RAM"], answer: 1, explanation: "The monitor is an output device; the others are types of memory." },
+    { q: "Which number does not belong with the others?", options: ["41", "23", "119", "67"], answer: 2, explanation: "119 = 7 × 17 is not prime; the others are prime numbers." },
+    { q: "Choose the word most opposite in meaning to CAUTIOUS.", options: ["Wary", "Alert", "Careful", "Reckless"], answer: 3, explanation: "The opposite of cautious is reckless; the other options are similar in meaning or unrelated." },
+    { q: "If FALCON is written as 6-1-12-3-15-14, how is HONOUR written in the same code?", options: ["8-15-14-15-21-18", "8-15-14-14-21-18", "8-15-14-15-22-18", "19-12-13-12-6-9"], answer: 0, explanation: "Each letter is replaced by its position in the alphabet (A = 1, …, Z = 26), so HONOUR → 8-15-14-15-21-18." },
+    { q: "In a code language, 'calm cadets swim' is written as 'li yo ru', 'strong cadets' is written as 'li ta' and 'swim well' is written as 'ru tu'. Which word is coded as 'yo'?", options: ["cadets", "strong", "well", "calm"], answer: 3, explanation: "'cadets' is common to the first two sentences, so cadets = li; 'swim' is common to the first and third, so swim = ru. The remaining code in the first sentence, yo, means 'calm'." },
+    { q: "If '×' means '+', '÷' means '−', '+' means '×' and '−' means '÷', what is the value of 18 − 2 + 6 ÷ 5 × 12?", options: ["73", "37", "61", "63"], answer: 2, explanation: "Replacing the symbols gives 18 ÷ 2 × 6 − 5 + 12; following BODMAS, this equals 61." },
+    { q: "Aman is the grandson of Bhola. Bhola has only one child, a daughter named Chitra. How is Chitra related to Aman?", options: ["Aunt", "Grandmother", "Mother", "Sister"], answer: 2, explanation: "Bhola's only child is Chitra, so his grandson Aman must be Chitra's son." },
+    { q: "Pointing to a lady, Om said, \"She is the only daughter of the father of my father's only brother.\" How is the lady related to Om?", options: ["Mother", "Sister", "Paternal aunt", "Grandmother"], answer: 2, explanation: "The father of Om's uncle is Om's grandfather; his only daughter is Om's father's sister." },
+    { q: "Starting from his house, Suresh walks 150 m towards the south, turns right and walks 105 m, finally turns right and walks 35 m. In which direction is he now from his house?", options: ["South-East", "North-West", "South-West", "North-East"], answer: 2, explanation: "He ends up 105 m west and 115 m south of his house, so he is to the South-West of his house." },
+    { q: "One evening, just before sunset, Kabir was standing in a field. His shadow fell exactly to his right. Which direction was he facing?", options: ["East", "North", "West", "South"], answer: 1, explanation: "In the evening the sun is in the west, so shadows fall to the east. With the shadow (East) on his right, he must be facing North." },
+    { q: "In a row of 30 students, Rohit is 5th from the left end and Arjun is 16th from the right end. How many students are there between them?", options: ["11", "8", "10", "9"], answer: 3, explanation: "Rohit and Arjun with everyone to their outer sides account for 5 + 16 = 21 students, so 30 − 21 = 9 are between them." },
+    { q: "Gita is slower than Tarun. Esha is faster than Farhan. Tarun is slower than Farhan. Who is the fastest?", options: ["Farhan", "Gita", "Tarun", "Esha"], answer: 3, explanation: "The order from fastest to slowest is Esha > Farhan > Tarun > Gita, so the fastest is Esha." },
+    { q: "A train 75 m long passes a signal post in 6 seconds. What is its speed in km/h?", options: ["54", "12.5", "36", "45"], answer: 3, explanation: "Speed = 75/6 = 12.5 m/s = 12.5 × 18/5 = 45 km/h." },
+    { q: "A shopkeeper marks his goods 20% above the cost price and then gives a discount of 25%. What is his net profit or loss?", options: ["-5% profit", "12% loss", "10% profit", "10% loss"], answer: 3, explanation: "On a cost of ₹100 the marked price is ₹120; after 25% off it sells for ₹90, a 10% loss." },
+    { q: "Through how many degrees does the hour hand of a clock turn from 3:30 to 7:40?", options: ["140°", "125°", "155°", "60°"], answer: 1, explanation: "The hour hand turns 0.5° per minute; 250 minutes × 0.5° = 125°." },
+    { q: "If today is Sunday, what day of the week will it be 423 days from today?", options: ["Tuesday", "Friday", "Thursday", "Wednesday"], answer: 3, explanation: "423 = 7 × 60 + 3; 3 days after Sunday is Wednesday." },
+    { q: "Statements: All watches are boxes. No box is a phone. Conclusions: I. No watch is a phone. II. Some watches are phones.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "All watches are boxes and no a box is a phone, so no a watch can be a phone (I); II contradicts this." },
+    { q: "Statement: A vaccine for the disease has been developed and approved. Conclusions: I. The disease can now be prevented to some extent. II. The disease will disappear within a month.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "A vaccine enables prevention (I); disappearance within a month does not follow." },
+    { q: "How many cubes of side 5 cm can be cut from a solid cube of side 20 cm?", options: ["12", "64", "1600", "16"], answer: 1, explanation: "(20/5)³ = 4³ = 64." },
+    { q: "If the English alphabet is written in reverse order (Z to A), which letter will be 7th to the right of the 12th letter from the left?", options: ["I", "S", "H", "G"], answer: 2, explanation: "In the reversed alphabet the 19th letter from the left is H (position n holds letter 27 − n)." },
+    { q: "How many pairs of letters in the word LOYALTY have as many letters between them in the word as there are between them in the English alphabet (in either direction)?", options: ["2", "1", "3", "0"], answer: 1, explanation: "The pairs are OL — 1 in all." },
+  ],
+};
+
+export default test;

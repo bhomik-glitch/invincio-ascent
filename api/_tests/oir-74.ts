@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-74",
+  title: "OIR Test 74",
+  durationMinutes: 20,
+  releaseAt: "2026-12-13T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 121, 169, 289, 361, 529, ?", options: ["900", "625", "843", "841"], answer: 3, explanation: "Here the terms are the squares of consecutive prime numbers. Next: 29² = 841." },
+    { q: "Find the next number: 4, 11, 43, 214, 1283, ?", options: ["10264", "8981", "7697", "8980"], answer: 3, explanation: "Here the multipliers increase by one each step (×3, ×4, ×5, …), then subtract 1. Next: 1283 × 7 − 1 = 8980." },
+    { q: "Find the next number: 64, 125, 216, 343, 512, ?", options: ["728", "729", "1000", "730"], answer: 1, explanation: "Here the terms are the cubes of consecutive numbers. Next: 9³ = 729." },
+    { q: "Find the missing number: 12960, 2160, ?, 60, 10", options: ["1110", "361", "1860", "360"], answer: 3, explanation: "Here each term is the previous term divided by 6, so the missing term is 360." },
+    { q: "Find the next letter: E, F, J, K, O, ?", options: ["O", "P", "Q", "R"], answer: 1, explanation: "By alphabet positions (5, 6, 10, 11, 15), the letters move alternately +1 and +4: O(15) + 1 = P(16)." },
+    { q: "Find the next term: F6, J10, N14, R18, ?", options: ["V5", "W23", "V22", "V23"], answer: 2, explanation: "The letters move 4 forward each time, and each number is the letter's position in the alphabet: V → 22." },
+    { q: "Helmet : Head :: Goggles : ?", options: ["Nose", "Eyes", "Ears", "Face"], answer: 1, explanation: "A helmet protects the head; goggles protect the eyes." },
+    { q: "9 : 738 :: 7 : ?", options: ["50", "344", "350", "336"], answer: 2, explanation: "9 → 9³ + 9 = 738; likewise 7 → 7³ + 7 = 350." },
+    { q: "Amartya Sen : Economics :: Rabindranath Tagore : ?", options: ["Literature", "Physics", "Medicine", "Peace"], answer: 0, explanation: "Amartya Sen won the Nobel in Economics; Tagore won it in Literature." },
+    { q: "Which one does not belong with the others?", options: ["Paris", "Sydney", "London", "Tokyo"], answer: 1, explanation: "Sydney is not a national capital; the others are." },
+    { q: "Which number does not belong with the others?", options: ["253", "146", "145", "361"], answer: 1, explanation: "The digits of 361, 145, 253 each add up to 10; the digits of 146 add up to 11." },
+    { q: "Choose the one word for: \"One who loves his or her country\"", options: ["Patriot", "Pilgrim", "Emigrant", "Traitor"], answer: 0, explanation: "Patriot: one who loves his or her country." },
+    { q: "If CITY is coded as DHUX, how is STORM coded?", options: ["TSPQN", "TTPQN", "TSPQM", "TVRVR"], answer: 0, explanation: "In this code letters are moved alternately one place forward and one place back, so STORM becomes TSPQN." },
+    { q: "In a code language, 'young players fly' is written as 'ho ze da', 'brave players' is written as 've ho' and 'fly fast' is written as 'ze ma'. What is the code for 'fly'?", options: ["ze", "da", "ma", "ve"], answer: 0, explanation: "'players' is common to the first two sentences, so players = ho; 'fly' is common to the first and third, so fly = ze." },
+    { q: "If A = 1, B = 2, …, Z = 26 and TROPHY = 102 (the sum of its letter values), what is MARBLE?", options: ["52", "64", "111", "51"], answer: 3, explanation: "MARBLE = 13 + 1 + 18 + 2 + 12 + 5 = 51." },
+    { q: "Tanya is the sister of Uma. Uma is the wife of Vikas. Vikas and Uma have a son, Waman. How is Tanya related to Waman?", options: ["Maternal aunt", "Grandmother", "Mother", "Paternal aunt"], answer: 0, explanation: "Tanya is the sister of Waman's mother Uma, so she is his maternal aunt." },
+    { q: "Pointing to a man, Kabir said, \"His only sister is my mother's mother.\" How is the man related to Kabir?", options: ["Uncle", "Grand-uncle", "Cousin", "Grandfather"], answer: 1, explanation: "The man is the brother of Kabir's maternal grandmother, so he is Kabir's grand-uncle." },
+    { q: "Starting from his house, Arjun walks 150 m towards the north, turns left and walks 25 m, turns right and walks 35 m, finally turns right and walks 125 m. In which direction is he now from his house?", options: ["South-East", "South-West", "North-West", "North-East"], answer: 3, explanation: "He ends up 100 m east and 185 m north of his house, so he is to the North-East of his house." },
+    { q: "If West is called South, and all other directions are renamed in the same way, what will North be called?", options: ["South", "East", "North", "West"], answer: 3, explanation: "West → South is a rotation of 270° clockwise; rotating North by the same amount gives West." },
+    { q: "In a class of 48 students, Deepak ranks 17th from the top. What is his rank from the bottom?", options: ["33rd", "31st", "34th", "32nd"], answer: 3, explanation: "Rank from bottom = 48 − 17 + 1 = 32." },
+    { q: "Sita is shorter than Tarun. Chetan is shorter than Sita. Ravi is taller than Om. Tarun is shorter than Om. Who is the shortest?", options: ["Ravi", "Chetan", "Tarun", "Om"], answer: 1, explanation: "The order from tallest to shortest is Ravi > Om > Tarun > Sita > Chetan, so the shortest is Chetan." },
+    { q: "A can complete a piece of work in 45 days and B in 90 days. Working together, in how many days will they complete it?", options: ["45", "31", "67.5", "30"], answer: 3, explanation: "Together they do 1/45 + 1/90 = 135/4050 = 1/30 of the work per day, so they need 30 days." },
+    { q: "A bag contains an equal number of ₹5, ₹10 and ₹20 coins worth ₹700 in all. How many of each are there?", options: ["35", "20", "19", "60"], answer: 1, explanation: "Each set of one of each is worth ₹35; 700/35 = 20." },
+    { q: "What is the angle between the hands of a clock at 10:55?", options: ["17.5°", "30°", "2.5°", "32.5°"], answer: 2, explanation: "Angle = |30 × 10 − 5.5 × 55| = 2.5°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "How many days are there from 22 April 2030 to 11 May 2030, both days included?", options: ["19", "21", "10", "20"], answer: 3, explanation: "Counting the days in each month from 22 April 2030 to 11 May 2030 inclusive gives 20." },
+    { q: "Statements: All pens are shirts. Some pens are rings. Conclusions: I. Some shirts are rings. II. Some rings are not shirts.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "The pens that are rings are also shirts, so some shirts are rings (I); all rings might be shirts, so II is uncertain." },
+    { q: "Statement: The bridge can carry a maximum load of 20 tonnes. Conclusions: I. A 25-tonne truck should not cross the bridge. II. A 15-tonne truck is within the bridge's load limit.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "25 t exceeds the limit (I) and 15 t is within it (II)." },
+    { q: "A wooden block measuring 6 cm × 4 cm × 4 cm is painted on all faces and cut into 1 cm cubes. How many cubes have exactly one face painted?", options: ["40", "16", "32", "8"], answer: 0, explanation: "Cubes with exactly one face painted: 2[(4)(2) + (2)(2) + (4)(2)] = 40." },
+    { q: "How many letters are there between K and Y in the English alphabet?", options: ["14", "13", "12", "15"], answer: 1, explanation: "K is 11 and Y is 25; the letters strictly between them number 25 − 11 − 1 = 13." },
+    { q: "If the letters of the word CORPORAL are arranged in alphabetical order, how many letters remain in the same position?", options: ["2", "0", "1", "3"], answer: 2, explanation: "Alphabetical order: ACLOOPRR. Comparing with CORPORAL, 1 letter (O) stays in place." },
+  ],
+};
+
+export default test;

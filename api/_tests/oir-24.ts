@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-24",
+  title: "OIR Test 24",
+  durationMinutes: 20,
+  releaseAt: "2026-10-04T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 137, 130, 120, 107, 91, ?", options: ["71", "75", "72", "69"], answer: 2, explanation: "Here the differences subtracted are 7, 10, 13, 16, 19 — each 3 more than the last. Next: 91 − 19 = 72." },
+    { q: "Find the next number: 2, 2, 4, 6, 10, 16, 26, ?", options: ["42", "52", "43", "36"], answer: 0, explanation: "Here each term is the sum of the previous two terms. Next: 16 + 26 = 42." },
+    { q: "Find the next number: 18, 45, 21, 43, 24, 41, 27, ?", options: ["39", "37", "41", "30"], answer: 0, explanation: "Here two series alternate: 18, 21, 24, … (+3) and 45, 43, 41, … (-2). Next: 41 − 2 = 39." },
+    { q: "Find the missing number: 18, 23, 38, 83, ?, 623", options: ["218", "488", "353", "216"], answer: 0, explanation: "Here the differences 5, 15, 45, 135, 405 are each 3 times the previous difference, so the missing term is 218." },
+    { q: "Find the next letter: A, E, K, O, U, ?", options: ["W", "Y", "X", "Z"], answer: 1, explanation: "By alphabet positions (1, 5, 11, 15, 21), the letters move alternately +4 and +6: U(21) + 4 = Y(25)." },
+    { q: "Find the next pair: OA, QD, SG, UJ, ?", options: ["WN", "VL", "WM", "XM"], answer: 2, explanation: "The first letters move 2 forward each time and the second letters move 3 forward: next is WM." },
+    { q: "Water : Thirst :: Food : ?", options: ["Hunger", "Health", "Taste", "Energy"], answer: 0, explanation: "Water satisfies thirst; food satisfies hunger." },
+    { q: "7 : 344 :: 10 : ?", options: ["99", "1001", "103", "90"], answer: 1, explanation: "7 → 7³ + 1 = 344; likewise 10 → 10³ + 1 = 1001." },
+    { q: "Tejas : Fighter aircraft :: Dhruv : ?", options: ["Submarine", "Helicopter", "Missile", "Tank"], answer: 1, explanation: "Tejas is a light combat aircraft; Dhruv is an advanced light helicopter." },
+    { q: "Which one does not belong with the others?", options: ["Godavari", "Ganga", "Chilika", "Yamuna"], answer: 2, explanation: "Chilika is a lake; the others are rivers." },
+    { q: "Which number does not belong with the others?", options: ["19", "21", "113", "67"], answer: 1, explanation: "21 = 3 × 7 is not prime; the others are prime numbers." },
+    { q: "Choose the word most similar in meaning to EMINENT.", options: ["Wealthy", "Tall", "Distinguished", "Unknown"], answer: 2, explanation: "Eminent means distinguished." },
+    { q: "If CARPET is written as 3-1-18-16-5-20, how is CADET written in the same code?", options: ["24-26-23-22-7", "3-1-4-5-20", "3-2-4-5-20", "3-1-4-6-20"], answer: 1, explanation: "Each letter is replaced by its position in the alphabet (A = 1, …, Z = 26), so CADET → 3-1-4-5-20." },
+    { q: "In a code language, 'quick girls win' is written as 'ne su si', 'tall girls' is written as 'ne ho' and 'win quietly' is written as 'po su'. What is the code for 'quick'?", options: ["si", "po", "ho", "su"], answer: 0, explanation: "'girls' is common to the first two sentences, so girls = ne; 'win' is common to the first and third, so win = su. The remaining code in the first sentence, si, means 'quick'." },
+    { q: "If A = 1, B = 2, …, Z = 26 and PAINTER = 83 (the sum of its letter values), what is SCHOOL?", options: ["72", "70", "91", "90"], answer: 0, explanation: "SCHOOL = 19 + 3 + 8 + 15 + 15 + 12 = 72." },
+    { q: "F is the sister of G. H is the husband of F. I is the son of H and F. How is G related to I?", options: ["Cousin", "Uncle", "Aunt", "Uncle or aunt"], answer: 3, explanation: "G is the sibling of I's mother F; G's gender is not given." },
+    { q: "Pointing to a woman, Deepak said, \"Her son's father is my father's only son-in-law.\" How is the woman related to Deepak?", options: ["Cousin", "Mother", "Wife", "Sister"], answer: 3, explanation: "The only son-in-law of Deepak's father is Deepak's sister's husband; the woman is his wife — Deepak's sister." },
+    { q: "Starting from his house, Aman walks 110 m towards the west, turns right and walks 135 m, turns left and walks 145 m, finally turns right and walks 100 m. In which direction is he now from his house?", options: ["North-West", "North-East", "South-West", "South-East"], answer: 0, explanation: "He ends up 255 m west and 235 m north of his house, so he is to the North-West of his house." },
+    { q: "A man is facing East. He turns 135° anticlockwise, then 45° clockwise, then 45° clockwise. Which direction is he facing now?", options: ["North-West", "South-West", "North-East", "South-East"], answer: 2, explanation: "The net turn is 45° anticlockwise from East, so he faces North-East." },
+    { q: "In a row of 34 students, Nikhil is 15th from the left end and Sanjay is 9th from the right end. How many students are there between them?", options: ["20", "12", "10", "11"], answer: 2, explanation: "Nikhil and Sanjay with everyone to their outer sides account for 15 + 9 = 24 students, so 34 − 24 = 10 are between them." },
+    { q: "Manoj is poorer than Dinesh. Esha is poorer than Pooja. Pooja is poorer than Manoj. Om is poorer than Esha. Who is the second richest?", options: ["Esha", "Pooja", "Dinesh", "Manoj"], answer: 3, explanation: "The order from richest to poorest is Dinesh > Manoj > Pooja > Esha > Om, so the second richest is Manoj." },
+    { q: "A boat goes 19 km downstream in 1 hour and 9 km upstream in 1 hour. What is the speed of the stream?", options: ["6 km/h", "5 km/h", "10 km/h", "14 km/h"], answer: 1, explanation: "Boat speed = (19 + 9)/2 = 14 km/h; stream speed = (19 − 9)/2 = 5 km/h." },
+    { q: "15% of a number is 33. What is 20% of the same number?", options: ["42", "66", "44", "77"], answer: 2, explanation: "The number is 33 × 100/15 = 220, and 20% of 220 = 44." },
+    { q: "At what time between 8 and 9 o'clock are the hands of a clock together?", options: ["8:43 10/11", "8:43 7/11", "8:42 1/11", "8:44 7/11"], answer: 1, explanation: "The minute hand gains 11/2° per minute. It must gain 240° on the hour hand, which takes 480/11 = 43 7/11 minutes past 8." },
+    { q: "If today is Friday, what day of the week will it be 362 days from today?", options: ["Thursday", "Tuesday", "Friday", "Wednesday"], answer: 3, explanation: "362 = 7 × 51 + 5; 5 days after Friday is Wednesday." },
+    { q: "Statements: All cadets are cars. Some cars are rings. Conclusions: I. Some cadets are rings. II. Some rings are cars.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "Some cars are rings, so some rings are cars (II); the cars that are rings need not include any cadets, so I is uncertain." },
+    { q: "Statement: A candidate going to the SSB was advised, \"Be yourself during the interview.\" Assumptions: I. Pretending may be detected in the interview. II. The candidate is naturally shy.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0, explanation: "The advice assumes pretence can be spotted (I); nothing is said about shyness." },
+    { q: "How many cubes of side 4 cm can be cut from a solid cube of side 16 cm?", options: ["1024", "16", "64", "12"], answer: 2, explanation: "(16/4)³ = 4³ = 64." },
+    { q: "If the English alphabet is written in reverse order (Z to A), which letter will be 3rd to the right of the 18th letter from the left?", options: ["F", "G", "E", "U"], answer: 0, explanation: "In the reversed alphabet the 21st letter from the left is F (position n holds letter 27 − n)." },
+    { q: "If the following words are arranged in dictionary order, which word comes second? Eagle, Education, Eraser, Engine", options: ["Eraser", "Engine", "Education", "Eagle"], answer: 2, explanation: "In dictionary order: Eagle, Education, Engine, Eraser." },
+  ],
+};
+
+export default test;

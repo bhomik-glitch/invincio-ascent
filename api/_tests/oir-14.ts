@@ -1,0 +1,41 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-14",
+  title: "OIR Test 14",
+  durationMinutes: 20,
+  questions: [
+    { q: "Find the next number: 2, 15, 14, 27, 26, 39, ?", options: ["36", "52", "38", "39"], answer: 2, explanation: "Here the operations alternate: + 13, − 1, + 13, − 1 and so on. Next: 39 − 1 = 38." },
+    { q: "Find the next number: 11, 54, 17, 51, 23, 48, 29, ?", options: ["45", "35", "48", "42"], answer: 0, explanation: "Here two series alternate: 11, 17, 23, … (+6) and 54, 51, 48, … (-3). Next: 48 − 3 = 45." },
+    { q: "Find the next number: 27, 29, 33, 39, 47, ?", options: ["59", "55", "57", "47"], answer: 2, explanation: "Here the differences added are 2, 4, 6, 8, 10 — each 2 more than the last. Next: 47 + 10 = 57." },
+    { q: "Find the missing number: 1, 6, 28, 145, ?, 6139", options: ["5408", "879", "876", "3142"], answer: 2, explanation: "Here the multipliers increase by one each step (×3, ×4, ×5, …), then add the same number (×3 + 3, ×4 + 4, …), so the missing term is 876." },
+    { q: "Find the next letter: F, G, I, L, P, ?", options: ["V", "U", "T", "W"], answer: 1, explanation: "By alphabet positions (6, 7, 9, 12, 16), the gaps grow by one each time (+1, 2, 3, 4, …): P(16) + 5 = U(21)." },
+    { q: "Find the next pair: SJ, TM, UP, VS, ?", options: ["WV", "VU", "WW", "XV"], answer: 0, explanation: "The first letters move 1 forward each time and the second letters move 3 forward: next is WV." },
+    { q: "Pig : Sty :: Dog : ?", options: ["Stable", "Hive", "Burrow", "Kennel"], answer: 3, explanation: "A pig is kept in a sty; a dog is kept in a kennel." },
+    { q: "11 : 132 :: 8 : ?", options: ["504", "64", "63", "72"], answer: 3, explanation: "11 → 11² + 11 = 132; likewise 8 → 8² + 8 = 72." },
+    { q: "Brigadier (Army) : Commodore (Navy) :: Lieutenant Colonel (Army) : ?", options: ["Commodore", "Captain", "Commander", "Lieutenant Commander"], answer: 2, explanation: "A Brigadier equals a Commodore; a Lieutenant Colonel equals a Commander in the Navy." },
+    { q: "Which one does not belong with the others?", options: ["Rohu", "Salmon", "Shark", "Whale"], answer: 3, explanation: "The whale is a mammal; the others are fish." },
+    { q: "Which pair does not belong with the others?", options: ["6 – 48", "4 – 24", "8 – 80", "9 – 81"], answer: 3, explanation: "In the other pairs the second number is n × (n + 2), where n is the first (e.g. 8 × 10 = 80); but 9 × 11 = 99, not 81." },
+    { q: "Choose the word most similar in meaning to DILIGENT.", options: ["Careless", "Honest", "Slow", "Hardworking"], answer: 3, explanation: "Diligent means hardworking." },
+    { q: "If KABADDI is coded as IDDABAK, how is KNIGHT coded?", options: ["THGIML", "THGHNK", "WKJLQN", "THGINK"], answer: 3, explanation: "In this code the letters are written in reverse order, so KNIGHT becomes THGINK." },
+    { q: "In a code language, 'quick sailors swim' is written as 'tu da fe', 'young sailors' is written as 'ki fe' and 'swim well' is written as 'bu da'. What is the code for 'well'?", options: ["bu", "da", "fe", "ki"], answer: 0, explanation: "'sailors' is common to the first two sentences, so sailors = fe; 'swim' is common to the first and third, so swim = da. The other code in the third sentence, bu, means 'well'." },
+    { q: "If A = 26, B = 25, …, Z = 1 and BREAD = 105 (the sum of its letter values), what is COMPASS?", options: ["86", "103", "102", "127"], answer: 1, explanation: "COMPASS = 24 + 12 + 14 + 11 + 26 + 8 + 8 = 103." },
+    { q: "M is the mother of N. N is the wife of O. How is O related to M?", options: ["Brother", "Son-in-law", "Son", "Nephew"], answer: 1, explanation: "O is married to M's daughter N, so O is M's son-in-law." },
+    { q: "Pointing to a man, Neha said, \"He is the brother of my father's only daughter.\" How is the man related to Neha?", options: ["Father", "Uncle", "Brother", "Cousin"], answer: 2, explanation: "Neha is her father's only daughter, so the man is Neha's brother." },
+    { q: "Starting from his house, Ajay walks 145 m towards the east, turns right and walks 60 m, finally turns left and walks 20 m. In which direction is he now from his house?", options: ["North-East", "North-West", "South-East", "South-West"], answer: 2, explanation: "He ends up 165 m east and 60 m south of his house, so he is to the South-East of his house." },
+    { q: "A man is facing South-East. He turns 135° anticlockwise, then 90° clockwise. Which direction is he facing now?", options: ["North", "East", "West", "South"], answer: 1, explanation: "The net turn is 45° anticlockwise from South-East, so he faces East." },
+    { q: "In a row of 37 students, Deepak is 6th from the left end and Karan is 5th from the right end. How many students are there between them?", options: ["27", "28", "36", "26"], answer: 3, explanation: "Deepak and Karan with everyone to their outer sides account for 6 + 5 = 11 students, so 37 − 11 = 26 are between them." },
+    { q: "Chetan is taller than Om. Om is taller than Lata. Hari is shorter than Nisha. Hari is taller than Chetan. Who is in the middle (third)?", options: ["Hari", "Nisha", "Chetan", "Om"], answer: 2, explanation: "The order from tallest to shortest is Nisha > Hari > Chetan > Om > Lata, so in the middle (third) is Chetan." },
+    { q: "A bag contains an equal number of ₹1, ₹5 and ₹10 coins worth ₹320 in all. How many of each are there?", options: ["20", "60", "21", "32"], answer: 0, explanation: "Each set of one of each is worth ₹16; 320/16 = 20." },
+    { q: "A number is multiplied by 4, then 2 is added, and the result is multiplied by 3. The final answer is 246. What was the number?", options: ["22", "19", "30", "20"], answer: 3, explanation: "Working backwards: 246 ÷ 3 = 82; − 2 = 80; ÷ 4 = 20." },
+    { q: "Through how many degrees does the hour hand of a clock turn from 2:20 to 7:20?", options: ["150°", "0°", "180°", "165°"], answer: 0, explanation: "The hour hand turns 0.5° per minute; 300 minutes × 0.5° = 150°." },
+    { q: "Which year will have exactly the same calendar as 2048?", options: ["2077", "2052", "2075", "2076"], answer: 3, explanation: "A year has the same calendar when it starts on the same weekday and is also a leap year. Counting odd days (1 per ordinary year, 2 per leap year) from 2048 until they total a multiple of 7 gives 2076." },
+    { q: "Statements: All watches are shirts. No writer is a shirt. Conclusions: I. No watch is a writer. II. All writers are watches.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "All watches are shirts and no a writer is a shirt, so no a watch is a writer (I); II contradicts this." },
+    { q: "Statement: The school has decided to hold classes on Saturdays to complete the syllabus. Assumptions: I. The syllabus cannot be completed in the regular schedule. II. Students and teachers will attend on Saturdays.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 2, explanation: "Extra classes assume the normal schedule is insufficient (I) and that people will actually attend (II)." },
+    { q: "A wooden block measuring 7 cm × 4 cm × 3 cm is painted on all faces and cut into 1 cm cubes. How many cubes have exactly one face painted?", options: ["8", "10", "32", "34"], answer: 3, explanation: "Cubes with exactly one face painted: 2[(5)(2) + (2)(1) + (5)(1)] = 34." },
+    { q: "How many letters are there between I and M in the English alphabet?", options: ["3", "13", "4", "5"], answer: 0, explanation: "I is 9 and M is 13; the letters strictly between them number 13 − 9 − 1 = 3." },
+    { q: "How many pairs of letters in the word BATTALION have as many letters between them in the word as there are between them in the English alphabet (in either direction)?", options: ["5", "6", "4", "7"], answer: 2, explanation: "The pairs are BA, TO, TN, ON — 4 in all." },
+  ],
+};
+
+export default test;

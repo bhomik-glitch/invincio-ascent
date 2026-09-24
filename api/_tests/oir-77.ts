@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-77",
+  title: "OIR Test 77",
+  durationMinutes: 20,
+  releaseAt: "2026-12-20T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 6, 24, 96, 384, ?", options: ["1530", "1920", "1536", "1546"], answer: 2, explanation: "Here each term is 4 times the previous term. Next: 384 × 4 = 1536." },
+    { q: "Find the next number: 3, 7, 19, 55, ?", options: ["166", "163", "167", "165"], answer: 1, explanation: "Here each term is 3 times the previous term minus 2. Next: 55 × 3 − 2 = 163." },
+    { q: "Find the next number: 2, 10, 30, 68, 130, ?", options: ["222", "350", "221", "223"], answer: 0, explanation: "Here the terms are n³ + n for consecutive n. Next: 6³ + 6 = 222." },
+    { q: "Find the missing number: 4, 8, 24, 96, ?, 2880", options: ["480", "2496", "1488", "482"], answer: 0, explanation: "Here the multipliers increase by one each step (×2, ×3, ×4, …), so the missing term is 480." },
+    { q: "Find the next letter: Y, U, Q, M, I, ?", options: ["D", "G", "E", "F"], answer: 2, explanation: "By alphabet positions (25, 21, 17, 13, 9), each letter is 4 places before the previous one: I(9) − 4 = E(5)." },
+    { q: "Find the next pair: IN, MM, QL, UK, ?", options: ["YI", "XI", "YJ", "ZJ"], answer: 2, explanation: "The first letters move 4 forward each time and the second letters move 1 back: next is YJ." },
+    { q: "Mercury : Liquid :: Oxygen : ?", options: ["Solid", "Metal", "Plasma", "Gas"], answer: 3, explanation: "At room temperature mercury is a liquid and oxygen is a gas." },
+    { q: "12 : 288 :: 11 : ?", options: ["143", "121", "1331", "242"], answer: 3, explanation: "12 → 2 × 12² = 288; likewise 11 → 2 × 11² = 242." },
+    { q: "Kalhana : Rajatarangini :: Bharata Muni : ?", options: ["Arthashastra", "Panchatantra", "Natyashastra", "Ashtadhyayi"], answer: 2, explanation: "Kalhana wrote the Rajatarangini; Bharata Muni wrote the Natyashastra." },
+    { q: "Which one does not belong with the others?", options: ["Shivaji", "Humayun", "Akbar", "Babur"], answer: 0, explanation: "Shivaji was a Maratha ruler; the others were Mughal emperors." },
+    { q: "Which number does not belong with the others?", options: ["43", "51", "83", "47"], answer: 1, explanation: "51 = 3 × 17 is not prime; the others are prime numbers." },
+    { q: "Choose the one word for: \"A place where arms and ammunition are stored\"", options: ["Hangar", "Arsenal", "Barracks", "Granary"], answer: 1, explanation: "Arsenal: a place where arms and ammunition are stored." },
+    { q: "If LAWYER is coded as REYWAL, how is CLOUD coded?", options: ["CTNKB", "DUOLB", "DUOLC", "DUOLD"], answer: 2, explanation: "In this code the letters are written in reverse order, so CLOUD becomes DUOLC." },
+    { q: "In a code language, 'bold boys study' is written as 'ga zo ka', 'strong boys' is written as 'si ka' and 'study together' is written as 'zo ri'. Which word is coded as 'ka'?", options: ["bold", "study", "strong", "boys"], answer: 3, explanation: "'boys' is common to the first two sentences, so boys = ka; 'study' is common to the first and third, so study = zo." },
+    { q: "If '−' means '+', '×' means '−', '÷' means '×' and '+' means '÷', what is the value of 20 ÷ 3 − 40 + 8 × 12?", options: ["53", "29", "65", "54"], answer: 0, explanation: "Replacing the symbols gives 20 × 3 + 40 ÷ 8 − 12; following BODMAS, this equals 53." },
+    { q: "Laxmi is the mother of Mukesh and Neelam. Neelam's son is Omprakash. How is Mukesh related to Omprakash?", options: ["Grandfather", "Maternal uncle", "Father", "Cousin"], answer: 1, explanation: "Mukesh is the brother of Omprakash's mother Neelam, so he is his maternal uncle." },
+    { q: "Pointing to a boy, Mansi said, \"He is the grandson of my mother's only son-in-law. I am my mother's only daughter.\" How is the boy related to Mansi?", options: ["Grand-nephew", "Grandson", "Son", "Nephew"], answer: 1, explanation: "Her mother's only son-in-law is Mansi's husband, so his grandson is also Mansi's grandson." },
+    { q: "Starting from his house, Yash walks 11 km towards the east, turns right and walks 8 km, finally turns left and walks 3 km. In which direction is he now from his house?", options: ["South-West", "North-East", "South-East", "North-West"], answer: 2, explanation: "He ends up 14 km east and 8 km south of his house, so he is to the South-East of his house." },
+    { q: "One evening, just before sunset, Kabir was standing in a field. His shadow fell exactly to his left. Which direction was he facing?", options: ["South", "North", "West", "East"], answer: 0, explanation: "In the evening the sun is in the west, so shadows fall to the east. With the shadow (East) on his left, he must be facing South." },
+    { q: "In a row of 42 students, Karan is 19th from the left end and Aman is 17th from the right end. How many students are there between them?", options: ["5", "6", "7", "8"], answer: 1, explanation: "Karan and Aman with everyone to their outer sides account for 19 + 17 = 36 students, so 42 − 36 = 6 are between them." },
+    { q: "Bina is lighter than Kiran. Bina is heavier than Pooja. Gita is heavier than Kiran. Who is the heaviest?", options: ["Kiran", "Bina", "Gita", "Pooja"], answer: 2, explanation: "The order from heaviest to lightest is Gita > Kiran > Bina > Pooja, so the heaviest is Gita." },
+    { q: "At a meeting, each of the 8 officers shakes hands exactly once with every other officer. How many handshakes take place?", options: ["28", "36", "64", "56"], answer: 0, explanation: "Handshakes = n(n − 1)/2 = 8 × 7/2 = 28." },
+    { q: "The sum of the present ages of a father and his son is 88 years. 4 years ago, the father was 4 times as old as the son. What is the son's present age?", options: ["24 years", "18 years", "20 years", "22 years"], answer: 2, explanation: "Let the son be x: (88 − x − 4) = 4(x − 4) gives x = 20; the father is 68." },
+    { q: "In a mirror, a clock appears to show 1:31. What is the actual time?", options: ["11:29", "10:59", "10:29", "11:31"], answer: 2, explanation: "Actual time = 11:60 − 1:31 = 10:29." },
+    { q: "15 October 2026 is a Thursday. What day of the week is 8 April 2026?", options: ["Friday", "Thursday", "Wednesday", "Tuesday"], answer: 2, explanation: "8 April 2026 is 190 days before 15 October 2026. 190 = 7 × 27 + 1, so the day shifts 1 back: Wednesday." },
+    { q: "Statements: All swimmers are lamps. No lamp is a sailor. Conclusions: I. No sailor is a swimmer. II. Some lamps are not sailors.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "No a swimmer is a sailor, so equally no a sailor is a swimmer (I); and since no a lamp is a sailor, the lamps are certainly not sailors (II)." },
+    { q: "Statement: Tea is grown on hill slopes where rainfall is heavy but water does not collect. Conclusions: I. Tea plants need plenty of rain. II. Standing water is bad for tea plants.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "Heavy rainfall is needed (I), and slopes are chosen so water does not stand (II)." },
+    { q: "A cube of side 6 cm is painted on two opposite faces only and then cut into 1 cm cubes. How many small cubes have no paint on them?", options: ["144", "72", "36", "96"], answer: 0, explanation: "The two opposite faces each have 36 cubes with exactly one painted face (72 in all), and the remaining 6³ − 72 = 144 cubes have no paint." },
+    { q: "How many letters are there between C and M in the English alphabet?", options: ["9", "12", "11", "10"], answer: 0, explanation: "C is 3 and M is 13; the letters strictly between them number 13 − 3 − 1 = 9." },
+    { q: "If the letters of the word HORIZON are arranged in alphabetical order, how many letters remain in the same position?", options: ["1", "2", "4", "3"], answer: 0, explanation: "Alphabetical order: HINOORZ. Comparing with HORIZON, 1 letter (H) stays in place." },
+  ],
+};
+
+export default test;

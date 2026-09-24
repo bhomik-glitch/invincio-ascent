@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-23",
+  title: "OIR Test 23",
+  durationMinutes: 20,
+  releaseAt: "2026-10-04T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 14, 36, 22, 30, 30, 24, 38, ?", options: ["24", "18", "46", "12"], answer: 1, explanation: "Here two series alternate: 14, 22, 30, … (+8) and 36, 30, 24, … (-6). Next: 24 − 6 = 18." },
+    { q: "Find the next number: 47, 59, 63, 75, 83, ?", options: ["90", "87", "85", "89"], answer: 1, explanation: "Here the terms are 2p + 1 for consecutive primes p. Next: 2 × 43 + 1 = 87." },
+    { q: "Find the next number: 65, 82, 101, 122, 145, ?", options: ["171", "197", "170", "169"], answer: 2, explanation: "Here the terms are n² + 1 for consecutive n. Next: 13² + 1 = 170." },
+    { q: "Find the missing number: 27, 34, ?, 54, 67, 82", options: ["43", "45", "44", "46"], answer: 0, explanation: "Here the differences added are 7, 9, 11, 13, 15 — each 2 more than the last, so the missing term is 43." },
+    { q: "Find the next letter: W, S, O, K, G, ?", options: ["E", "C", "B", "D"], answer: 1, explanation: "By alphabet positions (23, 19, 15, 11, 7), each letter is 4 places before the previous one: G(7) − 4 = C(3)." },
+    { q: "Find the next term: N13, Q10, T7, W4, ?", options: ["Z1", "Z26", "Z2", "Y1"], answer: 0, explanation: "The letters move 3 forward each time, and each number is the letter's position in the reversed alphabet (A = 26 … Z = 1): Z → 1." },
+    { q: "Cobbler : Shoes :: Potter : ?", options: ["Jewellery", "Pots", "Clothes", "Furniture"], answer: 1, explanation: "A cobbler makes shoes; a potter makes pots." },
+    { q: "3 : 16 :: 8 : ?", options: ["72", "81", "128", "520"], answer: 1, explanation: "3 → (3 + 1)² = 16; likewise 8 → (8 + 1)² = 81." },
+    { q: "Arjun : Tank :: INSAS : ?", options: ["Missile", "Aircraft", "Submarine", "Rifle"], answer: 3, explanation: "Arjun is a main battle tank; INSAS is a rifle." },
+    { q: "Which one does not belong with the others?", options: ["Lucknow", "Patna", "Bhopal", "Indore"], answer: 3, explanation: "Indore is not a state capital; the others are." },
+    { q: "Which number does not belong with the others?", options: ["100", "400", "359", "361"], answer: 2, explanation: "400 = 20², 361 = 19², 100 = 10² are perfect squares; 359 is not." },
+    { q: "Choose the word most similar in meaning to DEFER.", options: ["Postpone", "Refuse", "Cancel", "Hasten"], answer: 0, explanation: "Defer means postpone." },
+    { q: "If LETTER is coded as MGWXJX, how is MOTOR coded?", options: ["NQWSW", "OQWSW", "NQWRW", "NLGLI"], answer: 0, explanation: "In this code the 1st letter moves 1 place forward, the 2nd moves 2, the 3rd moves 3, and so on, so MOTOR becomes NQWSW." },
+    { q: "In a code language, 'loyal soldiers fly' is written as 'tu si su', 'tall soldiers' is written as 'da tu' and 'fly hard' is written as 'mu su'. What is the code for 'loyal'?", options: ["da", "mu", "su", "si"], answer: 3, explanation: "'soldiers' is common to the first two sentences, so soldiers = tu; 'fly' is common to the first and third, so fly = su. The remaining code in the first sentence, si, means 'loyal'." },
+    { q: "If '−' means '+', '÷' means '−', '+' means '×' and '×' means '÷', what is the value of 19 + 3 ÷ 32 × 4 − 5?", options: ["54", "44", "59", "52"], answer: 0, explanation: "Replacing the symbols gives 19 × 3 − 32 ÷ 4 + 5; following BODMAS, this equals 54." },
+    { q: "M is the father of N. O is the wife of M. P is the mother of O. How is P related to N?", options: ["Aunt", "Sister", "Mother", "Grandmother"], answer: 3, explanation: "O is N's mother, and P is O's mother, so P is N's (maternal) grandmother." },
+    { q: "Pointing to a girl, Harish said, \"She is the daughter of the only child of my grandmother.\" How is the girl related to Harish?", options: ["Niece", "Daughter", "Sister", "Cousin"], answer: 2, explanation: "The only child of Harish's grandmother is Harish's parent; that parent's daughter is Harish's sister." },
+    { q: "Starting from his house, Deepak walks 90 m towards the west, turns right and walks 15 m, finally turns right and walks 150 m. In which direction is he now from his house?", options: ["North-West", "North-East", "South-East", "South-West"], answer: 1, explanation: "He ends up 60 m east and 15 m north of his house, so he is to the North-East of his house." },
+    { q: "A man is facing South. He turns 135° clockwise, then 45° clockwise, then 90° anticlockwise. Which direction is he facing now?", options: ["South", "East", "West", "North"], answer: 2, explanation: "The net turn is 90° clockwise from South, so he faces West." },
+    { q: "In a row of 30 children, Mohan is 8th from the left. Nikhil is 4th to the right of Mohan. What is Nikhil's position from the right end?", options: ["18th", "21st", "20th", "19th"], answer: 3, explanation: "Nikhil is 12th from the left, so from the right he is 30 − 12 + 1 = 19." },
+    { q: "Dinesh is slower than Ravi. Dinesh is faster than Hari. Lata is slower than Esha. Lata is faster than Ravi. Who is the slowest?", options: ["Esha", "Ravi", "Lata", "Hari"], answer: 3, explanation: "The order from fastest to slowest is Esha > Lata > Ravi > Dinesh > Hari, so the slowest is Hari." },
+    { q: "At a meeting, each of the 12 officers shakes hands exactly once with every other officer. How many handshakes take place?", options: ["66", "132", "144", "78"], answer: 0, explanation: "Handshakes = n(n − 1)/2 = 12 × 11/2 = 66." },
+    { q: "10% of a number is 24. What is 50% of the same number?", options: ["144", "130", "121", "120"], answer: 3, explanation: "The number is 24 × 100/10 = 240, and 50% of 240 = 120." },
+    { q: "Through how many degrees does the hour hand of a clock turn from 2:30 to 9:10?", options: ["230°", "240°", "200°", "215°"], answer: 2, explanation: "The hour hand turns 0.5° per minute; 400 minutes × 0.5° = 200°." },
+    { q: "How many days are there from 8 September 2030 to 18 November 2030, both days included?", options: ["71", "73", "82", "72"], answer: 3, explanation: "Counting the days in each month from 8 September 2030 to 18 November 2030 inclusive gives 72." },
+    { q: "Statements: No soldier is a swimmer. All officers are soldiers. Conclusions: I. No officer is a swimmer. II. Some soldiers are officers.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "All officers are soldiers and no a soldier is a swimmer, so no an officer is a swimmer (I); all officers being soldiers means some soldiers are officers (II)." },
+    { q: "Statement: The city council has decided to widen the main road. Assumptions: I. The main road is congested. II. Widening the road will ease traffic.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 2, explanation: "The decision assumes there is a problem (I) and that widening will help (II)." },
+    { q: "A cube of side 3 cm is painted on two opposite faces only and then cut into 1 cm cubes. How many small cubes have exactly one painted face?", options: ["18", "21", "6", "9"], answer: 0, explanation: "The two opposite faces each have 9 cubes with exactly one painted face (18 in all), and the remaining 3³ − 18 = 9 cubes have no paint." },
+    { q: "How many letters are there between C and X in the English alphabet?", options: ["19", "20", "21", "22"], answer: 1, explanation: "C is 3 and X is 24; the letters strictly between them number 24 − 3 − 1 = 20." },
+    { q: "In the word STRATEGY, the 1st and 2nd letters are interchanged, the 3rd and 4th letters are interchanged, and so on. Which letter will be 3rd from the right end?", options: ["A", "Y", "T", "E"], answer: 2, explanation: "The new arrangement is TSARETYG; the 3rd letter from the right is T." },
+  ],
+};
+
+export default test;

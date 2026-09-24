@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-54",
+  title: "OIR Test 54",
+  durationMinutes: 20,
+  releaseAt: "2026-11-15T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 8, 8, 16, 48, 192, ?", options: ["960", "1152", "768", "961"], answer: 0, explanation: "Here the multipliers increase by one each step (×1, ×2, ×3, …). Next: 192 × 5 = 960." },
+    { q: "Find the next number: 11, 40, 20, 38, 29, 36, 38, ?", options: ["36", "47", "32", "34"], answer: 3, explanation: "Here two series alternate: 11, 20, 29, … (+9) and 40, 38, 36, … (-2). Next: 36 − 2 = 34." },
+    { q: "Find the next number: 81, 85, 93, 105, 117, ?", options: ["131", "123", "121", "120"], answer: 2, explanation: "Here the terms are 2p − 1 for consecutive primes p. Next: 2 × 61 − 1 = 121." },
+    { q: "Find the missing number: 9, 23, 51, ?, 219, 443", options: ["97", "163", "135", "107"], answer: 3, explanation: "Here each term is 2 times the previous term plus 5, so the missing term is 107." },
+    { q: "Find the next letter: D, E, I, J, N, ?", options: ["O", "P", "N", "Q"], answer: 0, explanation: "By alphabet positions (4, 5, 9, 10, 14), the letters move alternately +1 and +4: N(14) + 1 = O(15)." },
+    { q: "Find the next pair: LQ, NS, PU, RW, ?", options: ["TZ", "UY", "TY", "SX"], answer: 2, explanation: "The first letters move 2 forward each time and the second letters move 2 forward: next is TY." },
+    { q: "Virus : Disease :: Spark : ?", options: ["Light", "Smoke", "Heat", "Fire"], answer: 3, explanation: "A virus causes disease; a spark causes fire." },
+    { q: "10 : 103 :: 2 : ?", options: ["4", "7", "8", "9"], answer: 1, explanation: "10 → 10² + 3 = 103; likewise 2 → 2² + 3 = 7." },
+    { q: "USA : Dollar :: United Kingdom : ?", options: ["Krona", "Euro", "Pound sterling", "Franc"], answer: 2, explanation: "The USA uses the dollar; the UK uses the pound sterling." },
+    { q: "Which one does not belong with the others?", options: ["Tamil", "Devanagari", "Hindi", "Telugu"], answer: 1, explanation: "Devanagari is a script; the others are languages." },
+    { q: "Which number does not belong with the others?", options: ["51", "19", "13", "97"], answer: 0, explanation: "51 = 3 × 17 is not prime; the others are prime numbers." },
+    { q: "Choose the word most opposite in meaning to REJECT.", options: ["Deny", "Refuse", "Accept", "Discard"], answer: 2, explanation: "The opposite of reject is accept; the other options are similar in meaning or unrelated." },
+    { q: "If STREET is written as 8-7-9-22-22-7, how is NUMBER written in the same code?", options: ["13-6-15-25-22-9", "14-21-13-2-5-18", "13-6-14-25-22-9", "13-6-13-25-22-9"], answer: 2, explanation: "Each letter is replaced by its position in the reversed alphabet (A = 26, B = 25, …, Z = 1), so NUMBER → 13-6-14-25-22-9." },
+    { q: "In a code language, 'loyal players lead' is written as 'bu lo pi', 'bold players' is written as 'ne lo' and 'lead together' is written as 'pi li'. Which word is coded as 'pi'?", options: ["players", "loyal", "together", "lead"], answer: 3, explanation: "'players' is common to the first two sentences, so players = lo; 'lead' is common to the first and third, so lead = pi." },
+    { q: "If A = 1, B = 2, …, Z = 26 and BRIDGE = 45 (the sum of its letter values), what is THUNDER?", options: ["110", "93", "90", "99"], answer: 2, explanation: "THUNDER = 20 + 8 + 21 + 14 + 4 + 5 + 18 = 90." },
+    { q: "Meena is the daughter of Suresh. Suresh is the brother of Kavita. Kavita's son is Rohan. How is Rohan related to Meena?", options: ["Cousin", "Nephew", "Uncle", "Brother"], answer: 0, explanation: "Rohan's mother and Meena's father are siblings, so they are cousins." },
+    { q: "Pointing to a boy, Divya said, \"He is the only son of my father-in-law's only daughter-in-law.\" How is the boy related to Divya?", options: ["Son", "Brother", "Grandson", "Nephew"], answer: 0, explanation: "Her father-in-law's only daughter-in-law is Divya herself, so the boy is her son." },
+    { q: "Starting from his house, Karan walks 12 km towards the north, turns right and walks 7 km, turns right and walks 4 km, finally turns left and walks 6 km. In which direction is he now from his house?", options: ["North-East", "North-West", "South-West", "South-East"], answer: 0, explanation: "He ends up 13 km east and 8 km north of his house, so he is to the North-East of his house." },
+    { q: "A man is facing North-East. He turns 45° anticlockwise, then 90° anticlockwise, then 90° anticlockwise. Which direction is he facing now?", options: ["West", "South", "East", "North"], answer: 1, explanation: "The net turn is 135° clockwise from North-East, so he faces South." },
+    { q: "In a row, Yash is 6th from the left and Mohan is 19th from the right. When they interchange places, Yash becomes 18th from the left. How many people are in the row?", options: ["36", "37", "23", "46"], answer: 0, explanation: "After the swap Yash takes Mohan's old place, which is 18th from the left and 19th from the right, so total = 18 + 19 − 1 = 36." },
+    { q: "Farhan is faster than Chetan. Nisha is slower than Chetan. Uma is slower than Om. Uma is faster than Farhan. Who is the second slowest?", options: ["Chetan", "Om", "Uma", "Farhan"], answer: 0, explanation: "The order from fastest to slowest is Om > Uma > Farhan > Chetan > Nisha, so the second slowest is Chetan." },
+    { q: "A shopkeeper marks his goods 40% above the cost price and then gives a discount of 5%. What is his net profit or loss?", options: ["35% profit", "45% profit", "33% loss", "33% profit"], answer: 3, explanation: "On a cost of ₹100 the marked price is ₹140; after 5% off it sells for ₹133, a 33% profit." },
+    { q: "₹16800 is divided among X, Y and Z in the ratio 1 : 1 : 6. What is Y's share?", options: ["₹4200", "₹12600", "₹5600", "₹2100"], answer: 3, explanation: "Total parts = 8; one part = ₹2100; Y gets 1 × 2100 = ₹2100." },
+    { q: "A clock gains 2 minutes every hour. It is set right at 9 am. What time will it show when the correct time is 12:00 pm the same day?", options: ["12:08 pm", "12:04 pm", "11:54 am", "12:06 pm"], answer: 3, explanation: "In 3 hours it gains 2 × 3 = 6 minutes, so it shows 12:06 pm." },
+    { q: "If today is Tuesday, what day of the week will it be 89 days from today?", options: ["Saturday", "Monday", "Sunday", "Tuesday"], answer: 2, explanation: "89 = 7 × 12 + 5; 5 days after Tuesday is Sunday." },
+    { q: "Statements: All phones are flowers. Some bottles are phones. Conclusions: I. Some bottles are flowers. II. All flowers are phones.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "The bottles that are phones are also flowers, so some bottles are flowers (I); 'All phones are flowers' cannot be reversed, so II fails." },
+    { q: "Statement: The number of candidates recommended by SSBs has increased this year. Conclusions: I. More candidates appeared this year. II. The standard of the SSB has dropped.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 3, explanation: "More recommendations could have many causes; neither conclusion is certain." },
+    { q: "A wooden block measuring 6 cm × 6 cm × 5 cm is painted on all faces and cut into 1 cm cubes. How many cubes have no face painted?", options: ["80", "8", "44", "48"], answer: 3, explanation: "Cubes with no face painted: (6 − 2)(6 − 2)(5 − 2) = 48." },
+    { q: "Which letter is exactly midway between G and Q in the English alphabet?", options: ["N", "M", "K", "L"], answer: 3, explanation: "G = 7 and Q = 17; the midpoint is 12 = L." },
+    { q: "If the following words are arranged in dictionary order, which word comes first? Winter, Window, Writer, Wheel", options: ["Winter", "Writer", "Window", "Wheel"], answer: 3, explanation: "In dictionary order: Wheel, Window, Winter, Writer." },
+  ],
+};
+
+export default test;

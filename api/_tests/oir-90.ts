@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-90",
+  title: "OIR Test 90",
+  durationMinutes: 20,
+  releaseAt: "2027-01-03T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 51, 53, 57, 63, 69, ?", options: ["72", "69", "71", "73"], answer: 2, explanation: "Here the terms are consecutive prime numbers plus 10. Next: 61 + 10 = 71." },
+    { q: "Find the next number: 8, 21, 47, 99, 203, ?", options: ["406", "411", "413", "401"], answer: 1, explanation: "Here each term is 2 times the previous term plus 5. Next: 203 × 2 + 5 = 411." },
+    { q: "Find the next number: 3, 9, 6, 18, 15, 45, ?", options: ["43", "135", "40", "42"], answer: 3, explanation: "Here the operations alternate: × 3, − 3, × 3, − 3 and so on. Next: 45 − 3 = 42." },
+    { q: "Find the missing number: 8, 9, ?, 63, 256, 1285", options: ["20", "52", "10", "36"], answer: 0, explanation: "Here the multipliers increase by one each step (×1, ×2, ×3, …), then add the same number (×1 + 1, ×2 + 2, …), so the missing term is 20." },
+    { q: "Find the next letter: U, R, O, L, I, ?", options: ["H", "E", "G", "F"], answer: 3, explanation: "By alphabet positions (21, 18, 15, 12, 9), each letter is 3 places before the previous one: I(9) − 3 = F(6)." },
+    { q: "Find the next pair: RN, SO, TP, UQ, ?", options: ["UQ", "WR", "VR", "VS"], answer: 2, explanation: "The first letters move 1 forward each time and the second letters move 1 forward: next is VR." },
+    { q: "Nose : Smell :: Tongue : ?", options: ["Speak", "Swallow", "Chew", "Taste"], answer: 3, explanation: "The nose is the organ of smell; the tongue is the organ of taste." },
+    { q: "10 : 99 :: 12 : ?", options: ["156", "169", "143", "144"], answer: 2, explanation: "10 → 10² − 1 = 99; likewise 12 → 12² − 1 = 143." },
+    { q: "Sham No Varunah : Indian Navy :: Nabha Sparsham Deeptam : ?", options: ["NDA", "Indian Air Force", "Coast Guard", "Indian Army"], answer: 1, explanation: "'Sham No Varunah' is the Navy's motto; 'Nabha Sparsham Deeptam' (Touch the sky with glory) is the IAF's." },
+    { q: "Which one does not belong with the others?", options: ["Calorie", "Kilowatt-hour", "Watt", "Joule"], answer: 2, explanation: "The watt is a unit of power; the others are units of energy." },
+    { q: "Which number does not belong with the others?", options: ["324", "256", "257", "36"], answer: 2, explanation: "256 = 16², 36 = 6², 324 = 18² are perfect squares; 257 is not." },
+    { q: "Choose the one word for: \"The life story of a person written by someone else\"", options: ["Epitaph", "Biography", "Obituary", "Autobiography"], answer: 1, explanation: "Biography: the life story of a person written by someone else." },
+    { q: "If CAMP is coded as DCPT, how is ARROW coded?", options: ["ZIILD", "ATUSB", "BTUSB", "BUUTB"], answer: 2, explanation: "In this code the 1st letter moves 1 place forward, the 2nd moves 2, the 3rd moves 3, and so on, so ARROW becomes BTUSB." },
+    { q: "In a code language, 'strong students fight' is written as 'da mu yo', 'smart students' is written as 'mu ne' and 'fight quietly' is written as 'ze yo'. Which word is coded as 'ne'?", options: ["students", "strong", "quietly", "smart"], answer: 3, explanation: "'students' is common to the first two sentences, so students = mu; 'fight' is common to the first and third, so fight = yo. The other code in the second sentence, ne, means 'smart'." },
+    { q: "If A = 26, B = 25, …, Z = 1 and LETTER = 82 (the sum of its letter values), what is OCEAN?", options: ["109", "97", "99", "38"], answer: 1, explanation: "OCEAN = 12 + 24 + 22 + 26 + 13 = 97." },
+    { q: "Pooja has a son Raman. Raman's sister is Sakshi. Sakshi's husband is Tarun. How is Tarun related to Pooja?", options: ["Nephew", "Son", "Brother", "Son-in-law"], answer: 3, explanation: "Sakshi is Pooja's daughter, so her husband Tarun is Pooja's son-in-law." },
+    { q: "Pointing to a woman, Manav said, \"Her husband's only brother is my father.\" How is the woman related to Manav?", options: ["Aunt", "Sister", "Mother", "Grandmother"], answer: 0, explanation: "Her husband is Manav's father's brother (Manav's uncle), so she is Manav's aunt." },
+    { q: "Starting from his house, Rohit walks 35 m towards the north, turns right and walks 105 m, finally turns left and walks 40 m. In which direction is he now from his house?", options: ["South-West", "North-East", "North-West", "South-East"], answer: 1, explanation: "He ends up 105 m east and 75 m north of his house, so he is to the North-East of his house." },
+    { q: "A man is facing West. He turns 135° clockwise, then 90° anticlockwise. Which direction is he facing now?", options: ["South-East", "North-East", "South-West", "North-West"], answer: 3, explanation: "The net turn is 45° clockwise from West, so he faces North-West." },
+    { q: "In a row of 43 children, Vikram is 15th from the left. Mohan is 9th to the right of Vikram. What is Mohan's position from the right end?", options: ["21st", "22nd", "20th", "19th"], answer: 2, explanation: "Mohan is 24th from the left, so from the right he is 43 − 24 + 1 = 20." },
+    { q: "Sita is older than Farhan. Hari is older than Sita. Farhan is older than Lata. Who is the oldest?", options: ["Hari", "Sita", "Lata", "Farhan"], answer: 0, explanation: "The order from oldest to youngest is Hari > Sita > Farhan > Lata, so the oldest is Hari." },
+    { q: "A train 280 m long passes a signal post in 14 seconds. What is its speed in km/h?", options: ["81", "63", "72", "20"], answer: 2, explanation: "Speed = 280/14 = 20 m/s = 20 × 18/5 = 72 km/h." },
+    { q: "At a meeting, each of the 7 officers shakes hands exactly once with every other officer. How many handshakes take place?", options: ["49", "28", "21", "42"], answer: 2, explanation: "Handshakes = n(n − 1)/2 = 7 × 6/2 = 21." },
+    { q: "In a mirror, a clock appears to show 5:12. What is the actual time?", options: ["6:48", "6:18", "7:12", "7:48"], answer: 0, explanation: "Actual time = 11:60 − 5:12 = 6:48." },
+    { q: "11 July 2025 is a Friday. What day of the week is 4 January 2025?", options: ["Saturday", "Sunday", "Monday", "Friday"], answer: 0, explanation: "4 January 2025 is 188 days before 11 July 2025. 188 = 7 × 26 + 6, so the day shifts 6 back: Saturday." },
+    { q: "Statements: All teachers are rivers. All teachers are phones. Conclusions: I. Some rivers are phones. II. All rivers are phones.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Every one of the teachers is both a river and a phone, so some rivers are phones (I); there may be rivers that are not phones, so II fails." },
+    { q: "Statement: Many candidates who clear the written exam fail the interview because of poor communication skills. Courses of action: I. Candidates should practise speaking and group discussions. II. The interview stage should be removed. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Practice fixes the weakness (I); removing the interview avoids rather than solves it." },
+    { q: "A wooden block measuring 5 cm × 3 cm × 3 cm is painted on all faces and cut into 1 cm cubes. How many cubes have exactly one face painted?", options: ["14", "8", "3", "20"], answer: 0, explanation: "Cubes with exactly one face painted: 2[(3)(1) + (1)(1) + (3)(1)] = 14." },
+    { q: "How many letters are there between E and R in the English alphabet?", options: ["13", "11", "12", "14"], answer: 2, explanation: "E is 5 and R is 18; the letters strictly between them number 18 − 5 − 1 = 12." },
+    { q: "How many pairs of letters in the word FESTIVAL have as many letters between them in the word as there are between them in the English alphabet (in either direction)?", options: ["6", "8", "7", "5"], answer: 3, explanation: "The pairs are FE, ST, SV, TV, IL — 5 in all." },
+  ],
+};
+
+export default test;

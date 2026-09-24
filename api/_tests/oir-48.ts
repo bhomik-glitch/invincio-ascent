@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-48",
+  title: "OIR Test 48",
+  durationMinutes: 20,
+  releaseAt: "2026-11-08T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 6, 5, 9, 26, 103, ?", options: ["514", "515", "618", "411"], answer: 0, explanation: "Here the multipliers increase by one each step (×1, ×2, ×3, …), then subtract 1. Next: 103 × 5 − 1 = 514." },
+    { q: "Find the next number: 9, 3, 12, 15, 27, 42, 69, ?", options: ["138", "96", "111", "112"], answer: 2, explanation: "Here each term is the sum of the previous two terms. Next: 42 + 69 = 111." },
+    { q: "Find the next number: 6, 18, 23, 69, 74, 222, ?", options: ["225", "228", "666", "227"], answer: 3, explanation: "Here the operations alternate: × 3, + 5, × 3, + 5 and so on. Next: 222 + 5 = 227." },
+    { q: "Find the missing number: 1, 2, 4, 8, ?, 32", options: ["20", "15", "24", "16"], answer: 3, explanation: "Here each term is 2 times the previous term, so the missing term is 16." },
+    { q: "Find the next letter: Z, W, T, Q, N, ?", options: ["M", "K", "J", "L"], answer: 1, explanation: "By alphabet positions (26, 23, 20, 17, 14), each letter is 3 places before the previous one: N(14) − 3 = K(11)." },
+    { q: "Find the next pair: NM, PK, RI, TG, ?", options: ["WE", "UD", "VE", "VD"], answer: 2, explanation: "The first letters move 2 forward each time and the second letters move 2 back: next is VE." },
+    { q: "Seismology : Earthquakes :: Cartography : ?", options: ["Map-making", "Rocks", "Coins", "Weather"], answer: 0, explanation: "Seismology is the study of earthquakes; cartography is the art of making maps." },
+    { q: "12 : 1716 :: 5 : ?", options: ["120", "130", "24", "35"], answer: 0, explanation: "12 → 12³ − 12 = 1716; likewise 5 → 5³ − 5 = 120." },
+    { q: "Canada : Ottawa :: Brazil : ?", options: ["Rio de Janeiro", "Buenos Aires", "Brasília", "São Paulo"], answer: 2, explanation: "Ottawa is the capital of Canada; Brasília is the capital of Brazil." },
+    { q: "Which one does not belong with the others?", options: ["Butterfly", "Bee", "Spider", "Housefly"], answer: 2, explanation: "The spider is an arachnid with eight legs; the others are insects." },
+    { q: "Which number does not belong with the others?", options: ["216", "1000", "999", "64"], answer: 2, explanation: "64 = 4³, 1000 = 10³, 216 = 6³ are perfect cubes; 999 is not." },
+    { q: "Choose the word most opposite in meaning to GENUINE.", options: ["Honest", "Pure", "Real", "Fake"], answer: 3, explanation: "The opposite of genuine is fake; the other options are similar in meaning or unrelated." },
+    { q: "If WHEEL is coded as XGFDM, how is ROCKET coded?", options: ["SQFOJZ", "SODJFS", "SNDJES", "SNDJFS"], answer: 3, explanation: "In this code letters are moved alternately one place forward and one place back, so ROCKET becomes SNDJFS." },
+    { q: "In a code language, 'calm farmers win' is written as 'tu da fe', 'bold farmers' is written as 'zo tu' and 'win again' is written as 'ru da'. Which word is coded as 'zo'?", options: ["bold", "calm", "again", "win"], answer: 0, explanation: "'farmers' is common to the first two sentences, so farmers = tu; 'win' is common to the first and third, so win = da. The other code in the second sentence, zo, means 'bold'." },
+    { q: "If A = 1, B = 2, …, Z = 26 and HOCKEY = 67 (the sum of its letter values), what is FLAG?", options: ["25", "32", "82", "26"], answer: 3, explanation: "FLAG = 6 + 12 + 1 + 7 = 26." },
+    { q: "T is the father of U. U is the sister of V. W is the wife of V. How is T related to W?", options: ["Father", "Uncle", "Father-in-law", "Brother-in-law"], answer: 2, explanation: "T is the father of W's husband V, so T is W's father-in-law." },
+    { q: "Pointing to a woman, Gaurav said, \"She is the mother of my mother's husband.\" How is the woman related to Gaurav?", options: ["Maternal grandmother", "Paternal grandmother", "Aunt", "Mother"], answer: 1, explanation: "Gaurav's mother's husband is his father; the father's mother is Gaurav's paternal grandmother." },
+    { q: "Starting from his house, Aditya walks 85 m towards the north, turns left and walks 80 m, finally turns left and walks 125 m. In which direction is he now from his house?", options: ["South-West", "South-East", "North-East", "North-West"], answer: 0, explanation: "He ends up 80 m west and 40 m south of his house, so he is to the South-West of his house." },
+    { q: "One morning, just after sunrise, Mohan was standing in a field. His shadow fell exactly behind him. Which direction was he facing?", options: ["North", "South", "West", "East"], answer: 3, explanation: "In the morning the sun is in the east, so shadows fall to the west. With the shadow (West) behind him, he must be facing East." },
+    { q: "In a row of 31 children, Ajay is 14th from the left. Vikram is 3rd to the right of Ajay. What is Vikram's position from the right end?", options: ["17th", "14th", "16th", "15th"], answer: 3, explanation: "Vikram is 17th from the left, so from the right he is 31 − 17 + 1 = 15." },
+    { q: "Bina is poorer than Uma. Uma is poorer than Farhan. Dinesh is richer than Farhan. Who is the second richest?", options: ["Farhan", "Bina", "Uma", "Dinesh"], answer: 0, explanation: "The order from richest to poorest is Dinesh > Farhan > Uma > Bina, so the second richest is Farhan." },
+    { q: "A train 290 m long running at 36 km/h crosses a platform 330 m long. How many seconds does it take?", options: ["62", "72", "33", "29"], answer: 0, explanation: "It must cover 290 + 330 = 620 m at 36 km/h = 10 m/s, taking 620/10 = 62 s." },
+    { q: "The average of 8 numbers is 29. When one number is removed, the average of the rest becomes 27. Which number was removed?", options: ["44", "51", "29", "43"], answer: 3, explanation: "Total before = 8 × 29 = 232; after = 7 × 27 = 189; removed = 43." },
+    { q: "Through how many degrees does the hour hand of a clock turn from 6:45 to 9:45?", options: ["0°", "120°", "105°", "90°"], answer: 3, explanation: "The hour hand turns 0.5° per minute; 180 minutes × 0.5° = 90°." },
+    { q: "How many days are there from 10 January 2027 to 18 June 2027, both days included?", options: ["161", "170", "160", "159"], answer: 2, explanation: "Counting the days in each month from 10 January 2027 to 18 June 2027 inclusive gives 160." },
+    { q: "Statements: No plate is a cup. No cup is an officer. Conclusions: I. No officer is a cup. II. Some plates are officers.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "'No a cup is an officer' can be reversed to 'No an officer is a cup' (I); two negative statements say nothing about plates and officers." },
+    { q: "Statement: Only those who score above 70% can apply for the scholarship. Meena scored 68%. Conclusions: I. Meena cannot apply for the scholarship. II. Meena is a poor student.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "68% is below the cut-off, so I follows; one score does not make her a poor student." },
+    { q: "How many cubes of side 3 cm can be cut from a solid cube of side 6 cm?", options: ["8", "72", "6", "4"], answer: 0, explanation: "(6/3)³ = 2³ = 8." },
+    { q: "Which letter is 3rd to the left of the 8th letter from the right in the English alphabet?", options: ["K", "P", "O", "Q"], answer: 1, explanation: "The 8th letter from the right is the 19th from the left (S); 3 to its left is the 16th letter, P." },
+    { q: "If the following words are arranged in dictionary order, which word comes last? Sugar, Sergeant, Storm, Salute", options: ["Salute", "Storm", "Sugar", "Sergeant"], answer: 2, explanation: "In dictionary order: Salute, Sergeant, Storm, Sugar." },
+  ],
+};
+
+export default test;

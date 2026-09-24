@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-55",
+  title: "OIR Test 55",
+  durationMinutes: 20,
+  releaseAt: "2026-11-15T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 7, 49, 16, 42, 25, 35, 34, ?", options: ["35", "43", "28", "21"], answer: 2, explanation: "Here two series alternate: 7, 16, 25, … (+9) and 49, 42, 35, … (-7). Next: 35 − 7 = 28." },
+    { q: "Find the next number: 7, 21, 84, 420, 2520, ?", options: ["20160", "17641", "15120", "17640"], answer: 3, explanation: "Here the multipliers increase by one each step (×3, ×4, ×5, …). Next: 2520 × 7 = 17640." },
+    { q: "Find the next number: 1, 4, 5, 10, 19, 34, 63, ?", options: ["116", "98", "82", "126"], answer: 0, explanation: "Here each term is the sum of the previous three terms. Next: 19 + 34 + 63 = 116." },
+    { q: "Find the missing number: 11, 17, ?, 35, 47, 61", options: ["27", "23", "26", "25"], answer: 3, explanation: "Here the differences added are 6, 8, 10, 12, 14 — each 2 more than the last, so the missing term is 25." },
+    { q: "Find the next letter: G, H, M, N, S, ?", options: ["U", "S", "V", "T"], answer: 3, explanation: "By alphabet positions (7, 8, 13, 14, 19), the letters move alternately +1 and +5: S(19) + 1 = T(20)." },
+    { q: "Find the next pair: FE, JH, NK, RN, ?", options: ["UP", "WQ", "VQ", "VR"], answer: 2, explanation: "The first letters move 4 forward each time and the second letters move 3 forward: next is VQ." },
+    { q: "Problem : Solution :: Question : ?", options: ["Test", "Answer", "Doubt", "Query"], answer: 1, explanation: "A problem needs a solution; a question needs an answer." },
+    { q: "12 : 143 :: 10 : ?", options: ["100", "99", "999", "1010"], answer: 1, explanation: "12 → 12² − 1 = 143; likewise 10 → 10² − 1 = 99." },
+    { q: "India : Parliament :: Japan : ?", options: ["Duma", "Majlis", "Knesset", "Diet"], answer: 3, explanation: "India's legislature is Parliament; Japan's is the Diet." },
+    { q: "Which one does not belong with the others?", options: ["Rupee", "Euro", "Dollar", "Sensex"], answer: 3, explanation: "The Sensex is a stock market index; the others are currencies." },
+    { q: "Which pair does not belong with the others?", options: ["2 – 10", "7 – 350", "8 – 512", "5 – 130"], answer: 2, explanation: "In the other pairs the second number is n³ + n, where n is the first (e.g. 2³ + 2 = 10); but 8³ + 8 = 520, not 512." },
+    { q: "Choose the word most opposite in meaning to RIGID.", options: ["Hard", "Firm", "Stiff", "Flexible"], answer: 3, explanation: "The opposite of rigid is flexible; the other options are similar in meaning or unrelated." },
+    { q: "If CANDLE is coded as DZOCMD, how is COLLEGE coded?", options: ["DNMKFFG", "DQOPJML", "DNMKFFF", "DMMKFFF"], answer: 2, explanation: "In this code letters are moved alternately one place forward and one place back, so COLLEGE becomes DNMKFFF." },
+    { q: "In a code language, 'strong farmers fly' is written as 'ri pi mu', 'tall farmers' is written as 'ri fe' and 'fly fast' is written as 'pi ta'. What is the code for 'fly'?", options: ["ri", "pi", "fe", "mu"], answer: 1, explanation: "'farmers' is common to the first two sentences, so farmers = ri; 'fly' is common to the first and third, so fly = pi." },
+    { q: "If '−' means '+', '÷' means '−', '+' means '×' and '×' means '÷', what is the value of 16 + 4 − 6 × 6 ÷ 11?", options: ["57", "65", "54", "32"], answer: 2, explanation: "Replacing the symbols gives 16 × 4 + 6 ÷ 6 − 11; following BODMAS, this equals 54." },
+    { q: "Vijay is the husband of Anita. Anita's brother is Karan. Karan's daughter is Isha. How is Vijay related to Isha?", options: ["Grandfather", "Father", "Cousin", "Uncle"], answer: 3, explanation: "Anita is Isha's aunt (father's sister), so Anita's husband Vijay is Isha's uncle." },
+    { q: "Pointing to a woman, Anuj said, \"Her only brother is my son's maternal uncle. My wife has no sister.\" How is the woman related to Anuj?", options: ["Sister-in-law", "Wife", "Mother-in-law", "Sister"], answer: 1, explanation: "Anuj's son's maternal uncle is his wife's brother; since the wife has no sister, that man's sister must be Anuj's wife." },
+    { q: "Starting from his house, Dev walks 30 m towards the west, turns left and walks 50 m, finally turns left and walks 55 m. In which direction is he now from his house?", options: ["South-West", "South-East", "North-West", "North-East"], answer: 1, explanation: "He ends up 25 m east and 50 m south of his house, so he is to the South-East of his house." },
+    { q: "One evening, just before sunset, Deepak was standing in a field. His shadow fell exactly in front of him. Which direction was he facing?", options: ["East", "South", "West", "North"], answer: 0, explanation: "In the evening the sun is in the west, so shadows fall to the east. With the shadow (East) in front of him, he must be facing East." },
+    { q: "In a row of 28 children, Suresh is 10th from the left. Arjun is 8th to the right of Suresh. What is Arjun's position from the right end?", options: ["13th", "10th", "11th", "12th"], answer: 2, explanation: "Arjun is 18th from the left, so from the right he is 28 − 18 + 1 = 11." },
+    { q: "Tarun is younger than Lata. Tarun is older than Pooja. Asha is younger than Farhan. Farhan is younger than Pooja. Who is the oldest?", options: ["Tarun", "Pooja", "Lata", "Farhan"], answer: 2, explanation: "The order from oldest to youngest is Lata > Tarun > Pooja > Farhan > Asha, so the oldest is Lata." },
+    { q: "What is the simple interest on ₹18000 at 4% per annum for 2 years?", options: ["₹720", "₹19440", "₹2160", "₹1440"], answer: 3, explanation: "SI = P × R × T / 100 = 18000 × 4 × 2 / 100 = ₹1440." },
+    { q: "A boat goes 11 km downstream in 1 hour and 7 km upstream in 1 hour. What is the speed of the stream?", options: ["3 km/h", "9 km/h", "4 km/h", "2 km/h"], answer: 3, explanation: "Boat speed = (11 + 7)/2 = 9 km/h; stream speed = (11 − 7)/2 = 2 km/h." },
+    { q: "What is the angle between the hands of a clock at 12:15?", options: ["90°", "82.5°", "97.5°", "112.5°"], answer: 1, explanation: "Angle = |30 × 0 − 5.5 × 15| = 82.5°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "If today is Monday, what day of the week will it be 117 days from today?", options: ["Friday", "Sunday", "Monday", "Saturday"], answer: 3, explanation: "117 = 7 × 16 + 5; 5 days after Monday is Saturday." },
+    { q: "Statements: All watches are pilots. All pilots are trucks. Conclusions: I. Some watches are not trucks. II. All trucks are pilots.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 3, explanation: "All watches are trucks, so I is false; 'All pilots are trucks' cannot be reversed, so II is not certain." },
+    { q: "Statement: All the shops in the market are closed on Mondays. Today the shops in the market are closed. Conclusions: I. Today is Monday. II. Today is a public holiday.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 3, explanation: "Shops close on Mondays, but they may close on other days too; neither follows." },
+    { q: "A cube of side 5 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have exactly one face painted?", options: ["54", "8", "36", "27"], answer: 0, explanation: "There are 125 small cubes; exactly one face painted: 6 faces × (5 − 2)² = 54." },
+    { q: "Which letter is exactly midway between I and Q in the English alphabet?", options: ["O", "N", "M", "L"], answer: 2, explanation: "I = 9 and Q = 17; the midpoint is 13 = M." },
+    { q: "If the letters of the word SERGEANT are arranged in alphabetical order, how many letters remain in the same position?", options: ["13", "5", "4", "3"], answer: 3, explanation: "Alphabetical order: AEEGNRST. Comparing with SERGEANT, 3 letters (E, G, T) stay in place." },
+  ],
+};
+
+export default test;

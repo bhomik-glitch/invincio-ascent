@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-59",
+  title: "OIR Test 59",
+  durationMinutes: 20,
+  releaseAt: "2026-11-22T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 18, 19, 22, 31, 58, ?", options: ["140", "166", "139", "174"], answer: 2, explanation: "Here the differences 1, 3, 9, 27, 81 are each 3 times the previous difference. Next: 58 + 81 = 139." },
+    { q: "Find the next number: 3840, 960, 240, 60, ?", options: ["15", "12", "45", "16"], answer: 0, explanation: "Here each term is the previous term divided by 4. Next: 60 ÷ 4 = 15." },
+    { q: "Find the next number: 13, 16, 23, 34, 49, ?", options: ["67", "68", "72", "64"], answer: 1, explanation: "Here the differences added are 3, 7, 11, 15, 19 — each 4 more than the last. Next: 49 + 19 = 68." },
+    { q: "Find the missing number: 83, 102, 123, ?, 171, 198", options: ["148", "147", "146", "149"], answer: 2, explanation: "Here the terms are n² + 2 for consecutive n, so the missing term is 146." },
+    { q: "Find the next letter: E, H, M, P, U, ?", options: ["Z", "Y", "W", "X"], answer: 3, explanation: "By alphabet positions (5, 8, 13, 16, 21), the letters move alternately +3 and +5: U(21) + 3 = X(24)." },
+    { q: "Find the next group: KLM, OPQ, STU, ?", options: ["VWX", "WYX", "WXY", "XYZ"], answer: 2, explanation: "Each group is three consecutive letters, and 1 letter is skipped between groups: after STU comes WXY." },
+    { q: "Fish : School :: Wolf : ?", options: ["Swarm", "Flock", "Pack", "Herd"], answer: 2, explanation: "A group of fish is a school; a group of wolves is a pack." },
+    { q: "2 : 4 :: 7 : ?", options: ["344", "342", "336", "49"], answer: 3, explanation: "2 → 2² = 4; likewise 7 → 7² = 49." },
+    { q: "Supreme Commander of the Armed Forces : President :: Head of Government : ?", options: ["Prime Minister", "President", "Chief of Defence Staff", "Chief Justice"], answer: 0, explanation: "The President is Supreme Commander; the Prime Minister heads the government." },
+    { q: "Which one does not belong with the others?", options: ["Microscope", "Stethoscope", "Binoculars", "Telescope"], answer: 1, explanation: "The stethoscope is for listening; the others are optical instruments." },
+    { q: "Which number does not belong with the others?", options: ["110", "112", "154", "66"], answer: 1, explanation: "154, 110, 66 are all multiples of 11; 112 is not." },
+    { q: "Choose the word most opposite in meaning to ACQUIT.", options: ["Release", "Pardon", "Convict", "Free"], answer: 2, explanation: "The opposite of acquit is convict; the other options are similar in meaning or unrelated." },
+    { q: "If GROUND is coded as HTRYSJ, how is BOXING coded?", options: ["CQAMSM", "CQAMSL", "DQAMSM", "YLCRMT"], answer: 0, explanation: "In this code the 1st letter moves 1 place forward, the 2nd moves 2, the 3rd moves 3, and so on, so BOXING becomes CQAMSM." },
+    { q: "In a code language, 'brave sailors lead' is written as 'tu ze ri', 'smart sailors' is written as 'ne ri' and 'lead early' is written as 'po ze'. Which word is coded as 'ne'?", options: ["brave", "smart", "early", "sailors"], answer: 1, explanation: "'sailors' is common to the first two sentences, so sailors = ri; 'lead' is common to the first and third, so lead = ze. The other code in the second sentence, ne, means 'smart'." },
+    { q: "If '×' means '+', '÷' means '−', '+' means '×' and '−' means '÷', what is the value of 7 + 6 × 35 − 5 ÷ 7?", options: ["28", "32", "42", "49"], answer: 2, explanation: "Replacing the symbols gives 7 × 6 + 35 ÷ 5 − 7; following BODMAS, this equals 42." },
+    { q: "Sonia is the wife of Raj. Raj is the only son of Kamla. Kamla's husband is Dinesh. How is Dinesh related to Sonia?", options: ["Father", "Father-in-law", "Husband", "Uncle"], answer: 1, explanation: "Dinesh is the father of Sonia's husband Raj, so he is Sonia's father-in-law." },
+    { q: "Pointing to a girl, Parul said, \"Her mother is the only sister of my husband.\" How is the girl related to Parul?", options: ["Sister", "Niece", "Cousin", "Daughter"], answer: 1, explanation: "The girl is the daughter of Parul's sister-in-law, i.e. her niece." },
+    { q: "Starting from his house, Yash walks 1 km towards the north, turns left and walks 15 km, turns right and walks 6 km, finally turns right and walks 2 km. In which direction is he now from his house?", options: ["South-East", "North-East", "North-West", "South-West"], answer: 2, explanation: "He ends up 13 km west and 7 km north of his house, so he is to the North-West of his house." },
+    { q: "One evening, just before sunset, Ajay was standing in a field. His shadow fell exactly to his left. Which direction was he facing?", options: ["East", "West", "South", "North"], answer: 2, explanation: "In the evening the sun is in the west, so shadows fall to the east. With the shadow (East) on his left, he must be facing South." },
+    { q: "In a row of 43 children, Varun is 10th from the left. Rahul is 4th to the right of Varun. What is Rahul's position from the right end?", options: ["29th", "31st", "30th", "32nd"], answer: 2, explanation: "Rahul is 14th from the left, so from the right he is 43 − 14 + 1 = 30." },
+    { q: "Isha is shorter than Farhan. Sita is shorter than Uma. Isha is taller than Uma. Who is the second tallest?", options: ["Farhan", "Isha", "Sita", "Uma"], answer: 1, explanation: "The order from tallest to shortest is Farhan > Isha > Uma > Sita, so the second tallest is Isha." },
+    { q: "The sum of 5 consecutive even numbers is 380. What is the largest of them?", options: ["78", "76", "80", "82"], answer: 2, explanation: "The middle value is 380/5 = 76; the numbers are 72, 74, 76, 78, 80, so the largest is 80." },
+    { q: "₹10000 is divided among X, Y and Z in the ratio 1 : 1 : 3. What is Y's share?", options: ["₹3333.3333333333335", "₹4000", "₹2000", "₹6000"], answer: 2, explanation: "Total parts = 5; one part = ₹2000; Y gets 1 × 2000 = ₹2000." },
+    { q: "In a mirror, a clock appears to show 2:06. What is the actual time?", options: ["10:06", "10:54", "9:54", "9:24"], answer: 2, explanation: "Actual time = 11:60 − 2:06 = 9:54." },
+    { q: "How many days are there from 10 February 2029 to 27 December 2029, both days included?", options: ["331", "321", "320", "322"], answer: 1, explanation: "Counting the days in each month from 10 February 2029 to 27 December 2029 inclusive gives 321." },
+    { q: "Statements: Some stones are not cups. All cups are chairs. Conclusions: I. Some stones are not chairs. II. Some chairs are cups.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "All cups are chairs, so some chairs are cups (II); the stones that are not cups may still be chairs, so I is uncertain." },
+    { q: "Statement: The last date for applications has been extended by a week. Conclusions: I. Many candidates had failed to apply in time. II. Applications will be accepted for one more week.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "The extension directly means another week to apply (II); the reason for it is not stated." },
+    { q: "A wooden block measuring 6 cm × 5 cm × 4 cm is painted on all faces and cut into 1 cm cubes. How many cubes have no face painted?", options: ["52", "36", "24", "8"], answer: 2, explanation: "Cubes with no face painted: (6 − 2)(5 − 2)(4 − 2) = 24." },
+    { q: "If the English alphabet is written in reverse order (Z to A), which letter will be 5th to the right of the 11th letter from the left?", options: ["P", "J", "K", "L"], answer: 2, explanation: "In the reversed alphabet the 16th letter from the left is K (position n holds letter 27 − n)." },
+    { q: "In the word SENTINEL, the 1st and 2nd letters are interchanged, the 3rd and 4th letters are interchanged, and so on. Which letter will be 2nd from the right end?", options: ["I", "L", "S", "E"], answer: 1, explanation: "The new arrangement is ESTNNILE; the 2nd letter from the right is L." },
+  ],
+};
+
+export default test;

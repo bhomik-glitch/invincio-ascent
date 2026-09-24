@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-83",
+  title: "OIR Test 83",
+  durationMinutes: 20,
+  releaseAt: "2026-12-27T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 12, 48, 192, 768, ?", options: ["3060", "3070", "3072", "3840"], answer: 2, explanation: "Here each term is 4 times the previous term. Next: 768 × 4 = 3072." },
+    { q: "Find the next number: 4, 12, 7, 21, 16, 48, ?", options: ["43", "44", "41", "144"], answer: 0, explanation: "Here the operations alternate: × 3, − 5, × 3, − 5 and so on. Next: 48 − 5 = 43." },
+    { q: "Find the next number: 3, 12, 52, 265, 1596, ?", options: ["12768", "11179", "9582", "11180"], answer: 1, explanation: "Here the multipliers increase by one each step (×3, ×4, ×5, …), then add the same number (×3 + 3, ×4 + 4, …). Next: 1596 × 7 + 7 = 11179." },
+    { q: "Find the missing number: 28, 31, 38, ?, 64, 83", options: ["47", "49", "53", "51"], answer: 1, explanation: "Here the differences added are 3, 7, 11, 15, 19 — each 4 more than the last, so the missing term is 49." },
+    { q: "Find the next letter: A, B, F, G, K, ?", options: ["M", "K", "L", "N"], answer: 2, explanation: "By alphabet positions (1, 2, 6, 7, 11), the letters move alternately +1 and +4: K(11) + 1 = L(12)." },
+    { q: "Find the next term: A1, D4, G7, J10, ?", options: ["L13", "M13", "N14", "M14"], answer: 1, explanation: "The letters move 3 forward each time, and each number is the letter's position in the alphabet: M → 13." },
+    { q: "Abundant : Scarce :: Ancient : ?", options: ["Old", "Historic", "Modern", "Antique"], answer: 2, explanation: "These are opposites: abundant–scarce, ancient–modern." },
+    { q: "3 : 24 :: 9 : ?", options: ["730", "84", "162", "720"], answer: 3, explanation: "3 → 3³ − 3 = 24; likewise 9 → 9³ − 9 = 720." },
+    { q: "Bihu : Assam :: Onam : ?", options: ["Tamil Nadu", "Kerala", "Punjab", "Gujarat"], answer: 1, explanation: "Bihu is celebrated in Assam; Onam in Kerala." },
+    { q: "Which one does not belong with the others?", options: ["Ashoka Chakra", "Maha Vir Chakra", "Param Vir Chakra", "Vir Chakra"], answer: 0, explanation: "The Ashoka Chakra is a peacetime award; the others are wartime gallantry awards." },
+    { q: "Which pair does not belong with the others?", options: ["2 – 2", "9 – 72", "4 – 12", "6 – 72"], answer: 3, explanation: "In the other pairs the second number is n² − n, where n is the first (e.g. 2² − 2 = 2); but 6² − 6 = 30, not 72." },
+    { q: "Choose the one word for: \"Government by one person with absolute power\"", options: ["Oligarchy", "Autocracy", "Democracy", "Theocracy"], answer: 1, explanation: "Autocracy: government by one person with absolute power." },
+    { q: "If ANCHOR is coded as BPFLTX, how is TANK coded?", options: ["GZMP", "UDQO", "UCQP", "UCQO"], answer: 3, explanation: "In this code the 1st letter moves 1 place forward, the 2nd moves 2, the 3rd moves 3, and so on, so TANK becomes UCQO." },
+    { q: "In a code language, 'brave leaders study' is written as 've ho li', 'proud leaders' is written as 'ho ki' and 'study today' is written as 'bu li'. What is the code for 'brave'?", options: ["bu", "ve", "li", "ho"], answer: 1, explanation: "'leaders' is common to the first two sentences, so leaders = ho; 'study' is common to the first and third, so study = li. The remaining code in the first sentence, ve, means 'brave'." },
+    { q: "If '−' means '+', '+' means '−', '÷' means '×' and '×' means '÷', what is the value of 16 ÷ 12 − 32 × 4 + 4?", options: ["188", "186", "200", "196"], answer: 3, explanation: "Replacing the symbols gives 16 × 12 + 32 ÷ 4 − 4; following BODMAS, this equals 196." },
+    { q: "Kavya's brother is Lakshay. Lakshay's wife is Mansi. Mansi's son is Nikhil. How is Kavya related to Nikhil?", options: ["Maternal aunt", "Paternal aunt", "Mother", "Sister"], answer: 1, explanation: "Lakshay is Nikhil's father and Kavya is Lakshay's sister, so she is Nikhil's paternal aunt." },
+    { q: "Pointing to a boy, Ananya said, \"His mother's mother is my mother, and I have no children.\" How is the boy related to Ananya?", options: ["Grandson", "Son", "Brother", "Nephew"], answer: 3, explanation: "The boy's mother is a daughter of Ananya's mother but not Ananya (who has no children), so she is Ananya's sister; the boy is her nephew." },
+    { q: "Starting from his house, Arjun walks 50 m towards the west, turns right and walks 95 m, finally turns left and walks 115 m. In which direction is he now from his house?", options: ["North-West", "South-West", "South-East", "North-East"], answer: 0, explanation: "He ends up 165 m west and 95 m north of his house, so he is to the North-West of his house." },
+    { q: "A man is facing North-West. He turns 90° anticlockwise, then 45° clockwise. Which direction is he facing now?", options: ["South", "West", "North", "East"], answer: 1, explanation: "The net turn is 45° anticlockwise from North-West, so he faces West." },
+    { q: "In a row, Arjun is 6th from the left and Dev is 9th from the right. When they interchange places, Arjun becomes 17th from the left. How many people are in the row?", options: ["26", "22", "15", "25"], answer: 3, explanation: "After the swap Arjun takes Dev's old place, which is 17th from the left and 9th from the right, so total = 17 + 9 − 1 = 25." },
+    { q: "Hari is slower than Jatin. Asha is faster than Jatin. Asha is slower than Tarun. Who is the second slowest?", options: ["Hari", "Jatin", "Tarun", "Asha"], answer: 1, explanation: "The order from fastest to slowest is Tarun > Asha > Jatin > Hari, so the second slowest is Jatin." },
+    { q: "A shopkeeper marks his goods 60% above the cost price and then gives a discount of 10%. What is his net profit or loss?", options: ["46% profit", "50% profit", "44% profit", "44% loss"], answer: 2, explanation: "On a cost of ₹100 the marked price is ₹160; after 10% off it sells for ₹144, a 44% profit." },
+    { q: "20% of a number is 52. What is 80% of the same number?", options: ["211", "208", "260", "416"], answer: 1, explanation: "The number is 52 × 100/20 = 260, and 80% of 260 = 208." },
+    { q: "What is the angle between the hands of a clock at 10:50?", options: ["40°", "25°", "55°", "0°"], answer: 1, explanation: "Angle = |30 × 10 − 5.5 × 50| = 25°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "How many days are there from 25 February 2031 to 23 December 2031, both days included?", options: ["303", "302", "301", "312"], answer: 1, explanation: "Counting the days in each month from 25 February 2031 to 23 December 2031 inclusive gives 302." },
+    { q: "Statements: Some birds are not pens. All pens are plates. Conclusions: I. Some birds are not plates. II. Some plates are pens.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "All pens are plates, so some plates are pens (II); the birds that are not pens may still be plates, so I is uncertain." },
+    { q: "Statement: Many road accidents happen at a particular crossing. Courses of action: I. Traffic lights and speed breakers should be installed there. II. Traffic police should be posted at the crossing during peak hours. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "Both measures directly reduce accidents at the crossing." },
+    { q: "A cube of side 5 cm is painted on two opposite faces only and then cut into 1 cm cubes. How many small cubes have no paint on them?", options: ["54", "50", "25", "75"], answer: 3, explanation: "The two opposite faces each have 25 cubes with exactly one painted face (50 in all), and the remaining 5³ − 50 = 75 cubes have no paint." },
+    { q: "Which letter is exactly midway between K and U in the English alphabet?", options: ["Q", "R", "O", "P"], answer: 3, explanation: "K = 11 and U = 21; the midpoint is 16 = P." },
+    { q: "If the following words are arranged in dictionary order, which word comes first? Salute, Street, Summer, Sailor", options: ["Salute", "Street", "Sailor", "Summer"], answer: 2, explanation: "In dictionary order: Sailor, Salute, Street, Summer." },
+  ],
+};
+
+export default test;

@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-58",
+  title: "OIR Test 58",
+  durationMinutes: 20,
+  releaseAt: "2026-11-22T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 5, 12, 39, 160, 805, ?", options: ["4030", "4837", "5635", "4836"], answer: 3, explanation: "Here the multipliers increase by one each step (×2, ×3, ×4, …), then add the same number (×2 + 2, ×3 + 3, …). Next: 805 × 6 + 6 = 4836." },
+    { q: "Find the next number: 3, 7, 15, 31, 63, ?", options: ["159", "128", "127", "126"], answer: 2, explanation: "Here the differences 4, 8, 16, 32, 64 are each 2 times the previous difference. Next: 63 + 64 = 127." },
+    { q: "Find the next number: 7, 55, 10, 50, 13, 45, 16, ?", options: ["35", "45", "40", "19"], answer: 2, explanation: "Here two series alternate: 7, 10, 13, … (+3) and 55, 50, 45, … (-5). Next: 45 − 5 = 40." },
+    { q: "Find the missing number: 18144, 3024, 504, ?, 14", options: ["82", "434", "259", "84"], answer: 3, explanation: "Here each term is the previous term divided by 6, so the missing term is 84." },
+    { q: "Find the next letter: D, E, G, J, N, ?", options: ["R", "U", "T", "S"], answer: 3, explanation: "By alphabet positions (4, 5, 7, 10, 14), the gaps grow by one each time (+1, 2, 3, 4, …): N(14) + 5 = S(19)." },
+    { q: "Find the next pair: BU, CS, DQ, EO, ?", options: ["EL", "FM", "GM", "FL"], answer: 1, explanation: "The first letters move 1 forward each time and the second letters move 2 back: next is FM." },
+    { q: "Stethoscope : Doctor :: Easel : ?", options: ["Sculptor", "Writer", "Painter", "Singer"], answer: 2, explanation: "A stethoscope is used by a doctor; an easel is used by a painter." },
+    { q: "11 : 242 :: 12 : ?", options: ["145", "1716", "1727", "288"], answer: 3, explanation: "11 → 2 × 11² = 242; likewise 12 → 2 × 12² = 288." },
+    { q: "Governor : State :: Lieutenant Governor : ?", options: ["Country", "Union Territory", "Municipality", "District"], answer: 1, explanation: "A Governor heads a state; a Lieutenant Governor heads a Union Territory with an administrator." },
+    { q: "Which one does not belong with the others?", options: ["Avalanche", "Cyclone", "Tornado", "Typhoon"], answer: 0, explanation: "An avalanche is a mass of sliding snow; the others are windstorms." },
+    { q: "Which number does not belong with the others?", options: ["130", "129", "140", "90"], answer: 1, explanation: "130, 90, 140 are all multiples of 10; 129 is not." },
+    { q: "Choose the word most opposite in meaning to WISDOM.", options: ["Insight", "Folly", "Sense", "Knowledge"], answer: 1, explanation: "The opposite of wisdom is folly; the other options are similar in meaning or unrelated." },
+    { q: "If TEMPLE is coded as DKOLDS, how is JUNGLE coded?", options: ["DKFMTI", "DKFMTH", "DLFMTI", "KTOFMD"], answer: 0, explanation: "In this code the letters are reversed and each is moved 1 place back, so JUNGLE becomes DKFMTI." },
+    { q: "In a code language, 'brave officers study' is written as 'ta ga su', 'calm officers' is written as 'fe su' and 'study well' is written as 'si ta'. Which word is coded as 'fe'?", options: ["brave", "calm", "officers", "well"], answer: 1, explanation: "'officers' is common to the first two sentences, so officers = su; 'study' is common to the first and third, so study = ta. The other code in the second sentence, fe, means 'calm'." },
+    { q: "If A = 1, B = 2, …, Z = 26 and SPOON = 79 (the sum of its letter values), what is RIFLE?", options: ["53", "68", "50", "85"], answer: 2, explanation: "RIFLE = 18 + 9 + 6 + 12 + 5 = 50." },
+    { q: "Leela is the sister of Ajay's father. Leela's husband is Prakash. How is Prakash related to Ajay?", options: ["Father", "Uncle", "Brother-in-law", "Cousin"], answer: 1, explanation: "Leela is Ajay's paternal aunt, so her husband Prakash is Ajay's uncle." },
+    { q: "Pointing to a man, Shweta said, \"He is the only son of my mother-in-law's husband.\" How is the man related to Shweta?", options: ["Son", "Father-in-law", "Husband", "Brother-in-law"], answer: 2, explanation: "Her mother-in-law's husband is her father-in-law; his only son is Shweta's husband." },
+    { q: "Starting from his house, Kabir walks 140 m towards the west, turns right and walks 150 m, turns right and walks 115 m, finally turns left and walks 85 m. In which direction is he now from his house?", options: ["North-East", "North-West", "South-East", "South-West"], answer: 1, explanation: "He ends up 25 m west and 235 m north of his house, so he is to the North-West of his house." },
+    { q: "One morning, just after sunrise, Yash was standing in a field. His shadow fell exactly behind him. Which direction was he facing?", options: ["East", "West", "North", "South"], answer: 0, explanation: "In the morning the sun is in the east, so shadows fall to the west. With the shadow (West) behind him, he must be facing East." },
+    { q: "In a class of 47 students, Nikhil ranks 34th from the top. What is his rank from the bottom?", options: ["16th", "13th", "15th", "14th"], answer: 3, explanation: "Rank from bottom = 47 − 34 + 1 = 14." },
+    { q: "Asha is older than Nisha. Nisha is older than Uma. Dinesh is older than Asha. Who is the second youngest?", options: ["Uma", "Dinesh", "Nisha", "Asha"], answer: 2, explanation: "The order from oldest to youngest is Dinesh > Asha > Nisha > Uma, so the second youngest is Nisha." },
+    { q: "The sum of 3 consecutive odd numbers is 225. What is the largest of them?", options: ["87", "79", "77", "75"], answer: 2, explanation: "The middle value is 225/3 = 75; the numbers are 73, 75, 77, so the largest is 77." },
+    { q: "A bag contains an equal number of ₹1, ₹2 and ₹5 coins worth ₹232 in all. How many of each are there?", options: ["19", "87", "30", "29"], answer: 3, explanation: "Each set of one of each is worth ₹8; 232/8 = 29." },
+    { q: "What is the angle between the hands of a clock at 1:30?", options: ["135°", "105°", "150°", "165°"], answer: 0, explanation: "Angle = |30 × 1 − 5.5 × 30| = 135°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "11 December 2031 is a Thursday. What day of the week is 13 April 2031?", options: ["Sunday", "Saturday", "Tuesday", "Monday"], answer: 0, explanation: "13 April 2031 is 242 days before 11 December 2031. 242 = 7 × 34 + 4, so the day shifts 4 back: Sunday." },
+    { q: "Statements: All birds are cups. All cups are coins. Conclusions: I. All coins are birds. II. Some cups are birds.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "All birds are cups, so some cups are birds (II); but coins may include much more than birds, so I does not follow." },
+    { q: "Statement: Some of the new recruits cannot swim. Conclusions: I. Some recruits may need swimming training. II. No recruit can swim.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Those who cannot swim may need training (I); 'some' does not mean 'all'." },
+    { q: "A cube of side 9 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have exactly two faces painted?", options: ["8", "294", "343", "84"], answer: 3, explanation: "There are 729 small cubes; exactly two faces painted: 12 edges × (9 − 2) = 84." },
+    { q: "Which letter is exactly midway between H and P in the English alphabet?", options: ["M", "L", "K", "N"], answer: 1, explanation: "H = 8 and P = 16; the midpoint is 12 = L." },
+    { q: "If the following words are arranged in dictionary order, which word comes second? Hunter, History, Helicopter, Horizon", options: ["Hunter", "History", "Helicopter", "Horizon"], answer: 1, explanation: "In dictionary order: Helicopter, History, Horizon, Hunter." },
+  ],
+};
+
+export default test;

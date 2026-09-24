@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-32",
+  title: "OIR Test 32",
+  durationMinutes: 20,
+  releaseAt: "2026-10-18T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 80, 99, 120, 143, 168, ?", options: ["194", "195", "224", "196"], answer: 1, explanation: "Here the terms are n² − 1 for consecutive n. Next: 14² − 1 = 195." },
+    { q: "Find the next number: 3, 9, 8, 24, 23, 69, ?", options: ["68", "207", "69", "66"], answer: 0, explanation: "Here the operations alternate: × 3, − 1, × 3, − 1 and so on. Next: 69 − 1 = 68." },
+    { q: "Find the next number: 1792, 448, 112, 28, ?", options: ["7", "8", "21", "6"], answer: 0, explanation: "Here each term is the previous term divided by 4. Next: 28 ÷ 4 = 7." },
+    { q: "Find the missing number: 20, 28, 37, 47, ?, 70", options: ["58", "59", "56", "68"], answer: 0, explanation: "Here the differences added are 8, 9, 10, 11, 12 — each 1 more than the last, so the missing term is 58." },
+    { q: "Find the next letter: V, R, N, J, F, ?", options: ["B", "C", "A", "D"], answer: 0, explanation: "By alphabet positions (22, 18, 14, 10, 6), each letter is 4 places before the previous one: F(6) − 4 = B(2)." },
+    { q: "Find the next pair: BJ, CH, DF, ED, ?", options: ["EA", "GB", "FB", "FA"], answer: 2, explanation: "The first letters move 1 forward each time and the second letters move 2 back: next is FB." },
+    { q: "Petal : Flower :: Page : ?", options: ["Book", "Letter", "Pen", "Word"], answer: 0, explanation: "A petal is part of a flower; a page is part of a book." },
+    { q: "9 : 100 :: 13 : ?", options: ["338", "172", "196", "182"], answer: 2, explanation: "9 → (9 + 1)² = 100; likewise 13 → (13 + 1)² = 196." },
+    { q: "Pinaka : Rocket launcher :: K9 Vajra : ?", options: ["Self-propelled howitzer", "Missile", "Rifle", "Tank"], answer: 0, explanation: "Pinaka is a multi-barrel rocket launcher; K9 Vajra is a self-propelled howitzer." },
+    { q: "Which one does not belong with the others?", options: ["Pentagon", "Triangle", "Square", "Sphere"], answer: 3, explanation: "A sphere is three-dimensional; the others are plane figures." },
+    { q: "Which pair does not belong with the others?", options: ["9 – 84", "8 – 128", "2 – 7", "5 – 28"], answer: 1, explanation: "In the other pairs the second number is n² + 3, where n is the first (e.g. 2² + 3 = 7); but 8² + 3 = 67, not 128." },
+    { q: "Choose the word most similar in meaning to METICULOUS.", options: ["Careless", "Careful", "Hasty", "Rough"], answer: 1, explanation: "Meticulous means careful." },
+    { q: "If TANK is coded as UCQO, how is TOWER coded?", options: ["GLDVI", "UQZIW", "UQZIX", "URZIW"], answer: 1, explanation: "In this code the 1st letter moves 1 place forward, the 2nd moves 2, the 3rd moves 3, and so on, so TOWER becomes UQZIW." },
+    { q: "In a code language, 'strong farmers march' is written as 'ka si bu', 'quick farmers' is written as 'tu si' and 'march hard' is written as 'su ka'. Which word is coded as 'si'?", options: ["march", "hard", "farmers", "quick"], answer: 2, explanation: "'farmers' is common to the first two sentences, so farmers = si; 'march' is common to the first and third, so march = ka." },
+    { q: "If A = 26, B = 25, …, Z = 1 and FOREST = 79 (the sum of its letter values), what is HARBOUR?", options: ["125", "83", "106", "105"], answer: 2, explanation: "HARBOUR = 19 + 26 + 9 + 25 + 12 + 6 + 9 = 106." },
+    { q: "G is the father of H. I is the brother of G. J is the daughter of I. How is J related to H?", options: ["Cousin", "Aunt", "Niece", "Sister"], answer: 0, explanation: "J's father I and H's father G are brothers, so J and H are cousins." },
+    { q: "Pointing to a lady, Tarun said, \"Her husband is the son of my father's only brother.\" How is the lady related to Tarun?", options: ["Aunt", "Niece", "Wife", "Cousin's wife"], answer: 3, explanation: "Her husband is Tarun's cousin (his uncle's son), so she is Tarun's cousin's wife." },
+    { q: "Starting from his house, Rahul walks 9 km towards the south, turns right and walks 1 km, finally turns left and walks 8 km. In which direction is he now from his house?", options: ["North-East", "South-East", "South-West", "North-West"], answer: 2, explanation: "He ends up 1 km west and 17 km south of his house, so he is to the South-West of his house." },
+    { q: "A man is facing North. He turns 180° anticlockwise, then 90° clockwise. Which direction is he facing now?", options: ["North", "South", "East", "West"], answer: 3, explanation: "The net turn is 90° anticlockwise from North, so he faces West." },
+    { q: "Dev is 28th from the top and 7th from the bottom in his class. How many students are there in the class?", options: ["34", "33", "35", "24"], answer: 0, explanation: "Total = 28 + 7 − 1 = 34 (Dev is counted in both ranks)." },
+    { q: "Bina is younger than Lata. Bina is older than Om. Manoj is older than Nisha. Lata is younger than Nisha. Who is the oldest?", options: ["Lata", "Nisha", "Manoj", "Bina"], answer: 2, explanation: "The order from oldest to youngest is Manoj > Nisha > Lata > Bina > Om, so the oldest is Manoj." },
+    { q: "The sum of the present ages of a father and his son is 44 years. 7 years ago, the father was 5 times as old as the son. What is the son's present age?", options: ["10 years", "14 years", "19 years", "12 years"], answer: 3, explanation: "Let the son be x: (44 − x − 7) = 5(x − 7) gives x = 12; the father is 32." },
+    { q: "₹8000 is divided among X, Y and Z in the ratio 2 : 2 : 6. What is Y's share?", options: ["₹2400", "₹1600", "₹4800", "₹2666.6666666666665"], answer: 1, explanation: "Total parts = 10; one part = ₹800; Y gets 2 × 800 = ₹1600." },
+    { q: "Through how many degrees does the hour hand of a clock turn from 2:30 to 9:20?", options: ["220°", "235°", "300°", "205°"], answer: 3, explanation: "The hour hand turns 0.5° per minute; 410 minutes × 0.5° = 205°." },
+    { q: "If today is Thursday, what day of the week will it be 270 days from today?", options: ["Sunday", "Wednesday", "Tuesday", "Monday"], answer: 3, explanation: "270 = 7 × 38 + 4; 4 days after Thursday is Monday." },
+    { q: "Statements: Some bottles are singers. Some singers are coins. Conclusions: I. Some bottles are coins. II. All coins are bottles.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 3, explanation: "Two 'some' statements give no definite link between bottles and coins, so neither conclusion is certain." },
+    { q: "Statement: The government has made yoga compulsory in schools. Assumptions: I. Yoga is beneficial for students. II. Schools can arrange to teach yoga.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 2, explanation: "Making it compulsory assumes it is useful (I) and can be implemented (II)." },
+    { q: "How many cubes of side 2 cm can be cut from a solid cube of side 10 cm?", options: ["125", "500", "25", "15"], answer: 0, explanation: "(10/2)³ = 5³ = 125." },
+    { q: "Which letter is 10th to the right of the 5th letter from the left in the English alphabet?", options: ["N", "P", "M", "O"], answer: 3, explanation: "The 5th letter from the left is E; 10 places to its right is the 15th letter, O." },
+    { q: "If the following words are arranged in dictionary order, which word comes first? Diamond, Discipline, Dynamic, Doctor", options: ["Discipline", "Diamond", "Dynamic", "Doctor"], answer: 1, explanation: "In dictionary order: Diamond, Discipline, Doctor, Dynamic." },
+  ],
+};
+
+export default test;

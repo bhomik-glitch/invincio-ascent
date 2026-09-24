@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-91",
+  title: "OIR Test 91",
+  durationMinutes: 20,
+  releaseAt: "2027-01-10T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 15552, 2592, 432, 72, ?", options: ["13", "60", "12", "10"], answer: 2, explanation: "Here each term is the previous term divided by 6. Next: 72 ÷ 6 = 12." },
+    { q: "Find the next number: 9, 87, 14, 83, 19, 79, 24, ?", options: ["79", "29", "71", "75"], answer: 3, explanation: "Here two series alternate: 9, 14, 19, … (+5) and 87, 83, 79, … (-4). Next: 79 − 4 = 75." },
+    { q: "Find the next number: 512, 729, 1000, 1331, 1728, ?", options: ["2197", "2196", "2744", "2198"], answer: 0, explanation: "Here the terms are the cubes of consecutive numbers. Next: 13³ = 2197." },
+    { q: "Find the missing number: 27, 32, ?, 57, 77, 102", options: ["47", "45", "52", "42"], answer: 3, explanation: "Here the differences added are 5, 10, 15, 20, 25 — each 5 more than the last, so the missing term is 42." },
+    { q: "Find the next letter: E, I, L, P, S, ?", options: ["X", "Y", "V", "W"], answer: 3, explanation: "By alphabet positions (5, 9, 12, 16, 19), the letters move alternately +4 and +3: S(19) + 4 = W(23)." },
+    { q: "Find the next pair: PH, RI, TJ, VK, ?", options: ["XM", "XL", "YL", "WK"], answer: 1, explanation: "The first letters move 2 forward each time and the second letters move 1 forward: next is XL." },
+    { q: "Bee : Honey :: Cow : ?", options: ["Grass", "Calf", "Milk", "Dung"], answer: 2, explanation: "Bees produce honey; cows produce milk." },
+    { q: "9 : 80 :: 13 : ?", options: ["169", "168", "170", "196"], answer: 1, explanation: "9 → 9² − 1 = 80; likewise 13 → 13² − 1 = 168." },
+    { q: "Ganga : Gangotri :: Yamuna : ?", options: ["Gangotri", "Amarkantak", "Mansarovar", "Yamunotri"], answer: 3, explanation: "The Ganga rises at Gangotri; the Yamuna rises at Yamunotri." },
+    { q: "Which one does not belong with the others?", options: ["Pink", "Violet", "Indigo", "Blue"], answer: 0, explanation: "Pink is not a colour of the rainbow." },
+    { q: "Which number does not belong with the others?", options: ["13", "29", "27", "47"], answer: 2, explanation: "27 = 3 × 9 is not prime; the others are prime numbers." },
+    { q: "Choose the one word for: \"One who always looks on the bright side of things\"", options: ["Optimist", "Realist", "Cynic", "Pessimist"], answer: 0, explanation: "Optimist: one who always looks on the bright side of things." },
+    { q: "If FLAG is written as 6-12-1-7, how is FAMILY written in the same code?", options: ["21-26-14-18-15-2", "6-1-13-10-12-25", "6-1-13-9-12-25", "5-1-13-9-12-25"], answer: 2, explanation: "Each letter is replaced by its position in the alphabet (A = 1, …, Z = 26), so FAMILY → 6-1-13-9-12-25." },
+    { q: "In a code language, 'strong officers train' is written as 've ja pi', 'smart officers' is written as 'pi li' and 'train daily' is written as 'ga ja'. What is the code for 'train'?", options: ["ve", "ja", "ga", "pi"], answer: 1, explanation: "'officers' is common to the first two sentences, so officers = pi; 'train' is common to the first and third, so train = ja." },
+    { q: "If '×' means '+', '÷' means '−', '−' means '×' and '+' means '÷', what is the value of 14 × 10 ÷ 36 + 9 − 6?", options: ["12", "2", "0", "6"], answer: 2, explanation: "Replacing the symbols gives 14 + 10 − 36 ÷ 9 × 6; following BODMAS, this equals 0." },
+    { q: "Uday's paternal grandmother Vimla has only one son, Waman. How is Waman related to Uday?", options: ["Uncle", "Brother", "Father", "Grandfather"], answer: 2, explanation: "Uday's father is a son of Vimla; her only son is Waman, so Waman is Uday's father." },
+    { q: "Pointing to a man, Bela said, \"His only brother's wife is my daughter.\" How is the man related to Bela?", options: ["Son-in-law", "Daughter's brother-in-law", "Son", "Nephew"], answer: 1, explanation: "The man's brother is Bela's son-in-law, so the man is her daughter's brother-in-law." },
+    { q: "Starting from his house, Kabir walks 8 km towards the west, turns left and walks 3 km, finally turns left and walks 12 km. What is the shortest distance between him and his house?", options: ["1 km", "4 km", "7 km", "5 km"], answer: 3, explanation: "He ends up 4 km east and 3 km south of his house. Distance = √(4² + 3²) = 5 km." },
+    { q: "One morning, just after sunrise, Rohit was standing in a field. His shadow fell exactly to his right. Which direction was he facing?", options: ["North", "South", "West", "East"], answer: 1, explanation: "In the morning the sun is in the east, so shadows fall to the west. With the shadow (West) on his right, he must be facing South." },
+    { q: "In a row of 33 children, Suresh is 7th from the left. Varun is 3rd to the right of Suresh. What is Varun's position from the right end?", options: ["26th", "23rd", "25th", "24th"], answer: 3, explanation: "Varun is 10th from the left, so from the right he is 33 − 10 + 1 = 24." },
+    { q: "Farhan is shorter than Ravi. Uma is shorter than Jatin. Farhan is taller than Jatin. Who is the second tallest?", options: ["Ravi", "Uma", "Farhan", "Jatin"], answer: 2, explanation: "The order from tallest to shortest is Ravi > Farhan > Jatin > Uma, so the second tallest is Farhan." },
+    { q: "15% of a number is 24. What is 60% of the same number?", options: ["120", "144", "96", "106"], answer: 2, explanation: "The number is 24 × 100/15 = 160, and 60% of 160 = 96." },
+    { q: "A bag contains an equal number of ₹1, ₹5 and ₹10 coins worth ₹112 in all. How many of each are there?", options: ["9", "7", "21", "6"], answer: 1, explanation: "Each set of one of each is worth ₹16; 112/16 = 7." },
+    { q: "What is the angle between the hands of a clock at 10:30?", options: ["150°", "120°", "165°", "135°"], answer: 3, explanation: "Angle = |30 × 10 − 5.5 × 30| = 135°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "2 May 2025 is a Friday. What day of the week is 17 April 2026?", options: ["Friday", "Sunday", "Thursday", "Saturday"], answer: 0, explanation: "17 April 2026 is 350 days after 2 May 2025. 350 = 7 × 50 + 0, so the day shifts 0 forward: Friday." },
+    { q: "Statements: Some bats are clouds. All bats are farmers. Conclusions: I. Some farmers are clouds. II. Some clouds are farmers.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "The bats that are clouds are also farmers, so some farmers are clouds (I) and some clouds are farmers (II)." },
+    { q: "Statement: Drivers using mobile phones have caused many accidents. Courses of action: I. Using a hand-held phone while driving should be a punishable offence. II. Mobile phones should be banned in the country. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Penalising phone use while driving targets the cause (I); a national ban is extreme." },
+    { q: "A cube of side 9 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have exactly one face painted?", options: ["8", "294", "343", "84"], answer: 1, explanation: "There are 729 small cubes; exactly one face painted: 6 faces × (9 − 2)² = 294." },
+    { q: "Which letter is 5th to the right of the 18th letter from the left in the English alphabet?", options: ["X", "V", "U", "W"], answer: 3, explanation: "The 18th letter from the left is R; 5 places to its right is the 23rd letter, W." },
+    { q: "If the following words are arranged in dictionary order, which word comes first? Rifle, Regiment, Rocket, Runway", options: ["Regiment", "Rocket", "Rifle", "Runway"], answer: 0, explanation: "In dictionary order: Regiment, Rifle, Rocket, Runway." },
+  ],
+};
+
+export default test;

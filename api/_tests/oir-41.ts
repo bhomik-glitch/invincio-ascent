@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-41",
+  title: "OIR Test 41",
+  durationMinutes: 20,
+  releaseAt: "2026-11-01T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 8, 19, 41, 85, 173, ?", options: ["346", "349", "351", "343"], answer: 1, explanation: "Here each term is 2 times the previous term plus 3. Next: 173 × 2 + 3 = 349." },
+    { q: "Find the next number: 20, 64, 24, 59, 28, 54, 32, ?", options: ["49", "54", "36", "44"], answer: 0, explanation: "Here two series alternate: 20, 24, 28, … (+4) and 64, 59, 54, … (-5). Next: 54 − 5 = 49." },
+    { q: "Find the next number: 2, 4, 6, 10, 16, 26, 42, ?", options: ["58", "68", "69", "84"], answer: 1, explanation: "Here each term is the sum of the previous two terms. Next: 26 + 42 = 68." },
+    { q: "Find the missing number: 8, 32, 128, ?, 2048", options: ["1088", "512", "1664", "513"], answer: 1, explanation: "Here each term is 4 times the previous term, so the missing term is 512." },
+    { q: "Find the next letter: F, I, M, P, T, ?", options: ["Y", "X", "W", "V"], answer: 2, explanation: "By alphabet positions (6, 9, 13, 16, 20), the letters move alternately +3 and +4: T(20) + 3 = W(23)." },
+    { q: "Find the next pair: GN, HP, IR, JT, ?", options: ["KW", "LV", "KV", "JU"], answer: 2, explanation: "The first letters move 1 forward each time and the second letters move 2 forward: next is KV." },
+    { q: "Ampere : Current :: Volt : ?", options: ["Energy", "Resistance", "Potential difference", "Power"], answer: 2, explanation: "The ampere is the unit of current; the volt is the unit of potential difference." },
+    { q: "4 : 24 :: 8 : ?", options: ["80", "72", "504", "56"], answer: 0, explanation: "4 → 4 × 6 = 24; likewise 8 → 8 × 10 = 80." },
+    { q: "Rajasthan : Jaipur :: Arunachal Pradesh : ?", options: ["Itanagar", "Aizawl", "Kohima", "Imphal"], answer: 0, explanation: "Jaipur is the capital of Rajasthan; Itanagar is the capital of Arunachal Pradesh." },
+    { q: "Which one does not belong with the others?", options: ["Carrot", "Apple", "Mango", "Banana"], answer: 0, explanation: "The carrot is a vegetable; the others are fruits." },
+    { q: "Which number does not belong with the others?", options: ["120", "40", "123", "60"], answer: 2, explanation: "40, 60, 120 are all multiples of 10; 123 is not." },
+    { q: "Choose the word most opposite in meaning to COURAGE.", options: ["Valour", "Cowardice", "Strength", "Bravery"], answer: 1, explanation: "The opposite of courage is cowardice; the other options are similar in meaning or unrelated." },
+    { q: "If BRIDGE is coded as CTLHLK, how is TOWER coded?", options: ["TQZIW", "GLDVI", "UQAIW", "UQZIW"], answer: 3, explanation: "In this code the 1st letter moves 1 place forward, the 2nd moves 2, the 3rd moves 3, and so on, so TOWER becomes UQZIW." },
+    { q: "In a code language, 'bold players fight' is written as 'bu ru ve', 'smart players' is written as 're ru' and 'fight together' is written as 've lo'. What is the code for 'smart'?", options: ["re", "ve", "bu", "lo"], answer: 0, explanation: "'players' is common to the first two sentences, so players = ru; 'fight' is common to the first and third, so fight = ve. The other code in the second sentence, re, means 'smart'." },
+    { q: "If '÷' means '+', '×' means '−', '−' means '×' and '+' means '÷', what is the value of 15 − 11 × 6 ÷ 70 + 10?", options: ["166", "146", "176", "167"], answer: 0, explanation: "Replacing the symbols gives 15 × 11 − 6 + 70 ÷ 10; following BODMAS, this equals 166." },
+    { q: "A is the brother of B. B is the son of C. D is the father of C. E is the wife of D. How is A related to E?", options: ["Nephew", "Grandson", "Great-grandson", "Son"], answer: 1, explanation: "A is C's son; C is the child of D and E, so A is E's grandson." },
+    { q: "Pointing to a woman, Kapil said, \"She is the wife of the only son of my paternal grandfather.\" How is the woman related to Kapil?", options: ["Sister", "Aunt", "Grandmother", "Mother"], answer: 3, explanation: "The only son of Kapil's paternal grandfather is Kapil's father; his wife is Kapil's mother." },
+    { q: "Starting from his house, Dev walks 100 m towards the west, turns right and walks 10 m, finally turns right and walks 80 m. In which direction is he now from his house?", options: ["South-West", "North-West", "North-East", "South-East"], answer: 1, explanation: "He ends up 20 m west and 10 m north of his house, so he is to the North-West of his house." },
+    { q: "A man is facing West. He turns 90° clockwise, then 135° clockwise. Which direction is he facing now?", options: ["South-West", "North-West", "South-East", "North-East"], answer: 2, explanation: "The net turn is 135° anticlockwise from West, so he faces South-East." },
+    { q: "In a row of 27 children, Suresh is 15th from the left. Sanjay is 9th to the right of Suresh. What is Sanjay's position from the right end?", options: ["4th", "6th", "3rd", "5th"], answer: 0, explanation: "Sanjay is 24th from the left, so from the right he is 27 − 24 + 1 = 4." },
+    { q: "Hari is richer than Chetan. Hari is poorer than Nisha. Kiran is poorer than Chetan. Who is the second poorest?", options: ["Nisha", "Kiran", "Hari", "Chetan"], answer: 3, explanation: "The order from richest to poorest is Nisha > Hari > Chetan > Kiran, so the second poorest is Chetan." },
+    { q: "The sum of 3 consecutive odd numbers is 57. What is the largest of them?", options: ["19", "23", "21", "25"], answer: 2, explanation: "The middle value is 57/3 = 19; the numbers are 17, 19, 21, so the largest is 21." },
+    { q: "What is the simple interest on ₹5500 at 9% per annum for 3 years?", options: ["₹1485", "₹1980", "₹990", "₹6985"], answer: 0, explanation: "SI = P × R × T / 100 = 5500 × 9 × 3 / 100 = ₹1485." },
+    { q: "In a mirror, a clock appears to show 6:54. What is the actual time?", options: ["5:36", "6:54", "6:06", "5:06"], answer: 3, explanation: "Actual time = 11:60 − 6:54 = 5:06." },
+    { q: "Which year will have exactly the same calendar as 2038?", options: ["2050", "2048", "2042", "2049"], answer: 3, explanation: "A year has the same calendar when it starts on the same weekday and is also an ordinary year. Counting odd days (1 per ordinary year, 2 per leap year) from 2038 until they total a multiple of 7 gives 2049." },
+    { q: "Statements: All cars are watches. All cars are bottles. Conclusions: I. Some watches are bottles. II. All watches are bottles.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Every one of the cars is both a watch and a bottle, so some watches are bottles (I); there may be watches that are not bottles, so II fails." },
+    { q: "Statement: \"Book early to avoid disappointment,\" says a travel agency. Assumptions: I. Seats may run out. II. Prices will certainly fall later.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0, explanation: "The advice assumes limited availability (I); it would not be given if prices were sure to fall." },
+    { q: "A cube of side 4 cm is painted on two opposite faces only and then cut into 1 cm cubes. How many small cubes have no paint on them?", options: ["16", "32", "24", "30"], answer: 1, explanation: "The two opposite faces each have 16 cubes with exactly one painted face (32 in all), and the remaining 4³ − 32 = 32 cubes have no paint." },
+    { q: "If the English alphabet is written in reverse order (Z to A), which letter will be 6th to the right of the 12th letter from the left?", options: ["J", "H", "I", "R"], answer: 2, explanation: "In the reversed alphabet the 18th letter from the left is I (position n holds letter 27 − n)." },
+    { q: "If the following words are arranged in dictionary order, which word comes first? Trophy, Target, Tower, Tank", options: ["Target", "Tower", "Trophy", "Tank"], answer: 3, explanation: "In dictionary order: Tank, Target, Tower, Trophy." },
+  ],
+};
+
+export default test;

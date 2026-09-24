@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-81",
+  title: "OIR Test 81",
+  durationMinutes: 20,
+  releaseAt: "2026-12-27T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 18, 25, 33, 42, 52, ?", options: ["62", "64", "63", "65"], answer: 2, explanation: "Here the differences added are 7, 8, 9, 10, 11 — each 1 more than the last. Next: 52 + 11 = 63." },
+    { q: "Find the next number: 6, 12, 18, 30, 48, 78, 126, ?", options: ["205", "174", "252", "204"], answer: 3, explanation: "Here each term is the sum of the previous two terms. Next: 78 + 126 = 204." },
+    { q: "Find the next number: 29, 33, 39, 41, 47, ?", options: ["52", "49", "51", "53"], answer: 2, explanation: "Here the terms are consecutive prime numbers plus 10. Next: 41 + 10 = 51." },
+    { q: "Find the missing number: 2, 3, 8, ?, 112, 565", options: ["27", "60", "93", "17"], answer: 0, explanation: "Here the multipliers increase by one each step (×1, ×2, ×3, …), then add the same number (×1 + 1, ×2 + 2, …), so the missing term is 27." },
+    { q: "Find the next letter: F, G, J, K, N, ?", options: ["N", "P", "O", "Q"], answer: 2, explanation: "By alphabet positions (6, 7, 10, 11, 14), the letters move alternately +1 and +3: N(14) + 1 = O(15)." },
+    { q: "Find the next group: BCD, HIJ, NOP, ?", options: ["TUV", "STU", "TVU", "UVW"], answer: 0, explanation: "Each group is three consecutive letters, and 3 letters are skipped between groups: after NOP comes TUV." },
+    { q: "Bricks : Kiln :: Bread : ?", options: ["Oven", "Furnace", "Mill", "Loom"], answer: 0, explanation: "Bricks are baked in a kiln; bread is baked in an oven." },
+    { q: "6 : 215 :: 5 : ?", options: ["26", "124", "30", "20"], answer: 1, explanation: "6 → 6³ − 1 = 215; likewise 5 → 5³ − 1 = 124." },
+    { q: "Bharatanatyam : Tamil Nadu :: Kuchipudi : ?", options: ["Odisha", "Kerala", "Assam", "Andhra Pradesh"], answer: 3, explanation: "Bharatanatyam is from Tamil Nadu; Kuchipudi is from Andhra Pradesh." },
+    { q: "Which one does not belong with the others?", options: ["Mirage 2000", "Tejas", "Rafale", "Chetak"], answer: 3, explanation: "Chetak is a helicopter; the others are fighter aircraft." },
+    { q: "Which number does not belong with the others?", options: ["101", "59", "51", "97"], answer: 2, explanation: "51 = 3 × 17 is not prime; the others are prime numbers." },
+    { q: "Choose the one word for: \"A speech made without any preparation\"", options: ["Soliloquy", "Eulogy", "Monologue", "Extempore"], answer: 3, explanation: "Extempore: a speech made without any preparation." },
+    { q: "If TICKET is coded as TEKCIT, how is COACH coded?", options: ["HCZOC", "JECQE", "HCAOC", "HCAOB"], answer: 2, explanation: "In this code the letters are written in reverse order, so COACH becomes HCAOC." },
+    { q: "In a code language, 'tall cadets sail' is written as 'ta po ka', 'proud cadets' is written as 'ki ta' and 'sail early' is written as 'ka ne'. What is the code for 'sail'?", options: ["ka", "po", "ki", "ne"], answer: 0, explanation: "'cadets' is common to the first two sentences, so cadets = ta; 'sail' is common to the first and third, so sail = ka." },
+    { q: "If '×' means '+', '+' means '−', '÷' means '×' and '−' means '÷', what is the value of 10 × 9 − 3 ÷ 4 + 5?", options: ["19", "22", "17", "7"], answer: 2, explanation: "Replacing the symbols gives 10 + 9 ÷ 3 × 4 − 5; following BODMAS, this equals 17." },
+    { q: "Dinesh's son Eshwar has a daughter Falguni. Falguni has a brother Ganesh. How is Dinesh related to Ganesh?", options: ["Uncle", "Father", "Great-grandfather", "Grandfather"], answer: 3, explanation: "Ganesh is Eshwar's son too, and Dinesh is Eshwar's father, so Dinesh is Ganesh's grandfather." },
+    { q: "Pointing to a man, Rupal said, \"His father's wife's only daughter is me.\" How is the man related to Rupal?", options: ["Husband", "Brother", "Father", "Cousin"], answer: 1, explanation: "The man's mother's only daughter is Rupal, so the man is Rupal's brother." },
+    { q: "Starting from his house, Deepak walks 6 km towards the east, turns right and walks 10 km, finally turns left and walks 10 km. In which direction is he now from his house?", options: ["North-West", "North-East", "South-West", "South-East"], answer: 3, explanation: "He ends up 16 km east and 10 km south of his house, so he is to the South-East of his house." },
+    { q: "A man is facing West. He turns 45° anticlockwise, then 135° anticlockwise. Which direction is he facing now?", options: ["East", "South", "North", "West"], answer: 0, explanation: "The net turn is 180° clockwise from West, so he faces East." },
+    { q: "In a class of 57 students, Ravi ranks 49th from the top. What is his rank from the bottom?", options: ["10th", "8th", "11th", "9th"], answer: 3, explanation: "Rank from bottom = 57 − 49 + 1 = 9." },
+    { q: "Asha is younger than Chetan. Chetan is younger than Gita. Bina is older than Gita. Asha is older than Lata. Who is in the middle (third)?", options: ["Gita", "Chetan", "Bina", "Asha"], answer: 1, explanation: "The order from oldest to youngest is Bina > Gita > Chetan > Asha > Lata, so in the middle (third) is Chetan." },
+    { q: "A train 120 m long passes a signal post in 8 seconds. What is its speed in km/h?", options: ["54", "45", "15", "63"], answer: 0, explanation: "Speed = 120/8 = 15 m/s = 15 × 18/5 = 54 km/h." },
+    { q: "What is the simple interest on ₹2000 at 10% per annum for 4 years?", options: ["₹800", "₹600", "₹2800", "₹1000"], answer: 0, explanation: "SI = P × R × T / 100 = 2000 × 10 × 4 / 100 = ₹800." },
+    { q: "In a mirror, a clock appears to show 9:37. What is the actual time?", options: ["2:23", "2:53", "3:37", "3:23"], answer: 0, explanation: "Actual time = 11:60 − 9:37 = 2:23." },
+    { q: "If today is Friday, what day of the week will it be 380 days from today?", options: ["Monday", "Tuesday", "Saturday", "Sunday"], answer: 3, explanation: "380 = 7 × 54 + 2; 2 days after Friday is Sunday." },
+    { q: "Statements: All teachers are sailors. No sailor is a road. Conclusions: I. No teacher is a road. II. Some teachers are roads.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "All teachers are sailors and no a sailor is a road, so no a teacher can be a road (I); II contradicts this." },
+    { q: "Statement: Several cases of dengue have been reported in the locality. Courses of action: I. The municipality should clear stagnant water and spray insecticide. II. All residents should be asked to leave the locality. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Removing mosquito breeding sites is practical (I); evacuating everyone is extreme." },
+    { q: "A cube of side 10 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have exactly three faces painted?", options: ["8", "512", "384", "96"], answer: 0, explanation: "There are 1000 small cubes; exactly three faces painted: only the 8 corner cubes." },
+    { q: "Which letter is 4th to the left of the 13th letter from the right in the English alphabet?", options: ["J", "K", "Q", "I"], answer: 0, explanation: "The 13th letter from the right is the 14th from the left (N); 4 to its left is the 10th letter, J." },
+    { q: "If the following words are arranged in dictionary order, which word comes first? Territory, Tiger, Team, Ticket", options: ["Territory", "Tiger", "Ticket", "Team"], answer: 3, explanation: "In dictionary order: Team, Territory, Ticket, Tiger." },
+  ],
+};
+
+export default test;

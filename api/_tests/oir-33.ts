@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-33",
+  title: "OIR Test 33",
+  durationMinutes: 20,
+  releaseAt: "2026-10-18T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 16, 49, 21, 46, 26, 43, 31, ?", options: ["36", "43", "37", "40"], answer: 3, explanation: "Here two series alternate: 16, 21, 26, … (+5) and 49, 46, 43, … (-3). Next: 43 − 3 = 40." },
+    { q: "Find the next number: 41, 47, 51, 53, 57, ?", options: ["59", "65", "64", "63"], answer: 3, explanation: "Here the terms are consecutive prime numbers plus 10. Next: 53 + 10 = 63." },
+    { q: "Find the next number: 35, 48, 63, 80, 99, ?", options: ["121", "143", "119", "120"], answer: 3, explanation: "Here the terms are n² − 1 for consecutive n. Next: 11² − 1 = 120." },
+    { q: "Find the missing number: 1, 6, 21, 66, ?, 606", options: ["201", "471", "211", "336"], answer: 0, explanation: "Here the differences 5, 15, 45, 135, 405 are each 3 times the previous difference, so the missing term is 201." },
+    { q: "Find the next letter: D, G, J, M, P, ?", options: ["S", "U", "R", "T"], answer: 0, explanation: "By alphabet positions (4, 7, 10, 13, 16), each letter is 3 places after the previous one: P(16) + 3 = S(19)." },
+    { q: "Find the next pair: TA, UD, VG, WJ, ?", options: ["WL", "XN", "YM", "XM"], answer: 3, explanation: "The first letters move 1 forward each time and the second letters move 3 forward: next is XM." },
+    { q: "Finger : Hand :: Toe : ?", options: ["Leg", "Nail", "Knee", "Foot"], answer: 3, explanation: "Fingers are part of the hand; toes are part of the foot." },
+    { q: "9 : 730 :: 2 : ?", options: ["9", "7", "6", "5"], answer: 0, explanation: "9 → 9³ + 1 = 730; likewise 2 → 2³ + 1 = 9." },
+    { q: "Army Day : 15 January :: Navy Day : ?", options: ["16 December", "4 December", "8 October", "7 December"], answer: 1, explanation: "Army Day is on 15 January; Navy Day is on 4 December." },
+    { q: "Which one does not belong with the others?", options: ["Cylinder", "Cone", "Rectangle", "Cube"], answer: 2, explanation: "A rectangle is two-dimensional; the others are solids." },
+    { q: "Which number does not belong with the others?", options: ["42", "86", "24", "84"], answer: 1, explanation: "42, 84, 24 are all multiples of 6; 86 is not." },
+    { q: "Choose the word most similar in meaning to OBSTINATE.", options: ["Obedient", "Stubborn", "Flexible", "Gentle"], answer: 1, explanation: "Obstinate means stubborn." },
+    { q: "If PISTON is written as 16-9-19-20-15-14, how is ARROW written in the same code?", options: ["26-9-9-12-4", "1-18-19-15-23", "1-18-18-15-23", "1-18-18-15-22"], answer: 2, explanation: "Each letter is replaced by its position in the alphabet (A = 1, …, Z = 26), so ARROW → 1-18-18-15-23." },
+    { q: "In a code language, 'proud leaders sail' is written as 'ka tu yo', 'calm leaders' is written as 'yo lo' and 'sail bravely' is written as 'mu ka'. What is the code for 'proud'?", options: ["ka", "lo", "tu", "yo"], answer: 2, explanation: "'leaders' is common to the first two sentences, so leaders = yo; 'sail' is common to the first and third, so sail = ka. The remaining code in the first sentence, tu, means 'proud'." },
+    { q: "If '×' means '+', '÷' means '−', '−' means '×' and '+' means '÷', what is the value of 28 + 7 − 10 ÷ 4 × 11?", options: ["25", "58", "47", "48"], answer: 2, explanation: "Replacing the symbols gives 28 ÷ 7 × 10 − 4 + 11; following BODMAS, this equals 47." },
+    { q: "B is the wife of C. D is the son of B. E is the father of C. How is E related to D?", options: ["Great-grandfather", "Uncle", "Father", "Grandfather"], answer: 3, explanation: "C is D's father, and E is C's father, so E is D's grandfather." },
+    { q: "Introducing a girl, Mohit said, \"Her mother is the wife of my father's only son.\" How is the girl related to Mohit?", options: ["Daughter", "Niece", "Cousin", "Sister"], answer: 0, explanation: "Mohit is his father's only son, so the girl's mother is Mohit's wife and the girl is his daughter." },
+    { q: "Starting from his house, Dev walks 65 m towards the west, turns left and walks 105 m, finally turns right and walks 105 m. In which direction is he now from his house?", options: ["North-East", "South-West", "North-West", "South-East"], answer: 1, explanation: "He ends up 170 m west and 105 m south of his house, so he is to the South-West of his house." },
+    { q: "If North-West is called North-East, and all other directions are renamed in the same way, what will West be called?", options: ["West", "South", "North", "East"], answer: 2, explanation: "North-West → North-East is a rotation of 90° clockwise; rotating West by the same amount gives North." },
+    { q: "In a row of 37 children, Rohit is 6th from the left. Arjun is 3rd to the right of Rohit. What is Arjun's position from the right end?", options: ["29th", "28th", "31st", "30th"], answer: 0, explanation: "Arjun is 9th from the left, so from the right he is 37 − 9 + 1 = 29." },
+    { q: "Farhan is richer than Manoj. Jatin is poorer than Manoj. Tarun is poorer than Kiran. Jatin is richer than Kiran. Who is the richest?", options: ["Jatin", "Manoj", "Kiran", "Farhan"], answer: 3, explanation: "The order from richest to poorest is Farhan > Manoj > Jatin > Kiran > Tarun, so the richest is Farhan." },
+    { q: "What is the simple interest on ₹5500 at 4% per annum for 6 years?", options: ["₹1540", "₹1100", "₹6820", "₹1320"], answer: 3, explanation: "SI = P × R × T / 100 = 5500 × 4 × 6 / 100 = ₹1320." },
+    { q: "Two trains start at the same time from stations 184 km apart and travel towards each other at 31 km/h and 61 km/h. After how many hours will they meet?", options: ["5", "1", "2", "3"], answer: 2, explanation: "They close the gap at 31 + 61 = 92 km/h, so they meet after 184/92 = 2 hours." },
+    { q: "In a mirror, a clock appears to show 7:40. What is the actual time?", options: ["4:50", "5:40", "4:20", "5:20"], answer: 2, explanation: "Actual time = 11:60 − 7:40 = 4:20." },
+    { q: "24 September 2014 was Mangalyaan's entry into Mars orbit. What day of the week was it?", options: ["Saturday", "Thursday", "Wednesday", "Tuesday"], answer: 2, explanation: "1 January 2001 was a Monday. 24 September 2014 is 5014 days after it, leaving 2 odd day(s) forwards from Monday, so it was a Wednesday." },
+    { q: "Statements: All singers are dancers. All stones are dancers. Conclusions: I. Some singers are stones. II. Some dancers are stones.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "All stones are dancers, so some dancers are stones (II); singers and stones both lie within dancers but need not overlap, so I fails." },
+    { q: "Statement: A soldier on leave was told, \"Report back to the unit within 48 hours.\" Assumptions: I. The soldier can reach the unit within 48 hours. II. The unit is located abroad.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0, explanation: "An order assumes it can be obeyed (I); nothing indicates the unit is abroad." },
+    { q: "A cube of side 7 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have exactly three faces painted?", options: ["60", "125", "8", "150"], answer: 2, explanation: "There are 343 small cubes; exactly three faces painted: only the 8 corner cubes." },
+    { q: "Which letter is 6th to the right of the 6th letter from the left in the English alphabet?", options: ["K", "J", "L", "M"], answer: 2, explanation: "The 6th letter from the left is F; 6 places to its right is the 12th letter, L." },
+    { q: "If the following words are arranged in dictionary order, which word comes second? Boxing, Boots, Blanket, Border", options: ["Boots", "Border", "Blanket", "Boxing"], answer: 0, explanation: "In dictionary order: Blanket, Boots, Border, Boxing." },
+  ],
+};
+
+export default test;

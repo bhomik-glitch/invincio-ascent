@@ -1,0 +1,41 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-15",
+  title: "OIR Test 15",
+  durationMinutes: 20,
+  questions: [
+    { q: "Find the next number: 2, 4, 2, 8, 14, 24, 46, ?", options: ["92", "71", "84", "60"], answer: 2, explanation: "Here each term is the sum of the previous three terms. Next: 14 + 24 + 46 = 84." },
+    { q: "Find the next number: 5, 9, 26, 103, 514, ?", options: ["3598", "3084", "2569", "3083"], answer: 3, explanation: "Here the multipliers increase by one each step (×2, ×3, ×4, …), then subtract 1. Next: 514 × 6 − 1 = 3083." },
+    { q: "Find the next number: 9, 54, 324, 1944, ?", options: ["11664", "11655", "13608", "11665"], answer: 0, explanation: "Here each term is 6 times the previous term. Next: 1944 × 6 = 11664." },
+    { q: "Find the missing number: 7, 12, ?, 42, 82, 162", options: ["32", "22", "21", "27"], answer: 1, explanation: "Here each term is 2 times the previous term minus 2, so the missing term is 22." },
+    { q: "Find the next letter: B, F, J, N, R, ?", options: ["U", "X", "W", "V"], answer: 3, explanation: "By alphabet positions (2, 6, 10, 14, 18), each letter is 4 places after the previous one: R(18) + 4 = V(22)." },
+    { q: "Find the next pair: PF, QI, RL, SO, ?", options: ["SQ", "TS", "TR", "UR"], answer: 2, explanation: "The first letters move 1 forward each time and the second letters move 3 forward: next is TR." },
+    { q: "Lion : Roar :: Elephant : ?", options: ["Bray", "Bleat", "Trumpet", "Howl"], answer: 2, explanation: "A lion roars; an elephant trumpets." },
+    { q: "9 : 720 :: 11 : ?", options: ["110", "1342", "1320", "1332"], answer: 2, explanation: "9 → 9³ − 9 = 720; likewise 11 → 11³ − 11 = 1320." },
+    { q: "Lieutenant General : Air Marshal :: Major General : ?", options: ["Air Marshal", "Group Captain", "Air Vice Marshal", "Air Commodore"], answer: 2, explanation: "Lieutenant General equals Air Marshal; Major General equals Air Vice Marshal." },
+    { q: "Which one does not belong with the others?", options: ["Lizard", "Crocodile", "Snake", "Frog"], answer: 3, explanation: "The frog is an amphibian; the others are reptiles." },
+    { q: "Which number does not belong with the others?", options: ["290", "256", "49", "289"], answer: 0, explanation: "49 = 7², 289 = 17², 256 = 16² are perfect squares; 290 is not." },
+    { q: "Choose the word most similar in meaning to ABANDON.", options: ["Adopt", "Protect", "Keep", "Desert"], answer: 3, explanation: "Abandon means desert." },
+    { q: "If HOCKEY is coded as FMAICW, how is PRINTER coded?", options: ["NPGLSCP", "NPGKRCP", "NPGLRCP", "RETNIRP"], answer: 2, explanation: "In this code each letter is moved 2 places back in the alphabet, so PRINTER becomes NPGLRCP." },
+    { q: "In a code language, 'young cadets work' is written as 'da ru lo', 'brave cadets' is written as 'ho ru' and 'work again' is written as 'ki lo'. What is the code for 'young'?", options: ["ho", "da", "lo", "ki"], answer: 1, explanation: "'cadets' is common to the first two sentences, so cadets = ru; 'work' is common to the first and third, so work = lo. The remaining code in the first sentence, da, means 'young'." },
+    { q: "If '÷' means '+', '×' means '−', '+' means '×' and '−' means '÷', what is the value of 8 × 8 ÷ 2 − 2 + 10?", options: ["20", "13", "12", "10"], answer: 3, explanation: "Replacing the symbols gives 8 − 8 + 2 ÷ 2 × 10; following BODMAS, this equals 10." },
+    { q: "A is the husband of B. B is the sister of C. C is the father of D. How is A related to D?", options: ["Grandfather", "Father", "Uncle", "Cousin"], answer: 2, explanation: "B is D's aunt (father's sister), so her husband A is D's uncle." },
+    { q: "Pointing to a girl, Manoj said, \"Her father is the only brother of my wife.\" How is the girl related to Manoj?", options: ["Niece", "Sister", "Daughter", "Cousin"], answer: 0, explanation: "The girl is the daughter of Manoj's wife's brother, i.e. Manoj's niece." },
+    { q: "Starting from his house, Aditya walks 3 km towards the north, turns left and walks 13 km, finally turns left and walks 2 km. In which direction is he now from his house?", options: ["North-West", "South-East", "South-West", "North-East"], answer: 0, explanation: "He ends up 13 km west and 1 km north of his house, so he is to the North-West of his house." },
+    { q: "A man is facing East. He turns 45° anticlockwise, then 90° clockwise, then 90° anticlockwise. Which direction is he facing now?", options: ["South-West", "South-East", "North-West", "North-East"], answer: 3, explanation: "The net turn is 45° anticlockwise from East, so he faces North-East." },
+    { q: "In a row, Vikram is 9th from the left and Deepak is 8th from the right. When they interchange places, Vikram becomes 15th from the left. How many people are in the row?", options: ["23", "21", "22", "20"], answer: 2, explanation: "After the swap Vikram takes Deepak's old place, which is 15th from the left and 8th from the right, so total = 15 + 8 − 1 = 22." },
+    { q: "Nisha is richer than Farhan. Bina is poorer than Farhan. Bina is richer than Ravi. Who is the richest?", options: ["Farhan", "Bina", "Ravi", "Nisha"], answer: 3, explanation: "The order from richest to poorest is Nisha > Farhan > Bina > Ravi, so the richest is Nisha." },
+    { q: "A train 180 m long running at 36 km/h crosses a platform 270 m long. How many seconds does it take?", options: ["51", "18", "45", "27"], answer: 2, explanation: "It must cover 180 + 270 = 450 m at 36 km/h = 10 m/s, taking 450/10 = 45 s." },
+    { q: "The sum of 4 consecutive even numbers is 116. What is the largest of them?", options: ["32", "34", "29", "30"], answer: 0, explanation: "The middle value is 116/4 = 29; the numbers are 26, 28, 30, 32, so the largest is 32." },
+    { q: "What is the angle between the hands of a clock at 12:35?", options: ["150°", "137.5°", "175°", "167.5°"], answer: 3, explanation: "Angle = |30 × 0 − 5.5 × 35| = 192.5°, i.e. 360° − that = 167.5°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "Which year will have exactly the same calendar as 2028?", options: ["2057", "2055", "2032", "2056"], answer: 3, explanation: "A year has the same calendar when it starts on the same weekday and is also a leap year. Counting odd days (1 per ordinary year, 2 per leap year) from 2028 until they total a multiple of 7 gives 2056." },
+    { q: "Statements: All pilots are chairs. No runner is a chair. Conclusions: I. No pilot is a runner. II. All runners are pilots.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "All pilots are chairs and no a runner is a chair, so no a pilot is a runner (I); II contradicts this." },
+    { q: "Statement: \"In case of fire, use the stairs; do not use the lift,\" reads a notice. Assumptions: I. Lifts may be unsafe during a fire. II. People can reach the stairs.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 2, explanation: "The advice only makes sense if lifts are risky (I) and the stairs are usable (II)." },
+    { q: "A wooden block measuring 6 cm × 4 cm × 3 cm is painted on all faces and cut into 1 cm cubes. How many cubes have no face painted?", options: ["28", "9", "8", "7"], answer: 2, explanation: "Cubes with no face painted: (6 − 2)(4 − 2)(3 − 2) = 8." },
+    { q: "Which letter is exactly midway between T and Z in the English alphabet?", options: ["X", "Y", "W", "V"], answer: 2, explanation: "T = 20 and Z = 26; the midpoint is 23 = W." },
+    { q: "If the following words are arranged in dictionary order, which word comes first? Artillery, Aircraft, Autumn, Anchor", options: ["Aircraft", "Artillery", "Autumn", "Anchor"], answer: 0, explanation: "In dictionary order: Aircraft, Anchor, Artillery, Autumn." },
+  ],
+};
+
+export default test;

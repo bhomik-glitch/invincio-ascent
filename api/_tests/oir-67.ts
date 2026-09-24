@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-67",
+  title: "OIR Test 67",
+  durationMinutes: 20,
+  releaseAt: "2026-12-06T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 33, 39, 41, 47, 51, ?", options: ["53", "54", "56", "55"], answer: 0, explanation: "Here the terms are consecutive prime numbers plus 10. Next: 43 + 10 = 53." },
+    { q: "Find the next number: 10, 14, 26, 62, 170, ?", options: ["495", "602", "510", "494"], answer: 3, explanation: "Here the differences 4, 12, 36, 108, 324 are each 3 times the previous difference. Next: 170 + 324 = 494." },
+    { q: "Find the next number: 171, 164, 155, 144, 131, ?", options: ["116", "118", "119", "114"], answer: 0, explanation: "Here the differences subtracted are 7, 9, 11, 13, 15 — each 2 more than the last. Next: 131 − 15 = 116." },
+    { q: "Find the missing number: 3, 5, ?, 55, 274, 1643", options: ["4", "46", "30", "14"], answer: 3, explanation: "Here the multipliers increase by one each step (×2, ×3, ×4, …), then subtract 1, so the missing term is 14." },
+    { q: "Find the next letter: C, E, G, I, K, ?", options: ["M", "N", "L", "O"], answer: 0, explanation: "By alphabet positions (3, 5, 7, 9, 11), each letter is 2 places after the previous one: K(11) + 2 = M(13)." },
+    { q: "Find the next pair: GY, JV, MS, PP, ?", options: ["SM", "TM", "SL", "RL"], answer: 0, explanation: "The first letters move 3 forward each time and the second letters move 3 back: next is SM." },
+    { q: "Ink : Pen :: Lead : ?", options: ["Eraser", "Sharpener", "Paper", "Pencil"], answer: 3, explanation: "A pen writes with ink; a pencil writes with lead." },
+    { q: "7 : 52 :: 3 : ?", options: ["28", "15", "12", "18"], answer: 2, explanation: "7 → 7² + 3 = 52; likewise 3 → 3² + 3 = 12." },
+    { q: "Football : Durand Cup :: Hockey : ?", options: ["Thomas Cup", "Beighton Cup", "Davis Cup", "Ranji Trophy"], answer: 1, explanation: "The Durand Cup is a football tournament; the Beighton Cup is a hockey tournament." },
+    { q: "Which one does not belong with the others?", options: ["Timid", "Bold", "Fearless", "Brave"], answer: 0, explanation: "Timid is opposite in meaning; the others mean courageous." },
+    { q: "Which number does not belong with the others?", options: ["60", "120", "63", "156"], answer: 2, explanation: "120, 60, 156 are all multiples of 12; 63 is not." },
+    { q: "Choose the word most opposite in meaning to FOREIGN.", options: ["Distant", "Strange", "Alien", "Native"], answer: 3, explanation: "The opposite of foreign is native; the other options are similar in meaning or unrelated." },
+    { q: "If SAILOR is coded as TZJKPQ, how is CAMEL coded?", options: ["DZNCM", "DCPIQ", "CZNDM", "DZNDM"], answer: 3, explanation: "In this code letters are moved alternately one place forward and one place back, so CAMEL becomes DZNDM." },
+    { q: "In a code language, 'young boys sail' is written as 'lo ne ta', 'proud boys' is written as 'li ta' and 'sail fast' is written as 'ru lo'. What is the code for 'fast'?", options: ["ta", "li", "lo", "ru"], answer: 3, explanation: "'boys' is common to the first two sentences, so boys = ta; 'sail' is common to the first and third, so sail = lo. The other code in the third sentence, ru, means 'fast'." },
+    { q: "If '×' means '+', '÷' means '−', '−' means '×' and '+' means '÷', what is the value of 18 ÷ 30 + 6 × 4 − 10?", options: ["33", "63", "54", "53"], answer: 3, explanation: "Replacing the symbols gives 18 − 30 ÷ 6 + 4 × 10; following BODMAS, this equals 53." },
+    { q: "Yash is the son of Zoya. Zoya is the daughter of Amar. Amar's wife is Bina. How is Yash related to Bina?", options: ["Great-grandson", "Nephew", "Son", "Grandson"], answer: 3, explanation: "Zoya is Bina's daughter, so Zoya's son Yash is Bina's grandson." },
+    { q: "Pointing to a lady, Uday said, \"Her daughter's father is my brother's father-in-law.\" How is the lady related to Uday?", options: ["Mother", "Mother-in-law", "Brother's mother-in-law", "Aunt"], answer: 2, explanation: "The lady's husband is Uday's brother's father-in-law, so she is his brother's mother-in-law." },
+    { q: "Starting from his house, Karan walks 12 km towards the east, turns right and walks 14 km, turns left and walks 3 km, finally turns left and walks 1 km. In which direction is he now from his house?", options: ["South-East", "North-East", "North-West", "South-West"], answer: 0, explanation: "He ends up 15 km east and 13 km south of his house, so he is to the South-East of his house." },
+    { q: "A man is facing North-West. He turns 180° clockwise, then 90° clockwise. Which direction is he facing now?", options: ["South-West", "South-East", "North-East", "North-West"], answer: 0, explanation: "The net turn is 90° anticlockwise from North-West, so he faces South-West." },
+    { q: "In a class of 52 students, Ravi ranks 18th from the top. What is his rank from the bottom?", options: ["34th", "35th", "36th", "37th"], answer: 1, explanation: "Rank from bottom = 52 − 18 + 1 = 35." },
+    { q: "Om is younger than Dinesh. Dinesh is younger than Farhan. Om is older than Gita. Who is the youngest?", options: ["Gita", "Dinesh", "Farhan", "Om"], answer: 0, explanation: "The order from oldest to youngest is Farhan > Dinesh > Om > Gita, so the youngest is Gita." },
+    { q: "A number is multiplied by 2, then 15 is added, and the result is multiplied by 3. The final answer is 105. What was the number?", options: ["0", "15", "11", "10"], answer: 3, explanation: "Working backwards: 105 ÷ 3 = 35; − 15 = 20; ÷ 2 = 10." },
+    { q: "A train 300 m long passes a signal post in 12 seconds. What is its speed in km/h?", options: ["90", "99", "81", "25"], answer: 0, explanation: "Speed = 300/12 = 25 m/s = 25 × 18/5 = 90 km/h." },
+    { q: "What is the angle between the hands of a clock at 4:45?", options: ["150°", "157.5°", "127.5°", "142.5°"], answer: 2, explanation: "Angle = |30 × 4 − 5.5 × 45| = 127.5°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "Which year will have exactly the same calendar as 2031?", options: ["2042", "2041", "2043", "2035"], answer: 0, explanation: "A year has the same calendar when it starts on the same weekday and is also an ordinary year. Counting odd days (1 per ordinary year, 2 per leap year) from 2031 until they total a multiple of 7 gives 2042." },
+    { q: "Statements: No phone is a teacher. No teacher is a table. Conclusions: I. No table is a teacher. II. Some phones are tables.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "'No a teacher is a table' can be reversed to 'No a table is a teacher' (I); two negative statements say nothing about phones and tables." },
+    { q: "Statement: All the members of the club are above 18 years of age. Karan is 16 years old. Conclusions: I. Karan is not a member of the club. II. Karan will become a member in two years.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "At 16 Karan cannot be a member (I); becoming one later is not certain." },
+    { q: "A cube of side 4 cm is painted on two adjacent faces only and then cut into 1 cm cubes. How many small cubes have exactly one painted face?", options: ["36", "26", "4", "24"], answer: 3, explanation: "Each painted face has 4² = 16 cubes; the 4 cubes on the shared edge have two painted faces. Exactly one face: 2 × (16 − 4) = 24. Painted cubes total 28, so 36 have no paint." },
+    { q: "If the English alphabet is written in reverse order (Z to A), which letter will be 22nd to the right of the 3rd letter from the left?", options: ["A", "Y", "C", "B"], answer: 3, explanation: "In the reversed alphabet the 25th letter from the left is B (position n holds letter 27 − n)." },
+    { q: "If the following words are arranged in dictionary order, which word comes third? Physics, Piston, Potato, Player", options: ["Physics", "Piston", "Player", "Potato"], answer: 2, explanation: "In dictionary order: Physics, Piston, Player, Potato." },
+  ],
+};
+
+export default test;

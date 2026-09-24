@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-47",
+  title: "OIR Test 47",
+  durationMinutes: 20,
+  releaseAt: "2026-11-08T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 6, 10, 16, 26, 42, 68, 110, ?", options: ["179", "220", "178", "152"], answer: 2, explanation: "Here each term is the sum of the previous two terms. Next: 68 + 110 = 178." },
+    { q: "Find the next number: 5, 15, 45, 135, ?", options: ["405", "400", "415", "540"], answer: 0, explanation: "Here each term is 3 times the previous term. Next: 135 × 3 = 405." },
+    { q: "Find the next number: 18, 20, 24, 32, 48, ?", options: ["80", "96", "79", "81"], answer: 0, explanation: "Here the differences 2, 4, 8, 16, 32 are each 2 times the previous difference. Next: 48 + 32 = 80." },
+    { q: "Find the missing number: 5, 9, 26, 103, ?, 3083", options: ["2672", "514", "524", "1593"], answer: 1, explanation: "Here the multipliers increase by one each step (×2, ×3, ×4, …), then subtract 1, so the missing term is 514." },
+    { q: "Find the next letter: C, E, H, L, Q, ?", options: ["W", "Y", "X", "V"], answer: 0, explanation: "By alphabet positions (3, 5, 8, 12, 17), the gaps grow by one each time (+2, 3, 4, 5, …): Q(17) + 6 = W(23)." },
+    { q: "Find the next pair: GD, HH, IL, JP, ?", options: ["JS", "KU", "KT", "LT"], answer: 2, explanation: "The first letters move 1 forward each time and the second letters move 4 forward: next is KT." },
+    { q: "Paediatrics : Children :: Geriatrics : ?", options: ["Athletes", "The elderly", "Women", "Infants"], answer: 1, explanation: "Paediatrics deals with children's health; geriatrics deals with the health of the elderly." },
+    { q: "5 : 125 :: 12 : ?", options: ["1728", "1727", "143", "132"], answer: 0, explanation: "5 → 5³ = 125; likewise 12 → 12³ = 1728." },
+    { q: "France : Paris :: Australia : ?", options: ["Canberra", "Sydney", "Melbourne", "Perth"], answer: 0, explanation: "Paris is the capital of France; Canberra (not Sydney) is the capital of Australia." },
+    { q: "Which one does not belong with the others?", options: ["Sparrow", "Pigeon", "Crow", "Penguin"], answer: 3, explanation: "The penguin cannot fly; the others can." },
+    { q: "Which number does not belong with the others?", options: ["393", "248", "176", "392"], answer: 0, explanation: "The digits of 248, 176, 392 each add up to 14; the digits of 393 add up to 15." },
+    { q: "Choose the word most opposite in meaning to EXTRAVAGANT.", options: ["Lavish", "Thrifty", "Generous", "Wasteful"], answer: 1, explanation: "The opposite of extravagant is thrifty; the other options are similar in meaning or unrelated." },
+    { q: "If TOWER is coded as UQZIW, how is WINDOW coded?", options: ["DRMWLD", "XKQHTC", "XKQHSC", "YKQHTC"], answer: 1, explanation: "In this code the 1st letter moves 1 place forward, the 2nd moves 2, the 3rd moves 3, and so on, so WINDOW becomes XKQHTC." },
+    { q: "In a code language, 'proud officers win' is written as 'si yo ga', 'smart officers' is written as 'ga fe' and 'win today' is written as 'yo ho'. Which word is coded as 'ga'?", options: ["proud", "win", "smart", "officers"], answer: 3, explanation: "'officers' is common to the first two sentences, so officers = ga; 'win' is common to the first and third, so win = yo." },
+    { q: "If '÷' means '+', '×' means '−', '−' means '×' and '+' means '÷', what is the value of 10 − 12 ÷ 50 + 10 × 2?", options: ["125", "123", "133", "119"], answer: 1, explanation: "Replacing the symbols gives 10 × 12 + 50 ÷ 10 − 2; following BODMAS, this equals 123." },
+    { q: "O and P are husband and wife, and their only child is a daughter, R. Q is the grandson of P. How is R related to Q?", options: ["Mother", "Aunt", "Sister", "Grandmother"], answer: 0, explanation: "P's only child is R, so P's grandson Q must be R's son." },
+    { q: "Pointing to a man, Rita said, \"He is the son of the only son of my mother's mother.\" Rita's mother has only one brother. How is the man related to Rita?", options: ["Cousin", "Nephew", "Brother", "Uncle"], answer: 0, explanation: "The only son of her maternal grandmother is her maternal uncle; his son is Rita's cousin." },
+    { q: "Starting from his house, Mohan walks 25 m towards the north, turns right and walks 25 m, finally turns left and walks 30 m. In which direction is he now from his house?", options: ["South-West", "North-East", "North-West", "South-East"], answer: 1, explanation: "He ends up 25 m east and 55 m north of his house, so he is to the North-East of his house." },
+    { q: "A man is facing North-West. He turns 90° anticlockwise, then 90° anticlockwise, then 45° anticlockwise. Which direction is he facing now?", options: ["South", "North", "West", "East"], answer: 3, explanation: "The net turn is 135° clockwise from North-West, so he faces East." },
+    { q: "Suresh is 12th from the top and 8th from the bottom in his class. How many students are there in the class?", options: ["29", "19", "20", "18"], answer: 1, explanation: "Total = 12 + 8 − 1 = 19 (Suresh is counted in both ranks)." },
+    { q: "Farhan is shorter than Lata. Pooja is shorter than Bina. Bina is shorter than Farhan. Who is the shortest?", options: ["Bina", "Farhan", "Lata", "Pooja"], answer: 3, explanation: "The order from tallest to shortest is Lata > Farhan > Bina > Pooja, so the shortest is Pooja." },
+    { q: "A bag contains an equal number of ₹1, ₹5 and ₹10 coins worth ₹128 in all. How many of each are there?", options: ["8", "6", "18", "24"], answer: 0, explanation: "Each set of one of each is worth ₹16; 128/16 = 8." },
+    { q: "15% of a number is 45. What is 20% of the same number?", options: ["90", "105", "60", "61"], answer: 2, explanation: "The number is 45 × 100/15 = 300, and 20% of 300 = 60." },
+    { q: "Through how many degrees does the hour hand of a clock turn from 2:40 to 5:30?", options: ["115°", "100°", "85°", "300°"], answer: 2, explanation: "The hour hand turns 0.5° per minute; 170 minutes × 0.5° = 85°." },
+    { q: "5 March 2029 is a Monday. What day of the week is 3 August 2028?", options: ["Saturday", "Thursday", "Friday", "Wednesday"], answer: 1, explanation: "3 August 2028 is 214 days before 5 March 2029. 214 = 7 × 30 + 4, so the day shifts 4 back: Thursday." },
+    { q: "Statements: Some cups are bridges. Some bridges are trucks. Conclusions: I. Some cups are trucks. II. All trucks are cups.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 3, explanation: "Two 'some' statements give no definite link between cups and trucks, so neither conclusion is certain." },
+    { q: "Statement: The prices of vegetables have doubled after the floods. Conclusions: I. The floods affected the supply of vegetables. II. People will stop eating vegetables.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "The price rise after floods points to reduced supply (I); people stopping altogether does not follow." },
+    { q: "A cube of side 4 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have at least one face painted?", options: ["24", "56", "8", "55"], answer: 1, explanation: "There are 64 small cubes; at least one face painted: 4³ − (4 − 2)³ = 64 − 8 = 56." },
+    { q: "If the English alphabet is written in reverse order (Z to A), which letter will be 10th to the right of the 5th letter from the left?", options: ["M", "L", "O", "K"], answer: 1, explanation: "In the reversed alphabet the 15th letter from the left is L (position n holds letter 27 − n)." },
+    { q: "In the word NOTEBOOK, the 1st and 2nd letters are interchanged, the 3rd and 4th letters are interchanged, and so on. Which letter will be 3rd from the right end?", options: ["B", "E", "O", "K"], answer: 0, explanation: "The new arrangement is ONETOBKO; the 3rd letter from the right is B." },
+  ],
+};
+
+export default test;

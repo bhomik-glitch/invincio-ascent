@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-100",
+  title: "OIR Test 100",
+  durationMinutes: 20,
+  releaseAt: "2027-01-17T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 9, 2, 11, 13, 24, 37, 61, ?", options: ["85", "98", "122", "99"], answer: 1, explanation: "Here each term is the sum of the previous two terms. Next: 37 + 61 = 98." },
+    { q: "Find the next number: 5, 25, 125, 625, ?", options: ["3125", "3120", "3127", "3750"], answer: 0, explanation: "Here each term is 5 times the previous term. Next: 625 × 5 = 3125." },
+    { q: "Find the next number: 3, 9, 36, 180, 1080, ?", options: ["7560", "7561", "8640", "6480"], answer: 0, explanation: "Here the multipliers increase by one each step (×3, ×4, ×5, …). Next: 1080 × 7 = 7560." },
+    { q: "Find the missing number: 144, 137, 126, ?, 92, 69", options: ["107", "111", "109", "121"], answer: 1, explanation: "Here the differences subtracted are 7, 11, 15, 19, 23 — each 4 more than the last, so the missing term is 111." },
+    { q: "Find the next letter: E, H, L, O, S, ?", options: ["W", "X", "V", "U"], answer: 2, explanation: "By alphabet positions (5, 8, 12, 15, 19), the letters move alternately +3 and +4: S(19) + 3 = V(22)." },
+    { q: "Find the next pair: CL, GJ, KH, OF, ?", options: ["RC", "SC", "TD", "SD"], answer: 3, explanation: "The first letters move 4 forward each time and the second letters move 2 back: next is SD." },
+    { q: "Pentagon : Five :: Hexagon : ?", options: ["Six", "Eight", "Four", "Seven"], answer: 0, explanation: "A pentagon has five sides; a hexagon has six." },
+    { q: "4 : 65 :: 9 : ?", options: ["730", "100", "738", "80"], answer: 0, explanation: "4 → 4³ + 1 = 65; likewise 9 → 9³ + 1 = 730." },
+    { q: "McMahon Line : India–China :: Durand Line : ?", options: ["Afghanistan–Pakistan", "India–Nepal", "India–Bangladesh", "India–Pakistan"], answer: 0, explanation: "The McMahon Line lies between India and China; the Durand Line between Afghanistan and Pakistan." },
+    { q: "Which one does not belong with the others?", options: ["Petroleum", "Coal", "Natural gas", "Solar energy"], answer: 3, explanation: "Solar energy is renewable; the others are fossil fuels." },
+    { q: "Which number does not belong with the others?", options: ["59", "43", "11", "111"], answer: 3, explanation: "111 = 3 × 37 is not prime; the others are prime numbers." },
+    { q: "Choose the one word for: \"The scientific study of the mind and behaviour\"", options: ["Sociology", "Physiology", "Psychology", "Philosophy"], answer: 2, explanation: "Psychology: the scientific study of the mind and behaviour." },
+    { q: "If MARKET is coded as TEKRAM, how is PALACE coded?", options: ["ECALAP", "FCALBP", "EBALAP", "GECNCR"], answer: 0, explanation: "In this code the letters are written in reverse order, so PALACE becomes ECALAP." },
+    { q: "In a code language, 'brave boys fight' is written as 'pi li ho', 'strong boys' is written as 'li ga' and 'fight well' is written as 'ma pi'. What is the code for 'fight'?", options: ["pi", "ma", "li", "ho"], answer: 0, explanation: "'boys' is common to the first two sentences, so boys = li; 'fight' is common to the first and third, so fight = pi." },
+    { q: "If A = 26, B = 25, …, Z = 1 and GLASS = 77 (the sum of its letter values), what is SWORD?", options: ["54", "56", "64", "79"], answer: 1, explanation: "SWORD = 8 + 4 + 12 + 9 + 23 = 56." },
+    { q: "Hemant's daughter Ishita is married to Jeevan. Jeevan's father is Kishore. How is Kishore related to Hemant?", options: ["Brother-in-law", "Son-in-law", "Father-in-law", "Daughter's father-in-law"], answer: 3, explanation: "Kishore is the father of Hemant's son-in-law, i.e. his daughter's father-in-law." },
+    { q: "Pointing to a boy, Neelam said, \"He is my father's only grandson, and I am my father's only child.\" How is the boy related to Neelam?", options: ["Grandson", "Nephew", "Brother", "Son"], answer: 3, explanation: "As her father's only child, any grandson of his must be Neelam's son." },
+    { q: "Starting from his house, Ravi walks 3 km towards the west, turns right and walks 3 km, finally turns left and walks 4 km. In which direction is he now from his house?", options: ["South-West", "North-West", "South-East", "North-East"], answer: 1, explanation: "He ends up 7 km west and 3 km north of his house, so he is to the North-West of his house." },
+    { q: "A man is facing East. He turns 180° anticlockwise, then 135° clockwise, then 45° clockwise. Which direction is he facing now?", options: ["South", "West", "East", "North"], answer: 2, explanation: "The turns cancel out completely from East, so he faces East." },
+    { q: "Yash is 6th from the top and 24th from the bottom in his class. How many students are there in the class?", options: ["29", "28", "30", "27"], answer: 0, explanation: "Total = 6 + 24 − 1 = 29 (Yash is counted in both ranks)." },
+    { q: "Nisha is older than Esha. Ravi is younger than Esha. Isha is older than Nisha. Who is the second youngest?", options: ["Esha", "Ravi", "Nisha", "Isha"], answer: 0, explanation: "The order from oldest to youngest is Isha > Nisha > Esha > Ravi, so the second youngest is Esha." },
+    { q: "A boat goes 18 km downstream in 1 hour and 16 km upstream in 1 hour. What is the speed of the boat in still water?", options: ["17 km/h", "2 km/h", "1 km/h", "18 km/h"], answer: 0, explanation: "Boat speed = (18 + 16)/2 = 17 km/h; stream speed = (18 − 16)/2 = 1 km/h." },
+    { q: "A can complete a piece of work in 36 days and B in 45 days. Working together, in how many days will they complete it?", options: ["20", "9", "19", "40.5"], answer: 0, explanation: "Together they do 1/36 + 1/45 = 81/1620 = 1/20 of the work per day, so they need 20 days." },
+    { q: "Through how many degrees does the hour hand of a clock turn from 3:40 to 7:00?", options: ["130°", "115°", "100°", "120°"], answer: 2, explanation: "The hour hand turns 0.5° per minute; 200 minutes × 0.5° = 100°." },
+    { q: "18 November 2031 is a Tuesday. What day of the week is 17 January 2032?", options: ["Friday", "Monday", "Sunday", "Saturday"], answer: 3, explanation: "17 January 2032 is 60 days after 18 November 2031. 60 = 7 × 8 + 4, so the day shifts 4 forward: Saturday." },
+    { q: "Statements: All boxes are singers. All singers are pens. Conclusions: I. Some boxes are not pens. II. All pens are singers.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 3, explanation: "All boxes are pens, so I is false; 'All singers are pens' cannot be reversed, so II is not certain." },
+    { q: "Statement: A tourist has lost his passport in the city. Courses of action: I. He should report the loss to the police and his embassy. II. He should leave the country immediately. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Reporting the loss is the right step (I); he cannot leave without travel documents anyway." },
+    { q: "A cube of side 6 cm is painted on two opposite faces only and then cut into 1 cm cubes. How many small cubes have exactly one painted face?", options: ["72", "36", "96", "144"], answer: 0, explanation: "The two opposite faces each have 36 cubes with exactly one painted face (72 in all), and the remaining 6³ − 72 = 144 cubes have no paint." },
+    { q: "How many letters are there between C and L in the English alphabet?", options: ["11", "10", "9", "8"], answer: 3, explanation: "C is 3 and L is 12; the letters strictly between them number 12 − 3 − 1 = 8." },
+    { q: "If the following words are arranged in dictionary order, which word comes last? Engine, Eraser, Education, Eagle", options: ["Engine", "Eagle", "Eraser", "Education"], answer: 2, explanation: "In dictionary order: Eagle, Education, Engine, Eraser." },
+  ],
+};
+
+export default test;

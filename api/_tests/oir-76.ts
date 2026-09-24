@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-76",
+  title: "OIR Test 76",
+  durationMinutes: 20,
+  releaseAt: "2026-12-20T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 3, 2, 2, 7, 11, 20, 38, ?", options: ["69", "59", "49", "76"], answer: 0, explanation: "Here each term is the sum of the previous three terms. Next: 11 + 20 + 38 = 69." },
+    { q: "Find the next number: 1, 3, 9, 27, ?", options: ["108", "81", "82", "80"], answer: 1, explanation: "Here each term is 3 times the previous term. Next: 27 × 3 = 81." },
+    { q: "Find the next number: 5, 12, 26, 54, 110, ?", options: ["220", "218", "222", "224"], answer: 2, explanation: "Here each term is 2 times the previous term plus 2. Next: 110 × 2 + 2 = 222." },
+    { q: "Find the missing number: 6, 18, ?, 360, 2160, 15120", options: ["306", "189", "71", "72"], answer: 3, explanation: "Here the multipliers increase by one each step (×3, ×4, ×5, …), so the missing term is 72." },
+    { q: "Find the next letter: B, G, K, P, T, ?", options: ["W", "X", "Y", "Z"], answer: 2, explanation: "By alphabet positions (2, 7, 11, 16, 20), the letters move alternately +5 and +4: T(20) + 5 = Y(25)." },
+    { q: "Find the next pair: IQ, LR, OS, RT, ?", options: ["TT", "VU", "UU", "UV"], answer: 2, explanation: "The first letters move 3 forward each time and the second letters move 1 forward: next is UU." },
+    { q: "Moon : Satellite :: Earth : ?", options: ["Planet", "Galaxy", "Comet", "Star"], answer: 0, explanation: "The Moon is a satellite; the Earth is a planet." },
+    { q: "7 : 342 :: 6 : ?", options: ["37", "35", "215", "48"], answer: 2, explanation: "7 → 7³ − 1 = 342; likewise 6 → 6³ − 1 = 215." },
+    { q: "Panini : Ashtadhyayi :: Kautilya : ?", options: ["Arthashastra", "Panchatantra", "Rajatarangini", "Natyashastra"], answer: 0, explanation: "Panini wrote the Ashtadhyayi; Kautilya wrote the Arthashastra." },
+    { q: "Which one does not belong with the others?", options: ["Tagore", "Aryabhata", "Kalidasa", "Premchand"], answer: 1, explanation: "Aryabhata was a mathematician-astronomer; the others were writers." },
+    { q: "Which number does not belong with the others?", options: ["19", "57", "113", "97"], answer: 1, explanation: "57 = 3 × 19 is not prime; the others are prime numbers." },
+    { q: "Choose the one word for: \"A building where soldiers live\"", options: ["Dockyard", "Hangar", "Barracks", "Arsenal"], answer: 2, explanation: "Barracks: a building where soldiers live." },
+    { q: "If BRIDGE is coded as YIRWTV, how is OCEAN coded?", options: ["LXVZL", "RFHDQ", "LYVZM", "LXVZM"], answer: 3, explanation: "In this code each letter is replaced by its opposite letter (A↔Z, B↔Y, C↔X, …), so OCEAN becomes LXVZM." },
+    { q: "In a code language, 'proud farmers train' is written as 'ka da bu', 'calm farmers' is written as 'da ga' and 'train daily' is written as 'lo ka'. Which word is coded as 'ka'?", options: ["train", "proud", "daily", "calm"], answer: 0, explanation: "'farmers' is common to the first two sentences, so farmers = da; 'train' is common to the first and third, so train = ka." },
+    { q: "If A = 1, B = 2, …, Z = 26 and SCREEN = 64 (the sum of its letter values), what is PENCIL?", options: ["60", "59", "75", "103"], answer: 1, explanation: "PENCIL = 16 + 5 + 14 + 3 + 9 + 12 = 59." },
+    { q: "Girish is the only son of Hema. Juhi is Girish's wife. Kartik is Juhi and Girish's son. How is Hema related to Kartik?", options: ["Mother-in-law", "Mother", "Grandmother", "Aunt"], answer: 2, explanation: "Hema is the mother of Kartik's father Girish, so she is Kartik's grandmother." },
+    { q: "Pointing to an old lady, Tushar said, \"She is the mother of my father's only sister.\" How is the lady related to Tushar?", options: ["Great-grandmother", "Aunt", "Mother", "Grandmother"], answer: 3, explanation: "The mother of his father's sister is his father's mother — Tushar's grandmother." },
+    { q: "Starting from his house, Vikram walks 20 m towards the west, turns left and walks 85 m, finally turns right and walks 140 m. In which direction is he now from his house?", options: ["North-East", "South-East", "South-West", "North-West"], answer: 2, explanation: "He ends up 160 m west and 85 m south of his house, so he is to the South-West of his house." },
+    { q: "A man is facing North-West. He turns 135° clockwise, then 45° anticlockwise. Which direction is he facing now?", options: ["South-West", "North-West", "South-East", "North-East"], answer: 3, explanation: "The net turn is 90° clockwise from North-West, so he faces North-East." },
+    { q: "In a class of 38 students, Aditya ranks 19th from the top. What is his rank from the bottom?", options: ["20th", "21st", "19th", "22nd"], answer: 0, explanation: "Rank from bottom = 38 − 19 + 1 = 20." },
+    { q: "Asha is lighter than Farhan. Manoj is lighter than Esha. Asha is heavier than Sita. Farhan is lighter than Manoj. Who is the second heaviest?", options: ["Manoj", "Farhan", "Esha", "Asha"], answer: 0, explanation: "The order from heaviest to lightest is Esha > Manoj > Farhan > Asha > Sita, so the second heaviest is Manoj." },
+    { q: "Two trains start at the same time from stations 218 km apart and travel towards each other at 41 km/h and 68 km/h. After how many hours will they meet?", options: ["1", "5", "3", "2"], answer: 3, explanation: "They close the gap at 41 + 68 = 109 km/h, so they meet after 218/109 = 2 hours." },
+    { q: "A shopkeeper marks his goods 50% above the cost price and then gives a discount of 30%. What is his net profit or loss?", options: ["7% profit", "20% profit", "5% loss", "5% profit"], answer: 3, explanation: "On a cost of ₹100 the marked price is ₹150; after 30% off it sells for ₹105, a 5% profit." },
+    { q: "What is the angle between the hands of a clock at 9:30?", options: ["135°", "120°", "105°", "90°"], answer: 2, explanation: "Angle = |30 × 9 − 5.5 × 30| = 105°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "9 October 2027 is a Saturday. What day of the week is 16 August 2028?", options: ["Tuesday", "Thursday", "Friday", "Wednesday"], answer: 3, explanation: "16 August 2028 is 312 days after 9 October 2027. 312 = 7 × 44 + 4, so the day shifts 4 forward: Wednesday." },
+    { q: "Statements: Some plates are phones. All phones are dancers. Conclusions: I. Some plates are dancers. II. Some dancers are plates.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "The plates that are phones are also dancers, so some plates are dancers (I), and conversely some dancers are plates (II)." },
+    { q: "Statement: The school bus leaves the stop at 7 am sharp every day. Rohan reached the stop at 7:10 am today. Conclusions: I. Rohan missed the bus today. II. Rohan was absent from school today.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "The bus had already left (I); he may have reached school some other way." },
+    { q: "A cube of side 6 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have no face painted?", options: ["48", "64", "8", "96"], answer: 1, explanation: "There are 216 small cubes; no face painted: the inner (6 − 2)³ = 64 cubes." },
+    { q: "Which letter is 15th to the right of the 9th letter from the left in the English alphabet?", options: ["V", "W", "X", "Y"], answer: 2, explanation: "The 9th letter from the left is I; 15 places to its right is the 24th letter, X." },
+    { q: "If the following words are arranged in dictionary order, which word comes second? Artillery, Anchor, Arrow, Autumn", options: ["Arrow", "Anchor", "Artillery", "Autumn"], answer: 0, explanation: "In dictionary order: Anchor, Arrow, Artillery, Autumn." },
+  ],
+};
+
+export default test;

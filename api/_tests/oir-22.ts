@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-22",
+  title: "OIR Test 22",
+  durationMinutes: 20,
+  releaseAt: "2026-10-04T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 1, 4, 5, 9, 14, 23, 37, ?", options: ["74", "61", "51", "60"], answer: 3, explanation: "Here each term is the sum of the previous two terms. Next: 23 + 37 = 60." },
+    { q: "Find the next number: 2, 6, 18, 54, 162, ?", options: ["594", "487", "496", "486"], answer: 3, explanation: "Here the differences 4, 12, 36, 108, 324 are each 3 times the previous difference. Next: 162 + 324 = 486." },
+    { q: "Find the next number: 6, 14, 45, 184, 925, ?", options: ["5557", "5556", "6475", "4630"], answer: 1, explanation: "Here the multipliers increase by one each step (×2, ×3, ×4, …), then add the same number (×2 + 2, ×3 + 3, …). Next: 925 × 6 + 6 = 5556." },
+    { q: "Find the missing number: 16848, 2808, ?, 78, 13", options: ["1443", "2418", "468", "467"], answer: 2, explanation: "Here each term is the previous term divided by 6, so the missing term is 468." },
+    { q: "Find the next letter: W, T, Q, N, K, ?", options: ["J", "H", "I", "G"], answer: 1, explanation: "By alphabet positions (23, 20, 17, 14, 11), each letter is 3 places before the previous one: K(11) − 3 = H(8)." },
+    { q: "Find the next group: JKL, NOP, RST, ?", options: ["WXY", "VXW", "UVW", "VWX"], answer: 3, explanation: "Each group is three consecutive letters, and 1 letter is skipped between groups: after RST comes VWX." },
+    { q: "Mason : Trowel :: Farmer : ?", options: ["Needle", "Scalpel", "Plough", "Spanner"], answer: 2, explanation: "A trowel is a mason's tool; a plough is a farmer's tool." },
+    { q: "12 : 143 :: 6 : ?", options: ["39", "217", "48", "35"], answer: 3, explanation: "12 → 12² − 1 = 143; likewise 6 → 6² − 1 = 35." },
+    { q: "Maha Vir Chakra : Param Vir Chakra :: Kirti Chakra : ?", options: ["Sena Medal", "Vir Chakra", "Shaurya Chakra", "Ashoka Chakra"], answer: 3, explanation: "The Maha Vir Chakra ranks just below the PVC; the Kirti Chakra ranks just below the Ashoka Chakra." },
+    { q: "Which one does not belong with the others?", options: ["Admiral", "Brigadier", "Commander", "Commodore"], answer: 1, explanation: "Brigadier is an Army rank; the others are Navy ranks." },
+    { q: "Which number does not belong with the others?", options: ["291", "219", "264", "290"], answer: 3, explanation: "The digits of 219, 264, 291 each add up to 12; the digits of 290 add up to 11." },
+    { q: "Choose the word most similar in meaning to CONCEAL.", options: ["Show", "Display", "Reveal", "Hide"], answer: 3, explanation: "Conceal means hide." },
+    { q: "If PLANET is written as 16-12-1-14-5-20, how is SCREEN written in the same code?", options: ["19-3-18-5-5-14", "19-3-19-5-5-14", "8-24-9-22-22-13", "18-3-18-5-5-14"], answer: 0, explanation: "Each letter is replaced by its position in the alphabet (A = 1, …, Z = 26), so SCREEN → 19-3-18-5-5-14." },
+    { q: "In a code language, 'brave officers sail' is written as 'ho yo ki', 'bold officers' is written as 'ru yo' and 'sail well' is written as 'da ho'. Which word is coded as 'ru'?", options: ["brave", "sail", "officers", "bold"], answer: 3, explanation: "'officers' is common to the first two sentences, so officers = yo; 'sail' is common to the first and third, so sail = ho. The other code in the second sentence, ru, means 'bold'." },
+    { q: "If A = 1, B = 2, …, Z = 26 and SPRING = 83 (the sum of its letter values), what is BOOTS?", options: ["73", "71", "61", "64"], answer: 1, explanation: "BOOTS = 2 + 15 + 15 + 20 + 19 = 71." },
+    { q: "A is the son of B. C is the daughter of B. D is the husband of C. How is D related to A?", options: ["Brother", "Brother-in-law", "Uncle", "Cousin"], answer: 1, explanation: "D is married to A's sister C, so D is A's brother-in-law." },
+    { q: "Pointing to a boy, Veena said, \"He is the son of my husband's only brother.\" How is the boy related to Veena?", options: ["Nephew", "Cousin", "Brother", "Son"], answer: 0, explanation: "He is the son of Veena's brother-in-law, so he is her nephew." },
+    { q: "Starting from his house, Dev walks 125 m towards the east, turns right and walks 65 m, finally turns left and walks 65 m. In which direction is he now from his house?", options: ["North-West", "South-East", "South-West", "North-East"], answer: 1, explanation: "He ends up 190 m east and 65 m south of his house, so he is to the South-East of his house." },
+    { q: "One morning, just after sunrise, Ajay was standing in a field. His shadow fell exactly behind him. Which direction was he facing?", options: ["East", "South", "West", "North"], answer: 0, explanation: "In the morning the sun is in the east, so shadows fall to the west. With the shadow (West) behind him, he must be facing East." },
+    { q: "In a row of 34 students, Aditya is 13th from the left end and Dev is 6th from the right end. How many students are there between them?", options: ["18", "15", "16", "17"], answer: 1, explanation: "Aditya and Dev with everyone to their outer sides account for 13 + 6 = 19 students, so 34 − 19 = 15 are between them." },
+    { q: "Ravi is faster than Asha. Lata is slower than Farhan. Om is faster than Ravi. Farhan is slower than Asha. Who is the second slowest?", options: ["Asha", "Om", "Ravi", "Farhan"], answer: 3, explanation: "The order from fastest to slowest is Om > Ravi > Asha > Farhan > Lata, so the second slowest is Farhan." },
+    { q: "A number is multiplied by 3, then 7 is added, and the result is multiplied by 4. The final answer is 148. What was the number?", options: ["10", "11", "13", "20"], answer: 0, explanation: "Working backwards: 148 ÷ 4 = 37; − 7 = 30; ÷ 3 = 10." },
+    { q: "At a meeting, each of the 19 officers shakes hands exactly once with every other officer. How many handshakes take place?", options: ["361", "342", "171", "190"], answer: 2, explanation: "Handshakes = n(n − 1)/2 = 19 × 18/2 = 171." },
+    { q: "In a mirror, a clock appears to show 10:37. What is the actual time?", options: ["2:37", "1:23", "1:53", "2:23"], answer: 1, explanation: "Actual time = 11:60 − 10:37 = 1:23." },
+    { q: "24 August 2030 is a Saturday. What day of the week is 4 June 2030?", options: ["Thursday", "Tuesday", "Monday", "Wednesday"], answer: 1, explanation: "4 June 2030 is 81 days before 24 August 2030. 81 = 7 × 11 + 4, so the day shifts 4 back: Tuesday." },
+    { q: "Statements: Some balls are coins. Some coins are doctors. Conclusions: I. Some balls are doctors. II. All doctors are balls.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 3, explanation: "Two 'some' statements give no definite link between balls and doctors, so neither conclusion is certain." },
+    { q: "Statement: \"Invest in gold for a secure future,\" says an advertisement. Assumptions: I. People want a secure future. II. The price of gold will never fall.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0, explanation: "The advertisement appeals to a desire for security (I); it need not assume prices never fall." },
+    { q: "A cube of side 9 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have at least two faces painted?", options: ["84", "343", "294", "92"], answer: 3, explanation: "There are 729 small cubes; at least two faces painted: corners + edges = 8 + 84 = 92." },
+    { q: "Which letter is exactly midway between K and S in the English alphabet?", options: ["N", "P", "Q", "O"], answer: 3, explanation: "K = 11 and S = 19; the midpoint is 15 = O." },
+    { q: "If the following words are arranged in dictionary order, which word comes third? Leadership, Letter, Language, Lion", options: ["Letter", "Language", "Lion", "Leadership"], answer: 0, explanation: "In dictionary order: Language, Leadership, Letter, Lion." },
+  ],
+};
+
+export default test;

@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-71",
+  title: "OIR Test 71",
+  durationMinutes: 20,
+  releaseAt: "2026-12-13T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 3, 6, 11, 22, 27, 54, ?", options: ["57", "108", "60", "59"], answer: 3, explanation: "Here the operations alternate: × 2, + 5, × 2, + 5 and so on. Next: 54 + 5 = 59." },
+    { q: "Find the next number: 9, 7, 16, 23, 39, 62, 101, ?", options: ["140", "163", "202", "164"], answer: 1, explanation: "Here each term is the sum of the previous two terms. Next: 62 + 101 = 163." },
+    { q: "Find the next number: 1, 2, 5, 14, 41, ?", options: ["149", "132", "122", "123"], answer: 2, explanation: "Here the differences 1, 3, 9, 27, 81 are each 3 times the previous difference. Next: 41 + 81 = 122." },
+    { q: "Find the missing number: 21, 22, ?, 36, 49, 66", options: ["31", "37", "29", "27"], answer: 3, explanation: "Here the differences added are 1, 5, 9, 13, 17 — each 4 more than the last, so the missing term is 27." },
+    { q: "Find the next letter: D, G, L, O, T, ?", options: ["X", "Y", "W", "V"], answer: 2, explanation: "By alphabet positions (4, 7, 12, 15, 20), the letters move alternately +3 and +5: T(20) + 3 = W(23)." },
+    { q: "Find the next term: J10, M13, P16, S19, ?", options: ["W23", "V5", "V23", "V22"], answer: 3, explanation: "The letters move 3 forward each time, and each number is the letter's position in the alphabet: V → 22." },
+    { q: "Calendar : Dates :: Dictionary : ?", options: ["Pages", "Books", "Letters", "Words"], answer: 3, explanation: "A calendar lists dates; a dictionary lists words." },
+    { q: "10 : 200 :: 11 : ?", options: ["242", "122", "1342", "120"], answer: 0, explanation: "10 → 2 × 10² = 200; likewise 11 → 2 × 11² = 242." },
+    { q: "Dadasaheb Phalke Award : Cinema :: Dronacharya Award : ?", options: ["Sports coaching", "Literature", "Journalism", "Music"], answer: 0, explanation: "The Phalke Award is for cinema; the Dronacharya Award is for sports coaches." },
+    { q: "Which one does not belong with the others?", options: ["Vindhya", "Deccan", "Himalaya", "Aravalli"], answer: 1, explanation: "The Deccan is a plateau; the others are mountain ranges." },
+    { q: "Which number does not belong with the others?", options: ["91", "49", "35", "92"], answer: 3, explanation: "91, 35, 49 are all multiples of 7; 92 is not." },
+    { q: "Choose the one word for: \"One who cannot be defeated\"", options: ["Invaluable", "Indelible", "Invincible", "Invisible"], answer: 2, explanation: "Invincible: one who cannot be defeated." },
+    { q: "If OCEAN is coded as PBFZO, how is RABBIT coded?", options: ["SCEFNZ", "SZCZJS", "SZCAJS", "SZCAJR"], answer: 2, explanation: "In this code letters are moved alternately one place forward and one place back, so RABBIT becomes SZCAJS." },
+    { q: "In a code language, 'quick leaders win' is written as 'ho bu fe', 'calm leaders' is written as 'da bu' and 'win quietly' is written as 'ho tu'. Which word is coded as 'ho'?", options: ["calm", "quietly", "win", "leaders"], answer: 2, explanation: "'leaders' is common to the first two sentences, so leaders = bu; 'win' is common to the first and third, so win = ho." },
+    { q: "If '×' means '+', '+' means '−', '÷' means '×' and '−' means '÷', what is the value of 4 ÷ 8 × 11 − 11 + 4?", options: ["28", "21", "33", "29"], answer: 3, explanation: "Replacing the symbols gives 4 × 8 + 11 ÷ 11 − 4; following BODMAS, this equals 29." },
+    { q: "Prerna is the only daughter of Qadir. Qadir is the son of Rehana. How is Rehana related to Prerna?", options: ["Aunt", "Grandmother", "Mother", "Great-grandmother"], answer: 1, explanation: "Rehana is the mother of Prerna's father, so she is Prerna's grandmother." },
+    { q: "Pointing to a woman, Sagar said, \"Her mother's only son is my wife's father.\" How is the woman related to Sagar?", options: ["Wife's paternal aunt", "Aunt", "Mother-in-law", "Sister-in-law"], answer: 0, explanation: "The woman's brother is Sagar's father-in-law, so she is the paternal aunt of Sagar's wife." },
+    { q: "Starting from his house, Sanjay walks 60 m towards the east, turns left and walks 110 m, turns right and walks 75 m, finally turns left and walks 40 m. In which direction is he now from his house?", options: ["North-East", "South-East", "North-West", "South-West"], answer: 0, explanation: "He ends up 135 m east and 150 m north of his house, so he is to the North-East of his house." },
+    { q: "One evening, just before sunset, Arjun was standing in a field. His shadow fell exactly to his right. Which direction was he facing?", options: ["West", "North", "East", "South"], answer: 1, explanation: "In the evening the sun is in the west, so shadows fall to the east. With the shadow (East) on his right, he must be facing North." },
+    { q: "In a row of 29 children, Nikhil is 13th from the left. Yash is 5th to the right of Nikhil. What is Yash's position from the right end?", options: ["11th", "14th", "13th", "12th"], answer: 3, explanation: "Yash is 18th from the left, so from the right he is 29 − 18 + 1 = 12." },
+    { q: "Pooja is taller than Manoj. Manoj is taller than Bina. Pooja is shorter than Sita. Jatin is shorter than Bina. Who is the second shortest?", options: ["Sita", "Bina", "Pooja", "Manoj"], answer: 1, explanation: "The order from tallest to shortest is Sita > Pooja > Manoj > Bina > Jatin, so the second shortest is Bina." },
+    { q: "30% of a number is 66. What is 60% of the same number?", options: ["198", "132", "122", "396"], answer: 1, explanation: "The number is 66 × 100/30 = 220, and 60% of 220 = 132." },
+    { q: "The average of 8 numbers is 53. When one number is removed, the average of the rest becomes 49. Which number was removed?", options: ["79", "81", "53", "89"], answer: 1, explanation: "Total before = 8 × 53 = 424; after = 7 × 49 = 343; removed = 81." },
+    { q: "In a mirror, a clock appears to show 10:27. What is the actual time?", options: ["1:33", "2:33", "2:27", "1:03"], answer: 0, explanation: "Actual time = 11:60 − 10:27 = 1:33." },
+    { q: "13 August 2031 is a Wednesday. What day of the week is 6 September 2030?", options: ["Sunday", "Thursday", "Friday", "Saturday"], answer: 2, explanation: "6 September 2030 is 341 days before 13 August 2031. 341 = 7 × 48 + 5, so the day shifts 5 back: Friday." },
+    { q: "Statements: All books are painters. Some painters are phones. Conclusions: I. Some books are phones. II. Some phones are painters.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "Some painters are phones, so some phones are painters (II); the painters that are phones need not include any books, so I is uncertain." },
+    { q: "Statement: Only 12 of the 40 students of the class went on the trek. Conclusions: I. 28 students of the class did not go on the trek. II. The trek was cancelled.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "40 − 12 = 28 did not go (I); the trek took place, so II is false." },
+    { q: "A wooden block measuring 4 cm × 3 cm × 3 cm is painted on all faces and cut into 1 cm cubes. How many cubes have no face painted?", options: ["8", "10", "16", "2"], answer: 3, explanation: "Cubes with no face painted: (4 − 2)(3 − 2)(3 − 2) = 2." },
+    { q: "Which letter is 9th to the left of the 15th letter from the right in the English alphabet?", options: ["C", "D", "B", "X"], answer: 0, explanation: "The 15th letter from the right is the 12th from the left (L); 9 to its left is the 3rd letter, C." },
+    { q: "If the following words are arranged in dictionary order, which word comes second? Camel, Cheese, Captain, Courageous", options: ["Captain", "Courageous", "Cheese", "Camel"], answer: 0, explanation: "In dictionary order: Camel, Captain, Cheese, Courageous." },
+  ],
+};
+
+export default test;

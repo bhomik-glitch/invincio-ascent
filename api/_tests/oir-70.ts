@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-70",
+  title: "OIR Test 70",
+  durationMinutes: 20,
+  releaseAt: "2026-12-06T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 1, 2, 6, 13, 23, ?", options: ["38", "33", "39", "36"], answer: 3, explanation: "Here the differences added are 1, 4, 7, 10, 13 — each 3 more than the last. Next: 23 + 13 = 36." },
+    { q: "Find the next number: 39, 41, 47, 51, 53, ?", options: ["58", "57", "55", "59"], answer: 1, explanation: "Here the terms are consecutive prime numbers plus 10. Next: 47 + 10 = 57." },
+    { q: "Find the next number: 9, 36, 144, 576, ?", options: ["2303", "2295", "2880", "2304"], answer: 3, explanation: "Here each term is 4 times the previous term. Next: 576 × 4 = 2304." },
+    { q: "Find the missing number: 4, 4, ?, 24, 96, 480", options: ["14", "8", "10", "20"], answer: 1, explanation: "Here the multipliers increase by one each step (×1, ×2, ×3, …), so the missing term is 8." },
+    { q: "Find the next letter: N, P, R, T, V, ?", options: ["Z", "X", "Y", "W"], answer: 1, explanation: "By alphabet positions (14, 16, 18, 20, 22), each letter is 2 places after the previous one: V(22) + 2 = X(24)." },
+    { q: "Find the next pair: JD, MG, PJ, SM, ?", options: ["UO", "WP", "VP", "VQ"], answer: 2, explanation: "The first letters move 3 forward each time and the second letters move 3 forward: next is VP." },
+    { q: "Judge : Courtroom :: Surgeon : ?", options: ["Laboratory", "Pharmacy", "Classroom", "Operation theatre"], answer: 3, explanation: "A judge works in a courtroom; a surgeon works in an operation theatre." },
+    { q: "12 : 144 :: 4 : ?", options: ["20", "64", "16", "12"], answer: 2, explanation: "12 → 12² = 144; likewise 4 → 4² = 16." },
+    { q: "Arjuna Award : Sports :: Jnanpith Award : ?", options: ["Cinema", "Music", "Science", "Literature"], answer: 3, explanation: "The Arjuna Award honours sportspersons; the Jnanpith Award honours literature." },
+    { q: "Which one does not belong with the others?", options: ["Shehnai", "Dholak", "Tabla", "Mridangam"], answer: 0, explanation: "The shehnai is a wind instrument; the others are percussion instruments." },
+    { q: "Which number does not belong with the others?", options: ["107", "41", "21", "31"], answer: 2, explanation: "21 = 3 × 7 is not prime; the others are prime numbers." },
+    { q: "Choose the word most opposite in meaning to HONEST.", options: ["Truthful", "Sincere", "Frank", "Deceitful"], answer: 3, explanation: "The opposite of honest is deceitful; the other options are similar in meaning or unrelated." },
+    { q: "If FOREST is coded as GNSDTS, how is TOWER coded?", options: ["TNXDS", "UNXDS", "UQZIW", "UMXDS"], answer: 1, explanation: "In this code letters are moved alternately one place forward and one place back, so TOWER becomes UNXDS." },
+    { q: "In a code language, 'tall boys march' is written as 'mu ma ze', 'quick boys' is written as 'pi mu' and 'march again' is written as 'ma ta'. What is the code for 'tall'?", options: ["ma", "pi", "ze", "ta"], answer: 2, explanation: "'boys' is common to the first two sentences, so boys = mu; 'march' is common to the first and third, so march = ma. The remaining code in the first sentence, ze, means 'tall'." },
+    { q: "If A = 1, B = 2, …, Z = 26 and NUMBER = 73 (the sum of its letter values), what is WINDOW?", options: ["88", "111", "74", "78"], answer: 0, explanation: "WINDOW = 23 + 9 + 14 + 4 + 15 + 23 = 88." },
+    { q: "Jatin's mother is Kusum. Kusum's mother is Lalita. Lalita's husband is Madan. How is Madan related to Jatin?", options: ["Paternal grandfather", "Maternal grandfather", "Great-grandfather", "Uncle"], answer: 1, explanation: "Madan is the father of Jatin's mother, so he is Jatin's maternal grandfather." },
+    { q: "Pointing to a girl, Dhruv said, \"She is the only daughter of my father's only daughter-in-law, and I have no brothers.\" How is the girl related to Dhruv?", options: ["Niece", "Daughter", "Granddaughter", "Sister"], answer: 1, explanation: "With no brothers, the only daughter-in-law of Dhruv's father is Dhruv's wife, so the girl is his daughter." },
+    { q: "Starting from his house, Nikhil walks 5 km towards the west, turns left and walks 14 km, finally turns right and walks 9 km. In which direction is he now from his house?", options: ["South-West", "South-East", "North-East", "North-West"], answer: 0, explanation: "He ends up 14 km west and 14 km south of his house, so he is to the South-West of his house." },
+    { q: "A man is facing South-West. He turns 135° anticlockwise, then 180° anticlockwise, then 90° clockwise. Which direction is he facing now?", options: ["South", "West", "East", "North"], answer: 3, explanation: "The net turn is 135° clockwise from South-West, so he faces North." },
+    { q: "In a row of 40 children, Vikram is 13th from the left. Sanjay is 7th to the right of Vikram. What is Sanjay's position from the right end?", options: ["20th", "23rd", "22nd", "21st"], answer: 3, explanation: "Sanjay is 20th from the left, so from the right he is 40 − 20 + 1 = 21." },
+    { q: "Bina is shorter than Gita. Bina is taller than Farhan. Sita is taller than Hari. Hari is taller than Gita. Who is the second shortest?", options: ["Bina", "Gita", "Sita", "Hari"], answer: 0, explanation: "The order from tallest to shortest is Sita > Hari > Gita > Bina > Farhan, so the second shortest is Bina." },
+    { q: "A can complete a piece of work in 9 days and B in 72 days. Working together, in how many days will they complete it?", options: ["8", "63", "18", "40.5"], answer: 0, explanation: "Together they do 1/9 + 1/72 = 81/648 = 1/8 of the work per day, so they need 8 days." },
+    { q: "The sum of the present ages of a father and his son is 56 years. 8 years ago, the father was 3 times as old as the son. What is the son's present age?", options: ["26 years", "16 years", "18 years", "20 years"], answer: 2, explanation: "Let the son be x: (56 − x − 8) = 3(x − 8) gives x = 18; the father is 38." },
+    { q: "Through how many degrees does the hour hand of a clock turn from 1:45 to 6:55?", options: ["185°", "170°", "60°", "155°"], answer: 3, explanation: "The hour hand turns 0.5° per minute; 310 minutes × 0.5° = 155°." },
+    { q: "How many days are there from 12 September 2026 to 1 November 2026, both days included?", options: ["61", "52", "50", "51"], answer: 3, explanation: "Counting the days in each month from 12 September 2026 to 1 November 2026 inclusive gives 51." },
+    { q: "Statements: All bridges are swimmers. No bottle is a swimmer. Conclusions: I. No bridge is a bottle. II. All bottles are bridges.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "All bridges are swimmers and no a bottle is a swimmer, so no a bridge is a bottle (I); II contradicts this." },
+    { q: "Statement: Neeraj won the gold medal in the javelin throw at the championship. Conclusions: I. Neeraj threw farther than every other competitor there. II. Neeraj will win every future championship.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Winning gold means the best throw (I); the future cannot be concluded." },
+    { q: "A cube of side 8 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have no face painted?", options: ["296", "8", "72", "216"], answer: 3, explanation: "There are 512 small cubes; no face painted: the inner (8 − 2)³ = 216 cubes." },
+    { q: "Which letter is 5th to the left of the 7th letter from the right in the English alphabet?", options: ["N", "O", "L", "P"], answer: 1, explanation: "The 7th letter from the right is the 20th from the left (T); 5 to its left is the 15th letter, O." },
+    { q: "If the following words are arranged in dictionary order, which word comes last? Referee, Rabbit, Riddle, Rocket", options: ["Referee", "Riddle", "Rabbit", "Rocket"], answer: 3, explanation: "In dictionary order: Rabbit, Referee, Riddle, Rocket." },
+  ],
+};
+
+export default test;

@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-101",
+  title: "OIR Test 101",
+  durationMinutes: 20,
+  releaseAt: "2027-01-24T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 768, 192, 48, 12, ?", options: ["2", "4", "9", "3"], answer: 3, explanation: "Here each term is the previous term divided by 4. Next: 12 ÷ 4 = 3." },
+    { q: "Find the next number: 18, 42, 22, 39, 26, 36, 30, ?", options: ["36", "30", "34", "33"], answer: 3, explanation: "Here two series alternate: 18, 22, 26, … (+4) and 42, 39, 36, … (-3). Next: 36 − 3 = 33." },
+    { q: "Find the next number: 7, 21, 8, 22, 9, 23, ?", options: ["37", "10", "11", "8"], answer: 1, explanation: "Here the operations alternate: + 14, − 13, + 14, − 13 and so on. Next: 23 − 13 = 10." },
+    { q: "Find the missing number: 5, 15, ?, 300, 1800, 12600", options: ["255", "50", "158", "60"], answer: 3, explanation: "Here the multipliers increase by one each step (×3, ×4, ×5, …), so the missing term is 60." },
+    { q: "Find the next letter: X, V, T, R, P, ?", options: ["P", "O", "M", "N"], answer: 3, explanation: "By alphabet positions (24, 22, 20, 18, 16), each letter is 2 places before the previous one: P(16) − 2 = N(14)." },
+    { q: "Find the next term: G20, K16, O12, S8, ?", options: ["X3", "W4", "W5", "W23"], answer: 1, explanation: "The letters move 4 forward each time, and each number is the letter's position in the reversed alphabet (A = 26 … Z = 1): W → 4." },
+    { q: "Square : Cube :: Circle : ?", options: ["Ring", "Cone", "Cylinder", "Sphere"], answer: 3, explanation: "A cube is the 3-D form of a square; a sphere is the 3-D form of a circle." },
+    { q: "3 : 10 :: 9 : ?", options: ["80", "82", "81", "100"], answer: 1, explanation: "3 → 3² + 1 = 10; likewise 9 → 9² + 1 = 82." },
+    { q: "Palk Strait : India–Sri Lanka :: Strait of Gibraltar : ?", options: ["Europe–North America", "Asia–Europe", "Asia–Africa", "Europe–Africa"], answer: 3, explanation: "The Palk Strait separates India and Sri Lanka; the Strait of Gibraltar separates Europe (Spain) and Africa (Morocco)." },
+    { q: "Which one does not belong with the others?", options: ["Nuclear", "Tidal", "Wind", "Solar"], answer: 0, explanation: "Nuclear energy uses finite uranium; the others are renewable sources." },
+    { q: "Which number does not belong with the others?", options: ["101", "97", "27", "43"], answer: 2, explanation: "27 = 3 × 9 is not prime; the others are prime numbers." },
+    { q: "Choose the one word for: \"The killing of a king\"", options: ["Regicide", "Genocide", "Homicide", "Patricide"], answer: 0, explanation: "Regicide: the killing of a king." },
+    { q: "If RIDDLE is coded as SKGHQK, how is PEPPER coded?", options: ["QGSTJX", "KVKKVI", "QGTTJX", "QFSTJX"], answer: 0, explanation: "In this code the 1st letter moves 1 place forward, the 2nd moves 2, the 3rd moves 3, and so on, so PEPPER becomes QGSTJX." },
+    { q: "In a code language, 'loyal players work' is written as 'ho ki ru', 'smart players' is written as 'ta ho' and 'work today' is written as 'ri ru'. Which word is coded as 'ta'?", options: ["work", "loyal", "today", "smart"], answer: 3, explanation: "'players' is common to the first two sentences, so players = ho; 'work' is common to the first and third, so work = ru. The other code in the second sentence, ta, means 'smart'." },
+    { q: "If '−' means '+', '÷' means '−', '+' means '×' and '×' means '÷', what is the value of 24 × 3 ÷ 11 − 12 + 8?", options: ["101", "92", "93", "77"], answer: 2, explanation: "Replacing the symbols gives 24 ÷ 3 − 11 + 12 × 8; following BODMAS, this equals 93." },
+    { q: "Lalita has only two children, Manohar and Nalini. Nalini's daughter is Omisha. How is Manohar related to Omisha?", options: ["Grandfather", "Paternal uncle", "Father", "Maternal uncle"], answer: 3, explanation: "Manohar is the brother of Omisha's mother Nalini, so he is her maternal uncle." },
+    { q: "Pointing to a man, Vidya said, \"His mother is my mother's mother.\" How is the man related to Vidya?", options: ["Brother", "Grandfather", "Father", "Maternal uncle"], answer: 3, explanation: "The man is a son of Vidya's maternal grandmother, i.e. her mother's brother." },
+    { q: "Starting from his house, Arjun walks 5 km towards the west, turns right and walks 7 km, finally turns left and walks 14 km. In which direction is he now from his house?", options: ["South-West", "South-East", "North-West", "North-East"], answer: 2, explanation: "He ends up 19 km west and 7 km north of his house, so he is to the North-West of his house." },
+    { q: "A man is facing West. He turns 180° anticlockwise, then 90° clockwise, then 135° anticlockwise. Which direction is he facing now?", options: ["South-East", "North-West", "South-West", "North-East"], answer: 3, explanation: "The net turn is 135° clockwise from West, so he faces North-East." },
+    { q: "Varun is 20th from the top and 21st from the bottom in his class. How many students are there in the class?", options: ["41", "39", "30", "40"], answer: 3, explanation: "Total = 20 + 21 − 1 = 40 (Varun is counted in both ranks)." },
+    { q: "Asha is slower than Lata. Farhan is faster than Lata. Hari is slower than Asha. Who is the slowest?", options: ["Lata", "Asha", "Hari", "Farhan"], answer: 2, explanation: "The order from fastest to slowest is Farhan > Lata > Asha > Hari, so the slowest is Hari." },
+    { q: "A bag contains an equal number of ₹1, ₹2 and ₹5 coins worth ₹80 in all. How many of each are there?", options: ["30", "20", "10", "16"], answer: 2, explanation: "Each set of one of each is worth ₹8; 80/8 = 10." },
+    { q: "₹12000 is divided among X, Y and Z in the ratio 2 : 2 : 4. What is Y's share?", options: ["₹3000", "₹4000", "₹4500", "₹6000"], answer: 0, explanation: "Total parts = 8; one part = ₹1500; Y gets 2 × 1500 = ₹3000." },
+    { q: "In a mirror, a clock appears to show 1:41. What is the actual time?", options: ["11:19", "10:49", "10:19", "11:41"], answer: 2, explanation: "Actual time = 11:60 − 1:41 = 10:19." },
+    { q: "12 September 2025 is a Friday. What day of the week is 30 July 2025?", options: ["Wednesday", "Tuesday", "Friday", "Thursday"], answer: 0, explanation: "30 July 2025 is 44 days before 12 September 2025. 44 = 7 × 6 + 2, so the day shifts 2 back: Wednesday." },
+    { q: "Statements: Some rings are not coins. All coins are cars. Conclusions: I. Some rings are not cars. II. Some cars are coins.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "All coins are cars, so some cars are coins (II); the rings that are not coins may still be cars, so I is uncertain." },
+    { q: "Statement: Hailstorms have destroyed standing crops in several districts. Courses of action: I. Affected farmers should be given relief and their crop-insurance claims settled quickly. II. Farmers should stop growing crops. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Relief helps the farmers (I); giving up farming is not a solution." },
+    { q: "A cube of side 3 cm is painted on two adjacent faces only and then cut into 1 cm cubes. How many small cubes have no paint on them?", options: ["22", "12", "6", "3"], answer: 1, explanation: "Each painted face has 3² = 9 cubes; the 3 cubes on the shared edge have two painted faces. Exactly one face: 2 × (9 − 3) = 12. Painted cubes total 15, so 12 have no paint." },
+    { q: "How many letters are there between A and I in the English alphabet?", options: ["9", "7", "10", "8"], answer: 1, explanation: "A is 1 and I is 9; the letters strictly between them number 9 − 1 − 1 = 7." },
+    { q: "If the following words are arranged in dictionary order, which word comes last? Ammunition, Arrow, Artillery, Autumn", options: ["Artillery", "Autumn", "Arrow", "Ammunition"], answer: 1, explanation: "In dictionary order: Ammunition, Arrow, Artillery, Autumn." },
+  ],
+};
+
+export default test;

@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-97",
+  title: "OIR Test 97",
+  durationMinutes: 20,
+  releaseAt: "2027-01-17T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 65, 126, 217, 344, 513, ?", options: ["730", "1001", "729", "731"], answer: 0, explanation: "Here the terms are n³ + 1 for consecutive n. Next: 9³ + 1 = 730." },
+    { q: "Find the next number: 73, 81, 85, 93, 105, ?", options: ["117", "109", "119", "120"], answer: 0, explanation: "Here the terms are 2p − 1 for consecutive primes p. Next: 2 × 59 − 1 = 117." },
+    { q: "Find the next number: 18, 36, 24, 31, 30, 26, 36, ?", options: ["26", "16", "42", "21"], answer: 3, explanation: "Here two series alternate: 18, 24, 30, … (+6) and 36, 31, 26, … (-5). Next: 26 − 5 = 21." },
+    { q: "Find the missing number: 10368, 1728, 288, ?, 8", options: ["148", "48", "248", "46"], answer: 1, explanation: "Here each term is the previous term divided by 6, so the missing term is 48." },
+    { q: "Find the next letter: K, M, O, Q, S, ?", options: ["U", "T", "V", "W"], answer: 0, explanation: "By alphabet positions (11, 13, 15, 17, 19), each letter is 2 places after the previous one: S(19) + 2 = U(21)." },
+    { q: "Find the next pair: NF, PG, RH, TI, ?", options: ["VK", "UI", "WJ", "VJ"], answer: 3, explanation: "The first letters move 2 forward each time and the second letters move 1 forward: next is VJ." },
+    { q: "Novice : Expert :: Apprentice : ?", options: ["Worker", "Master", "Student", "Trainee"], answer: 1, explanation: "A novice becomes an expert; an apprentice learns under and becomes a master." },
+    { q: "5 : 130 :: 7 : ?", options: ["350", "343", "52", "64"], answer: 0, explanation: "5 → 5³ + 5 = 130; likewise 7 → 7³ + 7 = 350." },
+    { q: "Anamudi : Kerala :: Guru Shikhar : ?", options: ["Rajasthan", "Maharashtra", "Madhya Pradesh", "Gujarat"], answer: 0, explanation: "Anamudi is the highest peak of Kerala; Guru Shikhar (Mount Abu) is the highest of Rajasthan." },
+    { q: "Which one does not belong with the others?", options: ["Wheat", "Mustard", "Rice", "Barley"], answer: 1, explanation: "Mustard is an oilseed; the others are cereals." },
+    { q: "Which pair does not belong with the others?", options: ["2 – 5", "4 – 24", "5 – 26", "3 – 10"], answer: 1, explanation: "In the other pairs the second number is n² + 1, where n is the first (e.g. 2² + 1 = 5); but 4² + 1 = 17, not 24." },
+    { q: "Choose the one word for: \"A person newly enlisted in the armed forces\"", options: ["Recruit", "Deserter", "Mercenary", "Veteran"], answer: 0, explanation: "Recruit: a person newly enlisted in the armed forces." },
+    { q: "If CRYSTAL is written as 3-18-25-19-20-1-12, how is TOMATO written in the same code?", options: ["20-15-13-2-20-15", "20-15-13-1-20-15", "21-15-13-1-20-15", "7-12-14-26-7-12"], answer: 1, explanation: "Each letter is replaced by its position in the alphabet (A = 1, …, Z = 26), so TOMATO → 20-15-13-1-20-15." },
+    { q: "In a code language, 'loyal pilots march' is written as 'ja ri fe', 'calm pilots' is written as 'ri mu' and 'march hard' is written as 'ma fe'. Which word is coded as 'ma'?", options: ["march", "hard", "calm", "pilots"], answer: 1, explanation: "'pilots' is common to the first two sentences, so pilots = ri; 'march' is common to the first and third, so march = fe. The other code in the third sentence, ma, means 'hard'." },
+    { q: "If '×' means '+', '÷' means '−', '+' means '×' and '−' means '÷', what is the value of 4 × 11 + 12 ÷ 8 − 8?", options: ["143", "119", "134", "135"], answer: 3, explanation: "Replacing the symbols gives 4 + 11 × 12 − 8 ÷ 8; following BODMAS, this equals 135." },
+    { q: "Umang is the son of Vasudha. Vasudha's father is Yogesh. Yogesh's only son is Zorawar. How is Zorawar related to Umang?", options: ["Brother", "Father", "Grandfather", "Maternal uncle"], answer: 3, explanation: "Zorawar is the brother of Umang's mother Vasudha, so he is Umang's maternal uncle." },
+    { q: "Pointing to a woman, Lavanya said, \"Her son is the husband of my only daughter.\" How is the woman related to Lavanya?", options: ["Sister", "Aunt", "Daughter's mother-in-law", "Mother-in-law"], answer: 2, explanation: "The woman's son is Lavanya's son-in-law, so she is Lavanya's daughter's mother-in-law." },
+    { q: "Starting from his house, Dev walks 15 km towards the east, turns left and walks 3 km, turns right and walks 11 km, finally turns right and walks 7 km. In which direction is he now from his house?", options: ["South-East", "North-West", "North-East", "South-West"], answer: 0, explanation: "He ends up 26 km east and 4 km south of his house, so he is to the South-East of his house." },
+    { q: "If East is called South-East, and all other directions are renamed in the same way, what will South be called?", options: ["North-West", "South-East", "North", "South-West"], answer: 3, explanation: "East → South-East is a rotation of 45° clockwise; rotating South by the same amount gives South-West." },
+    { q: "In a row, Varun is 6th from the left and Vikram is 14th from the right. When they interchange places, Varun becomes 18th from the left. How many people are in the row?", options: ["31", "21", "23", "32"], answer: 0, explanation: "After the swap Varun takes Vikram's old place, which is 18th from the left and 14th from the right, so total = 18 + 14 − 1 = 31." },
+    { q: "Kiran is younger than Ravi. Bina is younger than Kiran. Bina is older than Jatin. Manoj is older than Ravi. Who is the second youngest?", options: ["Kiran", "Bina", "Manoj", "Ravi"], answer: 1, explanation: "The order from oldest to youngest is Manoj > Ravi > Kiran > Bina > Jatin, so the second youngest is Bina." },
+    { q: "A train 390 m long passes a signal post in 13 seconds. What is its speed in km/h?", options: ["117", "108", "30", "99"], answer: 1, explanation: "Speed = 390/13 = 30 m/s = 30 × 18/5 = 108 km/h." },
+    { q: "₹5000 is divided among X, Y and Z in the ratio 1 : 3 : 1. What is Y's share?", options: ["₹3000", "₹1666.6666666666667", "₹4000", "₹1000"], answer: 0, explanation: "Total parts = 5; one part = ₹1000; Y gets 3 × 1000 = ₹3000." },
+    { q: "A clock gains 4 minutes every hour. It is set right at 7 am. What time will it show when the correct time is 1:00 pm the same day?", options: ["1:24 pm", "12:36 pm", "1:20 pm", "1:28 pm"], answer: 0, explanation: "In 6 hours it gains 4 × 6 = 24 minutes, so it shows 1:24 pm." },
+    { q: "11 October 2024 is a Friday. What day of the week is 6 August 2024?", options: ["Tuesday", "Thursday", "Monday", "Wednesday"], answer: 0, explanation: "6 August 2024 is 66 days before 11 October 2024. 66 = 7 × 9 + 3, so the day shifts 3 back: Tuesday." },
+    { q: "Statements: Some sailors are athletes. No flower is an athlete. Conclusions: I. Some sailors are not flowers. II. Some athletes are sailors.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "The sailors that are athletes cannot be flowers, so some sailors are not flowers (I); 'Some sailors are athletes' reverses to 'Some athletes are sailors' (II)." },
+    { q: "Statement: The city's hospitals are overcrowded. Courses of action: I. New hospitals and health centres should be opened. II. Patients should be refused treatment. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Adding capacity solves the problem (I); refusing treatment is wrong." },
+    { q: "A cube of side 3 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have exactly three faces painted?", options: ["6", "8", "1", "12"], answer: 1, explanation: "There are 27 small cubes; exactly three faces painted: only the 8 corner cubes." },
+    { q: "How many letters are there between D and J in the English alphabet?", options: ["6", "5", "15", "7"], answer: 1, explanation: "D is 4 and J is 10; the letters strictly between them number 10 − 4 − 1 = 5." },
+    { q: "If the letters of the word DYNAMIC are arranged in alphabetical order, how many letters remain in the same position?", options: ["2", "1", "0", "3"], answer: 1, explanation: "Alphabetical order: ACDIMNY. Comparing with DYNAMIC, 1 letter (M) stays in place." },
+  ],
+};
+
+export default test;

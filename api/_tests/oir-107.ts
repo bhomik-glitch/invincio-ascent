@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-107",
+  title: "OIR Test 107",
+  durationMinutes: 20,
+  releaseAt: "2027-01-31T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 7, 11, 13, 17, 19, ?", options: ["23", "25", "21", "24"], answer: 0, explanation: "Here the terms are consecutive prime numbers. Next: the prime after 19 = 23." },
+    { q: "Find the next number: 4375, 875, 175, 35, ?", options: ["6", "7", "8", "28"], answer: 1, explanation: "Here each term is the previous term divided by 5. Next: 35 ÷ 5 = 7." },
+    { q: "Find the next number: 20, 51, 23, 44, 26, 37, 29, ?", options: ["37", "32", "23", "30"], answer: 3, explanation: "Here two series alternate: 20, 23, 26, … (+3) and 51, 44, 37, … (-7). Next: 37 − 7 = 30." },
+    { q: "Find the missing number: 4, 11, 43, ?, 1283, 8980", options: ["1112", "214", "663", "217"], answer: 1, explanation: "Here the multipliers increase by one each step (×3, ×4, ×5, …), then subtract 1, so the missing term is 214." },
+    { q: "Find the next letter: C, G, I, M, O, ?", options: ["S", "R", "U", "T"], answer: 0, explanation: "By alphabet positions (3, 7, 9, 13, 15), the letters move alternately +4 and +2: O(15) + 4 = S(19)." },
+    { q: "Find the next pair: KX, LU, MR, NO, ?", options: ["NK", "PL", "OL", "OK"], answer: 2, explanation: "The first letters move 1 forward each time and the second letters move 3 back: next is OL." },
+    { q: "Mountain : Peak :: Wave : ?", options: ["Tide", "Trough", "Foam", "Crest"], answer: 3, explanation: "The top of a mountain is its peak; the top of a wave is its crest." },
+    { q: "10 : 101 :: 2 : ?", options: ["8", "7", "5", "6"], answer: 2, explanation: "10 → 10² + 1 = 101; likewise 2 → 2² + 1 = 5." },
+    { q: "BSF : Land borders :: Indian Coast Guard : ?", options: ["Industries", "Railways", "Airports", "Maritime zones"], answer: 3, explanation: "The BSF guards land borders; the Coast Guard protects India's maritime zones." },
+    { q: "Which one does not belong with the others?", options: ["Frog", "Toad", "Turtle", "Salamander"], answer: 2, explanation: "The turtle is a reptile; the others are amphibians." },
+    { q: "Which pair does not belong with the others?", options: ["2 – 5", "9 – 720", "6 – 210", "4 – 60"], answer: 0, explanation: "In the other pairs the second number is n³ − n, where n is the first (e.g. 9³ − 9 = 720); but 2³ − 2 = 6, not 5." },
+    { q: "Choose the one word for: \"Animals that eat both plants and flesh\"", options: ["Herbivores", "Insectivores", "Omnivores", "Carnivores"], answer: 2, explanation: "Omnivores: animals that eat both plants and flesh." },
+    { q: "If CRICKET is coded as DQJBLDU, how is CHERRY coded?", options: ["DGFQRX", "DGFQSX", "DJHVWE", "DGFQTX"], answer: 1, explanation: "In this code letters are moved alternately one place forward and one place back, so CHERRY becomes DGFQSX." },
+    { q: "In a code language, 'calm doctors win' is written as 're ri ja', 'brave doctors' is written as 're ho' and 'win fast' is written as 'ja tu'. Which word is coded as 'ja'?", options: ["calm", "doctors", "win", "fast"], answer: 2, explanation: "'doctors' is common to the first two sentences, so doctors = re; 'win' is common to the first and third, so win = ja." },
+    { q: "If '−' means '+', '+' means '−', '÷' means '×' and '×' means '÷', what is the value of 54 × 9 + 9 − 10 ÷ 8?", options: ["85", "77", "87", "61"], answer: 1, explanation: "Replacing the symbols gives 54 ÷ 9 − 9 + 10 × 8; following BODMAS, this equals 77." },
+    { q: "Mitali's husband's only brother is Nirav. Nirav's son is Om. How is Mitali related to Om?", options: ["Sister", "Aunt", "Grandmother", "Mother"], answer: 1, explanation: "Mitali is the wife of Om's father's brother, so she is Om's aunt." },
+    { q: "Pointing to a man, Gunjan said, \"He is the brother of my father's mother.\" How is the man related to Gunjan?", options: ["Cousin", "Grand-uncle", "Uncle", "Grandfather"], answer: 1, explanation: "The brother of Gunjan's grandmother is his grand-uncle." },
+    { q: "Starting from his house, Karan walks 9 km towards the north, turns right and walks 3 km, finally turns left and walks 15 km. In which direction is he now from his house?", options: ["South-East", "South-West", "North-East", "North-West"], answer: 2, explanation: "He ends up 3 km east and 24 km north of his house, so he is to the North-East of his house." },
+    { q: "One evening, just before sunset, Varun was standing in a field. His shadow fell exactly in front of him. Which direction was he facing?", options: ["West", "South", "East", "North"], answer: 2, explanation: "In the evening the sun is in the west, so shadows fall to the east. With the shadow (East) in front of him, he must be facing East." },
+    { q: "Sanjay is 18th from the top and 11th from the bottom in his class. How many students are there in the class?", options: ["27", "38", "28", "29"], answer: 2, explanation: "Total = 18 + 11 − 1 = 28 (Sanjay is counted in both ranks)." },
+    { q: "Om is lighter than Farhan. Sita is lighter than Esha. Ravi is lighter than Om. Farhan is lighter than Sita. Who is in the middle (third)?", options: ["Esha", "Sita", "Farhan", "Om"], answer: 2, explanation: "The order from heaviest to lightest is Esha > Sita > Farhan > Om > Ravi, so in the middle (third) is Farhan." },
+    { q: "A bag contains an equal number of ₹1, ₹5 and ₹10 coins worth ₹432 in all. How many of each are there?", options: ["27", "25", "26", "81"], answer: 0, explanation: "Each set of one of each is worth ₹16; 432/16 = 27." },
+    { q: "A shopkeeper marks his goods 10% above the cost price and then gives a discount of 30%. What is his net profit or loss?", options: ["23% profit", "25% loss", "23% loss", "-20% profit"], answer: 2, explanation: "On a cost of ₹100 the marked price is ₹110; after 30% off it sells for ₹77, a 23% loss." },
+    { q: "At what time between 1 and 2 o'clock are the hands of a clock in opposite directions (180° apart)?", options: ["1:38 2/11", "1:37 7/11", "1:39 2/11", "1:38 5/11"], answer: 0, explanation: "The minute hand gains 11/2° per minute. It must gain 30° + 180° = 210° on the hour hand, which takes 420/11 = 38 2/11 minutes past 1." },
+    { q: "How many days are there from 11 March 2029 to 23 December 2029, both days included?", options: ["287", "288", "286", "289"], answer: 1, explanation: "Counting the days in each month from 11 March 2029 to 23 December 2029 inclusive gives 288." },
+    { q: "Statements: All trees are runners. Some runners are bridges. Conclusions: I. Some trees are bridges. II. Some bridges are runners.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "Some runners are bridges, so some bridges are runners (II); the runners that are bridges need not include any trees, so I is uncertain." },
+    { q: "Statement: A website crashed because too many users tried to register at once. Courses of action: I. The website's servers should be upgraded. II. Registrations could be spread over several days. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "More capacity (I) and staggering the load (II) both prevent crashes." },
+    { q: "A cube of side 8 cm is painted on two opposite faces only and then cut into 1 cm cubes. How many small cubes have no paint on them?", options: ["64", "384", "128", "216"], answer: 1, explanation: "The two opposite faces each have 64 cubes with exactly one painted face (128 in all), and the remaining 8³ − 128 = 384 cubes have no paint." },
+    { q: "How many letters are there between I and P in the English alphabet?", options: ["7", "5", "8", "6"], answer: 3, explanation: "I is 9 and P is 16; the letters strictly between them number 16 − 9 − 1 = 6." },
+    { q: "If the following words are arranged in dictionary order, which word comes second? Aircraft, Ammunition, Artillery, Anchor", options: ["Aircraft", "Anchor", "Ammunition", "Artillery"], answer: 2, explanation: "In dictionary order: Aircraft, Ammunition, Anchor, Artillery." },
+  ],
+};
+
+export default test;

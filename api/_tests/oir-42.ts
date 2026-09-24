@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-42",
+  title: "OIR Test 42",
+  durationMinutes: 20,
+  releaseAt: "2026-11-01T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 1, 6, 7, 13, 20, 33, 53, ?", options: ["86", "73", "87", "106"], answer: 0, explanation: "Here each term is the sum of the previous two terms. Next: 33 + 53 = 86." },
+    { q: "Find the next number: 1296, 216, 36, 6, ?", options: ["1", "2", "5", "3"], answer: 0, explanation: "Here each term is the previous term divided by 6. Next: 6 ÷ 6 = 1." },
+    { q: "Find the next number: 64, 81, 100, 121, 144, ?", options: ["168", "170", "196", "169"], answer: 3, explanation: "Here the terms are the squares of consecutive numbers. Next: 13² = 169." },
+    { q: "Find the missing number: 18, 20, 26, ?, 98, 260", options: ["62", "34", "80", "44"], answer: 3, explanation: "Here the differences 2, 6, 18, 54, 162 are each 3 times the previous difference, so the missing term is 44." },
+    { q: "Find the next letter: M, O, Q, S, U, ?", options: ["V", "W", "X", "Y"], answer: 1, explanation: "By alphabet positions (13, 15, 17, 19, 21), each letter is 2 places after the previous one: U(21) + 2 = W(23)." },
+    { q: "Find the next term: G7, J10, M13, P16, ?", options: ["S19", "S8", "S20", "T20"], answer: 0, explanation: "The letters move 3 forward each time, and each number is the letter's position in the alphabet: S → 19." },
+    { q: "Watt : Power :: Joule : ?", options: ["Energy", "Current", "Force", "Pressure"], answer: 0, explanation: "The watt is the unit of power; the joule is the unit of energy." },
+    { q: "5 : 124 :: 12 : ?", options: ["169", "132", "1727", "288"], answer: 2, explanation: "5 → 5³ − 1 = 124; likewise 12 → 12³ − 1 = 1727." },
+    { q: "Manipur : Imphal :: Mizoram : ?", options: ["Agartala", "Itanagar", "Aizawl", "Shillong"], answer: 2, explanation: "Imphal is the capital of Manipur; Aizawl is the capital of Mizoram." },
+    { q: "Which one does not belong with the others?", options: ["Spinach", "Cabbage", "Potato", "Lettuce"], answer: 2, explanation: "The potato is a tuber; the others are leafy vegetables." },
+    { q: "Which number does not belong with the others?", options: ["28", "27", "729", "216"], answer: 0, explanation: "729 = 9³, 27 = 3³, 216 = 6³ are perfect cubes; 28 is not." },
+    { q: "Choose the word most opposite in meaning to EXPAND.", options: ["Spread", "Contract", "Grow", "Enlarge"], answer: 1, explanation: "The opposite of expand is contract; the other options are similar in meaning or unrelated." },
+    { q: "If ISLAND is coded as RHOZMW, how is STORM coded?", options: ["HGLIN", "HGMIN", "HHLIM", "QRMPK"], answer: 0, explanation: "In this code each letter is replaced by its opposite letter (A↔Z, B↔Y, C↔X, …), so STORM becomes HGLIN." },
+    { q: "In a code language, 'quick farmers climb' is written as 'da ki ri', 'bold farmers' is written as 'da bu' and 'climb fast' is written as 'lo ri'. What is the code for 'bold'?", options: ["bu", "ri", "lo", "ki"], answer: 0, explanation: "'farmers' is common to the first two sentences, so farmers = da; 'climb' is common to the first and third, so climb = ri. The other code in the second sentence, bu, means 'bold'." },
+    { q: "If A = 1, B = 2, …, Z = 26 and DANCER = 45 (the sum of its letter values), what is SALUTE?", options: ["97", "80", "78", "84"], answer: 2, explanation: "SALUTE = 19 + 1 + 12 + 21 + 20 + 5 = 78." },
+    { q: "S is the sister of T. T is the son of U. U is the son of V. How is S related to V?", options: ["Grandmother", "Granddaughter", "Daughter", "Niece"], answer: 1, explanation: "S is U's daughter, and U is V's son, so S is V's granddaughter." },
+    { q: "Pointing to a girl, Rajni said, \"Her father's wife is my mother's only daughter.\" How is the girl related to Rajni?", options: ["Sister", "Granddaughter", "Daughter", "Niece"], answer: 2, explanation: "Rajni's mother's only daughter is Rajni herself; the girl's father's wife is Rajni, so the girl is Rajni's daughter." },
+    { q: "Starting from his house, Ravi walks 3 km towards the east, turns left and walks 2 km, finally turns left and walks 8 km. In which direction is he now from his house?", options: ["North-East", "South-East", "North-West", "South-West"], answer: 2, explanation: "He ends up 5 km west and 2 km north of his house, so he is to the North-West of his house." },
+    { q: "A man is facing South-West. He turns 45° anticlockwise, then 45° anticlockwise, then 45° clockwise. Which direction is he facing now?", options: ["West", "North", "South", "East"], answer: 2, explanation: "The net turn is 45° anticlockwise from South-West, so he faces South." },
+    { q: "In a class of 43 students, Ajay ranks 13th from the top. What is his rank from the bottom?", options: ["31st", "33rd", "30th", "32nd"], answer: 0, explanation: "Rank from bottom = 43 − 13 + 1 = 31." },
+    { q: "Manoj is shorter than Lata. Nisha is taller than Tarun. Lata is shorter than Dinesh. Nisha is shorter than Manoj. Who is the tallest?", options: ["Nisha", "Dinesh", "Manoj", "Lata"], answer: 1, explanation: "The order from tallest to shortest is Dinesh > Lata > Manoj > Nisha > Tarun, so the tallest is Dinesh." },
+    { q: "The average of 9 numbers is 40. When one number is removed, the average of the rest becomes 44. Which number was removed?", options: ["17", "40", "8", "11"], answer: 2, explanation: "Total before = 9 × 40 = 360; after = 8 × 44 = 352; removed = 8." },
+    { q: "₹29400 is divided among X, Y and Z in the ratio 3 : 6 : 5. What is Y's share?", options: ["₹14700", "₹12600", "₹10500", "₹6300"], answer: 1, explanation: "Total parts = 14; one part = ₹2100; Y gets 6 × 2100 = ₹12600." },
+    { q: "Through how many degrees does the hour hand of a clock turn from 2:00 to 5:50?", options: ["145°", "130°", "115°", "300°"], answer: 2, explanation: "The hour hand turns 0.5° per minute; 230 minutes × 0.5° = 115°." },
+    { q: "How many days are there from 14 June 2025 to 23 October 2025, both days included?", options: ["142", "132", "133", "131"], answer: 1, explanation: "Counting the days in each month from 14 June 2025 to 23 October 2025 inclusive gives 132." },
+    { q: "Statements: No swimmer is a cup. Some cups are pilots. Conclusions: I. Some pilots are not swimmers. II. Some swimmers are pilots.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "The pilots that are cups cannot be swimmers, so some pilots are not swimmers (I); nothing links swimmers and pilots directly, so II is uncertain." },
+    { q: "Statement: The state government has decided to give free bicycles to girl students. Assumptions: I. Bicycles will help girls reach school more easily. II. All girl students already own bicycles.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0, explanation: "The scheme assumes bicycles will help (I); it would be pointless if all already had them." },
+    { q: "A cube of side 5 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have exactly two faces painted?", options: ["54", "8", "36", "27"], answer: 2, explanation: "There are 125 small cubes; exactly two faces painted: 12 edges × (5 − 2) = 36." },
+    { q: "Which letter is 5th to the right of the 10th letter from the left in the English alphabet?", options: ["P", "M", "O", "N"], answer: 2, explanation: "The 10th letter from the left is J; 5 places to its right is the 15th letter, O." },
+    { q: "If the following words are arranged in dictionary order, which word comes last? Lieutenant, Loyalty, Leadership, Letter", options: ["Loyalty", "Leadership", "Letter", "Lieutenant"], answer: 0, explanation: "In dictionary order: Leadership, Letter, Lieutenant, Loyalty." },
+  ],
+};
+
+export default test;

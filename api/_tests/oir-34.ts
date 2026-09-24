@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-34",
+  title: "OIR Test 34",
+  durationMinutes: 20,
+  releaseAt: "2026-10-18T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 2, 12, 14, 26, 40, 66, 106, ?", options: ["146", "173", "172", "212"], answer: 2, explanation: "Here each term is the sum of the previous two terms. Next: 66 + 106 = 172." },
+    { q: "Find the next number: 29, 34, 40, 47, 55, ?", options: ["63", "65", "64", "66"], answer: 2, explanation: "Here the differences added are 5, 6, 7, 8, 9 — each 1 more than the last. Next: 55 + 9 = 64." },
+    { q: "Find the next number: 6, 51, 14, 44, 22, 37, 30, ?", options: ["30", "23", "37", "38"], answer: 0, explanation: "Here two series alternate: 6, 14, 22, … (+8) and 51, 44, 37, … (-7). Next: 37 − 7 = 30." },
+    { q: "Find the missing number: 63, 124, 215, ?, 511, 728", options: ["363", "352", "342", "384"], answer: 2, explanation: "Here the terms are n³ − 1 for consecutive n, so the missing term is 342." },
+    { q: "Find the next letter: A, D, G, J, M, ?", options: ["O", "R", "Q", "P"], answer: 3, explanation: "By alphabet positions (1, 4, 7, 10, 13), each letter is 3 places after the previous one: M(13) + 3 = P(16)." },
+    { q: "Find the next term: N13, P11, R9, T7, ?", options: ["V5", "V6", "W4", "V22"], answer: 0, explanation: "The letters move 2 forward each time, and each number is the letter's position in the reversed alphabet (A = 26 … Z = 1): V → 5." },
+    { q: "Bank : Money :: Library : ?", options: ["Silence", "Students", "Shelves", "Books"], answer: 3, explanation: "A bank keeps money; a library keeps books." },
+    { q: "6 : 72 :: 11 : ?", options: ["242", "1320", "120", "122"], answer: 0, explanation: "6 → 2 × 6² = 72; likewise 11 → 2 × 11² = 242." },
+    { q: "Air Force Day : 8 October :: Armed Forces Flag Day : ?", options: ["7 December", "4 December", "15 January", "26 July"], answer: 0, explanation: "Air Force Day is 8 October; Armed Forces Flag Day is 7 December." },
+    { q: "Which one does not belong with the others?", options: ["Inch", "Kilogram", "Foot", "Yard"], answer: 1, explanation: "The kilogram measures mass; the others measure length." },
+    { q: "Which pair does not belong with the others?", options: ["4 – 12", "3 – 12", "8 – 56", "2 – 2"], answer: 1, explanation: "In the other pairs the second number is n² − n, where n is the first (e.g. 2² − 2 = 2); but 3² − 3 = 6, not 12." },
+    { q: "Choose the word most similar in meaning to PRUDENT.", options: ["Wise", "Foolish", "Proud", "Rash"], answer: 0, explanation: "Prudent means wise." },
+    { q: "If PEPPER is written as 16-5-16-16-5-18, how is ENGINE written in the same code?", options: ["5-14-7-9-14-5", "5-14-7-9-13-5", "22-13-20-18-13-22", "5-14-7-9-15-5"], answer: 0, explanation: "Each letter is replaced by its position in the alphabet (A = 1, …, Z = 26), so ENGINE → 5-14-7-9-14-5." },
+    { q: "In a code language, 'quick sailors swim' is written as 'zo su ka', 'loyal sailors' is written as 'ka pi' and 'swim fast' is written as 'zo ze'. Which word is coded as 'ze'?", options: ["quick", "loyal", "fast", "swim"], answer: 2, explanation: "'sailors' is common to the first two sentences, so sailors = ka; 'swim' is common to the first and third, so swim = zo. The other code in the third sentence, ze, means 'fast'." },
+    { q: "If A = 26, B = 25, …, Z = 1 and TEAM = 69 (the sum of its letter values), what is DUTY?", options: ["61", "38", "70", "28"], answer: 1, explanation: "DUTY = 23 + 6 + 7 + 2 = 38." },
+    { q: "Y is the sister of Z, who is a boy. X is the mother of Y. W is the husband of X. How is Z related to W?", options: ["Grandson", "Nephew", "Son", "Brother"], answer: 2, explanation: "Z is Y's brother, so X and her husband W are his parents; Z is W's son." },
+    { q: "Pointing to a man, Gita said, \"His sister's husband is my husband.\" Gita's husband has only one wife. How is the man related to Gita?", options: ["Cousin", "Brother", "Husband", "Brother-in-law"], answer: 1, explanation: "The man's sister is married to Gita's husband, so the sister is Gita herself; the man is Gita's brother." },
+    { q: "Starting from his house, Karan walks 1 km towards the north, turns left and walks 4 km, turns right and walks 9 km, finally turns right and walks 1 km. In which direction is he now from his house?", options: ["South-West", "South-East", "North-West", "North-East"], answer: 2, explanation: "He ends up 3 km west and 10 km north of his house, so he is to the North-West of his house." },
+    { q: "One morning, just after sunrise, Kabir was standing in a field. His shadow fell exactly in front of him. Which direction was he facing?", options: ["East", "South", "West", "North"], answer: 2, explanation: "In the morning the sun is in the east, so shadows fall to the west. With the shadow (West) in front of him, he must be facing West." },
+    { q: "In a row of 32 students, Kabir is 18th from the left end and Rohit is 12th from the right end. How many students are there between them?", options: ["0", "4", "3", "2"], answer: 3, explanation: "Kabir and Rohit with everyone to their outer sides account for 18 + 12 = 30 students, so 32 − 30 = 2 are between them." },
+    { q: "Farhan is faster than Dinesh. Dinesh is faster than Sita. Gita is faster than Farhan. Who is the second fastest?", options: ["Farhan", "Gita", "Sita", "Dinesh"], answer: 0, explanation: "The order from fastest to slowest is Gita > Farhan > Dinesh > Sita, so the second fastest is Farhan." },
+    { q: "The average of 10 numbers is 58. When one number is removed, the average of the rest becomes 62. Which number was removed?", options: ["22", "32", "58", "12"], answer: 0, explanation: "Total before = 10 × 58 = 580; after = 9 × 62 = 558; removed = 22." },
+    { q: "Two trains start at the same time from stations 336 km apart and travel towards each other at 46 km/h and 66 km/h. After how many hours will they meet?", options: ["13", "4", "2", "3"], answer: 3, explanation: "They close the gap at 46 + 66 = 112 km/h, so they meet after 336/112 = 3 hours." },
+    { q: "At what time between 9 and 10 o'clock are the hands of a clock together?", options: ["9:48 6/11", "9:50 1/11", "9:49 1/11", "9:49 4/11"], answer: 2, explanation: "The minute hand gains 11/2° per minute. It must gain 270° on the hour hand, which takes 540/11 = 49 1/11 minutes past 9." },
+    { q: "How many days are there from 3 August 2027 to 10 September 2027, both days included?", options: ["49", "40", "38", "39"], answer: 3, explanation: "Counting the days in each month from 3 August 2027 to 10 September 2027 inclusive gives 39." },
+    { q: "Statements: Some dancers are shirts. All dancers are bats. Conclusions: I. Some bats are shirts. II. Some shirts are bats.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "The dancers that are shirts are also bats, so some bats are shirts (I) and some shirts are bats (II)." },
+    { q: "Statement: \"Use public transport and reduce pollution,\" says a poster. Assumptions: I. Public transport causes less pollution per person than private vehicles. II. People pay attention to posters.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 2, explanation: "The message assumes public transport is cleaner (I) and that posters influence people (II)." },
+    { q: "A cube of side 7 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have at least one face painted?", options: ["218", "150", "125", "60"], answer: 0, explanation: "There are 343 small cubes; at least one face painted: 7³ − (7 − 2)³ = 343 − 125 = 218." },
+    { q: "If the English alphabet is written in reverse order (Z to A), which letter will be 3rd to the right of the 16th letter from the left?", options: ["H", "S", "I", "G"], answer: 0, explanation: "In the reversed alphabet the 19th letter from the left is H (position n holds letter 27 − n)." },
+    { q: "If the letters of the word RUNWAY are arranged in alphabetical order, how many letters remain in the same position?", options: ["2", "0", "3", "1"], answer: 3, explanation: "Alphabetical order: ANRUWY. Comparing with RUNWAY, 1 letter (Y) stays in place." },
+  ],
+};
+
+export default test;

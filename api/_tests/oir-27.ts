@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-27",
+  title: "OIR Test 27",
+  durationMinutes: 20,
+  releaseAt: "2026-10-11T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 20, 42, 26, 36, 32, 30, 38, ?", options: ["18", "24", "44", "30"], answer: 1, explanation: "Here two series alternate: 20, 26, 32, … (+6) and 42, 36, 30, … (-6). Next: 30 − 6 = 24." },
+    { q: "Find the next number: 5, 12, 9, 16, 13, 20, ?", options: ["27", "18", "15", "17"], answer: 3, explanation: "Here the operations alternate: + 7, − 3, + 7, − 3 and so on. Next: 20 − 3 = 17." },
+    { q: "Find the next number: 891, 297, 99, 33, ?", options: ["11", "22", "12", "8"], answer: 0, explanation: "Here each term is the previous term divided by 3. Next: 33 ÷ 3 = 11." },
+    { q: "Find the missing number: 18, 19, 24, 33, ?, 63", options: ["50", "36", "48", "46"], answer: 3, explanation: "Here the differences added are 1, 5, 9, 13, 17 — each 4 more than the last, so the missing term is 46." },
+    { q: "Find the next letter: E, I, M, Q, U, ?", options: ["Y", "Z", "W", "X"], answer: 0, explanation: "By alphabet positions (5, 9, 13, 17, 21), each letter is 4 places after the previous one: U(21) + 4 = Y(25)." },
+    { q: "Find the next term: E5, I9, M13, Q17, ?", options: ["V22", "U6", "U22", "U21"], answer: 3, explanation: "The letters move 4 forward each time, and each number is the letter's position in the alphabet: U → 21." },
+    { q: "Wide : Narrow :: Shallow : ?", options: ["Flat", "Low", "Thin", "Deep"], answer: 3, explanation: "These are pairs of opposites: wide–narrow, shallow–deep." },
+    { q: "9 : 738 :: 8 : ?", options: ["81", "520", "504", "72"], answer: 1, explanation: "9 → 9³ + 9 = 738; likewise 8 → 8³ + 8 = 520." },
+    { q: "Nag : Anti-tank missile :: BrahMos : ?", options: ["Torpedo", "Assault rifle", "Ballistic missile", "Supersonic cruise missile"], answer: 3, explanation: "Nag is an anti-tank guided missile; BrahMos is a supersonic cruise missile." },
+    { q: "Which one does not belong with the others?", options: ["Arctic", "Europe", "Asia", "Africa"], answer: 0, explanation: "The Arctic is an ocean; the others are continents." },
+    { q: "Which number does not belong with the others?", options: ["305", "70", "71", "314"], answer: 1, explanation: "The digits of 71, 305, 314 each add up to 8; the digits of 70 add up to 7." },
+    { q: "Choose the word most similar in meaning to FRUGAL.", options: ["Wasteful", "Poor", "Thrifty", "Generous"], answer: 2, explanation: "Frugal means thrifty." },
+    { q: "If BRIDGE is coded as EGDIRB, how is SCREEN coded?", options: ["NEERCS", "NEFRCS", "MDDQBR", "NDERCS"], answer: 0, explanation: "In this code the letters are written in reverse order, so SCREEN becomes NEERCS." },
+    { q: "In a code language, 'brave players study' is written as 'lo re ma', 'smart players' is written as 'ka re' and 'study again' is written as 'ne lo'. Which word is coded as 'ka'?", options: ["brave", "smart", "again", "players"], answer: 1, explanation: "'players' is common to the first two sentences, so players = re; 'study' is common to the first and third, so study = lo. The other code in the second sentence, ka, means 'smart'." },
+    { q: "If '−' means '+', '×' means '−', '÷' means '×' and '+' means '÷', what is the value of 11 × 99 + 11 ÷ 2 − 9?", options: ["11", "0", "16", "2"], answer: 3, explanation: "Replacing the symbols gives 11 − 99 ÷ 11 × 2 + 9; following BODMAS, this equals 2." },
+    { q: "U is the mother-in-law of V. V is the husband of W. How is U related to W?", options: ["Aunt", "Mother", "Mother-in-law", "Sister"], answer: 1, explanation: "V's mother-in-law is the mother of V's wife W." },
+    { q: "Pointing to a man, a girl said, \"He is the only son of my paternal grandfather.\" How is the man related to the girl?", options: ["Brother", "Uncle", "Father", "Grandfather"], answer: 2, explanation: "The only son of her paternal grandfather must be her father." },
+    { q: "Starting from his house, Ravi walks 130 m towards the north, turns right and walks 145 m, turns left and walks 150 m, finally turns left and walks 30 m. In which direction is he now from his house?", options: ["North-West", "North-East", "South-East", "South-West"], answer: 1, explanation: "He ends up 115 m east and 280 m north of his house, so he is to the North-East of his house." },
+    { q: "A man is facing South-West. He turns 135° clockwise, then 90° anticlockwise, then 180° anticlockwise. Which direction is he facing now?", options: ["West", "North", "South", "East"], answer: 3, explanation: "The net turn is 135° anticlockwise from South-West, so he faces East." },
+    { q: "In a row of 44 students, Karan is 18th from the left end and Nikhil is 19th from the right end. How many students are there between them?", options: ["7", "9", "5", "8"], answer: 0, explanation: "Karan and Nikhil with everyone to their outer sides account for 18 + 19 = 37 students, so 44 − 37 = 7 are between them." },
+    { q: "Kiran is faster than Farhan. Pooja is faster than Kiran. Ravi is slower than Esha. Ravi is faster than Pooja. Who is the second fastest?", options: ["Kiran", "Pooja", "Ravi", "Esha"], answer: 2, explanation: "The order from fastest to slowest is Esha > Ravi > Pooja > Kiran > Farhan, so the second fastest is Ravi." },
+    { q: "A bag contains an equal number of ₹5, ₹10 and ₹20 coins worth ₹595 in all. How many of each are there?", options: ["19", "15", "17", "51"], answer: 2, explanation: "Each set of one of each is worth ₹35; 595/35 = 17." },
+    { q: "A shopkeeper marks his goods 60% above the cost price and then gives a discount of 5%. What is his net profit or loss?", options: ["55% profit", "52% profit", "54% profit", "52% loss"], answer: 1, explanation: "On a cost of ₹100 the marked price is ₹160; after 5% off it sells for ₹152, a 52% profit." },
+    { q: "What is the angle between the hands of a clock at 9:55?", options: ["47.5°", "62.5°", "32.5°", "60°"], answer: 2, explanation: "Angle = |30 × 9 − 5.5 × 55| = 32.5°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "How many days are there from 2 April 2025 to 7 November 2025, both days included?", options: ["221", "220", "210", "219"], answer: 1, explanation: "Counting the days in each month from 2 April 2025 to 7 November 2025 inclusive gives 220." },
+    { q: "Statements: All singers are coins. All singers are runners. Conclusions: I. Some coins are runners. II. All coins are runners.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Every one of the singers is both a coin and a runner, so some coins are runners (I); there may be coins that are not runners, so II fails." },
+    { q: "Statement: \"Switch off your mobile phones before the briefing,\" said the officer. Assumptions: I. Mobile phones may disturb the briefing. II. Everyone present has a mobile phone.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0, explanation: "The instruction assumes phones can disturb (I); it does not require everyone to own one." },
+    { q: "A cube of side 5 cm is painted on two adjacent faces only and then cut into 1 cm cubes. How many small cubes have exactly one painted face?", options: ["80", "40", "5", "54"], answer: 1, explanation: "Each painted face has 5² = 25 cubes; the 5 cubes on the shared edge have two painted faces. Exactly one face: 2 × (25 − 5) = 40. Painted cubes total 45, so 80 have no paint." },
+    { q: "Which letter is exactly midway between G and M in the English alphabet?", options: ["K", "I", "L", "J"], answer: 3, explanation: "G = 7 and M = 13; the midpoint is 10 = J." },
+    { q: "If the letters of the word HARVEST are arranged in alphabetical order, how many letters remain in the same position?", options: ["3", "1", "2", "0"], answer: 3, explanation: "Alphabetical order: AEHRSTV. Comparing with HARVEST, no letter stays in place." },
+  ],
+};
+
+export default test;

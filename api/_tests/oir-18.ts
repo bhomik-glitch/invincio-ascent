@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-18",
+  title: "OIR Test 18",
+  durationMinutes: 20,
+  releaseAt: "2026-09-27T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 120, 168, 288, 360, 528, ?", options: ["899", "842", "624", "840"], answer: 3, explanation: "Here the terms are one less than the squares of consecutive primes. Next: 29² − 1 = 840." },
+    { q: "Find the next number: 125, 216, 343, 512, 729, ?", options: ["1001", "1000", "999", "1331"], answer: 1, explanation: "Here the terms are the cubes of consecutive numbers. Next: 10³ = 1000." },
+    { q: "Find the next number: 6, 20, 17, 31, 28, 42, ?", options: ["37", "39", "56", "40"], answer: 1, explanation: "Here the operations alternate: + 14, − 3, + 14, − 3 and so on. Next: 42 − 3 = 39." },
+    { q: "Find the missing number: 9, 10, 13, ?, 49, 130", options: ["40", "22", "23", "31"], answer: 1, explanation: "Here the differences 1, 3, 9, 27, 81 are each 3 times the previous difference, so the missing term is 22." },
+    { q: "Find the next letter: G, J, M, P, S, ?", options: ["V", "U", "X", "W"], answer: 0, explanation: "By alphabet positions (7, 10, 13, 16, 19), each letter is 3 places after the previous one: S(19) + 3 = V(22)." },
+    { q: "Find the next term: P16, R18, T20, V22, ?", options: ["Y25", "X24", "X3", "X25"], answer: 1, explanation: "The letters move 2 forward each time, and each number is the letter's position in the alphabet: X → 24." },
+    { q: "Fish : Gills :: Human : ?", options: ["Skin", "Nose", "Heart", "Lungs"], answer: 3, explanation: "Fish breathe through gills; humans breathe through lungs." },
+    { q: "5 : 36 :: 11 : ?", options: ["132", "121", "242", "144"], answer: 3, explanation: "5 → (5 + 1)² = 36; likewise 11 → (11 + 1)² = 144." },
+    { q: "Indian Naval Academy : Ezhimala :: Air Force Academy : ?", options: ["Khadakwasla", "Dundigal", "Gwalior", "Dehradun"], answer: 1, explanation: "The Indian Naval Academy is at Ezhimala; the Air Force Academy is at Dundigal, near Hyderabad." },
+    { q: "Which one does not belong with the others?", options: ["Carbine", "Pistol", "Rifle", "Grenade"], answer: 3, explanation: "A grenade is thrown; the others are firearms." },
+    { q: "Which number does not belong with the others?", options: ["328", "292", "95", "94"], answer: 2, explanation: "The digits of 292, 94, 328 each add up to 13; the digits of 95 add up to 14." },
+    { q: "Choose the word most similar in meaning to AMIABLE.", options: ["Shy", "Serious", "Hostile", "Friendly"], answer: 3, explanation: "Amiable means friendly." },
+    { q: "If TICKET is coded as UHDJFS, how is CHESS coded?", options: ["DGFRT", "DJHWX", "DHFRT", "CGFRT"], answer: 0, explanation: "In this code letters are moved alternately one place forward and one place back, so CHESS becomes DGFRT." },
+    { q: "In a code language, 'tall pilots fight' is written as 'lo po ze', 'smart pilots' is written as 'fe ze' and 'fight again' is written as 'ta po'. What is the code for 'pilots'?", options: ["ze", "ta", "fe", "po"], answer: 0, explanation: "'pilots' is common to the first two sentences, so pilots = ze; 'fight' is common to the first and third, so fight = po." },
+    { q: "If A = 1, B = 2, …, Z = 26 and HUNTER = 86 (the sum of its letter values), what is SILVER?", options: ["77", "86", "104", "85"], answer: 3, explanation: "SILVER = 19 + 9 + 12 + 22 + 5 + 18 = 85." },
+    { q: "J is the only son of K. L is the wife of J. M is the daughter of J and L. How is K related to M?", options: ["Father", "Grandfather", "Grandmother", "Grandfather or grandmother"], answer: 3, explanation: "K is the parent of M's father J; K's gender is not given." },
+    { q: "Introducing a boy, Sunita said, \"He is the son of the daughter of my father's only son.\" How is the boy related to Sunita?", options: ["Son", "Nephew", "Grand-nephew", "Grandson"], answer: 2, explanation: "Her father's only son is her brother; his daughter is her niece, and the niece's son is her grand-nephew." },
+    { q: "Starting from his house, Arjun walks 125 m towards the east, turns left and walks 75 m, finally turns right and walks 30 m. In which direction is he now from his house?", options: ["North-West", "South-West", "South-East", "North-East"], answer: 3, explanation: "He ends up 155 m east and 75 m north of his house, so he is to the North-East of his house." },
+    { q: "A man is facing West. He turns 45° anticlockwise, then 90° clockwise. Which direction is he facing now?", options: ["South-East", "North-East", "North-West", "South-West"], answer: 2, explanation: "The net turn is 45° clockwise from West, so he faces North-West." },
+    { q: "In a row of 36 children, Ajay is 13th from the left. Kabir is 6th to the right of Ajay. What is Kabir's position from the right end?", options: ["17th", "18th", "20th", "19th"], answer: 1, explanation: "Kabir is 19th from the left, so from the right he is 36 − 19 + 1 = 18." },
+    { q: "Asha is lighter than Ravi. Ravi is lighter than Farhan. Jatin is heavier than Farhan. Who is the second lightest?", options: ["Asha", "Jatin", "Farhan", "Ravi"], answer: 3, explanation: "The order from heaviest to lightest is Jatin > Farhan > Ravi > Asha, so the second lightest is Ravi." },
+    { q: "The average of 8 numbers is 40. When one number is removed, the average of the rest becomes 44. Which number was removed?", options: ["40", "2", "20", "12"], answer: 3, explanation: "Total before = 8 × 40 = 320; after = 7 × 44 = 308; removed = 12." },
+    { q: "The sum of 5 consecutive odd numbers is 345. What is the largest of them?", options: ["69", "73", "71", "75"], answer: 1, explanation: "The middle value is 345/5 = 69; the numbers are 65, 67, 69, 71, 73, so the largest is 73." },
+    { q: "At what time between 8 and 9 o'clock are the hands of a clock in opposite directions (180° apart)?", options: ["8:10 10/11", "8:10 2/11", "8:11 10/11", "8:09 4/11"], answer: 0, explanation: "The minute hand gains 11/2° per minute. It must gain 240° − 180° = 60° on the hour hand, which takes 120/11 = 10 10/11 minutes past 8." },
+    { q: "19 April 1975 was the launch of India's first satellite, Aryabhata. What day of the week was it?", options: ["Sunday", "Saturday", "Friday", "Tuesday"], answer: 1, explanation: "1 January 2001 was a Monday. 19 April 1975 is 9389 days before it, leaving 2 odd day(s) backwards from Monday, so it was a Saturday." },
+    { q: "Statements: All boxes are singers. Some phones are boxes. Conclusions: I. Some phones are singers. II. All singers are boxes.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "The phones that are boxes are also singers, so some phones are singers (I); 'All boxes are singers' cannot be reversed, so II fails." },
+    { q: "Statement: The company will give a bonus to employees who work overtime. Assumptions: I. A bonus will motivate employees to work overtime. II. Employees never work overtime.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0, explanation: "Offering a bonus assumes it motivates (I); nothing implies nobody ever works overtime." },
+    { q: "A wooden block measuring 5 cm × 4 cm × 3 cm is painted on all faces and cut into 1 cm cubes. How many cubes have exactly two faces painted?", options: ["6", "22", "24", "8"], answer: 2, explanation: "Cubes with exactly two faces painted: 4[(5 − 2) + (4 − 2) + (3 − 2)] = 24." },
+    { q: "Which letter is 4th to the left of the 14th letter from the right in the English alphabet?", options: ["J", "R", "H", "I"], answer: 3, explanation: "The 14th letter from the right is the 13th from the left (M); 4 to its left is the 9th letter, I." },
+    { q: "How many pairs of letters in the word BEAUTIFUL have as many letters between them in the word as there are between them in the English alphabet (in either direction)?", options: ["6", "5", "4", "14"], answer: 2, explanation: "The pairs are EI, EL, UT, IL — 4 in all." },
+  ],
+};
+
+export default test;

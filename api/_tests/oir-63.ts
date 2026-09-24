@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-63",
+  title: "OIR Test 63",
+  durationMinutes: 20,
+  releaseAt: "2026-11-29T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 7, 12, 22, 42, 82, ?", options: ["162", "166", "165", "164"], answer: 0, explanation: "Here each term is 2 times the previous term minus 2. Next: 82 × 2 − 2 = 162." },
+    { q: "Find the next number: 224, 112, 56, 28, 14, ?", options: ["5", "10", "8", "7"], answer: 3, explanation: "Here each term is the previous term divided by 2. Next: 14 ÷ 2 = 7." },
+    { q: "Find the next number: 10, 30, 28, 84, 82, 246, ?", options: ["244", "245", "242", "738"], answer: 0, explanation: "Here the operations alternate: × 3, − 2, × 3, − 2 and so on. Next: 246 − 2 = 244." },
+    { q: "Find the missing number: 18, 23, 30, ?, 50, 63", options: ["41", "39", "40", "42"], answer: 1, explanation: "Here the differences added are 5, 7, 9, 11, 13 — each 2 more than the last, so the missing term is 39." },
+    { q: "Find the next letter: I, L, O, R, U, ?", options: ["Y", "X", "W", "Z"], answer: 1, explanation: "By alphabet positions (9, 12, 15, 18, 21), each letter is 3 places after the previous one: U(21) + 3 = X(24)." },
+    { q: "Find the next group: FGH, JKL, NOP, ?", options: ["RTS", "STU", "RST", "QRS"], answer: 2, explanation: "Each group is three consecutive letters, and 1 letter is skipped between groups: after NOP comes RST." },
+    { q: "Cygnet : Swan :: Fawn : ?", options: ["Deer", "Fox", "Horse", "Goat"], answer: 0, explanation: "A cygnet is a young swan; a fawn is a young deer." },
+    { q: "5 : 25 :: 2 : ?", options: ["8", "4", "10", "2"], answer: 1, explanation: "5 → 5² = 25; likewise 2 → 2² = 4." },
+    { q: "Abhinav Bindra : Shooting :: Mary Kom : ?", options: ["Badminton", "Wrestling", "Archery", "Boxing"], answer: 3, explanation: "Abhinav Bindra is a shooter; Mary Kom is a boxer." },
+    { q: "Which one does not belong with the others?", options: ["Bus", "Truck", "Bicycle", "Car"], answer: 2, explanation: "The bicycle has no engine; the others are motor vehicles." },
+    { q: "Which number does not belong with the others?", options: ["400", "225", "145", "144"], answer: 2, explanation: "400 = 20², 144 = 12², 225 = 15² are perfect squares; 145 is not." },
+    { q: "Choose the word most opposite in meaning to FERTILE.", options: ["Barren", "Fruitful", "Green", "Rich"], answer: 0, explanation: "The opposite of fertile is barren; the other options are similar in meaning or unrelated." },
+    { q: "If HARBOUR is coded as QTNAQZG, how is CHEESE coded?", options: ["ERDDGB", "DRDEGB", "DGFDTD", "DRDDGB"], answer: 3, explanation: "In this code the letters are reversed and each is moved 1 place back, so CHEESE becomes DRDDGB." },
+    { q: "In a code language, 'brave leaders train' is written as 'pi fe si', 'young leaders' is written as 'yo pi' and 'train quietly' is written as 'fe da'. What is the code for 'quietly'?", options: ["yo", "fe", "da", "pi"], answer: 2, explanation: "'leaders' is common to the first two sentences, so leaders = pi; 'train' is common to the first and third, so train = fe. The other code in the third sentence, da, means 'quietly'." },
+    { q: "If '×' means '+', '+' means '−', '÷' means '×' and '−' means '÷', what is the value of 63 − 9 ÷ 2 × 9 + 3?", options: ["19", "23", "14", "20"], answer: 3, explanation: "Replacing the symbols gives 63 ÷ 9 × 2 + 9 − 3; following BODMAS, this equals 20." },
+    { q: "Harish's wife is Indu. Indu's only sister is Jaya. Jaya's son is Kunal. How is Harish related to Kunal?", options: ["Father", "Grandfather", "Uncle", "Brother"], answer: 2, explanation: "Indu is Kunal's maternal aunt, so her husband Harish is Kunal's uncle." },
+    { q: "Pointing to a girl, Ravi said, \"She is the sister of the only son of my father's wife.\" Ravi's father has one wife, Ravi's mother. How is the girl related to Ravi?", options: ["Niece", "Cousin", "Daughter", "Sister"], answer: 3, explanation: "The only son of Ravi's mother is Ravi himself, so the girl is Ravi's sister." },
+    { q: "Starting from his house, Aditya walks 3 km towards the north, turns right and walks 13 km, finally turns left and walks 8 km. In which direction is he now from his house?", options: ["North-East", "South-East", "North-West", "South-West"], answer: 0, explanation: "He ends up 13 km east and 11 km north of his house, so he is to the North-East of his house." },
+    { q: "A man is facing East. He turns 135° clockwise, then 90° anticlockwise, then 90° clockwise. Which direction is he facing now?", options: ["South-East", "South-West", "North-East", "North-West"], answer: 1, explanation: "The net turn is 135° clockwise from East, so he faces South-West." },
+    { q: "In a row of 42 students, Karan is 7th from the left end and Ajay is 7th from the right end. How many students are there between them?", options: ["28", "30", "27", "29"], answer: 0, explanation: "Karan and Ajay with everyone to their outer sides account for 7 + 7 = 14 students, so 42 − 14 = 28 are between them." },
+    { q: "Chetan is taller than Nisha. Asha is shorter than Bina. Uma is taller than Chetan. Nisha is taller than Bina. Who is the tallest?", options: ["Nisha", "Bina", "Uma", "Chetan"], answer: 2, explanation: "The order from tallest to shortest is Uma > Chetan > Nisha > Bina > Asha, so the tallest is Uma." },
+    { q: "A train 275 m long passes a signal post in 11 seconds. What is its speed in km/h?", options: ["25", "99", "81", "90"], answer: 3, explanation: "Speed = 275/11 = 25 m/s = 25 × 18/5 = 90 km/h." },
+    { q: "A number is multiplied by 3, then 7 is added, and the result is multiplied by 2. The final answer is 158. What was the number?", options: ["27", "14", "26", "24"], answer: 3, explanation: "Working backwards: 158 ÷ 2 = 79; − 7 = 72; ÷ 3 = 24." },
+    { q: "Through how many degrees does the hour hand of a clock turn from 5:00 to 8:50?", options: ["145°", "115°", "130°", "300°"], answer: 1, explanation: "The hour hand turns 0.5° per minute; 230 minutes × 0.5° = 115°." },
+    { q: "22 July 2030 is a Monday. What day of the week is 7 May 2030?", options: ["Wednesday", "Monday", "Thursday", "Tuesday"], answer: 3, explanation: "7 May 2030 is 76 days before 22 July 2030. 76 = 7 × 10 + 6, so the day shifts 6 back: Tuesday." },
+    { q: "Statements: Some doctors are phones. All phones are athletes. Conclusions: I. Some doctors are athletes. II. Some athletes are doctors.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "The doctors that are phones are also athletes, so some doctors are athletes (I), and conversely some athletes are doctors (II)." },
+    { q: "Statement: The temperature in the desert falls sharply at night. Conclusions: I. Desert nights are colder than desert days. II. Desert days are cold.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "A sharp fall at night makes nights colder (I); nothing says days are cold." },
+    { q: "A cube of side 9 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have exactly three faces painted?", options: ["84", "343", "294", "8"], answer: 3, explanation: "There are 729 small cubes; exactly three faces painted: only the 8 corner cubes." },
+    { q: "Which letter is 10th to the right of the 12th letter from the left in the English alphabet?", options: ["V", "W", "U", "T"], answer: 0, explanation: "The 12th letter from the left is L; 10 places to its right is the 22nd letter, V." },
+    { q: "If the following words are arranged in dictionary order, which word comes first? Letter, Leadership, Lieutenant, Loyalty", options: ["Loyalty", "Leadership", "Lieutenant", "Letter"], answer: 1, explanation: "In dictionary order: Leadership, Letter, Lieutenant, Loyalty." },
+  ],
+};
+
+export default test;

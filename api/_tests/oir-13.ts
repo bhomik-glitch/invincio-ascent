@@ -1,0 +1,41 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-13",
+  title: "OIR Test 13",
+  durationMinutes: 20,
+  questions: [
+    { q: "Find the next number: 12, 20, 30, 42, 56, ?", options: ["70", "74", "72", "71"], answer: 2, explanation: "Here the differences added are 8, 10, 12, 14, 16 — each 2 more than the last. Next: 56 + 16 = 72." },
+    { q: "Find the next number: 215, 342, 511, 728, 999, ?", options: ["1330", "1727", "1331", "1329"], answer: 0, explanation: "Here the terms are n³ − 1 for consecutive n. Next: 11³ − 1 = 1330." },
+    { q: "Find the next number: 9, 23, 51, 107, 219, ?", options: ["445", "433", "438", "443"], answer: 3, explanation: "Here each term is 2 times the previous term plus 5. Next: 219 × 2 + 5 = 443." },
+    { q: "Find the missing number: 1, 4, 10, 22, ?, 94", options: ["70", "58", "56", "46"], answer: 3, explanation: "Here the differences 3, 6, 12, 24, 48 are each 2 times the previous difference, so the missing term is 46." },
+    { q: "Find the next letter: X, U, R, O, L, ?", options: ["K", "I", "H", "J"], answer: 1, explanation: "By alphabet positions (24, 21, 18, 15, 12), each letter is 3 places before the previous one: L(12) − 3 = I(9)." },
+    { q: "Find the next group: ABC, GHI, MNO, ?", options: ["TUV", "SUT", "STU", "RST"], answer: 2, explanation: "Each group is three consecutive letters, and 3 letters are skipped between groups: after MNO comes STU." },
+    { q: "Bird : Nest :: Bee : ?", options: ["Burrow", "Stable", "Hive", "Den"], answer: 2, explanation: "A bird lives in a nest; a bee lives in a hive." },
+    { q: "8 : 65 :: 7 : ?", options: ["64", "50", "63", "42"], answer: 1, explanation: "8 → 8² + 1 = 65; likewise 7 → 7² + 1 = 50." },
+    { q: "Major (Army) : Squadron Leader (Air Force) :: Colonel (Army) : ?", options: ["Group Captain", "Air Commodore", "Squadron Leader", "Wing Commander"], answer: 0, explanation: "A Major equals a Squadron Leader; a Colonel equals a Group Captain." },
+    { q: "Which one does not belong with the others?", options: ["Hawk", "Eagle", "Falcon", "Ostrich"], answer: 3, explanation: "The ostrich cannot fly; the others are flying birds of prey." },
+    { q: "Which number does not belong with the others?", options: ["117", "144", "152", "153"], answer: 2, explanation: "The digits of 117, 144, 153 each add up to 9; the digits of 152 add up to 8." },
+    { q: "Choose the word most similar in meaning to CANDID.", options: ["Secretive", "Clever", "Frank", "Angry"], answer: 2, explanation: "Candid means frank." },
+    { q: "If TOWER is written as 7-12-4-22-9, how is CANDLE written in the same code?", options: ["24-26-13-23-15-23", "24-26-13-23-15-22", "3-1-14-4-12-5", "24-26-13-22-15-22"], answer: 1, explanation: "Each letter is replaced by its position in the reversed alphabet (A = 26, B = 25, …, Z = 1), so CANDLE → 24-26-13-23-15-22." },
+    { q: "In a code language, 'loyal pilots train' is written as 'fe pi si', 'tall pilots' is written as 'yo si' and 'train early' is written as 'ka pi'. Which word is coded as 'fe'?", options: ["train", "loyal", "early", "tall"], answer: 1, explanation: "'pilots' is common to the first two sentences, so pilots = si; 'train' is common to the first and third, so train = pi. The remaining code in the first sentence, fe, means 'loyal'." },
+    { q: "If '−' means '+', '÷' means '−', '+' means '×' and '×' means '÷', what is the value of 5 + 12 ÷ 2 − 48 × 6?", options: ["72", "69", "66", "54"], answer: 2, explanation: "Replacing the symbols gives 5 × 12 − 2 + 48 ÷ 6; following BODMAS, this equals 66." },
+    { q: "P is the brother of Q. Q is the sister of R. R is the son of S. How is P related to S?", options: ["Son", "Daughter", "Brother", "Nephew"], answer: 0, explanation: "P, Q and R are siblings; R is S's son, so P (a male) is also S's son." },
+    { q: "Ravi, who has no brothers or sisters, pointed to a woman and said, \"She is the mother of my father's only grandson.\" How is the woman related to Ravi?", options: ["Daughter", "Wife", "Mother", "Sister"], answer: 1, explanation: "Ravi is an only child, so his father's only grandson is Ravi's son; that boy's mother is Ravi's wife." },
+    { q: "Starting from his house, Yash walks 30 m towards the east, turns right and walks 35 m, finally turns right and walks 45 m. In which direction is he now from his house?", options: ["North-East", "South-West", "North-West", "South-East"], answer: 1, explanation: "He ends up 15 m west and 35 m south of his house, so he is to the South-West of his house." },
+    { q: "One morning, just after sunrise, Arjun was standing in a field. His shadow fell exactly behind him. Which direction was he facing?", options: ["North", "South", "West", "East"], answer: 3, explanation: "In the morning the sun is in the east, so shadows fall to the west. With the shadow (West) behind him, he must be facing East." },
+    { q: "In a class of 44 students, Yash ranks 29th from the top. What is his rank from the bottom?", options: ["16th", "15th", "17th", "18th"], answer: 0, explanation: "Rank from bottom = 44 − 29 + 1 = 16." },
+    { q: "Om is slower than Isha. Gita is slower than Om. Sita is slower than Gita. Manoj is slower than Sita. Who is the second slowest?", options: ["Sita", "Gita", "Om", "Isha"], answer: 0, explanation: "The order from fastest to slowest is Isha > Om > Gita > Sita > Manoj, so the second slowest is Sita." },
+    { q: "15% of a number is 54. What is 50% of the same number?", options: ["234", "270", "190", "180"], answer: 3, explanation: "The number is 54 × 100/15 = 360, and 50% of 360 = 180." },
+    { q: "₹32000 is divided among X, Y and Z in the ratio 3 : 3 : 2. What is Y's share?", options: ["₹8000", "₹10666.666666666666", "₹16000", "₹12000"], answer: 3, explanation: "Total parts = 8; one part = ₹4000; Y gets 3 × 4000 = ₹12000." },
+    { q: "At what time between 2 and 3 o'clock are the hands of a clock in opposite directions (180° apart)?", options: ["2:43 10/11", "2:43 7/11", "2:44 7/11", "2:42 1/11"], answer: 1, explanation: "The minute hand gains 11/2° per minute. It must gain 60° + 180° = 240° on the hour hand, which takes 480/11 = 43 7/11 minutes past 2." },
+    { q: "If today is Tuesday, what day of the week will it be 658 days from today?", options: ["Wednesday", "Thursday", "Monday", "Tuesday"], answer: 3, explanation: "658 = 7 × 94 + 0; 0 days after Tuesday is Tuesday." },
+    { q: "Statements: All boxes are pens. All pens are soldiers. Conclusions: I. All soldiers are boxes. II. Some pens are boxes.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "All boxes are pens, so some pens are boxes (II); but soldiers may include much more than boxes, so I does not follow." },
+    { q: "Statement: \"Buy two, get one free,\" says a sign outside a shop. Assumptions: I. Free offers attract customers. II. The shop is closing down.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0, explanation: "The offer is meant to attract buyers (I); nothing suggests the shop is closing." },
+    { q: "A cube of side 6 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have at least one face painted?", options: ["152", "96", "48", "64"], answer: 0, explanation: "There are 216 small cubes; at least one face painted: 6³ − (6 − 2)³ = 216 − 64 = 152." },
+    { q: "If the English alphabet is written in reverse order (Z to A), which letter will be 11th to the right of the 13th letter from the left?", options: ["C", "X", "B", "D"], answer: 0, explanation: "In the reversed alphabet the 24th letter from the left is C (position n holds letter 27 − n)." },
+    { q: "If the following words are arranged in dictionary order, which word comes first? Writer, Wheel, Winter, Window", options: ["Window", "Winter", "Wheel", "Writer"], answer: 2, explanation: "In dictionary order: Wheel, Window, Winter, Writer." },
+  ],
+};
+
+export default test;

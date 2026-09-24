@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-19",
+  title: "OIR Test 19",
+  durationMinutes: 20,
+  releaseAt: "2026-09-27T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 11, 76, 14, 74, 17, 72, 20, ?", options: ["23", "68", "70", "72"], answer: 2, explanation: "Here two series alternate: 11, 14, 17, … (+3) and 76, 74, 72, … (-2). Next: 72 − 2 = 70." },
+    { q: "Find the next number: 4, 8, 4, 8, 4, 8, ?", options: ["4", "5", "16", "2"], answer: 0, explanation: "Here the operations alternate: × 2, − 4, × 2, − 4 and so on. Next: 8 − 4 = 4." },
+    { q: "Find the next number: 141, 133, 121, 105, 85, ?", options: ["65", "61", "59", "57"], answer: 1, explanation: "Here the differences subtracted are 8, 12, 16, 20, 24 — each 4 more than the last. Next: 85 − 24 = 61." },
+    { q: "Find the missing number: 18, 19, 22, 31, ?, 139", options: ["112", "85", "58", "48"], answer: 2, explanation: "Here the differences 1, 3, 9, 27, 81 are each 3 times the previous difference, so the missing term is 58." },
+    { q: "Find the next letter: E, F, H, K, O, ?", options: ["S", "V", "T", "U"], answer: 2, explanation: "By alphabet positions (5, 6, 8, 11, 15), the gaps grow by one each time (+1, 2, 3, 4, …): O(15) + 5 = T(20)." },
+    { q: "Find the next pair: OK, QL, SM, UN, ?", options: ["XO", "VN", "WP", "WO"], answer: 3, explanation: "The first letters move 2 forward each time and the second letters move 1 forward: next is WO." },
+    { q: "Eye : See :: Ear : ?", options: ["Smell", "Taste", "Speak", "Hear"], answer: 3, explanation: "The eye is the organ for seeing; the ear is the organ for hearing." },
+    { q: "7 : 48 :: 2 : ?", options: ["3", "10", "4", "6"], answer: 0, explanation: "7 → 7² − 1 = 48; likewise 2 → 2² − 1 = 3." },
+    { q: "OTA : Chennai :: IMA : ?", options: ["Mhow", "Pune", "Ezhimala", "Dehradun"], answer: 3, explanation: "The Officers Training Academy is at Chennai; the Indian Military Academy is at Dehradun." },
+    { q: "Which one does not belong with the others?", options: ["Frigate", "Destroyer", "Tank", "Corvette"], answer: 2, explanation: "A tank is a land vehicle; the others are warships." },
+    { q: "Which number does not belong with the others?", options: ["283", "248", "319", "247"], answer: 1, explanation: "The digits of 319, 283, 247 each add up to 13; the digits of 248 add up to 14." },
+    { q: "Choose the word most similar in meaning to ARDUOUS.", options: ["Pleasant", "Easy", "Difficult", "Short"], answer: 2, explanation: "Arduous means difficult." },
+    { q: "If MARCH is written as 13-1-18-3-8, how is BUCKET written in the same code?", options: ["2-21-3-11-4-20", "2-21-3-11-5-20", "25-6-24-16-22-7", "2-21-4-11-5-20"], answer: 1, explanation: "Each letter is replaced by its position in the alphabet (A = 1, …, Z = 26), so BUCKET → 2-21-3-11-5-20." },
+    { q: "In a code language, 'bold boys climb' is written as 'ru fe zo', 'tall boys' is written as 'yo zo' and 'climb hard' is written as 'su fe'. Which word is coded as 'yo'?", options: ["boys", "bold", "climb", "tall"], answer: 3, explanation: "'boys' is common to the first two sentences, so boys = zo; 'climb' is common to the first and third, so climb = fe. The other code in the second sentence, yo, means 'tall'." },
+    { q: "If '÷' means '+', '+' means '−', '−' means '×' and '×' means '÷', what is the value of 13 − 12 ÷ 10 + 9 × 3?", options: ["157", "163", "166", "173"], answer: 1, explanation: "Replacing the symbols gives 13 × 12 + 10 − 9 ÷ 3; following BODMAS, this equals 163." },
+    { q: "A and B are sisters. C is the son of B. D is the father of A. How is C related to D?", options: ["Brother", "Grandson", "Son", "Nephew"], answer: 1, explanation: "D is the father of both sisters, so B's son C is D's grandson." },
+    { q: "Pointing to a man, Rekha said, \"He is the only son of my mother's father.\" How is the man related to Rekha?", options: ["Father", "Maternal uncle", "Brother", "Grandfather"], answer: 1, explanation: "The only son of Rekha's maternal grandfather is her mother's brother — her maternal uncle." },
+    { q: "Starting from his house, Kabir walks 14 km towards the west, turns right and walks 5 km, finally turns left and walks 13 km. In which direction is he now from his house?", options: ["North-East", "South-West", "South-East", "North-West"], answer: 3, explanation: "He ends up 27 km west and 5 km north of his house, so he is to the North-West of his house." },
+    { q: "If South is called North-West, and all other directions are renamed in the same way, what will North be called?", options: ["South-East", "South", "South-West", "North-East"], answer: 0, explanation: "South → North-West is a rotation of 135° clockwise; rotating North by the same amount gives South-East." },
+    { q: "In a row of 38 students, Aditya is 20th from the left end and Mohan is 13th from the right end. How many students are there between them?", options: ["7", "5", "15", "6"], answer: 1, explanation: "Aditya and Mohan with everyone to their outer sides account for 20 + 13 = 33 students, so 38 − 33 = 5 are between them." },
+    { q: "Asha is faster than Kiran. Sita is slower than Nisha. Uma is faster than Nisha. Sita is faster than Asha. Who is the fastest?", options: ["Asha", "Uma", "Nisha", "Sita"], answer: 1, explanation: "The order from fastest to slowest is Uma > Nisha > Sita > Asha > Kiran, so the fastest is Uma." },
+    { q: "The average of 9 numbers is 43. When one number is removed, the average of the rest becomes 39. Which number was removed?", options: ["77", "84", "43", "75"], answer: 3, explanation: "Total before = 9 × 43 = 387; after = 8 × 39 = 312; removed = 75." },
+    { q: "A number is multiplied by 3, then 6 is added, and the result is multiplied by 2. The final answer is 66. What was the number?", options: ["11", "7", "9", "10"], answer: 2, explanation: "Working backwards: 66 ÷ 2 = 33; − 6 = 27; ÷ 3 = 9." },
+    { q: "What is the angle between the hands of a clock at 9:35?", options: ["60°", "77.5°", "92.5°", "107.5°"], answer: 1, explanation: "Angle = |30 × 9 − 5.5 × 35| = 77.5°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "If today is Monday, what day of the week will it be 661 days from today?", options: ["Friday", "Saturday", "Wednesday", "Thursday"], answer: 3, explanation: "661 = 7 × 94 + 3; 3 days after Monday is Thursday." },
+    { q: "Statements: Some teachers are boxes. No stone is a box. Conclusions: I. Some teachers are not stones. II. Some boxes are teachers.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "The teachers that are boxes cannot be stones, so some teachers are not stones (I); 'Some teachers are boxes' reverses to 'Some boxes are teachers' (II)." },
+    { q: "Statement: \"Keep medicines out of the reach of children,\" is printed on the label. Assumptions: I. Children may harm themselves with medicines. II. Adults never misuse medicines.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0, explanation: "The warning assumes children are at risk (I); it says nothing about adults." },
+    { q: "How many cubes of side 2 cm can be cut from a solid cube of side 4 cm?", options: ["8", "4", "6", "32"], answer: 0, explanation: "(4/2)³ = 2³ = 8." },
+    { q: "If the English alphabet is written in reverse order (Z to A), which letter will be 20th to the right of the 6th letter from the left?", options: ["Z", "B", "A", "C"], answer: 2, explanation: "In the reversed alphabet the 26th letter from the left is A (position n holds letter 27 − n)." },
+    { q: "If the following words are arranged in dictionary order, which word comes third? Loyalty, Lawyer, Lion, Leadership", options: ["Lion", "Leadership", "Loyalty", "Lawyer"], answer: 0, explanation: "In dictionary order: Lawyer, Leadership, Lion, Loyalty." },
+  ],
+};
+
+export default test;

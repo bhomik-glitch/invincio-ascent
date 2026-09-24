@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-46",
+  title: "OIR Test 46",
+  durationMinutes: 20,
+  releaseAt: "2026-11-08T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 529, 841, 961, 1369, 1681, ?", options: ["1851", "1849", "1936", "1839"], answer: 1, explanation: "Here the terms are the squares of consecutive prime numbers. Next: 43² = 1849." },
+    { q: "Find the next number: 5, 11, 16, 27, 43, 70, 113, ?", options: ["183", "156", "226", "184"], answer: 0, explanation: "Here each term is the sum of the previous two terms. Next: 70 + 113 = 183." },
+    { q: "Find the next number: 11, 14, 23, 50, 131, ?", options: ["455", "374", "393", "375"], answer: 1, explanation: "Here the differences 3, 9, 27, 81, 243 are each 3 times the previous difference. Next: 131 + 243 = 374." },
+    { q: "Find the missing number: 34, 47, 62, 79, ?, 119", options: ["108", "100", "99", "98"], answer: 3, explanation: "Here the terms are n² − 2 for consecutive n, so the missing term is 98." },
+    { q: "Find the next letter: Z, X, V, T, R, ?", options: ["O", "R", "P", "Q"], answer: 2, explanation: "By alphabet positions (26, 24, 22, 20, 18), each letter is 2 places before the previous one: R(18) − 2 = P(16)." },
+    { q: "Find the next pair: GB, IF, KJ, MN, ?", options: ["PR", "NQ", "OS", "OR"], answer: 3, explanation: "The first letters move 2 forward each time and the second letters move 4 forward: next is OR." },
+    { q: "Dermatologist : Skin :: Ophthalmologist : ?", options: ["Eyes", "Ears", "Bones", "Teeth"], answer: 0, explanation: "A dermatologist treats the skin; an ophthalmologist treats the eyes." },
+    { q: "10 : 101 :: 11 : ?", options: ["1330", "122", "1331", "120"], answer: 1, explanation: "10 → 10² + 1 = 101; likewise 11 → 11² + 1 = 122." },
+    { q: "Chhattisgarh : Raipur :: Jharkhand : ?", options: ["Ranchi", "Dhanbad", "Bokaro", "Jamshedpur"], answer: 0, explanation: "Raipur is the capital of Chhattisgarh; Ranchi is the capital of Jharkhand." },
+    { q: "Which one does not belong with the others?", options: ["Lion", "Leopard", "Elephant", "Tiger"], answer: 2, explanation: "The elephant is a herbivore; the others are big cats." },
+    { q: "Which number does not belong with the others?", options: ["102", "70", "40", "100"], answer: 0, explanation: "40, 100, 70 are all multiples of 10; 102 is not." },
+    { q: "Choose the word most opposite in meaning to DEFEND.", options: ["Protect", "Attack", "Support", "Guard"], answer: 1, explanation: "The opposite of defend is attack; the other options are similar in meaning or unrelated." },
+    { q: "If SCREEN is written as 19-3-18-5-5-14, how is PENCIL written in the same code?", options: ["11-22-13-24-18-15", "16-5-14-3-9-13", "16-5-14-2-9-12", "16-5-14-3-9-12"], answer: 3, explanation: "Each letter is replaced by its position in the alphabet (A = 1, …, Z = 26), so PENCIL → 16-5-14-3-9-12." },
+    { q: "In a code language, 'young farmers fly' is written as 've ga ri', 'tall farmers' is written as 'ri ne' and 'fly again' is written as 'ga ho'. What is the code for 'farmers'?", options: ["ve", "ga", "ri", "ho"], answer: 2, explanation: "'farmers' is common to the first two sentences, so farmers = ri; 'fly' is common to the first and third, so fly = ga." },
+    { q: "If A = 1, B = 2, …, Z = 26 and TROOP = 84 (the sum of its letter values), what is SCHOOL?", options: ["82", "72", "91", "90"], answer: 1, explanation: "SCHOOL = 19 + 3 + 8 + 15 + 15 + 12 = 72." },
+    { q: "K is the son of L. L is the only daughter of M. N is the only son of M. How is N related to K?", options: ["Brother", "Maternal uncle", "Grandfather", "Father"], answer: 1, explanation: "N is the brother of K's mother L, so N is K's maternal uncle." },
+    { q: "Pointing to a woman, Karan said, \"She is the only sister of my wife's only brother.\" How is the woman related to Karan?", options: ["Sister", "Sister-in-law", "Mother-in-law", "Wife"], answer: 3, explanation: "Karan's wife is a sister of her brother; as he has only one sister, the woman is Karan's wife." },
+    { q: "Starting from his house, Aman walks 55 m towards the north, turns right and walks 70 m, finally turns left and walks 25 m. In which direction is he now from his house?", options: ["South-West", "North-West", "North-East", "South-East"], answer: 2, explanation: "He ends up 70 m east and 80 m north of his house, so he is to the North-East of his house." },
+    { q: "A man is facing South-East. He turns 180° clockwise, then 135° anticlockwise. Which direction is he facing now?", options: ["North", "East", "West", "South"], answer: 3, explanation: "The net turn is 45° clockwise from South-East, so he faces South." },
+    { q: "In a row of 32 children, Varun is 5th from the left. Aman is 10th to the right of Varun. What is Aman's position from the right end?", options: ["18th", "20th", "17th", "19th"], answer: 0, explanation: "Aman is 15th from the left, so from the right he is 32 − 15 + 1 = 18." },
+    { q: "Om is shorter than Farhan. Uma is taller than Farhan. Isha is shorter than Kiran. Kiran is shorter than Om. Who is the second shortest?", options: ["Om", "Kiran", "Farhan", "Uma"], answer: 1, explanation: "The order from tallest to shortest is Uma > Farhan > Om > Kiran > Isha, so the second shortest is Kiran." },
+    { q: "A bag contains an equal number of ₹5, ₹10 and ₹20 coins worth ₹1050 in all. How many of each are there?", options: ["90", "29", "32", "30"], answer: 3, explanation: "Each set of one of each is worth ₹35; 1050/35 = 30." },
+    { q: "A number is multiplied by 5, then 14 is added, and the result is multiplied by 2. The final answer is 248. What was the number?", options: ["23", "32", "22", "21"], answer: 2, explanation: "Working backwards: 248 ÷ 2 = 124; − 14 = 110; ÷ 5 = 22." },
+    { q: "What is the angle between the hands of a clock at 10:05?", options: ["102.5°", "90°", "87.5°", "117.5°"], answer: 2, explanation: "Angle = |30 × 10 − 5.5 × 5| = 272.5°, i.e. 360° − that = 87.5°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "13 April 1984 was the launch of Operation Meghdoot. What day of the week was it?", options: ["Saturday", "Friday", "Thursday", "Monday"], answer: 1, explanation: "1 January 2001 was a Monday. 13 April 1984 is 6107 days before it, leaving 3 odd day(s) backwards from Monday, so it was a Friday." },
+    { q: "Statements: Some roads are plates. All plates are bats. Conclusions: I. Some roads are bats. II. Some bats are roads.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "The roads that are plates are also bats, so some roads are bats (I), and conversely some bats are roads (II)." },
+    { q: "Statement: All cadets who passed the physical test were selected for training. Rahul was selected for training. Conclusions: I. Rahul passed the physical test. II. Rahul is a cadet.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 3, explanation: "The statement says passing leads to selection, not that only those who passed were selected; neither conclusion is certain." },
+    { q: "A cube of side 9 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have no face painted?", options: ["343", "294", "84", "8"], answer: 0, explanation: "There are 729 small cubes; no face painted: the inner (9 − 2)³ = 343 cubes." },
+    { q: "Which letter is 17th to the left of the 6th letter from the right in the English alphabet?", options: ["D", "W", "C", "E"], answer: 0, explanation: "The 6th letter from the right is the 21st from the left (U); 17 to its left is the 4th letter, D." },
+    { q: "In the word CORPORAL, the 1st and 2nd letters are interchanged, the 3rd and 4th letters are interchanged, and so on. Which letter will be 2nd from the right end?", options: ["L", "A", "C", "O"], answer: 0, explanation: "The new arrangement is OCPRROLA; the 2nd letter from the right is L." },
+  ],
+};
+
+export default test;

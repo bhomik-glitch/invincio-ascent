@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-69",
+  title: "OIR Test 69",
+  durationMinutes: 20,
+  releaseAt: "2026-12-06T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 3, 6, 12, 24, 48, ?", options: ["93", "86", "144", "96"], answer: 3, explanation: "Here each term is 2 times the previous term. Next: 48 × 2 = 96." },
+    { q: "Find the next number: 16, 19, 25, 37, 61, ?", options: ["133", "122", "110", "109"], answer: 3, explanation: "Here the differences 3, 6, 12, 24, 48 are each 2 times the previous difference. Next: 61 + 48 = 109." },
+    { q: "Find the next number: 2, 6, 8, 14, 22, 36, 58, ?", options: ["116", "80", "94", "95"], answer: 2, explanation: "Here each term is the sum of the previous two terms. Next: 36 + 58 = 94." },
+    { q: "Find the missing number: 5, 12, 33, ?, 285", options: ["96", "97", "222", "159"], answer: 0, explanation: "Here each term is 3 times the previous term minus 3, so the missing term is 96." },
+    { q: "Find the next letter: O, M, K, I, G, ?", options: ["E", "D", "F", "G"], answer: 0, explanation: "By alphabet positions (15, 13, 11, 9, 7), each letter is 2 places before the previous one: G(7) − 2 = E(5)." },
+    { q: "Find the next term: G7, K11, O15, S19, ?", options: ["X24", "W23", "W4", "W24"], answer: 1, explanation: "The letters move 4 forward each time, and each number is the letter's position in the alphabet: W → 23." },
+    { q: "Chef : Kitchen :: Pilot : ?", options: ["Runway", "Cockpit", "Hangar", "Airport"], answer: 1, explanation: "A chef works in a kitchen; a pilot works in a cockpit." },
+    { q: "8 : 67 :: 6 : ?", options: ["49", "35", "39", "30"], answer: 2, explanation: "8 → 8² + 3 = 67; likewise 6 → 6² + 3 = 39." },
+    { q: "Wankhede Stadium : Mumbai :: Eden Gardens : ?", options: ["Chennai", "Bengaluru", "Kolkata", "Delhi"], answer: 2, explanation: "Wankhede Stadium is in Mumbai; Eden Gardens is in Kolkata." },
+    { q: "Which one does not belong with the others?", options: ["Sleep", "Jog", "Walk", "Run"], answer: 0, explanation: "Sleeping is not a form of movement." },
+    { q: "Which number does not belong with the others?", options: ["513", "125", "64", "512"], answer: 0, explanation: "125 = 5³, 64 = 4³, 512 = 8³ are perfect cubes; 513 is not." },
+    { q: "Choose the word most opposite in meaning to SUPERFICIAL.", options: ["Surface", "Shallow", "Deep", "Slight"], answer: 2, explanation: "The opposite of superficial is deep; the other options are similar in meaning or unrelated." },
+    { q: "If CHESS is written as 24-19-22-8-8, how is SPEAKER written in the same code?", options: ["19-16-5-1-11-5-18", "8-11-22-26-16-22-9", "8-11-22-25-16-22-9", "8-11-22-26-15-22-9"], answer: 1, explanation: "Each letter is replaced by its position in the reversed alphabet (A = 26, B = 25, …, Z = 1), so SPEAKER → 8-11-22-26-16-22-9." },
+    { q: "In a code language, 'calm doctors study' is written as 'tu da ze', 'smart doctors' is written as 'lo tu' and 'study quietly' is written as 'ze ja'. Which word is coded as 'lo'?", options: ["calm", "study", "quietly", "smart"], answer: 3, explanation: "'doctors' is common to the first two sentences, so doctors = tu; 'study' is common to the first and third, so study = ze. The other code in the second sentence, lo, means 'smart'." },
+    { q: "If '−' means '+', '÷' means '−', '+' means '×' and '×' means '÷', what is the value of 4 − 24 × 3 ÷ 2 + 3?", options: ["6", "8", "0", "9"], answer: 0, explanation: "Replacing the symbols gives 4 + 24 ÷ 3 − 2 × 3; following BODMAS, this equals 6." },
+    { q: "Farida is Gul's daughter. Gul is the sister of Hamid. Hamid's son is Imran. How is Imran related to Farida?", options: ["Cousin", "Uncle", "Nephew", "Brother"], answer: 0, explanation: "Imran's father and Farida's mother are siblings, so they are cousins." },
+    { q: "Pointing to a boy, Asha said, \"He is the son of my mother's only daughter-in-law.\" How is the boy related to Asha?", options: ["Nephew", "Brother", "Son", "Cousin"], answer: 0, explanation: "Her mother's only daughter-in-law is Asha's brother's wife; her son is Asha's nephew." },
+    { q: "Starting from his house, Aman walks 4 km towards the east, turns left and walks 4 km, finally turns left and walks 5 km. In which direction is he now from his house?", options: ["South-East", "North-West", "South-West", "North-East"], answer: 1, explanation: "He ends up 1 km west and 4 km north of his house, so he is to the North-West of his house." },
+    { q: "If West is called South, and all other directions are renamed in the same way, what will South-East be called?", options: ["North-East", "North-West", "South-West", "South-East"], answer: 0, explanation: "West → South is a rotation of 270° clockwise; rotating South-East by the same amount gives North-East." },
+    { q: "In a row of 29 children, Vikram is 12th from the left. Mohan is 9th to the right of Vikram. What is Mohan's position from the right end?", options: ["10th", "8th", "9th", "11th"], answer: 2, explanation: "Mohan is 21st from the left, so from the right he is 29 − 21 + 1 = 9." },
+    { q: "Dinesh is faster than Sita. Isha is faster than Tarun. Tarun is faster than Gita. Sita is faster than Isha. Who is the slowest?", options: ["Gita", "Sita", "Isha", "Dinesh"], answer: 0, explanation: "The order from fastest to slowest is Dinesh > Sita > Isha > Tarun > Gita, so the slowest is Gita." },
+    { q: "₹29000 is divided among X, Y and Z in the ratio 3 : 2 : 5. What is Y's share?", options: ["₹9666.666666666666", "₹14500", "₹8700", "₹5800"], answer: 3, explanation: "Total parts = 10; one part = ₹2900; Y gets 2 × 2900 = ₹5800." },
+    { q: "A can complete a piece of work in 12 days and B in 36 days. Working together, in how many days will they complete it?", options: ["7", "24", "9", "12"], answer: 2, explanation: "Together they do 1/12 + 1/36 = 48/432 = 1/9 of the work per day, so they need 9 days." },
+    { q: "At what time between 9 and 10 o'clock are the hands of a clock in opposite directions (180° apart)?", options: ["9:17 4/11", "9:16 4/11", "9:15 9/11", "9:16 7/11"], answer: 1, explanation: "The minute hand gains 11/2° per minute. It must gain 270° − 180° = 90° on the hour hand, which takes 180/11 = 16 4/11 minutes past 9." },
+    { q: "If today is Friday, what day of the week will it be 299 days from today?", options: ["Friday", "Wednesday", "Tuesday", "Thursday"], answer: 1, explanation: "299 = 7 × 42 + 5; 5 days after Friday is Wednesday." },
+    { q: "Statements: All writers are swimmers. No swimmer is a sailor. Conclusions: I. No writer is a sailor. II. Some writers are sailors.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "All writers are swimmers and no a swimmer is a sailor, so no a writer can be a sailor (I); II contradicts this." },
+    { q: "Statement: This year's monsoon rainfall has been 30% below normal. Conclusions: I. Some reservoirs may hold less water than usual. II. No crops at all will grow this year.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Less rain may mean lower reservoirs (I); a total crop failure does not follow." },
+    { q: "A cube of side 8 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have exactly two faces painted?", options: ["216", "72", "8", "296"], answer: 1, explanation: "There are 512 small cubes; exactly two faces painted: 12 edges × (8 − 2) = 72." },
+    { q: "Which letter is 7th to the right of the 13th letter from the left in the English alphabet?", options: ["T", "U", "S", "R"], answer: 0, explanation: "The 13th letter from the left is M; 7 places to its right is the 20th letter, T." },
+    { q: "If the letters of the word BIOLOGY are arranged in alphabetical order, how many letters remain in the same position?", options: ["7", "4", "5", "6"], answer: 1, explanation: "Alphabetical order: BGILOOY. Comparing with BIOLOGY, 4 letters (B, L, O, Y) stay in place." },
+  ],
+};
+
+export default test;

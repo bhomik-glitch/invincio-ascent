@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-73",
+  title: "OIR Test 73",
+  durationMinutes: 20,
+  releaseAt: "2026-12-13T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 3, 5, 7, 11, 13, ?", options: ["17", "19", "15", "18"], answer: 0, explanation: "Here the terms are consecutive prime numbers. Next: the prime after 13 = 17." },
+    { q: "Find the next number: 3, 4, 4, 11, 19, 34, 64, ?", options: ["99", "83", "117", "128"], answer: 2, explanation: "Here each term is the sum of the previous three terms. Next: 19 + 34 + 64 = 117." },
+    { q: "Find the next number: 18, 23, 33, 53, 93, ?", options: ["174", "213", "186", "173"], answer: 3, explanation: "Here the differences 5, 10, 20, 40, 80 are each 2 times the previous difference. Next: 93 + 80 = 173." },
+    { q: "Find the missing number: 3, 2, 3, 8, ?, 154", options: ["81", "33", "131", "31"], answer: 3, explanation: "Here the multipliers increase by one each step (×1, ×2, ×3, …), then subtract 1, so the missing term is 31." },
+    { q: "Find the next letter: R, O, L, I, F, ?", options: ["D", "B", "C", "E"], answer: 2, explanation: "By alphabet positions (18, 15, 12, 9, 6), each letter is 3 places before the previous one: F(6) − 3 = C(3)." },
+    { q: "Find the next term: J17, L15, N13, P11, ?", options: ["R9", "S8", "R18", "R10"], answer: 0, explanation: "The letters move 2 forward each time, and each number is the letter's position in the reversed alphabet (A = 26 … Z = 1): R → 9." },
+    { q: "Glove : Hand :: Sock : ?", options: ["Shoe", "Toe", "Foot", "Leg"], answer: 2, explanation: "A glove covers the hand; a sock covers the foot." },
+    { q: "9 : 730 :: 5 : ?", options: ["126", "125", "25", "124"], answer: 0, explanation: "9 → 9³ + 1 = 730; likewise 5 → 5³ + 1 = 126." },
+    { q: "C.V. Raman : Physics :: Har Gobind Khorana : ?", options: ["Literature", "Chemistry", "Medicine", "Economics"], answer: 2, explanation: "Raman won the Nobel in Physics; Khorana won it in Physiology or Medicine." },
+    { q: "Which one does not belong with the others?", options: ["Kochi", "Nagpur", "Chennai", "Mumbai"], answer: 1, explanation: "Nagpur is inland; the others are port cities." },
+    { q: "Which number does not belong with the others?", options: ["728", "512", "729", "27"], answer: 0, explanation: "512 = 8³, 27 = 3³, 729 = 9³ are perfect cubes; 728 is not." },
+    { q: "Choose the one word for: \"A person who can speak many languages\"", options: ["Bilingual", "Polyglot", "Linguist", "Orator"], answer: 1, explanation: "Polyglot: a person who can speak many languages." },
+    { q: "If EAGLE is coded as FMHBF, how is WINDOW coded?", options: ["XOEOJX", "XPEOJX", "XPEOIX", "XHOCPV"], answer: 1, explanation: "In this code the letters are reversed and each is moved 1 place forward, so WINDOW becomes XPEOJX." },
+    { q: "In a code language, 'tall officers lead' is written as 'zo lo re', 'young officers' is written as 'si lo' and 'lead today' is written as 're ze'. What is the code for 'today'?", options: ["re", "zo", "ze", "si"], answer: 2, explanation: "'officers' is common to the first two sentences, so officers = lo; 'lead' is common to the first and third, so lead = re. The other code in the third sentence, ze, means 'today'." },
+    { q: "If '−' means '+', '×' means '−', '÷' means '×' and '+' means '÷', what is the value of 33 + 11 ÷ 5 − 9 × 3?", options: ["24", "21", "31", "15"], answer: 1, explanation: "Replacing the symbols gives 33 ÷ 11 × 5 + 9 − 3; following BODMAS, this equals 21." },
+    { q: "Ojas and Pranav are brothers. Pranav's wife is Rashmi. Rashmi's daughter is Sanya. How is Ojas related to Sanya?", options: ["Uncle", "Brother", "Father", "Grandfather"], answer: 0, explanation: "Sanya is Pranav's daughter, and Ojas is Pranav's brother, so Ojas is her uncle." },
+    { q: "Pointing to a woman, Sonal said, \"Her husband is the only son of my mother.\" How is the woman related to Sonal?", options: ["Sister-in-law", "Sister", "Aunt", "Mother"], answer: 0, explanation: "The only son of Sonal's mother is Sonal's brother; his wife is Sonal's sister-in-law." },
+    { q: "Starting from his house, Ravi walks 100 m towards the north, turns left and walks 150 m, finally turns right and walks 110 m. In which direction is he now from his house?", options: ["South-West", "North-West", "South-East", "North-East"], answer: 1, explanation: "He ends up 150 m west and 210 m north of his house, so he is to the North-West of his house." },
+    { q: "If South-East is called West, and all other directions are renamed in the same way, what will North-West be called?", options: ["South", "East", "South-East", "North"], answer: 1, explanation: "South-East → West is a rotation of 135° clockwise; rotating North-West by the same amount gives East." },
+    { q: "In a class of 39 students, Kabir ranks 16th from the top. What is his rank from the bottom?", options: ["25th", "26th", "24th", "23rd"], answer: 2, explanation: "Rank from bottom = 39 − 16 + 1 = 24." },
+    { q: "Isha is older than Dinesh. Isha is younger than Ravi. Ravi is younger than Bina. Who is the youngest?", options: ["Isha", "Bina", "Ravi", "Dinesh"], answer: 3, explanation: "The order from oldest to youngest is Bina > Ravi > Isha > Dinesh, so the youngest is Dinesh." },
+    { q: "The sum of 3 consecutive even numbers is 84. What is the largest of them?", options: ["26", "30", "32", "28"], answer: 1, explanation: "The middle value is 84/3 = 28; the numbers are 26, 28, 30, so the largest is 30." },
+    { q: "A can complete a piece of work in 15 days and B in 30 days. Working together, in how many days will they complete it?", options: ["13", "22.5", "15", "10"], answer: 3, explanation: "Together they do 1/15 + 1/30 = 45/450 = 1/10 of the work per day, so they need 10 days." },
+    { q: "What is the angle between the hands of a clock at 11:30?", options: ["165°", "150°", "135°", "180°"], answer: 0, explanation: "Angle = |30 × 11 − 5.5 × 30| = 165°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "If today is Saturday, what day of the week will it be 647 days from today?", options: ["Monday", "Tuesday", "Wednesday", "Thursday"], answer: 1, explanation: "647 = 7 × 92 + 3; 3 days after Saturday is Tuesday." },
+    { q: "Statements: No pen is a table. All tables are birds. Conclusions: I. Some birds are not pens. II. No pen is a bird.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "All tables are birds and none of them is a pen, so some birds are not pens (I); some pens could still be birds, so II is uncertain." },
+    { q: "Statement: All officers attending the conference must reach by 9 am. Major Singh is attending the conference. Conclusions: I. Major Singh must reach by 9 am. II. Major Singh is the chief guest.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "The rule applies to him (I); nothing says he is the chief guest." },
+    { q: "A cube of side 3 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have at least one face painted?", options: ["12", "26", "1", "6"], answer: 1, explanation: "There are 27 small cubes; at least one face painted: 3³ − (3 − 2)³ = 27 − 1 = 26." },
+    { q: "If the English alphabet is written in reverse order (Z to A), which letter will be 4th to the right of the 12th letter from the left?", options: ["J", "L", "P", "K"], answer: 3, explanation: "In the reversed alphabet the 16th letter from the left is K (position n holds letter 27 − n)." },
+    { q: "If the following words are arranged in dictionary order, which word comes second? Butter, Border, Boots, Battery", options: ["Border", "Battery", "Butter", "Boots"], answer: 3, explanation: "In dictionary order: Battery, Boots, Border, Butter." },
+  ],
+};
+
+export default test;

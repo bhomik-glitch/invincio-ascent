@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-85",
+  title: "OIR Test 85",
+  durationMinutes: 20,
+  releaseAt: "2026-12-27T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 2, 4, 8, 16, 32, ?", options: ["80", "67", "65", "64"], answer: 3, explanation: "Here the differences 2, 4, 8, 16, 32 are each 2 times the previous difference. Next: 32 + 32 = 64." },
+    { q: "Find the next number: 39, 51, 57, 69, 87, ?", options: ["94", "93", "95", "96"], answer: 1, explanation: "Here the terms are three times consecutive prime numbers. Next: 3 × 31 = 93." },
+    { q: "Find the next number: 8, 23, 91, 454, 2723, ?", options: ["19060", "16337", "19061", "21784"], answer: 0, explanation: "Here the multipliers increase by one each step (×3, ×4, ×5, …), then subtract 1. Next: 2723 × 7 − 1 = 19060." },
+    { q: "Find the missing number: 3, 14, 47, ?, 443", options: ["149", "344", "245", "146"], answer: 3, explanation: "Here each term is 3 times the previous term plus 5, so the missing term is 146." },
+    { q: "Find the next letter: T, R, P, N, L, ?", options: ["K", "L", "I", "J"], answer: 3, explanation: "By alphabet positions (20, 18, 16, 14, 12), each letter is 2 places before the previous one: L(12) − 2 = J(10)." },
+    { q: "Find the next pair: LD, OE, RF, UG, ?", options: ["XI", "XH", "WG", "YH"], answer: 1, explanation: "The first letters move 3 forward each time and the second letters move 1 forward: next is XH." },
+    { q: "Expand : Contract :: Ascend : ?", options: ["Soar", "Descend", "Rise", "Climb"], answer: 1, explanation: "These are opposites: expand–contract, ascend–descend." },
+    { q: "11 : 124 :: 8 : ?", options: ["72", "80", "67", "81"], answer: 2, explanation: "11 → 11² + 3 = 124; likewise 8 → 8² + 3 = 67." },
+    { q: "Kaziranga : One-horned rhinoceros :: Gir : ?", options: ["Asiatic lion", "Snow leopard", "Tiger", "Elephant"], answer: 0, explanation: "Kaziranga is famous for the rhino; Gir is the home of the Asiatic lion." },
+    { q: "Which one does not belong with the others?", options: ["BSF", "CRPF", "ISRO", "ITBP"], answer: 2, explanation: "ISRO is a space agency; the others are armed police forces." },
+    { q: "Which number does not belong with the others?", options: ["48", "73", "72", "80"], answer: 1, explanation: "48, 72, 80 are all multiples of 8; 73 is not." },
+    { q: "Choose the one word for: \"That which cannot be seen\"", options: ["Illegible", "Invincible", "Invisible", "Inaudible"], answer: 2, explanation: "Invisible: that which cannot be seen." },
+    { q: "If SPEAKER is coded as TOFZLDS, how is MEDAL coded?", options: ["NGGEQ", "NDEZM", "NDDZM", "MDEZM"], answer: 1, explanation: "In this code letters are moved alternately one place forward and one place back, so MEDAL becomes NDEZM." },
+    { q: "In a code language, 'quick girls fight' is written as 'ne li ho', 'smart girls' is written as 'ma li' and 'fight again' is written as 'ne zo'. What is the code for 'again'?", options: ["li", "ma", "zo", "ho"], answer: 2, explanation: "'girls' is common to the first two sentences, so girls = li; 'fight' is common to the first and third, so fight = ne. The other code in the third sentence, zo, means 'again'." },
+    { q: "If '−' means '+', '÷' means '−', '+' means '×' and '×' means '÷', what is the value of 5 + 7 − 45 × 9 ÷ 2?", options: ["28", "38", "34", "40"], answer: 1, explanation: "Replacing the symbols gives 5 × 7 + 45 ÷ 9 − 2; following BODMAS, this equals 38." },
+    { q: "Sagar has two children, Tara and Udit. Tara is married to Vivek. How is Vivek related to Udit?", options: ["Brother-in-law", "Cousin", "Brother", "Father-in-law"], answer: 0, explanation: "Vivek is the husband of Udit's sister Tara, so he is Udit's brother-in-law." },
+    { q: "Pointing to a woman, Veer said, \"She is the daughter-in-law of my paternal grandfather's only son, and I have no brother.\" How is the woman related to Veer?", options: ["Sister", "Mother", "Sister-in-law", "Wife"], answer: 3, explanation: "The only son of Veer's paternal grandfather is Veer's father; with no brothers, his daughter-in-law is Veer's wife." },
+    { q: "Starting from his house, Varun walks 35 m towards the north, turns left and walks 100 m, finally turns left and walks 110 m. What is the shortest distance between him and his house?", options: ["25 m", "175 m", "135 m", "125 m"], answer: 3, explanation: "He ends up 100 m west and 75 m south of his house. Distance = √(100² + 75²) = 125 m." },
+    { q: "A man is facing East. He turns 90° anticlockwise, then 45° anticlockwise. Which direction is he facing now?", options: ["South-West", "North-East", "South-East", "North-West"], answer: 3, explanation: "The net turn is 135° anticlockwise from East, so he faces North-West." },
+    { q: "Rohit is 29th from the top and 20th from the bottom in his class. How many students are there in the class?", options: ["50", "49", "48", "47"], answer: 2, explanation: "Total = 29 + 20 − 1 = 48 (Rohit is counted in both ranks)." },
+    { q: "Pooja is older than Kiran. Hari is younger than Manoj. Sita is younger than Hari. Manoj is younger than Kiran. Who is the oldest?", options: ["Pooja", "Manoj", "Kiran", "Hari"], answer: 0, explanation: "The order from oldest to youngest is Pooja > Kiran > Manoj > Hari > Sita, so the oldest is Pooja." },
+    { q: "A train 200 m long passes a signal post in 8 seconds. What is its speed in km/h?", options: ["25", "90", "81", "99"], answer: 1, explanation: "Speed = 200/8 = 25 m/s = 25 × 18/5 = 90 km/h." },
+    { q: "A boat goes 12 km downstream in 1 hour and 2 km upstream in 1 hour. What is the speed of the boat in still water?", options: ["5 km/h", "8 km/h", "10 km/h", "7 km/h"], answer: 3, explanation: "Boat speed = (12 + 2)/2 = 7 km/h; stream speed = (12 − 2)/2 = 5 km/h." },
+    { q: "Through how many degrees does the hour hand of a clock turn from 5:40 to 9:00?", options: ["100°", "130°", "115°", "120°"], answer: 0, explanation: "The hour hand turns 0.5° per minute; 200 minutes × 0.5° = 100°." },
+    { q: "If today is Wednesday, what day of the week will it be 766 days from today?", options: ["Friday", "Sunday", "Saturday", "Monday"], answer: 2, explanation: "766 = 7 × 109 + 3; 3 days after Wednesday is Saturday." },
+    { q: "Statements: Some swimmers are balls. All balls are doctors. Conclusions: I. All swimmers are doctors. II. Some doctors are not swimmers.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 3, explanation: "Only the swimmers that are balls are known to be doctors, so I is not certain; all doctors might be swimmers, so II is not certain either." },
+    { q: "Statement: A cadet has been caught cheating in an examination. Courses of action: I. He should be dealt with according to the academy's rules. II. The examination should be cancelled for all cadets. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Action against the individual is fair (I); punishing all cadets is not." },
+    { q: "A wooden block measuring 6 cm × 4 cm × 3 cm is painted on all faces and cut into 1 cm cubes. How many cubes have exactly one face painted?", options: ["29", "8", "28", "30"], answer: 2, explanation: "Cubes with exactly one face painted: 2[(4)(2) + (2)(1) + (4)(1)] = 28." },
+    { q: "If the English alphabet is written in reverse order (Z to A), which letter will be 14th to the right of the 6th letter from the left?", options: ["G", "H", "T", "F"], answer: 0, explanation: "In the reversed alphabet the 20th letter from the left is G (position n holds letter 27 − n)." },
+    { q: "If the following words are arranged in dictionary order, which word comes first? Lemon, Lawyer, Loyalty, Leadership", options: ["Lemon", "Lawyer", "Leadership", "Loyalty"], answer: 1, explanation: "In dictionary order: Lawyer, Leadership, Lemon, Loyalty." },
+  ],
+};
+
+export default test;

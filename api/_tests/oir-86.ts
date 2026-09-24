@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-86",
+  title: "OIR Test 86",
+  durationMinutes: 20,
+  releaseAt: "2027-01-03T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 194, 188, 180, 170, 158, ?", options: ["144", "146", "142", "145"], answer: 0, explanation: "Here the differences subtracted are 6, 8, 10, 12, 14 — each 2 more than the last. Next: 158 − 14 = 144." },
+    { q: "Find the next number: 2, 5, 19, 94, 563, ?", options: ["3377", "3940", "3941", "4504"], answer: 1, explanation: "Here the multipliers increase by one each step (×3, ×4, ×5, …), then subtract 1. Next: 563 × 7 − 1 = 3940." },
+    { q: "Find the next number: 3, 10, 24, 52, 108, ?", options: ["220", "216", "222", "212"], answer: 0, explanation: "Here each term is 2 times the previous term plus 4. Next: 108 × 2 + 4 = 220." },
+    { q: "Find the missing number: 4, 9, 19, ?, 79, 159", options: ["59", "39", "49", "42"], answer: 1, explanation: "Here the differences 5, 10, 20, 40, 80 are each 2 times the previous difference, so the missing term is 39." },
+    { q: "Find the next letter: I, K, P, R, W, ?", options: ["W", "Y", "Z", "X"], answer: 1, explanation: "By alphabet positions (9, 11, 16, 18, 23), the letters move alternately +2 and +5: W(23) + 2 = Y(25)." },
+    { q: "Find the next term: Q10, S8, U6, W4, ?", options: ["Y25", "Y2", "Y3", "Z1"], answer: 1, explanation: "The letters move 2 forward each time, and each number is the letter's position in the reversed alphabet (A = 26 … Z = 1): Y → 2." },
+    { q: "Ocean : Water :: Desert : ?", options: ["Sand", "Heat", "Cactus", "Camel"], answer: 0, explanation: "An ocean is a vast expanse of water; a desert is a vast expanse of sand." },
+    { q: "8 : 511 :: 6 : ?", options: ["215", "48", "217", "42"], answer: 0, explanation: "8 → 8³ − 1 = 511; likewise 6 → 6³ − 1 = 215." },
+    { q: "Jim Corbett National Park : Uttarakhand :: Sundarbans National Park : ?", options: ["Madhya Pradesh", "Assam", "West Bengal", "Odisha"], answer: 2, explanation: "Jim Corbett is in Uttarakhand; the Sundarbans National Park is in West Bengal." },
+    { q: "Which one does not belong with the others?", options: ["Artillery", "Infantry", "Armoured Corps", "Squadron"], answer: 3, explanation: "A squadron is a sub-unit; the others are arms of the Army." },
+    { q: "Which pair does not belong with the others?", options: ["8 – 504", "5 – 20", "6 – 30", "9 – 72"], answer: 0, explanation: "In the other pairs the second number is n² − n, where n is the first (e.g. 6² − 6 = 30); but 8² − 8 = 56, not 504." },
+    { q: "Choose the one word for: \"That which cannot be heard\"", options: ["Illegible", "Invisible", "Inedible", "Inaudible"], answer: 3, explanation: "Inaudible: that which cannot be heard." },
+    { q: "If PILLOW is coded as QHMKPV, how is TIGER coded?", options: ["UKJIW", "UHHDS", "UHHES", "UHHCS"], answer: 1, explanation: "In this code letters are moved alternately one place forward and one place back, so TIGER becomes UHHDS." },
+    { q: "In a code language, 'proud farmers fight' is written as 'su bu zo', 'quick farmers' is written as 'bu po' and 'fight bravely' is written as 'zo ga'. Which word is coded as 'ga'?", options: ["quick", "fight", "bravely", "proud"], answer: 2, explanation: "'farmers' is common to the first two sentences, so farmers = bu; 'fight' is common to the first and third, so fight = zo. The other code in the third sentence, ga, means 'bravely'." },
+    { q: "If A = 1, B = 2, …, Z = 26 and PALACE = 38 (the sum of its letter values), what is LAWYER?", options: ["78", "86", "96", "84"], answer: 3, explanation: "LAWYER = 12 + 1 + 23 + 25 + 5 + 18 = 84." },
+    { q: "Waheeda's father is Yusuf. Yusuf's brother is Zaid. Zaid's grandson is Aslam. How is Aslam related to Yusuf?", options: ["Cousin", "Nephew", "Grand-nephew", "Grandson"], answer: 2, explanation: "Aslam is the grandson of Yusuf's brother, so he is Yusuf's grand-nephew." },
+    { q: "Pointing to a man, Heena said, \"His mother is the only daughter-in-law of my mother.\" How is the man related to Heena?", options: ["Nephew", "Brother", "Cousin", "Son"], answer: 0, explanation: "The only daughter-in-law of Heena's mother is Heena's brother's wife; her son is Heena's nephew." },
+    { q: "Starting from his house, Vikram walks 95 m towards the north, turns left and walks 95 m, turns right and walks 40 m, finally turns right and walks 130 m. In which direction is he now from his house?", options: ["North-East", "South-West", "North-West", "South-East"], answer: 0, explanation: "He ends up 35 m east and 135 m north of his house, so he is to the North-East of his house." },
+    { q: "One evening, just before sunset, Mohan was standing in a field. His shadow fell exactly behind him. Which direction was he facing?", options: ["South", "West", "East", "North"], answer: 1, explanation: "In the evening the sun is in the west, so shadows fall to the east. With the shadow (East) behind him, he must be facing West." },
+    { q: "In a class of 59 students, Yash ranks 38th from the top. What is his rank from the bottom?", options: ["24th", "21st", "22nd", "23rd"], answer: 2, explanation: "Rank from bottom = 59 − 38 + 1 = 22." },
+    { q: "Isha is richer than Gita. Tarun is poorer than Jatin. Jatin is poorer than Ravi. Gita is richer than Ravi. Who is the second richest?", options: ["Gita", "Ravi", "Jatin", "Isha"], answer: 0, explanation: "The order from richest to poorest is Isha > Gita > Ravi > Jatin > Tarun, so the second richest is Gita." },
+    { q: "A can complete a piece of work in 33 days and B in 66 days. Working together, in how many days will they complete it?", options: ["20", "49.5", "33", "22"], answer: 3, explanation: "Together they do 1/33 + 1/66 = 99/2178 = 1/22 of the work per day, so they need 22 days." },
+    { q: "A shopkeeper marks his goods 40% above the cost price and then gives a discount of 15%. What is his net profit or loss?", options: ["25% profit", "21% profit", "19% profit", "19% loss"], answer: 2, explanation: "On a cost of ₹100 the marked price is ₹140; after 15% off it sells for ₹119, a 19% profit." },
+    { q: "Through how many degrees does the hour hand of a clock turn from 5:15 to 7:25?", options: ["60°", "95°", "80°", "65°"], answer: 3, explanation: "The hour hand turns 0.5° per minute; 130 minutes × 0.5° = 65°." },
+    { q: "11 March 2030 is a Monday. What day of the week is 11 February 2031?", options: ["Tuesday", "Wednesday", "Monday", "Thursday"], answer: 0, explanation: "11 February 2031 is 337 days after 11 March 2030. 337 = 7 × 48 + 1, so the day shifts 1 forward: Tuesday." },
+    { q: "Statements: All doctors are officers. Some doctors are chairs. Conclusions: I. Some officers are chairs. II. Some chairs are not officers.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "The doctors that are chairs are also officers, so some officers are chairs (I); all chairs might be officers, so II is uncertain." },
+    { q: "Statement: The river level is rising rapidly because of heavy rain upstream. Courses of action: I. People living near the banks should be moved to safer places. II. The rain should be stopped. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Evacuation is practical (I); stopping rain is impossible." },
+    { q: "A wooden block measuring 6 cm × 5 cm × 3 cm is painted on all faces and cut into 1 cm cubes. How many cubes have exactly one face painted?", options: ["12", "32", "8", "38"], answer: 3, explanation: "Cubes with exactly one face painted: 2[(4)(3) + (3)(1) + (4)(1)] = 38." },
+    { q: "Which letter is 11th to the right of the 15th letter from the left in the English alphabet?", options: ["A", "X", "Z", "Y"], answer: 2, explanation: "The 15th letter from the left is O; 11 places to its right is the 26th letter, Z." },
+    { q: "In the word PHYSICS, the 1st and 2nd letters are interchanged, the 3rd and 4th letters are interchanged, and so on. Which letter will be 5th from the right end?", options: ["P", "C", "Y", "S"], answer: 3, explanation: "The new arrangement is HPSYCIS; the 5th letter from the right is S." },
+  ],
+};
+
+export default test;

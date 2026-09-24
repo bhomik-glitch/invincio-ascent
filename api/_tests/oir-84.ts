@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-84",
+  title: "OIR Test 84",
+  durationMinutes: 20,
+  releaseAt: "2026-12-27T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 15, 23, 27, 35, 39, ?", options: ["47", "49", "48", "43"], answer: 0, explanation: "Here the terms are 2p + 1 for consecutive primes p. Next: 2 × 23 + 1 = 47." },
+    { q: "Find the next number: 9, 27, 22, 66, 61, 183, ?", options: ["549", "179", "176", "178"], answer: 3, explanation: "Here the operations alternate: × 3, − 5, × 3, − 5 and so on. Next: 183 − 5 = 178." },
+    { q: "Find the next number: 9, 30, 93, 282, ?", options: ["846", "852", "843", "849"], answer: 3, explanation: "Here each term is 3 times the previous term plus 3. Next: 282 × 3 + 3 = 849." },
+    { q: "Find the missing number: 720, 990, 1320, ?, 2184, 2730", options: ["1788", "1716", "1752", "1714"], answer: 1, explanation: "Here the terms are n³ − n for consecutive n, so the missing term is 1716." },
+    { q: "Find the next letter: H, I, K, N, R, ?", options: ["Y", "X", "V", "W"], answer: 3, explanation: "By alphabet positions (8, 9, 11, 14, 18), the gaps grow by one each time (+1, 2, 3, 4, …): R(18) + 5 = W(23)." },
+    { q: "Find the next group: HIJ, LMN, PQR, ?", options: ["TVU", "STU", "TUV", "UVW"], answer: 2, explanation: "Each group is three consecutive letters, and 1 letter is skipped between groups: after PQR comes TUV." },
+    { q: "Humble : Arrogant :: Timid : ?", options: ["Shy", "Calm", "Bold", "Weak"], answer: 2, explanation: "These are opposites: humble–arrogant, timid–bold." },
+    { q: "3 : 27 :: 10 : ?", options: ["1000", "121", "999", "101"], answer: 0, explanation: "3 → 3³ = 27; likewise 10 → 10³ = 1000." },
+    { q: "Pongal : Tamil Nadu :: Baisakhi : ?", options: ["Assam", "Punjab", "Goa", "Kerala"], answer: 1, explanation: "Pongal is Tamil Nadu's harvest festival; Baisakhi is Punjab's." },
+    { q: "Which one does not belong with the others?", options: ["AIIMS", "NDA", "OTA", "IMA"], answer: 0, explanation: "AIIMS is a medical institute; the others are military training academies." },
+    { q: "Which number does not belong with the others?", options: ["81", "196", "16", "197"], answer: 3, explanation: "81 = 9², 196 = 14², 16 = 4² are perfect squares; 197 is not." },
+    { q: "Choose the one word for: \"That which cannot be read\"", options: ["Indelible", "Invisible", "Ineligible", "Illegible"], answer: 3, explanation: "Illegible: that which cannot be read." },
+    { q: "If CHERRY is coded as XSVIIB, how is THUNDER coded?", options: ["GSFNWVI", "WKXQGHU", "GSFMWVI", "HSFMWVI"], answer: 2, explanation: "In this code each letter is replaced by its opposite letter (A↔Z, B↔Y, C↔X, …), so THUNDER becomes GSFMWVI." },
+    { q: "In a code language, 'bold leaders study' is written as 'ru po ho', 'strong leaders' is written as 'ru ka' and 'study hard' is written as 'ta po'. Which word is coded as 'ru'?", options: ["leaders", "hard", "strong", "bold"], answer: 0, explanation: "'leaders' is common to the first two sentences, so leaders = ru; 'study' is common to the first and third, so study = po." },
+    { q: "If A = 1, B = 2, …, Z = 26 and HUNTER = 86 (the sum of its letter values), what is NUMBER?", options: ["87", "63", "73", "89"], answer: 2, explanation: "NUMBER = 14 + 21 + 13 + 2 + 5 + 18 = 73." },
+    { q: "Omkar is the husband of Pallavi. Pallavi is the only daughter of Rakesh. How is Rakesh related to Omkar?", options: ["Uncle", "Father-in-law", "Father", "Brother-in-law"], answer: 1, explanation: "Rakesh is the father of Omkar's wife, so he is Omkar's father-in-law." },
+    { q: "Pointing to a man, Kunal said, \"He is the son-in-law of my father's only daughter.\" How is the man related to Kunal?", options: ["Brother-in-law", "Niece's husband", "Nephew", "Son-in-law"], answer: 1, explanation: "Kunal's father's only daughter is Kunal's sister; her son-in-law is the husband of Kunal's niece." },
+    { q: "Starting from his house, Karan walks 15 km towards the south, turns left and walks 1 km, turns left and walks 9 km, finally turns right and walks 15 km. In which direction is he now from his house?", options: ["South-East", "South-West", "North-East", "North-West"], answer: 0, explanation: "He ends up 16 km east and 6 km south of his house, so he is to the South-East of his house." },
+    { q: "One evening, just before sunset, Rohit was standing in a field. His shadow fell exactly behind him. Which direction was he facing?", options: ["North", "West", "South", "East"], answer: 1, explanation: "In the evening the sun is in the west, so shadows fall to the east. With the shadow (East) behind him, he must be facing West." },
+    { q: "In a row of 47 students, Karan is 20th from the left end and Suresh is 12th from the right end. How many students are there between them?", options: ["15", "25", "17", "16"], answer: 0, explanation: "Karan and Suresh with everyone to their outer sides account for 20 + 12 = 32 students, so 47 − 32 = 15 are between them." },
+    { q: "Chetan is slower than Om. Dinesh is faster than Hari. Om is slower than Asha. Dinesh is slower than Chetan. Who is the fastest?", options: ["Chetan", "Asha", "Dinesh", "Om"], answer: 1, explanation: "The order from fastest to slowest is Asha > Om > Chetan > Dinesh > Hari, so the fastest is Asha." },
+    { q: "₹51200 is divided among X, Y and Z in the ratio 6 : 6 : 4. What is Y's share?", options: ["₹22400", "₹17066.666666666668", "₹12800", "₹19200"], answer: 3, explanation: "Total parts = 16; one part = ₹3200; Y gets 6 × 3200 = ₹19200." },
+    { q: "The average of 7 numbers is 21. When one number is removed, the average of the rest becomes 18. Which number was removed?", options: ["21", "46", "39", "37"], answer: 2, explanation: "Total before = 7 × 21 = 147; after = 6 × 18 = 108; removed = 39." },
+    { q: "In a mirror, a clock appears to show 2:33. What is the actual time?", options: ["9:57", "10:33", "10:27", "9:27"], answer: 3, explanation: "Actual time = 11:60 − 2:33 = 9:27." },
+    { q: "22 July 2024 is a Monday. What day of the week is 16 September 2024?", options: ["Sunday", "Wednesday", "Monday", "Tuesday"], answer: 2, explanation: "16 September 2024 is 56 days after 22 July 2024. 56 = 7 × 8 + 0, so the day shifts 0 forward: Monday." },
+    { q: "Statements: Some roads are soldiers. All roads are cadets. Conclusions: I. Some cadets are soldiers. II. Some soldiers are cadets.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "The roads that are soldiers are also cadets, so some cadets are soldiers (I) and some soldiers are cadets (II)." },
+    { q: "Statement: Many trees in the city have been cut illegally. Courses of action: I. Those responsible should be identified and punished. II. New trees should be planted to replace them. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "Punishing offenders deters (I) and replanting repairs the damage (II)." },
+    { q: "How many cubes of side 4 cm can be cut from a solid cube of side 8 cm?", options: ["8", "4", "128", "6"], answer: 0, explanation: "(8/4)³ = 2³ = 8." },
+    { q: "How many letters are there between C and U in the English alphabet?", options: ["17", "19", "18", "16"], answer: 0, explanation: "C is 3 and U is 21; the letters strictly between them number 21 − 3 − 1 = 17." },
+    { q: "If the following words are arranged in dictionary order, which word comes first? Sword, Screen, Sentinel, Signal", options: ["Sword", "Signal", "Screen", "Sentinel"], answer: 2, explanation: "In dictionary order: Screen, Sentinel, Signal, Sword." },
+  ],
+};
+
+export default test;

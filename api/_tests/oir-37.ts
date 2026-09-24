@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-37",
+  title: "OIR Test 37",
+  durationMinutes: 20,
+  releaseAt: "2026-10-25T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 2, 1, 6, 9, 16, 31, 56, ?", options: ["88", "112", "103", "72"], answer: 2, explanation: "Here each term is the sum of the previous three terms. Next: 16 + 31 + 56 = 103." },
+    { q: "Find the next number: 9, 10, 12, 16, 24, ?", options: ["48", "40", "41", "50"], answer: 1, explanation: "Here the differences 1, 2, 4, 8, 16 are each 2 times the previous difference. Next: 24 + 16 = 40." },
+    { q: "Find the next number: 2, 9, 23, 51, 107, ?", options: ["214", "209", "219", "221"], answer: 2, explanation: "Here each term is 2 times the previous term plus 5. Next: 107 × 2 + 5 = 219." },
+    { q: "Find the missing number: 5, 30, ?, 1080, 6480", options: ["180", "179", "930", "555"], answer: 0, explanation: "Here each term is 6 times the previous term, so the missing term is 180." },
+    { q: "Find the next letter: E, G, J, N, S, ?", options: ["X", "W", "Y", "Z"], answer: 2, explanation: "By alphabet positions (5, 7, 10, 14, 19), the gaps grow by one each time (+2, 3, 4, 5, …): S(19) + 6 = Y(25)." },
+    { q: "Find the next group: BCD, GHI, LMN, ?", options: ["RST", "QRS", "PQR", "QSR"], answer: 1, explanation: "Each group is three consecutive letters, and 2 letters are skipped between groups: after LMN comes QRS." },
+    { q: "Tree : Forest :: Soldier : ?", options: ["Army", "Uniform", "Gun", "Battle"], answer: 0, explanation: "Many trees make a forest; many soldiers make an army." },
+    { q: "9 : 99 :: 11 : ?", options: ["121", "1331", "144", "143"], answer: 3, explanation: "9 → 9 × 11 = 99; likewise 11 → 11 × 13 = 143." },
+    { q: "Operation Blue Star : Amritsar :: Operation Cactus : ?", options: ["Goa", "Siachen", "Maldives", "Sri Lanka"], answer: 2, explanation: "Operation Blue Star took place in Amritsar; Operation Cactus (1988) was in the Maldives." },
+    { q: "Which one does not belong with the others?", options: ["Eraser", "Pen", "Chalk", "Pencil"], answer: 0, explanation: "An eraser removes writing; the others are used to write." },
+    { q: "Which number does not belong with the others?", options: ["144", "72", "108", "74"], answer: 3, explanation: "144, 108, 72 are all multiples of 12; 74 is not." },
+    { q: "Choose the word most similar in meaning to VIGILANT.", options: ["Careless", "Brave", "Watchful", "Sleepy"], answer: 2, explanation: "Vigilant means watchful." },
+    { q: "If SUGAR is coded as TWJEW, how is BREAD coded?", options: ["CTHEI", "CTHEJ", "CTHDI", "YIVZW"], answer: 0, explanation: "In this code the 1st letter moves 1 place forward, the 2nd moves 2, the 3rd moves 3, and so on, so BREAD becomes CTHEI." },
+    { q: "In a code language, 'smart girls lead' is written as 'si ho ne', 'strong girls' is written as 'tu si' and 'lead together' is written as 'ho ga'. Which word is coded as 'ne'?", options: ["girls", "smart", "lead", "strong"], answer: 1, explanation: "'girls' is common to the first two sentences, so girls = si; 'lead' is common to the first and third, so lead = ho. The remaining code in the first sentence, ne, means 'smart'." },
+    { q: "If '÷' means '+', '+' means '−', '−' means '×' and '×' means '÷', what is the value of 12 − 9 + 4 ÷ 24 × 6?", options: ["114", "96", "108", "106"], answer: 2, explanation: "Replacing the symbols gives 12 × 9 − 4 + 24 ÷ 6; following BODMAS, this equals 108." },
+    { q: "H is the daughter of I. I is the wife of J. K is the sister of J. How is K related to H?", options: ["Sister", "Cousin", "Mother", "Aunt"], answer: 3, explanation: "J is H's father and K is J's sister, so K is H's (paternal) aunt." },
+    { q: "Showing a photograph, Kishore said, \"This man's father's only daughter is my mother.\" How is the man related to Kishore?", options: ["Brother", "Father", "Grandfather", "Maternal uncle"], answer: 3, explanation: "The man's sister is Kishore's mother, so the man is Kishore's maternal uncle." },
+    { q: "Starting from his house, Arjun walks 5 km towards the east, turns left and walks 7 km, finally turns left and walks 4 km. In which direction is he now from his house?", options: ["South-East", "South-West", "North-East", "North-West"], answer: 2, explanation: "He ends up 1 km east and 7 km north of his house, so he is to the North-East of his house." },
+    { q: "If South-East is called South-West, and all other directions are renamed in the same way, what will North be called?", options: ["North", "South", "West", "East"], answer: 3, explanation: "South-East → South-West is a rotation of 90° clockwise; rotating North by the same amount gives East." },
+    { q: "In a class of 36 students, Rohit ranks 9th from the top. What is his rank from the bottom?", options: ["27th", "30th", "28th", "29th"], answer: 2, explanation: "Rank from bottom = 36 − 9 + 1 = 28." },
+    { q: "Sita is older than Hari. Tarun is older than Sita. Tarun is younger than Asha. Who is the youngest?", options: ["Asha", "Tarun", "Hari", "Sita"], answer: 2, explanation: "The order from oldest to youngest is Asha > Tarun > Sita > Hari, so the youngest is Hari." },
+    { q: "Two trains start at the same time from stations 204 km apart and travel towards each other at 49 km/h and 53 km/h. After how many hours will they meet?", options: ["4", "2", "1", "3"], answer: 1, explanation: "They close the gap at 49 + 53 = 102 km/h, so they meet after 204/102 = 2 hours." },
+    { q: "A train 60 m long passes a signal post in 6 seconds. What is its speed in km/h?", options: ["27", "10", "45", "36"], answer: 3, explanation: "Speed = 60/6 = 10 m/s = 10 × 18/5 = 36 km/h." },
+    { q: "What is the angle between the hands of a clock at 8:25?", options: ["90°", "102.5°", "132.5°", "117.5°"], answer: 1, explanation: "Angle = |30 × 8 − 5.5 × 25| = 102.5°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "If today is Saturday, what day of the week will it be 816 days from today?", options: ["Thursday", "Wednesday", "Tuesday", "Friday"], answer: 1, explanation: "816 = 7 × 116 + 4; 4 days after Saturday is Wednesday." },
+    { q: "Statements: No book is a stone. All stones are watches. Conclusions: I. Some watches are not books. II. No book is a watch.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "All stones are watches and none of them is a book, so some watches are not books (I); some books could still be watches, so II is uncertain." },
+    { q: "Statement: A company has advertised for a sales manager with five years' experience. Assumptions: I. Experienced people are better suited to the job. II. People with such experience will apply.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 2, explanation: "Asking for experience assumes it matters (I), and advertising assumes such people will apply (II)." },
+    { q: "A wooden block measuring 4 cm × 4 cm × 3 cm is painted on all faces and cut into 1 cm cubes. How many cubes have exactly two faces painted?", options: ["20", "4", "8", "16"], answer: 0, explanation: "Cubes with exactly two faces painted: 4[(4 − 2) + (4 − 2) + (3 − 2)] = 20." },
+    { q: "Which letter is 2nd to the right of the 20th letter from the left in the English alphabet?", options: ["T", "W", "V", "U"], answer: 2, explanation: "The 20th letter from the left is T; 2 places to its right is the 22nd letter, V." },
+    { q: "How many pairs of letters in the word COCKPIT have as many letters between them in the word as there are between them in the English alphabet (in either direction)?", options: ["2", "3", "12", "4"], answer: 0, explanation: "The pairs are OT, KI — 2 in all." },
+  ],
+};
+
+export default test;

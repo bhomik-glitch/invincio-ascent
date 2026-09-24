@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-82",
+  title: "OIR Test 82",
+  durationMinutes: 20,
+  releaseAt: "2026-12-27T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 8, 14, 26, 50, 98, ?", options: ["196", "198", "194", "192"], answer: 2, explanation: "Here each term is 2 times the previous term minus 2. Next: 98 × 2 − 2 = 194." },
+    { q: "Find the next number: 1, 3, 9, 27, 81, ?", options: ["241", "297", "243", "244"], answer: 2, explanation: "Here the differences 2, 6, 18, 54, 162 are each 3 times the previous difference. Next: 81 + 162 = 243." },
+    { q: "Find the next number: 360, 528, 840, 960, 1368, ?", options: ["1680", "1682", "1763", "1520"], answer: 0, explanation: "Here the terms are one less than the squares of consecutive primes. Next: 41² − 1 = 1680." },
+    { q: "Find the missing number: 96, 48, 24, ?, 6, 3", options: ["18", "12", "13", "15"], answer: 1, explanation: "Here each term is the previous term divided by 2, so the missing term is 12." },
+    { q: "Find the next letter: A, B, H, I, O, ?", options: ["Q", "P", "R", "O"], answer: 1, explanation: "By alphabet positions (1, 2, 8, 9, 15), the letters move alternately +1 and +6: O(15) + 1 = P(16)." },
+    { q: "Find the next pair: QH, SK, UN, WQ, ?", options: ["XS", "ZT", "YT", "YU"], answer: 2, explanation: "The first letters move 2 forward each time and the second letters move 3 forward: next is YT." },
+    { q: "Joy : Sorrow :: Wealth : ?", options: ["Fame", "Money", "Riches", "Poverty"], answer: 3, explanation: "These are opposites: joy–sorrow, wealth–poverty." },
+    { q: "6 : 37 :: 4 : ?", options: ["25", "65", "19", "17"], answer: 3, explanation: "6 → 6² + 1 = 37; likewise 4 → 4² + 1 = 17." },
+    { q: "Odissi : Odisha :: Sattriya : ?", options: ["Manipur", "Assam", "Kerala", "Gujarat"], answer: 1, explanation: "Odissi is from Odisha; Sattriya is from Assam." },
+    { q: "Which one does not belong with the others?", options: ["INS Chakra", "INS Vikramaditya", "INS Vikrant", "INS Viraat"], answer: 0, explanation: "INS Chakra was a nuclear submarine; the others are/were aircraft carriers." },
+    { q: "Which number does not belong with the others?", options: ["36", "132", "35", "168"], answer: 2, explanation: "36, 168, 132 are all multiples of 12; 35 is not." },
+    { q: "Choose the one word for: \"Government by the people\"", options: ["Monarchy", "Anarchy", "Democracy", "Autocracy"], answer: 2, explanation: "Democracy: government by the people." },
+    { q: "If PRINTER is written as 16-18-9-14-20-5-18, how is VILLAGE written in the same code?", options: ["22-9-12-12-1-6-5", "23-9-12-12-1-7-5", "5-18-15-15-26-20-22", "22-9-12-12-1-7-5"], answer: 3, explanation: "Each letter is replaced by its position in the alphabet (A = 1, …, Z = 26), so VILLAGE → 22-9-12-12-1-7-5." },
+    { q: "In a code language, 'young officers march' is written as 'ru si re', 'calm officers' is written as 'si su' and 'march early' is written as 'ta re'. Which word is coded as 'ru'?", options: ["early", "young", "officers", "march"], answer: 1, explanation: "'officers' is common to the first two sentences, so officers = si; 'march' is common to the first and third, so march = re. The remaining code in the first sentence, ru, means 'young'." },
+    { q: "If A = 26, B = 25, …, Z = 1 and TOWER = 54 (the sum of its letter values), what is CHESS?", options: ["81", "54", "83", "105"], answer: 0, explanation: "CHESS = 24 + 19 + 22 + 8 + 8 = 81." },
+    { q: "Heena's husband's father is Iqbal. Iqbal's wife is Jahanara. How is Jahanara related to Heena?", options: ["Mother-in-law", "Sister-in-law", "Grandmother", "Mother"], answer: 0, explanation: "Jahanara is the mother of Heena's husband, so she is Heena's mother-in-law." },
+    { q: "Pointing to a lady, Sohan said, \"She is the sister of the wife of my father's only son.\" How is the lady related to Sohan?", options: ["Sister-in-law", "Sister", "Wife", "Cousin"], answer: 0, explanation: "Sohan is his father's only son; the lady is his wife's sister — his sister-in-law." },
+    { q: "Starting from his house, Nikhil walks 4 km towards the south, turns left and walks 9 km, finally turns right and walks 4 km. In which direction is he now from his house?", options: ["North-East", "North-West", "South-West", "South-East"], answer: 3, explanation: "He ends up 9 km east and 8 km south of his house, so he is to the South-East of his house." },
+    { q: "If North is called South-East, and all other directions are renamed in the same way, what will South be called?", options: ["North-West", "South-West", "North-East", "North"], answer: 0, explanation: "North → South-East is a rotation of 135° clockwise; rotating South by the same amount gives North-West." },
+    { q: "Yash is 5th from the top and 21st from the bottom in his class. How many students are there in the class?", options: ["26", "24", "25", "35"], answer: 2, explanation: "Total = 5 + 21 − 1 = 25 (Yash is counted in both ranks)." },
+    { q: "Esha is heavier than Dinesh. Gita is lighter than Kiran. Dinesh is heavier than Uma. Uma is heavier than Kiran. Who is the heaviest?", options: ["Dinesh", "Kiran", "Esha", "Uma"], answer: 2, explanation: "The order from heaviest to lightest is Esha > Dinesh > Uma > Kiran > Gita, so the heaviest is Esha." },
+    { q: "Two trains start at the same time from stations 186 km apart and travel towards each other at 40 km/h and 53 km/h. After how many hours will they meet?", options: ["2", "1", "0", "3"], answer: 0, explanation: "They close the gap at 40 + 53 = 93 km/h, so they meet after 186/93 = 2 hours." },
+    { q: "A boat goes 15 km downstream in 1 hour and 7 km upstream in 1 hour. What is the speed of the stream?", options: ["8 km/h", "11 km/h", "4 km/h", "5 km/h"], answer: 2, explanation: "Boat speed = (15 + 7)/2 = 11 km/h; stream speed = (15 − 7)/2 = 4 km/h." },
+    { q: "At what time between 10 and 11 o'clock are the hands of a clock together?", options: ["10:54 9/11", "10:53", "10:54 6/11", "10:55 6/11"], answer: 2, explanation: "The minute hand gains 11/2° per minute. It must gain 300° on the hour hand, which takes 600/11 = 54 6/11 minutes past 10." },
+    { q: "2 October 1869 was the day Mahatma Gandhi was born. What day of the week was it?", options: ["Friday", "Sunday", "Tuesday", "Saturday"], answer: 3, explanation: "1 January 2001 was a Monday. 2 October 1869 is 47938 days before it, leaving 2 odd day(s) backwards from Monday, so it was a Saturday." },
+    { q: "Statements: Some trees are pens. All pens are teachers. Conclusions: I. Some trees are teachers. II. Some teachers are trees.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "The trees that are pens are also teachers, so some trees are teachers (I), and conversely some teachers are trees (II)." },
+    { q: "Statement: Many students are unable to follow lessons taught in English. Courses of action: I. Remedial English classes should be arranged for them. II. These students should be expelled. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Remedial help addresses the problem (I); expulsion does not." },
+    { q: "A wooden block measuring 7 cm × 7 cm × 3 cm is painted on all faces and cut into 1 cm cubes. How many cubes have exactly one face painted?", options: ["70", "8", "25", "44"], answer: 0, explanation: "Cubes with exactly one face painted: 2[(5)(5) + (5)(1) + (5)(1)] = 70." },
+    { q: "If the English alphabet is written in reverse order (Z to A), which letter will be 3rd to the right of the 13th letter from the left?", options: ["K", "J", "P", "L"], answer: 0, explanation: "In the reversed alphabet the 16th letter from the left is K (position n holds letter 27 − n)." },
+    { q: "How many pairs of letters in the word STRATEGY have as many letters between them in the word as there are between them in the English alphabet (in either direction)?", options: ["2", "4", "1", "3"], answer: 0, explanation: "The pairs are ST, RT — 2 in all." },
+  ],
+};
+
+export default test;

@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-51",
+  title: "OIR Test 51",
+  durationMinutes: 20,
+  releaseAt: "2026-11-15T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 7, 42, 252, 1512, ?", options: ["9074", "10584", "9072", "9065"], answer: 2, explanation: "Here each term is 6 times the previous term. Next: 1512 × 6 = 9072." },
+    { q: "Find the next number: 16, 75, 23, 69, 30, 63, 37, ?", options: ["57", "51", "63", "44"], answer: 0, explanation: "Here two series alternate: 16, 23, 30, … (+7) and 75, 69, 63, … (-6). Next: 63 − 6 = 57." },
+    { q: "Find the next number: 4, 15, 64, 325, 1956, ?", options: ["13699", "15648", "11742", "13700"], answer: 0, explanation: "Here the multipliers increase by one each step (×3, ×4, ×5, …), then add the same number (×3 + 3, ×4 + 4, …). Next: 1956 × 7 + 7 = 13699." },
+    { q: "Find the missing number: 221, 217, ?, 197, 181, 161", options: ["219", "209", "205", "207"], answer: 1, explanation: "Here the differences subtracted are 4, 8, 12, 16, 20 — each 4 more than the last, so the missing term is 209." },
+    { q: "Find the next letter: Z, V, R, N, J, ?", options: ["G", "E", "H", "F"], answer: 3, explanation: "By alphabet positions (26, 22, 18, 14, 10), each letter is 4 places before the previous one: J(10) − 4 = F(6)." },
+    { q: "Find the next pair: BI, FH, JG, NF, ?", options: ["SE", "QD", "RD", "RE"], answer: 3, explanation: "The first letters move 4 forward each time and the second letters move 1 back: next is RE." },
+    { q: "Pathology : Diseases :: Etymology : ?", options: ["Races", "Word origins", "Insects", "Fossils"], answer: 1, explanation: "Pathology is the study of diseases; etymology is the study of word origins (not insects — that is entomology)." },
+    { q: "4 : 15 :: 8 : ?", options: ["504", "63", "65", "64"], answer: 1, explanation: "4 → 4² − 1 = 15; likewise 8 → 8² − 1 = 63." },
+    { q: "Bangladesh : Taka :: Myanmar : ?", options: ["Taka", "Rupiah", "Ngultrum", "Kyat"], answer: 3, explanation: "Bangladesh uses the taka; Myanmar uses the kyat." },
+    { q: "Which one does not belong with the others?", options: ["Tin", "Brass", "Bronze", "Steel"], answer: 0, explanation: "Tin is an element; the others are alloys." },
+    { q: "Which number does not belong with the others?", options: ["109", "67", "63", "73"], answer: 2, explanation: "63 = 3 × 21 is not prime; the others are prime numbers." },
+    { q: "Choose the word most opposite in meaning to OBEDIENT.", options: ["Rebellious", "Loyal", "Humble", "Dutiful"], answer: 0, explanation: "The opposite of obedient is rebellious; the other options are similar in meaning or unrelated." },
+    { q: "If MIRROR is coded as PLUURU, how is BUCKET coded?", options: ["EXFOHW", "EXFNIW", "EXFNHW", "TEKCUB"], answer: 2, explanation: "In this code each letter is moved 3 places forward in the alphabet, so BUCKET becomes EXFNHW." },
+    { q: "In a code language, 'loyal boys win' is written as 'pi ja fe', 'bold boys' is written as 'ta fe' and 'win again' is written as 're ja'. What is the code for 'loyal'?", options: ["pi", "ja", "fe", "re"], answer: 0, explanation: "'boys' is common to the first two sentences, so boys = fe; 'win' is common to the first and third, so win = ja. The remaining code in the first sentence, pi, means 'loyal'." },
+    { q: "If '÷' means '+', '×' means '−', '+' means '×' and '−' means '÷', what is the value of 28 − 7 ÷ 9 + 5 × 6?", options: ["41", "49", "31", "43"], answer: 3, explanation: "Replacing the symbols gives 28 ÷ 7 + 9 × 5 − 6; following BODMAS, this equals 43." },
+    { q: "F is the mother of G. G is the father of H. I is the sister of H. How is I related to F?", options: ["Daughter", "Niece", "Sister", "Granddaughter"], answer: 3, explanation: "G is I's father and F is G's mother, so I is F's granddaughter." },
+    { q: "Pointing to a woman, Rohit said, \"Her mother-in-law's only son is my father.\" How is the woman related to Rohit?", options: ["Grandmother", "Mother", "Aunt", "Sister"], answer: 1, explanation: "Her mother-in-law's only son is her husband, who is Rohit's father, so she is Rohit's mother." },
+    { q: "Starting from his house, Kabir walks 2 km towards the west, turns right and walks 4 km, finally turns right and walks 4 km. In which direction is he now from his house?", options: ["South-West", "North-East", "South-East", "North-West"], answer: 1, explanation: "He ends up 2 km east and 4 km north of his house, so he is to the North-East of his house." },
+    { q: "One morning, just after sunrise, Dev was standing in a field. His shadow fell exactly to his right. Which direction was he facing?", options: ["East", "West", "North", "South"], answer: 3, explanation: "In the morning the sun is in the east, so shadows fall to the west. With the shadow (West) on his right, he must be facing South." },
+    { q: "In a class of 47 students, Mohan ranks 31st from the top. What is his rank from the bottom?", options: ["19th", "17th", "18th", "16th"], answer: 1, explanation: "Rank from bottom = 47 − 31 + 1 = 17." },
+    { q: "Esha is heavier than Asha. Chetan is lighter than Asha. Dinesh is lighter than Uma. Dinesh is heavier than Esha. Who is the heaviest?", options: ["Asha", "Dinesh", "Uma", "Esha"], answer: 2, explanation: "The order from heaviest to lightest is Uma > Dinesh > Esha > Asha > Chetan, so the heaviest is Uma." },
+    { q: "A train 300 m long passes a signal post in 15 seconds. What is its speed in km/h?", options: ["63", "20", "81", "72"], answer: 3, explanation: "Speed = 300/15 = 20 m/s = 20 × 18/5 = 72 km/h." },
+    { q: "The average of 5 numbers is 38. When one number is removed, the average of the rest becomes 40. Which number was removed?", options: ["35", "30", "28", "38"], answer: 1, explanation: "Total before = 5 × 38 = 190; after = 4 × 40 = 160; removed = 30." },
+    { q: "In a mirror, a clock appears to show 11:51. What is the actual time?", options: ["1:09", "1:51", "12:09", "12:39"], answer: 2, explanation: "Actual time = 11:60 − 11:51 = 12:09." },
+    { q: "21 January 2032 is a Wednesday. What day of the week is 8 March 2031?", options: ["Monday", "Friday", "Saturday", "Sunday"], answer: 2, explanation: "8 March 2031 is 319 days before 21 January 2032. 319 = 7 × 45 + 4, so the day shifts 4 back: Saturday." },
+    { q: "Statements: No river is a road. Some roads are flowers. Conclusions: I. Some flowers are not rivers. II. Some rivers are flowers.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "The flowers that are roads cannot be rivers, so some flowers are not rivers (I); nothing links rivers and flowers directly, so II is uncertain." },
+    { q: "Statement: Smoking is injurious to health. Conclusions: I. Non-smokers are always healthy. II. Smoking should be avoided.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "If smoking harms health, it should be avoided (II); non-smokers can still fall ill." },
+    { q: "A wooden block measuring 7 cm × 7 cm × 5 cm is painted on all faces and cut into 1 cm cubes. How many cubes have exactly one face painted?", options: ["52", "8", "110", "75"], answer: 2, explanation: "Cubes with exactly one face painted: 2[(5)(5) + (5)(3) + (5)(3)] = 110." },
+    { q: "If the English alphabet is written in reverse order (Z to A), which letter will be 2nd to the right of the 3rd letter from the left?", options: ["E", "V", "U", "W"], answer: 1, explanation: "In the reversed alphabet the 5th letter from the left is V (position n holds letter 27 − n)." },
+    { q: "If the following words are arranged in dictionary order, which word comes last? Aircraft, Artillery, Ammunition, Autumn", options: ["Artillery", "Autumn", "Aircraft", "Ammunition"], answer: 1, explanation: "In dictionary order: Aircraft, Ammunition, Artillery, Autumn." },
+  ],
+};
+
+export default test;

@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-60",
+  title: "OIR Test 60",
+  durationMinutes: 20,
+  releaseAt: "2026-11-22T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 211, 208, 201, 190, 175, ?", options: ["152", "160", "156", "158"], answer: 2, explanation: "Here the differences subtracted are 3, 7, 11, 15, 19 — each 4 more than the last. Next: 175 − 19 = 156." },
+    { q: "Find the next number: 3, 8, 27, 112, 565, ?", options: ["3955", "3396", "2830", "3397"], answer: 1, explanation: "Here the multipliers increase by one each step (×2, ×3, ×4, …), then add the same number (×2 + 2, ×3 + 3, …). Next: 565 × 6 + 6 = 3396." },
+    { q: "Find the next number: 1, 5, 25, 125, ?", options: ["624", "750", "625", "626"], answer: 2, explanation: "Here each term is 5 times the previous term. Next: 125 × 5 = 625." },
+    { q: "Find the missing number: 12, 13, 16, ?, 52, 133", options: ["43", "34", "25", "27"], answer: 2, explanation: "Here the differences 1, 3, 9, 27, 81 are each 3 times the previous difference, so the missing term is 25." },
+    { q: "Find the next letter: E, F, L, M, S, ?", options: ["U", "T", "V", "S"], answer: 1, explanation: "By alphabet positions (5, 6, 12, 13, 19), the letters move alternately +1 and +6: S(19) + 1 = T(20)." },
+    { q: "Find the next pair: CF, EJ, GN, IR, ?", options: ["KV", "JU", "KW", "LV"], answer: 0, explanation: "The first letters move 2 forward each time and the second letters move 4 forward: next is KV." },
+    { q: "Sheep : Flock :: Bee : ?", options: ["Pack", "Pride", "Herd", "Swarm"], answer: 3, explanation: "A group of sheep is a flock; a group of bees is a swarm." },
+    { q: "10 : 121 :: 11 : ?", options: ["1331", "242", "144", "143"], answer: 2, explanation: "10 → (10 + 1)² = 121; likewise 11 → (11 + 1)² = 144." },
+    { q: "First Field Marshal : Sam Manekshaw :: First Indian Commander-in-Chief of the Army : ?", options: ["K.M. Cariappa", "K.S. Thimayya", "J.N. Chaudhuri", "Sam Manekshaw"], answer: 0, explanation: "Manekshaw was the first Field Marshal; K.M. Cariappa was the first Indian Commander-in-Chief." },
+    { q: "Which one does not belong with the others?", options: ["Mouse", "Printer", "Scanner", "Keyboard"], answer: 1, explanation: "The printer is an output device; the others are input devices." },
+    { q: "Which number does not belong with the others?", options: ["79", "29", "63", "13"], answer: 2, explanation: "63 = 3 × 21 is not prime; the others are prime numbers." },
+    { q: "Choose the word most opposite in meaning to ASSEMBLE.", options: ["Unite", "Gather", "Collect", "Disperse"], answer: 3, explanation: "The opposite of assemble is disperse; the other options are similar in meaning or unrelated." },
+    { q: "If TOWER is coded as UPXFS, how is BOTTLE coded?", options: ["CPUUMG", "ELTTOB", "CPUUMF", "BPUUMF"], answer: 2, explanation: "In this code each letter is moved 1 place forward in the alphabet, so BOTTLE becomes CPUUMF." },
+    { q: "In a code language, 'strong farmers run' is written as 'fe re si', 'brave farmers' is written as 'ki si' and 'run fast' is written as 'ka re'. What is the code for 'strong'?", options: ["ki", "si", "fe", "re"], answer: 2, explanation: "'farmers' is common to the first two sentences, so farmers = si; 'run' is common to the first and third, so run = re. The remaining code in the first sentence, fe, means 'strong'." },
+    { q: "If A = 26, B = 25, …, Z = 1 and FALCON = 111 (the sum of its letter values), what is RIVER?", options: ["72", "73", "63", "61"], answer: 2, explanation: "RIVER = 9 + 18 + 5 + 22 + 9 = 63." },
+    { q: "Tarun and Varun are brothers. Tarun's daughter is Riya. Varun's son is Kabir. How is Kabir related to Riya?", options: ["Nephew", "Cousin", "Brother", "Uncle"], answer: 1, explanation: "Their fathers are brothers, so Kabir and Riya are cousins." },
+    { q: "Pointing to a man, Ankit said, \"His mother is the wife of my father's only son.\" How is the man related to Ankit?", options: ["Nephew", "Brother", "Son", "Grandson"], answer: 2, explanation: "Ankit is his father's only son, so the man's mother is Ankit's wife and the man is Ankit's son." },
+    { q: "Starting from his house, Aman walks 130 m towards the west, turns right and walks 70 m, finally turns right and walks 10 m. In which direction is he now from his house?", options: ["North-West", "North-East", "South-East", "South-West"], answer: 0, explanation: "He ends up 120 m west and 70 m north of his house, so he is to the North-West of his house." },
+    { q: "One evening, just before sunset, Arjun was standing in a field. His shadow fell exactly in front of him. Which direction was he facing?", options: ["North", "South", "West", "East"], answer: 3, explanation: "In the evening the sun is in the west, so shadows fall to the east. With the shadow (East) in front of him, he must be facing East." },
+    { q: "In a row, Sanjay is 8th from the left and Vikram is 17th from the right. When they interchange places, Sanjay becomes 26th from the left. How many people are in the row?", options: ["42", "44", "43", "33"], answer: 0, explanation: "After the swap Sanjay takes Vikram's old place, which is 26th from the left and 17th from the right, so total = 26 + 17 − 1 = 42." },
+    { q: "Asha is faster than Dinesh. Gita is faster than Farhan. Gita is slower than Jatin. Asha is slower than Farhan. Who is in the middle (third)?", options: ["Gita", "Jatin", "Farhan", "Asha"], answer: 2, explanation: "The order from fastest to slowest is Jatin > Gita > Farhan > Asha > Dinesh, so in the middle (third) is Farhan." },
+    { q: "What is the simple interest on ₹13000 at 3% per annum for 5 years?", options: ["₹1560", "₹14950", "₹2340", "₹1950"], answer: 3, explanation: "SI = P × R × T / 100 = 13000 × 3 × 5 / 100 = ₹1950." },
+    { q: "A bag contains an equal number of ₹1, ₹2 and ₹5 coins worth ₹240 in all. How many of each are there?", options: ["30", "32", "90", "48"], answer: 0, explanation: "Each set of one of each is worth ₹8; 240/8 = 30." },
+    { q: "In a mirror, a clock appears to show 7:23. What is the actual time?", options: ["4:37", "5:23", "4:07", "5:37"], answer: 0, explanation: "Actual time = 11:60 − 7:23 = 4:37." },
+    { q: "How many days are there from 4 February 2028 to 22 September 2028, both days included?", options: ["231", "242", "233", "232"], answer: 3, explanation: "Counting the days in each month from 4 February 2028 to 22 September 2028 inclusive gives 232." },
+    { q: "Statements: All officers are runners. Some cups are officers. Conclusions: I. Some cups are runners. II. All runners are officers.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "The cups that are officers are also runners, so some cups are runners (I); 'All officers are runners' cannot be reversed, so II fails." },
+    { q: "Statement: The office is open from 9 am to 5 pm on all working days. Conclusions: I. The office is open at 11 am on working days. II. The office is open at 8 am on working days.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "11 am lies within 9–5, so I follows; 8 am is before opening time." },
+    { q: "A cube of side 4 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have no face painted?", options: ["8", "24", "56", "9"], answer: 0, explanation: "There are 64 small cubes; no face painted: the inner (4 − 2)³ = 8 cubes." },
+    { q: "Which letter is 7th to the left of the 14th letter from the right in the English alphabet?", options: ["F", "E", "G", "U"], answer: 0, explanation: "The 14th letter from the right is the 13th from the left (M); 7 to its left is the 6th letter, F." },
+    { q: "If the following words are arranged in dictionary order, which word comes second? Friendship, Forest, Frigate, Falcon", options: ["Forest", "Frigate", "Friendship", "Falcon"], answer: 0, explanation: "In dictionary order: Falcon, Forest, Friendship, Frigate." },
+  ],
+};
+
+export default test;

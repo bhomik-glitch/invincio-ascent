@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-20",
+  title: "OIR Test 20",
+  durationMinutes: 20,
+  releaseAt: "2026-09-27T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 14, 28, 56, 112, 224, ?", options: ["434", "672", "448", "449"], answer: 2, explanation: "Here each term is 2 times the previous term. Next: 224 × 2 = 448." },
+    { q: "Find the next number: 10, 20, 22, 44, 46, 92, ?", options: ["184", "94", "95", "92"], answer: 1, explanation: "Here the operations alternate: × 2, + 2, × 2, + 2 and so on. Next: 92 + 2 = 94." },
+    { q: "Find the next number: 18, 81, 21, 75, 24, 69, 27, ?", options: ["63", "30", "57", "69"], answer: 0, explanation: "Here two series alternate: 18, 21, 24, … (+3) and 81, 75, 69, … (-6). Next: 69 − 6 = 63." },
+    { q: "Find the missing number: 203, 202, ?, 194, 187, 178", options: ["189", "199", "197", "198"], answer: 1, explanation: "Here the differences subtracted are 1, 3, 5, 7, 9 — each 2 more than the last, so the missing term is 199." },
+    { q: "Find the next letter: H, K, N, Q, T, ?", options: ["Y", "W", "X", "V"], answer: 1, explanation: "By alphabet positions (8, 11, 14, 17, 20), each letter is 3 places after the previous one: T(20) + 3 = W(23)." },
+    { q: "Find the next pair: NS, PR, RQ, TP, ?", options: ["WO", "VO", "UN", "VN"], answer: 1, explanation: "The first letters move 2 forward each time and the second letters move 1 back: next is VO." },
+    { q: "Author : Novel :: Composer : ?", options: ["Portrait", "Symphony", "Sculpture", "Novel"], answer: 1, explanation: "An author creates a novel; a composer creates a symphony." },
+    { q: "11 : 1331 :: 2 : ?", options: ["8", "4", "9", "2"], answer: 0, explanation: "11 → 11³ = 1331; likewise 2 → 2³ = 8." },
+    { q: "Madras Regiment : Wellington :: Sikh Regiment : ?", options: ["Lucknow", "Ramgarh", "Shillong", "Jabalpur"], answer: 1, explanation: "The Madras Regimental Centre is at Wellington; the Sikh Regimental Centre is at Ramgarh Cantonment." },
+    { q: "Which one does not belong with the others?", options: ["Brigadier", "Colonel", "Commodore", "Major"], answer: 2, explanation: "Commodore is a Navy rank; the others are Army ranks." },
+    { q: "Which number does not belong with the others?", options: ["23", "107", "87", "41"], answer: 2, explanation: "87 = 3 × 29 is not prime; the others are prime numbers." },
+    { q: "Choose the word most similar in meaning to AUDACIOUS.", options: ["Polite", "Daring", "Cowardly", "Quiet"], answer: 1, explanation: "Audacious means daring." },
+    { q: "If PILLOW is written as 11-18-15-15-12-4, how is MIRROR written in the same code?", options: ["14-18-9-9-12-9", "13-9-18-18-15-18", "14-18-9-10-12-9", "14-17-9-9-12-9"], answer: 0, explanation: "Each letter is replaced by its position in the reversed alphabet (A = 26, B = 25, …, Z = 1), so MIRROR → 14-18-9-9-12-9." },
+    { q: "In a code language, 'young doctors sail' is written as 'su pi ne', 'brave doctors' is written as 'si pi' and 'sail fast' is written as 'fe su'. Which word is coded as 'ne'?", options: ["young", "fast", "sail", "doctors"], answer: 0, explanation: "'doctors' is common to the first two sentences, so doctors = pi; 'sail' is common to the first and third, so sail = su. The remaining code in the first sentence, ne, means 'young'." },
+    { q: "If A = 26, B = 25, …, Z = 1 and CITY = 51 (the sum of its letter values), what is AUTUMN?", options: ["90", "72", "98", "71"], answer: 1, explanation: "AUTUMN = 26 + 6 + 7 + 6 + 14 + 13 = 72." },
+    { q: "P is the wife of Q. R is the brother of Q. S is the son of R. How is P related to S?", options: ["Aunt", "Grandmother", "Mother", "Sister"], answer: 0, explanation: "Q is S's uncle (father's brother), so Q's wife P is S's aunt." },
+    { q: "Pointing to a photograph, Amit said, \"Her mother's husband is my father's only son-in-law.\" How is the girl in the photograph related to Amit?", options: ["Sister", "Niece", "Daughter", "Cousin"], answer: 1, explanation: "Amit's father's only son-in-law is Amit's sister's husband; he is the girl's father, so she is Amit's niece." },
+    { q: "Starting from his house, Arjun walks 2 km towards the east, turns right and walks 5 km, finally turns right and walks 9 km. In which direction is he now from his house?", options: ["North-East", "South-East", "South-West", "North-West"], answer: 2, explanation: "He ends up 7 km west and 5 km south of his house, so he is to the South-West of his house." },
+    { q: "If South-West is called West, and all other directions are renamed in the same way, what will South-East be called?", options: ["East", "South", "West", "North-West"], answer: 1, explanation: "South-West → West is a rotation of 45° clockwise; rotating South-East by the same amount gives South." },
+    { q: "In a row of 44 children, Arjun is 8th from the left. Mohan is 3rd to the right of Arjun. What is Mohan's position from the right end?", options: ["36th", "33rd", "34th", "35th"], answer: 2, explanation: "Mohan is 11th from the left, so from the right he is 44 − 11 + 1 = 34." },
+    { q: "Gita is taller than Om. Isha is shorter than Om. Chetan is taller than Gita. Who is the shortest?", options: ["Isha", "Om", "Chetan", "Gita"], answer: 0, explanation: "The order from tallest to shortest is Chetan > Gita > Om > Isha, so the shortest is Isha." },
+    { q: "40% of a number is 56. What is 75% of the same number?", options: ["420", "161", "95", "105"], answer: 3, explanation: "The number is 56 × 100/40 = 140, and 75% of 140 = 105." },
+    { q: "What is the simple interest on ₹7500 at 9% per annum for 6 years?", options: ["₹3375", "₹4725", "₹11550", "₹4050"], answer: 3, explanation: "SI = P × R × T / 100 = 7500 × 9 × 6 / 100 = ₹4050." },
+    { q: "What is the angle between the hands of a clock at 8:40?", options: ["50°", "0°", "20°", "35°"], answer: 2, explanation: "Angle = |30 × 8 − 5.5 × 40| = 20°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "Which year will have exactly the same calendar as 2034?", options: ["2046", "2038", "2044", "2045"], answer: 3, explanation: "A year has the same calendar when it starts on the same weekday and is also an ordinary year. Counting odd days (1 per ordinary year, 2 per leap year) from 2034 until they total a multiple of 7 gives 2045." },
+    { q: "Statements: All officers are chairs. All bottles are chairs. Conclusions: I. Some officers are bottles. II. Some chairs are bottles.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "All bottles are chairs, so some chairs are bottles (II); officers and bottles both lie within chairs but need not overlap, so I fails." },
+    { q: "Statement: Train tickets can now be booked online. Assumptions: I. Many passengers have access to the internet. II. Ticket counters will be shut down.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0, explanation: "Online booking assumes internet access (I); it does not imply counters will close." },
+    { q: "How many cubes of side 4 cm can be cut from a solid cube of side 20 cm?", options: ["2000", "25", "125", "15"], answer: 2, explanation: "(20/4)³ = 5³ = 125." },
+    { q: "Which letter is 16th to the right of the 6th letter from the left in the English alphabet?", options: ["T", "W", "V", "U"], answer: 2, explanation: "The 6th letter from the left is F; 16 places to its right is the 22nd letter, V." },
+    { q: "In the word HISTORY, the 1st and 2nd letters are interchanged, the 3rd and 4th letters are interchanged, and so on. Which letter will be 5th from the right end?", options: ["S", "T", "H", "R"], answer: 1, explanation: "The new arrangement is IHTSROY; the 5th letter from the right is T." },
+  ],
+};
+
+export default test;

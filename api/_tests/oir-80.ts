@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-80",
+  title: "OIR Test 80",
+  durationMinutes: 20,
+  releaseAt: "2026-12-20T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 10, 17, 12, 19, 14, 21, ?", options: ["17", "16", "14", "28"], answer: 1, explanation: "Here the operations alternate: + 7, − 5, + 7, − 5 and so on. Next: 21 − 5 = 16." },
+    { q: "Find the next number: 111, 123, 129, 141, 159, ?", options: ["165", "177", "179", "180"], answer: 1, explanation: "Here the terms are three times consecutive prime numbers. Next: 3 × 59 = 177." },
+    { q: "Find the next number: 9, 20, 42, 86, 174, ?", options: ["350", "352", "346", "348"], answer: 0, explanation: "Here each term is 2 times the previous term plus 2. Next: 174 × 2 + 2 = 350." },
+    { q: "Find the missing number: 1, 4, 13, 40, ?, 364", options: ["202", "283", "121", "122"], answer: 2, explanation: "Here the differences 3, 9, 27, 81, 243 are each 3 times the previous difference, so the missing term is 121." },
+    { q: "Find the next letter: E, G, M, O, U, ?", options: ["V", "Y", "W", "X"], answer: 2, explanation: "By alphabet positions (5, 7, 13, 15, 21), the letters move alternately +2 and +6: U(21) + 2 = W(23)." },
+    { q: "Find the next pair: FS, HT, JU, LV, ?", options: ["OW", "NW", "NX", "MV"], answer: 1, explanation: "The first letters move 2 forward each time and the second letters move 1 forward: next is NW." },
+    { q: "Cloth : Loom :: Flour : ?", options: ["Mill", "Oven", "Press", "Kiln"], answer: 0, explanation: "Cloth is made on a loom; flour is made in a mill." },
+    { q: "5 : 36 :: 2 : ?", options: ["8", "3", "7", "9"], answer: 3, explanation: "5 → (5 + 1)² = 36; likewise 2 → (2 + 1)² = 9." },
+    { q: "Kathak : Uttar Pradesh :: Kathakali : ?", options: ["Kerala", "Odisha", "Manipur", "Tamil Nadu"], answer: 0, explanation: "Kathak comes from Uttar Pradesh; Kathakali comes from Kerala." },
+    { q: "Which one does not belong with the others?", options: ["Agni", "Akash", "Arjun", "Prithvi"], answer: 2, explanation: "Arjun is a tank; the others are missiles." },
+    { q: "Which number does not belong with the others?", options: ["127", "80", "62", "125"], answer: 0, explanation: "The digits of 62, 125, 80 each add up to 8; the digits of 127 add up to 10." },
+    { q: "Choose the one word for: \"A person who comes into a country to settle there\"", options: ["Nomad", "Immigrant", "Emigrant", "Pilgrim"], answer: 1, explanation: "Immigrant: a person who comes into a country to settle there." },
+    { q: "If TIGER is coded as UHHDS, how is SINGER coded?", options: ["THOFEQ", "THOGFQ", "THOFFQ", "TKQKJX"], answer: 2, explanation: "In this code letters are moved alternately one place forward and one place back, so SINGER becomes THOFFQ." },
+    { q: "In a code language, 'proud doctors run' is written as 'ka su ri', 'smart doctors' is written as 'ri lo' and 'run daily' is written as 'ho su'. Which word is coded as 'ka'?", options: ["proud", "run", "smart", "doctors"], answer: 0, explanation: "'doctors' is common to the first two sentences, so doctors = ri; 'run' is common to the first and third, so run = su. The remaining code in the first sentence, ka, means 'proud'." },
+    { q: "If A = 26, B = 25, …, Z = 1 and SALUTE = 84 (the sum of its letter values), what is ROCKET?", options: ["99", "72", "90", "92"], answer: 2, explanation: "ROCKET = 9 + 12 + 24 + 16 + 22 + 7 = 90." },
+    { q: "Anu's mother's brother is Bala. Bala's daughter is Chhavi. How is Chhavi related to Anu?", options: ["Aunt", "Niece", "Sister", "Cousin"], answer: 3, explanation: "Chhavi's father is Anu's maternal uncle, so they are cousins." },
+    { q: "Pointing to a girl, Pavan said, \"She is the only daughter of my only sister.\" How is the girl related to Pavan?", options: ["Sister", "Daughter", "Cousin", "Niece"], answer: 3, explanation: "The daughter of one's sister is one's niece." },
+    { q: "Starting from his house, Yash walks 11 km towards the east, turns left and walks 1 km, finally turns left and walks 5 km. In which direction is he now from his house?", options: ["North-West", "South-East", "South-West", "North-East"], answer: 3, explanation: "He ends up 6 km east and 1 km north of his house, so he is to the North-East of his house." },
+    { q: "A man is facing East. He turns 180° clockwise, then 90° clockwise, then 180° anticlockwise. Which direction is he facing now?", options: ["North", "West", "South", "East"], answer: 2, explanation: "The net turn is 90° clockwise from East, so he faces South." },
+    { q: "In a row, Mohan is 12th from the left and Karan is 10th from the right. When they interchange places, Mohan becomes 27th from the left. How many people are in the row?", options: ["36", "37", "38", "26"], answer: 0, explanation: "After the swap Mohan takes Karan's old place, which is 27th from the left and 10th from the right, so total = 27 + 10 − 1 = 36." },
+    { q: "Om is richer than Sita. Om is poorer than Nisha. Nisha is poorer than Manoj. Who is the richest?", options: ["Nisha", "Sita", "Manoj", "Om"], answer: 2, explanation: "The order from richest to poorest is Manoj > Nisha > Om > Sita, so the richest is Manoj." },
+    { q: "A train 120 m long passes a signal post in 12 seconds. What is its speed in km/h?", options: ["45", "27", "36", "10"], answer: 2, explanation: "Speed = 120/12 = 10 m/s = 10 × 18/5 = 36 km/h." },
+    { q: "30% of a number is 30. What is 60% of the same number?", options: ["180", "63", "90", "60"], answer: 3, explanation: "The number is 30 × 100/30 = 100, and 60% of 100 = 60." },
+    { q: "Through how many degrees does the hour hand of a clock turn from 1:20 to 8:10?", options: ["235°", "300°", "205°", "220°"], answer: 2, explanation: "The hour hand turns 0.5° per minute; 410 minutes × 0.5° = 205°." },
+    { q: "If today is Saturday, what day of the week will it be 248 days from today?", options: ["Tuesday", "Monday", "Thursday", "Wednesday"], answer: 0, explanation: "248 = 7 × 35 + 3; 3 days after Saturday is Tuesday." },
+    { q: "Statements: No lamp is a singer. Some singers are birds. Conclusions: I. Some birds are not lamps. II. Some lamps are birds.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "The birds that are singers cannot be lamps, so some birds are not lamps (I); nothing links lamps and birds directly, so II is uncertain." },
+    { q: "Statement: Each of the five units in the brigade has its own medical officer. Conclusions: I. The brigade has at least five medical officers. II. Every medical officer is a surgeon.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Five units each with its own officer means at least five (I); their speciality is not given." },
+    { q: "A cube of side 8 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have at least two faces painted?", options: ["72", "8", "216", "80"], answer: 3, explanation: "There are 512 small cubes; at least two faces painted: corners + edges = 8 + 72 = 80." },
+    { q: "Which letter is 11th to the right of the 8th letter from the left in the English alphabet?", options: ["T", "Q", "R", "S"], answer: 3, explanation: "The 8th letter from the left is H; 11 places to its right is the 19th letter, S." },
+    { q: "How many pairs of letters in the word LIEUTENANT have as many letters between them in the word as there are between them in the English alphabet (in either direction)?", options: ["4", "6", "5", "3"], answer: 3, explanation: "The pairs are IE, IN, UT — 3 in all." },
+  ],
+};
+
+export default test;

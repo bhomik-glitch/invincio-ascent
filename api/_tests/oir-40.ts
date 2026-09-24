@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-40",
+  title: "OIR Test 40",
+  durationMinutes: 20,
+  releaseAt: "2026-10-25T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 5, 7, 11, 19, 35, ?", options: ["73", "69", "67", "70"], answer: 2, explanation: "Here each term is 2 times the previous term minus 3. Next: 35 × 2 − 3 = 67." },
+    { q: "Find the next number: 14, 64, 21, 57, 28, 50, 35, ?", options: ["43", "50", "36", "42"], answer: 0, explanation: "Here two series alternate: 14, 21, 28, … (+7) and 64, 57, 50, … (-7). Next: 50 − 7 = 43." },
+    { q: "Find the next number: 17, 21, 23, 27, 29, ?", options: ["31", "34", "33", "35"], answer: 2, explanation: "Here the terms are consecutive prime numbers plus 10. Next: 23 + 10 = 33." },
+    { q: "Find the missing number: 36, 49, 64, ?, 100, 121", options: ["83", "81", "82", "84"], answer: 1, explanation: "Here the terms are the squares of consecutive numbers, so the missing term is 81." },
+    { q: "Find the next letter: R, S, U, V, X, ?", options: ["X", "W", "Y", "Z"], answer: 2, explanation: "By alphabet positions (18, 19, 21, 22, 24), the letters move alternately +1 and +2: X(24) + 1 = Y(25)." },
+    { q: "Find the next pair: LB, OF, RJ, UN, ?", options: ["XR", "YR", "XS", "WQ"], answer: 0, explanation: "The first letters move 3 forward each time and the second letters move 4 forward: next is XR." },
+    { q: "Kilometre : Distance :: Kilogram : ?", options: ["Length", "Density", "Volume", "Mass"], answer: 3, explanation: "The kilometre is a unit of distance; the kilogram is a unit of mass." },
+    { q: "9 : 84 :: 12 : ?", options: ["147", "1716", "1727", "143"], answer: 0, explanation: "9 → 9² + 3 = 84; likewise 12 → 12² + 3 = 147." },
+    { q: "Siachen : Glacier :: Thar : ?", options: ["Valley", "Plateau", "Delta", "Desert"], answer: 3, explanation: "Siachen is a glacier; Thar is a desert." },
+    { q: "Which one does not belong with the others?", options: ["Carrom", "Chess", "Ludo", "Kabaddi"], answer: 3, explanation: "Kabaddi is an outdoor contact sport; the others are indoor board games." },
+    { q: "Which number does not belong with the others?", options: ["175", "174", "327", "48"], answer: 0, explanation: "The digits of 327, 174, 48 each add up to 12; the digits of 175 add up to 13." },
+    { q: "Choose the word most similar in meaning to INTREPID.", options: ["Cautious", "Clever", "Afraid", "Fearless"], answer: 3, explanation: "Intrepid means fearless." },
+    { q: "If BUNKER is coded as SFLOVC, how is ANCHOR coded?", options: ["SQIDOB", "BMDGPQ", "SPIEOB", "SPIDOB"], answer: 3, explanation: "In this code the letters are reversed and each is moved 1 place forward, so ANCHOR becomes SPIDOB." },
+    { q: "In a code language, 'bold doctors work' is written as 'su ki ga', 'smart doctors' is written as 'ga ri' and 'work fast' is written as 'ki si'. What is the code for 'bold'?", options: ["su", "ki", "ga", "ri"], answer: 0, explanation: "'doctors' is common to the first two sentences, so doctors = ga; 'work' is common to the first and third, so work = ki. The remaining code in the first sentence, su, means 'bold'." },
+    { q: "If A = 26, B = 25, …, Z = 1 and CHERRY = 85 (the sum of its letter values), what is BADGE?", options: ["141", "116", "19", "118"], answer: 1, explanation: "BADGE = 25 + 26 + 23 + 20 + 22 = 116." },
+    { q: "L is the father of N. N is the father of M. O is the wife of N. How is L related to O?", options: ["Father-in-law", "Brother-in-law", "Father", "Grandfather"], answer: 0, explanation: "L is the father of O's husband N, so L is O's father-in-law." },
+    { q: "Pointing to a boy, Seema said, \"He is the brother of the daughter of my mother's only son-in-law.\" Seema is her mother's only daughter. How is the boy related to Seema?", options: ["Nephew", "Grandson", "Son", "Brother"], answer: 2, explanation: "Her mother's only son-in-law is Seema's husband; the brother of his daughter is his son — Seema's son." },
+    { q: "Starting from his house, Ajay walks 8 km towards the south, turns right and walks 1 km, finally turns right and walks 7 km. In which direction is he now from his house?", options: ["North-West", "North-East", "South-East", "South-West"], answer: 3, explanation: "He ends up 1 km west and 1 km south of his house, so he is to the South-West of his house." },
+    { q: "A man is facing North-East. He turns 45° anticlockwise, then 135° anticlockwise. Which direction is he facing now?", options: ["South-West", "North-West", "South-East", "North-East"], answer: 0, explanation: "The net turn is 180° clockwise from North-East, so he faces South-West." },
+    { q: "In a class of 56 students, Karan ranks 31st from the top. What is his rank from the bottom?", options: ["26th", "28th", "25th", "27th"], answer: 0, explanation: "Rank from bottom = 56 − 31 + 1 = 26." },
+    { q: "Lata is lighter than Pooja. Lata is heavier than Asha. Manoj is lighter than Asha. Isha is lighter than Manoj. Who is the second lightest?", options: ["Pooja", "Asha", "Lata", "Manoj"], answer: 3, explanation: "The order from heaviest to lightest is Pooja > Lata > Asha > Manoj > Isha, so the second lightest is Manoj." },
+    { q: "At a meeting, each of the 9 officers shakes hands exactly once with every other officer. How many handshakes take place?", options: ["81", "36", "72", "45"], answer: 1, explanation: "Handshakes = n(n − 1)/2 = 9 × 8/2 = 36." },
+    { q: "A number is multiplied by 2, then 10 is added, and the result is multiplied by 4. The final answer is 176. What was the number?", options: ["17", "19", "20", "18"], answer: 0, explanation: "Working backwards: 176 ÷ 4 = 44; − 10 = 34; ÷ 2 = 17." },
+    { q: "In a mirror, a clock appears to show 12:38. What is the actual time?", options: ["11:52", "11:22", "12:38", "12:22"], answer: 1, explanation: "Actual time = 11:60 − 12:38 = 11:22." },
+    { q: "26 January 1950 was the first Republic Day. What day of the week was it?", options: ["Thursday", "Wednesday", "Sunday", "Friday"], answer: 0, explanation: "1 January 2001 was a Monday. 26 January 1950 is 18603 days before it, leaving 4 odd day(s) backwards from Monday, so it was a Thursday." },
+    { q: "Statements: All engineers are flowers. All flowers are boxes. Conclusions: I. Some engineers are not boxes. II. All boxes are flowers.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 3, explanation: "All engineers are boxes, so I is false; 'All flowers are boxes' cannot be reversed, so II is not certain." },
+    { q: "Statement: The commanding officer ordered an extra hour of physical training every day. Assumptions: I. Extra training will improve fitness. II. The soldiers are completely unfit.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0, explanation: "The order assumes more training helps (I); it does not imply the soldiers are completely unfit." },
+    { q: "A cube of side 6 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have exactly three faces painted?", options: ["8", "48", "96", "64"], answer: 0, explanation: "There are 216 small cubes; exactly three faces painted: only the 8 corner cubes." },
+    { q: "How many letters are there between B and Z in the English alphabet?", options: ["26", "24", "23", "25"], answer: 2, explanation: "B is 2 and Z is 26; the letters strictly between them number 26 − 2 − 1 = 23." },
+    { q: "If the letters of the word LANGUAGE are arranged in alphabetical order, how many letters remain in the same position?", options: ["4", "3", "1", "2"], answer: 3, explanation: "Alphabetical order: AAEGGLNU. Comparing with LANGUAGE, 2 letters (A, G) stay in place." },
+  ],
+};
+
+export default test;

@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-93",
+  title: "OIR Test 93",
+  durationMinutes: 20,
+  releaseAt: "2027-01-10T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 9, 27, 81, 243, ?", options: ["720", "739", "972", "729"], answer: 3, explanation: "Here each term is 3 times the previous term. Next: 243 × 3 = 729." },
+    { q: "Find the next number: 6, 15, 33, 69, 141, ?", options: ["279", "285", "287", "282"], answer: 1, explanation: "Here each term is 2 times the previous term plus 3. Next: 141 × 2 + 3 = 285." },
+    { q: "Find the next number: 10, 30, 25, 75, 70, 210, ?", options: ["203", "630", "206", "205"], answer: 3, explanation: "Here the operations alternate: × 3, − 5, × 3, − 5 and so on. Next: 210 − 5 = 205." },
+    { q: "Find the missing number: 21, 22, 25, ?, 37, 46", options: ["29", "31", "32", "30"], answer: 3, explanation: "Here the differences added are 1, 3, 5, 7, 9 — each 2 more than the last, so the missing term is 30." },
+    { q: "Find the next letter: A, E, G, K, M, ?", options: ["R", "Q", "S", "P"], answer: 1, explanation: "By alphabet positions (1, 5, 7, 11, 13), the letters move alternately +4 and +2: M(13) + 4 = Q(17)." },
+    { q: "Find the next pair: SS, TQ, UO, VM, ?", options: ["XK", "WK", "VJ", "WJ"], answer: 1, explanation: "The first letters move 1 forward each time and the second letters move 2 back: next is WK." },
+    { q: "Cage : Bird :: Aquarium : ?", options: ["Glass", "Plants", "Fish", "Water"], answer: 2, explanation: "A bird is kept in a cage; a fish is kept in an aquarium." },
+    { q: "7 : 52 :: 12 : ?", options: ["168", "147", "145", "132"], answer: 1, explanation: "7 → 7² + 3 = 52; likewise 12 → 12² + 3 = 147." },
+    { q: "Kaveri : Talakaveri :: Krishna : ?", options: ["Gangotri", "Trimbakeshwar", "Amarkantak", "Mahabaleshwar"], answer: 3, explanation: "The Kaveri rises at Talakaveri; the Krishna rises near Mahabaleshwar." },
+    { q: "Which one does not belong with the others?", options: ["Vitamin C", "Vitamin D", "Vitamin K", "Vitamin A"], answer: 0, explanation: "Vitamin C is water-soluble; the others are fat-soluble." },
+    { q: "Which pair does not belong with the others?", options: ["2 – 8", "7 – 343", "5 – 125", "9 – 728"], answer: 3, explanation: "In the other pairs the second number is n³, where n is the first (e.g. 7³ = 343); but 9³ = 729, not 728." },
+    { q: "Choose the one word for: \"A person trained to travel in space\"", options: ["Pilot", "Aviator", "Astronaut", "Mariner"], answer: 2, explanation: "Astronaut: a person trained to travel in space." },
+    { q: "If DANCER is written as 23-26-13-24-22-9, how is NATION written in the same code?", options: ["12-26-7-18-12-13", "13-26-7-18-12-13", "14-1-20-9-15-14", "13-26-7-18-12-14"], answer: 1, explanation: "Each letter is replaced by its position in the reversed alphabet (A = 26, B = 25, …, Z = 1), so NATION → 13-26-7-18-12-13." },
+    { q: "In a code language, 'proud students climb' is written as 'ja ma bu', 'bold students' is written as 'bu mu' and 'climb today' is written as 'ja li'. Which word is coded as 'li'?", options: ["climb", "bold", "today", "proud"], answer: 2, explanation: "'students' is common to the first two sentences, so students = bu; 'climb' is common to the first and third, so climb = ja. The other code in the third sentence, li, means 'today'." },
+    { q: "If '−' means '+', '÷' means '−', '+' means '×' and '×' means '÷', what is the value of 15 ÷ 40 × 5 − 6 + 7?", options: ["56", "35", "39", "49"], answer: 3, explanation: "Replacing the symbols gives 15 − 40 ÷ 5 + 6 × 7; following BODMAS, this equals 49." },
+    { q: "Chanda and her husband Firoz have only one son, Gautam. Chanda is the grandmother of Dev, and Dev's father is Eklavya. How is Eklavya related to Chanda?", options: ["Brother", "Son-in-law", "Son", "Nephew"], answer: 1, explanation: "Chanda's only son is Gautam, so Dev's father Eklavya is not her son; Chanda must be Dev's maternal grandmother, making Eklavya her son-in-law." },
+    { q: "Pointing to a man, Anita said, \"He is the only brother of my son's wife.\" How is the man related to Anita?", options: ["Brother-in-law", "Son-in-law", "Daughter-in-law's brother", "Nephew"], answer: 2, explanation: "Anita's son's wife is her daughter-in-law; the man is her brother." },
+    { q: "Starting from his house, Rahul walks 6 km towards the east, turns left and walks 3 km, turns left and walks 12 km, finally turns right and walks 15 km. In which direction is he now from his house?", options: ["South-West", "North-West", "North-East", "South-East"], answer: 1, explanation: "He ends up 6 km west and 18 km north of his house, so he is to the North-West of his house." },
+    { q: "If South is called West, and all other directions are renamed in the same way, what will West be called?", options: ["North", "East", "South", "West"], answer: 0, explanation: "South → West is a rotation of 90° clockwise; rotating West by the same amount gives North." },
+    { q: "In a row of 30 children, Suresh is 8th from the left. Ravi is 9th to the right of Suresh. What is Ravi's position from the right end?", options: ["16th", "14th", "13th", "15th"], answer: 1, explanation: "Ravi is 17th from the left, so from the right he is 30 − 17 + 1 = 14." },
+    { q: "Sita is richer than Farhan. Ravi is poorer than Asha. Farhan is richer than Isha. Asha is poorer than Isha. Who is the poorest?", options: ["Farhan", "Sita", "Isha", "Ravi"], answer: 3, explanation: "The order from richest to poorest is Sita > Farhan > Isha > Asha > Ravi, so the poorest is Ravi." },
+    { q: "The sum of 4 consecutive even numbers is 316. What is the largest of them?", options: ["84", "79", "82", "80"], answer: 2, explanation: "The middle value is 316/4 = 79; the numbers are 76, 78, 80, 82, so the largest is 82." },
+    { q: "The average of 10 numbers is 38. When one number is removed, the average of the rest becomes 40. Which number was removed?", options: ["20", "10", "38", "30"], answer: 0, explanation: "Total before = 10 × 38 = 380; after = 9 × 40 = 360; removed = 20." },
+    { q: "What is the angle between the hands of a clock at 2:10?", options: ["35°", "5°", "0°", "20°"], answer: 1, explanation: "Angle = |30 × 2 − 5.5 × 10| = 5°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "26 September 2024 is a Thursday. What day of the week is 22 July 2025?", options: ["Wednesday", "Tuesday", "Thursday", "Monday"], answer: 1, explanation: "22 July 2025 is 299 days after 26 September 2024. 299 = 7 × 42 + 5, so the day shifts 5 forward: Tuesday." },
+    { q: "Statements: Some watches are not clouds. All clouds are bats. Conclusions: I. Some watches are not bats. II. Some bats are clouds.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "All clouds are bats, so some bats are clouds (II); the watches that are not clouds may still be bats, so I is uncertain." },
+    { q: "Statement: Some shopkeepers are selling adulterated food. Courses of action: I. Food inspectors should carry out surprise checks. II. People should be taught how to spot adulteration. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "Enforcement (I) and public awareness (II) both tackle the problem." },
+    { q: "A cube of side 6 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have exactly one face painted?", options: ["96", "64", "8", "48"], answer: 0, explanation: "There are 216 small cubes; exactly one face painted: 6 faces × (6 − 2)² = 96." },
+    { q: "Which letter is 8th to the right of the 4th letter from the left in the English alphabet?", options: ["L", "K", "J", "M"], answer: 0, explanation: "The 4th letter from the left is D; 8 places to its right is the 12th letter, L." },
+    { q: "If the following words are arranged in dictionary order, which word comes third? Battery, Bunker, Biology, Bread", options: ["Bunker", "Biology", "Bread", "Battery"], answer: 2, explanation: "In dictionary order: Battery, Biology, Bread, Bunker." },
+  ],
+};
+
+export default test;

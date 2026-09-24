@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-87",
+  title: "OIR Test 87",
+  durationMinutes: 20,
+  releaseAt: "2027-01-03T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 2, 6, 14, 30, 62, ?", options: ["124", "158", "127", "126"], answer: 3, explanation: "Here the differences 4, 8, 16, 32, 64 are each 2 times the previous difference. Next: 62 + 64 = 126." },
+    { q: "Find the next number: 3, 11, 35, 107, ?", options: ["319", "323", "321", "326"], answer: 1, explanation: "Here each term is 3 times the previous term plus 2. Next: 107 × 3 + 2 = 323." },
+    { q: "Find the next number: 15, 22, 30, 39, 49, ?", options: ["61", "63", "60", "59"], answer: 2, explanation: "Here the differences added are 7, 8, 9, 10, 11 — each 1 more than the last. Next: 49 + 11 = 60." },
+    { q: "Find the missing number: 2, 2, 4, ?, 48, 240", options: ["40", "13", "26", "12"], answer: 3, explanation: "Here the multipliers increase by one each step (×1, ×2, ×3, …), so the missing term is 12." },
+    { q: "Find the next letter: I, K, M, O, Q, ?", options: ["R", "T", "S", "U"], answer: 2, explanation: "By alphabet positions (9, 11, 13, 15, 17), each letter is 2 places after the previous one: Q(17) + 2 = S(19)." },
+    { q: "Find the next pair: JE, MI, PM, SQ, ?", options: ["VV", "VU", "WU", "UT"], answer: 1, explanation: "The first letters move 3 forward each time and the second letters move 4 forward: next is VU." },
+    { q: "Oar : Boat :: Pedal : ?", options: ["Bicycle", "Train", "Car", "Aeroplane"], answer: 0, explanation: "An oar propels a boat; a pedal propels a bicycle." },
+    { q: "9 : 720 :: 12 : ?", options: ["1716", "132", "169", "1728"], answer: 0, explanation: "9 → 9³ − 9 = 720; likewise 12 → 12³ − 12 = 1716." },
+    { q: "Lotus : National flower :: Banyan : ?", options: ["National flower", "National plant", "National fruit", "National tree"], answer: 3, explanation: "The lotus is India's national flower; the banyan is the national tree." },
+    { q: "Which one does not belong with the others?", options: ["Company", "Fleet", "Platoon", "Section"], answer: 1, explanation: "A fleet is a naval formation; the others are Army sub-units." },
+    { q: "Which number does not belong with the others?", options: ["27", "29", "8", "216"], answer: 1, explanation: "27 = 3³, 216 = 6³, 8 = 2³ are perfect cubes; 29 is not." },
+    { q: "Choose the one word for: \"That which cannot be eaten\"", options: ["Inedible", "Invaluable", "Indelible", "Inaudible"], answer: 0, explanation: "Inedible: that which cannot be eaten." },
+    { q: "If ARROW is coded as YPPMU, how is TENNIS coded?", options: ["RCLKGQ", "SINNET", "SCLLGQ", "RCLLGQ"], answer: 3, explanation: "In this code each letter is moved 2 places back in the alphabet, so TENNIS becomes RCLLGQ." },
+    { q: "In a code language, 'young soldiers work' is written as 'ka ja yo', 'loyal soldiers' is written as 'ja ho' and 'work fast' is written as 'ka po'. Which word is coded as 'yo'?", options: ["young", "loyal", "fast", "soldiers"], answer: 0, explanation: "'soldiers' is common to the first two sentences, so soldiers = ja; 'work' is common to the first and third, so work = ka. The remaining code in the first sentence, yo, means 'young'." },
+    { q: "If '÷' means '+', '×' means '−', '+' means '×' and '−' means '÷', what is the value of 7 ÷ 5 + 11 × 7 − 7?", options: ["68", "61", "59", "47"], answer: 1, explanation: "Replacing the symbols gives 7 + 5 × 11 − 7 ÷ 7; following BODMAS, this equals 61." },
+    { q: "Charu is the wife of Dhiraj. Dhiraj's mother is Ela. Ela's only daughter is Garima. How is Garima related to Charu?", options: ["Cousin", "Mother-in-law", "Sister-in-law", "Sister"], answer: 2, explanation: "Garima is the sister of Charu's husband Dhiraj, so she is Charu's sister-in-law." },
+    { q: "Pointing to a woman, Paras said, \"She is the daughter of my mother's only sister.\" How is the woman related to Paras?", options: ["Cousin", "Aunt", "Niece", "Sister"], answer: 0, explanation: "She is the daughter of Paras's maternal aunt, so she is his cousin." },
+    { q: "Starting from his house, Dev walks 5 km towards the north, turns left and walks 4 km, finally turns left and walks 1 km. In which direction is he now from his house?", options: ["North-East", "South-East", "North-West", "South-West"], answer: 2, explanation: "He ends up 4 km west and 4 km north of his house, so he is to the North-West of his house." },
+    { q: "A man is facing South-West. He turns 90° anticlockwise, then 90° anticlockwise, then 180° anticlockwise. Which direction is he facing now?", options: ["South-West", "North-West", "North-East", "South-East"], answer: 0, explanation: "The turns cancel out completely from South-West, so he faces South-West." },
+    { q: "Arjun is 11th from the top and 5th from the bottom in his class. How many students are there in the class?", options: ["13", "16", "14", "15"], answer: 3, explanation: "Total = 11 + 5 − 1 = 15 (Arjun is counted in both ranks)." },
+    { q: "Ravi is younger than Manoj. Manoj is younger than Esha. Asha is older than Esha. Who is the oldest?", options: ["Manoj", "Esha", "Ravi", "Asha"], answer: 3, explanation: "The order from oldest to youngest is Asha > Esha > Manoj > Ravi, so the oldest is Asha." },
+    { q: "Two trains start at the same time from stations 420 km apart and travel towards each other at 60 km/h and 45 km/h. After how many hours will they meet?", options: ["7", "5", "4", "3"], answer: 2, explanation: "They close the gap at 60 + 45 = 105 km/h, so they meet after 420/105 = 4 hours." },
+    { q: "At a meeting, each of the 10 officers shakes hands exactly once with every other officer. How many handshakes take place?", options: ["55", "90", "100", "45"], answer: 3, explanation: "Handshakes = n(n − 1)/2 = 10 × 9/2 = 45." },
+    { q: "Through how many degrees does the hour hand of a clock turn from 5:10 to 8:00?", options: ["100°", "85°", "115°", "300°"], answer: 1, explanation: "The hour hand turns 0.5° per minute; 170 minutes × 0.5° = 85°." },
+    { q: "Which year will have exactly the same calendar as 2047?", options: ["2057", "2058", "2051", "2059"], answer: 1, explanation: "A year has the same calendar when it starts on the same weekday and is also an ordinary year. Counting odd days (1 per ordinary year, 2 per leap year) from 2047 until they total a multiple of 7 gives 2058." },
+    { q: "Statements: All pens are lamps. Some lamps are athletes. Conclusions: I. Some pens are athletes. II. Some athletes are lamps.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "Some lamps are athletes, so some athletes are lamps (II); the lamps that are athletes need not include any pens, so I is uncertain." },
+    { q: "Statement: The number of students in the college has doubled, but the library still has the same number of books. Courses of action: I. More books should be bought for the library. II. Half the students should be sent away. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Buying books meets the need (I); sending students away is not a sensible solution." },
+    { q: "How many cubes of side 2 cm can be cut from a solid cube of side 8 cm?", options: ["256", "16", "12", "64"], answer: 3, explanation: "(8/2)³ = 4³ = 64." },
+    { q: "Which letter is 3rd to the right of the 9th letter from the left in the English alphabet?", options: ["J", "L", "K", "M"], answer: 1, explanation: "The 9th letter from the left is I; 3 places to its right is the 12th letter, L." },
+    { q: "If the following words are arranged in dictionary order, which word comes last? Tank, Tomato, Tennis, Tunnel", options: ["Tennis", "Tomato", "Tunnel", "Tank"], answer: 2, explanation: "In dictionary order: Tank, Tennis, Tomato, Tunnel." },
+  ],
+};
+
+export default test;

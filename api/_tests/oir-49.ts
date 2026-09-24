@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-49",
+  title: "OIR Test 49",
+  durationMinutes: 20,
+  releaseAt: "2026-11-08T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 5, 15, 16, 48, 49, 147, ?", options: ["441", "148", "146", "149"], answer: 1, explanation: "Here the operations alternate: × 3, + 1, × 3, + 1 and so on. Next: 147 + 1 = 148." },
+    { q: "Find the next number: 12, 83, 18, 80, 24, 77, 30, ?", options: ["36", "77", "71", "74"], answer: 3, explanation: "Here two series alternate: 12, 18, 24, … (+6) and 83, 80, 77, … (-3). Next: 77 − 3 = 74." },
+    { q: "Find the next number: 3, 2, 3, 8, 31, ?", options: ["123", "186", "154", "155"], answer: 2, explanation: "Here the multipliers increase by one each step (×1, ×2, ×3, …), then subtract 1. Next: 31 × 5 − 1 = 154." },
+    { q: "Find the missing number: 22, 23, ?, 37, 50, 67", options: ["26", "30", "28", "32"], answer: 2, explanation: "Here the differences added are 1, 5, 9, 13, 17 — each 4 more than the last, so the missing term is 28." },
+    { q: "Find the next letter: S, P, M, J, G, ?", options: ["C", "D", "F", "E"], answer: 1, explanation: "By alphabet positions (19, 16, 13, 10, 7), each letter is 3 places before the previous one: G(7) − 3 = D(4)." },
+    { q: "Find the next pair: FL, GM, HN, IO, ?", options: ["KP", "JP", "JQ", "IO"], answer: 1, explanation: "The first letters move 1 forward each time and the second letters move 1 forward: next is JP." },
+    { q: "Numismatics : Coins :: Philately : ?", options: ["Paintings", "Books", "Stamps", "Maps"], answer: 2, explanation: "Numismatics is the study/collection of coins; philately is that of stamps." },
+    { q: "8 : 63 :: 3 : ?", options: ["8", "24", "12", "28"], answer: 0, explanation: "8 → 8² − 1 = 63; likewise 3 → 3² − 1 = 8." },
+    { q: "Turkey : Ankara :: Myanmar : ?", options: ["Dhaka", "Yangon", "Naypyidaw", "Mandalay"], answer: 2, explanation: "Ankara is the capital of Turkey; Naypyidaw is the capital of Myanmar." },
+    { q: "Which one does not belong with the others?", options: ["Silver", "Diamond", "Gold", "Copper"], answer: 1, explanation: "Diamond is a form of carbon, a non-metal; the others are metals." },
+    { q: "Which number does not belong with the others?", options: ["39", "59", "53", "73"], answer: 0, explanation: "39 = 3 × 13 is not prime; the others are prime numbers." },
+    { q: "Choose the word most opposite in meaning to INFERIOR.", options: ["Superior", "Lesser", "Poor", "Lower"], answer: 0, explanation: "The opposite of inferior is superior; the other options are similar in meaning or unrelated." },
+    { q: "If MARKET is coded as UFLSBN, how is ENGINE coded?", options: ["FOKHOF", "FOJHOF", "FMHHOD", "FNJHOF"], answer: 1, explanation: "In this code the letters are reversed and each is moved 1 place forward, so ENGINE becomes FOJHOF." },
+    { q: "In a code language, 'strong boys swim' is written as 'ta ne tu', 'brave boys' is written as 'li tu' and 'swim fast' is written as 'su ta'. Which word is coded as 'su'?", options: ["fast", "brave", "boys", "swim"], answer: 0, explanation: "'boys' is common to the first two sentences, so boys = tu; 'swim' is common to the first and third, so swim = ta. The other code in the third sentence, su, means 'fast'." },
+    { q: "If '÷' means '+', '+' means '−', '−' means '×' and '×' means '÷', what is the value of 5 − 2 + 10 × 2 ÷ 5?", options: ["13", "10", "0", "15"], answer: 1, explanation: "Replacing the symbols gives 5 × 2 − 10 ÷ 2 + 5; following BODMAS, this equals 10." },
+    { q: "X is the daughter of Y. Z is the brother of Y. A is the son of Z. How is A related to X?", options: ["Brother", "Cousin", "Uncle", "Nephew"], answer: 1, explanation: "A's father Z and X's parent Y are siblings, so A and X are cousins." },
+    { q: "Pointing to a boy, Shalini said, \"His father is my father's son-in-law, and I am my father's only child.\" How is the boy related to Shalini?", options: ["Cousin", "Son", "Brother", "Nephew"], answer: 1, explanation: "As the only child, Shalini is the one married to her father's son-in-law; the boy's father is her husband, so the boy is her son." },
+    { q: "Starting from his house, Rohit walks 45 m towards the north, turns right and walks 15 m, finally turns left and walks 15 m. In which direction is he now from his house?", options: ["North-West", "South-West", "South-East", "North-East"], answer: 3, explanation: "He ends up 15 m east and 60 m north of his house, so he is to the North-East of his house." },
+    { q: "One evening, just before sunset, Sanjay was standing in a field. His shadow fell exactly behind him. Which direction was he facing?", options: ["East", "West", "South", "North"], answer: 1, explanation: "In the evening the sun is in the west, so shadows fall to the east. With the shadow (East) behind him, he must be facing West." },
+    { q: "In a row of 30 students, Arjun is 14th from the left end and Dev is 14th from the right end. How many students are there between them?", options: ["3", "12", "4", "2"], answer: 3, explanation: "Arjun and Dev with everyone to their outer sides account for 14 + 14 = 28 students, so 30 − 28 = 2 are between them." },
+    { q: "Ravi is poorer than Sita. Hari is poorer than Kiran. Om is poorer than Ravi. Hari is richer than Sita. Who is the second richest?", options: ["Ravi", "Hari", "Sita", "Kiran"], answer: 1, explanation: "The order from richest to poorest is Kiran > Hari > Sita > Ravi > Om, so the second richest is Hari." },
+    { q: "The sum of the present ages of a father and his son is 71 years. 8 years ago, the father was 4 times as old as the son. What is the son's present age?", options: ["19 years", "17 years", "21 years", "27 years"], answer: 0, explanation: "Let the son be x: (71 − x − 8) = 4(x − 8) gives x = 19; the father is 52." },
+    { q: "A train 100 m long passes a signal post in 10 seconds. What is its speed in km/h?", options: ["10", "36", "45", "27"], answer: 1, explanation: "Speed = 100/10 = 10 m/s = 10 × 18/5 = 36 km/h." },
+    { q: "Through how many degrees does the hour hand of a clock turn from 5:00 to 7:30?", options: ["75°", "105°", "90°", "180°"], answer: 0, explanation: "The hour hand turns 0.5° per minute; 150 minutes × 0.5° = 75°." },
+    { q: "Which year will have exactly the same calendar as 2045?", options: ["2049", "2052", "2051", "2050"], answer: 2, explanation: "A year has the same calendar when it starts on the same weekday and is also an ordinary year. Counting odd days (1 per ordinary year, 2 per leap year) from 2045 until they total a multiple of 7 gives 2051." },
+    { q: "Statements: Some trucks are writers. All trucks are lamps. Conclusions: I. Some lamps are writers. II. Some writers are lamps.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "The trucks that are writers are also lamps, so some lamps are writers (I) and some writers are lamps (II)." },
+    { q: "Statement: Every member of the unit has completed the course. Ravi is a member of the unit. Conclusions: I. Ravi has completed the course. II. Ravi is an officer.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Ravi is a member, so he has completed the course (I); nothing says he is an officer." },
+    { q: "A cube of side 4 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have at least two faces painted?", options: ["56", "32", "24", "8"], answer: 1, explanation: "There are 64 small cubes; at least two faces painted: corners + edges = 8 + 24 = 32." },
+    { q: "Which letter is exactly midway between F and J in the English alphabet?", options: ["J", "H", "I", "G"], answer: 1, explanation: "F = 6 and J = 10; the midpoint is 8 = H." },
+    { q: "How many pairs of letters in the word PERIMETER have as many letters between them in the word as there are between them in the English alphabet (in either direction)?", options: ["5", "4", "3", "1"], answer: 2, explanation: "The pairs are PR, IE, TR — 3 in all." },
+  ],
+};
+
+export default test;

@@ -1,0 +1,41 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-12",
+  title: "OIR Test 12",
+  durationMinutes: 20,
+  questions: [
+    { q: "Find the next number: 66, 83, 102, 123, 146, ?", options: ["172", "170", "198", "171"], answer: 3, explanation: "Here the terms are n² + 2 for consecutive n. Next: 13² + 2 = 171." },
+    { q: "Find the next number: 5, 9, 14, 23, 37, 60, 97, ?", options: ["194", "158", "157", "134"], answer: 2, explanation: "Here each term is the sum of the previous two terms. Next: 60 + 97 = 157." },
+    { q: "Find the next number: 23, 27, 35, 39, 47, ?", options: ["58", "51", "61", "59"], answer: 3, explanation: "Here the terms are 2p + 1 for consecutive primes p. Next: 2 × 29 + 1 = 59." },
+    { q: "Find the missing number: 161, 157, 149, ?, 121, 101", options: ["127", "133", "137", "135"], answer: 2, explanation: "Here the differences subtracted are 4, 8, 12, 16, 20 — each 4 more than the last, so the missing term is 137." },
+    { q: "Find the next letter: H, K, M, P, R, ?", options: ["W", "U", "T", "V"], answer: 1, explanation: "By alphabet positions (8, 11, 13, 16, 18), the letters move alternately +3 and +2: R(18) + 3 = U(21)." },
+    { q: "Find the next pair: OU, PT, QS, RR, ?", options: ["SP", "TQ", "RP", "SQ"], answer: 3, explanation: "The first letters move 1 forward each time and the second letters move 1 back: next is SQ." },
+    { q: "Pen : Write :: Knife : ?", options: ["Hold", "Sharpen", "Cut", "Cook"], answer: 2, explanation: "A pen is used to write; a knife is used to cut." },
+    { q: "4 : 16 :: 3 : ?", options: ["6", "9", "27", "12"], answer: 1, explanation: "4 → 4² = 16; likewise 3 → 3² = 9." },
+    { q: "Flight Lieutenant : Air Force :: Lieutenant Commander : ?", options: ["Navy", "Army", "Air Force", "Coast Guard"], answer: 0, explanation: "Flight Lieutenant is an Air Force rank; Lieutenant Commander is a Navy rank." },
+    { q: "Which one does not belong with the others?", options: ["Oxygen", "Iron", "Hydrogen", "Nitrogen"], answer: 1, explanation: "Iron is a solid metal; the others are gases." },
+    { q: "Which number does not belong with the others?", options: ["197", "196", "289", "16"], answer: 0, explanation: "289 = 17², 16 = 4², 196 = 14² are perfect squares; 197 is not." },
+    { q: "Choose the word most similar in meaning to BENEVOLENT.", options: ["Kind", "Lazy", "Cruel", "Proud"], answer: 0, explanation: "Benevolent means kind." },
+    { q: "If BOOTS is coded as CNPST, how is PILOT coded?", options: ["QHMNU", "QKOSY", "QIMMU", "RHMNU"], answer: 0, explanation: "In this code letters are moved alternately one place forward and one place back, so PILOT becomes QHMNU." },
+    { q: "In a code language, 'smart doctors sail' is written as 've mu da', 'strong doctors' is written as 'da ka' and 'sail fast' is written as 'tu ve'. What is the code for 'strong'?", options: ["ve", "ka", "tu", "da"], answer: 1, explanation: "'doctors' is common to the first two sentences, so doctors = da; 'sail' is common to the first and third, so sail = ve. The other code in the second sentence, ka, means 'strong'." },
+    { q: "If A = 26, B = 25, …, Z = 1 and MEDAL = 100 (the sum of its letter values), what is POTATO?", options: ["75", "87", "77", "86"], answer: 0, explanation: "POTATO = 11 + 12 + 7 + 26 + 7 + 12 = 75." },
+    { q: "X is the son of Y. Y is the daughter of Z. How is Z related to X?", options: ["Grandmother", "Grandfather or grandmother", "Grandfather", "Uncle"], answer: 1, explanation: "Z is Y's parent and Y is X's mother, so Z is X's grandparent — Z's gender is not given." },
+    { q: "Pointing to a boy, Kavita said, \"He is the son of the only son of my father.\" How is the boy related to Kavita?", options: ["Nephew", "Cousin", "Brother", "Son"], answer: 0, explanation: "The only son of Kavita's father is her brother; his son is Kavita's nephew." },
+    { q: "Starting from his house, Vikram walks 8 km towards the north, turns right and walks 14 km, finally turns right and walks 14 km. In which direction is he now from his house?", options: ["South-East", "North-West", "South-West", "North-East"], answer: 0, explanation: "He ends up 14 km east and 6 km south of his house, so he is to the South-East of his house." },
+    { q: "A man is facing North-East. He turns 135° anticlockwise, then 90° anticlockwise. Which direction is he facing now?", options: ["West", "South", "North", "East"], answer: 1, explanation: "The net turn is 135° clockwise from North-East, so he faces South." },
+    { q: "In a row, Aditya is 9th from the left and Dev is 19th from the right. When they interchange places, Aditya becomes 22nd from the left. How many people are in the row?", options: ["41", "40", "30", "42"], answer: 1, explanation: "After the swap Aditya takes Dev's old place, which is 22nd from the left and 19th from the right, so total = 22 + 19 − 1 = 40." },
+    { q: "Lata is heavier than Isha. Pooja is heavier than Ravi. Dinesh is heavier than Pooja. Ravi is heavier than Lata. Who is the lightest?", options: ["Dinesh", "Pooja", "Ravi", "Isha"], answer: 3, explanation: "The order from heaviest to lightest is Dinesh > Pooja > Ravi > Lata > Isha, so the lightest is Isha." },
+    { q: "The sum of the present ages of a father and his son is 68 years. 4 years ago, the father was 5 times as old as the son. What is the son's present age?", options: ["18 years", "16 years", "12 years", "14 years"], answer: 3, explanation: "Let the son be x: (68 − x − 4) = 5(x − 4) gives x = 14; the father is 54." },
+    { q: "A bag contains an equal number of ₹1, ₹2 and ₹5 coins worth ₹256 in all. How many of each are there?", options: ["30", "22", "96", "32"], answer: 3, explanation: "Each set of one of each is worth ₹8; 256/8 = 32." },
+    { q: "What is the angle between the hands of a clock at 6:34?", options: ["22°", "37°", "24°", "7°"], answer: 3, explanation: "Angle = |30 × 6 − 5.5 × 34| = 7°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "20 January 2027 is a Wednesday. What day of the week is 10 March 2026?", options: ["Tuesday", "Wednesday", "Monday", "Thursday"], answer: 0, explanation: "10 March 2026 is 316 days before 20 January 2027. 316 = 7 × 45 + 1, so the day shifts 1 back: Tuesday." },
+    { q: "Statements: No cup is a flower. All flowers are stones. Conclusions: I. Some stones are not cups. II. No cup is a stone.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "All flowers are stones and none of them is a cup, so some stones are not cups (I); some cups could still be stones, so II is uncertain." },
+    { q: "Statement: The Army has invited applications from young graduates for the Short Service Commission. Assumptions: I. Suitable graduates who want to join are available. II. The Army already has more officers than it needs.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0, explanation: "Inviting applications assumes eligible candidates will apply (I); a recruitment drive suggests a need for officers, not a surplus." },
+    { q: "A cube of side 8 cm is painted on two adjacent faces only and then cut into 1 cm cubes. How many small cubes have no paint on them?", options: ["392", "8", "112", "216"], answer: 0, explanation: "Each painted face has 8² = 64 cubes; the 8 cubes on the shared edge have two painted faces. Exactly one face: 2 × (64 − 8) = 112. Painted cubes total 120, so 392 have no paint." },
+    { q: "Which letter is 6th to the right of the 8th letter from the left in the English alphabet?", options: ["L", "N", "O", "M"], answer: 1, explanation: "The 8th letter from the left is H; 6 places to its right is the 14th letter, N." },
+    { q: "If the following words are arranged in dictionary order, which word comes third? Palace, Pencil, Pillow, Player", options: ["Pillow", "Player", "Palace", "Pencil"], answer: 0, explanation: "In dictionary order: Palace, Pencil, Pillow, Player." },
+  ],
+};
+
+export default test;

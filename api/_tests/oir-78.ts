@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-78",
+  title: "OIR Test 78",
+  durationMinutes: 20,
+  releaseAt: "2026-12-20T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 6, 12, 36, 144, 720, ?", options: ["5040", "3600", "4320", "4321"], answer: 2, explanation: "Here the multipliers increase by one each step (×2, ×3, ×4, …). Next: 720 × 6 = 4320." },
+    { q: "Find the next number: 8, 13, 23, 43, 83, ?", options: ["164", "163", "203", "166"], answer: 1, explanation: "Here the differences 5, 10, 20, 40, 80 are each 2 times the previous difference. Next: 83 + 80 = 163." },
+    { q: "Find the next number: 2, 3, 2, 7, 12, 21, 40, ?", options: ["52", "80", "62", "73"], answer: 3, explanation: "Here each term is the sum of the previous three terms. Next: 12 + 21 + 40 = 73." },
+    { q: "Find the missing number: 2048, 512, 128, ?, 8", options: ["68", "35", "104", "32"], answer: 3, explanation: "Here each term is the previous term divided by 4, so the missing term is 32." },
+    { q: "Find the next letter: J, K, P, Q, V, ?", options: ["W", "Y", "X", "V"], answer: 0, explanation: "By alphabet positions (10, 11, 16, 17, 22), the letters move alternately +1 and +5: V(22) + 1 = W(23)." },
+    { q: "Find the next group: DEF, IJK, NOP, ?", options: ["TUV", "RST", "STU", "SUT"], answer: 2, explanation: "Each group is three consecutive letters, and 2 letters are skipped between groups: after NOP comes STU." },
+    { q: "Iron : Rusting :: Silver : ?", options: ["Tarnishing", "Freezing", "Melting", "Glowing"], answer: 0, explanation: "Iron rusts on exposure to air; silver tarnishes." },
+    { q: "10 : 1001 :: 13 : ?", options: ["170", "2198", "196", "172"], answer: 1, explanation: "10 → 10³ + 1 = 1001; likewise 13 → 13³ + 1 = 2198." },
+    { q: "Gitanjali : Tagore :: The Discovery of India : ?", options: ["Sardar Patel", "Jawaharlal Nehru", "B.R. Ambedkar", "Mahatma Gandhi"], answer: 1, explanation: "Tagore wrote Gitanjali; Nehru wrote The Discovery of India." },
+    { q: "Which one does not belong with the others?", options: ["Panipat", "Plassey", "Haldighati", "Sabarmati"], answer: 3, explanation: "Sabarmati is a river and ashram; the others are famous battlefields." },
+    { q: "Which pair does not belong with the others?", options: ["6 – 215", "7 – 98", "9 – 162", "8 – 128"], answer: 0, explanation: "In the other pairs the second number is 2n², where n is the first (e.g. 2 × 8² = 128); but 2 × 6² = 72, not 215." },
+    { q: "Choose the one word for: \"A shed where aircraft are kept\"", options: ["Hangar", "Garage", "Dock", "Arsenal"], answer: 0, explanation: "Hangar: a shed where aircraft are kept." },
+    { q: "If SAILOR is written as 19-1-9-12-15-18, how is LAWYER written in the same code?", options: ["15-26-4-2-22-9", "12-1-23-25-5-17", "12-1-23-25-5-19", "12-1-23-25-5-18"], answer: 3, explanation: "Each letter is replaced by its position in the alphabet (A = 1, …, Z = 26), so LAWYER → 12-1-23-25-5-18." },
+    { q: "In a code language, 'quick boys swim' is written as 'si bu su', 'strong boys' is written as 'si ka' and 'swim together' is written as 'fe bu'. What is the code for 'quick'?", options: ["su", "bu", "ka", "si"], answer: 0, explanation: "'boys' is common to the first two sentences, so boys = si; 'swim' is common to the first and third, so swim = bu. The remaining code in the first sentence, su, means 'quick'." },
+    { q: "If A = 1, B = 2, …, Z = 26 and MOTOR = 81 (the sum of its letter values), what is PATROL?", options: ["85", "82", "98", "80"], answer: 1, explanation: "PATROL = 16 + 1 + 20 + 18 + 15 + 12 = 82." },
+    { q: "Parth's paternal grandfather is Raghav. Raghav's only daughter is Sneha. How is Sneha related to Parth?", options: ["Maternal aunt", "Mother", "Paternal aunt", "Grandmother"], answer: 2, explanation: "Parth's father is Raghav's son; Raghav's daughter Sneha is his sister, so she is Parth's paternal aunt." },
+    { q: "Pointing to a woman, Aakash said, \"Her son's sister is my daughter.\" How is the woman related to Aakash?", options: ["Mother", "Daughter", "Wife", "Sister"], answer: 2, explanation: "The woman's daughter is Aakash's daughter, so the woman is Aakash's wife." },
+    { q: "Starting from his house, Yash walks 11 km towards the west, turns right and walks 11 km, finally turns left and walks 8 km. In which direction is he now from his house?", options: ["South-East", "North-East", "North-West", "South-West"], answer: 2, explanation: "He ends up 19 km west and 11 km north of his house, so he is to the North-West of his house." },
+    { q: "A man is facing North. He turns 135° clockwise, then 135° anticlockwise, then 135° clockwise. Which direction is he facing now?", options: ["North-West", "South-West", "South-East", "North-East"], answer: 2, explanation: "The net turn is 135° clockwise from North, so he faces South-East." },
+    { q: "Nikhil is 28th from the top and 12th from the bottom in his class. How many students are there in the class?", options: ["41", "40", "39", "38"], answer: 2, explanation: "Total = 28 + 12 − 1 = 39 (Nikhil is counted in both ranks)." },
+    { q: "Lata is taller than Dinesh. Gita is taller than Bina. Dinesh is taller than Jatin. Jatin is taller than Gita. Who is the second tallest?", options: ["Lata", "Dinesh", "Jatin", "Gita"], answer: 1, explanation: "The order from tallest to shortest is Lata > Dinesh > Jatin > Gita > Bina, so the second tallest is Dinesh." },
+    { q: "A shopkeeper marks his goods 20% above the cost price and then gives a discount of 10%. What is his net profit or loss?", options: ["30% profit", "8% profit", "8% loss", "10% profit"], answer: 1, explanation: "On a cost of ₹100 the marked price is ₹120; after 10% off it sells for ₹108, a 8% profit." },
+    { q: "The sum of 4 consecutive even numbers is 84. What is the largest of them?", options: ["24", "22", "21", "26"], answer: 0, explanation: "The middle value is 84/4 = 21; the numbers are 18, 20, 22, 24, so the largest is 24." },
+    { q: "What is the angle between the hands of a clock at 9:05?", options: ["117.5°", "120°", "132.5°", "147.5°"], answer: 0, explanation: "Angle = |30 × 9 − 5.5 × 5| = 242.5°, i.e. 360° − that = 117.5°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "How many days are there from 14 August 2026 to 24 September 2026, both days included?", options: ["41", "43", "44", "42"], answer: 3, explanation: "Counting the days in each month from 14 August 2026 to 24 September 2026 inclusive gives 42." },
+    { q: "Statements: No cup is a phone. Some phones are engineers. Conclusions: I. Some engineers are not cups. II. Some cups are engineers.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "The engineers that are phones cannot be cups, so some engineers are not cups (I); nothing links cups and engineers directly, so II is uncertain." },
+    { q: "Statement: The book fair will be held from 5 March to 12 March, both days included. Conclusions: I. The book fair lasts eight days. II. The book fair will be held in the city centre.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "5 to 12 March inclusive is 8 days (I); the venue is not stated." },
+    { q: "A wooden block measuring 5 cm × 5 cm × 5 cm is painted on all faces and cut into 1 cm cubes. How many cubes have exactly two faces painted?", options: ["36", "8", "54", "27"], answer: 0, explanation: "Cubes with exactly two faces painted: 4[(5 − 2) + (5 − 2) + (5 − 2)] = 36." },
+    { q: "Which letter is exactly midway between C and I in the English alphabet?", options: ["H", "E", "F", "G"], answer: 2, explanation: "C = 3 and I = 9; the midpoint is 6 = F." },
+    { q: "How many pairs of letters in the word CAVALRY have as many letters between them in the word as there are between them in the English alphabet (in either direction)?", options: ["0", "2", "1", "3"], answer: 0, explanation: "Checking every pair, none has the same gap in the word as in the alphabet." },
+  ],
+};
+
+export default test;

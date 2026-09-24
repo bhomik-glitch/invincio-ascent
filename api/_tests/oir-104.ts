@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-104",
+  title: "OIR Test 104",
+  durationMinutes: 20,
+  releaseAt: "2027-01-24T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 16, 72, 24, 65, 32, 58, 40, ?", options: ["48", "51", "58", "44"], answer: 1, explanation: "Here two series alternate: 16, 24, 32, … (+8) and 72, 65, 58, … (-7). Next: 58 − 7 = 51." },
+    { q: "Find the next number: 14, 17, 26, 53, 134, ?", options: ["377", "458", "402", "378"], answer: 0, explanation: "Here the differences 3, 9, 27, 81, 243 are each 3 times the previous difference. Next: 134 + 243 = 377." },
+    { q: "Find the next number: 19440, 3240, 540, 90, ?", options: ["75", "16", "15", "13"], answer: 2, explanation: "Here each term is the previous term divided by 6. Next: 90 ÷ 6 = 15." },
+    { q: "Find the missing number: 82, 101, 122, ?, 170, 197", options: ["146", "148", "147", "145"], answer: 3, explanation: "Here the terms are n² + 1 for consecutive n, so the missing term is 145." },
+    { q: "Find the next letter: B, F, K, O, T, ?", options: ["Y", "X", "Z", "W"], answer: 1, explanation: "By alphabet positions (2, 6, 11, 15, 20), the letters move alternately +4 and +5: T(20) + 4 = X(24)." },
+    { q: "Find the next pair: FF, HG, JH, LI, ?", options: ["NJ", "OJ", "NK", "MI"], answer: 0, explanation: "The first letters move 2 forward each time and the second letters move 1 forward: next is NJ." },
+    { q: "Coal : Mine :: Marble : ?", options: ["Field", "Quarry", "Well", "Kiln"], answer: 1, explanation: "Coal is extracted from a mine; marble is extracted from a quarry." },
+    { q: "12 : 168 :: 5 : ?", options: ["130", "24", "35", "36"], answer: 2, explanation: "12 → 12 × 14 = 168; likewise 5 → 5 × 7 = 35." },
+    { q: "Chandrayaan : Moon :: Mangalyaan : ?", options: ["Mars", "Sun", "Venus", "Jupiter"], answer: 0, explanation: "Chandrayaan missions went to the Moon; Mangalyaan went to Mars." },
+    { q: "Which one does not belong with the others?", options: ["Flute", "Harp", "Saxophone", "Trumpet"], answer: 1, explanation: "The harp is a string instrument; the others are wind instruments." },
+    { q: "Which number does not belong with the others?", options: ["362", "25", "361", "121"], answer: 0, explanation: "361 = 19², 121 = 11², 25 = 5² are perfect squares; 362 is not." },
+    { q: "Choose the one word for: \"Fear of heights\"", options: ["Claustrophobia", "Acrophobia", "Agoraphobia", "Hydrophobia"], answer: 1, explanation: "Acrophobia: fear of heights." },
+    { q: "If PATROL is coded as NYRPMJ, how is FOREST coded?", options: ["DMOCQR", "CMPCQR", "TSEROF", "DMPCQR"], answer: 3, explanation: "In this code each letter is moved 2 places back in the alphabet, so FOREST becomes DMPCQR." },
+    { q: "In a code language, 'quick players lead' is written as 'tu ru pi', 'tall players' is written as 'li tu' and 'lead fast' is written as 'pi ze'. Which word is coded as 'ru'?", options: ["fast", "quick", "players", "tall"], answer: 1, explanation: "'players' is common to the first two sentences, so players = tu; 'lead' is common to the first and third, so lead = pi. The remaining code in the first sentence, ru, means 'quick'." },
+    { q: "If A = 1, B = 2, …, Z = 26 and SIGNAL = 62 (the sum of its letter values), what is SYMBOL?", options: ["76", "105", "86", "96"], answer: 2, explanation: "SYMBOL = 19 + 25 + 13 + 2 + 15 + 12 = 86." },
+    { q: "Anand's sister Bindu has a daughter Chitra. Chitra's husband is Dhawal. How is Anand related to Dhawal?", options: ["Brother-in-law", "Wife's maternal uncle", "Wife's paternal uncle", "Father-in-law"], answer: 1, explanation: "Anand is Chitra's maternal uncle, so he is Dhawal's wife's maternal uncle." },
+    { q: "Pointing to a woman, Aditya said, \"Her father's only grandson is my son, and she has no brother.\" How is the woman related to Aditya?", options: ["Wife", "Mother", "Sister-in-law", "Sister"], answer: 0, explanation: "With no brother, her father's grandson must be her own son; he is Aditya's son, so she is Aditya's wife." },
+    { q: "Starting from his house, Vikram walks 12 km towards the south, turns right and walks 8 km, turns right and walks 12 km, finally turns left and walks 2 km. How far and in which direction is he from his house?", options: ["10 km West", "10 km North", "34 km West", "10 km East"], answer: 0, explanation: "He ends up 10 km west and 0 km north of his house, i.e. 10 km West." },
+    { q: "A man is facing South-East. He turns 135° anticlockwise, then 180° clockwise. Which direction is he facing now?", options: ["East", "North", "South", "West"], answer: 2, explanation: "The net turn is 45° clockwise from South-East, so he faces South." },
+    { q: "In a class of 51 students, Sanjay ranks 19th from the top. What is his rank from the bottom?", options: ["35th", "32nd", "34th", "33rd"], answer: 3, explanation: "Rank from bottom = 51 − 19 + 1 = 33." },
+    { q: "Tarun is lighter than Nisha. Isha is heavier than Nisha. Tarun is heavier than Jatin. Who is the second lightest?", options: ["Nisha", "Isha", "Tarun", "Jatin"], answer: 2, explanation: "The order from heaviest to lightest is Isha > Nisha > Tarun > Jatin, so the second lightest is Tarun." },
+    { q: "A bag contains an equal number of ₹2, ₹5 and ₹10 coins worth ₹221 in all. How many of each are there?", options: ["14", "39", "13", "11"], answer: 2, explanation: "Each set of one of each is worth ₹17; 221/17 = 13." },
+    { q: "A train 140 m long running at 90 km/h crosses a platform 110 m long. How many seconds does it take?", options: ["10", "5.6", "16", "4.4"], answer: 0, explanation: "It must cover 140 + 110 = 250 m at 90 km/h = 25 m/s, taking 250/25 = 10 s." },
+    { q: "Through how many degrees does the hour hand of a clock turn from 5:15 to 8:55?", options: ["110°", "140°", "125°", "240°"], answer: 0, explanation: "The hour hand turns 0.5° per minute; 220 minutes × 0.5° = 110°." },
+    { q: "9 March 2029 is a Friday. What day of the week is 21 August 2029?", options: ["Monday", "Thursday", "Wednesday", "Tuesday"], answer: 3, explanation: "21 August 2029 is 165 days after 9 March 2029. 165 = 7 × 23 + 4, so the day shifts 4 forward: Tuesday." },
+    { q: "Statements: All swimmers are books. Some books are bridges. Conclusions: I. Some swimmers are bridges. II. Some bridges are books.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "Some books are bridges, so some bridges are books (II); the books that are bridges need not include any swimmers, so I is uncertain." },
+    { q: "Statement: A new recruit is finding the physical training very hard. Courses of action: I. He should be given extra coaching and built up gradually. II. He should be sent home at once. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Extra coaching helps him improve (I); sending him home immediately is premature." },
+    { q: "A cube of side 5 cm is painted on two adjacent faces only and then cut into 1 cm cubes. How many small cubes have no paint on them?", options: ["80", "5", "54", "40"], answer: 0, explanation: "Each painted face has 5² = 25 cubes; the 5 cubes on the shared edge have two painted faces. Exactly one face: 2 × (25 − 5) = 40. Painted cubes total 45, so 80 have no paint." },
+    { q: "Which letter is 13th to the right of the 9th letter from the left in the English alphabet?", options: ["W", "U", "T", "V"], answer: 3, explanation: "The 9th letter from the left is I; 13 places to its right is the 22nd letter, V." },
+    { q: "If the following words are arranged in dictionary order, which word comes first? Rifle, Runway, Radar, Rabbit", options: ["Rabbit", "Rifle", "Radar", "Runway"], answer: 0, explanation: "In dictionary order: Rabbit, Radar, Rifle, Runway." },
+  ],
+};
+
+export default test;

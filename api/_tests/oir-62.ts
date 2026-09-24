@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-62",
+  title: "OIR Test 62",
+  durationMinutes: 20,
+  releaseAt: "2026-11-29T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 2, 1, 1, 2, 7, ?", options: ["42", "27", "35", "34"], answer: 3, explanation: "Here the multipliers increase by one each step (×1, ×2, ×3, …), then subtract 1. Next: 7 × 5 − 1 = 34." },
+    { q: "Find the next number: 15, 61, 23, 57, 31, 53, 39, ?", options: ["45", "47", "53", "49"], answer: 3, explanation: "Here two series alternate: 15, 23, 31, … (+8) and 61, 57, 53, … (-4). Next: 53 − 4 = 49." },
+    { q: "Find the next number: 27, 35, 39, 47, 59, ?", options: ["65", "73", "53", "63"], answer: 3, explanation: "Here the terms are 2p + 1 for consecutive primes p. Next: 2 × 31 + 1 = 63." },
+    { q: "Find the missing number: 5, 6, ?, 20, 33, 50", options: ["14", "11", "13", "15"], answer: 1, explanation: "Here the differences added are 1, 5, 9, 13, 17 — each 4 more than the last, so the missing term is 11." },
+    { q: "Find the next letter: H, J, L, N, P, ?", options: ["R", "Q", "S", "T"], answer: 0, explanation: "By alphabet positions (8, 10, 12, 14, 16), each letter is 2 places after the previous one: P(16) + 2 = R(18)." },
+    { q: "Find the next pair: AV, CT, ER, GP, ?", options: ["IN", "IM", "JN", "HM"], answer: 0, explanation: "The first letters move 2 forward each time and the second letters move 2 back: next is IN." },
+    { q: "Soldier : Regiment :: Ship : ?", options: ["Crew", "Harbour", "Dock", "Fleet"], answer: 3, explanation: "Soldiers make up a regiment; ships make up a fleet." },
+    { q: "9 : 80 :: 6 : ?", options: ["222", "217", "210", "35"], answer: 3, explanation: "9 → 9² − 1 = 80; likewise 6 → 6² − 1 = 35." },
+    { q: "Neeraj Chopra : Javelin :: Mirabai Chanu : ?", options: ["Wrestling", "Boxing", "Weightlifting", "Shooting"], answer: 2, explanation: "Neeraj Chopra is a javelin thrower; Mirabai Chanu is a weightlifter." },
+    { q: "Which one does not belong with the others?", options: ["Aeroplane", "Submarine", "Glider", "Helicopter"], answer: 1, explanation: "The submarine travels under water; the others fly." },
+    { q: "Which number does not belong with the others?", options: ["228", "310", "75", "309"], answer: 1, explanation: "The digits of 75, 228, 309 each add up to 12; the digits of 310 add up to 4." },
+    { q: "Choose the word most opposite in meaning to ENCOURAGE.", options: ["Discourage", "Inspire", "Motivate", "Support"], answer: 0, explanation: "The opposite of encourage is discourage; the other options are similar in meaning or unrelated." },
+    { q: "If BRONZE is coded as DYMNQA, how is BANKER coded?", options: ["QDJLZA", "QEJMZA", "CZOJFQ", "QDJMZA"], answer: 3, explanation: "In this code the letters are reversed and each is moved 1 place back, so BANKER becomes QDJMZA." },
+    { q: "In a code language, 'strong pilots sail' is written as 'ri ga ve', 'brave pilots' is written as 'pi ga' and 'sail today' is written as 'ki ri'. Which word is coded as 'ga'?", options: ["sail", "today", "brave", "pilots"], answer: 3, explanation: "'pilots' is common to the first two sentences, so pilots = ga; 'sail' is common to the first and third, so sail = ri." },
+    { q: "If A = 26, B = 25, …, Z = 1 and BOOTS = 64 (the sum of its letter values), what is WINDOW?", options: ["78", "84", "74", "88"], answer: 2, explanation: "WINDOW = 4 + 18 + 13 + 23 + 12 + 4 = 74." },
+    { q: "Deepa is the mother of Esha. Esha is the sister of Farhan. Farhan's son is Gaurav. How is Deepa related to Gaurav?", options: ["Mother", "Grandmother", "Aunt", "Great-grandmother"], answer: 1, explanation: "Deepa is Farhan's mother too, so she is Gaurav's grandmother." },
+    { q: "Pointing to a woman, Rajat said, \"Her son is my son's only brother.\" How is the woman related to Rajat?", options: ["Sister-in-law", "Mother", "Sister", "Wife"], answer: 3, explanation: "Rajat's son's only brother is Rajat's other son, so the woman is Rajat's wife." },
+    { q: "Starting from his house, Ravi walks 70 m towards the south, turns right and walks 150 m, turns right and walks 35 m, finally turns right and walks 115 m. In which direction is he now from his house?", options: ["South-West", "South-East", "North-West", "North-East"], answer: 0, explanation: "He ends up 35 m west and 35 m south of his house, so he is to the South-West of his house." },
+    { q: "One morning, just after sunrise, Dev was standing in a field. His shadow fell exactly to his left. Which direction was he facing?", options: ["West", "North", "South", "East"], answer: 1, explanation: "In the morning the sun is in the east, so shadows fall to the west. With the shadow (West) on his left, he must be facing North." },
+    { q: "In a row of 43 children, Arjun is 6th from the left. Rahul is 3rd to the right of Arjun. What is Rahul's position from the right end?", options: ["36th", "34th", "37th", "35th"], answer: 3, explanation: "Rahul is 9th from the left, so from the right he is 43 − 9 + 1 = 35." },
+    { q: "Bina is shorter than Manoj. Dinesh is shorter than Bina. Dinesh is taller than Pooja. Manoj is shorter than Ravi. Who is the second tallest?", options: ["Dinesh", "Manoj", "Bina", "Ravi"], answer: 1, explanation: "The order from tallest to shortest is Ravi > Manoj > Bina > Dinesh > Pooja, so the second tallest is Manoj." },
+    { q: "30% of a number is 36. What is 80% of the same number?", options: ["132", "288", "96", "106"], answer: 2, explanation: "The number is 36 × 100/30 = 120, and 80% of 120 = 96." },
+    { q: "A number is multiplied by 5, then 7 is added, and the result is multiplied by 2. The final answer is 294. What was the number?", options: ["26", "28", "38", "27"], answer: 1, explanation: "Working backwards: 294 ÷ 2 = 147; − 7 = 140; ÷ 5 = 28." },
+    { q: "Through how many degrees does the hour hand of a clock turn from 2:45 to 8:35?", options: ["205°", "300°", "175°", "190°"], answer: 2, explanation: "The hour hand turns 0.5° per minute; 350 minutes × 0.5° = 175°." },
+    { q: "If today is Wednesday, what day of the week will it be 743 days from today?", options: ["Saturday", "Thursday", "Friday", "Wednesday"], answer: 1, explanation: "743 = 7 × 106 + 1; 1 days after Wednesday is Thursday." },
+    { q: "Statements: No book is a tree. Some athletes are books. Conclusions: I. Some athletes are not trees. II. Some trees are athletes.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "The athletes that are books cannot be trees, so some athletes are not trees (I); nothing says any of the trees are athletes." },
+    { q: "Statement: Every candidate must clear the medical examination to join the academy. Priya has joined the academy. Conclusions: I. Priya cleared the medical examination. II. Priya topped the written exam.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Joining required clearing the medical (I); her written-exam rank is not given." },
+    { q: "A cube of side 9 cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have at least one face painted?", options: ["84", "386", "294", "343"], answer: 1, explanation: "There are 729 small cubes; at least one face painted: 9³ − (9 − 2)³ = 729 − 343 = 386." },
+    { q: "Which letter is 14th to the left of the 8th letter from the right in the English alphabet?", options: ["D", "V", "F", "E"], answer: 3, explanation: "The 8th letter from the right is the 19th from the left (S); 14 to its left is the 5th letter, E." },
+    { q: "How many pairs of letters in the word HORIZON have as many letters between them in the word as there are between them in the English alphabet (in either direction)?", options: ["6", "5", "4", "7"], answer: 2, explanation: "The pairs are HN, RO, RN, ON — 4 in all." },
+  ],
+};
+
+export default test;

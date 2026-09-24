@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-21",
+  title: "OIR Test 21",
+  durationMinutes: 20,
+  releaseAt: "2026-10-04T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 2, 3, 8, 27, 112, ?", options: ["565", "452", "566", "672"], answer: 0, explanation: "Here the multipliers increase by one each step (×1, ×2, ×3, …), then add the same number (×1 + 1, ×2 + 2, …). Next: 112 × 5 + 5 = 565." },
+    { q: "Find the next number: 7, 19, 17, 29, 27, 39, ?", options: ["37", "38", "35", "51"], answer: 0, explanation: "Here the operations alternate: + 12, − 2, + 12, − 2 and so on. Next: 39 − 2 = 37." },
+    { q: "Find the next number: 2, 58, 9, 56, 16, 54, 23, ?", options: ["54", "52", "50", "30"], answer: 1, explanation: "Here two series alternate: 2, 9, 16, … (+7) and 58, 56, 54, … (-2). Next: 54 − 2 = 52." },
+    { q: "Find the missing number: 60, 120, ?, 336, 504, 720", options: ["210", "209", "228", "246"], answer: 0, explanation: "Here the terms are n³ − n for consecutive n, so the missing term is 210." },
+    { q: "Find the next letter: J, M, P, S, V, ?", options: ["Z", "Y", "X", "W"], answer: 1, explanation: "By alphabet positions (10, 13, 16, 19, 22), each letter is 3 places after the previous one: V(22) + 3 = Y(25)." },
+    { q: "Find the next pair: EJ, HK, KL, NM, ?", options: ["QO", "QN", "PM", "RN"], answer: 1, explanation: "The first letters move 3 forward each time and the second letters move 1 forward: next is QN." },
+    { q: "Carpenter : Saw :: Tailor : ?", options: ["Trowel", "Chisel", "Hammer", "Needle"], answer: 3, explanation: "A saw is a carpenter's tool; a needle is a tailor's tool." },
+    { q: "5 : 126 :: 4 : ?", options: ["20", "16", "25", "65"], answer: 3, explanation: "5 → 5³ + 1 = 126; likewise 4 → 4³ + 1 = 65." },
+    { q: "Param Vir Chakra : Wartime :: Ashoka Chakra : ?", options: ["Sports", "Wartime", "Civil service", "Peacetime"], answer: 3, explanation: "The Param Vir Chakra is the highest wartime gallantry award; the Ashoka Chakra is the highest peacetime one." },
+    { q: "Which one does not belong with the others?", options: ["Squadron Leader", "Lieutenant Colonel", "Wing Commander", "Group Captain"], answer: 1, explanation: "Lieutenant Colonel is an Army rank; the others are Air Force ranks." },
+    { q: "Which pair does not belong with the others?", options: ["4 – 32", "3 – 12", "6 – 72", "9 – 162"], answer: 1, explanation: "In the other pairs the second number is 2n², where n is the first (e.g. 2 × 9² = 162); but 2 × 3² = 18, not 12." },
+    { q: "Choose the word most similar in meaning to BRISK.", options: ["Slow", "Dull", "Lazy", "Quick"], answer: 3, explanation: "Brisk means quick." },
+    { q: "If BOOTS is written as 2-15-15-20-19, how is KNIFE written in the same code?", options: ["11-13-9-6-5", "11-14-9-6-5", "16-13-18-21-22", "12-14-9-6-5"], answer: 1, explanation: "Each letter is replaced by its position in the alphabet (A = 1, …, Z = 26), so KNIFE → 11-14-9-6-5." },
+    { q: "In a code language, 'brave doctors study' is written as 'yo lo ja', 'young doctors' is written as 'ma yo' and 'study daily' is written as 'ja si'. What is the code for 'brave'?", options: ["lo", "ma", "si", "yo"], answer: 0, explanation: "'doctors' is common to the first two sentences, so doctors = yo; 'study' is common to the first and third, so study = ja. The remaining code in the first sentence, lo, means 'brave'." },
+    { q: "If '×' means '+', '÷' means '−', '−' means '×' and '+' means '÷', what is the value of 4 × 12 − 8 ÷ 40 + 8?", options: ["103", "97", "95", "79"], answer: 2, explanation: "Replacing the symbols gives 4 + 12 × 8 − 40 ÷ 8; following BODMAS, this equals 95." },
+    { q: "X is the brother of Y. Z is the father of X. W is the mother of Z. How is Y related to W?", options: ["Grandson or granddaughter", "Son", "Grandson", "Granddaughter"], answer: 0, explanation: "Z is Y's father too, and W is Z's mother; Y's gender is not given." },
+    { q: "Introducing a man, a woman said, \"His wife is the only daughter of my father.\" How is the man related to the woman?", options: ["Father", "Husband", "Son-in-law", "Brother"], answer: 1, explanation: "The only daughter of the woman's father is the woman herself, so the man is her husband." },
+    { q: "Starting from his house, Deepak walks 8 km towards the south, turns right and walks 6 km, finally turns left and walks 8 km. In which direction is he now from his house?", options: ["South-East", "North-West", "South-West", "North-East"], answer: 2, explanation: "He ends up 6 km west and 16 km south of his house, so he is to the South-West of his house." },
+    { q: "If South is called East, and all other directions are renamed in the same way, what will North-East be called?", options: ["South-East", "North-West", "North-East", "South-West"], answer: 1, explanation: "South → East is a rotation of 270° clockwise; rotating North-East by the same amount gives North-West." },
+    { q: "Ajay is 9th from the top and 7th from the bottom in his class. How many students are there in the class?", options: ["5", "16", "15", "14"], answer: 2, explanation: "Total = 9 + 7 − 1 = 15 (Ajay is counted in both ranks)." },
+    { q: "Hari is slower than Asha. Tarun is faster than Chetan. Nisha is slower than Chetan. Nisha is faster than Asha. Who is the second fastest?", options: ["Asha", "Tarun", "Chetan", "Nisha"], answer: 2, explanation: "The order from fastest to slowest is Tarun > Chetan > Nisha > Asha > Hari, so the second fastest is Chetan." },
+    { q: "The sum of 5 consecutive odd numbers is 125. What is the largest of them?", options: ["25", "31", "29", "27"], answer: 2, explanation: "The middle value is 125/5 = 25; the numbers are 21, 23, 25, 27, 29, so the largest is 29." },
+    { q: "A number is multiplied by 2, then 2 is added, and the result is multiplied by 2. The final answer is 40. What was the number?", options: ["12", "9", "19", "7"], answer: 1, explanation: "Working backwards: 40 ÷ 2 = 20; − 2 = 18; ÷ 2 = 9." },
+    { q: "What is the angle between the hands of a clock at 5:50?", options: ["150°", "140°", "125°", "155°"], answer: 2, explanation: "Angle = |30 × 5 − 5.5 × 50| = 125°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "How many days are there from 11 May 2031 to 20 November 2031, both days included?", options: ["194", "195", "193", "192"], answer: 0, explanation: "Counting the days in each month from 11 May 2031 to 20 November 2031 inclusive gives 194." },
+    { q: "Statements: All coins are boxes. All writers are boxes. Conclusions: I. Some coins are writers. II. Some boxes are writers.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "All writers are boxes, so some boxes are writers (II); coins and writers both lie within boxes but need not overlap, so I fails." },
+    { q: "Statement: The principal asked all students to bring their parents to the annual day function. Assumptions: I. Parents will be interested in attending. II. The venue can accommodate the parents.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 2, explanation: "Inviting parents assumes they will come (I) and that there is room for them (II)." },
+    { q: "How many cubes of side 2 cm can be cut from a solid cube of side 6 cm?", options: ["108", "9", "27", "37"], answer: 2, explanation: "(6/2)³ = 3³ = 27." },
+    { q: "Which letter is 13th to the left of the 12th letter from the right in the English alphabet?", options: ["A", "C", "B", "Y"], answer: 2, explanation: "The 12th letter from the right is the 15th from the left (O); 13 to its left is the 2nd letter, B." },
+    { q: "If the letters of the word LOYALTY are arranged in alphabetical order, how many letters remain in the same position?", options: ["3", "4", "2", "1"], answer: 3, explanation: "Alphabetical order: ALLOTYY. Comparing with LOYALTY, 1 letter (Y) stays in place." },
+  ],
+};
+
+export default test;

@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-53",
+  title: "OIR Test 53",
+  durationMinutes: 20,
+  releaseAt: "2026-11-15T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 8, 24, 29, 87, 92, 276, ?", options: ["281", "282", "279", "828"], answer: 0, explanation: "Here the operations alternate: × 3, + 5, × 3, + 5 and so on. Next: 276 + 5 = 281." },
+    { q: "Find the next number: 3, 4, 6, 13, 23, 42, 78, ?", options: ["143", "101", "156", "121"], answer: 0, explanation: "Here each term is the sum of the previous three terms. Next: 23 + 42 + 78 = 143." },
+    { q: "Find the next number: 15, 22, 33, 48, 67, ?", options: ["94", "86", "90", "100"], answer: 2, explanation: "Here the differences added are 7, 11, 15, 19, 23 — each 4 more than the last. Next: 67 + 23 = 90." },
+    { q: "Find the missing number: 16, 21, 36, ?, 216, 621", options: ["126", "81", "71", "171"], answer: 1, explanation: "Here the differences 5, 15, 45, 135, 405 are each 3 times the previous difference, so the missing term is 81." },
+    { q: "Find the next letter: T, Q, N, K, H, ?", options: ["G", "E", "F", "D"], answer: 1, explanation: "By alphabet positions (20, 17, 14, 11, 8), each letter is 3 places before the previous one: H(8) − 3 = E(5)." },
+    { q: "Find the next term: B25, G20, L15, Q10, ?", options: ["V5", "V6", "V22", "W4"], answer: 0, explanation: "The letters move 5 forward each time, and each number is the letter's position in the reversed alphabet (A = 26 … Z = 1): V → 5." },
+    { q: "Hunger : Food :: Fatigue : ?", options: ["Water", "Work", "Medicine", "Rest"], answer: 3, explanation: "Food removes hunger; rest removes fatigue." },
+    { q: "3 : 10 :: 6 : ?", options: ["36", "30", "35", "37"], answer: 3, explanation: "3 → 3² + 1 = 10; likewise 6 → 6² + 1 = 37." },
+    { q: "China : Yuan :: Bhutan : ?", options: ["Rupiah", "Taka", "Ngultrum", "Kyat"], answer: 2, explanation: "China's currency is the yuan; Bhutan's is the ngultrum." },
+    { q: "Which one does not belong with the others?", options: ["Radius", "Biceps", "Ulna", "Tibia"], answer: 1, explanation: "The biceps is a muscle; the others are bones." },
+    { q: "Which number does not belong with the others?", options: ["121", "124", "289", "169"], answer: 1, explanation: "169 = 13², 289 = 17², 121 = 11² are perfect squares; 124 is not." },
+    { q: "Choose the word most opposite in meaning to PROSPERITY.", options: ["Poverty", "Growth", "Wealth", "Success"], answer: 0, explanation: "The opposite of prosperity is poverty; the other options are similar in meaning or unrelated." },
+    { q: "If NUMBER is coded as MTLADQ, how is MIRROR coded?", options: ["LHQRNQ", "LHQQNQ", "LHPQNQ", "RORRIM"], answer: 1, explanation: "In this code each letter is moved 1 place back in the alphabet, so MIRROR becomes LHQQNQ." },
+    { q: "In a code language, 'quick students study' is written as 'fe ze ma', 'young students' is written as 'fe ka' and 'study together' is written as 'ho ze'. What is the code for 'students'?", options: ["ma", "ho", "ze", "fe"], answer: 3, explanation: "'students' is common to the first two sentences, so students = fe; 'study' is common to the first and third, so study = ze." },
+    { q: "If '÷' means '+', '×' means '−', '−' means '×' and '+' means '÷', what is the value of 9 × 21 + 7 ÷ 7 − 2?", options: ["22", "16", "20", "30"], answer: 2, explanation: "Replacing the symbols gives 9 − 21 ÷ 7 + 7 × 2; following BODMAS, this equals 20." },
+    { q: "Rahul's sister is Priya's mother. How is Rahul related to Priya?", options: ["Brother", "Father", "Maternal uncle", "Grandfather"], answer: 2, explanation: "Rahul is the brother of Priya's mother, so he is Priya's maternal uncle." },
+    { q: "Pointing to a girl, Manish said, \"She is the daughter of the wife of my wife's only brother.\" How is the girl related to Manish?", options: ["Sister", "Niece", "Cousin", "Daughter"], answer: 1, explanation: "She is the daughter of Manish's brother-in-law (wife's brother), i.e. his niece." },
+    { q: "Starting from his house, Sanjay walks 115 m towards the west, turns left and walks 120 m, finally turns left and walks 110 m. In which direction is he now from his house?", options: ["South-East", "North-East", "South-West", "North-West"], answer: 2, explanation: "He ends up 5 m west and 120 m south of his house, so he is to the South-West of his house." },
+    { q: "A man is facing North-East. He turns 90° clockwise, then 90° anticlockwise, then 180° anticlockwise. Which direction is he facing now?", options: ["North-West", "South-West", "North-East", "South-East"], answer: 1, explanation: "The net turn is 180° clockwise from North-East, so he faces South-West." },
+    { q: "In a class of 44 students, Arjun ranks 30th from the top. What is his rank from the bottom?", options: ["15th", "17th", "16th", "14th"], answer: 0, explanation: "Rank from bottom = 44 − 30 + 1 = 15." },
+    { q: "Dinesh is poorer than Hari. Hari is poorer than Sita. Farhan is richer than Sita. Who is the poorest?", options: ["Hari", "Dinesh", "Sita", "Farhan"], answer: 1, explanation: "The order from richest to poorest is Farhan > Sita > Hari > Dinesh, so the poorest is Dinesh." },
+    { q: "The sum of 3 consecutive even numbers is 192. What is the largest of them?", options: ["68", "64", "62", "66"], answer: 3, explanation: "The middle value is 192/3 = 64; the numbers are 62, 64, 66, so the largest is 66." },
+    { q: "A car goes from town P to town Q at 45 km/h and returns at 90 km/h. What is its average speed for the whole journey?", options: ["60 km/h", "62 km/h", "57 km/h", "67.5 km/h"], answer: 0, explanation: "For equal distances, average speed = 2uv/(u + v) = 2 × 45 × 90/135 = 60 km/h (not the simple mean)." },
+    { q: "In a mirror, a clock appears to show 8:48. What is the actual time?", options: ["3:12", "3:42", "4:12", "4:48"], answer: 0, explanation: "Actual time = 11:60 − 8:48 = 3:12." },
+    { q: "If today is Tuesday, what day of the week will it be 767 days from today?", options: ["Monday", "Sunday", "Friday", "Saturday"], answer: 3, explanation: "767 = 7 × 109 + 4; 4 days after Tuesday is Saturday." },
+    { q: "Statements: All athletes are pens. Some athletes are balls. Conclusions: I. Some pens are balls. II. Some balls are not pens.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "The athletes that are balls are also pens, so some pens are balls (I); all balls might be pens, so II is uncertain." },
+    { q: "Statement: No one can enter the restricted area without a pass. Amit entered the restricted area. Conclusions: I. Amit had a pass. II. Amit is an officer.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Since entry needs a pass, Amit had one (I); his rank is not stated." },
+    { q: "A wooden block measuring 7 cm × 5 cm × 4 cm is painted on all faces and cut into 1 cm cubes. How many cubes have exactly two faces painted?", options: ["30", "8", "62", "40"], answer: 3, explanation: "Cubes with exactly two faces painted: 4[(7 − 2) + (5 − 2) + (4 − 2)] = 40." },
+    { q: "If the English alphabet is written in reverse order (Z to A), which letter will be 7th to the right of the 16th letter from the left?", options: ["C", "E", "W", "D"], answer: 3, explanation: "In the reversed alphabet the 23rd letter from the left is D (position n holds letter 27 − n)." },
+    { q: "If the following words are arranged in dictionary order, which word comes third? Monkey, Majority, Monsoon, Market", options: ["Market", "Monkey", "Monsoon", "Majority"], answer: 1, explanation: "In dictionary order: Majority, Market, Monkey, Monsoon." },
+  ],
+};
+
+export default test;

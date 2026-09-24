@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-94",
+  title: "OIR Test 94",
+  durationMinutes: 20,
+  releaseAt: "2027-01-10T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 8, 15, 26, 41, 60, ?", options: ["79", "82", "83", "87"], answer: 2, explanation: "Here the differences added are 7, 11, 15, 19, 23 — each 4 more than the last. Next: 60 + 23 = 83." },
+    { q: "Find the next number: 2, 6, 18, 54, ?", options: ["160", "152", "216", "162"], answer: 3, explanation: "Here each term is 3 times the previous term. Next: 54 × 3 = 162." },
+    { q: "Find the next number: 110, 132, 156, 182, 210, ?", options: ["241", "240", "272", "239"], answer: 1, explanation: "Here the terms are n × (n + 1) for consecutive n. Next: 15 × 16 = 240." },
+    { q: "Find the missing number: 19, 22, ?, 40, 64, 112", options: ["26", "31", "28", "34"], answer: 2, explanation: "Here the differences 3, 6, 12, 24, 48 are each 2 times the previous difference, so the missing term is 28." },
+    { q: "Find the next letter: C, D, I, J, O, ?", options: ["O", "Q", "R", "P"], answer: 3, explanation: "By alphabet positions (3, 4, 9, 10, 15), the letters move alternately +1 and +5: O(15) + 1 = P(16)." },
+    { q: "Find the next pair: KD, NG, QJ, TM, ?", options: ["VO", "WQ", "XP", "WP"], answer: 3, explanation: "The first letters move 3 forward each time and the second letters move 3 forward: next is WP." },
+    { q: "Ruler : Line :: Compass : ?", options: ["Square", "Direction", "Angle", "Circle"], answer: 3, explanation: "A ruler is used to draw a line; a (geometry) compass is used to draw a circle." },
+    { q: "6 : 215 :: 3 : ?", options: ["6", "15", "26", "18"], answer: 2, explanation: "6 → 6³ − 1 = 215; likewise 3 → 3³ − 1 = 26." },
+    { q: "Bhakra Nangal : Sutlej :: Hirakud : ?", options: ["Godavari", "Krishna", "Narmada", "Mahanadi"], answer: 3, explanation: "The Bhakra Nangal dam is on the Sutlej; the Hirakud dam is on the Mahanadi." },
+    { q: "Which one does not belong with the others?", options: ["Mumps", "Malaria", "Chickenpox", "Measles"], answer: 1, explanation: "Malaria is caused by a protozoan parasite; the others are viral diseases." },
+    { q: "Which pair does not belong with the others?", options: ["8 – 72", "5 – 30", "9 – 82", "7 – 56"], answer: 2, explanation: "In the other pairs the second number is n² + n, where n is the first (e.g. 7² + 7 = 56); but 9² + 9 = 90, not 82." },
+    { q: "Choose the one word for: \"A person who offers to work without payment\"", options: ["Employee", "Volunteer", "Servant", "Mercenary"], answer: 1, explanation: "Volunteer: a person who offers to work without payment." },
+    { q: "If ONION is written as 15-14-9-15-14, how is WINTER written in the same code?", options: ["23-9-14-20-5-19", "23-8-14-20-5-18", "23-9-14-20-5-18", "4-18-13-7-22-9"], answer: 2, explanation: "Each letter is replaced by its position in the alphabet (A = 1, …, Z = 26), so WINTER → 23-9-14-20-5-18." },
+    { q: "In a code language, 'bold pilots climb' is written as 'da re ki', 'smart pilots' is written as 'ne da' and 'climb together' is written as 'ze re'. Which word is coded as 'da'?", options: ["bold", "together", "pilots", "smart"], answer: 2, explanation: "'pilots' is common to the first two sentences, so pilots = da; 'climb' is common to the first and third, so climb = re." },
+    { q: "If A = 1, B = 2, …, Z = 26 and KABADDI = 32 (the sum of its letter values), what is RABBIT?", options: ["52", "70", "53", "110"], answer: 0, explanation: "RABBIT = 18 + 1 + 2 + 2 + 9 + 20 = 52." },
+    { q: "Hari's mother Indira is the sister of Jagat. Jagat's wife is Kamini. How is Kamini related to Hari?", options: ["Mother", "Grandmother", "Maternal uncle's wife", "Paternal aunt"], answer: 2, explanation: "Jagat is Hari's maternal uncle, so Kamini is his maternal uncle's wife (mami)." },
+    { q: "Pointing to a woman, Ramesh said, \"Her mother is the only daughter of my mother-in-law.\" How is the woman related to Ramesh?", options: ["Sister-in-law", "Wife", "Daughter", "Niece"], answer: 2, explanation: "The only daughter of Ramesh's mother-in-law is Ramesh's wife; her daughter is Ramesh's daughter." },
+    { q: "Starting from his house, Mohan walks 6 km towards the south, turns left and walks 2 km, turns right and walks 15 km, finally turns left and walks 15 km. In which direction is he now from his house?", options: ["North-West", "North-East", "South-West", "South-East"], answer: 3, explanation: "He ends up 17 km east and 21 km south of his house, so he is to the South-East of his house." },
+    { q: "If South-West is called North-West, and all other directions are renamed in the same way, what will East be called?", options: ["South", "East", "West", "North"], answer: 0, explanation: "South-West → North-West is a rotation of 90° clockwise; rotating East by the same amount gives South." },
+    { q: "Rahul is 6th from the top and 23rd from the bottom in his class. How many students are there in the class?", options: ["29", "27", "28", "26"], answer: 2, explanation: "Total = 6 + 23 − 1 = 28 (Rahul is counted in both ranks)." },
+    { q: "Farhan is younger than Bina. Bina is younger than Hari. Esha is younger than Chetan. Chetan is younger than Farhan. Who is the youngest?", options: ["Hari", "Farhan", "Bina", "Esha"], answer: 3, explanation: "The order from oldest to youngest is Hari > Bina > Farhan > Chetan > Esha, so the youngest is Esha." },
+    { q: "A number is multiplied by 3, then 4 is added, and the result is multiplied by 3. The final answer is 165. What was the number?", options: ["18", "27", "17", "7"], answer: 2, explanation: "Working backwards: 165 ÷ 3 = 55; − 4 = 51; ÷ 3 = 17." },
+    { q: "The average of 5 numbers is 25. When one number is removed, the average of the rest becomes 27. Which number was removed?", options: ["22", "17", "25", "20"], answer: 1, explanation: "Total before = 5 × 25 = 125; after = 4 × 27 = 108; removed = 17." },
+    { q: "In a mirror, a clock appears to show 2:14. What is the actual time?", options: ["9:16", "9:46", "10:46", "10:14"], answer: 1, explanation: "Actual time = 11:60 − 2:14 = 9:46." },
+    { q: "23 January 1897 was the day Netaji Subhas Chandra Bose was born. What day of the week was it?", options: ["Friday", "Sunday", "Tuesday", "Saturday"], answer: 3, explanation: "1 January 2001 was a Monday. 23 January 1897 is 37963 days before it, leaving 2 odd day(s) backwards from Monday, so it was a Saturday." },
+    { q: "Statements: All coins are shirts. All lamps are shirts. Conclusions: I. Some coins are lamps. II. Some shirts are lamps.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 1, explanation: "All lamps are shirts, so some shirts are lamps (II); coins and lamps both lie within shirts but need not overlap, so I fails." },
+    { q: "Statement: A bridge on the highway has developed cracks. Courses of action: I. Heavy vehicles should be stopped from using it until it is repaired. II. The highway should be closed permanently. Which course(s) of action follow?", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "Restricting heavy traffic until repairs is sensible (I); permanent closure is not." },
+    { q: "A wooden block measuring 6 cm × 6 cm × 3 cm is painted on all faces and cut into 1 cm cubes. How many cubes have exactly two faces painted?", options: ["16", "48", "8", "36"], answer: 3, explanation: "Cubes with exactly two faces painted: 4[(6 − 2) + (6 − 2) + (3 − 2)] = 36." },
+    { q: "If the English alphabet is written in reverse order (Z to A), which letter will be 11th to the right of the 12th letter from the left?", options: ["C", "E", "W", "D"], answer: 3, explanation: "In the reversed alphabet the 23rd letter from the left is D (position n holds letter 27 − n)." },
+    { q: "If the letters of the word FRIENDSHIP are arranged in alphabetical order, how many letters remain in the same position?", options: ["1", "10", "0", "2"], answer: 2, explanation: "Alphabetical order: DEFHIINPRS. Comparing with FRIENDSHIP, no letter stays in place." },
+  ],
+};
+
+export default test;

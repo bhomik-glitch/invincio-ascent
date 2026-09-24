@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-45",
+  title: "OIR Test 45",
+  durationMinutes: 20,
+  releaseAt: "2026-11-01T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 6, 10, 18, 34, 66, ?", options: ["130", "132", "162", "131"], answer: 0, explanation: "Here the differences 4, 8, 16, 32, 64 are each 2 times the previous difference. Next: 66 + 64 = 130." },
+    { q: "Find the next number: 30, 68, 130, 222, 350, ?", options: ["521", "519", "738", "520"], answer: 3, explanation: "Here the terms are n³ + n for consecutive n. Next: 8³ + 8 = 520." },
+    { q: "Find the next number: 8, 15, 44, 175, 874, ?", options: ["5244", "5243", "4369", "6118"], answer: 1, explanation: "Here the multipliers increase by one each step (×2, ×3, ×4, …), then subtract 1. Next: 874 × 6 − 1 = 5243." },
+    { q: "Find the missing number: 14, 56, 224, ?, 3584", options: ["896", "2912", "886", "1904"], answer: 0, explanation: "Here each term is 4 times the previous term, so the missing term is 896." },
+    { q: "Find the next letter: X, T, P, L, H, ?", options: ["D", "E", "C", "F"], answer: 0, explanation: "By alphabet positions (24, 20, 16, 12, 8), each letter is 4 places before the previous one: H(8) − 4 = D(4)." },
+    { q: "Find the next pair: JR, MP, PN, SL, ?", options: ["UI", "VI", "VJ", "WJ"], answer: 2, explanation: "The first letters move 3 forward each time and the second letters move 2 back: next is VJ." },
+    { q: "Cardiologist : Heart :: Nephrologist : ?", options: ["Skin", "Liver", "Nerves", "Kidneys"], answer: 3, explanation: "A cardiologist treats the heart; a nephrologist treats the kidneys." },
+    { q: "12 : 132 :: 9 : ?", options: ["80", "728", "72", "720"], answer: 2, explanation: "12 → 12² − 12 = 132; likewise 9 → 9² − 9 = 72." },
+    { q: "Goa : Panaji :: Odisha : ?", options: ["Rourkela", "Cuttack", "Puri", "Bhubaneswar"], answer: 3, explanation: "Panaji is the capital of Goa; Bhubaneswar is the capital of Odisha." },
+    { q: "Which one does not belong with the others?", options: ["Buffalo", "Cow", "Goat", "Tiger"], answer: 3, explanation: "The tiger is a carnivore; the others are herbivores." },
+    { q: "Which pair does not belong with the others?", options: ["8 – 520", "9 – 84", "2 – 7", "3 – 12"], answer: 0, explanation: "In the other pairs the second number is n² + 3, where n is the first (e.g. 3² + 3 = 12); but 8² + 3 = 67, not 520." },
+    { q: "Choose the word most opposite in meaning to COMPULSORY.", options: ["Optional", "Necessary", "Mandatory", "Required"], answer: 0, explanation: "The opposite of compulsory is optional; the other options are similar in meaning or unrelated." },
+    { q: "If RIVER is coded as REVIR, how is BOXING coded?", options: ["HNIXOB", "GNIXOB", "FMHWNA", "GNHXOB"], answer: 1, explanation: "In this code the letters are written in reverse order, so BOXING becomes GNIXOB." },
+    { q: "In a code language, 'tall sailors fight' is written as 'ja bu da', 'strong sailors' is written as 'ga bu' and 'fight quietly' is written as 'ne da'. Which word is coded as 'ja'?", options: ["strong", "tall", "sailors", "quietly"], answer: 1, explanation: "'sailors' is common to the first two sentences, so sailors = bu; 'fight' is common to the first and third, so fight = da. The remaining code in the first sentence, ja, means 'tall'." },
+    { q: "If '÷' means '+', '×' means '−', '−' means '×' and '+' means '÷', what is the value of 3 × 88 + 11 ÷ 6 − 9?", options: ["58", "49", "59", "31"], answer: 1, explanation: "Replacing the symbols gives 3 − 88 ÷ 11 + 6 × 9; following BODMAS, this equals 49." },
+    { q: "G is the sister of H. H is the only son of I. J is the wife of I. How is J related to G?", options: ["Grandmother", "Mother", "Aunt", "Sister"], answer: 1, explanation: "G and H are I's children; I's wife J is their mother." },
+    { q: "Pointing to a man, Leela said, \"His son is my son's only paternal uncle.\" How is the man related to Leela?", options: ["Father", "Father-in-law", "Brother-in-law", "Husband"], answer: 1, explanation: "Leela's son's paternal uncle is her husband's brother; that uncle's father is Leela's father-in-law." },
+    { q: "Starting from his house, Rahul walks 55 m towards the north, turns right and walks 50 m, turns right and walks 45 m, finally turns right and walks 110 m. In which direction is he now from his house?", options: ["South-West", "North-East", "North-West", "South-East"], answer: 2, explanation: "He ends up 60 m west and 10 m north of his house, so he is to the North-West of his house." },
+    { q: "A man is facing East. He turns 135° clockwise, then 180° anticlockwise, then 90° clockwise. Which direction is he facing now?", options: ["North-East", "South-West", "South-East", "North-West"], answer: 2, explanation: "The net turn is 45° clockwise from East, so he faces South-East." },
+    { q: "Nikhil is 23rd from the top and 28th from the bottom in his class. How many students are there in the class?", options: ["49", "48", "50", "51"], answer: 2, explanation: "Total = 23 + 28 − 1 = 50 (Nikhil is counted in both ranks)." },
+    { q: "Esha is heavier than Bina. Bina is heavier than Dinesh. Dinesh is heavier than Pooja. Esha is lighter than Asha. Who is the second lightest?", options: ["Esha", "Dinesh", "Bina", "Asha"], answer: 1, explanation: "The order from heaviest to lightest is Asha > Esha > Bina > Dinesh > Pooja, so the second lightest is Dinesh." },
+    { q: "30% of a number is 18. What is 75% of the same number?", options: ["45", "63", "44", "135"], answer: 0, explanation: "The number is 18 × 100/30 = 60, and 75% of 60 = 45." },
+    { q: "A train 140 m long passes a signal post in 14 seconds. What is its speed in km/h?", options: ["45", "36", "27", "10"], answer: 1, explanation: "Speed = 140/14 = 10 m/s = 10 × 18/5 = 36 km/h." },
+    { q: "In a mirror, a clock appears to show 5:10. What is the actual time?", options: ["6:20", "6:50", "7:10", "7:50"], answer: 1, explanation: "Actual time = 11:60 − 5:10 = 6:50." },
+    { q: "3 May 2025 is a Saturday. What day of the week is 9 January 2025?", options: ["Friday", "Thursday", "Wednesday", "Saturday"], answer: 1, explanation: "9 January 2025 is 114 days before 3 May 2025. 114 = 7 × 16 + 2, so the day shifts 2 back: Thursday." },
+    { q: "Statements: All dancers are cadets. All cadets are trees. Conclusions: I. All dancers are trees. II. Some trees are dancers.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 2, explanation: "All dancers are cadets and all cadets are trees, so all dancers are trees (I), and hence some trees are dancers (II)." },
+    { q: "Statement: \"Carry an umbrella tomorrow,\" said the weather report. Assumptions: I. It is likely to rain tomorrow. II. Everyone owns an umbrella.", options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"], answer: 0, explanation: "The advice assumes rain is likely (I); it does not assume everyone owns an umbrella." },
+    { q: "How many cubes of side 5 cm can be cut from a solid cube of side 25 cm?", options: ["125", "15", "25", "3125"], answer: 0, explanation: "(25/5)³ = 5³ = 125." },
+    { q: "If the English alphabet is written in reverse order (Z to A), which letter will be 16th to the right of the 7th letter from the left?", options: ["E", "D", "C", "W"], answer: 1, explanation: "In the reversed alphabet the 23rd letter from the left is D (position n holds letter 27 − n)." },
+    { q: "If the letters of the word KNOWLEDGE are arranged in alphabetical order, how many letters remain in the same position?", options: ["3", "1", "0", "2"], answer: 2, explanation: "Alphabetical order: DEEGKLNOW. Comparing with KNOWLEDGE, no letter stays in place." },
+  ],
+};
+
+export default test;

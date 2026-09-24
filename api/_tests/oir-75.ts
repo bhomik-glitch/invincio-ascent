@@ -1,0 +1,42 @@
+import type { Test } from "./index";
+
+const test: Test = {
+  id: "oir-75",
+  title: "OIR Test 75",
+  durationMinutes: 20,
+  releaseAt: "2026-12-13T00:00:00+05:30",
+  questions: [
+    { q: "Find the next number: 8, 15, 24, 35, 48, ?", options: ["64", "80", "62", "63"], answer: 3, explanation: "Here the terms are n² − 1 for consecutive n. Next: 8² − 1 = 63." },
+    { q: "Find the next number: 10, 50, 250, 1250, ?", options: ["6250", "6248", "6240", "7500"], answer: 0, explanation: "Here each term is 5 times the previous term. Next: 1250 × 5 = 6250." },
+    { q: "Find the next number: 18, 85, 24, 80, 30, 75, 36, ?", options: ["42", "65", "75", "70"], answer: 3, explanation: "Here two series alternate: 18, 24, 30, … (+6) and 85, 80, 75, … (-5). Next: 75 − 5 = 70." },
+    { q: "Find the missing number: 9, 16, 30, 58, ?, 226", options: ["142", "113", "170", "114"], answer: 3, explanation: "Here each term is 2 times the previous term minus 2, so the missing term is 114." },
+    { q: "Find the next letter: F, K, M, R, T, ?", options: ["W", "Z", "X", "Y"], answer: 3, explanation: "By alphabet positions (6, 11, 13, 18, 20), the letters move alternately +5 and +2: T(20) + 5 = Y(25)." },
+    { q: "Find the next group: EFG, IJK, MNO, ?", options: ["PQR", "QSR", "RST", "QRS"], answer: 3, explanation: "Each group is three consecutive letters, and 1 letter is skipped between groups: after MNO comes QRS." },
+    { q: "Carrot : Root :: Potato : ?", options: ["Fruit", "Leaf", "Stem", "Flower"], answer: 2, explanation: "A carrot is a modified root; a potato is a modified underground stem (tuber)." },
+    { q: "5 : 125 :: 11 : ?", options: ["1320", "1330", "1331", "242"], answer: 2, explanation: "5 → 5³ = 125; likewise 11 → 11³ = 1331." },
+    { q: "Kalidasa : Abhijnanashakuntalam :: Tulsidas : ?", options: ["Ramcharitmanas", "Gitanjali", "Arthashastra", "Meghaduta"], answer: 0, explanation: "Kalidasa wrote Abhijnanashakuntalam; Tulsidas wrote Ramcharitmanas." },
+    { q: "Which one does not belong with the others?", options: ["Einstein", "Shakespeare", "Newton", "Faraday"], answer: 1, explanation: "Shakespeare was a playwright; the others were scientists." },
+    { q: "Which number does not belong with the others?", options: ["80", "40", "68", "70"], answer: 2, explanation: "40, 80, 70 are all multiples of 10; 68 is not." },
+    { q: "Choose the one word for: \"One who betrays his or her country\"", options: ["Traitor", "Veteran", "Pilgrim", "Patriot"], answer: 0, explanation: "Traitor: one who betrays his or her country." },
+    { q: "If FOREST is coded as GNSDTS, how is PAINTER coded?", options: ["QZJMUDS", "QZJMUDT", "QYJMUDS", "QCLRYKY"], answer: 0, explanation: "In this code letters are moved alternately one place forward and one place back, so PAINTER becomes QZJMUDS." },
+    { q: "In a code language, 'brave leaders win' is written as 'su lo li', 'tall leaders' is written as 'lo tu' and 'win today' is written as 'su re'. What is the code for 'today'?", options: ["su", "li", "re", "lo"], answer: 2, explanation: "'leaders' is common to the first two sentences, so leaders = lo; 'win' is common to the first and third, so win = su. The other code in the third sentence, re, means 'today'." },
+    { q: "If '×' means '+', '÷' means '−', '+' means '×' and '−' means '÷', what is the value of 7 × 81 − 9 ÷ 3 + 5?", options: ["9", "6", "0", "1"], answer: 3, explanation: "Replacing the symbols gives 7 + 81 ÷ 9 − 3 × 5; following BODMAS, this equals 1." },
+    { q: "Anjali's husband Bharat has a sister Charu. Charu's husband is Daksh. How is Daksh related to Bharat?", options: ["Brother", "Cousin", "Brother-in-law", "Father-in-law"], answer: 2, explanation: "Daksh is married to Bharat's sister, so he is Bharat's brother-in-law." },
+    { q: "Pointing to a girl, Rehan said, \"Her father's mother is the only sister of my father.\" How is the girl related to Rehan?", options: ["Daughter", "Sister", "Cousin's daughter", "Niece"], answer: 2, explanation: "The girl's grandmother is Rehan's aunt, so the girl's father is Rehan's cousin and she is his cousin's daughter." },
+    { q: "Starting from his house, Vikram walks 12 km towards the west, turns left and walks 9 km, finally turns right and walks 4 km. In which direction is he now from his house?", options: ["North-West", "North-East", "South-West", "South-East"], answer: 2, explanation: "He ends up 16 km west and 9 km south of his house, so he is to the South-West of his house." },
+    { q: "One morning, just after sunrise, Rahul was standing in a field. His shadow fell exactly in front of him. Which direction was he facing?", options: ["West", "South", "East", "North"], answer: 0, explanation: "In the morning the sun is in the east, so shadows fall to the west. With the shadow (West) in front of him, he must be facing West." },
+    { q: "Suresh is 21st from the top and 26th from the bottom in his class. How many students are there in the class?", options: ["44", "45", "46", "47"], answer: 2, explanation: "Total = 21 + 26 − 1 = 46 (Suresh is counted in both ranks)." },
+    { q: "Farhan is taller than Esha. Esha is taller than Sita. Farhan is shorter than Pooja. Dinesh is shorter than Sita. Who is the second tallest?", options: ["Farhan", "Pooja", "Sita", "Esha"], answer: 0, explanation: "The order from tallest to shortest is Pooja > Farhan > Esha > Sita > Dinesh, so the second tallest is Farhan." },
+    { q: "The sum of 5 consecutive odd numbers is 205. What is the largest of them?", options: ["43", "41", "47", "45"], answer: 3, explanation: "The middle value is 205/5 = 41; the numbers are 37, 39, 41, 43, 45, so the largest is 45." },
+    { q: "What is the simple interest on ₹17500 at 3% per annum for 6 years?", options: ["₹2625", "₹20650", "₹3150", "₹3675"], answer: 2, explanation: "SI = P × R × T / 100 = 17500 × 3 × 6 / 100 = ₹3150." },
+    { q: "What is the angle between the hands of a clock at 10:35?", options: ["122.5°", "107.5°", "90°", "137.5°"], answer: 1, explanation: "Angle = |30 × 10 − 5.5 × 35| = 107.5°. (The hour hand also moves 0.5° per minute.)" },
+    { q: "How many days are there from 26 September 2031 to 1 October 2031, both days included?", options: ["5", "4", "6", "7"], answer: 2, explanation: "Counting the days in each month from 26 September 2031 to 1 October 2031 inclusive gives 6." },
+    { q: "Statements: No road is a box. Some boxes are trucks. Conclusions: I. Some trucks are not roads. II. Some roads are trucks.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "The trucks that are boxes cannot be roads, so some trucks are not roads (I); nothing links roads and trucks directly, so II is uncertain." },
+    { q: "Statement: Anyone who does not follow the rules will be penalised. Vijay was not penalised. Conclusions: I. Vijay followed the rules. II. Vijay is a new member.", options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: 0, explanation: "If breaking rules always leads to a penalty, no penalty means Vijay followed them (I); II is unrelated." },
+    { q: "A wooden block measuring 5 cm × 5 cm × 5 cm is painted on all faces and cut into 1 cm cubes. How many cubes have exactly one face painted?", options: ["54", "36", "8", "27"], answer: 0, explanation: "Cubes with exactly one face painted: 2[(3)(3) + (3)(3) + (3)(3)] = 54." },
+    { q: "How many letters are there between G and O in the English alphabet?", options: ["10", "7", "8", "9"], answer: 1, explanation: "G is 7 and O is 15; the letters strictly between them number 15 − 7 − 1 = 7." },
+    { q: "If the letters of the word CERTAIN are arranged in alphabetical order, how many letters remain in the same position?", options: ["3", "1", "0", "2"], answer: 2, explanation: "Alphabetical order: ACEINRT. Comparing with CERTAIN, no letter stays in place." },
+  ],
+};
+
+export default test;
