@@ -1,16 +1,16 @@
 import { describe, it, expect } from "vitest";
 import tests, { isLive } from "../../api/_tests";
 
-const GENERIC = /^Which (one|number|pair) does not belong with the others\?$/;
+const GENERIC = /^Which (one|number|pair|letter group) does not belong with the others\?$|which of these equations is correct\?$/;
 
 describe("OIR test bank", () => {
   it("has well-formed questions", () => {
     expect(new Set(tests.map((t) => t.id)).size).toBe(tests.length);
     for (const t of tests) {
       for (const q of t.questions) {
-        expect(q.options.length, `${t.id}: ${q.q}`).toBe(4);
-        expect(new Set(q.options).size, `${t.id}: ${q.q}`).toBe(4);
-        expect(q.answer >= 0 && q.answer < 4, `${t.id}: ${q.q}`).toBe(true);
+        expect([4, 5], `${t.id}: ${q.q}`).toContain(q.options.length);
+        expect(new Set(q.options).size, `${t.id}: ${q.q}`).toBe(q.options.length);
+        expect(q.answer >= 0 && q.answer < q.options.length, `${t.id}: ${q.q}`).toBe(true);
         expect(q.explanation, `${t.id}: ${q.q}`).toBeTruthy();
       }
     }

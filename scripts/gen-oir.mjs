@@ -1,14 +1,15 @@
-// Generates api/_tests/oir-11.ts … oir-110.ts and api/_tests/index.ts.
+// Generates api/_tests/oir-11.ts … oir-110.ts and api/_tests/index.ts at a hard (8–9/10) level.
 //   node scripts/gen-oir.mjs
-// Deterministic (seeded per test), so re-running reproduces the same files. Computable question types
-// are generated with their answers worked out in code; verbal ones come from scripts/oir-bank.mjs.
+// Deterministic (seeded per test). Every computable question is solved in code — seating, code-language and
+// syllogism answers are found by exhaustive search, dice by enumerating all pairings, cubes by counting every
+// small cube — so answers are correct by construction. Verbal items come from scripts/oir-bank.mjs.
 // Tests 11–15 go live immediately; 16–110 release five at a time every Sunday 00:00 IST.
 import fs from "node:fs";
 import * as bank from "./oir-bank.mjs";
 
 const DIR = new URL("../api/_tests/", import.meta.url);
 const FIRST = 11, LAST = 110, LIVE_UNTIL = 15, PER_WEEK = 5;
-const FIRST_SUNDAY = "2026-09-27"; // first weekly drop
+const FIRST_SUNDAY = "2026-09-27";
 
 // ---------- helpers ----------
 let rnd;
@@ -20,14 +21,20 @@ const sample = (a, n) => shuffle(a).slice(0, n);
 const AZ = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const ch = (p) => AZ[p - 1];
 const pos = (c) => AZ.indexOf(c) + 1;
-const wrap = (p) => ((p - 1 + 260) % 26) + 1;
-const sgn = (n) => (n < 0 ? `− ${-n}` : `+ ${n}`);
+const wrap = (p) => ((((p - 1) % 26) + 26) % 26) + 1;
 const ord = (n) => n + (n % 100 >= 11 && n % 100 <= 13 ? "th" : ["th", "st", "nd", "rd"][n % 10] || "th");
 const list = (a) => a.join(", ");
+const gcd = (a, b) => (b ? gcd(b, a % b) : Math.abs(a));
+const lcm = (a, b) => (a / gcd(a, b)) * b;
+const mixed = (num, den) => { const w = Math.floor(num / den), r = num % den; if (!r) return `${w}`; const g = gcd(r, den); return `${w ? w + " " : ""}${r / g}/${den / g}`; };
+const title = (w) => w[0] + w.slice(1).toLowerCase();
+const DAY = 86400000;
+const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const fmtDate = (d) => `${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+const bad = (s) => /undefined|NaN|Infinity/.test(String(s));
 
-// Multiple choice with the correct answer first; wrongs are de-duplicated and the options shuffled.
 function mc(q, correct, wrongs, explanation) {
-  const bad = (s) => /undefined|NaN|Infinity/.test(s);
   const opts = [String(correct)];
   if (bad(opts[0]) || bad(q) || bad(explanation)) return null;
   for (const w of wrongs) { const s = String(w); if (!opts.includes(s) && !bad(s)) opts.push(s); if (opts.length === 4) break; }
@@ -35,636 +42,891 @@ function mc(q, correct, wrongs, explanation) {
   const options = shuffle(opts);
   return { q, options, answer: options.indexOf(String(correct)), explanation };
 }
-// Plausible wrong numbers: rule-based mistakes first, then near misses.
-const nearNums = (ans, extra = [], step = 1) => [...extra, ...shuffle([ans + step, ans - step, ans + 2 * step, ans - 2 * step, ans + 3 * step, ans + 10, ans - 10])].filter((x) => x !== ans && (ans < 0 || x >= 0));
+const nearNums = (ans, extra = [], step = 1) => [...extra, ...shuffle([ans + step, ans - step, ans + 2 * step, ans - 2 * step, ans + 3 * step, ans - 3 * step])].filter((x) => x !== ans && Number.isFinite(x) && (ans < 0 || x >= 0));
+function permutations(arr) { if (arr.length <= 1) return [arr.slice()]; const out = []; arr.forEach((x, i) => { for (const p of permutations([...arr.slice(0, i), ...arr.slice(i + 1)])) out.push([x, ...p]); }); return out; }
 
-// ---------- number series ----------
-const primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113];
-const powForms = [
-  [(n) => n * n, (n) => `${n}²`, "the squares of consecutive numbers"],
-  [(n) => n ** 3, (n) => `${n}³`, "the cubes of consecutive numbers"],
-  [(n) => n * n + 1, (n) => `${n}² + 1`, "n² + 1 for consecutive n"],
-  [(n) => n * n - 1, (n) => `${n}² − 1`, "n² − 1 for consecutive n"],
-  [(n) => n * n + 2, (n) => `${n}² + 2`, "n² + 2 for consecutive n"],
-  [(n) => n * n - 2, (n) => `${n}² − 2`, "n² − 2 for consecutive n"],
-  [(n) => n ** 3 + 1, (n) => `${n}³ + 1`, "n³ + 1 for consecutive n"],
-  [(n) => n ** 3 - 1, (n) => `${n}³ − 1`, "n³ − 1 for consecutive n"],
-  [(n) => n * n + n, (n) => `${n} × ${n + 1}`, "n × (n + 1) for consecutive n"],
-  [(n) => n ** 3 - n, (n) => `${n}³ − ${n}`, "n³ − n for consecutive n"],
-  [(n) => n ** 3 + n, (n) => `${n}³ + ${n}`, "n³ + n for consecutive n"],
-  [(n) => 2 * n * n, (n) => `2 × ${n}²`, "twice the square of consecutive numbers"],
-];
-// Each returns { seq (answer last), expl, extra wrongs } or null. `missing` families can hide a middle term.
-const primeIdentity = (p) => `${p}`;
-const seriesFamilies = {
-  linear() {
-    const a = pick([2, 2, 3]), b = pick([-3, -2, -1, 1, 2, 3, 4, 5]), s = ri(2, 9), n = a === 2 ? 6 : 5;
-    const seq = [s]; while (seq.length < n) seq.push(seq.at(-1) * a + b);
-    if (seq.some((x) => x <= 0)) return null;
+// ================= NUMBER SERIES (hard) =================
+const PRIMES = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149];
+const digitSum = (n) => String(n).split("").reduce((a, b) => a + +b, 0);
+const digitProd = (n) => String(n).split("").reduce((a, b) => a * +b, 1);
+// Each returns { seq, rule, calc (how the last term follows), extra (plausible wrong answers for the last term) }.
+const SERIES = {
+  mulAddInc() {
+    const a = pick([2, 3]), k0 = ri(1, 4), dir = pick([1, -1]), s = ri(3, 12);
+    const seq = [s]; for (let i = 0; i < 5; i++) seq.push(seq.at(-1) * a + dir * (k0 + i));
+    if (seq.some((x) => x <= 0) || seq.at(-1) > 30000) return null;
+    const p = seq.at(-2), k = k0 + 4, op = dir > 0 ? "+" : "−";
+    return { seq, rule: `each term is multiplied by ${a} and then ${op} ${k0}, ${op} ${k0 + 1}, ${op} ${k0 + 2}, … (the adjustment grows by 1 each step)`, calc: `${p} × ${a} ${op} ${k}`, extra: [p * a + dir * (k - 1), p * a + dir * (k + 1), p * a] };
+  },
+  mulInc() {
+    const v = pick(["plus", "minus", "none"]), m0 = v === "minus" ? 2 : ri(1, 3), s = ri(1, 14);
+    const adj = (m) => (v === "plus" ? m : v === "minus" ? -(m - 1) : 0);
+    const seq = [s]; for (let i = 0; i < 5; i++) { const m = m0 + i; seq.push(seq.at(-1) * m + adj(m)); }
+    if (seq.some((x) => x <= 0) || seq.at(-1) > 60000) return null;
+    const m = m0 + 4, p = seq.at(-2);
+    const d = v === "plus" ? `×${m0} + ${m0}, ×${m0 + 1} + ${m0 + 1}, ×${m0 + 2} + ${m0 + 2}, …` : v === "minus" ? `×${m0} − ${m0 - 1}, ×${m0 + 1} − ${m0}, ×${m0 + 2} − ${m0 + 1}, …` : `×${m0}, ×${m0 + 1}, ×${m0 + 2}, …`;
+    return { seq, rule: `the steps are ${d}`, calc: `${p} × ${m}${adj(m) ? (adj(m) > 0 ? ` + ${adj(m)}` : ` − ${-adj(m)}`) : ""}`, extra: [p * (m - 1) + adj(m - 1), p * (m + 1) + adj(m + 1), p * m + adj(m) + 1] };
+  },
+  diffPattern() {
+    const kind = pick(["sq", "cube", "prime", "tri", "fib"]);
+    let diffs, name;
+    if (kind === "sq") { const n0 = ri(2, 7); diffs = [0, 1, 2, 3, 4].map((i) => (n0 + i) ** 2); name = "consecutive perfect squares"; }
+    else if (kind === "cube") { const n0 = ri(1, 3); diffs = [0, 1, 2, 3, 4].map((i) => (n0 + i) ** 3); name = "consecutive cubes"; }
+    else if (kind === "prime") { const i0 = ri(1, 10); diffs = PRIMES.slice(i0, i0 + 5); name = "consecutive prime numbers"; }
+    else if (kind === "tri") { const n0 = ri(2, 6); diffs = [0, 1, 2, 3, 4].map((i) => ((n0 + i) * (n0 + i + 1)) / 2); name = "triangular numbers"; }
+    else { const a = ri(1, 4), b = ri(a + 1, 7); diffs = [a, b]; while (diffs.length < 5) diffs.push(diffs.at(-1) + diffs.at(-2)); name = "a Fibonacci-type sequence (each difference is the sum of the previous two)"; }
+    const down = kind !== "cube" && rnd() < 0.3, total = diffs.reduce((x, y) => x + y);
+    const seq = [down ? ri(total + 5, total + 150) : ri(1, 40)];
+    for (const d of diffs) seq.push(seq.at(-1) + (down ? -d : d));
+    const p = seq.at(-2), last = diffs.at(-1), sg = down ? -1 : 1;
+    return { seq, rule: `the differences (${list(diffs)}) are ${name}`, calc: `${p} ${down ? "−" : "+"} ${last}`, extra: [p + sg * (2 * diffs[3] - diffs[2]), p + sg * (last + 1), p + sg * (last - 1)] };
+  },
+  secondDiff() {
+    const d0 = ri(1, 6), dd0 = ri(1, 3), r = pick([2, 3]), s = ri(1, 20);
+    const dd = [0, 1, 2, 3].map((i) => dd0 * r ** i), diffs = [d0]; dd.forEach((x) => diffs.push(diffs.at(-1) + x));
+    const seq = [s]; diffs.forEach((d) => seq.push(seq.at(-1) + d));
     const p = seq.at(-2);
-    return { seq, rule: `each term is ${a} times the previous term ${b < 0 ? "minus" : "plus"} ${Math.abs(b)}`, calc: (x) => `${x} × ${a} ${sgn(b)}`, extra: [p * a, p * a + b + a, p * a - b] };
+    return { seq, rule: `the differences are ${list(diffs)}, and the gaps between those differences (${list(dd)}) are each ×${r}`, calc: `${p} + ${diffs.at(-1)}`, extra: [p + diffs[3] + dd[2], p + diffs.at(-1) * 2 - diffs[3] - 1, p + diffs.at(-1) + dd0] };
   },
-  diffAP() {
-    const down = rnd() < 0.3, d = ri(1, 8), k = ri(1, 5), s = down ? ri(120, 250) : ri(1, 30);
-    const seq = [s], diffs = []; for (let i = 0; i < 5; i++) { const dd = d + i * k; diffs.push(dd); seq.push(seq.at(-1) + (down ? -dd : dd)); }
-    if (seq.some((x) => x < 0)) return null;
-    const last = diffs.at(-1), prevd = diffs.at(-2);
-    return { seq, rule: `the differences ${down ? "subtracted" : "added"} are ${list(diffs)} — each ${k} more than the last`, calc: (x) => `${x} ${down ? "−" : "+"} ${last}`, extra: [seq.at(-2) + (down ? -prevd : prevd), seq.at(-1) + (down ? -k : k), seq.at(-2) + (down ? -(last + k) : last + k)] };
-  },
-  powers() {
-    const [f, s, desc] = pick(powForms), n0 = ri(1, 10);
-    const ns = [0, 1, 2, 3, 4, 5].map((i) => n0 + i), seq = ns.map(f);
-    if (seq.some((x) => x < 0) || seq.at(-1) > 5000) return null;
-    const n = ns.at(-1);
-    return { seq, rule: `the terms are ${desc}`, calc: () => s(n), extra: [f(n) + 1, f(n) - 1, f(n + 1), 2 * seq.at(-2) - seq.at(-3)] };
-  },
-  geometric() {
-    const r = pick([2, 3, 4, 5, 6]), s = ri(1, 15), n = r === 2 ? 6 : 5;
-    const seq = [s]; while (seq.length < n) seq.push(seq.at(-1) * r);
+  altGrow() {
+    const start = ri(1, 15), k0 = ri(1, 3), mulFirst = rnd() < 0.5;
+    const ops = [0, 1, 2, 3, 4, 5].map((i) => ({ k: k0 + Math.floor(i / 2) + (mulFirst ? 1 : 0), mul: (i % 2 === 0) === mulFirst }));
+    const seq = [start]; for (const o of ops) seq.push(o.mul ? seq.at(-1) * o.k : seq.at(-1) + o.k);
     if (seq.at(-1) > 50000) return null;
-    if (rnd() < 0.4) { // descending: divide by r
-      seq.reverse(); const p = seq.at(-2);
-      return { seq, rule: `each term is the previous term divided by ${r}`, calc: (x) => `${x} ÷ ${r}`, extra: [p / r + 1, p - p / r, p / (r + 1)].map(Math.round) };
-    }
-    const p = seq.at(-2);
-    return { seq, rule: `each term is ${r} times the previous term`, calc: (x) => `${x} × ${r}`, extra: [p * (r + 1), p * r + p, p * r - s] };
-  },
-  alternating() {
-    const kind = pick(["mul-add", "add-sub", "mul-sub"]), s = ri(2, 10);
-    let a, b, ops;
-    if (kind === "mul-add") { a = pick([2, 3]); b = ri(1, 6); ops = [(x) => x * a, (x) => x + b]; }
-    else if (kind === "add-sub") { a = ri(5, 15); b = ri(1, a - 1); ops = [(x) => x + a, (x) => x - b]; }
-    else { a = pick([2, 3]); b = ri(1, 5); ops = [(x) => x * a, (x) => x - b]; }
-    const names = kind === "mul-add" ? [`× ${a}`, `+ ${b}`] : kind === "add-sub" ? [`+ ${a}`, `− ${b}`] : [`× ${a}`, `− ${b}`];
-    const seq = [s]; for (let i = 0; i < 6; i++) seq.push(ops[i % 2](seq.at(-1)));
-    if (seq.some((x) => x <= 0) || seq.at(-1) > 5000) return null;
-    const p = seq.at(-2), wrongOp = ops[1](p) === seq.at(-1) ? ops[0](p) : ops[1](p);
-    return { seq, rule: `the operations alternate: ${names[0]}, ${names[1]}, ${names[0]}, ${names[1]} and so on`, calc: (x) => `${x} ${names[5 % 2]}`, extra: [wrongOp, seq.at(-1) + 1, seq.at(-1) - 2] };
+    const o = ops.at(-1), p = seq.at(-2), names = ops.slice(0, 4).map((x) => `${x.mul ? "×" : "+"}${x.k}`);
+    return { seq, rule: `the operations alternate between multiplying and adding, with the number growing every two steps: ${list(names)}, …`, calc: `${p} ${o.mul ? "×" : "+"} ${o.k}`, extra: [o.mul ? p + o.k : p * o.k, o.mul ? p * (o.k + 1) : p + o.k + 1, o.mul ? p * (o.k - 1) : p + o.k - 1] };
   },
   interleaved() {
-    const a0 = ri(1, 20), da = ri(2, 9), b0 = ri(30, 90), db = -ri(2, 7);
-    const seq = []; for (let i = 0; i < 8; i++) seq.push(i % 2 === 0 ? a0 + (i / 2) * da : b0 + ((i - 1) / 2) * db);
+    const r = pick([2, 3]), a0 = ri(1, 5), sq = rnd() < 0.5, n0 = ri(2, 6), b0 = ri(20, 60), db = pick([-7, -5, -4, -3, 3, 4, 6]);
+    const A = [0, 1, 2, 3].map((i) => a0 * r ** i), B = [0, 1, 2, 3].map((i) => (sq ? (n0 + i) ** 2 : b0 + i * db));
+    const seq = [A[0], B[0], A[1], B[1], A[2], B[2], A[3], B[3]];
     if (seq.some((x) => x <= 0)) return null;
-    return { seq, rule: `two series alternate: ${a0}, ${a0 + da}, ${a0 + 2 * da}, … (+${da}) and ${b0}, ${b0 + db}, ${b0 + 2 * db}, … (${db})`, calc: () => `${seq[5]} − ${-db}`, extra: [seq[6] + da, seq[5] + db * 2, seq[7] - db], nomiss: true };
+    const bRule = sq ? `the squares ${B.slice(0, 3).join(", ")}, …` : `${B.slice(0, 3).join(", ")}, … (${db > 0 ? "+" : ""}${db} each time)`;
+    return { seq, rule: `two series alternate: ${A.slice(0, 3).join(", ")}, … (×${r} each time) and ${bRule}`, calc: sq ? `${n0 + 3}²` : `${B[2]} ${db > 0 ? "+" : "−"} ${Math.abs(db)}`, extra: [A[3] * r, B[2] + 2 * db, sq ? (n0 + 4) ** 2 : B[3] + 1] };
   },
-  diffGeometric() {
-    const s = ri(1, 20), d = ri(1, 5), r = pick([2, 3]);
-    const seq = [s]; let dd = d; const diffs = []; for (let i = 0; i < 5; i++) { diffs.push(dd); seq.push(seq.at(-1) + dd); dd *= r; }
-    const last = diffs.at(-1);
-    return { seq, rule: `the differences ${list(diffs)} are each ${r} times the previous difference`, calc: (x) => `${x} + ${last}`, extra: [seq.at(-2) + diffs.at(-2) * (r + 1), seq.at(-2) * r, seq.at(-1) + 1] };
+  powerMix() {
+    const k = pick(["cube+sq", "cube-sq", "altSqCube", "sqPlusNext", "nn", "cubeMinus2n"]);
+    const n0 = ri(1, 9), ns = [0, 1, 2, 3, 4, 5].map((i) => n0 + i);
+    if (k === "altSqCube") {
+      const seq = ns.map((n, i) => (i % 2 ? n ** 3 : n ** 2)), n = ns.at(-1);
+      return { seq, rule: `the terms are alternately squares and cubes of consecutive numbers (${ns[0]}², ${ns[1]}³, ${ns[2]}², …)`, calc: `${n}³`, extra: [n * n, (n + 1) ** 2, n ** 3 + n] };
+    }
+    const F = { "cube+sq": [(n) => n ** 3 + n ** 2, (n) => `${n}³ + ${n}²`, "n³ + n²"], "cube-sq": [(n) => n ** 3 - n ** 2, (n) => `${n}³ − ${n}²`, "n³ − n²"], sqPlusNext: [(n) => n * n + (n + 1) ** 2, (n) => `${n}² + ${n + 1}²`, "n² + (n + 1)²"], nn: [(n) => n ** n, (n) => `${n}^${n}`, "nⁿ"], cubeMinus2n: [(n) => n ** 3 - 2 * n, (n) => `${n}³ − 2×${n}`, "n³ − 2n"] }[k];
+    if (k === "nn" && n0 > 2) return null;
+    const [f, s, d] = F, seq = (k === "nn" ? ns.slice(0, 5) : ns).map(f), n = k === "nn" ? ns[4] : ns.at(-1);
+    if (seq.at(-1) > 60000 || seq.some((x) => x < 0)) return null;
+    return { seq, rule: `the terms follow ${d} for n = ${ns[0]}, ${ns[1]}, ${ns[2]}, …`, calc: s(n), extra: [f(n) + n, f(n) - 1, f(n + 1)] };
   },
-  fibonacci() {
-    const three = rnd() < 0.35, seq = three ? [ri(1, 3), ri(1, 4), ri(2, 6)] : [ri(1, 9), ri(2, 12)];
-    const len = three ? 8 : 8;
-    while (seq.length < len) seq.push(three ? seq.at(-1) + seq.at(-2) + seq.at(-3) : seq.at(-1) + seq.at(-2));
-    const [a, b, c] = seq.slice(-4, -1).reverse();
-    return { seq, rule: three ? "each term is the sum of the previous three terms" : "each term is the sum of the previous two terms", calc: () => (three ? `${c} + ${b} + ${a}` : `${b} + ${a}`), extra: [a + b + 1, 2 * a, a + c], nomiss: true };
+  productChain() {
+    const kind = pick(["prod", "prodPlus", "trib"]);
+    const seq = kind === "trib" ? [ri(1, 3), ri(1, 4), ri(2, 6)] : [ri(1, 3), ri(2, 4)];
+    const len = kind === "trib" ? 8 : 6;
+    while (seq.length < len) { const [a, b, c] = [seq.at(-1), seq.at(-2), seq.at(-3)]; seq.push(kind === "trib" ? a + b + c : kind === "prod" ? a * b : a * b + 1); }
+    if (seq.at(-1) > 100000 || seq.at(-1) < 20) return null;
+    const [a, b, c] = [seq.at(-2), seq.at(-3), seq.at(-4)];
+    const rule = kind === "trib" ? "each term is the sum of the previous three terms" : kind === "prod" ? "each term is the product of the previous two terms" : "each term is the product of the previous two terms plus 1";
+    const calc = kind === "trib" ? `${c} + ${b} + ${a}` : `${b} × ${a}${kind === "prodPlus" ? " + 1" : ""}`;
+    return { seq, rule, calc, extra: kind === "trib" ? [a + b, a + b + c + 1, 2 * a] : [a * b + (kind === "prod" ? 1 : -1), a + b, a * (b + 1)] };
   },
-  factorialLike() {
-    const s = ri(1, 8), m0 = ri(1, 3), c = pick(["none", "plus", "minus1"]);
-    const add = (m) => (c === "plus" ? m : c === "minus1" ? -1 : 0);
-    const seq = [s]; for (let i = 0; i < 5; i++) seq.push(seq.at(-1) * (m0 + i) + add(m0 + i));
-    if (seq.at(-1) > 50000 || seq.some((x) => x <= 0)) return null;
-    const m = m0 + 4, tail = c === "plus" ? `, then add the same number (×${m0} + ${m0}, ×${m0 + 1} + ${m0 + 1}, …)` : c === "minus1" ? ", then subtract 1" : "";
-    return { seq, rule: `the multipliers increase by one each step (×${m0}, ×${m0 + 1}, ×${m0 + 2}, …)${tail}`, calc: (x) => `${x} × ${m}${add(m) ? ` ${sgn(add(m))}` : ""}`, extra: [seq.at(-2) * (m - 1) + add(m - 1), seq.at(-2) * (m + 1), seq.at(-1) + 1] };
+  digits() {
+    const prod = rnd() < 0.4, s = ri(12, 89);
+    const f = (x) => x + (prod ? digitProd(x) : digitSum(x));
+    const seq = [s]; while (seq.length < 6) seq.push(f(seq.at(-1)));
+    if (prod && seq.some((x) => String(x).includes("0"))) return null;
+    const p = seq.at(-2), d = prod ? digitProd(p) : digitSum(p);
+    return { seq, rule: `each term is the previous term plus the ${prod ? "product" : "sum"} of its digits`, calc: `${p} + (${String(p).split("").join(prod ? " × " : " + ")}) = ${p} + ${d}`, extra: [p + d + 1, p + (prod ? digitSum(p) : digitProd(p) || d + 2), p + d - 1] };
   },
-  primeBased() {
-    const i0 = ri(1, 12), ps = primes.slice(i0, i0 + 6);
-    const [f, s, desc] = pick([[(p) => p * p, (p) => `${p}²`, "the squares of consecutive prime numbers"], [(p) => 2 * p + 1, (p) => `2 × ${p} + 1`, "2p + 1 for consecutive primes p"], [(p) => p + 10, (p) => `${p} + 10`, "consecutive prime numbers plus 10"], [(p) => 3 * p, (p) => `3 × ${p}`, "three times consecutive prime numbers"], [(p) => p, primeIdentity, "consecutive prime numbers"], [(p) => p * p - 1, (p) => `${p}² − 1`, "one less than the squares of consecutive primes"], [(p) => 2 * p - 1, (p) => `2 × ${p} − 1`, "2p − 1 for consecutive primes p"]]);
-    const seq = ps.map(f), p = ps.at(-1), q = ps.at(-2);
-    if (s === primeIdentity) return { seq, rule: `the terms are ${desc}`, calc: () => `the prime after ${q}`, extra: [q + 2 === p ? p + 2 : q + 2, p + 1, p + 2].filter((x) => x !== p), nomiss: true };
-    return { seq, rule: `the terms are ${desc}`, calc: () => s(p), extra: [f(q + 2), f(p + 1), f(p) + 2], nomiss: true };
+  primeProduct() {
+    const i0 = ri(0, 22), ps = PRIMES.slice(i0, i0 + 7), k = pick(["prod", "sqMinus", "sumSq"]);
+    const f = { prod: (i) => ps[i] * ps[i + 1], sqMinus: (i) => ps[i] ** 2 - ps[i], sumSq: (i) => ps[i] ** 2 + 1 }[k];
+    const seq = [0, 1, 2, 3, 4, 5].map(f), p = ps[5], q = ps[6];
+    const rule = { prod: "each term is the product of two consecutive primes", sqMinus: "each term is p² − p for consecutive primes p", sumSq: "each term is p² + 1 for consecutive primes p" }[k];
+    const calc = { prod: `${p} × ${q}`, sqMinus: `${p}² − ${p}`, sumSq: `${p}² + 1` }[k];
+    return { seq, rule, calc, extra: [seq.at(-1) + 2, k === "prod" ? p * (p + 2) : (p + 1) ** 2 - (p + 1), seq.at(-1) - 2] };
   },
 };
-const MISSABLE = ["linear", "diffAP", "powers", "geometric", "diffGeometric", "factorialLike"];
+const MISSABLE = ["mulAddInc", "mulInc", "diffPattern", "secondDiff", "powerMix", "primeProduct", "digits"];
 
-function numberSeries(family, missing) {
-  const r = seriesFamilies[family]();
-  if (!r) return null;
-  const { seq } = r;
-  if (!missing) {
-    const ans = seq.at(-1);
-    return mc(`Find the next number: ${list(seq.slice(0, -1))}, ?`, ans, nearNums(ans, r.extra), `Here ${r.rule}. Next: ${r.calc(seq.at(-2))} = ${ans}.`);
-  }
-  const h = ri(2, seq.length - 2), ans = seq[h];
-  const shown = seq.map((x, i) => (i === h ? "?" : x));
-  return mc(`Find the missing number: ${list(shown)}`, ans, nearNums(ans, [Math.round((seq[h - 1] + seq[h + 1]) / 2), ans + (seq[h + 1] - seq[h]) - (seq[h] - seq[h - 1])].filter((x) => x > 0 && x !== seq[h - 1] && x !== seq[h + 1])), `Here ${r.rule}, so the missing term is ${ans}.`);
+function seriesNext(fam) {
+  const r = SERIES[fam](); if (!r) return null;
+  const ans = r.seq.at(-1);
+  return mc(`Find the next number: ${list(r.seq.slice(0, -1))}, ?`, ans, nearNums(ans, r.extra), `Here ${r.rule}. Next: ${r.calc} = ${ans}.`);
+}
+function seriesMissing(fam) {
+  const r = SERIES[fam](); if (!r) return null;
+  const h = ri(2, r.seq.length - 2), ans = r.seq[h];
+  const shown = r.seq.map((x, i) => (i === h ? "?" : x));
+  const avg = Math.round((r.seq[h - 1] + r.seq[h + 1]) / 2);
+  return mc(`Find the missing number: ${list(shown)}`, ans, nearNums(ans, [avg, ans + 2].filter((x) => x !== r.seq[h - 1] && x !== r.seq[h + 1])), `Here ${r.rule}, so the missing term is ${ans}.`);
+}
+function seriesWrong(fam) {
+  const r = SERIES[fam](); if (!r) return null;
+  const seq = [...r.seq], j = ri(1, seq.length - 2), right = seq[j];
+  seq[j] = right + pick([-3, -2, -1, 1, 2, 3, Math.round(right * 0.1) || 4]);
+  if (seq[j] <= 0 || r.seq.includes(seq[j])) return null;
+  const others = shuffle(seq.filter((_, i) => i !== j));
+  return mc(`One number in this series is wrong. Find it: ${list(seq)}`, seq[j], others, `Here ${r.rule}. The term ${seq[j]} should be ${right}.`);
 }
 
-// ---------- letter series ----------
+// ================= LETTER SERIES & CLUSTERS =================
 function letterSeries() {
-  const t = pick(["const", "const", "incr", "alt", "back"]);
-  let steps;
-  if (t === "const") steps = Array(5).fill(ri(2, 6));
-  else if (t === "back") steps = Array(5).fill(-ri(2, 5));
-  else if (t === "incr") { const k = ri(1, 2); steps = [0, 1, 2, 3, 4].map((i) => k + i); }
-  else { const a = ri(1, 5), b = ri(2, 6); if (a === b) return null; steps = [a, b, a, b, a]; }
-  const start = steps[0] > 0 ? ri(1, 26 - steps.reduce((x, y) => x + y)) : ri(-steps.reduce((x, y) => x + y) + 1, 26);
-  const ps = [start]; for (const s of steps) ps.push(ps.at(-1) + s);
+  const t = pick(["incr2", "fibPos", "primePos", "altDir", "interleave", "wrapStep"]);
+  let ps, rule;
+  if (t === "incr2") { const s = ri(1, 3), g0 = ri(1, 2); ps = [s]; for (let i = 0; i < 5; i++) ps.push(ps.at(-1) + g0 + 2 * i); rule = `the gaps are ${list(ps.slice(1).map((p, i) => p - ps[i]))} — increasing by 2`; }
+  else if (t === "fibPos") { const a = ri(1, 2), b = ri(2, 3); ps = [a, b]; while (ps.length < 6) ps.push(ps.at(-1) + ps.at(-2)); rule = `each position is the sum of the previous two (${list(ps)})`; }
+  else if (t === "primePos") { const i0 = ri(0, 3); ps = PRIMES.slice(i0, i0 + 6); rule = `the positions are consecutive primes (${list(ps)})`; }
+  else if (t === "altDir") { const a = ri(4, 7), b = ri(1, 3), s = ri(1, 8); ps = [s]; for (let i = 0; i < 5; i++) ps.push(ps.at(-1) + (i % 2 ? -b : a)); rule = `the letters move alternately ${a} forward and ${b} back`; }
+  else if (t === "interleave") { const a0 = ri(1, 6), da = ri(2, 4), b0 = ri(20, 26), db = -ri(1, 3); ps = []; for (let i = 0; i < 6; i++) ps.push(i % 2 ? b0 + ((i - 1) / 2) * db : a0 + (i / 2) * da); rule = `two series alternate: ${ch(ps[0])}, ${ch(ps[2])}, ${ch(ps[4])} (+${da}) and ${ch(ps[1])}, ${ch(ps[3])}, ${ch(ps[5])} (${db})`; }
+  else { const k = ri(5, 9), s = ri(10, 24); ps = [s]; for (let i = 0; i < 5; i++) ps.push(wrap(ps.at(-1) + k)); rule = `each letter is ${k} places after the previous one, wrapping from Z back to A`; }
   if (ps.some((p) => p < 1 || p > 26)) return null;
-  const ans = ps.at(-1), shown = ps.slice(0, -1).map(ch);
-  const rule = t === "alt" ? `the letters move alternately +${steps[0]} and +${steps[1]}` : t === "incr" ? `the gaps grow by one each time (+${list(steps.slice(0, -1).map(String))}, …)` : `each letter is ${Math.abs(steps[0])} places ${steps[0] > 0 ? "after" : "before"} the previous one`;
-  const wrongs = [ans + 1, ans - 1, ans + 2, ans - 2].filter((p) => p >= 1 && p <= 26).map(ch);
-  return mc(`Find the next letter: ${list(shown)}, ?`, ch(ans), wrongs, `By alphabet positions (${list(ps.slice(0, -1))}), ${rule}: ${ch(ps.at(-2))}(${ps.at(-2)}) ${sgn(steps.at(-1))} = ${ch(ans)}(${ans}).`);
+  const ans = ps.at(-1);
+  return mc(`Find the next letter: ${list(ps.slice(0, -1).map(ch))}, ?`, ch(ans), [wrap(ans + 1), wrap(ans - 1), wrap(ans + 2), wrap(ans - 2)].map(ch), `By alphabet positions, ${rule}; so the next letter is ${ch(ans)} (${ans}).`);
 }
 
-function letterGroups() {
-  const t = pick(["pair", "pair", "triple", "letnum"]);
-  if (t === "pair") {
-    const k1 = pick([1, 2, 3, 4]), k2 = pick([-3, -2, -1, 1, 2, 3, 4]);
-    const a = k1 > 0 ? ri(1, 26 - 4 * k1) : 0, b = k2 > 0 ? ri(1, 26 - 4 * k2) : ri(1 - 4 * k2, 26);
-    const g = [0, 1, 2, 3, 4].map((i) => ch(a + i * k1) + ch(b + i * k2));
-    const ans = g[4], fa = a + 4 * k1, fb = b + 4 * k2;
-    const wrongs = [[fa + 1, fb], [fa, fb + (k2 > 0 ? 1 : -1)], [fa - 1, fb - 1], [fa + 1, fb + 1]].filter(([x, y]) => x >= 1 && x <= 26 && y >= 1 && y <= 26).map(([x, y]) => ch(x) + ch(y));
-    return mc(`Find the next pair: ${list(g.slice(0, 4))}, ?`, ans, wrongs, `The first letters move ${k1} forward each time and the second letters move ${Math.abs(k2)} ${k2 > 0 ? "forward" : "back"}: next is ${ans}.`);
-  }
+function letterCluster() {
+  const t = pick(["triple", "triple", "letnum", "pattern", "pattern"]);
   if (t === "triple") {
-    const gap = ri(1, 3), start = ri(1, 26 - (3 + gap) * 3 - 2);
-    if (start < 1) return null;
-    const g = [0, 1, 2, 3].map((i) => { const s = start + i * (3 + gap); return ch(s) + ch(s + 1) + ch(s + 2); });
-    const s4 = start + 3 * (3 + gap), ans = g[3];
-    const wrongs = [ch(s4 - 1) + ch(s4) + ch(s4 + 1), ch(s4 + 1) + ch(s4 + 2) + ch(s4 + 3), ch(s4) + ch(s4 + 2) + ch(s4 + 1)];
-    return mc(`Find the next group: ${list(g.slice(0, 3))}, ?`, ans, wrongs, `Each group is three consecutive letters, and ${gap} letter${gap > 1 ? "s are" : " is"} skipped between groups: after ${g[2]} comes ${ans}.`);
+    const steps = [pick([2, 3, 4, 5]), pick([-3, -2, -1, 1, 2]), pick([-4, -3, 3, 4, 5])], starts = [ri(1, 10), ri(14, 26), ri(1, 26)];
+    const g = [0, 1, 2, 3, 4].map((i) => steps.map((s, j) => ch(wrap(starts[j] + i * s))).join(""));
+    if (new Set(g).size < 5) return null;
+    const ans = g[4], tw = (k, d) => [...ans].map((c, i) => (i === k ? ch(wrap(pos(c) + d)) : c)).join("");
+    const sg = (s) => (s > 0 ? `+${s}` : `${s}`);
+    return mc(`Find the next group: ${list(g.slice(0, 4))}, ?`, ans, [tw(0, 1), tw(1, -1), tw(2, 1), tw(1, 1), tw(2, -1)], `Each position moves on its own: 1st letter ${sg(steps[0])}, 2nd letter ${sg(steps[1])}, 3rd letter ${sg(steps[2])} (wrapping round the alphabet), giving ${ans}.`);
   }
-  const k = ri(2, 5), rev = rnd() < 0.4, a = ri(1, 26 - 4 * k);
-  const val = (p) => (rev ? 27 - p : p);
-  const g = [0, 1, 2, 3, 4].map((i) => ch(a + i * k) + val(a + i * k));
-  const p = a + 4 * k, ans = g[4];
-  const wrongs = [ch(p) + (27 - val(p)) , ch(p) + (val(p) + 1), ch(p + 1) + val(p + 1), ch(p - 1) + val(p)].filter((w) => w !== ans);
-  return mc(`Find the next term: ${list(g.slice(0, 4))}, ?`, ans, wrongs, `The letters move ${k} forward each time, and each number is the letter's position in the ${rev ? "reversed alphabet (A = 26 … Z = 1)" : "alphabet"}: ${ch(p)} → ${val(p)}.`);
+  if (t === "letnum") {
+    const k = ri(2, 4), s = ri(1, 6), m = pick([2, 3]), n0 = ri(1, 4), back = ri(1, 3), e0 = ri(20, 26);
+    const g = [0, 1, 2, 3, 4].map((i) => ch(wrap(s + i * k)) + n0 * m ** i + ch(wrap(e0 - i * back)));
+    const ans = g[4], num = n0 * m ** 4, L1 = ch(wrap(s + 4 * k)), L2 = ch(wrap(e0 - 4 * back));
+    return mc(`Find the next term: ${list(g.slice(0, 4))}, ?`, ans, [L1 + num * m + L2, L1 + num + ch(wrap(e0 - 3 * back)), ch(wrap(s + 4 * k + 1)) + num + L2, L1 + (num + m) + L2], `The first letter moves +${k}, the number is ×${m} each time and the last letter moves −${back}: next is ${ans}.`);
+  }
+  const L = ri(3, 5), unit = Array.from({ length: L }, () => pick(["a", "b", "c", "d"].slice(0, L === 3 ? 3 : 4))).join("");
+  if (new Set(unit).size < 2) return null;
+  const full = unit.repeat(Math.ceil(16 / L)).slice(0, ri(13, 16));
+  const blanks = sample([...Array(full.length).keys()], 5).sort((a, b) => a - b);
+  const shown = [...full].map((c, i) => (blanks.includes(i) ? "_" : c)).join("");
+  const ans = blanks.map((i) => full[i]).join("");
+  const periodic = (s) => { for (let p = 1; p <= 5; p++) if ([...s].every((c, i) => i < p || c === s[i - p])) return true; return false; };
+  const fill = (w) => { let k = 0; return [...shown].map((c) => (c === "_" ? w[k++] : c)).join(""); };
+  const wrongs = [];
+  for (let tries = 0; tries < 60 && wrongs.length < 3; tries++) {
+    const w = [...ans]; const i = ri(0, 4), j = ri(0, 4);
+    if (rnd() < 0.5) [w[i], w[j]] = [w[j], w[i]]; else w[i] = pick(["a", "b", "c", "d"]);
+    const s = w.join(""); if (s !== ans && !wrongs.includes(s) && !periodic(fill(s))) wrongs.push(s);
+  }
+  return mc(`Which set of letters, placed in the blanks in order, completes the series? ${shown}`, ans, wrongs, `The block "${unit}" repeats: ${full}. The blanks are ${[...ans].join(", ")}.`);
 }
 
-// ---------- analogies / odd one out ----------
-const numFns = [
-  { f: (n) => n * n, s: (n) => `${n}²`, d: "n²" },
-  { f: (n) => n ** 3, s: (n) => `${n}³`, d: "n³" },
-  { f: (n) => n * n + 1, s: (n) => `${n}² + 1`, d: "n² + 1" },
-  { f: (n) => n * n - 1, s: (n) => `${n}² − 1`, d: "n² − 1" },
-  { f: (n) => n ** 3 + 1, s: (n) => `${n}³ + 1`, d: "n³ + 1" },
+// ================= ANALOGIES / ODD ONE OUT =================
+const NUMF = [
+  { f: (n) => n * n + n + 1, s: (n) => `${n}² + ${n} + 1`, d: "n² + n + 1" },
+  { f: (n) => n ** 3 - n * n, s: (n) => `${n}³ − ${n}²`, d: "n³ − n²" },
+  { f: (n) => n ** 3 + n * n, s: (n) => `${n}³ + ${n}²`, d: "n³ + n²" },
+  { f: (n) => 2 * n * n - 1, s: (n) => `2 × ${n}² − 1`, d: "2n² − 1" },
+  { f: (n) => 2 * n * n + 1, s: (n) => `2 × ${n}² + 1`, d: "2n² + 1" },
+  { f: (n) => 3 * n * n - 1, s: (n) => `3 × ${n}² − 1`, d: "3n² − 1" },
+  { f: (n) => n * n - 2 * n, s: (n) => `${n}² − 2 × ${n}`, d: "n² − 2n" },
+  { f: (n) => n * n + (n + 1) ** 2, s: (n) => `${n}² + ${n + 1}²`, d: "n² + (n + 1)²" },
+  { f: (n) => n ** 3 + 2 * n, s: (n) => `${n}³ + 2 × ${n}`, d: "n³ + 2n" },
+  { f: (n) => (n - 1) ** 3, s: (n) => `(${n} − 1)³`, d: "(n − 1)³" },
+  { f: (n) => n * (n + 1) * 2, s: (n) => `2 × ${n} × ${n + 1}`, d: "2n(n + 1)" },
   { f: (n) => n ** 3 - 1, s: (n) => `${n}³ − 1`, d: "n³ − 1" },
-  { f: (n) => n * n + n, s: (n) => `${n}² + ${n}`, d: "n² + n" },
-  { f: (n) => n * n - n, s: (n) => `${n}² − ${n}`, d: "n² − n" },
-  { f: (n) => n ** 3 - n, s: (n) => `${n}³ − ${n}`, d: "n³ − n" },
-  { f: (n) => n ** 3 + n, s: (n) => `${n}³ + ${n}`, d: "n³ + n" },
-  { f: (n) => 2 * n * n, s: (n) => `2 × ${n}²`, d: "2n²" },
-  { f: (n) => (n + 1) ** 2, s: (n) => `(${n} + 1)²`, d: "(n + 1)²" },
-  { f: (n) => n * n + 2 * n, s: (n) => `${n} × ${n + 2}`, d: "n × (n + 2)" },
-  { f: (n) => n * n + 3, s: (n) => `${n}² + 3`, d: "n² + 3" },
+  { f: (n) => n * n + 5, s: (n) => `${n}² + 5`, d: "n² + 5" },
+];
+const DIGF = [
+  { f: (n) => digitProd(n), s: (n) => `${String(n).split("").join(" × ")}`, d: "the product of its digits" },
+  { f: (n) => digitSum(n) ** 2, s: (n) => `(${String(n).split("").join(" + ")})²`, d: "the square of the sum of its digits" },
+  { f: (n) => +String(n).split("").reverse().join("") * 2, s: (n) => `2 × ${String(n).split("").reverse().join("")}`, d: "twice the number with its digits reversed" },
+  { f: (n) => String(n).split("").reduce((a, b) => a + b * b, 0), s: (n) => `${String(n).split("").map((d) => d + "²").join(" + ")}`, d: "the sum of the squares of its digits" },
 ];
 function numberAnalogy() {
-  const fn = pick(numFns), x = ri(2, 12), y = ri(2, 13);
-  if (x === y) return null;
-  const fx = fn.f(x);
-  if (numFns.some((g) => g !== fn && g.f(x) === fx)) return null; // the pair must pin down one rule
-  const ans = fn.f(y), wrongs = shuffle(numFns.filter((g) => g !== fn).map((g) => g.f(y)));
-  return mc(`${x} : ${fx} :: ${y} : ?`, ans, wrongs, `${x} → ${fn.s(x)} = ${fx}; likewise ${y} → ${fn.s(y)} = ${ans}.`);
+  const digit = rnd() < 0.35, fam = digit ? DIGF : NUMF, fn = pick(fam);
+  const gen = () => (digit ? ri(21, 98) : ri(3, 13));
+  const x = gen(), y = gen();
+  if (x === y || (digit && (String(x).includes("0") || String(y).includes("0")))) return null;
+  if (fam.some((g) => g !== fn && g.f(x) === fn.f(x))) return null;
+  const ans = fn.f(y);
+  if (rnd() < 0.5) return mc(`${x} : ${fn.f(x)} :: ${y} : ?`, ans, shuffle(fam.filter((g) => g !== fn)).map((g) => g.f(y)), `${x} → ${fn.s(x)} = ${fn.f(x)} (${fn.d}); likewise ${y} → ${fn.s(y)} = ${ans}.`);
+  const zs = shuffle([...Array(digit ? 70 : 11).keys()].map((i) => i + (digit ? 23 : 3))).filter((z) => z !== x && z !== y && !String(z).includes("0"));
+  const wr = [];
+  for (const z of zs) { const g = pick(fam.filter((h) => h !== fn)); if (g.f(z) !== fn.f(z)) wr.push(`${z} : ${g.f(z)}`); if (wr.length === 3) break; }
+  return mc(`Which pair has the same relationship as ${x} : ${fn.f(x)}?`, `${y} : ${ans}`, wr, `In ${x} : ${fn.f(x)}, the second number is ${fn.d} (${fn.s(x)}). Only ${y} : ${ans} follows this (${fn.s(y)} = ${ans}).`);
 }
 
-const GENERIC = new Set(["Which one does not belong with the others?", "Which number does not belong with the others?", "Which pair does not belong with the others?"]);
-const isSq = (n) => Number.isInteger(Math.sqrt(n));
-const isPrime = (n) => n > 1 && [...Array(Math.floor(Math.sqrt(n)) + 1).keys()].slice(2).every((d) => n % d);
-const digitSum = (n) => String(n).split("").reduce((a, b) => a + +b, 0);
+// Letter-string transforms shared by the letter analogy and coding questions.
+const shift = (c, k) => ch(wrap(pos(c) + k));
+const VOW = "AEIOU";
+const TRANSFORMS = [
+  ...[1, 2].map((d) => ({ f: (w) => [...w].map((c, i) => shift(c, d * (i + 1))).join(""), d: d === 1 ? "the 1st letter moves +1, the 2nd +2, the 3rd +3, and so on" : "the 1st letter moves +2, the 2nd +4, the 3rd +6, and so on" })),
+  { f: (w) => [...w].map((c, i) => shift(c, -(i + 1))).join(""), d: "the 1st letter moves −1, the 2nd −2, the 3rd −3, and so on" },
+  ...[1, 2, -1].map((k) => ({ f: (w) => [...w].reverse().map((c) => shift(c, k)).join(""), d: `the word is reversed and every letter moves ${k > 0 ? "+" : ""}${k}` })),
+  { f: (w) => [...w].map((c) => ch(27 - pos(c))).reverse().join(""), d: "each letter is replaced by its opposite (A↔Z, B↔Y, …) and the result is reversed" },
+  ...[2, 3].map((k) => ({ f: (w) => [...w].map((c, i) => shift(c, i % 2 ? -k : k)).join(""), d: `letters move alternately +${k} and −${k}` })),
+  ...[1, -1].map((k) => ({ f: (w) => { const a = [...w]; for (let i = 0; i + 1 < a.length; i += 2) [a[i], a[i + 1]] = [a[i + 1], a[i]]; return a.map((c) => shift(c, k)).join(""); }, d: `each pair of adjacent letters is swapped and then every letter moves ${k > 0 ? "+" : ""}${k}` })),
+  { f: (w) => { const h = Math.floor(w.length / 2); return [...w.slice(0, h)].reverse().join("") + [...w.slice(h)].reverse().join(""); }, d: "the first half and the second half of the word are each written in reverse" },
+  { f: (w) => [...w].map((c) => shift(c, VOW.includes(c) ? 1 : -1)).join(""), d: "every vowel moves one letter forward and every consonant one letter back" },
+  { f: (w) => [...w].map((c) => shift(c, w.length)).join(""), d: "every letter moves forward by the number of letters in the word" },
+];
+const WORDS = "CADET RIFLE PILOT MARCH BADGE SALUTE MEDAL HONOUR GUARD TROOP SHIELD SWORD ARROW ROCKET RADAR CANNON PATROL BORDER BUNKER JUNGLE DESERT RIVER OCEAN ISLAND FOREST PLANET CLOUD STORM THUNDER WINTER SUMMER SPRING AUTUMN CANDLE MIRROR WINDOW PENCIL BOTTLE TICKET MARKET SCHOOL DOCTOR FARMER SINGER DANCER PAINTER WRITER HUNTER SAILOR KNIGHT CASTLE PALACE TEMPLE BRIDGE TUNNEL TOWER ANCHOR COMPASS SIGNAL MISSION TARGET VICTORY PARADE UNIFORM HELMET JACKET BASKET CARPET BLANKET SILVER COPPER BRONZE MARBLE CRYSTAL TIGER EAGLE FALCON HORSE CAMEL RABBIT MONKEY PARROT LEMON ORANGE CHERRY POTATO TOMATO PEPPER SUGAR BUTTER CHEESE BREAD KNIFE PLATE GLASS FIELD GROUND STREET VILLAGE NATION PEOPLE FAMILY PLAYER CAPTAIN COACH TROPHY CRICKET HOCKEY TENNIS CHESS PUZZLE RIDDLE SECRET CIPHER LETTER NUMBER SYMBOL SCREEN CAMERA ENGINE WHEEL MOTOR GARDEN FLOWER BRAVE VALOUR STRIKE FLIGHT CORPS".split(" ");
+function pickTransform(w1, w2) {
+  const t = pick(TRANSFORMS), a = t.f(w1), b = t.f(w2);
+  if (a === w1) return null;
+  if (TRANSFORMS.some((u) => u !== t && u.f(w1) === a && u.f(w2) !== b)) return null; // the example must pin the rule down
+  return t;
+}
+const tweak = (s) => { const j = ri(0, s.length - 1); return s.slice(0, j) + shift(s[j], pick([1, -1])) + s.slice(j + 1); };
+function letterAnalogy() {
+  const [w1, w2] = sample(WORDS.filter((w) => w.length <= 6), 2), t = pickTransform(w1, w2); if (!t) return null;
+  const ans = t.f(w2), alt = pick(TRANSFORMS.filter((u) => u !== t)).f(w2);
+  return mc(`${w1} : ${t.f(w1)} :: ${w2} : ?`, ans, [alt, tweak(ans), tweak(ans), tweak(alt)], `In the first pair ${t.d}. Applying the same to ${w2} gives ${ans}.`);
+}
+function coding() {
+  const kind = pick(["encode", "encode", "decode", "numeric"]);
+  if (kind === "numeric") {
+    const RULES = [
+      { f: (w) => [...w].reduce((a, c) => a + pos(c), 0) * w.length, d: "the sum of the letter positions multiplied by the number of letters" },
+      { f: (w) => [...w].reduce((a, c) => a + pos(c), 0) + w.length ** 2, d: "the sum of the letter positions plus the square of the number of letters" },
+      { f: (w) => [...w].reduce((a, c) => a + 27 - pos(c), 0) * 2, d: "twice the sum of the letters' positions in the reversed alphabet (A = 26 … Z = 1)" },
+      { f: (w) => pos(w[0]) * pos(w.at(-1)) + w.length, d: "the product of the first and last letters' positions plus the number of letters" },
+      { f: (w) => [...w].reduce((a, c) => a + pos(c), 0) - w.length, d: "the sum of the letter positions minus the number of letters" },
+    ];
+    const [a, b, c] = sample(WORDS, 3), r = pick(RULES);
+    if (RULES.some((u) => u !== r && u.f(a) === r.f(a) && u.f(b) === r.f(b))) return null;
+    const ans = r.f(c);
+    return mc(`If ${a} is coded as ${r.f(a)} and ${b} as ${r.f(b)}, what is the code for ${c}?`, ans, nearNums(ans, RULES.filter((u) => u !== r).map((u) => u.f(c))), `Each code is ${r.d}. ${a}: ${r.f(a)}; ${b}: ${r.f(b)}; so ${c} = ${ans}.`);
+  }
+  const [w1, w2] = sample(WORDS, 2), t = pickTransform(w1, w2); if (!t) return null;
+  if (kind === "encode") {
+    const ans = t.f(w2), alt = pick(TRANSFORMS.filter((u) => u !== t)).f(w2);
+    return mc(`In a certain code, ${w1} is written as ${t.f(w1)}. How is ${w2} written in that code?`, ans, [tweak(ans), alt, tweak(ans), tweak(tweak(ans))], `In this code ${t.d}. So ${w2} → ${ans}.`);
+  }
+  const code = t.f(w2), same = WORDS.filter((w) => w.length === w2.length && w !== w2 && w !== w1);
+  if (same.length < 3) return null;
+  return mc(`In a certain code, ${w1} is written as ${t.f(w1)}. Which word is written as ${code} in that code?`, w2, sample(same, 3), `In this code ${t.d}. Reversing the steps on ${code} gives ${w2}.`);
+}
+
+const GENERIC = /^Which (one|number|pair|letter group) does not belong with the others\?$|which of these equations is correct\?$/;
 function oddNumber() {
-  const t = pick(["prime", "square", "cube", "multiple", "digits", "pair"]);
+  const t = pick(["prime", "middle", "eleven", "form", "digprod", "pair"]);
   let good, odd, expl;
   if (t === "prime") {
-    good = sample(primes.filter((p) => p > 10), 3); odd = pick([21, 27, 33, 39, 49, 51, 57, 63, 69, 77, 81, 87, 91, 93, 111, 119]);
+    good = sample([53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397], 3);
+    odd = pick([91, 119, 133, 143, 161, 187, 203, 209, 221, 247, 253, 289, 299, 323, 341, 361, 377, 391]);
     const f = [...Array(odd).keys()].find((d) => d > 1 && odd % d === 0);
-    expl = `${odd} = ${f} × ${odd / f} is not prime; the others are prime numbers.`;
-  } else if (t === "square") {
-    good = sample([...Array(17).keys()].map((i) => (i + 4) ** 2), 3); odd = pick(good) + pick([-2, -1, 1, 2, 3]);
-    if (isSq(odd)) return null;
-    expl = `${list(good.map((g) => `${g} = ${Math.sqrt(g)}²`))} are perfect squares; ${odd} is not.`;
-  } else if (t === "cube") {
-    good = sample([2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => i ** 3), 3); odd = pick(good) + pick([-2, -1, 1, 2]);
-    expl = `${list(good.map((g) => `${g} = ${Math.round(Math.cbrt(g))}³`))} are perfect cubes; ${odd} is not.`;
-  } else if (t === "multiple") {
-    const k = ri(6, 13); good = sample([...Array(12).keys()].map((i) => k * (i + 3)), 3); odd = pick(good) + pick([-2, -1, 1, 2, 3]);
-    if (odd % k === 0) return null;
-    expl = `${list(good)} are all multiples of ${k}; ${odd} is not.`;
-  } else if (t === "digits") {
-    const S = ri(8, 14), pool = [...Array(900).keys()].map((i) => i + 11).filter((n) => digitSum(n) === S && n < 400);
-    good = sample(pool, 3); odd = pick(good) + pick([1, 2, -1]);
-    if (digitSum(odd) === S) return null;
-    expl = `The digits of ${list(good)} each add up to ${S}; the digits of ${odd} add up to ${digitSum(odd)}.`;
+    expl = `${odd} = ${f} × ${odd / f}, so it is not prime; the others are prime numbers.`;
+  } else if (t === "middle") {
+    const mk = () => { const a = ri(1, 4), c = ri(1, 5); return a + c <= 9 ? a * 100 + (a + c) * 10 + c : null; };
+    good = []; for (let g = 0; g < 50 && good.length < 3; g++) { const x = mk(); if (x && !good.includes(x)) good.push(x); }
+    odd = pick(good) + pick([10, -10, 1, -1]);
+    const [a, b, c] = String(odd).split("").map(Number); if (a + c === b || String(odd).length !== 3) return null;
+    expl = `In ${list(good)}, the middle digit equals the sum of the other two; in ${odd} it does not.`;
+  } else if (t === "eleven") {
+    good = sample([...Array(80).keys()].map((i) => 11 * (i + 11)).filter((x) => x < 1000), 3); odd = pick(good) + pick([1, 2, 10, -10, 9]);
+    if (odd % 11 === 0) return null;
+    expl = `${list(good)} are all multiples of 11 (their alternating digit sums are divisible by 11); ${odd} is not.`;
+  } else if (t === "form") {
+    const fn = pick(NUMF), ns = sample([3, 4, 5, 6, 7, 8, 9, 10, 11], 3);
+    good = ns.map(fn.f); odd = fn.f(pick(ns)) + pick([2, -2, 3, -3, 4]);
+    if ([...Array(25).keys()].some((n) => fn.f(n) === odd)) return null;
+    expl = `${list(ns.map((n) => `${fn.f(n)} = ${fn.s(n)}`))} all fit ${fn.d}; ${odd} does not.`;
+  } else if (t === "digprod") {
+    const P = pick([12, 18, 24, 36, 48]), pool = [...Array(900).keys()].map((i) => i + 100).filter((n) => digitProd(n) === P);
+    good = sample(pool, 3); odd = pick(good) + pick([1, -1, 10]);
+    if (digitProd(odd) === P || String(odd).length !== 3) return null;
+    expl = `The digits of ${list(good)} each multiply to ${P}; the digits of ${odd} multiply to ${digitProd(odd)}.`;
   } else {
-    const fn = pick(numFns), other = pick(numFns.filter((g) => g !== fn)), xs = sample([2, 3, 4, 5, 6, 7, 8, 9], 4);
-    const pairs = xs.slice(0, 3).map((x) => `${x} – ${fn.f(x)}`), oddPair = `${xs[3]} – ${other.f(xs[3])}`;
+    const fn = pick(NUMF), other = pick(NUMF.filter((g) => g !== fn)), xs = sample([3, 4, 5, 6, 7, 8, 9], 4);
     if (fn.f(xs[3]) === other.f(xs[3])) return null;
-    return mc("Which pair does not belong with the others?", oddPair, pairs, `In the other pairs the second number is ${fn.d}, where n is the first (e.g. ${fn.s(xs[0])} = ${fn.f(xs[0])}); but ${fn.s(xs[3])} = ${fn.f(xs[3])}, not ${other.f(xs[3])}.`);
+    return mc("Which pair does not belong with the others?", `${xs[3]} – ${other.f(xs[3])}`, xs.slice(0, 3).map((x) => `${x} – ${fn.f(x)}`), `In the other pairs the second number is ${fn.d}, where n is the first (e.g. ${fn.s(xs[0])} = ${fn.f(xs[0])}); but ${fn.s(xs[3])} = ${fn.f(xs[3])}, not ${other.f(xs[3])}.`);
   }
   const all = [...good, odd];
-  if (new Set(all).size < 4 || odd <= 0) return null;
-  // guard: parity must not single out a different number
+  if (good.length < 3 || new Set(all).size < 4 || odd <= 0) return null;
   const odds = all.filter((n) => n % 2), evens = all.filter((n) => n % 2 === 0);
-  const parityOdd = odds.length === 1 ? odds[0] : evens.length === 1 ? evens[0] : null;
-  if (parityOdd !== null && parityOdd !== odd) return null;
+  const par = odds.length === 1 ? odds[0] : evens.length === 1 ? evens[0] : null;
+  if (par !== null && par !== odd) return null;
+  if (new Set(all.map((n) => String(n).length)).size > 1) return null;
   return mc("Which number does not belong with the others?", odd, good, expl);
 }
-
-// ---------- coding ----------
-const WORDS = "CADET RIFLE TANK PILOT CAMP MARCH BADGE RANK FLAG SALUTE MEDAL HONOUR DUTY BRAVE GUARD TROOP SHIELD SWORD ARROW ROCKET RADAR CANNON PATROL BORDER BUNKER JUNGLE DESERT RIVER OCEAN ISLAND FOREST PLANET CLOUD STORM THUNDER WINTER SUMMER SPRING AUTUMN CANDLE MIRROR WINDOW PENCIL ERASER BOTTLE TICKET MARKET SCHOOL COLLEGE DOCTOR LAWYER FARMER BANKER SINGER DANCER PAINTER WRITER HUNTER SAILOR KNIGHT CASTLE PALACE TEMPLE BRIDGE TUNNEL TOWER HARBOUR ANCHOR COMPASS SIGNAL MISSION TARGET VICTORY PARADE UNIFORM HELMET BOOTS JACKET BASKET BUCKET CARPET BLANKET PILLOW SILVER COPPER BRONZE MARBLE CRYSTAL DIAMOND TIGER LION EAGLE FALCON HORSE CAMEL RABBIT MONKEY PARROT DONKEY LEMON ORANGE BANANA CHERRY POTATO TOMATO ONION PEPPER SUGAR BUTTER CHEESE BREAD KNIFE SPOON PLATE GLASS FIELD GROUND STREET VILLAGE CITY NATION PEOPLE FAMILY TEAM PLAYER CAPTAIN COACH REFEREE STADIUM TROPHY CRICKET HOCKEY TENNIS BOXING KABADDI CHESS PUZZLE RIDDLE SECRET CIPHER LETTER NUMBER SYMBOL MARKER PRINTER SCREEN SPEAKER CAMERA BATTERY ENGINE WHEEL PISTON MOTOR".split(" ");
-const codeTransforms = [
-  (k) => ({ f: (w) => [...w].map((c) => ch(wrap(pos(c) + k))).join(""), d: `each letter is moved ${Math.abs(k)} place${Math.abs(k) > 1 ? "s" : ""} ${k > 0 ? "forward" : "back"} in the alphabet` }),
-  () => ({ f: (w) => [...w].reverse().join(""), d: "the letters are written in reverse order" }),
-  (k) => ({ f: (w) => [...w].reverse().map((c) => ch(wrap(pos(c) + k))).join(""), d: `the letters are reversed and each is moved ${Math.abs(k)} place ${k > 0 ? "forward" : "back"}` }),
-  () => ({ f: (w) => [...w].map((c, i) => ch(wrap(pos(c) + (i % 2 ? -1 : 1)))).join(""), d: "letters are moved alternately one place forward and one place back" }),
-  () => ({ f: (w) => [...w].map((c, i) => ch(wrap(pos(c) + i + 1))).join(""), d: "the 1st letter moves 1 place forward, the 2nd moves 2, the 3rd moves 3, and so on" }),
-  () => ({ f: (w) => [...w].map((c) => ch(27 - pos(c))).join(""), d: "each letter is replaced by its opposite letter (A↔Z, B↔Y, C↔X, …)" }),
-];
-function letterCoding() {
-  const [w1, w2] = sample(WORDS, 2);
-  if (rnd() < 0.3) {
-    const rev = rnd() < 0.5, v = (c) => (rev ? 27 - pos(c) : pos(c)), enc = (w) => [...w].map(v).join("-");
-    const ans = enc(w2), nums = [...w2].map(v);
-    const tweak = (i, d) => nums.map((n, j) => (j === i ? (n + d < 1 || n + d > 26 ? n - d : n + d) : n)).join("-");
-    const wrongs = [tweak(ri(0, nums.length - 1), 1), tweak(ri(0, nums.length - 1), -1), [...w2].map((c) => (rev ? pos(c) : 27 - pos(c))).join("-")];
-    return mc(`If ${w1} is written as ${enc(w1)}, how is ${w2} written in the same code?`, ans, wrongs, `Each letter is replaced by its position in the ${rev ? "reversed alphabet (A = 26, B = 25, …, Z = 1)" : "alphabet (A = 1, …, Z = 26)"}, so ${w2} → ${ans}.`);
+function oddLetterGroup() {
+  const t = pick(["gaps", "gaps", "opposite", "letnum"]);
+  if (t === "gaps") {
+    const g1 = ri(1, 5), g2 = ri(1, 5), ob = g2 + pick([1, -1]); if (ob < 1) return null;
+    const mk = (s, a, b) => ch(s) + ch(s + a) + ch(s + a + b);
+    const starts = sample([...Array(26 - g1 - Math.max(g2, ob)).keys()].map((i) => i + 1), 4);
+    if (starts.length < 4) return null;
+    const good = starts.slice(0, 3).map((s) => mk(s, g1, g2)), odd = mk(starts[3], g1, ob);
+    return mc("Which letter group does not belong with the others?", odd, good, `In ${list(good)} the letters are +${g1} then +${g2} apart; in ${odd} they are +${g1} then +${ob}.`);
   }
-  const i = ri(0, codeTransforms.length - 1), k = pick([1, 2, 3, -1, -2]);
-  const t = codeTransforms[i](i === 2 ? pick([1, -1]) : k);
-  const ans = t.f(w2);
-  const tweak = (s) => { const j = ri(0, s.length - 1); return s.slice(0, j) + ch(wrap(pos(s[j]) + pick([1, -1]))) + s.slice(j + 1); };
-  const alt = codeTransforms[(i + 1) % codeTransforms.length](k).f(w2);
-  if (t.f(w1) === w1) return null;
-  return mc(`If ${w1} is coded as ${t.f(w1)}, how is ${w2} coded?`, ans, [tweak(ans), tweak(ans), alt, tweak(tweak(ans))], `In this code ${t.d}, so ${w2} becomes ${ans}.`);
+  if (t === "opposite") {
+    const ls = sample([...Array(13).keys()].map((i) => i + 1), 4);
+    const good = ls.slice(0, 3).map((p) => ch(p) + ch(27 - p)), p = ls[3], q = 27 - p + pick([1, -1]);
+    return mc("Which letter group does not belong with the others?", ch(p) + ch(q), good, `In ${list(good)} the two letters are opposites (positions adding up to 27); in ${ch(p)}${ch(q)} they add up to ${p + q}.`);
+  }
+  const f = pick([{ f: (p) => p * p, d: "the square of the letter's position" }, { f: (p) => 2 * p + 1, d: "twice the letter's position plus 1" }, { f: (p) => p * (p + 1), d: "the letter's position times the next number" }]);
+  const ls = sample([...Array(20).keys()].map((i) => i + 3), 4), good = ls.slice(0, 3).map((p) => ch(p) + f.f(p)), p = ls[3], v = f.f(p) + pick([1, -1, 2]);
+  return mc("Which letter group does not belong with the others?", ch(p) + v, good, `In ${list(good)} the number is ${f.d}; for ${ch(p)} it should be ${f.f(p)}, not ${v}.`);
 }
 
+// ================= CODE LANGUAGE (solved by brute force) =================
 const ADJ = ["brave", "young", "strong", "bold", "loyal", "smart", "tall", "quick", "calm", "proud"];
-const NOUN = ["cadets", "soldiers", "pilots", "sailors", "officers", "boys", "girls", "players", "doctors", "leaders", "farmers", "students"];
-const VERB = ["march", "fight", "train", "fly", "sail", "run", "win", "lead", "work", "study", "swim", "climb"];
+const NOUN = ["cadets", "soldiers", "pilots", "sailors", "officers", "boys", "girls", "players", "leaders", "farmers"];
+const VERB = ["march", "fight", "train", "fly", "sail", "run", "win", "lead", "work", "climb"];
 const ADV = ["today", "hard", "daily", "fast", "well", "together", "early", "bravely", "quietly", "again"];
-const SYL = ["ka", "pi", "lo", "ma", "ta", "ri", "su", "ne", "zo", "bu", "fe", "da", "mu", "si", "po", "ve", "ja", "ki", "ru", "ho", "ze", "li", "ga", "yo", "tu", "re"];
+const SYL = ["ka", "pi", "lo", "ma", "ta", "ri", "su", "ne", "zo", "bu", "fe", "da", "mu", "si", "po", "ve", "ja", "ki", "ru", "ho", "ze", "li", "ga", "yo"];
+const PERM8 = permutations([0, 1, 2, 3, 4, 5, 6, 7]);
 function codeLanguage() {
-  const [adj, adj2] = sample(ADJ, 2), noun = pick(NOUN), verb = pick(VERB), adv = pick(ADV);
-  const codes = sample(SYL, 5), code = { [adj]: codes[0], [noun]: codes[1], [verb]: codes[2], [adj2]: codes[3], [adv]: codes[4] };
-  const say = (ws) => `'${ws.join(" ")}' is written as '${shuffle(ws.map((w) => code[w])).join(" ")}'`;
-  const q0 = `In a code language, ${say([adj, noun, verb])}, ${say([adj2, noun])} and ${say([verb, adv])}.`;
-  const why = `'${noun}' is common to the first two sentences, so ${noun} = ${code[noun]}; '${verb}' is common to the first and third, so ${verb} = ${code[verb]}.`;
-  const target = pick([adj, adj, noun, verb, adj2, adv]);
-  const rest = target === adj ? `The remaining code in the first sentence, ${code[adj]}, means '${adj}'.` : target === adj2 ? `The other code in the second sentence, ${code[adj2]}, means '${adj2}'.` : target === adv ? `The other code in the third sentence, ${code[adv]}, means '${adv}'.` : "";
-  if (rnd() < 0.5) return mc(`${q0} What is the code for '${target}'?`, code[target], shuffle(Object.values(code).filter((c) => c !== code[target])), `${why} ${rest}`.trim());
-  return mc(`${q0} Which word is coded as '${code[target]}'?`, target, shuffle(Object.keys(code).filter((w) => w !== target)), `${why} ${rest}`.trim());
+  const words = [...sample(ADJ, 2), ...sample(NOUN, 2), ...sample(VERB, 2), ...sample(ADV, 2)];
+  const sents = [0, 1, 2].map(() => [0, 1, 2, 3].map((c) => words[c * 2 + ri(0, 1)]));
+  if (new Set(sents.flat()).size !== 8 || new Set(sents.map((s) => s.join())).size < 3) return null;
+  const codes = sample(SYL, 8), code = Object.fromEntries(words.map((w, i) => [w, codes[i]]));
+  const sig = (arr) => [...arr].sort().join();
+  const target = sents.map((s) => sig(s.map((w) => code[w])));
+  const cand = Object.fromEntries(words.map((w) => [w, new Set()]));
+  for (const p of PERM8) {
+    const m = Object.fromEntries(words.map((w, i) => [w, codes[p[i]]]));
+    if (sents.every((s, k) => sig(s.map((w) => m[w])) === target[k])) words.forEach((w) => cand[w].add(m[w]));
+  }
+  const determined = words.filter((w) => cand[w].size === 1), undetermined = words.filter((w) => cand[w].size > 1);
+  const wantCBD = undetermined.length > 0 && rnd() < 0.3;
+  if (!wantCBD && !determined.length) return null;
+  const w = wantCBD ? pick(undetermined) : pick(determined);
+  const say = (s) => `'${s.join(" ")}' is written as '${shuffle(s.map((x) => code[x])).join(" ")}'`;
+  const q = `In a code language, ${say(sents[0])}; ${say(sents[1])}; and ${say(sents[2])}. What is the code for '${w}'?`;
+  const inIdx = sents.map((s, k) => (s.includes(w) ? k + 1 : 0)).filter(Boolean);
+  if (wantCBD) {
+    const partners = words.filter((x) => x !== w && sig([...cand[x]]) === sig([...cand[w]]));
+    return mc(q, "Cannot be determined", [...cand[w], ...shuffle(codes.filter((c) => !cand[w].has(c)))], `'${w}' could be ${[...cand[w]].map((c) => `'${c}'`).join(" or ")}: it always appears together with ${partners.map((p) => `'${p}'`).join(", ") || "another word"}, so the sentences cannot separate their codes.`);
+  }
+  const sameSent = sents.filter((s) => s.includes(w)).flat().filter((x) => x !== w).map((x) => code[x]);
+  return mc(q, code[w], [...shuffle(sameSent), "Cannot be determined"], `'${w}' appears in sentence${inIdx.length > 1 ? "s" : ""} ${inIdx.join(" and ")}. Matching the words shared between sentences to the codes shared between them leaves only one possibility: '${w}' = '${code[w]}'. (Everything the sentences fix: ${determined.map((x) => `${x} = ${code[x]}`).join(", ")}.)`);
 }
 
-function letterValue() {
-  const [w1, w2] = sample(WORDS, 2), rev = rnd() < 0.35, v = (c) => (rev ? 27 - pos(c) : pos(c));
-  const sum = (w) => [...w].reduce((a, c) => a + v(c), 0), ans = sum(w2);
-  const other = [...w2].reduce((a, c) => a + (rev ? pos(c) : 27 - pos(c)), 0);
-  return mc(`If A = ${rev ? "26, B = 25, …, Z = 1" : "1, B = 2, …, Z = 26"} and ${w1} = ${sum(w1)} (the sum of its letter values), what is ${w2}?`, ans, nearNums(ans, [other, ans + v(w2[0])]), `${w2} = ${[...w2].map(v).join(" + ")} = ${ans}.`);
+// ================= OPERATORS =================
+function evalExpr(nums, ops) {
+  const t = [nums[0]]; ops.forEach((o, i) => t.push(o, nums[i + 1]));
+  for (let i = 1; i < t.length;) if (t[i] === "×" || t[i] === "÷") { if (t[i] === "÷" && t[i + 1] === 0) return null; t.splice(i - 1, 3, t[i] === "×" ? t[i - 1] * t[i + 1] : t[i - 1] / t[i + 1]); } else i += 2;
+  let v = t[0]; for (let i = 1; i < t.length; i += 2) v = t[i] === "+" ? v + t[i + 1] : v - t[i + 1];
+  return v;
 }
-function operatorSub() {
-  const real = ["+", "−", "×", "÷"];
-  let perm; do perm = shuffle(real); while (perm.some((p, i) => p === real[i]));
-  const shown = Object.fromEntries(real.map((r, i) => [perm[i], r])); // displayed symbol -> real op
-  const ops = shuffle(real), nums = [ri(2, 20), ri(2, 12), ri(2, 12), ri(2, 12), ri(2, 12)];
-  // make every ÷ exact: numerator = product/quotient chain value so far within its term
-  const di = ops.indexOf("÷"); nums[di] = nums[di + 1] * ri(1, 9); if (di > 0 && ops[di - 1] === "×") return null;
-  const toks = [nums[0]]; ops.forEach((o, i) => toks.push(o, nums[i + 1]));
-  // BODMAS: collapse × and ÷ first
-  const t = [...toks];
-  for (let i = 1; i < t.length; ) if (t[i] === "×" || t[i] === "÷") { const r = t[i] === "×" ? t[i - 1] * t[i + 1] : t[i - 1] / t[i + 1]; if (!Number.isInteger(r)) return null; t.splice(i - 1, 3, r); } else i += 2;
-  let ans = t[0]; for (let i = 1; i < t.length; i += 2) ans = t[i] === "+" ? ans + t[i + 1] : ans - t[i + 1];
-  if (ans < 0) return null;
-  const inv = Object.fromEntries(Object.entries(shown).map(([s, r]) => [r, s]));
-  const disp = toks.map((x) => (typeof x === "number" ? x : inv[x])).join(" ");
-  const meaning = Object.entries(shown).map(([s, r]) => `'${s}' means '${r}'`);
-  const q = `If ${meaning.slice(0, 3).join(", ")} and ${meaning[3]}, what is the value of ${disp}?`;
-  return mc(q, ans, nearNums(ans, [ans + nums[4], Math.abs(ans - 2 * nums[4])]), `Replacing the symbols gives ${toks.join(" ")}; following BODMAS, this equals ${ans}.`);
+const exactInts = (nums, ops) => { const t = [nums[0]]; ops.forEach((o, i) => t.push(o, nums[i + 1])); for (let i = 1; i < t.length;) if (t[i] === "×" || t[i] === "÷") { if (t[i] === "÷" && t[i - 1] % t[i + 1]) return false; t.splice(i - 1, 3, t[i] === "×" ? t[i - 1] * t[i + 1] : t[i - 1] / t[i + 1]); } else i += 2; return true; };
+function signSwap() {
+  const shown = shuffle(["+", "−", "×", "÷"]), [s1, s2] = sample(shown, 2);
+  const swapOps = (ops, a, b) => ops.map((o) => (o === a ? b : o === b ? a : o));
+  const real = swapOps(shown, s1, s2), nums = [ri(4, 30), ri(2, 12), ri(2, 12), ri(2, 12), ri(2, 12)];
+  const di = real.indexOf("÷"); nums[di] = nums[di + 1] * ri(2, 9);
+  if (!exactInts(nums, real)) return null;
+  const rhs = evalExpr(nums, real); if (!Number.isInteger(rhs) || rhs < 0) return null;
+  const pairs = []; for (let i = 0; i < 4; i++) for (let j = i + 1; j < 4; j++) pairs.push([shown[i], shown[j]]);
+  const ok = pairs.filter(([a, b]) => { const v = evalExpr(nums, swapOps(shown, a, b)); return v !== null && Math.abs(v - rhs) < 1e-9; });
+  const orig = evalExpr(nums, shown);
+  if (ok.length !== 1 || (orig !== null && Math.abs(orig - rhs) < 1e-9)) return null;
+  const label = ([a, b]) => `${a} and ${b}`, show = (ops) => nums.map((n, i) => (i < 4 ? `${n} ${ops[i]} ` : `${n}`)).join("");
+  return mc(`Which two signs must be interchanged to make this equation correct? ${show(shown)} = ${rhs}`, label(ok[0]), shuffle(pairs.filter((p) => p !== ok[0])).map(label), `Swapping ${s1} and ${s2} gives ${show(real)} = ${rhs} (solving × and ÷ before + and −). No other swap works.`);
+}
+function trueEquation() {
+  const real = ["+", "−", "×", "÷"]; let perm; do perm = shuffle(real); while (perm.some((p, i) => p === real[i]));
+  const meaning = Object.fromEntries(perm.map((s, i) => [s, real[i]])), inv = Object.fromEntries(Object.entries(meaning).map(([s, r]) => [r, s]));
+  const eqs = [];
+  for (let k = 0; k < 30 && eqs.length < 4; k++) {
+    const ops = sample(real, 3), nums = [ri(4, 30), ri(2, 12), ri(2, 12), ri(2, 12)], di = ops.indexOf("÷");
+    if (di >= 0) nums[di] = nums[di + 1] * ri(2, 8);
+    if (!exactInts(nums, ops)) continue;
+    const v = evalExpr(nums, ops); if (!Number.isInteger(v) || v < 0) continue;
+    eqs.push({ nums, ops, v });
+  }
+  if (eqs.length < 4) return null;
+  const show = (e, rhs, sym) => e.nums.map((n, i) => (i < 3 ? `${n} ${sym(e.ops[i])} ` : `${n}`)).join("") + ` = ${rhs}`;
+  const right = show(eqs[0], eqs[0].v, (o) => inv[o]);
+  const wrongs = eqs.slice(1).map((e) => show(e, e.v + pick([-2, -1, 1, 2, 3]), (o) => inv[o]));
+  const mean = Object.entries(meaning).map(([s, r]) => `'${s}' means '${r}'`);
+  return mc(`If ${mean.slice(0, 3).join(", ")} and ${mean[3]}, which of these equations is correct?`, right, wrongs, `Converting the symbols, ${right} becomes ${show(eqs[0], eqs[0].v, (o) => o)}, which is true (× and ÷ first); each of the others is off.`);
 }
 
-// ---------- directions ----------
+// ================= BLOOD RELATIONS (kinship engine) =================
+const KIN = { parent: ["father", "mother"], child: ["son", "daughter"], sibling: ["brother", "sister"], spouse: ["husband", "wife"] };
+const kw = (r) => `${r.only ? "only " : ""}${KIN[r.rel][r.g === "M" ? 0 : 1]}`;
+// Simplifies a chain read outward from a person of gender g0. Returns { seq, steps } or null if ambiguous.
+function simplify(g0, seq0, allowIdentity, owner, self) {
+  let seq = seq0.map((x) => ({ ...x }));
+  const steps = [], phrase = (a) => (a.length ? `${owner} ${a.map(kw).join("'s ")}` : self);
+  for (let i = 0; i + 1 < seq.length; i++) if (seq[i].only && seq[i + 1].rel === "sibling" && seq[i + 1].g === seq[i].g) return null; // an "only son" has no brother
+  for (let guard = 0; guard < 20; guard++) {
+    let fired = false;
+    for (let i = 0; i + 1 < seq.length; i++) {
+      const x = seq[i], y = seq[i + 1], pg = i ? seq[i - 1].g : g0, key = `${x.rel},${y.rel}`;
+      let rep;
+      if (key === "parent,child") rep = pg && y.g !== pg ? [{ rel: "sibling", g: y.g }] : pg && y.only ? [] : null;
+      else if (key === "child,parent") rep = !pg ? null : y.g === pg ? [] : [{ rel: "spouse", g: y.g }];
+      else if (key === "sibling,sibling") rep = pg && y.g !== pg ? [{ rel: "sibling", g: y.g }] : null;
+      else if (key === "sibling,parent") rep = [{ rel: "parent", g: y.g }];
+      else if (key === "parent,spouse") rep = [{ rel: "parent", g: y.g }];
+      else if (key === "spouse,child") rep = [{ rel: "child", g: y.g }];
+      else if (key === "child,sibling") rep = [{ rel: "child", g: y.g }];
+      else if (key === "spouse,spouse") rep = pg && y.g === pg ? [] : null;
+      else continue;
+      if (rep === null) return null;
+      if (!rep.length && !allowIdentity) return null;
+      const after = [...seq.slice(0, i), ...rep];
+      steps.push(`${phrase(seq.slice(0, i + 2))} = ${phrase(after)}`);
+      seq = [...after, ...seq.slice(i + 2)]; fired = true; break;
+    }
+    if (!fired) return { seq, steps };
+  }
+  return null;
+}
+function kinName(seq) {
+  if (!seq.length) return null;
+  const key = seq.map((s) => s.rel).join(","), i = seq.at(-1).g === "M" ? 0 : 1, side = seq[0].g === "M" ? "Paternal" : "Maternal";
+  const T = {
+    parent: ["Father", "Mother"], child: ["Son", "Daughter"], sibling: ["Brother", "Sister"], spouse: ["Husband", "Wife"],
+    "parent,parent": [`${side} grandfather`, `${side} grandmother`], "child,child": ["Grandson", "Granddaughter"],
+    "parent,sibling": [`${side} uncle`, `${side} aunt`], "sibling,child": ["Nephew", "Niece"],
+    "spouse,parent": ["Father-in-law", "Mother-in-law"], "child,spouse": ["Son-in-law", "Daughter-in-law"],
+    "sibling,spouse": ["Brother-in-law", "Sister-in-law"], "spouse,sibling": ["Brother-in-law", "Sister-in-law"],
+    "parent,sibling,spouse": ["Uncle", "Aunt"], "parent,sibling,child": ["Cousin", "Cousin"],
+    "parent,parent,parent": ["Great-grandfather", "Great-grandmother"], "child,child,child": ["Great-grandson", "Great-granddaughter"],
+    "parent,parent,sibling": ["Grand-uncle", "Grand-aunt"], "sibling,child,child": ["Grand-nephew", "Grand-niece"],
+    "spouse,sibling,child": ["Nephew", "Niece"],
+  };
+  return T[key]?.[i] ?? null;
+}
+const KIN_POOL = {
+  M: ["Father", "Son", "Brother", "Husband", "Paternal grandfather", "Maternal grandfather", "Grandson", "Paternal uncle", "Maternal uncle", "Nephew", "Father-in-law", "Son-in-law", "Brother-in-law", "Cousin", "Great-grandfather", "Grand-uncle", "Grand-nephew"],
+  F: ["Mother", "Daughter", "Sister", "Wife", "Paternal grandmother", "Maternal grandmother", "Granddaughter", "Paternal aunt", "Maternal aunt", "Niece", "Mother-in-law", "Daughter-in-law", "Sister-in-law", "Cousin", "Great-grandmother", "Grand-aunt", "Grand-niece"],
+};
+function kinWrongs(name, g) {
+  const byMarriage = name === "Uncle" || name === "Aunt";
+  const pool = KIN_POOL[g].filter((x) => x !== name && !(byMarriage && /uncle|aunt/i.test(x)));
+  const last = name.split(" ").at(-1).toLowerCase(), near = pool.filter((x) => x.toLowerCase().endsWith(last) || x.toLowerCase().includes(last.split("-")[0]));
+  return [...shuffle(near), ...shuffle(pool)];
+}
+const SYMS = ["+", "−", "×", "÷", "$", "#", "@", "%", "&", "*"];
+const CODE_RELS = [["parent", "M"], ["parent", "F"], ["child", "M"], ["child", "F"], ["sibling", "M"], ["sibling", "F"], ["spouse", "M"], ["spouse", "F"]];
+function codedRelation() {
+  const syms = sample(SYMS, 6), defs = sample(CODE_RELS, 6).map(([rel, g], i) => ({ sym: syms[i], rel, g }));
+  const k = pick([3, 3, 4]), L = sample(["A", "B", "C", "D", "E", "F", "K", "L", "M", "P", "Q", "R", "S", "T"], k + 1), ops = Array.from({ length: k }, () => pick(defs));
+  if (ops.some((o, i) => i && o.rel === "spouse" && ops[i - 1].rel === "spouse")) return null; // nobody has two spouses
+  const G = {}, setG = (p, g) => { if (G[p] && G[p] !== g) return false; G[p] = g; return true; };
+  for (let i = 0; i < k; i++) { if (!setG(L[i], ops[i].g)) return null; if (ops[i].rel === "spouse" && !setG(L[i + 1], ops[i].g === "M" ? "F" : "M")) return null; }
+  const inv = { parent: "child", child: "parent", sibling: "sibling", spouse: "spouse" };
+  const reverse = rnd() < 0.4 && L.every((p) => G[p]);
+  const from = reverse ? L[0] : L[k], to = reverse ? L[k] : L[0];
+  const seq = reverse ? ops.map((o, i) => ({ rel: inv[o.rel], g: G[L[i + 1]] })) : [...ops].reverse().map((o) => ({ rel: o.rel, g: o.g }));
+  const r = simplify(G[from], seq, false, `${from}'s`, from); if (!r) return null;
+  const name = kinName(r.seq); if (!name) return null;
+  const expr = L.map((p, i) => (i < k ? `${p} ${ops[i].sym} ` : p)).join("");
+  const q = `If ${defs.map((d) => `'P ${d.sym} Q' means 'P is the ${kw(d)} of Q'`).join(", ")}, then in '${expr}', how is ${to} related to ${from}?`;
+  const chain = ops.map((o, i) => `${L[i]} is the ${kw(o)} of ${L[i + 1]}`).join("; ");
+  return mc(q, name, kinWrongs(name, seq.at(-1).g), `${chain}. So ${to} is ${from}'s ${seq.map(kw).join("'s ")}${r.steps.length ? ` (${r.steps.join("; ")})` : ""} — that is, ${from}'s ${name.toLowerCase()}.`);
+}
+const MALE = ["Rahul", "Aman", "Vikram", "Karan", "Rohit", "Arjun", "Sanjay", "Deepak", "Mohan", "Ravi", "Suresh", "Ajay", "Nikhil", "Yash", "Kabir", "Dev", "Aditya", "Varun"];
+const FEMALE = ["Priya", "Neha", "Kavita", "Sunita", "Meera", "Anjali", "Pooja", "Ritu", "Shalini", "Seema", "Rekha", "Asha", "Isha", "Divya", "Nisha", "Tanvi"];
+function pointing() {
+  const sg = pick(["M", "F"]), sp = pick(sg === "M" ? MALE : FEMALE), n = pick([3, 3, 4]);
+  const seq = Array.from({ length: n }, () => { const rel = pick(["parent", "parent", "child", "sibling", "spouse"]); return { rel, g: pick(["M", "F"]), only: rel === "child" && rnd() < 0.6 }; });
+  if (seq.some((s, i) => i && s.rel === "spouse" && seq[i - 1].rel === "spouse")) return null;
+  const r = simplify(sg, seq, true, "my", sg === "M" ? `${sp} himself` : `${sp} herself`); if (!r || !r.steps.length) return null;
+  const name = kinName(r.seq); if (!name) return null;
+  const tg = seq.at(-1).g, pron = tg === "M" ? "He" : "She", who = tg === "M" ? "man" : "woman";
+  const said = rnd() < 0.5 ? `"${pron} is the ${kw(seq.at(-1))} of my ${seq.slice(0, -1).map(kw).join("'s ")}."` : `"${pron} is my ${seq.map(kw).join("'s ")}."`;
+  return mc(`Pointing to a ${who} in a photograph, ${sp} said, ${said} How is the ${who} related to ${sp}?`, name, kinWrongs(name, tg), `Simplify from ${sp}'s side (${sp} is ${sg === "M" ? "male" : "female"}): ${r.steps.join("; ")}. So the ${who} is ${sp}'s ${name.toLowerCase()}.`);
+}
+
+// ================= DIRECTIONS =================
 const DIRS8 = ["North", "North-East", "East", "South-East", "South", "South-West", "West", "North-West"];
 const V = { North: [0, 1], East: [1, 0], South: [0, -1], West: [-1, 0] };
-const NAMES = ["Rahul", "Aman", "Vikram", "Karan", "Rohit", "Arjun", "Sanjay", "Deepak", "Mohan", "Ravi", "Suresh", "Ajay", "Nikhil", "Yash", "Kabir", "Dev", "Aditya", "Varun"];
-function directionDistance() {
-  const name = pick(NAMES), unit = pick(["km", "m"]), n = pick([3, 3, 4]);
-  let d = ri(0, 3), x = 0, y = 0; const legs = [];
-  for (let i = 0; i < n; i++) {
-    const turn = i === 0 ? null : pick(["left", "right"]);
-    if (turn) d = (d + (turn === "right" ? 1 : 3)) % 4;
-    const len = unit === "km" ? ri(1, 15) : ri(2, 30) * 5, dir = DIRS8[d * 2];
-    x += V[dir][0] * len; y += V[dir][1] * len; legs.push([turn, len, dir]);
+const quadrant = (dx, dy) => (dx && dy ? `${dy > 0 ? "North" : "South"}-${dx > 0 ? "East" : "West"}` : dx ? (dx > 0 ? "East" : "West") : dy > 0 ? "North" : "South");
+function directions() {
+  const unit = pick(["km", "m"]), scale = unit === "m" ? 5 : 1;
+  if (rnd() < 0.5) {
+    const name = pick(MALE), n = pick([4, 5, 5]);
+    let d = ri(0, 3), x = 0, y = 0; const legs = [];
+    for (let i = 0; i < n; i++) { const t = i ? pick(["left", "right"]) : null; if (t) d = (d + (t === "right" ? 1 : 3)) % 4; const len = ri(1, 12) * scale, dir = DIRS8[d * 2]; x += V[dir][0] * len; y += V[dir][1] * len; legs.push([t, len, dir]); }
+    const h = Math.hypot(x, y); if (!x && !y) return null;
+    if (x && y && !Number.isInteger(h)) return null;
+    const path = legs.map(([t, l, dir], i) => (i ? `turns ${t} and walks ${l} ${unit}` : `walks ${l} ${unit} towards the ${dir.toLowerCase()}`)).join(", then ");
+    const dist = x && y ? h : Math.abs(x || y), dir = quadrant(x, y), opp = DIRS8[(DIRS8.indexOf(dir) + 4) % 8];
+    return mc(`${name} ${path}. How far and in which direction is he now from his starting point?`, `${dist} ${unit} ${dir}`, [`${dist} ${unit} ${opp}`, `${Math.abs(x) + Math.abs(y)} ${unit} ${dir}`, `${dist + 2 * scale} ${unit} ${dir}`, `${dist} ${unit} ${DIRS8[(DIRS8.indexOf(dir) + 2) % 8]}`], `He ends ${Math.abs(x)} ${unit} ${x >= 0 ? "east" : "west"} and ${Math.abs(y)} ${unit} ${y >= 0 ? "north" : "south"} of the start${x && y ? `; distance = √(${Math.abs(x)}² + ${Math.abs(y)}²) = ${dist} ${unit}` : ""}, towards the ${dir}.`);
   }
-  if (!x && !y) return null;
-  const path = legs.map(([t, l, dir], i) => (i === 0 ? `walks ${l} ${unit} towards the ${dir.toLowerCase()}` : `${i === n - 1 ? "finally turns" : "turns"} ${t} and walks ${l} ${unit}`)).join(", ");
-  const q0 = `Starting from his house, ${name} ${path}.`;
-  const dirOf = (dx, dy) => DIRS8[Math.round(((Math.atan2(dx, dy) * 180) / Math.PI + 360) % 360 / 45) % 8];
-  const where = `He ends up ${Math.abs(x)} ${unit} ${x >= 0 ? "east" : "west"} and ${Math.abs(y)} ${unit} ${y >= 0 ? "north" : "south"} of his house`;
-  if (!x || !y) {
-    const dist = Math.abs(x || y), dir = dirOf(x, y);
-    return mc(`${q0} How far and in which direction is he from his house?`, `${dist} ${unit} ${dir}`, [`${dist} ${unit} ${DIRS8[(DIRS8.indexOf(dir) + 4) % 8]}`, `${dist} ${unit} ${DIRS8[(DIRS8.indexOf(dir) + 2) % 8]}`, `${legs.reduce((a, l) => a + l[1], 0)} ${unit} ${dir}`, `${dist + legs[0][1]} ${unit} ${dir}`], `${where}, i.e. ${dist} ${unit} ${dir}.`);
-  }
-  const h = Math.hypot(x, y);
-  if (Number.isInteger(h)) return mc(`${q0} What is the shortest distance between him and his house?`, `${h} ${unit}`, [`${Math.abs(x) + Math.abs(y)} ${unit}`, `${h + (unit === "km" ? 2 : 10)} ${unit}`, `${Math.abs(Math.abs(x) - Math.abs(y))} ${unit}`, `${h - (unit === "km" ? 1 : 5)} ${unit}`], `${where}. Distance = √(${Math.abs(x)}² + ${Math.abs(y)}²) = ${h} ${unit}.`);
-  const dir = dirOf(Math.sign(x), Math.sign(y)), i = DIRS8.indexOf(dir);
-  return mc(`${q0} In which direction is he now from his house?`, dir, [DIRS8[(i + 2) % 8], DIRS8[(i + 4) % 8], DIRS8[(i + 6) % 8]], `${where}, so he is to the ${dir} of his house.`);
+  const P = sample(["P", "Q", "R", "S", "T", "U", "W"], 5), pt = { [P[0]]: [0, 0] }, facts = [];
+  for (let i = 1; i < 5; i++) { const ref = P[ri(Math.max(0, i - 2), i - 1)], dir = pick(["North", "East", "South", "West"]), len = ri(2, 12) * scale; pt[P[i]] = [pt[ref][0] + V[dir][0] * len, pt[ref][1] + V[dir][1] * len]; facts.push(`${P[i]} is ${len} ${unit} to the ${dir.toLowerCase()} of ${ref}`); }
+  const [a, b] = [P[4], P[0]], dx = pt[a][0] - pt[b][0], dy = pt[a][1] - pt[b][1], h = Math.hypot(dx, dy);
+  if ((!dx && !dy) || (dx && dy && !Number.isInteger(h))) return null;
+  if (new Set(Object.values(pt).map(String)).size < 5) return null;
+  const dist = dx && dy ? h : Math.abs(dx || dy), dir = quadrant(dx, dy);
+  return mc(`${facts.join(". ")}. What is the distance and direction of ${a} from ${b}?`, `${dist} ${unit} ${dir}`, [`${dist} ${unit} ${DIRS8[(DIRS8.indexOf(dir) + 4) % 8]}`, `${Math.abs(dx) + Math.abs(dy)} ${unit} ${dir}`, `${dist} ${unit} ${DIRS8[(DIRS8.indexOf(dir) + 2) % 8]}`, `${dist + scale} ${unit} ${dir}`], `Placing ${b} at the origin, ${a} is ${Math.abs(dx)} ${unit} ${dx >= 0 ? "east" : "west"} and ${Math.abs(dy)} ${unit} ${dy >= 0 ? "north" : "south"} of ${b}${dx && dy ? `, so the distance is √(${Math.abs(dx)}² + ${Math.abs(dy)}²) = ${dist} ${unit}` : ""}, towards the ${dir}.`);
 }
-function directionTurns() {
-  const t = pick(["turns", "turns", "rotate", "shadow"]);
-  if (t === "turns") {
-    const d0 = ri(0, 7), n = ri(2, 3), moves = [];
-    let d = d0;
-    for (let i = 0; i < n; i++) { const deg = pick([45, 90, 90, 135, 180]), cw = rnd() < 0.5; d = (d + (cw ? 1 : -1) * (deg / 45) + 16) % 8; moves.push(`${deg}° ${cw ? "clockwise" : "anticlockwise"}`); }
-    const ans = DIRS8[d], net = ((d - d0 + 8) % 8) * 45;
-    return mc(`A man is facing ${DIRS8[d0]}. He turns ${moves.join(", then ")}. Which direction is he facing now?`, ans, [DIRS8[(d + 2) % 8], DIRS8[(d + 4) % 8], DIRS8[(d + 6) % 8], DIRS8[(d + 1) % 8]], `${net === 0 ? "The turns cancel out completely" : `The net turn is ${net <= 180 ? `${net}° clockwise` : `${360 - net}° anticlockwise`}`} from ${DIRS8[d0]}, so he faces ${ans}.`);
+function directionsTurns() {
+  const t = pick(["shadow", "shadow", "rename", "clock"]);
+  if (t === "shadow") {
+    const morning = rnd() < 0.5, name = pick(MALE), turns = Array.from({ length: ri(3, 4) }, () => pick(["left", "right"]));
+    if (new Set(turns).size === 1) return null;
+    let d = morning ? 1 : 3;
+    turns.forEach((x) => (d = (d + (x === "right" ? 1 : 3)) % 4));
+    const shadow = morning ? 3 : 1, side = ["in front of him", "to his right", "behind him", "to his left"][(shadow - d + 4) % 4];
+    return mc(`${morning ? "Just after sunrise" : "Just before sunset"}, ${name} starts walking towards the sun. He then turns ${turns.join(", then ")}. Where does his shadow fall now?`, side, ["in front of him", "to his right", "behind him", "to his left"].filter((s) => s !== side), `Walking towards the ${morning ? "rising sun he faces East" : "setting sun he faces West"}; after the turns he faces ${DIRS8[d * 2]}. The shadow points ${morning ? "West" : "East"}, which is ${side}.`);
   }
-  if (t === "rotate") {
-    const a = ri(0, 7), b = ri(0, 7), c = ri(0, 7), r = (b - a + 8) % 8;
-    if (!r || c === a) return null;
-    const ans = DIRS8[(c + r) % 8];
-    return mc(`If ${DIRS8[a]} is called ${DIRS8[b]}, and all other directions are renamed in the same way, what will ${DIRS8[c]} be called?`, ans, [DIRS8[(c - r + 8) % 8], DIRS8[(c + r + 2) % 8], DIRS8[(c + 4) % 8], DIRS8[(c + r + 6) % 8]], `${DIRS8[a]} → ${DIRS8[b]} is a rotation of ${r * 45}° clockwise; rotating ${DIRS8[c]} by the same amount gives ${ans}.`);
+  if (t === "rename") {
+    const r = ri(1, 7), a = ri(0, 7), target = ri(0, 7), actual = DIRS8[(target - r + 8) % 8];
+    return mc(`In a new naming system, ${DIRS8[a]} is called ${DIRS8[(a + r) % 8]}, and every direction is renamed by the same rotation. A patrol is ordered to move towards what is now called ${DIRS8[target]}. In which actual direction does it move?`, actual, [DIRS8[(target + r) % 8], DIRS8[(target + 4) % 8], DIRS8[(target - r + 12) % 8], DIRS8[target]], `The renaming turns every direction ${r * 45}° clockwise. The name "${DIRS8[target]}" therefore belongs to the actual direction ${r * 45}° anticlockwise of it: ${actual}.`);
   }
-  const morning = rnd() < 0.5, side = pick(["left", "right", "behind him", "in front of him"]), name = pick(NAMES);
-  const shadow = morning ? "West" : "East"; // sun in the east in the morning, west in the evening
-  const facing = { left: morning ? "North" : "South", right: morning ? "South" : "North", "behind him": morning ? "East" : "West", "in front of him": morning ? "West" : "East" }[side];
-  return mc(`One ${morning ? "morning, just after sunrise" : "evening, just before sunset"}, ${name} was standing in a field. His shadow fell exactly ${side === "left" || side === "right" ? `to his ${side}` : side}. Which direction was he facing?`, facing, ["North", "South", "East", "West"].filter((x) => x !== facing), `In the ${morning ? "morning the sun is in the east, so shadows fall to the west" : "evening the sun is in the west, so shadows fall to the east"}. With the shadow (${shadow}) ${side === "left" || side === "right" ? `on his ${side}` : side}, he must be facing ${facing}.`);
+  const h = pick([3, 6, 9, 12]), d0 = ri(0, 7), off = (d0 * 45 - (h % 12) * 30 + 720) % 360;
+  const m = pick([0, 15, 30, 45]), hh = ri(1, 12), ang = (m * 6 + off) % 360, ans = DIRS8[ang / 45];
+  return mc(`A clock is laid flat so that at ${h}:00 its hour hand points ${DIRS8[d0]}. In which direction will the minute hand point at ${hh}:${String(m).padStart(2, "0")}?`, ans, [DIRS8[(ang / 45 + 2) % 8], DIRS8[(ang / 45 + 4) % 8], DIRS8[(m / 15) * 2], DIRS8[(ang / 45 + 6) % 8]], `On an upright dial the hour hand at ${h}:00 points ${DIRS8[((h % 12) * 30) / 45]}; here it points ${DIRS8[d0]}, so the dial is turned ${off}° clockwise. At :${String(m).padStart(2, "0")} the minute hand would normally point ${DIRS8[(m / 15) * 2]}; turned ${off}°, it points ${ans}.`);
 }
 
-// ---------- ranking / ordering ----------
+// ================= RANKING & SEATING =================
 function ranking() {
-  const t = ri(0, 4), a = pick(NAMES), b = pick(NAMES.filter((x) => x !== a));
-  if (t === 0) { const top = ri(5, 30), bot = ri(5, 30), n = top + bot - 1; return mc(`${a} is ${ord(top)} from the top and ${ord(bot)} from the bottom in his class. How many students are there in the class?`, n, nearNums(n, [top + bot, top + bot - 2]), `Total = ${top} + ${bot} − 1 = ${n} (${a} is counted in both ranks).`); }
-  if (t === 1) { const n = ri(30, 60), top = ri(5, n - 5), bot = n - top + 1; return mc(`In a class of ${n} students, ${a} ranks ${ord(top)} from the top. What is his rank from the bottom?`, ord(bot), [ord(bot + 1), ord(bot - 1), ord(n - top)].filter((x) => x !== ord(bot)).concat(ord(bot + 2)), `Rank from bottom = ${n} − ${top} + 1 = ${bot}.`); }
-  if (t === 2) { const n = ri(25, 50), l = ri(5, 20), r = ri(5, 20); if (l + r >= n) return null; const k = n - l - r; return mc(`In a row of ${n} students, ${a} is ${ord(l)} from the left end and ${b} is ${ord(r)} from the right end. How many students are there between them?`, k, nearNums(k, [k + 1, k + 2]), `${a} and ${b} with everyone to their outer sides account for ${l} + ${r} = ${l + r} students, so ${n} − ${l + r} = ${k} are between them.`); }
-  if (t === 3) { const l = ri(4, 12), r = ri(8, 20), L = ri(l + 5, l + 20), n = L + r - 1; return mc(`In a row, ${a} is ${ord(l)} from the left and ${b} is ${ord(r)} from the right. When they interchange places, ${a} becomes ${ord(L)} from the left. How many people are in the row?`, n, nearNums(n, [L + r, L + l - 1]), `After the swap ${a} takes ${b}'s old place, which is ${ord(L)} from the left and ${ord(r)} from the right, so total = ${L} + ${r} − 1 = ${n}.`); }
-  const n = ri(25, 45), l = ri(5, 15), k = ri(3, 10), p = l + k, fromR = n - p + 1;
-  if (p > n) return null;
-  return mc(`In a row of ${n} children, ${a} is ${ord(l)} from the left. ${b} is ${ord(k)} to the right of ${a}. What is ${b}'s position from the right end?`, ord(fromR), [ord(fromR + 1), ord(fromR - 1), ord(n - p)].filter((x) => x !== ord(fromR)).concat(ord(fromR + 2)), `${b} is ${ord(p)} from the left, so from the right he is ${n} − ${p} + 1 = ${fromR}.`);
+  const t = ri(0, 4), [a, b, c] = sample(MALE, 3);
+  if (t === 0) {
+    const pa = ri(10, 25), k = ri(3, pa - 3), pb = ri(10, 30), n1 = pa + k + pb, bPos = pa - k - 1, n2 = bPos + pb - 1;
+    if (bPos < 1 || n2 < pa) return null;
+    return mc(`In a queue, ${a} is ${ord(pa)} from the front and ${b} is ${ord(pb)} from the back. There are ${k} people between them. What is the minimum possible number of people in the queue?`, n2, nearNums(n2, [n1, n1 - 1, pa + pb]), `If ${b} is behind ${a}, the queue has ${pa} + ${k} + ${pb} = ${n1}. If ${b} is ahead of ${a}, ${b} is ${ord(bPos)} from the front, giving ${bPos} + ${pb} − 1 = ${n2}. The minimum is ${n2}.`);
+  }
+  if (t === 1) {
+    const n = ri(30, 60), pa = ri(4, 20), rb = ri(4, 20), pb = n - rb + 1; if (pb - pa < 4 || (pa + pb) % 2) return null;
+    const pc = (pa + pb) / 2;
+    return mc(`In a row of ${n} people, ${a} is ${ord(pa)} from the left and ${b} is ${ord(rb)} from the right. ${c} stands exactly midway between them. What is ${c}'s position from the right end?`, ord(n - pc + 1), [ord(pc), ord(n - pc), ord(n - pc + 2)], `${b} is ${ord(pb)} from the left, so the midpoint is (${pa} + ${pb}) / 2 = ${pc} from the left, i.e. ${n} − ${pc} + 1 = ${n - pc + 1} from the right.`);
+  }
+  if (t === 2) {
+    const l = ri(5, 15), r = ri(6, 18), L = ri(l + 6, l + 20), n = L + r - 1, bNew = n - l + 1;
+    return mc(`In a row, ${a} is ${ord(l)} from the left and ${b} is ${ord(r)} from the right. They swap places, and ${a} is now ${ord(L)} from the left. What is ${b}'s new position from the right?`, ord(bNew), [ord(r), ord(L), ord(bNew - 1), ord(bNew + 1)], `After the swap ${a} is ${ord(L)} from the left and ${ord(r)} from the right, so the row has ${L} + ${r} − 1 = ${n} people. ${b} now stands in ${a}'s old place, ${ord(l)} from the left, i.e. ${n} − ${l} + 1 = ${bNew} from the right.`);
+  }
+  if (t === 3) {
+    const n = ri(35, 60), s = ri(8, 25), k = ri(4, 12), sTop = n - s + 1, rTop = sTop - k; if (rTop < 1) return null;
+    return mc(`In a class of ${n}, ${a} is ${k} ranks above ${b}. ${b} is ${ord(s)} from the bottom. What is ${a}'s rank from the top?`, ord(rTop), [ord(rTop + 1), ord(sTop + k), ord(rTop - 1), ord(s + k)], `${b} is ${n} − ${s} + 1 = ${sTop} from the top, so ${a} is ${sTop} − ${k} = ${rTop}.`);
+  }
+  const top = ri(8, 25), bot = ri(8, 30), f = ri(3, 9), ab = ri(1, 5), passed = top + bot - 1, tot = passed + f + ab;
+  return mc(`Among the students who passed, ${a} ranks ${ord(top)} from the top and ${ord(bot)} from the bottom. ${f} students failed and ${ab} were absent. How many students are in the class?`, tot, nearNums(tot, [passed, passed + f, top + bot + f + ab]), `Students who passed = ${top} + ${bot} − 1 = ${passed}; adding ${f} who failed and ${ab} absent gives ${tot}.`);
 }
-const ATTRS = [["taller", "shorter", "tallest", "shortest"], ["heavier", "lighter", "heaviest", "lightest"], ["older", "younger", "oldest", "youngest"], ["richer", "poorer", "richest", "poorest"], ["faster", "slower", "fastest", "slowest"]];
-const PEOPLE = ["Asha", "Bina", "Chetan", "Dinesh", "Esha", "Farhan", "Gita", "Hari", "Isha", "Jatin", "Kiran", "Lata", "Manoj", "Nisha", "Om", "Pooja", "Ravi", "Sita", "Tarun", "Uma"];
-function ordering() {
-  const [more, less, most, least] = pick(ATTRS), n = pick([4, 5, 5]), people = sample(PEOPLE, n); // people[0] is the most
-  const facts = shuffle(people.slice(1).map((p, i) => (rnd() < 0.5 ? `${people[i]} is ${more} than ${p}` : `${p} is ${less} than ${people[i]}`)));
-  const k = pick(n === 5 ? [0, 1, 2, 3, 4] : [0, 1, 2, 3]), label = k === 0 ? `the ${most}` : k === n - 1 ? `the ${least}` : n === 5 && k === 2 ? "in the middle (third)" : k === 1 ? `the second ${most}` : `the second ${least}`;
-  return mc(`${facts.join(". ")}. Who is ${label}?`, people[k], people.filter((_, i) => i !== k), `The order from ${most} to ${least} is ${people.join(" > ")}, so ${label} is ${people[k]}.`);
+const PERMS = {};
+const permsOf = (key, arr) => (PERMS[key] ||= permutations(arr));
+function seating() {
+  const circ = rnd() < 0.45, n = circ ? pick([6, 8]) : pick([6, 7]);
+  const people = sample(["A", "B", "C", "D", "E", "F", "G", "H", "K", "M", "P", "Q", "R", "S", "T", "V"], n);
+  let arr = shuffle(people);
+  if (circ) { const z = arr.indexOf(people[0]); arr = [...arr.slice(z), ...arr.slice(0, z)]; }
+  const idx = circ ? permsOf(`c${n}`, [...Array(n - 1).keys()].map((i) => i + 1)).map((p) => [0, ...p]) : permsOf(`l${n}`, [...Array(n).keys()]);
+  const perms = idx.map((p) => p.map((i) => people[i]));
+  const md = (i) => ((i % n) + n) % n;
+  const mk = () => {
+    const [x, y, z] = sample(people, 3), ix = arr.indexOf(x), iy = arr.indexOf(y), iz = arr.indexOf(z), k = ri(2, 3);
+    const opts = circ ? [
+      [`${x} sits immediately to the left of ${y}.`, (P) => md(P.indexOf(y) + 1) === P.indexOf(x), md(iy + 1) === ix],
+      [`${x} sits immediately to the right of ${y}.`, (P) => md(P.indexOf(y) - 1) === P.indexOf(x), md(iy - 1) === ix],
+      [`${x} sits ${ord(k)} to the left of ${y}.`, (P) => md(P.indexOf(y) + k) === P.indexOf(x), md(iy + k) === ix],
+      [`${x} sits ${ord(k)} to the right of ${y}.`, (P) => md(P.indexOf(y) - k) === P.indexOf(x), md(iy - k) === ix],
+      [`${x} sits opposite ${y}.`, (P) => md(P.indexOf(y) + n / 2) === P.indexOf(x), md(iy + n / 2) === ix],
+      [`${x} is not a neighbour of ${y}.`, (P) => ![1, n - 1].includes(md(P.indexOf(x) - P.indexOf(y))), ![1, n - 1].includes(md(ix - iy))],
+      [`${z} sits between ${x} and ${y}.`, (P) => [1, n - 1].includes(md(P.indexOf(z) - P.indexOf(x))) && [1, n - 1].includes(md(P.indexOf(z) - P.indexOf(y))), [1, n - 1].includes(md(iz - ix)) && [1, n - 1].includes(md(iz - iy))],
+    ] : [
+      [`${x} sits at one of the ends.`, (P) => [0, n - 1].includes(P.indexOf(x)), [0, n - 1].includes(ix)],
+      [`${x} does not sit at either end.`, (P) => ![0, n - 1].includes(P.indexOf(x)), ![0, n - 1].includes(ix)],
+      [`${x} sits immediately to the left of ${y}.`, (P) => P.indexOf(x) === P.indexOf(y) - 1, ix === iy - 1],
+      [`${x} sits ${ord(k)} to the right of ${y}.`, (P) => P.indexOf(x) === P.indexOf(y) + k, ix === iy + k],
+      [`${x} sits ${ord(k)} to the left of ${y}.`, (P) => P.indexOf(x) === P.indexOf(y) - k, ix === iy - k],
+      [`Exactly ${Math.abs(ix - iy) - 1} ${Math.abs(ix - iy) - 1 === 1 ? "person sits" : "people sit"} between ${x} and ${y}.`, (P) => Math.abs(P.indexOf(x) - P.indexOf(y)) === Math.abs(ix - iy), Math.abs(ix - iy) > 1],
+      [`${x} does not sit next to ${y}.`, (P) => Math.abs(P.indexOf(x) - P.indexOf(y)) > 1, Math.abs(ix - iy) > 1],
+      [`${x} sits somewhere to the left of ${y}.`, (P) => P.indexOf(x) < P.indexOf(y), ix < iy],
+      [`${z} sits between ${x} and ${y}, next to both.`, (P) => Math.abs(P.indexOf(z) - P.indexOf(x)) === 1 && Math.abs(P.indexOf(z) - P.indexOf(y)) === 1, Math.abs(iz - ix) === 1 && Math.abs(iz - iy) === 1],
+    ];
+    const ok = opts.filter((o) => o[2]); return ok.length ? pick(ok) : null;
+  };
+  const clues = []; let live = perms;
+  for (let g = 0; g < 300 && live.length > 1; g++) { const c = mk(); if (!c || clues.some((d) => d[0] === c[0])) continue; const next = live.filter(c[1]); if (next.length < live.length) { clues.push(c); live = next; } }
+  if (live.length !== 1) return null;
+  for (const c of shuffle([...clues])) { const rest = clues.filter((d) => d !== c); if (perms.filter((P) => rest.every((d) => d[1](P))).length === 1) clues.splice(clues.indexOf(c), 1); }
+  if (clues.length < 4) return null;
+  const [x, y] = sample(people, 2), ix = arr.indexOf(x);
+  let qq, ans, wrongs;
+  if (circ) {
+    const k = ri(1, 3), dir = pick(["left", "right"]);
+    if (n % 2 === 0 && rnd() < 0.3) { qq = `Who sits opposite ${x}?`; ans = arr[md(ix + n / 2)]; }
+    else { qq = `Who sits ${k === 1 ? "immediately" : ord(k)} to the ${dir} of ${x}?`; ans = arr[md(dir === "left" ? ix + k : ix - k)]; }
+    wrongs = people.filter((p) => p !== ans && p !== x);
+  } else {
+    const r = rnd();
+    if (r < 0.35) { const k = ri(2, n - 1), end = pick(["left", "right"]); qq = `Who sits ${ord(k)} from the ${end} end?`; ans = arr[end === "left" ? k - 1 : n - k]; wrongs = people.filter((p) => p !== ans); }
+    else if (r < 0.7) { const k = ri(1, 2), dir = pick(["left", "right"]), j = dir === "left" ? ix - k : ix + k; if (j < 0 || j >= n) return null; qq = `Who sits ${k === 1 ? "immediately" : ord(k)} to the ${dir} of ${x}?`; ans = arr[j]; wrongs = people.filter((p) => p !== ans && p !== x); }
+    else { ans = Math.abs(ix - arr.indexOf(y)) - 1; qq = `How many people sit between ${x} and ${y}?`; if (clues.some((c) => c[0].includes(` between ${x} and ${y}`) || c[0].includes(` between ${y} and ${x}`))) return null; wrongs = nearNums(ans).filter((v) => v <= n - 2); }
+  }
+  const intro = circ ? `${n} friends — ${list([...people].sort())} — sit around a circular table facing the centre.` : `${n} friends — ${list([...people].sort())} — sit in a row facing north.`;
+  const order = circ ? `Going round with each person's left as the next seat: ${arr.join(" → ")} → ${arr[0]}` : `From left to right: ${arr.join(", ")}`;
+  return mc(`${intro} ${shuffle(clues).map((c) => c[0]).join(" ")} ${qq}`, ans, shuffle(wrongs), `Only one arrangement satisfies every clue. ${order}. So the answer is ${ans}.`);
 }
 
-// ---------- arithmetic ----------
-const arith = [
-  () => { const pairs = []; for (let a = 4; a <= 60; a++) for (let b = a + 1; b <= 90; b++) if ((a * b) % (a + b) === 0) pairs.push([a, b]); const [a, b] = pick(pairs), t = (a * b) / (a + b); return mc(`A can complete a piece of work in ${a} days and B in ${b} days. Working together, in how many days will they complete it?`, t, nearNums(t, [(a + b) / 2, b - a]), `Together they do 1/${a} + 1/${b} = ${a + b}/${a * b} = 1/${t} of the work per day, so they need ${t} days.`); },
-  () => { const v = pick([36, 45, 54, 72, 90, 108]), t = ri(6, 20), L = (v * 5 / 18) * t; return mc(`A train ${L} m long passes a signal post in ${t} seconds. What is its speed in km/h?`, v, nearNums(v, [L / t, v + 9, v - 9], 9), `Speed = ${L}/${t} = ${L / t} m/s = ${L / t} × 18/5 = ${v} km/h.`); },
-  () => { const v = pick([36, 54, 72, 90]), L = ri(10, 30) * 10, P = ri(10, 40) * 10, s = v * 5 / 18; if ((L + P) % s) return null; const t = (L + P) / s; return mc(`A train ${L} m long running at ${v} km/h crosses a platform ${P} m long. How many seconds does it take?`, t, nearNums(t, [L / s, P / s], 2), `It must cover ${L} + ${P} = ${L + P} m at ${v} km/h = ${s} m/s, taking ${L + P}/${s} = ${t} s.`); },
-  () => { const P = ri(4, 40) * 500, R = ri(3, 12), T = ri(2, 6), si = (P * R * T) / 100; if (!Number.isInteger(si)) return null; return mc(`What is the simple interest on ₹${P} at ${R}% per annum for ${T} years?`, `₹${si}`, [`₹${si + (P * R) / 100}`, `₹${si - (P * R) / 100}`, `₹${P + si}`, `₹${si + 100}`], `SI = P × R × T / 100 = ${P} × ${R} × ${T} / 100 = ₹${si}.`); },
-  () => { const a = pick([10, 15, 20, 25, 30, 40]), c = pick([20, 30, 50, 60, 75, 80].filter((x) => x !== a)), N = ri(2, 20) * 20, b = (a * N) / 100, ans = (c * N) / 100; return mc(`${a}% of a number is ${b}. What is ${c}% of the same number?`, ans, nearNums(ans, [b * c / 10, ans + b]), `The number is ${b} × 100/${a} = ${N}, and ${c}% of ${N} = ${ans}.`); },
-  () => { const m = pick([10, 15, 20, 25, 30, 40, 50, 60]), d = pick([5, 10, 15, 20, 25, 30]), net = ((100 + m) * (100 - d)) / 100 - 100; if (!Number.isInteger(net) || net === 0) return null; const lbl = net > 0 ? `${net}% profit` : `${-net}% loss`; return mc(`A shopkeeper marks his goods ${m}% above the cost price and then gives a discount of ${d}%. What is his net profit or loss?`, lbl, [`${m - d}% profit`, `${Math.abs(net) + 2}% ${net > 0 ? "profit" : "loss"}`, `${Math.abs(net)}% ${net > 0 ? "loss" : "profit"}`, `${m + d}% profit`], `On a cost of ₹100 the marked price is ₹${100 + m}; after ${d}% off it sells for ₹${(100 + m) * (100 - d) / 100}, a ${lbl}.`); },
-  () => { const n = ri(5, 10), A = ri(20, 60), B = A + pick([-4, -3, -2, 2, 3, 4]), x = n * A - (n - 1) * B; if (x <= 0) return null; return mc(`The average of ${n} numbers is ${A}. When one number is removed, the average of the rest becomes ${B}. Which number was removed?`, x, nearNums(x, [A, x + n]), `Total before = ${n} × ${A} = ${n * A}; after = ${n - 1} × ${B} = ${(n - 1) * B}; removed = ${x}.`); },
-  () => { const s = ri(8, 20), yrs = ri(3, 8), m = ri(3, 5), f = m * (s - yrs) + yrs; if (f - s < 20 || f > 70 || s - yrs < 2) return null; return mc(`The sum of the present ages of a father and his son is ${f + s} years. ${yrs} years ago, the father was ${m} times as old as the son. What is the son's present age?`, `${s} years`, [`${s + 2} years`, `${s - 2} years`, `${s + yrs} years`, `${s - 1} years`], `Let the son be x: (${f + s} − x − ${yrs}) = ${m}(x − ${yrs}) gives x = ${s}; the father is ${f}.`); },
-  () => { const k = pick([3, 4, 5]), odd = rnd() < 0.5, first = odd ? ri(5, 40) * 2 + 1 : ri(5, 40) * 2, nums = [...Array(k).keys()].map((i) => first + 2 * i), S = nums.reduce((a, b) => a + b); return mc(`The sum of ${k} consecutive ${odd ? "odd" : "even"} numbers is ${S}. What is the largest of them?`, nums.at(-1), nearNums(nums.at(-1), [nums.at(-2), nums.at(-1) + 2, S / k], 2), `The middle value is ${S}/${k} = ${S / k}; the numbers are ${list(nums)}, so the largest is ${nums.at(-1)}.`); },
-  () => { const u = ri(4, 16) * 5, v = ri(u / 5 + 1, 24) * 5, a = (2 * u * v) / (u + v); if (!Number.isInteger(a)) return null; return mc(`A car goes from town P to town Q at ${u} km/h and returns at ${v} km/h. What is its average speed for the whole journey?`, `${a} km/h`, [`${(u + v) / 2} km/h`, `${a + 2} km/h`, `${a - 3} km/h`, `${v - u} km/h`], `For equal distances, average speed = 2uv/(u + v) = 2 × ${u} × ${v}/${u + v} = ${a} km/h (not the simple mean).`); },
-  () => { const [a, b, c] = [ri(1, 6), ri(1, 6), ri(1, 6)], unit = ri(2, 40) * 100, total = (a + b + c) * unit; if (a === b && b === c) return null; return mc(`₹${total} is divided among X, Y and Z in the ratio ${a} : ${b} : ${c}. What is Y's share?`, `₹${b * unit}`, [`₹${a * unit}`, `₹${c * unit}`, `₹${(b + 1) * unit}`, `₹${total / 3}`], `Total parts = ${a + b + c}; one part = ₹${unit}; Y gets ${b} × ${unit} = ₹${b * unit}.`); },
-  () => { const x = ri(3, 30), k = ri(2, 5), m = ri(2, 15), r = ri(2, 4), res = (k * x + m) * r; return mc(`A number is multiplied by ${k}, then ${m} is added, and the result is multiplied by ${r}. The final answer is ${res}. What was the number?`, x, nearNums(x, [(res - m) / (k * r)].filter(Number.isInteger)), `Working backwards: ${res} ÷ ${r} = ${res / r}; − ${m} = ${res / r - m}; ÷ ${k} = ${x}.`); },
-  () => { const a = ri(2, 20), b = ri(a + 1, 40), t = (a * b) / (b - a); if (!Number.isInteger(t) || t > 60) return null; return mc(`A pipe can fill a tank in ${a} hours and another pipe can empty it in ${b} hours. If both are opened together on an empty tank, in how many hours will it be full?`, t, nearNums(t, [(a * b) / (a + b), b - a].filter(Number.isInteger)), `Net filling per hour = 1/${a} − 1/${b} = ${b - a}/${a * b} = 1/${t}, so it fills in ${t} hours.`); },
-  () => { const s = ri(6, 20), w = ri(1, 5), down = s + w, up = s - w; if (up <= 0) return null; const askStream = rnd() < 0.5; return mc(`A boat goes ${down} km downstream in 1 hour and ${up} km upstream in 1 hour. What is the speed of the ${askStream ? "stream" : "boat in still water"}?`, `${askStream ? w : s} km/h`, [`${askStream ? s : w} km/h`, `${(askStream ? w : s) + 1} km/h`, `${down - up} km/h`, `${(askStream ? w : s) + 2} km/h`], `Boat speed = (${down} + ${up})/2 = ${s} km/h; stream speed = (${down} − ${up})/2 = ${w} km/h.`); },
-  () => { const u = ri(30, 70), v = ri(30, 70), t = ri(2, 5), D = (u + v) * t; return mc(`Two trains start at the same time from stations ${D} km apart and travel towards each other at ${u} km/h and ${v} km/h. After how many hours will they meet?`, t, nearNums(t, [D / Math.max(u, v)].filter(Number.isInteger).concat([t + 1, t - 1])), `They close the gap at ${u} + ${v} = ${u + v} km/h, so they meet after ${D}/${u + v} = ${t} hours.`); },
-  () => { const n = ri(6, 25), h = (n * (n - 1)) / 2; return mc(`At a meeting, each of the ${n} officers shakes hands exactly once with every other officer. How many handshakes take place?`, h, nearNums(h, [n * (n - 1), n * n, h + n]), `Handshakes = n(n − 1)/2 = ${n} × ${n - 1}/2 = ${h}.`); },
-  () => { const d = pick([[1, 2, 5], [2, 5, 10], [1, 5, 10], [5, 10, 20]]), k = ri(5, 40), T = k * (d[0] + d[1] + d[2]); return mc(`A bag contains an equal number of ₹${d[0]}, ₹${d[1]} and ₹${d[2]} coins worth ₹${T} in all. How many of each are there?`, k, nearNums(k, [T / d[2], 3 * k].filter(Number.isInteger)), `Each set of one of each is worth ₹${d[0] + d[1] + d[2]}; ${T}/${d[0] + d[1] + d[2]} = ${k}.`); },
+// ================= ARITHMETIC (multi-step) =================
+const fmtClock = (mins) => { const H = Math.floor(mins / 60) % 24, M = mins % 60; return `${H % 12 || 12}:${String(M).padStart(2, "0")} ${H < 12 ? "am" : "pm"}`; };
+const ARITH = [
+  () => { const a = ri(8, 30), b = ri(8, 40), x = ri(2, 6); const rem = a * b - x * (a + b); if (rem <= 0 || rem % a) return null; const t = x + rem / a; return mc(`A can finish a job in ${a} days and B in ${b} days. They work together for ${x} days, after which A leaves. In how many days in all is the job finished?`, t, nearNums(t, [rem / a, Math.round((a * b) / (a + b))]), `Together they do ${x}(1/${a} + 1/${b}) = ${x * (a + b)}/${a * b} of the job. B finishes the remaining ${rem}/${a * b} alone in ${rem / a} days, so the total is ${x} + ${rem / a} = ${t} days.`); },
+  () => { const t = ri(3, 12), a = ri(t + 1, 5 * t), b = ri(t + 1, 5 * t), n0 = a * b - t * b - t * a, d0 = t * a * b; if (n0 <= 0 || d0 % n0) return null; const c = d0 / n0; if (c > 150 || c === a || c === b) return null; const den = a * b + b * c + a * c, num = a * b * c; return mc(`A, B and C can each do a piece of work in ${a}, ${b} and ${c} days respectively. How many days will they take working together?`, t, nearNums(t, [Math.round((a + b + c) / 3)]), `Together they do 1/${a} + 1/${b} + 1/${c} = ${den}/${num} = 1/${t} of the work per day, so they need ${t} days.`); },
+  () => { const [a, b, c] = [ri(4, 20), ri(4, 20), ri(6, 40)], den = b * c + a * c - a * b; if (den <= 0) return null; const num = a * b * c; if (num % den) return null; const t = num / den; return mc(`Two pipes can fill a tank in ${a} and ${b} hours, and a drain can empty it in ${c} hours. If all three are opened together on an empty tank, how long will it take to fill?`, `${t} hours`, nearNums(t, [Math.round((a * b) / (a + b))]).map((v) => `${v} hours`), `Net rate = 1/${a} + 1/${b} − 1/${c} = ${den}/${num} = 1/${t}, so ${t} hours.`); },
+  () => { const L1 = ri(10, 30) * 10, L2 = ri(10, 30) * 10, v1 = ri(4, 12) * 9, v2 = ri(4, 12) * 9, same = rnd() < 0.4; const rel = same ? Math.abs(v1 - v2) : v1 + v2; if (!rel) return null; const ms = (rel * 5) / 18, t = (L1 + L2) / ms; if (!Number.isInteger(t)) return null; const other = Math.round((L1 + L2) / ((same ? v1 + v2 : Math.abs(v1 - v2) || 1) * 5 / 18)); return mc(`Two trains, ${L1} m and ${L2} m long, run at ${v1} km/h and ${v2} km/h in ${same ? "the same direction" : "opposite directions"} on parallel tracks. How many seconds do they take to cross each other completely?`, t, nearNums(t, [other, Math.round(L1 / ms)]), `Relative speed = ${same ? `${Math.max(v1, v2)} − ${Math.min(v1, v2)}` : `${v1} + ${v2}`} = ${rel} km/h = ${ms} m/s; distance = ${L1} + ${L2} = ${L1 + L2} m; time = ${t} s.`); },
+  () => { const x = pick([10, 20, 25, 30, 40, 50]), y = pick([10, 20, 25, 30, 40, 50]), net = (100 + x) * (100 - y) - 10000; if (net % 100 || !net) return null; const p = net / 100, lbl = p > 0 ? `${p}% increase` : `${-p}% decrease`; return mc(`The price of an item is first raised by ${x}% and then reduced by ${y}%. What is the overall change?`, lbl, [x === y ? "No change" : `${Math.abs(x - y)}% ${x > y ? "increase" : "decrease"}`, `${Math.abs(p) + 2}% ${p > 0 ? "increase" : "decrease"}`, `${Math.abs(p)}% ${p > 0 ? "decrease" : "increase"}`, "No change"], `Net factor = ${(100 + x) / 100} × ${(100 - y) / 100} = ${(100 + p) / 100}, i.e. a ${lbl}.`); },
+  () => { const g = pick([800, 750, 900, 960, 875, 950, 850, 920, 940, 980, 975, 925, 880, 820]), num = (1000 - g) * 100, pct = mixed(num, g); return mc(`A dishonest shopkeeper sells goods at cost price but uses a weight of ${g} g instead of 1 kg. What is his profit percentage?`, `${pct}%`, [`${(1000 - g) / 10}%`, `${mixed(num, 1000 + (1000 - g))}%`, `${mixed(num + g, g)}%`, `${mixed(num - g, g)}%`], `He charges for 1000 g but gives ${g} g, gaining ${1000 - g} g on ${g} g: ${1000 - g}/${g} × 100 = ${pct}%.`); },
+  () => { const x = ri(3, 9), p = ri(2, 5), q = ri(p + 1, 8), yrs = ri(4, 12); if (gcd(p, q) !== 1) return null; const A = p * x, B = q * x, g = gcd(A + yrs, B + yrs); return mc(`The present ages of A and B are in the ratio ${p} : ${q}. After ${yrs} years the ratio will be ${(A + yrs) / g} : ${(B + yrs) / g}. What is A's present age?`, `${A} years`, [`${B} years`, `${A + yrs} years`, `${A + p} years`, `${A - p} years`], `Let the ages be ${p}x and ${q}x: (${p}x + ${yrs})/(${q}x + ${yrs}) = ${(A + yrs) / g}/${(B + yrs) / g} gives x = ${x}, so A is ${A}.`); },
+  () => { const n = ri(6, 12), d = pick([1.5, 2, 2.5, 3]), w = ri(45, 70), nw = w + n * d; if (!Number.isInteger(nw)) return null; return mc(`The average weight of ${n} soldiers increases by ${d} kg when one of them, weighing ${w} kg, is replaced by a new soldier. What is the new soldier's weight?`, `${nw} kg`, [`${w + d} kg`, `${nw - d} kg`, `${nw + n} kg`, `${w + n} kg`], `The total rises by ${n} × ${d} = ${n * d} kg, so the new soldier weighs ${w} + ${n * d} = ${nw} kg.`); },
+  () => { const a = ri(20, 50), b = a + ri(10, 40), m = ri(a + 1, b - 1), p = b - m, q = m - a, g = gcd(p, q); if (p === q) return null; return mc(`In what ratio must rice costing ₹${a}/kg be mixed with rice costing ₹${b}/kg so that the mixture costs ₹${m}/kg?`, `${p / g} : ${q / g}`, [`${q / g} : ${p / g}`, `${p / g + 1} : ${q / g}`, `${p / g} : ${q / g + 1}`, `${a} : ${b}`], `By alligation, cheaper : dearer = (${b} − ${m}) : (${m} − ${a}) = ${p} : ${q}${g > 1 ? ` = ${p / g} : ${q / g}` : ""}.`); },
+  () => { const r = pick([4, 5, 8, 10, 12, 15, 20]), P = ri(4, 60) * 500, d = (P * r * r) / 10000; if (!Number.isInteger(d)) return null; return mc(`What is the difference between compound interest and simple interest on ₹${P} for 2 years at ${r}% per annum?`, `₹${d}`, [`₹${2 * d}`, `₹${d + r}`, `₹${(P * r) / 100}`, `₹${d / 2}`], `For 2 years the difference is P(r/100)² = ${P} × (${r}/100)² = ₹${d}.`); },
+  () => { const u = ri(3, 6), v = u + ri(1, 3), t1 = pick([5, 10, 12, 15, 20]), t2 = pick([5, 6, 10, 15]); const num = u * v * (t1 + t2), den = 60 * (v - u); if (num % den) return null; const D = num / den; return mc(`Walking at ${u} km/h, a cadet reaches the parade ground ${t1} minutes late; walking at ${v} km/h, he reaches ${t2} minutes early. How far is the parade ground?`, `${D} km`, [`${D + 1} km`, `${Math.max(1, D - 1)} km`, `${D * 2} km`, `${D + 2} km`], `The time difference is ${t1 + t2} min = ${mixed(t1 + t2, 60)} h. D/${u} − D/${v} = ${mixed(t1 + t2, 60)} gives D = ${u} × ${v} × ${mixed(t1 + t2, 60)} ÷ ${v - u} = ${D} km.`); },
+  () => { const a = ri(1, 7), b = ri(a + 1, 9), N = 10 * a + b; return mc(`The sum of the digits of a two-digit number is ${a + b}. When the digits are reversed, the number increases by ${9 * (b - a)}. What is the number?`, N, [10 * b + a, N + 9, N - 9, N + 18].filter((x) => x > 9 && x < 100), `Reversing adds 9 × (units − tens) = ${9 * (b - a)}, so units − tens = ${b - a}; with sum ${a + b}, the digits are ${a} and ${b}: ${N}.`); },
+  () => { const iv = sample([4, 6, 8, 9, 10, 12, 15, 16, 18, 20], 3), L = iv.reduce(lcm), start = ri(7, 10) * 60; if (L > 300) return null; return mc(`Three bugles sound at intervals of ${list(iv)} minutes. They sound together at ${fmtClock(start)}. When will they next sound together?`, fmtClock(start + L), [fmtClock(start + L / 2), fmtClock(start + L + iv[0]), fmtClock(start + iv.reduce((a, b) => a + b)), fmtClock(start + 2 * L)], `They coincide every LCM(${list(iv)}) = ${L} minutes, so next at ${fmtClock(start + L)}.`); },
+  () => { const x = ri(2, 9) * 10000, y = ri(2, 9) * 10000, m = ri(4, 10), P = ri(2, 9) * 1000; const ax = x * 12, by = y * m, tot = ax + by; if ((P * ax) % tot) return null; const sa = (P * ax) / tot, g = gcd(ax, by); return mc(`A invests ₹${x} for 12 months and B invests ₹${y} for ${m} months in a business. Out of a profit of ₹${P}, what is A's share?`, `₹${sa}`, [`₹${P - sa}`, `₹${Math.round((P * x) / (x + y))}`, `₹${sa + 100}`, `₹${P / 2}`], `Shares are in the ratio ${x} × 12 : ${y} × ${m} = ${ax / g} : ${by / g}, so A gets ₹${sa}.`); },
+  () => { const p1 = ri(25, 40), p2 = p1 + ri(5, 15), M = pick([200, 300, 400, 500, 600]), pass = ri(Math.ceil((p1 * M) / 100) + 5, Math.floor((p2 * M) / 100) - 5), f = pass - (p1 * M) / 100, e = (p2 * M) / 100 - pass; if (!Number.isInteger(f) || !Number.isInteger(e) || f <= 0 || e <= 0) return null; return mc(`A candidate who scores ${p1}% fails by ${f} marks, while another who scores ${p2}% gets ${e} marks more than the pass mark. What are the maximum marks?`, M, nearNums(M, [f + e, (f + e) * 5], 50), `The ${p2 - p1}% difference equals ${f} + ${e} = ${f + e} marks, so 1% = ${(f + e) / (p2 - p1)} marks and the maximum is ${M}.`); },
+  () => { const vt = ri(6, 10), vp = vt + ri(2, 6), lag = pick([6, 10, 12, 15, 20]), head = (vt * lag) / 60, t = head / (vp - vt); if (!Number.isInteger(t * 60)) return null; return mc(`A thief escapes at ${vt} km/h. A policeman starts chasing him ${lag} minutes later at ${vp} km/h. How long after starting will the policeman catch him?`, `${t * 60} minutes`, [`${lag} minutes`, `${t * 60 + lag} minutes`, `${t * 60 + 5} minutes`, `${Math.max(1, t * 60 - 5)} minutes`], `The thief's head start is ${vt} × ${lag}/60 = ${head} km; the gap closes at ${vp - vt} km/h, taking ${head}/${vp - vt} h = ${t * 60} minutes.`); },
+  () => { const s = ri(8, 20), w = ri(2, 6), d = ((s * s - w * w) * pick([1, 2])) / 2, T = d / (s + w) + d / (s - w); if (!Number.isInteger(d) || !Number.isInteger(T)) return null; return mc(`A boat's speed in still water is ${s} km/h and the stream flows at ${w} km/h. How long does it take to go ${d} km downstream and come back?`, `${T} hours`, [`${mixed(2 * d, s)} hours`, `${T + 1} hours`, `${T - 1} hours`, `${mixed(d, s + w)} hours`], `Downstream: ${d}/${s + w} = ${mixed(d, s + w)} h; upstream: ${d}/${s - w} = ${mixed(d, s - w)} h; total ${T} h.`); },
+  () => { const x = pick([10, 20, 25]), y = pick([10, 20, 25, 50]), C = ri(2, 20) * 100, P = (C * (100 + x) * (100 + y)) / 10000; if (!Number.isInteger(P)) return null; return mc(`A sells a bicycle to B at ${x}% profit, and B sells it to C at ${y}% profit. If C pays ₹${P}, what did A pay for it?`, `₹${C}`, [`₹${Math.round((P * (100 - x - y)) / 100)}`, `₹${Math.round((P * 100) / (100 + x + y))}`, `₹${C + 100}`, `₹${Math.round((P * 100) / (100 + y))}`], `₹${P} = cost × ${(100 + x) / 100} × ${(100 + y) / 100}, so the cost was ₹${C}.`); },
+  () => { const L = ri(3, 12) * 100, u = ri(3, 7), v = u + ri(1, 5), same = rnd() < 0.5, t = L / (same ? v - u : v + u); if (!Number.isInteger(t)) return null; return mc(`Two runners start together from the same point on a ${L} m circular track at ${u} m/s and ${v} m/s, running in ${same ? "the same direction" : "opposite directions"}. After how many seconds do they first meet again?`, `${t} s`, [`${mixed(L, same ? v + u : v - u)} s`, `${t * 2} s`, `${t + 10} s`, `${mixed(L, v)} s`], `${same ? "The faster runner must gain a full lap" : "Together they must cover one full lap"}: ${L} ÷ ${same ? `(${v} − ${u})` : `(${v} + ${u})`} = ${t} s.`); },
 ];
 
-// ---------- clocks / calendars ----------
-const fmtTime = (h, m) => `${h}:${String(m).padStart(2, "0")}`;
-const deg = (a) => `${a}°`;
-function clock() {
-  const t = pick(["angle", "angle", "mirror", "gain", "coincide", "hourmove"]);
-  if (t === "angle") {
-    const h = ri(1, 12), m = pick([5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, ri(1, 59)]);
-    let a = Math.abs(30 * (h % 12) - 5.5 * m); if (a > 180) a = 360 - a;
-    let naive = Math.abs(30 * (h % 12) - 6 * m); if (naive > 180) naive = 360 - naive;
-    return mc(`What is the angle between the hands of a clock at ${fmtTime(h, m)}?`, deg(a), [naive, a + 30, a + 15, Math.abs(a - 30), a + 7.5].filter((x) => x !== a && x <= 180).map(deg), `Angle = |30 × ${h % 12} − 5.5 × ${m}| = ${Math.abs(30 * (h % 12) - 5.5 * m)}°${Math.abs(30 * (h % 12) - 5.5 * m) > 180 ? `, i.e. 360° − that = ${a}°` : ""}. (The hour hand also moves 0.5° per minute.)`);
+// ================= CLOCKS & CALENDARS =================
+const hm = (h, m) => `${h}:${String(m).padStart(2, "0")}`;
+const angleAt = (h, m) => { const a = Math.abs(30 * (h % 12) - 5.5 * m); return a > 180 ? 360 - a : a; };
+function clockHard() {
+  const t = pick(["angleTime", "angleTime", "watch", "rightAngles", "mirrorAngle", "trueTime"]);
+  if (t === "angleTime") {
+    const H = ri(1, 11), th = pick([30, 60, 90, 120, 150]), c = [2 * (30 * H - th), 2 * (30 * H + th)].filter((x) => x >= 0 && x < 660).sort((a, b) => a - b);
+    if (!c.length) return null;
+    const f = (num) => `${H}:${String(Math.floor(num / 11)).padStart(2, "0")}${num % 11 ? ` ${num % 11}/11` : ""}`;
+    const ans = f(c[0]);
+    return mc(`At what time between ${H} and ${H + 1} o'clock are the hands of a clock ${th}° apart for the first time?`, ans, [c[1] !== undefined ? f(c[1]) : f(c[0] + 22), f(c[0] + 11), f(Math.max(0, c[0] - 11)), `${H}:${String(Math.round(((30 * H + th) / 6) % 60)).padStart(2, "0")}`], `At ${H}:00 the minute hand is ${30 * H}° behind the hour hand and gains 5.5° per minute. They are first ${th}° apart when 5.5m = ${30 * H} ${c[0] === 2 * (30 * H - th) ? "−" : "+"} ${th}, i.e. m = ${mixed(c[0], 11)} minutes past ${H}.`);
   }
-  if (t === "mirror") {
-    const h = ri(1, 12), m = ri(1, 59), tot = (720 - (h % 12) * 60 - m + 720) % 720, ah = Math.floor(tot / 60) || 12, am = tot % 60;
-    return mc(`In a mirror, a clock appears to show ${fmtTime(h, m)}. What is the actual time?`, fmtTime(ah, am), [fmtTime((ah % 12) + 1, am), fmtTime(ah, (am + 30) % 60), fmtTime(12 - (h % 12) || 12, m), fmtTime(ah, 60 - am === 60 ? 0 : 60 - am)], `Actual time = 11:60 − ${fmtTime(h, m)} = ${fmtTime(ah, am)}.`);
+  if (t === "watch") {
+    const s = ri(2, 10), f = ri(2, 12), H = pick([24, 30, 36, 40, 48, 50, 54, 60]), mins = (H * 60 * s) / (s + f); if (!Number.isInteger(mins)) return null;
+    const DN = ["Monday", "Tuesday", "Wednesday", "Thursday"], at = (m) => `${fmtClock((720 + m) % 1440)} on ${DN[Math.floor((720 + m) / 1440)]}`;
+    const ans = at(mins);
+    return mc(`A watch that gains time uniformly was ${s} minutes slow at noon on Monday and ${f} minutes fast at ${at(H * 60)}. When did it show the correct time?`, ans, [at((H * 60 * f) / (s + f)), at(mins + 60), at(H * 30), at(Math.max(0, mins - 60))], `In ${H} hours it gains ${s} + ${f} = ${s + f} minutes. It is correct once it has gained ${s} minutes: ${H} × ${s}/${s + f} = ${mixed(mins, 60)} hours after noon on Monday, i.e. ${ans}.`);
   }
-  if (t === "gain") {
-    const g = ri(2, 6), gain = rnd() < 0.5, h0 = ri(6, 10), hrs = ri(3, 8), off = g * hrs;
-    const fmt = (mins) => { const H = Math.floor(mins / 60) % 24, M = mins % 60; return `${(H % 12) || 12}:${String(M).padStart(2, "0")} ${H < 12 ? "am" : "pm"}`; };
-    const real = (h0 + hrs) * 60, shown = real + (gain ? off : -off);
-    return mc(`A clock ${gain ? "gains" : "loses"} ${g} minutes every hour. It is set right at ${h0} am. What time will it show when the correct time is ${fmt(real)} the same day?`, fmt(shown), [fmt(real - (gain ? off : -off)), fmt(shown + g), fmt(shown - g), fmt(real)], `In ${hrs} hours it ${gain ? "gains" : "loses"} ${g} × ${hrs} = ${off} minutes, so it shows ${fmt(shown)}.`);
+  if (t === "rightAngles") {
+    const a = pick([1, 2, 4, 5, 7, 8, 10]), b = a + ri(2, 5); if (b > 12 || [3, 9].includes(b % 12)) return null;
+    let cnt = 0; for (let k = 0; k < 44; k++) { const m = (90 + 180 * k) / 5.5; if (m > a * 60 && m < b * 60) cnt++; }
+    return mc(`How many times are the hands of a clock at right angles between ${a} o'clock and ${b} o'clock?`, cnt, nearNums(cnt, [(b - a) * 2, (b - a) * 2 - 2]), `The hands are at right angles twice in almost every hour, but between 2 and 4 (and 8 and 10) one of those moments is exactly 3:00 (or 9:00), so those stretches give 3 instead of 4. Counting the moments between ${a}:00 and ${b}:00 gives ${cnt}.`);
   }
-  if (t === "coincide") {
-    const opp = rnd() < 0.5, h = opp ? pick([1, 2, 3, 4, 7, 8, 9, 10]) : pick([1, 2, 4, 5, 6, 7, 8, 9, 10]);
-    const num = opp ? (h < 6 ? (5 * h + 30) * 12 : (5 * h - 30) * 12) : 60 * h, m = Math.floor(num / 11), r = num % 11;
-    const f = (mm, rr) => `${h}:${String(mm).padStart(2, "0")}${rr ? ` ${rr}/11` : ""}`;
-    return mc(`At what time between ${h} and ${h + 1} o'clock are the hands of a clock ${opp ? "in opposite directions (180° apart)" : "together"}?`, f(m, r), [f(m + 1, r), f(m - 1, (r + 5) % 11), f(m, (r + 3) % 11 || 6), f(opp ? (m + 30) % 60 : 5 * h, 0)], `The minute hand gains 11/2° per minute. It must gain ${opp ? (h < 6 ? `${30 * h}° + 180° = ${30 * h + 180}°` : `${30 * h}° − 180° = ${30 * h - 180}°`) : `${30 * h}°`} on the hour hand, which takes ${num}/11 = ${m}${r ? ` ${r}/11` : ""} minutes past ${h}.`);
+  if (t === "mirrorAngle") {
+    const h = ri(1, 12), m = pick([10, 20, 25, 35, 40, 50]), tot = (720 - (h % 12) * 60 - m + 720) % 720, ah = Math.floor(tot / 60) || 12, am = tot % 60, a = angleAt(ah, am);
+    return mc(`In a mirror, a clock appears to show ${hm(h, m)}. What is the angle between the hands at the actual time?`, `${a}°`, [angleAt(h, m), a + 30, Math.abs(a - 15), a + 7.5].filter((z) => z !== a && z <= 180).map((z) => `${z}°`), `Actual time = 11:60 − ${hm(h, m)} = ${hm(ah, am)}. Angle = |30 × ${ah % 12} − 5.5 × ${am}|, taking the smaller side = ${a}°.`);
   }
-  const h1 = ri(1, 6), m1 = pick([0, 10, 15, 20, 30, 40, 45]), mins = ri(2, 6) * 60 + pick([0, 10, 20, 30, 40, 50]), end = h1 * 60 + m1 + mins;
-  const a = mins / 2;
-  return mc(`Through how many degrees does the hour hand of a clock turn from ${fmtTime(h1, m1)} to ${fmtTime(Math.floor(end / 60), end % 60)}?`, deg(a), [deg(mins / 60 * 30 + 30), deg(a + 15), deg(mins * 6 % 360), deg(a - 5)], `The hour hand turns 0.5° per minute; ${mins} minutes × 0.5° = ${a}°.`);
+  const g = pick([2, 3, 4, 5, 6]), h0 = ri(6, 9), real = ri(4, 12) * 60, shown = (real * (60 + g)) / 60; if (!Number.isInteger(shown)) return null;
+  return mc(`A clock gains ${g} minutes every hour. It was set right at ${h0}:00 am. What is the correct time when it shows ${fmtClock(h0 * 60 + shown)}?`, fmtClock(h0 * 60 + real), [fmtClock(h0 * 60 + shown - Math.round((shown * g) / 60)), fmtClock(h0 * 60 + real - g), fmtClock(h0 * 60 + real + g), fmtClock(h0 * 60 + shown - g)], `The clock runs ${60 + g} minutes for every 60 real minutes. It has run ${shown} minutes, so real time elapsed = ${shown} × 60/${60 + g} = ${real} minutes: ${fmtClock(h0 * 60 + real)}.`);
+}
+function calendarHard() {
+  const t = pick(["old", "old", "nth", "count53", "offsets", "after"]);
+  if (t === "old") {
+    const y = ri(1700, 2099), m = ri(0, 11), d = ri(1, 28), date = new Date(Date.UTC(y, m, d)), w = date.getUTCDay();
+    const Y = y - 1, centOdd = [0, 5, 3, 1][Math.floor((Y % 400) / 100)], rem = Y % 100, remLeap = Math.floor(rem / 4), remOdd = (rem + remLeap) % 7;
+    const leap = (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0, ml = [31, leap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31], monOdd = ml.slice(0, m).reduce((a, b) => a + b, 0) % 7;
+    const total = centOdd + remOdd + monOdd + d;
+    if (total % 7 !== w) return null; // the odd-days working must agree with the real calendar
+    return mc(`What day of the week was ${fmtDate(date)}?`, DAYS[w], [DAYS[(w + 1) % 7], DAYS[(w + 6) % 7], DAYS[(w + 2) % 7], DAYS[(w + 5) % 7]], `Count odd days: the first ${Y - rem} years give ${centOdd}; the next ${rem} years (${remLeap} of them leap) give ${remOdd}; the months before ${MONTHS[m]} give ${monOdd}; plus ${d} days. Total ${total}, and ${total} mod 7 = ${w} → ${DAYS[w]} (0 = Sunday).`);
+  }
+  if (t === "nth") {
+    const k1 = ri(1, 3), wd1 = ri(0, 6), date1 = ri(1, 7) + (k1 - 1) * 7, first = (((wd1 - (date1 - 1)) % 7) + 7) % 7, wd2 = ri(0, 6), last = rnd() < 0.5, k2 = ri(2, 4);
+    if (wd1 === wd2) return null;
+    const firstW2 = 1 + ((wd2 - first + 7) % 7); let ans = firstW2;
+    if (last) while (ans + 7 <= 31) ans += 7; else ans = firstW2 + (k2 - 1) * 7;
+    return mc(`In a 31-day month, the ${ord(k1)} ${DAYS[wd1]} falls on the ${ord(date1)}. On which date does the ${last ? "last" : ord(k2)} ${DAYS[wd2]} fall?`, ord(ans), [ord(ans > 7 ? ans - 7 : ans + 7), ord(ans + 1), ord(ans - 1), ord(ans + 2)], `The ${ord(k1)} ${DAYS[wd1]} is the ${ord(date1)}, so the 1st is a ${DAYS[first]}. The first ${DAYS[wd2]} is the ${ord(firstW2)}, so the ${last ? "last" : ord(k2)} one is the ${ord(ans)}.`);
+  }
+  if (t === "count53") {
+    const leap = rnd() < 0.5, s = ri(0, 6), ans = leap ? `${DAYS[s]} and ${DAYS[(s + 1) % 7]}` : DAYS[s];
+    const wr = leap ? [DAYS[s], `${DAYS[(s + 6) % 7]} and ${DAYS[s]}`, `${DAYS[(s + 1) % 7]} and ${DAYS[(s + 2) % 7]}`] : [`${DAYS[s]} and ${DAYS[(s + 1) % 7]}`, DAYS[(s + 6) % 7], DAYS[(s + 1) % 7]];
+    return mc(`A ${leap ? "leap" : "non-leap"} year begins on a ${DAYS[s]}. Which day(s) of the week occur 53 times in that year?`, ans, wr, `${leap ? 366 : 365} days = 52 weeks + ${leap ? "2 days" : "1 day"}; the extra ${leap ? "days are" : "day is"} the first ${leap ? "two days" : "day"} of the year: ${ans}.`);
+  }
+  if (t === "offsets") {
+    const w = ri(0, 6), n = ri(40, 400), today = (w + 5) % 7, ans = (((today - 1 - n) % 7) + 7) % 7;
+    return mc(`If the day after tomorrow is ${DAYS[w]}, what day of the week was it ${n} days before yesterday?`, DAYS[ans], [DAYS[(ans + 1) % 7], DAYS[(ans + 6) % 7], DAYS[(((w - n) % 7) + 7) % 7], DAYS[(ans + 3) % 7]], `Today is ${DAYS[today]}, so yesterday was ${DAYS[(today + 6) % 7]}. ${n} = 7 × ${Math.floor(n / 7)} + ${n % 7}, so go back ${n % 7} more days: ${DAYS[ans]}.`);
+  }
+  const d0 = new Date(Date.UTC(ri(2026, 2032), ri(0, 11), ri(1, 28))), n = ri(60, 250), d1 = new Date(+d0 + n * DAY);
+  return mc(`What will be the date ${n} days after ${fmtDate(d0)}?`, fmtDate(d1), [fmtDate(new Date(+d1 + DAY)), fmtDate(new Date(+d1 - DAY)), fmtDate(new Date(+d1 + 2 * DAY)), fmtDate(new Date(+d1 - 2 * DAY))], `Count the remaining days of ${MONTHS[d0.getUTCMonth()]}, then whole months, until ${n} days are used up: ${fmtDate(d1)}.`);
 }
 
-const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-const fmtDate = (d) => `${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
-const DAY = 86400000;
-const EVENTS = [["1947-08-15", "India's first Independence Day"], ["1950-01-26", "the first Republic Day"], ["1971-12-16", "the day Pakistan surrendered in the 1971 war"], ["1999-07-26", "Kargil Vijay Diwas (1999)"], ["1869-10-02", "the day Mahatma Gandhi was born"], ["1897-01-23", "the day Netaji Subhas Chandra Bose was born"], ["1949-01-15", "the day General Cariappa took over as Commander-in-Chief"], ["1932-10-08", "the day the Indian Air Force was established"], ["2023-08-23", "Chandrayaan-3's Moon landing"], ["1984-04-13", "the launch of Operation Meghdoot"], ["1961-12-19", "the liberation of Goa"], ["1975-04-19", "the launch of India's first satellite, Aryabhata"], ["2008-10-22", "the launch of Chandrayaan-1"], ["2014-09-24", "Mangalyaan's entry into Mars orbit"]];
-function calendar() {
-  const t = pick(["pair", "pair", "after", "sameyear", "event", "count"]);
-  if (t === "pair") {
-    const d1 = new Date(Date.UTC(ri(2024, 2032), ri(0, 11), ri(1, 28))), diff = ri(-400, 400); if (Math.abs(diff) < 20) return null;
-    const d2 = new Date(+d1 + diff * DAY), w1 = d1.getUTCDay(), w2 = d2.getUTCDay(), r = ((diff % 7) + 7) % 7;
-    return mc(`${fmtDate(d1)} is a ${DAYS[w1]}. What day of the week is ${fmtDate(d2)}?`, DAYS[w2], [DAYS[(w2 + 1) % 7], DAYS[(w2 + 6) % 7], DAYS[(w2 + 2) % 7], DAYS[(w2 + 5) % 7]], `${fmtDate(d2)} is ${Math.abs(diff)} days ${diff > 0 ? "after" : "before"} ${fmtDate(d1)}. ${Math.abs(diff)} = 7 × ${Math.floor(Math.abs(diff) / 7)} + ${Math.abs(diff) % 7}, so the day shifts ${diff > 0 ? r : (7 - r) % 7} ${diff > 0 ? "forward" : "back"}: ${DAYS[w2]}.`);
-  }
-  if (t === "after") {
-    const w = ri(0, 6), n = ri(20, 900), a = (w + n) % 7;
-    return mc(`If today is ${DAYS[w]}, what day of the week will it be ${n} days from today?`, DAYS[a], [DAYS[(a + 1) % 7], DAYS[(a + 6) % 7], DAYS[(w + (n % 7) + 2) % 7], DAYS[(a + 3) % 7]], `${n} = 7 × ${Math.floor(n / 7)} + ${n % 7}; ${n % 7} days after ${DAYS[w]} is ${DAYS[a]}.`);
-  }
-  if (t === "sameyear") {
-    const y = ri(2026, 2050), leap = (x) => (x % 4 === 0 && x % 100 !== 0) || x % 400 === 0, jan1 = (x) => new Date(Date.UTC(x, 0, 1)).getUTCDay();
-    let z = y + 1; while (!(leap(z) === leap(y) && jan1(z) === jan1(y))) z++;
-    return mc(`Which year will have exactly the same calendar as ${y}?`, z, [z - 1, z + 1, y + 4 === z ? y + 7 : y + 4, y + 28 === z ? y + 11 : y + 28].filter((x) => x !== z), `A year has the same calendar when it starts on the same weekday and is ${leap(y) ? "also a leap year" : "also an ordinary year"}. Counting odd days (1 per ordinary year, 2 per leap year) from ${y} until they total a multiple of 7 gives ${z}.`);
-  }
-  if (t === "event") {
-    const [iso, name] = pick(EVENTS), d = new Date(iso + "T00:00:00Z"), w = d.getUTCDay();
-    const ref = Date.UTC(2001, 0, 1), diff = Math.round((+d - ref) / DAY), r = ((diff % 7) + 7) % 7;
-    return mc(`${fmtDate(d)} was ${name}. What day of the week was it?`, DAYS[w], [DAYS[(w + 1) % 7], DAYS[(w + 6) % 7], DAYS[(w + 3) % 7], DAYS[(w + 2) % 7]], `1 January 2001 was a Monday. ${fmtDate(d)} is ${Math.abs(diff)} days ${diff < 0 ? "before" : "after"} it, leaving ${diff < 0 ? (7 - r) % 7 : r} odd day(s) ${diff < 0 ? "backwards" : "forwards"} from Monday, so it was a ${DAYS[w]}.`);
-  }
-  const y = ri(2025, 2031), m1 = ri(0, 8), d1 = ri(1, 28), m2 = ri(m1 + 1, 11), d2 = ri(1, 28), a = new Date(Date.UTC(y, m1, d1)), b = new Date(Date.UTC(y, m2, d2)), n = Math.round((+b - +a) / DAY) + 1;
-  return mc(`How many days are there from ${fmtDate(a)} to ${fmtDate(b)}, both days included?`, n, nearNums(n, [n - 1, n + 1]), `Counting the days in each month from ${fmtDate(a)} to ${fmtDate(b)} inclusive gives ${n}.`);
-}
-
-// ---------- syllogisms ----------
+// ================= SYLLOGISMS (Venn-model solver) =================
 const TERMS = [["pens", "pen"], ["books", "book"], ["chairs", "chair"], ["tables", "table"], ["cadets", "cadet"], ["athletes", "athlete"], ["swimmers", "swimmer"], ["pilots", "pilot"], ["doctors", "doctor"], ["teachers", "teacher"], ["singers", "singer"], ["dancers", "dancer"], ["cars", "car"], ["trucks", "truck"], ["trees", "tree"], ["flowers", "flower"], ["birds", "bird"], ["rivers", "river"], ["stones", "stone"], ["clouds", "cloud"], ["boxes", "box"], ["bottles", "bottle"], ["lamps", "lamp"], ["shirts", "shirt"], ["rings", "ring"], ["coins", "coin"], ["bats", "bat"], ["balls", "ball"], ["phones", "phone"], ["watches", "watch"], ["painters", "painter"], ["writers", "writer"], ["soldiers", "soldier"], ["sailors", "sailor"], ["engineers", "engineer"], ["farmers", "farmer"], ["roads", "road"], ["bridges", "bridge"], ["cups", "cup"], ["plates", "plate"], ["officers", "officer"], ["runners", "runner"]];
 const art = (s) => (/^[aeiou]/.test(s) ? "an " : "a ") + s;
-const say = ([k, x, y]) => ({ all: `All ${x[0]} are ${y[0]}`, some: `Some ${x[0]} are ${y[0]}`, no: `No ${x[1]} is ${art(y[1])}`, somenot: `Some ${x[0]} are not ${y[0]}` })[k];
-// [statements, conclusions, answer index (Only I / Only II / Both / Neither), why]
-const FORMS = [
-  [[["all", "A", "B"], ["all", "B", "C"]], [["all", "A", "C"], ["some", "C", "A"]], 2, "All {A} are {B} and all {B} are {C}, so all {A} are {C} (I), and hence some {C} are {A} (II)."],
-  [[["all", "A", "B"], ["all", "B", "C"]], [["all", "C", "A"], ["some", "B", "A"]], 1, "All {A} are {B}, so some {B} are {A} (II); but {C} may include much more than {A}, so I does not follow."],
-  [[["all", "A", "B"], ["no", "B", "C"]], [["no", "A", "C"], ["some", "A", "C"]], 0, "All {A} are {B} and no {b} is {c}, so no {a} can be {c} (I); II contradicts this."],
-  [[["all", "A", "B"], ["no", "B", "C"]], [["no", "C", "A"], ["somenot", "B", "C"]], 2, "No {a} is {c}, so equally no {c} is {a} (I); and since no {b} is {c}, the {B} are certainly not {C} (II)."],
-  [[["some", "A", "B"], ["all", "B", "C"]], [["some", "A", "C"], ["some", "C", "A"]], 2, "The {A} that are {B} are also {C}, so some {A} are {C} (I), and conversely some {C} are {A} (II)."],
-  [[["some", "A", "B"], ["all", "B", "C"]], [["all", "A", "C"], ["somenot", "C", "A"]], 3, "Only the {A} that are {B} are known to be {C}, so I is not certain; all {C} might be {A}, so II is not certain either."],
-  [[["some", "A", "B"], ["no", "B", "C"]], [["somenot", "A", "C"], ["no", "A", "C"]], 0, "The {A} that are {B} cannot be {C}, so some {A} are not {C} (I); other {A} might be {C}, so II is not certain."],
-  [[["no", "A", "B"], ["all", "B", "C"]], [["somenot", "C", "A"], ["no", "A", "C"]], 0, "All {B} are {C} and none of them is {a}, so some {C} are not {A} (I); some {A} could still be {C}, so II is uncertain."],
-  [[["no", "A", "B"], ["some", "B", "C"]], [["somenot", "C", "A"], ["some", "A", "C"]], 0, "The {C} that are {B} cannot be {A}, so some {C} are not {A} (I); nothing links {A} and {C} directly, so II is uncertain."],
-  [[["all", "A", "B"], ["some", "B", "C"]], [["some", "A", "C"], ["some", "C", "B"]], 1, "Some {B} are {C}, so some {C} are {B} (II); the {B} that are {C} need not include any {A}, so I is uncertain."],
-  [[["all", "A", "B"], ["some", "C", "A"]], [["some", "C", "B"], ["all", "B", "A"]], 0, "The {C} that are {A} are also {B}, so some {C} are {B} (I); 'All {A} are {B}' cannot be reversed, so II fails."],
-  [[["some", "A", "B"], ["some", "B", "C"]], [["some", "A", "C"], ["all", "C", "A"]], 3, "Two 'some' statements give no definite link between {A} and {C}, so neither conclusion is certain."],
-  [[["no", "A", "B"], ["no", "B", "C"]], [["no", "C", "B"], ["some", "A", "C"]], 0, "'No {b} is {c}' can be reversed to 'No {c} is {b}' (I); two negative statements say nothing about {A} and {C}."],
-  [[["all", "A", "B"], ["all", "A", "C"]], [["some", "B", "C"], ["all", "B", "C"]], 0, "Every one of the {A} is both {b} and {c}, so some {B} are {C} (I); there may be {B} that are not {C}, so II fails."],
-  [[["somenot", "A", "B"], ["all", "B", "C"]], [["somenot", "A", "C"], ["some", "C", "B"]], 1, "All {B} are {C}, so some {C} are {B} (II); the {A} that are not {B} may still be {C}, so I is uncertain."],
-  [[["all", "A", "B"], ["no", "C", "A"]], [["no", "C", "B"], ["some", "B", "A"]], 1, "All {A} are {B}, so some {B} are {A} (II); {C} may overlap with the {B} that are not {A}, so I fails."],
-  [[["some", "A", "B"], ["all", "A", "C"]], [["some", "C", "B"], ["some", "B", "C"]], 2, "The {A} that are {B} are also {C}, so some {C} are {B} (I) and some {B} are {C} (II)."],
-  [[["all", "A", "B"], ["all", "C", "B"]], [["some", "A", "C"], ["some", "B", "C"]], 1, "All {C} are {B}, so some {B} are {C} (II); {A} and {C} both lie within {B} but need not overlap, so I fails."],
-  [[["no", "A", "B"], ["all", "C", "A"]], [["no", "C", "B"], ["some", "A", "C"]], 2, "All {C} are {A} and no {a} is {b}, so no {c} is {b} (I); all {C} being {A} means some {A} are {C} (II)."],
-  [[["all", "A", "B"], ["some", "A", "C"]], [["some", "B", "C"], ["somenot", "C", "B"]], 0, "The {A} that are {C} are also {B}, so some {B} are {C} (I); all {C} might be {B}, so II is uncertain."],
-  [[["some", "A", "B"], ["no", "C", "B"]], [["somenot", "A", "C"], ["some", "B", "A"]], 2, "The {A} that are {B} cannot be {C}, so some {A} are not {C} (I); 'Some {A} are {B}' reverses to 'Some {B} are {A}' (II)."],
-  [[["all", "A", "B"], ["no", "C", "B"]], [["no", "A", "C"], ["all", "C", "A"]], 0, "All {A} are {B} and no {c} is {b}, so no {a} is {c} (I); II contradicts this."],
-  [[["no", "A", "B"], ["some", "C", "A"]], [["somenot", "C", "B"], ["some", "B", "C"]], 0, "The {C} that are {A} cannot be {B}, so some {C} are not {B} (I); nothing says any of the {B} are {C}."],
-  [[["all", "A", "B"], ["all", "B", "C"]], [["somenot", "A", "C"], ["all", "C", "B"]], 3, "All {A} are {C}, so I is false; 'All {B} are {C}' cannot be reversed, so II is not certain."],
-];
-function syllogism() {
-  const [stm, con, ans, why] = pick(FORMS), [A, B, C] = sample(TERMS, 3), m = { A, B, C };
-  const r = (s) => say([s[0], m[s[1]], m[s[2]]]);
-  const cap = (s) => s.replace(/\{([ABCabc])\}/g, (_, x) => (x === x.toUpperCase() ? m[x][0] : art(m[x.toUpperCase()][1])));
-  return { q: `Statements: ${stm.map(r).join(". ")}. Conclusions: I. ${r(con[0])}. II. ${r(con[1])}.`, options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"], answer: ans, explanation: cap(why) };
+const VENN = {};
+function venn(T) {
+  if (VENN[T]) return VENN[T];
+  const R = (1 << T) - 1, M = 1 << R, ab = new Uint8Array(M * T * T), anb = new Uint8Array(M * T * T), ok = new Uint8Array(M);
+  for (let m = 1; m < M; m++) {
+    let has = 0;
+    for (let r = 1; r <= R; r++) if ((m >> (r - 1)) & 1) { has |= r; for (let a = 0; a < T; a++) if ((r >> a) & 1) for (let b = 0; b < T; b++) ((r >> b) & 1 ? ab : anb)[(m * T + a) * T + b] = 1; }
+    ok[m] = has === R ? 1 : 0; // every term is non-empty
+  }
+  return (VENN[T] = { M, ab, anb, ok, T });
+}
+const holds = (V, m, [k, a, b]) => { const i = (m * V.T + a) * V.T + b; return k === "all" ? !V.anb[i] : k === "no" ? !V.ab[i] : k === "some" ? !!V.ab[i] : !!V.anb[i]; };
+const OPTS5 = ["Only I follows", "Only II follows", "Either I or II follows", "Neither I nor II follows", "Both I and II follow"];
+const COMP = { some: "no", no: "some", all: "somenot", somenot: "all" };
+function syllogismHard() {
+  const T = pick([3, 4, 4]), V = venn(T), terms = sample(TERMS, T), want = ri(0, 4);
+  for (let tries = 0; tries < 400; tries++) {
+    const st = [];
+    for (let i = 0; i < T - 1; i++) { const k = pick(["all", "all", "all", "some", "some", "no", "no", "somenot"]); st.push(rnd() < 0.5 ? [k, i, i + 1] : [k, i + 1, i]); }
+    const models = []; for (let m = 1; m < V.M; m++) if (V.ok[m] && st.every((s) => holds(V, m, s))) models.push(m);
+    if (!models.length) continue;
+    const mkC = () => { const [a, b] = sample([...Array(T).keys()], 2); return { k: pick(["all", "some", "no", "somenot", "all", "some"]), a, b, poss: rnd() < 0.3 }; };
+    const c1 = mkC(); let c2 = mkC();
+    if (want === 2 || rnd() < 0.15) { c1.poss = false; c2 = { k: COMP[c1.k], a: c1.a, b: c1.b, poss: false }; }
+    const follows = (c) => (c.poss ? models.some((m) => holds(V, m, [c.k, c.a, c.b])) : models.every((m) => holds(V, m, [c.k, c.a, c.b])));
+    const f1 = follows(c1), f2 = follows(c2);
+    const comp = !c1.poss && !c2.poss && c1.a === c2.a && c1.b === c2.b && COMP[c1.k] === c2.k;
+    const ans = f1 && f2 ? 4 : f1 ? 0 : f2 ? 1 : comp ? 2 : 3;
+    if (ans !== want) continue;
+    const say = ([k, a, b]) => ({ all: `All ${terms[a][0]} are ${terms[b][0]}`, some: `Some ${terms[a][0]} are ${terms[b][0]}`, no: `No ${terms[a][1]} is ${art(terms[b][1])}`, somenot: `Some ${terms[a][0]} are not ${terms[b][0]}` })[k];
+    const sayC = (c) => (c.poss ? `It is possible that ${say([c.k, c.a, c.b]).replace(/^./, (x) => x.toLowerCase())}` : say([c.k, c.a, c.b]));
+    const why = (c, f, n) => (c.poss ? (f ? `${n} is a possibility — nothing in the statements rules it out.` : `${n} is not possible — the statements rule it out.`) : f ? `${n} follows — every arrangement the statements allow makes it true.` : `${n} does not follow — the statements allow an arrangement in which it is false.`);
+    const either = ans === 2 ? " But I and II are complementary — exactly one of them must be true — so either I or II follows." : "";
+    return { q: `Statements: ${st.map(say).join(". ")}. Conclusions: I. ${sayC(c1)}. II. ${sayC(c2)}.`, options: OPTS5, answer: ans, explanation: `${why(c1, f1, "I")} ${why(c2, f2, "II")}${either}` };
+  }
+  return null;
 }
 
-// ---------- cubes, alphabet, words ----------
-function cubes() {
-  const t = pick(["cube", "cube", "cuboid", "partial", "cut"]);
-  if (t === "cube") {
-    const n = ri(3, 10), c = { 3: 8, 2: 12 * (n - 2), 1: 6 * (n - 2) ** 2, 0: (n - 2) ** 3 };
-    const k = pick(["3", "2", "1", "0", "atleast1", "atleast2"]);
-    const [label, ans, how] = { 3: ["exactly three faces", 8, "only the 8 corner cubes"], 2: ["exactly two faces", c[2], `12 edges × (${n} − 2) = ${c[2]}`], 1: ["exactly one face", c[1], `6 faces × (${n} − 2)² = ${c[1]}`], 0: ["no face", c[0], `the inner (${n} − 2)³ = ${c[0]} cubes`], atleast1: ["at least one face", n ** 3 - c[0], `${n}³ − (${n} − 2)³ = ${n ** 3} − ${c[0]} = ${n ** 3 - c[0]}`], atleast2: ["at least two faces", 8 + c[2], `corners + edges = 8 + ${c[2]} = ${8 + c[2]}`] }[k];
-    return mc(`A cube of side ${n} cm is painted on all faces and then cut into 1 cm cubes. How many of the small cubes have ${label} painted?`, ans, nearNums(ans, [c[1], c[2], c[0], 8, n ** 3 - c[0]].filter((x) => x !== ans)), `There are ${n ** 3} small cubes; ${label} painted: ${how}.`);
+// ================= DICE & CUBES =================
+const MATCHINGS = (() => { const out = []; const rec = (rest, acc) => { if (!rest.length) return out.push(acc); const [a, ...r] = rest; r.forEach((b, i) => rec(r.filter((_, j) => j !== i), [...acc, [a, b]])); }; rec([0, 1, 2, 3, 4, 5], []); return out; })();
+const COLOURS = ["Red", "Blue", "Green", "Yellow", "White", "Black"];
+function dice() {
+  const numbers = rnd() < 0.6, faces = numbers ? ["1", "2", "3", "4", "5", "6"] : COLOURS, perm = shuffle([0, 1, 2, 3, 4, 5]);
+  const pairs = [[perm[0], perm[1]], [perm[2], perm[3]], [perm[4], perm[5]]], nv = pick([2, 3, 3]);
+  const views = Array.from({ length: nv }, () => shuffle(pairs.map((p) => pick(p))));
+  if (new Set(views.map((v) => [...v].sort().join())).size < nv) return null;
+  const consistent = MATCHINGS.filter((mt) => views.every((v) => !mt.some(([a, b]) => v.includes(a) && v.includes(b))));
+  const x = ri(0, 5), partner = (mt) => { const p = mt.find((q) => q.includes(x)); return p[0] === x ? p[1] : p[0]; };
+  const partners = new Set(consistent.map(partner));
+  if (partners.size !== 1 || !views.some((v) => v.includes(x))) return null;
+  const y = [...partners][0], adj = new Set(views.filter((v) => v.includes(x)).flat().filter((f) => f !== x));
+  if (adj.size === 4 && rnd() < 0.5) return null; // prefer ones that need elimination
+  const forced = pairs.filter((p) => !p.includes(x) && consistent.every((mt) => mt.some((q) => q.includes(p[0]) && q.includes(p[1]))));
+  const how = adj.size === 4 ? `${faces[x]} appears next to ${list([...adj].map((f) => faces[f]))}, so none of these can be opposite it; only ${faces[y]} remains.` : `${faces[x]} appears next to ${list([...adj].map((f) => faces[f]))}.${forced.length ? ` The views also force ${forced.map(([a, b]) => `${faces[a]} opposite ${faces[b]}`).join(" and ")}.` : ""} The only face left for ${faces[x]} is ${faces[y]}.`;
+  return mc(`${nv === 2 ? "Two" : "Three"} views of the same die each show three faces meeting at a corner: ${views.map((v) => `(${v.map((f) => faces[f]).join(", ")})`).join(", ")}. Which ${numbers ? "number" : "colour"} is opposite ${faces[x]}?`, faces[y], shuffle([0, 1, 2, 3, 4, 5].filter((f) => f !== x && f !== y)).map((f) => faces[f]), `Faces seen together are adjacent, so they cannot be opposite. ${how}`);
+}
+function colouredCube() {
+  const n = ri(3, 6), scheme = pick(["opp3", "all6", "partial", "adjPairs"]);
+  const [c1, c2, c3, c4, c5] = sample(COLOURS.filter((c) => c !== "White"), 5), c6 = "White";
+  const col = { opp3: { top: c1, bottom: c1, front: c2, back: c2, left: c3, right: c3 }, all6: { top: c1, bottom: c2, front: c3, back: c4, left: c5, right: c6 }, partial: { top: c1, bottom: c1, front: c2, back: null, left: null, right: null }, adjPairs: { top: c1, front: c1, bottom: c2, back: c2, left: c3, right: c3 } }[scheme];
+  const desc = { opp3: `${c1} on the top and bottom, ${c2} on the front and back, and ${c3} on the left and right faces`, all6: `a different colour on each face — top ${c1}, bottom ${c2}, front ${c3}, back ${c4}, left ${c5}, right ${c6}`, partial: `${c1} on the top and bottom and ${c2} on the front, leaving the other three faces unpainted`, adjPairs: `${c1} on the top and front, ${c2} on the bottom and back, and ${c3} on the left and right faces` }[scheme];
+  const cubes = [];
+  for (let x = 0; x < n; x++) for (let y = 0; y < n; y++) for (let z = 0; z < n; z++) {
+    const hitFaces = [[z === n - 1, col.top], [z === 0, col.bottom], [y === 0, col.front], [y === n - 1, col.back], [x === 0, col.left], [x === n - 1, col.right]].filter(([on, c]) => on && c).map(([, c]) => c);
+    const ext = [x, y, z].filter((v) => v === 0 || v === n - 1).length;
+    cubes.push({ s: new Set(hitFaces), faces: hitFaces.length, kind: ["inner", "face-centre", "edge", "corner"][ext] });
   }
-  if (t === "cuboid") {
-    const [a, b, c] = [ri(3, 7), ri(3, 7), ri(2, 6)].sort((x, y) => y - x);
-    if (c < 3) return null;
-    const none = (a - 2) * (b - 2) * (c - 2), two = 4 * (a - 2 + b - 2 + c - 2), one = 2 * ((a - 2) * (b - 2) + (b - 2) * (c - 2) + (a - 2) * (c - 2));
-    const k = pick(["none", "two", "one"]), [label, ans, how] = { none: ["no face", none, `(${a} − 2)(${b} − 2)(${c} − 2) = ${none}`], two: ["exactly two faces", two, `4[(${a} − 2) + (${b} − 2) + (${c} − 2)] = ${two}`], one: ["exactly one face", one, `2[(${a - 2})(${b - 2}) + (${b - 2})(${c - 2}) + (${a - 2})(${c - 2})] = ${one}`] }[k];
-    return mc(`A wooden block measuring ${a} cm × ${b} cm × ${c} cm is painted on all faces and cut into 1 cm cubes. How many cubes have ${label} painted?`, ans, nearNums(ans, [none, two, one, 8].filter((x) => x !== ans)), `Cubes with ${label} painted: ${how}.`);
-  }
-  if (t === "partial") {
-    const n = ri(3, 8), adj = rnd() < 0.5, k = pick(["none", "one"]);
-    const one = adj ? 2 * (n * n - n) : 2 * n * n, none = adj ? n ** 3 - (2 * n * n - n) : n ** 3 - 2 * n * n;
-    const ans = k === "none" ? none : one;
-    return mc(`A cube of side ${n} cm is painted on two ${adj ? "adjacent" : "opposite"} faces only and then cut into 1 cm cubes. How many small cubes have ${k === "none" ? "no paint on them" : "exactly one painted face"}?`, ans, nearNums(ans, [none, one, adj ? n : n * n, 6 * (n - 2) ** 2].filter((x) => x !== ans)), adj ? `Each painted face has ${n}² = ${n * n} cubes; the ${n} cubes on the shared edge have two painted faces. Exactly one face: 2 × (${n * n} − ${n}) = ${one}. Painted cubes total ${2 * n * n - n}, so ${none} have no paint.` : `The two opposite faces each have ${n * n} cubes with exactly one painted face (${one} in all), and the remaining ${n}³ − ${one} = ${none} cubes have no paint.`);
-  }
-  const k = pick([2, 3, 4, 5]), n = k * ri(2, 5), ans = (n / k) ** 3;
-  return mc(`How many cubes of side ${k} cm can be cut from a solid cube of side ${n} cm?`, ans, nearNums(ans, [(n / k) ** 2, n ** 3 / k, 3 * (n / k)]), `(${n}/${k})³ = ${n / k}³ = ${ans}.`);
+  const colours = [...new Set(Object.values(col).filter(Boolean))];
+  const qs = [
+    () => { const [a, b] = sample(colours, 2); return [`exactly two painted faces, one ${a} and one ${b}`, (c) => c.faces === 2 && c.s.has(a) && c.s.has(b)]; },
+    () => { const a = pick(colours); return [`${a} paint and no other colour`, (c) => c.s.size === 1 && c.s.has(a)]; },
+    () => [`no paint at all`, (c) => c.faces === 0],
+    () => [`exactly three painted faces`, (c) => c.faces === 3],
+    () => { const [a, b] = sample(colours, 2); return [`${a} paint but no ${b} paint`, (c) => c.s.has(a) && !c.s.has(b)]; },
+    () => [`paint of at least two different colours`, (c) => c.s.size >= 2],
+  ];
+  const [label, test] = pick(qs)(), hit = cubes.filter(test), ans = hit.length; if (!ans) return null;
+  const parts = ["corner", "edge", "face-centre", "inner"].map((k) => [k, hit.filter((c) => c.kind === k).length]).filter(([, v]) => v).map(([k, v]) => `${v} ${k}`);
+  const others = qs.map((q) => cubes.filter(q()[1]).length).filter((v) => v !== ans);
+  return mc(`A cube of side ${n} cm is painted with ${desc}. It is then cut into 1 cm cubes. How many small cubes have ${label}?`, ans, nearNums(ans, others, Math.max(1, n - 2)), `Of the ${n ** 3} small cubes (8 corner, ${12 * (n - 2)} edge, ${6 * (n - 2) ** 2} face-centre, ${(n - 2) ** 3} inner), the ones with ${label} are: ${parts.join(" + ")} = ${ans}.`);
 }
 
-function alphabet() {
-  const t = ri(0, 4);
-  if (t === 0) { const m = ri(3, 20), k = ri(2, 26 - m), p = m + k; if (p > 26) return null; return mc(`Which letter is ${ord(k)} to the right of the ${ord(m)} letter from the left in the English alphabet?`, ch(p), [ch(p - 1), ch(p + 1 > 26 ? p - 2 : p + 1), ch(m + k - 2 > 0 ? m + k - 2 : 1), ch(27 - p)], `The ${ord(m)} letter from the left is ${ch(m)}; ${k} places to its right is the ${ord(p)} letter, ${ch(p)}.`); }
-  if (t === 1) { const m = ri(3, 18), k = ri(2, 20), p = 27 - m - k; if (p < 1) return null; return mc(`Which letter is ${ord(k)} to the left of the ${ord(m)} letter from the right in the English alphabet?`, ch(p), [ch(p + 1), ch(p - 1 > 0 ? p - 1 : p + 2), ch(27 - p), ch(p + 2)], `The ${ord(m)} letter from the right is the ${ord(27 - m)} from the left (${ch(27 - m)}); ${k} to its left is the ${ord(p)} letter, ${ch(p)}.`); }
-  if (t === 2) { const m = ri(3, 18), k = ri(2, 26 - m), p = 27 - (m + k); return mc(`If the English alphabet is written in reverse order (Z to A), which letter will be ${ord(k)} to the right of the ${ord(m)} letter from the left?`, ch(p), [ch(m + k), ch(p + 1 > 26 ? p - 2 : p + 1), ch(p - 1 > 0 ? p - 1 : p + 2), ch(27 - m)], `In the reversed alphabet the ${ord(m + k)} letter from the left is ${ch(p)} (position n holds letter 27 − n).`); }
-  if (t === 3) { const a = ri(1, 20), b = a + 2 * ri(2, 6); if (b > 26) return null; const mid = (a + b) / 2; return mc(`Which letter is exactly midway between ${ch(a)} and ${ch(b)} in the English alphabet?`, ch(mid), [ch(mid + 1), ch(mid - 1), ch(mid + 2)], `${ch(a)} = ${a} and ${ch(b)} = ${b}; the midpoint is ${mid} = ${ch(mid)}.`); }
-  const a = ri(1, 12), b = ri(a + 4, 26), n = b - a - 1; return mc(`How many letters are there between ${ch(a)} and ${ch(b)} in the English alphabet?`, n, nearNums(n, [n + 1, n + 2]), `${ch(a)} is ${a} and ${ch(b)} is ${b}; the letters strictly between them number ${b} − ${a} − 1 = ${n}.`);
+// ================= ALPHABET & WORDS =================
+function alphabetHard() {
+  let arr = [...AZ]; const done = [];
+  const OPS = {
+    rev: ["the alphabet is written in reverse order", (a) => [...a].reverse()],
+    firstHalf: ["the first half (A–M) is written in reverse order", (a) => (a.length === 26 ? [...a.slice(0, 13).reverse(), ...a.slice(13)] : null)],
+    secondHalf: ["the second half (N–Z) is written in reverse order", (a) => (a.length === 26 ? [...a.slice(0, 13), ...a.slice(13).reverse()] : null)],
+    vowels: ["all the vowels are removed", (a) => a.filter((c) => !VOW.includes(c))],
+    third: ["every third letter (counting from the left) is removed", (a) => a.filter((_, i) => (i + 1) % 3)],
+    alt: ["every second letter (counting from the left) is removed", (a) => a.filter((_, i) => i % 2 === 0)],
+  };
+  for (const k of sample(Object.keys(OPS), pick([1, 2, 2]))) { const r = OPS[k][1](arr); if (!r) return null; arr = r; done.push(OPS[k][0]); }
+  const n = arr.length, t = ri(0, 2);
+  let q, idx, how;
+  if (t === 0) { const m = ri(2, Math.floor(n / 2)), k = ri(2, n - m); idx = m - 1 + k; if (idx >= n) return null; q = `which letter is ${ord(k)} to the right of the ${ord(m)} letter from the left`; how = `the ${ord(m)} letter from the left is ${arr[m - 1]}; ${k} places to its right is ${arr[idx]}`; }
+  else if (t === 1) { const m = ri(2, Math.floor(n / 2)), k = ri(2, n - m); idx = n - m - k; if (idx < 0) return null; q = `which letter is ${ord(k)} to the left of the ${ord(m)} letter from the right`; how = `the ${ord(m)} letter from the right is ${arr[n - m]}; ${k} places to its left is ${arr[idx]}`; }
+  else { const a = ri(1, Math.floor(n / 2)), b = ri(1, Math.floor(n / 2)), i1 = a - 1, i2 = n - b; if ((i2 - i1) % 2 || i2 - i1 < 4) return null; idx = (i1 + i2) / 2; q = `which letter is exactly midway between the ${ord(a)} letter from the left and the ${ord(b)} letter from the right`; how = `those are ${arr[i1]} and ${arr[i2]}; the letter midway is ${arr[idx]}`; }
+  const ans = arr[idx];
+  return mc(`If ${done.join(" and then ")}, ${q}?`, ans, [arr[idx + 1], arr[idx - 1], AZ[idx], arr[idx + 2], arr[idx - 2]].filter(Boolean), `After the changes the sequence is ${arr.join(" ")}. ${how[0].toUpperCase() + how.slice(1)}.`);
 }
-
-const LONGWORDS = "CAPTAIN LIEUTENANT BATTALION REGIMENT ARTILLERY INFANTRY CAVALRY DISCIPLINE LEADERSHIP COURAGEOUS STRATEGY SQUADRON CORPORAL SERGEANT MAJORITY GENERATION CHAMPION MOUNTAIN KNOWLEDGE MANAGEMENT EDUCATION CERTAIN DYNAMIC HOSPITAL FRIENDSHIP BEAUTIFUL MOTIVATE PATIENCE INTEGRITY LOYALTY GALLANTRY SENTINEL TERRITORY PERIMETER CAMOUFLAGE AMMUNITION PARACHUTE HELICOPTER SUBMARINE DESTROYER FRIGATE CORVETTE AIRCRAFT RUNWAY COCKPIT BLUEPRINT HORIZON CHEMISTRY PHYSICS BIOLOGY HISTORY GEOGRAPHY LANGUAGE NOTEBOOK UNIVERSE TELESCOPE MONSOON FESTIVAL HARVEST".split(" ");
-function wordTest() {
-  const t = pick(["dict", "dict", "sameplace", "gap", "swap"]);
+const CLUSTERS = [["CONSTANT", "CONSTRAIN", "CONSTRUCT", "CONSTABLE", "CONSTELLATION", "CONSULT"], ["DISCIPLINE", "DISCIPLE", "DISCOUNT", "DISCOVER", "DISCREET", "DISCLOSE"], ["PREVAIL", "PREVENT", "PREVIOUS", "PREVIEW", "PRESENT", "PRESERVE"], ["COMPETE", "COMPETENT", "COMPLETE", "COMPLEX", "COMPLAIN", "COMPLY"], ["INTEREST", "INTERIOR", "INTERVAL", "INTERNAL", "INTERN", "INTERVIEW"], ["MANAGE", "MANDATE", "MANGO", "MANIFEST", "MANNER", "MANOEUVRE"], ["STRAIN", "STRAIGHT", "STRAND", "STRANGE", "STRATEGY", "STREAM"], ["PARADE", "PARADOX", "PARAGON", "PARALLEL", "PARAMOUNT", "PARAPET"], ["SOLDIER", "SOLDER", "SOLEMN", "SOLICIT", "SOLID", "SOLITARY"], ["BATTALION", "BATTERY", "BATTLE", "BATTEN", "BATTER", "BATTING"], ["REGIMENT", "REGIME", "REGION", "REGISTER", "REGRET", "REGULAR"], ["ARTICLE", "ARTIFACT", "ARTILLERY", "ARTISAN", "ARTIST", "ARTLESS"], ["COMMAND", "COMMANDO", "COMMENCE", "COMMEND", "COMMENT", "COMMERCE"], ["TRANSFER", "TRANSFORM", "TRANSIT", "TRANSLATE", "TRANSMIT", "TRANSPORT"], ["CERTAIN", "CERTIFY", "CERTIFICATE", "CERTITUDE", "CERAMIC", "CEREAL"], ["PERMANENT", "PERMIT", "PERMEATE", "PERSIST", "PERSON", "PERSUADE"], ["ACCOUNT", "ACCURATE", "ACCUSE", "ACCUSTOM", "ACCORD", "ACCOMPANY"], ["MISSILE", "MISSION", "MISSIVE", "MISTAKE", "MISTRESS", "MISTRUST"], ["DEFEND", "DEFENCE", "DEFER", "DEFIANT", "DEFICIT", "DEFINE"], ["CONTAIN", "CONTEMPT", "CONTEND", "CONTENT", "CONTEST", "CONTEXT"]];
+const LONGWORDS = "CAPTAIN LIEUTENANT BATTALION REGIMENT ARTILLERY INFANTRY CAVALRY DISCIPLINE LEADERSHIP STRATEGY SQUADRON CORPORAL SERGEANT GENERATION CHAMPION MOUNTAIN KNOWLEDGE MANAGEMENT EDUCATION DYNAMIC HOSPITAL FRIENDSHIP BEAUTIFUL MOTIVATE PATIENCE INTEGRITY LOYALTY GALLANTRY SENTINEL TERRITORY PERIMETER CAMOUFLAGE AMMUNITION PARACHUTE HELICOPTER SUBMARINE DESTROYER FRIGATE CORVETTE AIRCRAFT COCKPIT BLUEPRINT HORIZON CHEMISTRY PHYSICS HISTORY GEOGRAPHY LANGUAGE NOTEBOOK UNIVERSE TELESCOPE MONSOON FESTIVAL HARVEST".split(" ");
+function wordHard() {
+  const t = pick(["dict", "dict", "gap", "vc"]);
   if (t === "dict") {
-    const groups = Object.values(WORDS.concat(LONGWORDS).reduce((g, w) => ((g[w[0]] ||= []).push(w), g), {})).filter((g) => g.length >= 4);
-    const ws = sample(pick(groups), 4), sorted = [...ws].sort(), k = ri(0, 3);
-    const lbl = ["first", "second", "third", "last"][k];
-    return mc(`If the following words are arranged in dictionary order, which word comes ${lbl}? ${list(ws.map((w) => w[0] + w.slice(1).toLowerCase()))}`, sorted[k][0] + sorted[k].slice(1).toLowerCase(), ws.filter((w) => w !== sorted[k]).map((w) => w[0] + w.slice(1).toLowerCase()), `In dictionary order: ${sorted.map((w) => w[0] + w.slice(1).toLowerCase()).join(", ")}.`);
+    const ws = sample(pick(CLUSTERS), 5), sorted = [...ws].sort(), k = ri(1, 4);
+    return mc(`If these words are arranged in dictionary order, which comes ${k === 4 ? "last" : ord(k + 1)}? ${list(ws.map(title))}`, title(sorted[k]), ws.filter((w) => w !== sorted[k]).map(title), `Dictionary order: ${sorted.map(title).join(", ")}.`);
   }
   const w = pick(LONGWORDS);
-  if (t === "sameplace") {
-    const s = [...w].sort(), same = [...w].filter((c, i) => c === s[i]);
-    return mc(`If the letters of the word ${w} are arranged in alphabetical order, how many letters remain in the same position?`, same.length, nearNums(same.length, [same.length + 1, same.length + 2]).filter((x) => x >= 0), `Alphabetical order: ${s.join("")}. Comparing with ${w}, ${same.length ? `${same.length} letter${same.length > 1 ? "s" : ""} (${same.join(", ")}) stay${same.length > 1 ? "" : "s"} in place` : "no letter stays in place"}.`);
-  }
   if (t === "gap") {
-    const pairs = [];
-    for (let i = 0; i < w.length; i++) for (let j = i + 1; j < w.length; j++) if (j - i === Math.abs(pos(w[j]) - pos(w[i]))) pairs.push(w[i] + w[j]);
-    const n = pairs.length;
-    return mc(`How many pairs of letters in the word ${w} have as many letters between them in the word as there are between them in the English alphabet (in either direction)?`, n, nearNums(n, [n + 1, n + 2]).filter((x) => x >= 0), n ? `The pairs are ${list(pairs)} — ${n} in all.` : "Checking every pair, none has the same gap in the word as in the alphabet.");
+    const pairs = []; for (let i = 0; i < w.length; i++) for (let j = i + 1; j < w.length; j++) if (j - i === Math.abs(pos(w[j]) - pos(w[i]))) pairs.push(w[i] + w[j]);
+    return mc(`How many pairs of letters in the word ${w} have as many letters between them in the word as in the English alphabet (in either direction)?`, pairs.length, nearNums(pairs.length, [pairs.length + 1]).filter((x) => x >= 0), pairs.length ? `The pairs are ${list(pairs)} — ${pairs.length} in all.` : "Checking every pair, none qualifies.");
   }
-  const sw = [...w]; for (let i = 0; i + 1 < sw.length; i += 2) [sw[i], sw[i + 1]] = [sw[i + 1], sw[i]];
-  const k = ri(2, Math.min(7, w.length)), ans = sw[sw.length - k];
-  return mc(`In the word ${w}, the 1st and 2nd letters are interchanged, the 3rd and 4th letters are interchanged, and so on. Which letter will be ${ord(k)} from the right end?`, ans, [w[w.length - k], sw[sw.length - k - 1] ?? sw[0], sw[sw.length - k + 1] ?? sw[1], sw[k - 1]].filter((x) => x !== ans), `The new arrangement is ${sw.join("")}; the ${ord(k)} letter from the right is ${ans}.`);
+  const nw = [...w].map((c) => shift(c, VOW.includes(c) ? 1 : -1)).join(""), rep = [...new Set(nw)].filter((c) => nw.split(c).length > 2);
+  return mc(`In the word ${w}, each vowel is replaced by the next letter of the alphabet and each consonant by the previous letter. How many different letters appear more than once in the new word?`, rep.length, nearNums(rep.length, [[...new Set(w)].filter((c) => w.split(c).length > 2).length]).filter((x) => x >= 0), `The new word is ${nw}. ${rep.length ? `Letters that repeat: ${list(rep)}.` : "No letter repeats."}`);
 }
 
-// ---------- banks ----------
-const fromBank = (row, q) => mc(q ?? row[0], row[1], row.slice(2, 5), row[5]);
-const oddFromBank = (row) => mc("Which one does not belong with the others?", row[3], row.slice(0, 3), row[4]);
-function vocabFromBank([head, ...opts]) {
-  const [kind, text] = [head.slice(0, 1), head.slice(2)];
-  if (kind === "S") return mc(`Choose the word most similar in meaning to ${text}.`, opts[0], opts.slice(1), `${text[0] + text.slice(1).toLowerCase()} means ${opts[0].toLowerCase()}.`);
-  if (kind === "A") return mc(`Choose the word most opposite in meaning to ${text}.`, opts[0], opts.slice(1), `The opposite of ${text.toLowerCase()} is ${opts[0].toLowerCase()}; the other options are similar in meaning or unrelated.`);
-  return mc(`Choose the one word for: "${text}"`, opts[0], opts.slice(1), `${opts[0]}: ${text.toLowerCase()}.`);
+// ================= BANKS =================
+const fromBank = (r) => mc(r[0], r[1], r.slice(2, 5), r[5]);
+const oddFromBank = (r) => mc("Which one does not belong with the others?", r[3], r.slice(0, 3), r[4]);
+function vocabFromBank([head, ...o]) {
+  const kind = head[0], text = head.slice(2);
+  if (kind === "S") return mc(`Choose the word nearest in meaning to ${text}.`, o[0], o.slice(1), `${title(text)} means ${o[0].toLowerCase()}. Watch for look-alike traps among the options.`);
+  if (kind === "A") return mc(`Choose the word most opposite in meaning to ${text}.`, o[0], o.slice(1), `${title(text)} is the opposite of ${o[0].toLowerCase()}; the other options are close in meaning or unrelated.`);
+  return mc(`Choose the one word for: "${text}"`, o[0], o.slice(1), `${o[0]}: ${text.toLowerCase()}.`);
 }
 function statementFromBank([kind, q, ans, why]) {
-  const options = kind === "A" ? ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"] : ["Only I follows", "Only II follows", "Both follow", "Neither follows"];
-  return { q: kind === "K" ? q + " Which course(s) of action follow?" : q, options, answer: Number(ans), explanation: why };
+  const options = kind === "A" ? ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"] : kind === "R" ? ["Only argument I is strong", "Only argument II is strong", "Both I and II are strong", "Neither I nor II is strong"] : ["Only I follows", "Only II follows", "Both follow", "Neither follows"];
+  return { q, options, answer: Number(ans), explanation: why };
 }
 
 // ---------- assembly ----------
-const keyOf = (q) => (GENERIC.has(q.q) ? q.q + "|" + [...q.options].sort().join("|") : q.q);
+const keyOf = (q) => (GENERIC.test(q.q) ? q.q + "|" + [...q.options].sort().join("|") : q.q);
 const seen = new Set();
 for (let n = 1; n < FIRST; n++) for (const q of (await import(new URL(`oir-${n}.ts`, DIR))).default.questions) seen.add(keyOf(q));
-
-function take(make) {
-  for (let i = 0; i < 400; i++) {
-    const q = make();
-    if (!q) continue;
-    const k = keyOf(q);
-    if (seen.has(k)) continue;
-    seen.add(k);
-    return q;
-  }
-  throw new Error("could not generate a unique question: " + make.toString().slice(0, 60));
+function take(make, label) {
+  for (let i = 0; i < 800; i++) { const q = make(); if (!q) continue; const k = keyOf(q); if (seen.has(k)) continue; seen.add(k); return q; }
+  throw new Error("could not generate a unique question: " + label);
 }
-function takeBank(q, label) {
-  if (!q) throw new Error("bad bank row " + label);
-  const k = keyOf(q);
-  if (seen.has(k)) throw new Error("bank question already used: " + q.q);
-  seen.add(k);
-  return q;
-}
+function takeBank(q, label) { if (!q) throw new Error("bad bank row " + label); const k = keyOf(q); if (seen.has(k)) throw new Error("bank question already used: " + q.q); seen.add(k); return q; }
+seed(424242);
+const B = { analogies: shuffle(bank.analogies), oddWords: shuffle(bank.oddWords), vocab: shuffle(bank.vocab), statements: shuffle(bank.statements) };
 
 function buildTest(n) {
   seed(n * 7919);
-  const i = n - FIRST;
-  const fams = shuffle(Object.keys(seriesFamilies));
-  const missFam = pick(MISSABLE.filter((f) => !fams.slice(0, 3).includes(f)));
-  const ar = shuffle(arith), half = Math.ceil(ar.length / 2);
+  const i = n - FIRST, fams = shuffle(Object.keys(SERIES)), miss = pick(MISSABLE.filter((f) => !fams.slice(0, 3).includes(f)));
+  const ar = shuffle(ARITH), half = Math.ceil(ar.length / 2);
   return [
-    take(() => numberSeries(fams[0])),
-    take(() => numberSeries(fams[1])),
-    take(() => numberSeries(fams[2])),
-    take(() => numberSeries(missFam, true)),
-    take(letterSeries),
-    take(letterGroups),
-    takeBank(fromBank(bank.analogies[i]), `analogies ${i}`),
-    take(numberAnalogy),
-    takeBank(fromBank(bank.gkAnalogies[i]), `gk ${i}`),
-    takeBank(oddFromBank(bank.oddWords[i]), `odd ${i}`),
-    take(oddNumber),
-    takeBank(vocabFromBank(bank.vocab[i]), `vocab ${i}`),
-    take(letterCoding),
-    take(codeLanguage),
-    take(n % 2 ? operatorSub : letterValue),
-    takeBank(fromBank(bank.relations[i]), `relations ${i}`),
-    takeBank(fromBank(bank.pointing[i]), `pointing ${i}`),
-    take(directionDistance),
-    take(directionTurns),
-    take(ranking),
-    take(ordering),
-    take(() => pick(ar.slice(0, half))()),
-    take(() => pick(ar.slice(half))()),
-    take(clock),
-    take(calendar),
-    take(syllogism),
-    takeBank(statementFromBank(bank.statements[i]), `statements ${i}`),
-    take(cubes),
-    take(alphabet),
-    take(wordTest),
+    take(() => seriesNext(fams[0]), "series1"),
+    take(() => seriesNext(fams[1]), "series2"),
+    take(() => seriesWrong(fams[2]), "wrong"),
+    take(() => seriesMissing(miss), "missing"),
+    take(letterSeries, "letters"),
+    take(letterCluster, "cluster"),
+    takeBank(fromBank(B.analogies[i]), `analogy ${i}`),
+    take(numberAnalogy, "numAnalogy"),
+    take(letterAnalogy, "letterAnalogy"),
+    takeBank(oddFromBank(B.oddWords[i]), `odd ${i}`),
+    take(oddNumber, "oddNumber"),
+    take(oddLetterGroup, "oddLetters"),
+    take(coding, "coding"),
+    take(codeLanguage, "codeLanguage"),
+    take(n % 2 ? signSwap : trueEquation, "operators"),
+    take(codedRelation, "codedRelation"),
+    take(pointing, "pointing"),
+    take(directions, "directions"),
+    take(directionsTurns, "turns"),
+    take(ranking, "ranking"),
+    take(seating, "seating"),
+    take(() => pick(ar.slice(0, half))(), "arith1"),
+    take(() => pick(ar.slice(half))(), "arith2"),
+    take(clockHard, "clock"),
+    take(calendarHard, "calendar"),
+    take(syllogismHard, "syllogism"),
+    takeBank(statementFromBank(B.statements[i]), `statement ${i}`),
+    take(n % 2 ? dice : colouredCube, "cubes"),
+    take(n % 3 ? alphabetHard : wordHard, "alphabet"),
+    takeBank(vocabFromBank(B.vocab[i]), `vocab ${i}`),
   ];
 }
-
 function releaseAt(n) {
   if (n <= LIVE_UNTIL) return null;
   const week = Math.floor((n - LIVE_UNTIL - 1) / PER_WEEK);
-  const d = new Date(Date.parse(FIRST_SUNDAY + "T00:00:00Z") + week * 7 * DAY);
-  return d.toISOString().slice(0, 10) + "T00:00:00+05:30";
+  return new Date(Date.parse(FIRST_SUNDAY + "T00:00:00Z") + week * 7 * DAY).toISOString().slice(0, 10) + "T00:00:00+05:30";
 }
 
 const J = JSON.stringify;
@@ -676,7 +938,7 @@ for (let n = FIRST; n <= LAST; n++) {
 const test: Test = {
   id: "oir-${n}",
   title: "OIR Test ${n}",
-  durationMinutes: 20,${rel ? `\n  releaseAt: "${rel}",` : ""}
+  durationMinutes: 25,${rel ? `\n  releaseAt: "${rel}",` : ""}
   questions: [
 ${body}
   ],
@@ -685,7 +947,6 @@ ${body}
 export default test;
 `);
 }
-
 const ids = Array.from({ length: LAST }, (_, k) => k + 1);
 fs.writeFileSync(new URL("index.ts", DIR), `// Generated by scripts/gen-oir.mjs — edit the generator or the question files, not this list.
 ${ids.map((k) => `import oir${k} from "./oir-${k}.js";`).join("\n")}
