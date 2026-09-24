@@ -3,15 +3,11 @@
 // Prints the new AUTH_USERS value (paste into Vercel) and a phone → password table to send out.
 import { randomInt } from "node:crypto";
 
-// No 0/O, 1/l/I — easy to read out over WhatsApp. No symbols — easy to type on a phone.
-const SETS = ["ABCDEFGHJKLMNPQRSTUVWXYZ", "abcdefghijkmnpqrstuvwxyz", "23456789"];
-const ALL = SETS.join("");
+// Random lowercase word + 3 random digits, e.g. "tiger482": easy to type, nothing derived from name or phone.
+const WORDS = "tiger eagle falcon rocket thunder river mango lotus cobalt summit anchor arrow bravo delta orbit comet maple cedar pearl ember frost harbor jungle kite lantern meadow nectar onyx pepper quartz raven saffron timber velvet walnut zephyr amber bison cactus dragon forest glacier hawk island jasper koala lemon marble nova otter panther ranger shadow storm tango valley willow".split(" ");
 
-export function password(len = 10) {
-  const chars = SETS.map((s) => s[randomInt(s.length)]); // at least one of each kind
-  while (chars.length < len) chars.push(ALL[randomInt(ALL.length)]);
-  for (let i = chars.length - 1; i > 0; i--) { const j = randomInt(i + 1); [chars[i], chars[j]] = [chars[j], chars[i]]; }
-  return chars.join("");
+export function password() {
+  return WORDS[randomInt(WORDS.length)] + String(randomInt(100, 1000));
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
