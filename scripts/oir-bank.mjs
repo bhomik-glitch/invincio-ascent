@@ -8,11 +8,7 @@ Pusillanimous : Courage :: Impecunious : ?|Money|Friends|Wisdom|Patience|Pusilla
 Cacophony : Sound :: Stench : ?|Smell|Taste|Sight|Noise|A cacophony is an unpleasant sound; a stench is an unpleasant smell.
 Sycophant : Flattery :: Braggart : ?|Boasting|Lying|Cowardice|Complaining|A sycophant is marked by flattery; a braggart by boasting.
 Counterfeiter : Currency :: Plagiarist : ?|Writing|Money|Signatures|Identity|A counterfeiter fakes currency; a plagiarist steals and passes off someone else's writing.
-Drought : Rain :: Famine : ?|Food|Water|Money|Crops|A drought is a severe shortage of rain; a famine is a severe shortage of food.
-Myopia : Vision :: Amnesia : ?|Memory|Speech|Hearing|Sleep|Myopia impairs vision; amnesia impairs memory.
-Insomnia : Sleep :: Anorexia : ?|Appetite|Memory|Speech|Movement|Insomnia is the inability to sleep; anorexia is loss of appetite.
 Mutiny : Ship :: Coup : ?|Government|Army|Company|Parliament|A mutiny is a revolt against authority on a ship; a coup is the overthrow of a government.
-Epaulette : Shoulder :: Gauntlet : ?|Hand|Head|Foot|Neck|An epaulette is worn on the shoulder; a gauntlet is worn on the hand.
 Sabotage : Destruction :: Espionage : ?|Spying|Treason|Bribery|Rebellion|Sabotage is deliberate destruction; espionage is spying.
 Ephemeral : Permanent :: Frugal : ?|Extravagant|Thrifty|Poor|Careful|These are opposites: ephemeral–permanent, frugal–extravagant.
 Lethargic : Energy :: Apathetic : ?|Interest|Anger|Money|Health|A lethargic person lacks energy; an apathetic person lacks interest.
@@ -36,13 +32,10 @@ Fry : Fish :: Joey : ?|Kangaroo|Goat|Horse|Swan|A fry is a young fish; a joey is
 Cygnet : Swan :: Leveret : ?|Hare|Lion|Deer|Owl|A cygnet is a young swan; a leveret is a young hare.
 Stallion : Mare :: Gander : ?|Goose|Duck|Hen|Ewe|Stallion is a male horse and mare a female; gander is a male goose and goose the female.
 Ram : Ewe :: Drake : ?|Duck|Goose|Hen|Doe|A ram is a male sheep and a ewe the female; a drake is a male duck and a duck the female.
-Hive : Bees :: Warren : ?|Rabbits|Foxes|Birds|Wolves|Bees live in a hive; rabbits live in a warren.
 Eyrie : Eagle :: Drey : ?|Squirrel|Rabbit|Bee|Beaver|An eyrie is an eagle's nest; a drey is a squirrel's nest.
 Sett : Badger :: Lodge : ?|Beaver|Fox|Otter|Rabbit|A sett is a badger's home; a lodge is a beaver's home.
 Cote : Doves :: Coop : ?|Poultry|Horses|Pigs|Bees|Doves are kept in a cote; poultry in a coop.
 Pod : Whales :: Gaggle : ?|Geese|Crows|Owls|Bees|A group of whales is a pod; a group of geese is a gaggle.
-Archipelago : Islands :: Constellation : ?|Stars|Planets|Galaxies|Comets|An archipelago is a group of islands; a constellation is a group of stars.
-Anthology : Poems :: Bouquet : ?|Flowers|Leaves|Trees|Fruits|An anthology is a collection of poems; a bouquet is a collection of flowers.
 Xenophobia : Foreigners :: Agoraphobia : ?|Open spaces|Heights|Water|Darkness|Xenophobia is fear of foreigners; agoraphobia is fear of open or crowded spaces.
 Nyctophobia : Darkness :: Ophidiophobia : ?|Snakes|Spiders|Dogs|Birds|Nyctophobia is fear of darkness; ophidiophobia is fear of snakes.
 Regicide : King :: Fratricide : ?|Brother|Father|Mother|Sister|Regicide is killing a king; fratricide is killing one's brother.
@@ -51,25 +44,13 @@ Monarchy : A single ruler :: Oligarchy : ?|A small group|All citizens|The clergy
 Theocracy : Priests :: Plutocracy : ?|The wealthy|The military|The elderly|Scholars|A theocracy is rule by priests; a plutocracy is rule by the wealthy.
 Gerontocracy : The elderly :: Meritocracy : ?|The most able|The wealthy|The clergy|The military|A gerontocracy is rule by the old; a meritocracy is rule by the most able.
 Bibliophile : Books :: Oenophile : ?|Wine|Flowers|Music|Food|A bibliophile loves books; an oenophile loves wine.
-Glacier : Ice :: Delta : ?|Silt|Water|Rock|Salt|A glacier is formed of ice; a delta is formed of silt deposits.
-Stalactite : Ceiling :: Stalagmite : ?|Floor|Wall|Roof|Water|A stalactite hangs from a cave's ceiling; a stalagmite rises from its floor.
-Composer : Score :: Architect : ?|Blueprint|Building|Brick|Crane|A composer writes a score; an architect draws a blueprint.
 Dermatology : Skin :: Haematology : ?|Blood|Heart|Liver|Bones|Dermatology deals with skin; haematology deals with blood.
 Nephron : Kidney :: Neuron : ?|Nervous system|Heart|Lung|Muscle|The nephron is the functional unit of the kidney; the neuron is that of the nervous system.
 Alveoli : Lungs :: Villi : ?|Small intestine|Stomach|Kidney|Heart|Alveoli are tiny structures in the lungs; villi are tiny projections in the small intestine.
 Chlorophyll : Leaf :: Haemoglobin : ?|Blood|Bone|Skin|Hair|Chlorophyll is the pigment in leaves; haemoglobin is the pigment in blood.
 Insulin : Pancreas :: Bile : ?|Liver|Kidney|Stomach|Heart|Insulin is produced by the pancreas; bile is produced by the liver.
-Vitamin C : Scurvy :: Vitamin D : ?|Rickets|Beriberi|Night blindness|Pellagra|Lack of vitamin C causes scurvy; lack of vitamin D causes rickets.
-Iodine : Goitre :: Iron : ?|Anaemia|Rickets|Scurvy|Diabetes|Iodine deficiency causes goitre; iron deficiency causes anaemia.
-Decibel : Loudness :: Richter scale : ?|Earthquake magnitude|Wind speed|Temperature|Rainfall|Decibels measure loudness; the Richter scale measures earthquake magnitude.
-Knot : Speed :: Nautical mile : ?|Distance|Depth|Speed|Time|The knot is a unit of speed at sea; the nautical mile is a unit of distance.
 Lactometer : Milk :: Hydrometer : ?|Density of liquids|Humidity|Pressure|Rainfall|A lactometer tests the purity (density) of milk; a hydrometer measures the density of liquids.
 Sphygmomanometer : Blood pressure :: Altimeter : ?|Altitude|Speed|Depth|Temperature|A sphygmomanometer measures blood pressure; an altimeter measures altitude.
-Sonar : Sound waves :: Radar : ?|Radio waves|Light waves|Heat|Magnetism|Sonar works with sound waves; radar works with radio waves.
-Brake : Stop :: Throttle : ?|Speed|Steer|Stop|Lift|A brake is used to stop; a throttle controls speed.
-Caterpillar : Leaf :: Termite : ?|Wood|Soil|Blood|Nectar|Caterpillars feed on leaves; termites feed on wood.
-Koala : Eucalyptus :: Panda : ?|Bamboo|Grass|Fish|Honey|Koalas feed on eucalyptus; pandas feed on bamboo.
-Herbivore : Plants :: Frugivore : ?|Fruit|Insects|Grain|Meat|A herbivore eats plants; a frugivore eats fruit.
 Piscivore : Fish :: Granivore : ?|Seeds|Fish|Insects|Leaves|A piscivore eats fish; a granivore eats seeds.
 Arid : Moisture :: Barren : ?|Vegetation|Heat|Sand|Wind|Arid land lacks moisture; barren land lacks vegetation.
 Gale : Breeze :: Deluge : ?|Drizzle|Flood|Storm|Torrent|A gale is a violent breeze; a deluge is a violent drizzle — the pairs differ in intensity.
@@ -80,42 +61,83 @@ Admire : Idolise :: Dislike : ?|Loathe|Like|Ignore|Accept|To idolise is to admir
 Famous : Notorious :: Clever : ?|Cunning|Wise|Brilliant|Dull|Notorious is the negative form of famous; cunning is the negative form of clever.
 Thrifty : Miserly :: Confident : ?|Arrogant|Shy|Modest|Brave|Miserly is thrift taken too far; arrogant is confidence taken too far.
 Brave : Reckless :: Cautious : ?|Timid|Careful|Bold|Wise|Reckless is bravery taken too far; timid is caution taken too far.
-Pestle : Mortar :: Hammer : ?|Anvil|Nail|Chisel|Tongs|A pestle strikes against a mortar; a hammer strikes against an anvil.
-Violin : Bow :: Drum : ?|Stick|Skin|String|Reed|A violin is played with a bow; a drum is played with a stick.
 Shehnai : Wind :: Tabla : ?|Percussion|String|Reed|Brass|The shehnai is a wind instrument; the tabla is a percussion instrument.
 Sonnet : Fourteen :: Haiku : ?|Three|Five|Seven|Fourteen|A sonnet has fourteen lines; a haiku has three.
-Sextet : Six :: Nonet : ?|Nine|Seven|Eight|Ten|A sextet is a group of six; a nonet is a group of nine.
-Decade : Ten :: Score : ?|Twenty|Twelve|Fifty|Hundred|A decade is ten years; a score is twenty.
-Octogenarian : Eighty :: Nonagenarian : ?|Ninety|Seventy|Sixty|Hundred|An octogenarian is in their eighties; a nonagenarian is in their nineties.
-Silver jubilee : 25 :: Golden jubilee : ?|50|40|60|75|A silver jubilee marks 25 years; a golden jubilee marks 50.
-Triangle : 180° :: Quadrilateral : ?|360°|270°|540°|90°|The angles of a triangle add up to 180°; those of a quadrilateral add up to 360°.
 Hexagon : 720° :: Pentagon : ?|540°|360°|600°|450°|The interior angles of a hexagon total 720°; those of a pentagon total 540°.
-Cube : 6 :: Tetrahedron : ?|4|3|6|8|A cube has 6 faces; a tetrahedron has 4.
-Kilo : Thousand :: Mega : ?|Million|Hundred|Billion|Ten thousand|Kilo means a thousand; mega means a million.
-Milli : Thousandth :: Micro : ?|Millionth|Hundredth|Billionth|Tenth|Milli means one-thousandth; micro means one-millionth.
 Bauxite : Aluminium :: Haematite : ?|Iron|Copper|Zinc|Lead|Bauxite is the ore of aluminium; haematite is an ore of iron.
 Galena : Lead :: Cinnabar : ?|Mercury|Tin|Iron|Silver|Galena is the ore of lead; cinnabar is the ore of mercury.
 Graphite : Carbon :: Quartz : ?|Silica|Calcium|Iron|Sodium|Graphite is a form of carbon; quartz is a form of silica.
 Brass : Copper and zinc :: Bronze : ?|Copper and tin|Iron and carbon|Copper and nickel|Lead and tin|Brass is an alloy of copper and zinc; bronze is an alloy of copper and tin.
-Marathon : Stamina :: Sprint : ?|Speed|Endurance|Strength|Skill|A marathon tests stamina; a sprint tests speed.
-Chess : Checkmate :: Boxing : ?|Knockout|Punch|Ring|Round|A chess game is won outright by checkmate; a boxing bout by a knockout.
 Polo : Chukka :: Boxing : ?|Round|Set|Innings|Quarter|A polo match is divided into chukkas; a boxing match into rounds.
-Verdict : Jury :: Diagnosis : ?|Doctor|Patient|Nurse|Hospital|A jury gives a verdict; a doctor gives a diagnosis.
-Prosecutor : Accuse :: Advocate : ?|Defend|Judge|Arrest|Sentence|A prosecutor accuses; a defence advocate defends.
 Amnesty : Pardon :: Embargo : ?|Trade ban|Tax|Treaty|Alliance|An amnesty is a general pardon; an embargo is a ban on trade.
-Ceasefire : Hostilities :: Strike : ?|Work|Pay|Holiday|Protest|A ceasefire stops hostilities; a strike stops work.
 Armistice : War :: Adjournment : ?|Proceedings|Victory|Election|Journey|An armistice suspends a war; an adjournment suspends proceedings.
 Quiver : Arrows :: Bandolier : ?|Cartridges|Swords|Maps|Medals|A quiver holds arrows; a bandolier is a belt that holds cartridges.
-Garrison : Fort :: Crew : ?|Ship|Crowd|Team|Harbour|A garrison mans a fort; a crew mans a ship.
 Reconnaissance : Information :: Sortie : ?|Attack|Rest|Surrender|Training|A reconnaissance mission is flown to gather information; a sortie is flown to attack.
-Camouflage : Concealment :: Armour : ?|Protection|Attack|Speed|Signalling|Camouflage provides concealment; armour provides protection.
+Sanguine : Hopeful :: Saturnine : ?|Gloomy|Planetary|Cheerful|Saturated|These are synonyms: sanguine means cheerfully hopeful; saturnine means gloomy and sullen.
+Vexillology : Flags :: Sigillography : ?|Seals|Signatures|Signs|Cigars|Vexillology is the study of flags; sigillography is the study of seals.
+Ichthyology : Fish :: Malacology : ?|Molluscs|Diseases|Insects|Minerals|Ichthyology studies fish; malacology studies molluscs.
+Pedology : Soil :: Limnology : ?|Lakes and inland waters|Limbs|Oceans|Rocks|Pedology is the study of soils; limnology is the study of lakes and other inland waters (oceanography covers the sea).
+Hygrometer : Humidity :: Pyrometer : ?|Very high temperatures|Air pressure|Fire alarms|Radiation|A hygrometer measures humidity; a pyrometer measures very high temperatures, as in furnaces.
+Obstreperous : Quiet :: Intransigent : ?|Compromising|Stubborn|Transient|Intolerant|These are opposites: obstreperous (noisy, unruly) vs quiet; intransigent (refusing to compromise) vs compromising.
+Pellucid : Clear :: Turbid : ?|Muddy|Turbulent|Swollen|Transparent|These are synonyms: pellucid means clear; turbid means muddy or cloudy — 'turbulent' is a look-alike trap.
+Recondite : Obscure :: Perfunctory : ?|Cursory|Perfect|Functional|Thorough|These are synonyms: recondite means obscure; perfunctory means cursory, done without care.
+Gauche : Tact :: Callow : ?|Experience|Callousness|Colour|Courage|A gauche person lacks tact; a callow person lacks experience.
+Lachrymose : Tears :: Bibulous : ?|Drink|Books|Bibles|Bubbles|Lachrymose means given to tears; bibulous means given to drinking.
+Somnambulist : Sleep :: Funambulist : ?|Tightrope|Funerals|Fun|Ambulances|A somnambulist walks in their sleep; a funambulist walks on a tightrope.
+Cacophony : Euphony :: Dissonance : ?|Harmony|Melody|Noise|Rhythm|These are opposites: cacophony–euphony, dissonance–harmony.
+Petrology : Rocks :: Pomology : ?|Fruit|Poems|Flowers|Potatoes|Petrology is the study of rocks; pomology is the science of growing fruit.
+Apiculture : Bees :: Sericulture : ?|Silkworms|Serums|Fish|Birds|Apiculture is bee-keeping; sericulture is the rearing of silkworms.
+Pisciculture : Fish :: Vermiculture : ?|Earthworms|Vermin|Vegetables|Silkworms|Pisciculture is fish farming; vermiculture is the rearing of earthworms.
+Viticulture : Grapes :: Olericulture : ?|Vegetables|Olives|Oilseeds|Flowers|Viticulture is grape growing; olericulture is vegetable growing — 'olives' is the trap.
+Kilogram : Mass :: Candela : ?|Luminous intensity|Electric current|Temperature|Amount of substance|The kilogram is the SI base unit of mass; the candela is the SI base unit of luminous intensity.
+Pascal : Pressure :: Weber : ?|Magnetic flux|Power|Frequency|Magnetic flux density|The pascal measures pressure; the weber measures magnetic flux (the tesla measures flux density).
+Hertz : Frequency :: Henry : ?|Inductance|Capacitance|Charge|Resistance|The hertz is the unit of frequency; the henry is the unit of inductance.
+Farad : Capacitance :: Siemens : ?|Conductance|Resistance|Inductance|Power|The farad measures capacitance; the siemens measures electrical conductance.
+Tungsten : Bulb filament :: Nichrome : ?|Heating element|Fuse wire|Permanent magnet|Solder|Tungsten is used for bulb filaments; nichrome for heating elements.
+Pinaka : Rocket launcher :: Arjun : ?|Main battle tank|Missile|Helicopter|Rifle|Pinaka is India's multi-barrel rocket launcher; Arjun is its main battle tank.
+Vikrant : Aircraft carrier :: Kalvari : ?|Submarine|Destroyer|Frigate|Corvette|INS Vikrant is an aircraft carrier; INS Kalvari is a Scorpène-class submarine.
+Field Marshal : Five-star :: Lieutenant General : ?|Three-star|Two-star|Four-star|One-star|A Field Marshal holds five-star rank; a Lieutenant General holds three-star rank.
+Division : Major General :: Corps : ?|Lieutenant General|General|Brigadier|Colonel|A division is commanded by a Major General; a corps by a Lieutenant General.
+Jharia : Coal :: Kolar : ?|Gold|Mica|Iron ore|Coal|Jharia is known for its coalfields; Kolar for its gold fields.
+Khetri : Copper :: Neyveli : ?|Lignite|Gold|Bauxite|Mica|Khetri is known for copper mines; Neyveli for lignite.
+Loktak : Manipur :: Wular : ?|Jammu and Kashmir|Himachal Pradesh|Punjab|Sikkim|Loktak Lake is in Manipur; Wular Lake is in Jammu and Kashmir.
+Bhakra Nangal : Sutlej :: Tehri : ?|Bhagirathi|Alaknanda|Yamuna|Ganga|The Bhakra Nangal dam is on the Sutlej; the Tehri dam is on the Bhagirathi.
+Nagarjuna Sagar : Krishna :: Mettur : ?|Kaveri|Krishna|Godavari|Tungabhadra|The Nagarjuna Sagar dam is on the Krishna; the Mettur dam is on the Kaveri.
+Bihu : Assam :: Nuakhai : ?|Odisha|Assam|Bihar|Punjab|Bihu is a harvest festival of Assam; Nuakhai is a harvest festival of Odisha.
+Kaziranga : One-horned rhinoceros :: Keibul Lamjao : ?|Sangai deer|Snow leopard|Red panda|Hoolock gibbon|Kaziranga protects the one-horned rhino; Keibul Lamjao, the floating park of Manipur, protects the sangai deer.
+Oxymoron : Contradiction :: Litotes : ?|Understatement|Exaggeration|Comparison|Repetition|An oxymoron joins contradictory terms; litotes is understatement ("not bad"); hyperbole would be exaggeration.
+Prologue : Epilogue :: Overture : ?|Finale|Opera|Interlude|Symphony|A prologue opens a play and an epilogue closes it; an overture opens an opera and a finale closes it.
+Carpenter : Adze :: Cobbler : ?|Awl|Anvil|Plane|Trowel|An adze is a carpenter's tool; an awl is a cobbler's tool.
+Taxonomy : Classification :: Aetiology : ?|Causes of disease|Word origins|Insects|Ethics|Taxonomy deals with classification; aetiology with the causes of disease — etymology (word origins) is the trap.
+Aphasia : Speech :: Anosmia : ?|Smell|Memory|Sleep|Hearing|Aphasia is loss of the ability to use speech; anosmia is loss of the sense of smell.
+Ataxia : Coordination :: Aphonia : ?|Voice|Hearing|Appetite|Vision|Ataxia is loss of coordination; aphonia is loss of voice.
+Fathom : Depth :: Light-year : ?|Distance|Time|Speed|Brightness|A fathom measures depth; a light-year measures distance, not time.
+Ohm : Resistance :: Tesla : ?|Magnetic flux density|Magnetic flux|Electric field|Inductance|The ohm measures resistance; the tesla measures magnetic flux density (the weber is flux).
+Bharatanatyam : Tamil Nadu :: Sattriya : ?|Assam|Manipur|Odisha|Kerala|Bharatanatyam comes from Tamil Nadu; Sattriya from Assam.
+Madhubani : Bihar :: Warli : ?|Maharashtra|Gujarat|Rajasthan|Odisha|Madhubani painting comes from Bihar; Warli painting from Maharashtra.
+Pattachitra : Odisha :: Kalamkari : ?|Andhra Pradesh|Kerala|Tamil Nadu|Karnataka|Pattachitra is an art of Odisha; Kalamkari of Andhra Pradesh.
+Thomas Cup : Men's badminton :: Uber Cup : ?|Women's badminton|Men's tennis|Women's tennis|Table tennis|The Thomas Cup is the men's world team badminton championship; the Uber Cup is the women's.
+Misogyny : Women :: Misandry : ?|Men|Marriage|Mankind|Children|Misogyny is hatred of women; misandry is hatred of men (misanthropy is hatred of mankind).
+Filibuster : Delay :: Veto : ?|Reject|Debate|Approve|Amend|A filibuster delays a measure; a veto rejects it.
+Hibernation : Winter :: Aestivation : ?|Summer|Autumn|Spring|Monsoon|Hibernation is dormancy in winter; aestivation is dormancy in the hot, dry summer.
+Diurnal : Day :: Crepuscular : ?|Twilight|Night|Noon|Winter|Diurnal animals are active by day; crepuscular animals at dawn and dusk (twilight).
+Oviparous : Eggs :: Viviparous : ?|Live young|Seeds|Spores|Larvae|Oviparous animals lay eggs; viviparous animals give birth to live young.
+Xerophyte : Dry habitat :: Halophyte : ?|Salty soil|Water|Shade|Rock|A xerophyte is adapted to dry places; a halophyte to salty soil or water.
+Thyroxine : Thyroid :: Melatonin : ?|Pineal gland|Pituitary gland|Adrenal gland|Pancreas|Thyroxine is secreted by the thyroid; melatonin by the pineal gland.
+Scurvy : Vitamin C :: Beriberi : ?|Vitamin B1|Vitamin B12|Vitamin A|Vitamin D|Scurvy is caused by lack of vitamin C; beriberi by lack of vitamin B1 (thiamine).
+Isobar : Pressure :: Isohyet : ?|Rainfall|Temperature|Sunshine|Humidity|An isobar joins places of equal pressure; an isohyet joins places of equal rainfall.
+Isotherm : Temperature :: Isobath : ?|Water depth|Pressure|Salinity|Height above sea level|An isotherm joins places of equal temperature; an isobath joins points of equal water depth.
+Pedagogy : Children :: Andragogy : ?|Adults|Men's health|Mankind|Leaders|Pedagogy is the method of teaching children; andragogy is the method of teaching adults.
+Sinecure : Little work :: Pittance : ?|Little money|Little time|Little effort|Little food|A sinecure is a post needing little work; a pittance is a very small amount of money.
+Quixotic : Idealistic :: Machiavellian : ?|Cunning|Loyal|Heroic|Cowardly|Quixotic means impractically idealistic; Machiavellian means cunning and unscrupulous.
+Herculean : Task :: Draconian : ?|Law|Dragon|Journey|Speech|'Herculean' describes an enormous task; 'draconian' describes an excessively harsh law.
+Ahimsa : Non-violence :: Aparigraha : ?|Non-possession|Truthfulness|Non-stealing|Celibacy|Among the Jain vows, ahimsa is non-violence and aparigraha is non-possession (asteya is non-stealing, satya truthfulness).
+Chandrayaan : Moon :: Aditya-L1 : ?|Sun|Mars|Venus|Asteroids|Chandrayaan missions study the Moon; Aditya-L1 studies the Sun.
 `);
 
 // odd-one-out: three that belong | the odd one | explanation
 export const oddWords = lines(`
-Lion|Tiger|Leopard|Hyena|The hyena is not a member of the cat family; the others are big cats.
 Whale|Dolphin|Porpoise|Seal|The seal is a pinniped; the others are cetaceans.
-Ostrich|Emu|Kiwi|Albatross|The albatross can fly; the others are flightless birds.
 Spider|Scorpion|Tick|Centipede|The centipede is not an arachnid; the others are.
 Octopus|Squid|Cuttlefish|Starfish|The starfish is an echinoderm; the others are cephalopod molluscs.
 Shark|Ray|Skate|Tuna|The tuna has a bony skeleton; the others are cartilaginous fish.
@@ -129,19 +151,15 @@ Malaria|Kala-azar|Sleeping sickness|Dengue|Dengue is caused by a virus; the othe
 Rabies|Polio|Measles|Tetanus|Tetanus is caused by bacteria; the others are viral diseases.
 Insulin|Adrenaline|Thyroxine|Pepsin|Pepsin is an enzyme; the others are hormones.
 Amylase|Lipase|Trypsin|Glucagon|Glucagon is a hormone; the others are digestive enzymes.
-Retina|Cornea|Iris|Cochlea|The cochlea is part of the ear; the others are parts of the eye.
-Femur|Tibia|Fibula|Humerus|The humerus is an arm bone; the others are leg bones.
 Stapes|Malleus|Incus|Sternum|The sternum is the breastbone; the others are bones of the middle ear.
 Neon|Argon|Krypton|Nitrogen|Nitrogen is not a noble gas; the others are.
 Sodium|Potassium|Lithium|Calcium|Calcium is an alkaline earth metal; the others are alkali metals.
 Diamond|Graphite|Charcoal|Quartz|Quartz is not a form of carbon; the others are.
 Ruby|Sapphire|Emerald|Pearl|The pearl is formed by a living oyster; the others are mineral gemstones.
 Vinegar|Lemon juice|Curd|Soap solution|Soap solution is basic; the others are acidic.
-Proton|Neutron|Electron|Photon|The photon is a particle of light; the others are constituents of atoms.
 Velocity|Acceleration|Force|Speed|Speed is a scalar quantity; the others are vectors.
 Mass|Time|Temperature|Displacement|Displacement is a vector quantity; the others are scalars.
 Joule|Erg|Electron-volt|Newton|The newton is a unit of force; the others are units of energy.
-Venus|Mercury|Earth|Jupiter|Jupiter is a gas giant; the others are rocky (terrestrial) planets.
 Io|Europa|Ganymede|Titan|Titan orbits Saturn; the others are moons of Jupiter.
 Troposphere|Stratosphere|Mesosphere|Lithosphere|The lithosphere is the Earth's rocky outer layer; the others are layers of the atmosphere.
 Granite|Basalt|Pumice|Marble|Marble is a metamorphic rock; the others are igneous rocks.
@@ -175,19 +193,11 @@ Ashoka|Chandragupta Maurya|Bindusara|Samudragupta|Samudragupta was a Gupta emper
 Babur|Akbar|Aurangzeb|Sher Shah Suri|Sher Shah Suri was a Sur ruler; the others were Mughal emperors.
 Tilak|Lala Lajpat Rai|Bipin Chandra Pal|Gokhale|Gokhale was a moderate; the others (Lal-Bal-Pal) were extremist leaders.
 Dandi March|Quit India|Non-Cooperation|Swadeshi (1905)|The Swadeshi movement of 1905 predates Gandhi's leadership; Gandhi led the others.
-Rigveda|Samaveda|Yajurveda|Upanishad|The Upanishads are not one of the four Vedas; the others are.
-Kabaddi|Kho-kho|Wrestling|Hockey|Hockey needs equipment (stick and ball); the others need none.
-Wimbledon|US Open|French Open|Davis Cup|The Davis Cup is a team competition; the others are Grand Slam tournaments.
 Durand Cup|Santosh Trophy|Subroto Cup|Ranji Trophy|The Ranji Trophy is a cricket tournament; the others are football tournaments.
-Kanpur|Lucknow|Varanasi|Patna|Patna is in Bihar; the others are in Uttar Pradesh.
-Bhopal|Indore|Jabalpur|Nagpur|Nagpur is in Maharashtra; the others are in Madhya Pradesh.
-Shillong|Aizawl|Kohima|Guwahati|Guwahati is not a state capital; the others are.
 Ellipse|Parabola|Hyperbola|Cycloid|The cycloid is not a conic section; the others are.
 Isosceles|Scalene|Equilateral|Obtuse|'Obtuse' classifies a triangle by its angles; the others classify it by its sides.
 Rhombus|Square|Rectangle|Kite|A kite is not a parallelogram; the others are.
 Median|Mode|Mean|Range|The range measures spread; the others are measures of central tendency.
-Sine|Cosine|Tangent|Logarithm|The logarithm is not a trigonometric function.
-Litre|Gallon|Cubic metre|Hectare|The hectare measures area; the others measure volume.
 Acre|Hectare|Square metre|Furlong|The furlong is a unit of length; the others measure area.
 Kelvin|Ampere|Candela|Newton|The newton is a derived unit; the others are SI base units.
 Einstein|Bohr|Planck|Darwin|Darwin was a naturalist; the others were physicists.
@@ -198,24 +208,46 @@ Wheat|Mustard|Gram|Rice|Rice is a kharif crop; the others are rabi crops.
 Maize|Jowar|Cotton|Barley|Barley is a rabi crop; the others are kharif crops.
 Jhum|Podu|Bewar|Terrace farming|Terrace farming is permanent cultivation; the others are regional names for shifting cultivation.
 Tamil|Telugu|Kannada|Marathi|Marathi is an Indo-Aryan language; the others are Dravidian.
-Novel|Novella|Short story|Ode|An ode is a poem; the others are forms of prose fiction.
 Simile|Metaphor|Personification|Prologue|A prologue is a section of a work; the others are figures of speech.
-Adverb|Adjective|Conjunction|Clause|A clause is not a part of speech.
 Infantry|Armoured Corps|Mechanised Infantry|Army Service Corps|The Army Service Corps is a logistics service; the others are fighting arms.
 Corps|Division|Brigade|Flotilla|A flotilla is a naval formation; the others are Army formations.
-Frigate|Destroyer|Corvette|Tanker|A tanker is a support ship; the others are warships.
 AWACS|Netra|Phalcon|Pinaka|Pinaka is a rocket launcher; the others are airborne early-warning systems.
-INSAS|AK-203|Tavor|Glock|The Glock is a pistol; the others are rifles.
 Sonar|Radar|Lidar|Laser|A laser is a light source; the others are detection-and-ranging systems.
 Asteroid|Comet|Meteoroid|Nebula|A nebula is a vast cloud of gas and dust; the others are small solid bodies of the Solar System.
 Oesophagus|Stomach|Duodenum|Trachea|The trachea belongs to the respiratory tract; the others belong to the digestive tract.
-Red|Blue|Green|Yellow|Yellow is not a primary colour of light.
 Cyan|Magenta|Yellow|Green|Green is not a primary colour of pigment (CMY).
-Soprano|Alto|Tenor|Tempo|Tempo is the speed of music; the others are voice ranges.
 Ozone|Methane|Carbon dioxide|Nitrogen|Nitrogen is not a greenhouse gas; the others are.
 Uranium|Thorium|Plutonium|Tungsten|Tungsten is not radioactive; the others are nuclear fuels.
 Rubber|Glass|Wood|Graphite|Graphite conducts electricity; the others are insulators.
 Sundarbans|Bhitarkanika|Pichavaram|Bandipur|Bandipur is a dry forest national park; the others are mangrove forests.
+Haemoglobin|Myoglobin|Cytochrome|Chlorophyll|Chlorophyll has magnesium at its centre; the others contain iron.
+Vitamin A|Vitamin D|Vitamin K|Vitamin B12|Vitamin B12 is water-soluble; the others are fat-soluble.
+Mitochondrion|Chloroplast|Nucleus|Ribosome|The ribosome has no membrane; the others are bounded by a double membrane.
+Diphtheria|Whooping cough|Tuberculosis|Chickenpox|Chickenpox is caused by a virus; the others are bacterial diseases.
+Amoeba|Paramecium|Euglena|Hydra|Hydra is multicellular; the others are single-celled organisms.
+Bat|Whale|Platypus|Penguin|The penguin is a bird; the others are mammals, even though the platypus lays eggs.
+Silicon|Germanium|Arsenic|Carbon|Carbon is a non-metal; the others are metalloids.
+Solder|Pewter|Bronze|Invar|Invar (iron–nickel) contains no tin; solder, pewter and bronze all contain tin.
+Lignite|Anthracite|Bituminous|Haematite|Haematite is an iron ore; the others are grades of coal.
+Jhelum|Chenab|Ravi|Yamuna|The Yamuna belongs to the Ganga system; the others are tributaries of the Indus.
+Chambal|Betwa|Ken|Gomti|The Gomti flows into the Ganga; the others are tributaries of the Yamuna.
+Tungabhadra|Bhima|Ghataprabha|Indravati|The Indravati is a tributary of the Godavari; the others are tributaries of the Krishna.
+Pranhita|Manjira|Indravati|Hemavati|The Hemavati is a tributary of the Kaveri; the others are tributaries of the Godavari.
+Zoji La|Banihal|Rohtang|Nathu La|Nathu La is in Sikkim in the eastern Himalaya; the others are passes of the western Himalaya.
+Anamudi|Doddabetta|Mahendragiri|Guru Shikhar|Guru Shikhar is in the Aravalli range; the others are peaks of the Western or Eastern Ghats.
+Nagarhole|Bandipur|Mudumalai|Kanha|Kanha is in Madhya Pradesh; the others lie in the Nilgiri Biosphere Reserve.
+Operation Cactus|Operation Pawan|Operation Rahat|Operation Meghdoot|Operation Meghdoot (Siachen) was carried out on India's own frontier; the others were conducted in other countries (Maldives, Sri Lanka, Yemen).
+Mahavir Chakra|Vir Chakra|Param Vir Chakra|Kirti Chakra|The Kirti Chakra is a peacetime gallantry award; the others are wartime awards.
+Sam Manekshaw|K.M. Cariappa|Arjan Singh|K. Sundarji|General Sundarji never held five-star rank; the other three did.
+Lok Sabha|Rajya Sabha|President|Supreme Court|Parliament consists of the President, the Lok Sabha and the Rajya Sabha; the Supreme Court is not part of it.
+Article 14|Article 19|Article 32|Article 44|Article 44 (uniform civil code) is a Directive Principle; the others are Fundamental Rights.
+Jupiter|Saturn|Uranus|Mars|Mars has no ring system; the other three have rings.
+Rigel|Sirius|Betelgeuse|Andromeda|Andromeda is a galaxy; the others are stars.
+Lothal|Dholavira|Rakhigarhi|Nalanda|Nalanda was an ancient university; the others are Indus Valley (Harappan) sites.
+Tughlaq|Khilji|Lodi|Mughal|The Mughals did not belong to the Delhi Sultanate; the other three dynasties did.
+Ahom|Chola|Pandya|Chera|The Ahoms ruled Assam; the others were dynasties of the far south.
+Work|Energy|Torque|Power|Work, energy and torque share the dimensions ML²T⁻²; power is ML²T⁻³.
+Stress|Pressure|Young's modulus|Strain|Strain is dimensionless; the others have the dimensions of pressure.
 `);
 
 // S:WORD synonym, A:WORD antonym, O:phrase one-word substitution | correct | wrong | wrong | wrong
@@ -228,7 +260,6 @@ S:EPHEMERAL|Short-lived|Eternal|Ethereal|Fragile
 S:UBIQUITOUS|Omnipresent|Rare|Unique|Ambiguous
 S:MAGNANIMOUS|Generous|Mean|Huge|Proud
 S:CIRCUMSPECT|Cautious|Reckless|Round|Suspicious
-S:DIFFIDENT|Shy|Confident|Different|Indifferent
 S:FASTIDIOUS|Fussy|Fast|Careless|Hungry
 S:GARRULOUS|Talkative|Silent|Angry|Elderly
 S:IMPETUOUS|Rash|Cautious|Important|Lazy
@@ -240,7 +271,6 @@ S:OBDURATE|Stubborn|Flexible|Durable|Obedient
 S:PARSIMONIOUS|Stingy|Generous|Religious|Talkative
 S:PERSPICACIOUS|Shrewd|Dull|Transparent|Sweaty
 S:RECALCITRANT|Defiant|Obedient|Repetitive|Calm
-S:SAGACIOUS|Wise|Foolish|Sad|Brave
 S:SOPORIFIC|Sleep-inducing|Stimulating|Musical|Sour
 S:TACITURN|Reserved|Talkative|Tactful|Rude
 S:TRUCULENT|Aggressive|Gentle|Truthful|Sluggish
@@ -251,22 +281,17 @@ S:ALACRITY|Eagerness|Reluctance|Sorrow|Anxiety
 S:AMELIORATE|Improve|Worsen|Soften|Adore
 S:ABSTRUSE|Obscure|Obvious|Absent|Rude
 S:BELLICOSE|Warlike|Peaceful|Beautiful|Bulky
-S:CAPRICIOUS|Unpredictable|Steady|Capable|Greedy
 A:EXACERBATE|Alleviate|Worsen|Examine|Exaggerate
 A:MUNIFICENT|Stingy|Generous|Municipal|Grand
 A:PROLIX|Concise|Wordy|Lengthy|Professional
 A:ESOTERIC|Commonplace|Mysterious|Obscure|Exotic
 A:VITUPERATE|Praise|Abuse|Revive|Criticise
-A:TRANQUIL|Turbulent|Calm|Quiet|Serene
 A:ARCANE|Familiar|Mysterious|Ancient|Secret
 A:AUSTERE|Luxurious|Strict|Plain|Harsh
-A:CANDID|Evasive|Frank|Open|Blunt
 A:DILATORY|Prompt|Slow|Tardy|Lazy
 A:EFFUSIVE|Reserved|Gushing|Lavish|Emotional
 A:FORTUITOUS|Planned|Lucky|Accidental|Chance
-A:GREGARIOUS|Reclusive|Sociable|Friendly|Outgoing
 A:INNOCUOUS|Harmful|Harmless|Mild|Innocent
-A:LOQUACIOUS|Taciturn|Talkative|Chatty|Fluent
 A:OSTENTATIOUS|Modest|Showy|Grand|Pretentious
 A:PAUCITY|Abundance|Scarcity|Lack|Poverty
 A:PLACATE|Provoke|Pacify|Soothe|Appease
@@ -277,13 +302,10 @@ A:SPURIOUS|Genuine|False|Fake|Doubtful
 A:TIMOROUS|Bold|Fearful|Timid|Nervous
 A:VACILLATE|Resolve|Waver|Hesitate|Oscillate
 A:ZENITH|Nadir|Peak|Summit|Apex
-A:BENIGN|Malignant|Kind|Gentle|Harmless
 A:COGENT|Unconvincing|Convincing|Forceful|Sound
 A:DEARTH|Plenty|Scarcity|Death|Want
 A:ENERVATE|Invigorate|Weaken|Tire|Annoy
 A:FECUND|Barren|Fertile|Rich|Fruitful
-A:HAUGHTY|Humble|Proud|Arrogant|Lofty
-A:IMPLICIT|Explicit|Implied|Hidden|Complete
 O:A person who is indifferent to pleasure or pain|Stoic|Hedonist|Cynic|Epicure
 O:One who is devoted to the pursuit of pleasure|Hedonist|Stoic|Ascetic|Altruist
 O:A person who gives up worldly comforts for spiritual discipline|Ascetic|Hedonist|Atheist|Sceptic
@@ -295,38 +317,64 @@ O:Government by the wealthy|Plutocracy|Aristocracy|Oligarchy|Bureaucracy
 O:Government by a few|Oligarchy|Plutocracy|Monarchy|Theocracy
 O:Government by the least qualified or worst citizens|Kakistocracy|Kleptocracy|Autocracy|Anarchy
 O:Government by thieves or the corrupt|Kleptocracy|Kakistocracy|Plutocracy|Oligarchy
-O:A word that reads the same backwards as forwards|Palindrome|Anagram|Homonym|Acronym
-O:A word formed by rearranging the letters of another|Anagram|Palindrome|Synonym|Pseudonym
 O:A false name adopted by an author|Pseudonym|Anagram|Epithet|Eponym
 O:A person after whom something is named|Eponym|Pseudonym|Synonym|Antonym
 O:An inscription on a tombstone|Epitaph|Epigraph|Epilogue|Obituary
 O:A short witty saying|Epigram|Epitaph|Epilogue|Epistle
 O:A concluding section added to a literary work|Epilogue|Prologue|Epigram|Preface
-O:The deliberate killing of a whole race or group of people|Genocide|Homicide|Regicide|Infanticide
 O:The killing of one's own sister|Sororicide|Fratricide|Matricide|Uxoricide
 O:The killing of one's wife|Uxoricide|Sororicide|Regicide|Parricide
 O:The study of the origin and history of words|Etymology|Entomology|Philology|Ethnology
-O:The study of insects|Entomology|Etymology|Ornithology|Zoology
 O:A person who is recovering from an illness|Convalescent|Invalid|Patient|Malingerer
 O:One who pretends to be ill to avoid work|Malingerer|Convalescent|Hypochondriac|Invalid
 O:One who worries needlessly about his or her health|Hypochondriac|Malingerer|Pessimist|Convalescent
-O:Soldiers who fight on horseback|Cavalry|Infantry|Artillery|Sappers
-O:Soldiers who fight on foot|Infantry|Cavalry|Artillery|Commandos
-O:Large-calibre guns used in land warfare|Artillery|Infantry|Cavalry|Sappers
 O:Military engineers who build bridges and clear mines|Sappers|Gunners|Troopers|Grenadiers
 O:A formal agreement to stop fighting|Armistice|Amnesty|Alliance|Embargo
 O:A general pardon, especially for political offences|Amnesty|Armistice|Acquittal|Asylum
 O:Protection granted by a state to a political refugee|Asylum|Amnesty|Immunity|Exile
-O:Being barred from one's native country, usually for political reasons|Exile|Asylum|Emigration|Immigration
 O:A person who switches to the opposing side|Turncoat|Mercenary|Veteran|Recruit
-O:A sudden, illegal seizure of power from a government|Coup|Mutiny|Strike|Referendum
 O:Open rebellion by soldiers or sailors against their officers|Mutiny|Coup|Riot|Treason
 O:One who cannot be reformed or corrected|Incorrigible|Invincible|Indelible|Irreparable
-O:That which cannot be avoided|Inevitable|Invincible|Inimitable|Insoluble
 O:That which cannot be imitated|Inimitable|Inevitable|Indomitable|Invulnerable
 O:One whose spirit cannot be subdued|Indomitable|Inimitable|Inevitable|Impeccable
 O:A person who is unable to pay his or her debts|Insolvent|Solvent|Miser|Spendthrift
-O:A person who spends money extravagantly|Spendthrift|Miser|Insolvent|Philanthropist
+S:INELUCTABLE|Unavoidable|Inexplicable|Inedible|Unintelligible
+S:PERNICIOUS|Harmful|Persistent|Petty|Pertinent
+S:OBFUSCATE|Confuse|Clarify|Obliterate|Offend
+S:REPUDIATE|Reject|Repeat|Repair|Reputed
+S:INSOUCIANT|Nonchalant|Insolent|Anxious|Insistent
+S:PERIPATETIC|Itinerant|Peripheral|Pathetic|Stationary
+S:EXCULPATE|Absolve|Accuse|Excavate|Exclaim
+S:SEDULOUS|Diligent|Seductive|Sedentary|Careless
+S:TRENCHANT|Incisive|Trembling|Vague|Entrenched
+S:SUPERCILIOUS|Haughty|Superficial|Silly|Humble
+S:PROPITIOUS|Favourable|Proper|Precarious|Ominous
+S:RECONDITE|Obscure|Reconciled|Obvious|Recent
+S:INVETERATE|Habitual|Invertebrate|Occasional|Invented
+S:PERFUNCTORY|Cursory|Thorough|Functional|Perfumed
+S:REDOUBTABLE|Formidable|Doubtful|Redundant|Feeble
+A:PROPITIATE|Provoke|Appease|Propagate|Predict
+A:EQUANIMITY|Agitation|Composure|Equality|Fairness
+A:SANGUINE|Pessimistic|Optimistic|Bloody|Ruddy
+A:ABSTEMIOUS|Self-indulgent|Moderate|Absent-minded|Abstract
+A:PHLEGMATIC|Excitable|Calm|Sickly|Stolid
+A:INTREPID|Timorous|Fearless|Tepid|Intricate
+A:DESULTORY|Methodical|Random|Desolate|Sluggish
+A:SALUBRIOUS|Unwholesome|Healthy|Salty|Salacious
+A:PARSIMONY|Extravagance|Frugality|Parity|Patrimony
+O:Rule by the mob|Ochlocracy|Oligarchy|Anarchy|Autocracy
+O:A person who walks in their sleep|Somnambulist|Funambulist|Somniloquist|Insomniac
+O:A person who talks in their sleep|Somniloquist|Somnambulist|Ventriloquist|Soliloquist
+O:The killing of one's own child|Filicide|Infanticide|Fratricide|Patricide
+O:A person who is a hundred years old or more|Centenarian|Centurion|Octogenarian|Nonagenarian
+O:An abnormal fear of heights|Acrophobia|Agoraphobia|Claustrophobia|Hydrophobia
+O:A person new to and inexperienced in an activity|Neophyte|Veteran|Neologist|Novelist
+O:A newly coined word or expression|Neologism|Neophyte|Archaism|Anachronism
+O:Something placed in a period to which it does not belong|Anachronism|Archaism|Neologism|Chronicle
+O:A remedy that counteracts a poison|Antidote|Anecdote|Antibiotic|Antiseptic
+O:A place where birds are kept|Aviary|Apiary|Aquarium|Armoury
+O:Writing that cannot be read|Illegible|Ineligible|Illiterate|Inaudible
+O:A series of three related novels, plays or films|Trilogy|Triad|Trinity|Troika
 `);
 
 // A = assumptions, C = conclusions, K = courses of action, R = arguments | question | answer index | explanation
@@ -410,7 +458,6 @@ K|Statement: The monsoon is forecast to be weak this year. Courses of action: I.
 K|Statement: A new flyover has developed cracks within six months of opening. Courses of action: I. An inquiry should be held into the quality of construction and those responsible held accountable. II. The flyover should be inspected and, if unsafe, closed for repairs. Which course(s) of action follow?|2|Accountability (I) and immediate safety (II) are both needed.
 K|Statement: Many students doze off in the first period after lunch. Courses of action: I. Lighter lunches should be encouraged and that period made more interactive. II. The lunch break should be abolished. Which course(s) of action follow?|0|I addresses the cause; abolishing lunch is harmful.
 K|Statement: The number of stray dogs in the city has grown and dog-bite cases are rising. Courses of action: I. The municipality should run a sterilisation and anti-rabies vaccination drive. II. All stray dogs should be killed. Which course(s) of action follow?|0|Sterilisation and vaccination are the humane, lasting measures (I); mass culling is extreme and unlawful.
-K|Statement: A bank's ATMs frequently run out of cash on weekends. Courses of action: I. ATMs should be refilled more often before and during weekends. II. The ATMs should be shut on weekends. Which course(s) of action follow?|0|More frequent refills solve the problem (I); shutting ATMs defeats their purpose.
 K|Statement: Many passengers travel without tickets on suburban trains. Courses of action: I. Ticket checking should be intensified and fines raised. II. More ticket counters and digital ticketing options should be provided. Which course(s) of action follow?|2|Enforcement (I) and easier ticketing (II) both reduce ticketless travel.
 K|Statement: A student has been absent from school for three weeks without informing anyone. Courses of action: I. The school should contact the parents to find out why. II. The student's name should be struck off the rolls at once. Which course(s) of action follow?|0|Finding the reason comes first (I); striking off immediately is premature.
 K|Statement: The water level in the city's main reservoir is at a ten-year low. Courses of action: I. Water supply should be rationed until the reservoir recovers. II. Residents should be urged to conserve water. Which course(s) of action follow?|2|Rationing (I) and conservation (II) both stretch the limited supply.
@@ -426,10 +473,6 @@ K|Statement: The number of candidates for an entrance exam has doubled, but the 
 K|Statement: During a heatwave several labourers working in the open have suffered heatstroke. Courses of action: I. Outdoor working hours should be moved to the cooler parts of the day. II. Drinking water and shade should be provided at work sites. Which course(s) of action follow?|2|Both reduce heat exposure.
 K|Statement: A recruitment rally in a small town drew three times more candidates than expected, causing chaos. Courses of action: I. Future rallies should require online registration with fixed time slots. II. Recruitment rallies should not be held in small towns. Which course(s) of action follow?|0|Registration manages crowds (I); excluding small towns is unfair and unnecessary.
 K|Statement: A bird-flu outbreak has been confirmed at a poultry farm. Courses of action: I. Infected birds should be culled and the area disinfected as per health protocols. II. Movement of poultry out of the area should be temporarily restricted. Which course(s) of action follow?|2|Both are standard containment steps.
-K|Statement: Many people are losing money to fraudulent phone calls. Courses of action: I. Public awareness campaigns about such frauds should be run. II. People over 60 should be banned from owning mobile phones. Which course(s) of action follow?|0|Awareness helps (I); banning phones for an age group is absurd.
-K|Statement: A student failed one subject by two marks. Courses of action: I. The student should be expelled. II. The examination system should be abolished. Which course(s) of action follow?|3|Both are extreme reactions to a narrow failure.
-K|Statement: One train on a route was delayed by an hour because of a signal failure. Courses of action: I. All trains on the route should be cancelled until further notice. II. The railway minister should resign. Which course(s) of action follow?|3|A one-off signal failure calls for repair, not these drastic steps.
-K|Statement: A few customers complained that a restaurant's service is slow on weekends. Courses of action: I. The authorities should shut the restaurant down. II. The restaurant should stop opening on weekends. Which course(s) of action follow?|3|Neither addresses slow service sensibly; adding weekend staff would.
 K|Statement: A popular magazine's sales have fallen steadily for two years. Courses of action: I. The publishers should study how readers' preferences have changed. II. The magazine should immediately cut its price by half. Which course(s) of action follow?|0|Understanding readers comes first (I); a blind price cut may not address the cause.
 R|Should military training be made compulsory for all college students? Arguments: I. Yes, it will instil discipline and a sense of national duty in the youth. II. No, it will force students who are unsuited or unwilling into military activity.|2|Both give weighty, relevant reasons.
 R|Should mobile phones be banned in schools? Arguments: I. Yes, they distract students from their studies. II. No, everybody uses mobile phones nowadays.|0|I is a real harm; II merely cites popularity.
@@ -460,4 +503,15 @@ R|Should competitive exams have negative marking? Arguments: I. Yes, it discoura
 R|Should school start later in the morning? Arguments: I. Yes, adolescents learn better when they are well rested. II. No, families will have to change their routine.|0|I rests on learning outcomes; a change of routine is a weak objection.
 R|Should office working hours be flexible? Arguments: I. Yes, it can improve productivity and work–life balance. II. No, coordination between employees may become difficult.|2|Both are relevant and significant.
 R|Should all job interviews be video-recorded? Arguments: I. Yes, it will make the process transparent and open to review. II. No, it may make candidates nervous and raises privacy concerns.|2|Both are weighty.
+C|Statement: Exactly 70% of the cadets passed the drill test and exactly 80% passed the weapons test. Conclusions: I. At least half of the cadets passed both tests. II. At most 70% of the cadets passed both tests.|2|The overlap is at least 70 + 80 − 100 = 50% (I), and it cannot exceed the smaller group, 70% (II).
+C|Statement: Each of 50 people speaks Hindi or English or both; 38 speak Hindi and 30 speak English. Conclusions: I. Exactly 18 people speak both languages. II. Exactly 12 people speak only English.|2|Both = 38 + 30 − 50 = 18 (I); only English = 30 − 18 = 12 (II).
+C|Statement: If Ravi is selected, Mohan will not be selected. If Mohan is not selected, Sunil will be selected. Sunil was not selected. Conclusions: I. Mohan was selected. II. Ravi was not selected.|2|Sunil was not selected, so Mohan must have been (the second rule read backwards) — I. Mohan was selected, so Ravi cannot have been (the first rule read backwards) — II.
+C|Statement: Every officer who attended the course was promoted. Some officers who were promoted had not attended the course. Major Singh was not promoted. Conclusions: I. Major Singh did not attend the course. II. Every officer who was promoted attended the course.|0|Attending guarantees promotion, so the unpromoted Major Singh did not attend (I). II contradicts the second statement.
+C|Statement: A five-digit code uses each of the digits 1 to 5 exactly once. The code is an even number and its first digit is greater than its last digit. Conclusions: I. The last digit is 2 or 4. II. The first digit is not 1.|2|An even code ends in 2 or 4 (I); the first digit is greater than the last, which is at least 2, so it cannot be 1 (II).
+C|Statement: Every day this week was warmer than the day before. Thursday was 6°C warmer than Tuesday. Conclusions: I. Wednesday was warmer than Tuesday. II. Wednesday was exactly 3°C warmer than Tuesday.|0|Temperatures rose every day, so I follows; the 6° rise need not be split equally, so II does not.
+C|Statement: No one who failed the medical examination was commissioned. Some cadets who were commissioned had been injured in training. Conclusions: I. Some cadets who had been injured in training passed the medical examination. II. Every cadet who passed the medical examination was commissioned.|0|The injured cadets who were commissioned must have passed the medical (I). Passing it is necessary, not sufficient, so II does not follow.
+C|Statement: A bag holds only red and blue balls. Any 3 balls drawn from it always include at least one red ball, and any 5 balls always include at least one blue ball. Conclusions: I. There are at most 2 blue balls. II. There are at most 4 red balls.|2|If there were 3 blue balls, drawing them would give no red — so blue ≤ 2 (I). Likewise 5 red balls would give no blue — so red ≤ 4 (II).
+C|Statement: Only candidates who cleared Stage I could appear in Stage II. Of the 120 candidates who appeared in Stage II, 40 were recommended. Conclusions: I. At least 120 candidates cleared Stage I. II. Exactly 80 candidates who cleared Stage I were not recommended.|0|All 120 who appeared had cleared Stage I (I). Some who cleared Stage I may not have appeared, so the number not recommended could exceed 80 — II is not certain.
+C|Statement: The ages of three children multiply to 36 and add up to 13. Conclusions: I. Two of the children are twins. II. The eldest child is 9 years old.|0|Only (1, 6, 6) and (2, 2, 9) have product 36 and sum 13. Both contain twins, so I follows; the eldest could be 6 or 9, so II does not.
+C|Statement: Five friends each bought a different number of books, 20 books in all, and each bought at least one. Conclusions: I. Someone bought at least 6 books. II. Someone bought exactly one book.|0|Five different numbers of at most 5 books add up to at most 1 + 2 + 3 + 4 + 5 = 15, so someone bought at least 6 (I). 2 + 3 + 4 + 5 + 6 = 20 shows nobody need have bought one, so II does not follow.
 `);

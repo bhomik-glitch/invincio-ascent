@@ -1,14 +1,16 @@
-// Generates api/_tests/oir-11.ts … oir-110.ts and api/_tests/index.ts at a hard (8–9/10) level.
+// Generates api/_tests/oir-1.ts … oir-110.ts and api/_tests/index.ts at a very hard (9.5–10/10) level:
+// 40 questions in 25 minutes (real OIR pace), with bank-exam "mains" puzzles — mixed-facing seating,
+// coded inequalities, "only a few" syllogisms, number matrices, painted cuboids, long relation chains.
 //   node scripts/gen-oir.mjs
 // Deterministic (seeded per test). Every computable question is solved in code — seating, code-language and
 // syllogism answers are found by exhaustive search, dice by enumerating all pairings, cubes by counting every
 // small cube — so answers are correct by construction. Verbal items come from scripts/oir-bank.mjs.
-// Tests 11–15 go live immediately; 16–110 release five at a time every Sunday 00:00 IST.
+// Tests 1–15 go live immediately; 16–110 release five at a time every Sunday 00:00 IST.
 import fs from "node:fs";
 import * as bank from "./oir-bank.mjs";
 
 const DIR = new URL("../api/_tests/", import.meta.url);
-const FIRST = 11, LAST = 110, LIVE_UNTIL = 15, PER_WEEK = 5;
+const FIRST = 1, LAST = 110, LIVE_UNTIL = 15, PER_WEEK = 5;
 const FIRST_SUNDAY = "2026-09-27";
 
 // ---------- helpers ----------
@@ -144,8 +146,55 @@ const SERIES = {
     const calc = { prod: `${p} × ${q}`, sqMinus: `${p}² − ${p}`, sumSq: `${p}² + 1` }[k];
     return { seq, rule, calc, extra: [seq.at(-1) + 2, k === "prod" ? p * (p + 2) : (p + 1) ** 2 - (p + 1), seq.at(-1) - 2] };
   },
+  recur2() {
+    const p = pick([2, 3]), q = pick([1, 2, -1]), seq = [ri(1, 5), ri(2, 7)];
+    while (seq.length < 7) seq.push(p * seq.at(-1) + q * seq.at(-2));
+    if (seq.some((x) => x <= 0) || seq.at(-1) > 60000 || seq[1] === seq[0]) return null;
+    const [a, b] = [seq.at(-2), seq.at(-3)], qs = q === 1 ? "+" : q === -1 ? "−" : "+ 2 ×";
+    return { seq, rule: `each term is ${p} × the previous term ${qs} the term before that`, calc: `${p} × ${a} ${qs} ${b}`, extra: [p * a, p * a + q * b + (q > 0 ? -1 : 1), (p + 1) * a - b] };
+  },
+  mulDivAlt() {
+    const m = pick([3, 5]), d = 2, s = ri(2, 300);
+    const seq = [s]; for (let i = 0; i < 6; i++) seq.push(i % 2 ? seq.at(-1) / d + (i + 1) / 2 : seq.at(-1) * m);
+    if (seq.some((x) => !Number.isInteger(x) || x <= 0) || seq.at(-1) > 60000) return null;
+    const p = seq.at(-2);
+    return { seq, rule: `the steps alternate between ×${m} and ÷${d}, and each ÷${d} step adds one more than the last (÷${d} + 1, ÷${d} + 2, ÷${d} + 3)`, calc: `${p} ÷ ${d} + 3`, extra: [p / d + 2, p / d + 4, p * m] };
+  },
+  sqPlusPrime() {
+    const n0 = ri(2, 8), i0 = ri(0, 6), ns = [0, 1, 2, 3, 4, 5].map((i) => n0 + i), ps = PRIMES.slice(i0, i0 + 6);
+    const seq = ns.map((n, i) => n * n + ps[i]), n = ns.at(-1), p = ps.at(-1);
+    return { seq, rule: `each term is n² plus the matching prime (${ns[0]}² + ${ps[0]}, ${ns[1]}² + ${ps[1]}, ${ns[2]}² + ${ps[2]}, …)`, calc: `${n}² + ${p}`, extra: [n * n + p + 2, n * n + ps.at(-2), n * n + p - 1] };
+  },
 };
-const MISSABLE = ["mulAddInc", "mulInc", "diffPattern", "secondDiff", "powerMix", "primeProduct", "digits"];
+const MISSABLE = ["mulAddInc", "mulInc", "diffPattern", "secondDiff", "powerMix", "primeProduct", "digits", "recur2", "sqPlusPrime"];
+
+// ================= NUMBER MATRIX (3×3, one rule for every row or column) =================
+const MATRIX_RULES = [
+  { f: (a, b) => a * b - (a + b), d: "a × b − (a + b)" },
+  { f: (a, b) => a * b + (a + b), d: "a × b + (a + b)" },
+  { f: (a, b) => (a + b) ** 2, d: "(a + b)²" },
+  { f: (a, b) => a * a + b * b, d: "a² + b²" },
+  { f: (a, b) => a * a - b * b, d: "a² − b²" },
+  { f: (a, b) => a * a + b, d: "a² + b" },
+  { f: (a, b) => (a - b) * (a + b + 1), d: "(a − b) × (a + b + 1)" },
+  { f: (a, b) => a ** 3 - b, d: "a³ − b" },
+  { f: (a, b) => a * b * 2 - b, d: "2ab − b" },
+  { f: (a, b) => (a + b) * (a - 1), d: "(a + b) × (a − 1)" },
+];
+function numberMatrix() {
+  const r = pick(MATRIX_RULES), cols = rnd() < 0.4, rows = [];
+  for (let k = 0; k < 3; k++) { const a = ri(3, 12), b = ri(2, a - 1), c = r.f(a, b); if (c <= 0 || c > 2000) return null; rows.push([a, b, c]); }
+  if (MATRIX_RULES.some((o) => o !== r && rows.slice(0, 2).every(([a, b, c]) => o.f(a, b) === c))) return null;
+  const hide = pick([0, 1, 2]), ans = rows[2][hide];
+  if (hide !== 2) { // a hidden input must be the only value that fits
+    const fits = [...Array(40).keys()].filter((v) => { const t = [...rows[2]]; t[hide] = v; return v > 0 && r.f(t[0], t[1]) === t[2]; });
+    if (fits.length !== 1) return null;
+  }
+  const grid = cols ? [0, 1, 2].map((i) => rows.map((x) => x[i])) : rows;
+  const shown = grid.map((row, i) => row.map((v, j) => ((cols ? j === 2 && i === hide : i === 2 && j === hide) ? "?" : v)));
+  const line = cols ? "column" : "row", others = MATRIX_RULES.filter((o) => o !== r).map((o) => (hide === 2 ? o.f(rows[2][0], rows[2][1]) : ans + ri(1, 3)));
+  return mc(`Find the missing number in the grid (rows separated by " | "): ${shown.map((row) => row.join("  ")).join(" | ")}`, ans, nearNums(ans, others), `In every ${line}, the third number = ${r.d}, where a and b are the first two numbers of that ${line}: ${rows.slice(0, 2).map(([a, b, c]) => `${a}, ${b} → ${c}`).join("; ")}. So the missing number is ${ans} (${rows[2].join(", ")}).`);
+}
 
 function seriesNext(fam) {
   const r = SERIES[fam](); if (!r) return null;
@@ -169,20 +218,6 @@ function seriesWrong(fam) {
 }
 
 // ================= LETTER SERIES & CLUSTERS =================
-function letterSeries() {
-  const t = pick(["incr2", "fibPos", "primePos", "altDir", "interleave", "wrapStep"]);
-  let ps, rule;
-  if (t === "incr2") { const s = ri(1, 3), g0 = ri(1, 2); ps = [s]; for (let i = 0; i < 5; i++) ps.push(ps.at(-1) + g0 + 2 * i); rule = `the gaps are ${list(ps.slice(1).map((p, i) => p - ps[i]))} — increasing by 2`; }
-  else if (t === "fibPos") { const a = ri(1, 2), b = ri(2, 3); ps = [a, b]; while (ps.length < 6) ps.push(ps.at(-1) + ps.at(-2)); rule = `each position is the sum of the previous two (${list(ps)})`; }
-  else if (t === "primePos") { const i0 = ri(0, 3); ps = PRIMES.slice(i0, i0 + 6); rule = `the positions are consecutive primes (${list(ps)})`; }
-  else if (t === "altDir") { const a = ri(4, 7), b = ri(1, 3), s = ri(1, 8); ps = [s]; for (let i = 0; i < 5; i++) ps.push(ps.at(-1) + (i % 2 ? -b : a)); rule = `the letters move alternately ${a} forward and ${b} back`; }
-  else if (t === "interleave") { const a0 = ri(1, 6), da = ri(2, 4), b0 = ri(20, 26), db = -ri(1, 3); ps = []; for (let i = 0; i < 6; i++) ps.push(i % 2 ? b0 + ((i - 1) / 2) * db : a0 + (i / 2) * da); rule = `two series alternate: ${ch(ps[0])}, ${ch(ps[2])}, ${ch(ps[4])} (+${da}) and ${ch(ps[1])}, ${ch(ps[3])}, ${ch(ps[5])} (${db})`; }
-  else { const k = ri(5, 9), s = ri(10, 24); ps = [s]; for (let i = 0; i < 5; i++) ps.push(wrap(ps.at(-1) + k)); rule = `each letter is ${k} places after the previous one, wrapping from Z back to A`; }
-  if (ps.some((p) => p < 1 || p > 26)) return null;
-  const ans = ps.at(-1);
-  return mc(`Find the next letter: ${list(ps.slice(0, -1).map(ch))}, ?`, ch(ans), [wrap(ans + 1), wrap(ans - 1), wrap(ans + 2), wrap(ans - 2)].map(ch), `By alphabet positions, ${rule}; so the next letter is ${ch(ans)} (${ans}).`);
-}
-
 function letterCluster() {
   const t = pick(["triple", "triple", "letnum", "pattern", "pattern"]);
   if (t === "triple") {
@@ -441,6 +476,42 @@ function trueEquation() {
   return mc(`If ${mean.slice(0, 3).join(", ")} and ${mean[3]}, which of these equations is correct?`, right, wrongs, `Converting the symbols, ${right} becomes ${show(eqs[0], eqs[0].v, (o) => o)}, which is true (× and ÷ first); each of the others is off.`);
 }
 
+// ================= CODED INEQUALITIES =================
+// Statements form a tree of chains, so the relation between two letters is fixed exactly by the path between them.
+const INEQ = [[">", "is greater than"], ["<", "is smaller than"], ["≥", "is either greater than or equal to"], ["≤", "is either smaller than or equal to"], ["=", "is equal to"]];
+const OUTS = { ">": [">"], "<": ["<"], "≥": [">", "="], "≤": ["<", "="], "=": ["="], none: [">", "=", "<"] };
+function codedInequality() {
+  const syms = sample(["@", "#", "$", "%", "&", "©", "★", "δ"], 5), code = Object.fromEntries(INEQ.map(([r], i) => [r, syms[i]]));
+  const rest = sample(["A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "M", "N", "P", "R", "T", "W"], ri(6, 7)), used = [], chains = [];
+  const rel = () => pick([">", ">", "<", "<", "≥", "≥", "≤", "≤", "="]);
+  while (rest.length) {
+    const fresh = rest.splice(0, used.length ? Math.min(rest.length, ri(1, 3)) : ri(3, 4)), at = ri(0, fresh.length);
+    const members = used.length ? [...fresh.slice(0, at), pick(used), ...fresh.slice(at)] : fresh;
+    chains.push(members.map((v, i) => [i ? rel() : null, v])); used.push(...fresh);
+  }
+  const adj = {}; const link = (u, r, v) => { (adj[u] ||= []).push([v, r]); (adj[v] ||= []).push([u, { ">": "<", "<": ">", "≥": "≤", "≤": "≥", "=": "=" }[r]]); };
+  chains.forEach((c) => c.forEach(([r, v], i) => i && link(c[i - 1][1], r, v)));
+  const path = (x, y) => { const prev = { [x]: null }, q = [x]; while (q.length) { const u = q.shift(); for (const [v, r] of adj[u]) if (!(v in prev)) { prev[v] = [u, r]; q.push(v); } } const out = []; for (let v = y; prev[v]; v = prev[v][0]) out.unshift([prev[v][1], v]); return out; };
+  const combine = (p) => { const up = p.some(([r]) => r === "<" || r === "≤"), down = p.some(([r]) => r === ">" || r === "≥"); if (up && down) return "none"; if (!up && !down) return "="; const strict = p.some(([r]) => r === ">" || r === "<"); return down ? (strict ? ">" : "≥") : strict ? "<" : "≤"; };
+  const want = ri(0, 4);
+  for (let tries = 0; tries < 200; tries++) {
+    const [x, y] = sample(used, 2), p = path(x, y); if (p.length < 2) continue;
+    const S = OUTS[combine(p)], rels = INEQ.map(([r]) => r), fol = (r) => S.every((o) => OUTS[r].includes(o));
+    let r1 = pick(rels), r2 = pick(rels), x2 = x, y2 = y, p2 = p;
+    if (want === 2) { if (S.length < 2) continue; const pairs = [[">", "="], [">", "≤"], ["<", "="], ["<", "≥"], ["≥", "<"], ["≤", ">"]].filter(([a, b]) => S.every((o) => OUTS[a].includes(o) !== OUTS[b].includes(o))); if (!pairs.length) continue; [r1, r2] = shuffle(pick(pairs)); }
+    else { [x2, y2] = sample(used, 2); p2 = path(x2, y2); if (p2.length < 2) continue; }
+    const S2 = OUTS[combine(p2)], fol2 = S2.every((o) => OUTS[r2].includes(o)), f1 = fol(r1);
+    const either = x2 === x && y2 === y && !f1 && !fol2 && S.every((o) => OUTS[r1].includes(o) !== OUTS[r2].includes(o));
+    const ans = f1 && fol2 ? 4 : f1 ? 0 : fol2 ? 1 : either ? 2 : 3;
+    if (ans !== want) continue;
+    const showP = (a, pp) => a + pp.map(([r, v]) => ` ${r} ${v}`).join("");
+    const why = (a, b, r, pp, f) => { const c = combine(pp); return `${a} ${r} ${b}: ${showP(a, pp)}, ${f ? "so it follows" : c === "none" ? "the signs point both ways, so there is no fixed relation — it does not follow" : `which gives only ${a} ${c} ${b} — it does not follow`}.`; };
+    const shown = chains.map((c) => c.map(([r, v]) => (r ? ` ${code[r]} ${v}` : v)).join("")), decoded = chains.map((c) => c.map(([r, v]) => (r ? ` ${r} ${v}` : v)).join(""));
+    return { q: `In the following question, ${INEQ.map(([r, m]) => `'P ${code[r]} Q' means 'P ${m} Q'`).join(", ")}. Statements: ${shown.join("; ")}. Conclusions: I. ${x} ${code[r1]} ${y}  II. ${x2} ${code[r2]} ${y2}`, options: OPTS5, answer: ans, explanation: `Decoded, the statements are ${decoded.join("; ")}. I. ${why(x, y, r1, p, f1)} II. ${why(x2, y2, r2, p2, fol2)}${either ? " Together, I and II cover every possibility and exactly one of them must be true, so either I or II follows." : ""}` };
+  }
+  return null;
+}
+
 // ================= BLOOD RELATIONS (kinship engine) =================
 const KIN = { parent: ["father", "mother"], child: ["son", "daughter"], sibling: ["brother", "sister"], spouse: ["husband", "wife"] };
 const kw = (r) => `${r.only ? "only " : ""}${KIN[r.rel][r.g === "M" ? 0 : 1]}`;
@@ -503,7 +574,7 @@ const SYMS = ["+", "−", "×", "÷", "$", "#", "@", "%", "&", "*"];
 const CODE_RELS = [["parent", "M"], ["parent", "F"], ["child", "M"], ["child", "F"], ["sibling", "M"], ["sibling", "F"], ["spouse", "M"], ["spouse", "F"]];
 function codedRelation() {
   const syms = sample(SYMS, 6), defs = sample(CODE_RELS, 6).map(([rel, g], i) => ({ sym: syms[i], rel, g }));
-  const k = pick([3, 3, 4]), L = sample(["A", "B", "C", "D", "E", "F", "K", "L", "M", "P", "Q", "R", "S", "T"], k + 1), ops = Array.from({ length: k }, () => pick(defs));
+  const k = pick([4, 4, 5]), L = sample(["A", "B", "C", "D", "E", "F", "K", "L", "M", "P", "Q", "R", "S", "T"], k + 1), ops = Array.from({ length: k }, () => pick(defs));
   if (ops.some((o, i) => i && o.rel === "spouse" && ops[i - 1].rel === "spouse")) return null; // nobody has two spouses
   const G = {}, setG = (p, g) => { if (G[p] && G[p] !== g) return false; G[p] = g; return true; };
   for (let i = 0; i < k; i++) { if (!setG(L[i], ops[i].g)) return null; if (ops[i].rel === "spouse" && !setG(L[i + 1], ops[i].g === "M" ? "F" : "M")) return null; }
@@ -521,7 +592,7 @@ function codedRelation() {
 const MALE = ["Rahul", "Aman", "Vikram", "Karan", "Rohit", "Arjun", "Sanjay", "Deepak", "Mohan", "Ravi", "Suresh", "Ajay", "Nikhil", "Yash", "Kabir", "Dev", "Aditya", "Varun"];
 const FEMALE = ["Priya", "Neha", "Kavita", "Sunita", "Meera", "Anjali", "Pooja", "Ritu", "Shalini", "Seema", "Rekha", "Asha", "Isha", "Divya", "Nisha", "Tanvi"];
 function pointing() {
-  const sg = pick(["M", "F"]), sp = pick(sg === "M" ? MALE : FEMALE), n = pick([3, 3, 4]);
+  const sg = pick(["M", "F"]), sp = pick(sg === "M" ? MALE : FEMALE), n = pick([4, 4, 5]);
   const seq = Array.from({ length: n }, () => { const rel = pick(["parent", "parent", "child", "sibling", "spouse"]); return { rel, g: pick(["M", "F"]), only: rel === "child" && rnd() < 0.6 }; });
   if (seq.some((s, i) => i && s.rel === "spouse" && seq[i - 1].rel === "spouse")) return null;
   const r = simplify(sg, seq, true, "my", sg === "M" ? `${sp} himself` : `${sp} herself`); if (!r || !r.steps.length) return null;
@@ -538,7 +609,7 @@ const quadrant = (dx, dy) => (dx && dy ? `${dy > 0 ? "North" : "South"}-${dx > 0
 function directions() {
   const unit = pick(["km", "m"]), scale = unit === "m" ? 5 : 1;
   if (rnd() < 0.5) {
-    const name = pick(MALE), n = pick([4, 5, 5]);
+    const name = pick(MALE), n = pick([6, 6, 7]);
     let d = ri(0, 3), x = 0, y = 0; const legs = [];
     for (let i = 0; i < n; i++) { const t = i ? pick(["left", "right"]) : null; if (t) d = (d + (t === "right" ? 1 : 3)) % 4; const len = ri(1, 12) * scale, dir = DIRS8[d * 2]; x += V[dir][0] * len; y += V[dir][1] * len; legs.push([t, len, dir]); }
     const h = Math.hypot(x, y); if (!x && !y) return null;
@@ -547,11 +618,11 @@ function directions() {
     const dist = x && y ? h : Math.abs(x || y), dir = quadrant(x, y), opp = DIRS8[(DIRS8.indexOf(dir) + 4) % 8];
     return mc(`${name} ${path}. How far and in which direction is he now from his starting point?`, `${dist} ${unit} ${dir}`, [`${dist} ${unit} ${opp}`, `${Math.abs(x) + Math.abs(y)} ${unit} ${dir}`, `${dist + 2 * scale} ${unit} ${dir}`, `${dist} ${unit} ${DIRS8[(DIRS8.indexOf(dir) + 2) % 8]}`], `He ends ${Math.abs(x)} ${unit} ${x >= 0 ? "east" : "west"} and ${Math.abs(y)} ${unit} ${y >= 0 ? "north" : "south"} of the start${x && y ? `; distance = √(${Math.abs(x)}² + ${Math.abs(y)}²) = ${dist} ${unit}` : ""}, towards the ${dir}.`);
   }
-  const P = sample(["P", "Q", "R", "S", "T", "U", "W"], 5), pt = { [P[0]]: [0, 0] }, facts = [];
-  for (let i = 1; i < 5; i++) { const ref = P[ri(Math.max(0, i - 2), i - 1)], dir = pick(["North", "East", "South", "West"]), len = ri(2, 12) * scale; pt[P[i]] = [pt[ref][0] + V[dir][0] * len, pt[ref][1] + V[dir][1] * len]; facts.push(`${P[i]} is ${len} ${unit} to the ${dir.toLowerCase()} of ${ref}`); }
-  const [a, b] = [P[4], P[0]], dx = pt[a][0] - pt[b][0], dy = pt[a][1] - pt[b][1], h = Math.hypot(dx, dy);
+  const P = sample(["P", "Q", "R", "S", "T", "U", "W", "X"], 7), pt = { [P[0]]: [0, 0] }, facts = [];
+  for (let i = 1; i < 7; i++) { const ref = P[ri(Math.max(0, i - 2), i - 1)], dir = pick(["North", "East", "South", "West"]), len = ri(2, 12) * scale; pt[P[i]] = [pt[ref][0] + V[dir][0] * len, pt[ref][1] + V[dir][1] * len]; facts.push(`${P[i]} is ${len} ${unit} to the ${dir.toLowerCase()} of ${ref}`); }
+  const [a, b] = [P[6], P[0]], dx = pt[a][0] - pt[b][0], dy = pt[a][1] - pt[b][1], h = Math.hypot(dx, dy);
   if ((!dx && !dy) || (dx && dy && !Number.isInteger(h))) return null;
-  if (new Set(Object.values(pt).map(String)).size < 5) return null;
+  if (new Set(Object.values(pt).map(String)).size < 7) return null;
   const dist = dx && dy ? h : Math.abs(dx || dy), dir = quadrant(dx, dy);
   return mc(`${facts.join(". ")}. What is the distance and direction of ${a} from ${b}?`, `${dist} ${unit} ${dir}`, [`${dist} ${unit} ${DIRS8[(DIRS8.indexOf(dir) + 4) % 8]}`, `${Math.abs(dx) + Math.abs(dy)} ${unit} ${dir}`, `${dist} ${unit} ${DIRS8[(DIRS8.indexOf(dir) + 2) % 8]}`, `${dist + scale} ${unit} ${dir}`], `Placing ${b} at the origin, ${a} is ${Math.abs(dx)} ${unit} ${dx >= 0 ? "east" : "west"} and ${Math.abs(dy)} ${unit} ${dy >= 0 ? "north" : "south"} of ${b}${dx && dy ? `, so the distance is √(${Math.abs(dx)}² + ${Math.abs(dy)}²) = ${dist} ${unit}` : ""}, towards the ${dir}.`);
 }
@@ -601,7 +672,7 @@ function ranking() {
 const PERMS = {};
 const permsOf = (key, arr) => (PERMS[key] ||= permutations(arr));
 function seating() {
-  const circ = rnd() < 0.45, n = circ ? pick([6, 8]) : pick([6, 7]);
+  const circ = rnd() < 0.45, n = circ ? 8 : pick([7, 8]);
   const people = sample(["A", "B", "C", "D", "E", "F", "G", "H", "K", "M", "P", "Q", "R", "S", "T", "V"], n);
   let arr = shuffle(people);
   if (circ) { const z = arr.indexOf(people[0]); arr = [...arr.slice(z), ...arr.slice(0, z)]; }
@@ -635,7 +706,7 @@ function seating() {
   for (let g = 0; g < 300 && live.length > 1; g++) { const c = mk(); if (!c || clues.some((d) => d[0] === c[0])) continue; const next = live.filter(c[1]); if (next.length < live.length) { clues.push(c); live = next; } }
   if (live.length !== 1) return null;
   for (const c of shuffle([...clues])) { const rest = clues.filter((d) => d !== c); if (perms.filter((P) => rest.every((d) => d[1](P))).length === 1) clues.splice(clues.indexOf(c), 1); }
-  if (clues.length < 4) return null;
+  if (clues.length < 5) return null;
   const [x, y] = sample(people, 2), ix = arr.indexOf(x);
   let qq, ans, wrongs;
   if (circ) {
@@ -654,6 +725,83 @@ function seating() {
   return mc(`${intro} ${shuffle(clues).map((c) => c[0]).join(" ")} ${qq}`, ans, shuffle(wrongs), `Only one arrangement satisfies every clue. ${order}. So the answer is ${ans}.`);
 }
 
+// Mixed-facing seating (bank-exam "mains" style): some people face the centre (or north), the rest face away,
+// so every "left/right" clue depends on who faces which way. Solved over every (seat order × facing) candidate.
+function seatingFacing() {
+  const circ = rnd() < 0.6, n = circ ? 8 : 7, FULL = (1 << n) - 1;
+  const people = sample(["A", "B", "C", "D", "E", "F", "G", "H", "K", "M", "P", "Q", "R", "S", "T", "V"], n);
+  const base = circ ? permsOf(`c${n}`, [...Array(n - 1).keys()].map((i) => i + 1)).map((p) => [0, ...p]) : permsOf(`l${n}`, [...Array(n).keys()]);
+  const truthP = pick(base), truthM = ri(1, FULL - 1), inCount = (M) => { let c = 0; for (let i = 0; i < n; i++) c += (M >> i) & 1; return c; };
+  if (inCount(truthM) < 2 || inCount(truthM) > n - 2) return null;
+  const md = (i) => ((i % n) + n) % n, fin = (M, x) => (M >> x) & 1;
+  const dL = (M, x) => (circ ? (fin(M, x) ? 1 : -1) : fin(M, x) ? -1 : 1); // seat step towards x's left
+  const facing = (x) => (circ ? ["faces away from the centre", "faces the centre"] : ["faces south", "faces north"])[x];
+  const off = (P, M, x, y) => (circ ? md((P[x] - P[y]) * dL(M, y)) : (P[x] - P[y]) * dL(M, y)); // x is `off` seats to y's left
+  const posName = (d) => (circ ? (d <= n / 2 - 1 ? [d, "left"] : n - d <= n / 2 - 1 ? [n - d, "right"] : null) : d > 0 ? [d, "left"] : [-d, "right"]);
+  const at = (k) => (k === 1 ? "immediately" : ord(k));
+  const mk = () => {
+    const [x, y, z] = sample([...Array(n).keys()], 3), P = truthP, M = truthM, N = people;
+    const opts = [];
+    const d = off(P, M, x, y), pn = posName(d);
+    if (pn && pn[0] <= 3 && pn[0] >= 1) { const [k, side] = pn; opts.push([`${N[x]} sits ${at(k)} to the ${side} of ${N[y]}.`, (Q, W) => off(Q, W, x, y) === (circ ? md(side === "left" ? k : -k) : side === "left" ? k : -k)]); }
+    opts.push([`${N[x]} ${facing(fin(M, x))}.`, (Q, W) => fin(W, x) === fin(M, x)]);
+    opts.push([`${N[x]} and ${N[y]} face ${fin(M, x) === fin(M, y) ? "the same direction" : "opposite directions"}.`, (Q, W) => (fin(W, x) === fin(W, y)) === (fin(M, x) === fin(M, y))]);
+    const adj = (Q, a, b) => (circ ? [1, n - 1].includes(md(Q[a] - Q[b])) : Math.abs(Q[a] - Q[b]) === 1);
+    opts.push([adj(P, x, y) ? `${N[x]} is an immediate neighbour of ${N[y]}.` : `${N[x]} is not an immediate neighbour of ${N[y]}.`, (Q) => adj(Q, x, y) === adj(P, x, y)]);
+    if (adj(P, z, x) && adj(P, z, y)) opts.push([`${N[z]} sits between ${N[x]} and ${N[y]}, next to both.`, (Q) => adj(Q, z, x) && adj(Q, z, y)]);
+    if (circ) {
+      if (md(P[x] - P[y]) === n / 2) opts.push([`${N[x]} sits opposite ${N[y]}.`, (Q) => md(Q[x] - Q[y]) === n / 2]);
+      const nb = (Q) => [...Array(n).keys()].filter((p) => p !== x && adj(Q, p, x)), f = nb(P).map((p) => fin(M, p));
+      if (f[0] === f[1]) opts.push([`Both immediate neighbours of ${N[x]} ${f[0] ? "face the centre" : "face away from the centre"}.`, (Q, W) => nb(Q).every((p) => fin(W, p) === f[0])]);
+      else opts.push([`The two immediate neighbours of ${N[x]} face opposite directions.`, (Q, W) => { const g = nb(Q); return fin(W, g[0]) !== fin(W, g[1]); }]);
+    } else {
+      const gap = Math.abs(P[x] - P[y]) - 1;
+      if (gap >= 1) opts.push([`Exactly ${gap} ${gap === 1 ? "person sits" : "people sit"} between ${N[x]} and ${N[y]}.`, (Q) => Math.abs(Q[x] - Q[y]) - 1 === gap]);
+      if ([0, n - 1].includes(P[x])) opts.push([`${N[x]} sits at one of the extreme ends.`, (Q) => [0, n - 1].includes(Q[x])]);
+      else opts.push([`${N[x]} does not sit at either end.`, (Q) => ![0, n - 1].includes(Q[x])]);
+    }
+    if (rnd() < 0.15) { const c = inCount(M); opts.push([`Exactly ${c} of them ${circ ? "face the centre" : "face north"}.`, (Q, W) => inCount(W) === c]); }
+    return pick(opts);
+  };
+  const total = base.length << n, test = (c, clue) => clue[1](base[c >> n], c & FULL);
+  let live = null; const clues = [];
+  for (let g = 0; g < 400; g++) {
+    if (live && live.length === 1) break;
+    const c = mk(); if (clues.some((d) => d[0] === c[0])) continue;
+    const next = []; if (live) { for (const i of live) if (test(i, c)) next.push(i); } else for (let i = 0; i < total; i++) if (test(i, c)) next.push(i);
+    if (!live || next.length < live.length) { clues.push(c); live = next; }
+  }
+  if (!live || live.length !== 1) return null;
+  for (const c of shuffle([...clues])) { // drop clues the others already imply
+    const rest = clues.filter((d) => d !== c); let cnt = 0;
+    for (let i = 0; i < total && cnt < 2; i++) if (rest.every((d) => test(i, d))) cnt++;
+    if (cnt === 1) clues.splice(clues.indexOf(c), 1);
+  }
+  if (clues.length < 7) return null;
+  const P = truthP, M = truthM, N = people, bySeat = [...Array(n).keys()].sort((a, b) => P[a] - P[b]);
+  const tag = (p) => `${N[p]} (${circ ? (fin(M, p) ? "in" : "out") : fin(M, p) ? "N" : "S"})`;
+  const layout = circ ? `Going round the table: ${bySeat.map(tag).join(" → ")} → back to ${N[bySeat[0]]} ("in" = faces the centre; this direction is to the left of anyone facing in and to the right of anyone facing out)` : `From west to east: ${bySeat.map(tag).join(", ")} (N = faces north, whose left is towards the west; S = faces south, whose left is towards the east)`;
+  const t = pick(["who", "who", "pos", "count"]), x = ri(0, n - 1);
+  let qq, ans, wrongs, how;
+  if (t === "count") {
+    if (clues.some((c) => c[0].startsWith("Exactly ") && c[0].includes(" of them "))) return null;
+    ans = inCount(M); qq = `How many of them ${circ ? "face the centre" : "face north"}?`; wrongs = nearNums(ans).filter((v) => v <= n); how = `${ans} of them ${circ ? "face the centre" : "face north"}`;
+  } else if (t === "who") {
+    const k = ri(1, 3), side = pick(["left", "right"]), s = (side === "left" ? k : -k) * dL(M, x), seat = circ ? md(P[x] + s) : P[x] + s;
+    if (seat < 0 || seat >= n) return null;
+    ans = N[bySeat[seat]]; qq = `Who sits ${at(k)} to the ${side} of ${N[x]}?`; wrongs = N.filter((p) => p !== ans && p !== N[x]);
+    how = `${N[x]} ${facing(fin(M, x))}, so ${k === 1 ? "the seat" : `${k} seats`} to ${N[x]}'s ${side} ${k === 1 ? "is" : "lead to"} ${ans}`;
+  } else {
+    const y = pick([...Array(n).keys()].filter((p) => p !== x)), pn = posName(off(P, M, x, y)); if (!pn || pn[0] > 4) return null;
+    const lbl = ([k, s]) => (k === 1 ? `Immediately to the ${s}` : `${ord(k)} to the ${s}`);
+    ans = lbl(pn); qq = `What is the position of ${N[x]} with respect to ${N[y]}?`;
+    wrongs = shuffle([[pn[0], pn[1] === "left" ? "right" : "left"], [pn[0] + 1, pn[1]], [Math.max(1, pn[0] - 1), pn[1]], [pn[0] + 1, pn[1] === "left" ? "right" : "left"], [pn[0] + 2, pn[1]]]).map(lbl);
+    how = `${N[y]} ${facing(fin(M, y))}, and ${N[x]} is ${ans.toLowerCase()} of ${N[y]} from ${N[y]}'s own point of view`;
+  }
+  const intro = circ ? `${n} people — ${list([...N].sort())} — sit around a circular table. Some of them face the centre and the rest face away from it.` : `${n} people — ${list([...N].sort())} — sit in a row running west to east. Some of them face north and the rest face south.`;
+  return mc(`${intro} ${shuffle(clues).map((c) => c[0]).join(" ")} ${qq}`, ans, wrongs, `Only one arrangement (seats and facing) satisfies every clue. ${layout}. ${how[0].toUpperCase() + how.slice(1)}.`);
+}
+
 // ================= ARITHMETIC (multi-step) =================
 const fmtClock = (mins) => { const H = Math.floor(mins / 60) % 24, M = mins % 60; return `${H % 12 || 12}:${String(M).padStart(2, "0")} ${H < 12 ? "am" : "pm"}`; };
 const ARITH = [
@@ -661,21 +809,27 @@ const ARITH = [
   () => { const t = ri(3, 12), a = ri(t + 1, 5 * t), b = ri(t + 1, 5 * t), n0 = a * b - t * b - t * a, d0 = t * a * b; if (n0 <= 0 || d0 % n0) return null; const c = d0 / n0; if (c > 150 || c === a || c === b) return null; const den = a * b + b * c + a * c, num = a * b * c; return mc(`A, B and C can each do a piece of work in ${a}, ${b} and ${c} days respectively. How many days will they take working together?`, t, nearNums(t, [Math.round((a + b + c) / 3)]), `Together they do 1/${a} + 1/${b} + 1/${c} = ${den}/${num} = 1/${t} of the work per day, so they need ${t} days.`); },
   () => { const [a, b, c] = [ri(4, 20), ri(4, 20), ri(6, 40)], den = b * c + a * c - a * b; if (den <= 0) return null; const num = a * b * c; if (num % den) return null; const t = num / den; return mc(`Two pipes can fill a tank in ${a} and ${b} hours, and a drain can empty it in ${c} hours. If all three are opened together on an empty tank, how long will it take to fill?`, `${t} hours`, nearNums(t, [Math.round((a * b) / (a + b))]).map((v) => `${v} hours`), `Net rate = 1/${a} + 1/${b} − 1/${c} = ${den}/${num} = 1/${t}, so ${t} hours.`); },
   () => { const L1 = ri(10, 30) * 10, L2 = ri(10, 30) * 10, v1 = ri(4, 12) * 9, v2 = ri(4, 12) * 9, same = rnd() < 0.4; const rel = same ? Math.abs(v1 - v2) : v1 + v2; if (!rel) return null; const ms = (rel * 5) / 18, t = (L1 + L2) / ms; if (!Number.isInteger(t)) return null; const other = Math.round((L1 + L2) / ((same ? v1 + v2 : Math.abs(v1 - v2) || 1) * 5 / 18)); return mc(`Two trains, ${L1} m and ${L2} m long, run at ${v1} km/h and ${v2} km/h in ${same ? "the same direction" : "opposite directions"} on parallel tracks. How many seconds do they take to cross each other completely?`, t, nearNums(t, [other, Math.round(L1 / ms)]), `Relative speed = ${same ? `${Math.max(v1, v2)} − ${Math.min(v1, v2)}` : `${v1} + ${v2}`} = ${rel} km/h = ${ms} m/s; distance = ${L1} + ${L2} = ${L1 + L2} m; time = ${t} s.`); },
-  () => { const x = pick([10, 20, 25, 30, 40, 50]), y = pick([10, 20, 25, 30, 40, 50]), net = (100 + x) * (100 - y) - 10000; if (net % 100 || !net) return null; const p = net / 100, lbl = p > 0 ? `${p}% increase` : `${-p}% decrease`; return mc(`The price of an item is first raised by ${x}% and then reduced by ${y}%. What is the overall change?`, lbl, [x === y ? "No change" : `${Math.abs(x - y)}% ${x > y ? "increase" : "decrease"}`, `${Math.abs(p) + 2}% ${p > 0 ? "increase" : "decrease"}`, `${Math.abs(p)}% ${p > 0 ? "decrease" : "increase"}`, "No change"], `Net factor = ${(100 + x) / 100} × ${(100 - y) / 100} = ${(100 + p) / 100}, i.e. a ${lbl}.`); },
   () => { const g = pick([800, 750, 900, 960, 875, 950, 850, 920, 940, 980, 975, 925, 880, 820]), num = (1000 - g) * 100, pct = mixed(num, g); return mc(`A dishonest shopkeeper sells goods at cost price but uses a weight of ${g} g instead of 1 kg. What is his profit percentage?`, `${pct}%`, [`${(1000 - g) / 10}%`, `${mixed(num, 1000 + (1000 - g))}%`, `${mixed(num + g, g)}%`, `${mixed(num - g, g)}%`], `He charges for 1000 g but gives ${g} g, gaining ${1000 - g} g on ${g} g: ${1000 - g}/${g} × 100 = ${pct}%.`); },
   () => { const x = ri(3, 9), p = ri(2, 5), q = ri(p + 1, 8), yrs = ri(4, 12); if (gcd(p, q) !== 1) return null; const A = p * x, B = q * x, g = gcd(A + yrs, B + yrs); return mc(`The present ages of A and B are in the ratio ${p} : ${q}. After ${yrs} years the ratio will be ${(A + yrs) / g} : ${(B + yrs) / g}. What is A's present age?`, `${A} years`, [`${B} years`, `${A + yrs} years`, `${A + p} years`, `${A - p} years`], `Let the ages be ${p}x and ${q}x: (${p}x + ${yrs})/(${q}x + ${yrs}) = ${(A + yrs) / g}/${(B + yrs) / g} gives x = ${x}, so A is ${A}.`); },
-  () => { const n = ri(6, 12), d = pick([1.5, 2, 2.5, 3]), w = ri(45, 70), nw = w + n * d; if (!Number.isInteger(nw)) return null; return mc(`The average weight of ${n} soldiers increases by ${d} kg when one of them, weighing ${w} kg, is replaced by a new soldier. What is the new soldier's weight?`, `${nw} kg`, [`${w + d} kg`, `${nw - d} kg`, `${nw + n} kg`, `${w + n} kg`], `The total rises by ${n} × ${d} = ${n * d} kg, so the new soldier weighs ${w} + ${n * d} = ${nw} kg.`); },
   () => { const a = ri(20, 50), b = a + ri(10, 40), m = ri(a + 1, b - 1), p = b - m, q = m - a, g = gcd(p, q); if (p === q) return null; return mc(`In what ratio must rice costing ₹${a}/kg be mixed with rice costing ₹${b}/kg so that the mixture costs ₹${m}/kg?`, `${p / g} : ${q / g}`, [`${q / g} : ${p / g}`, `${p / g + 1} : ${q / g}`, `${p / g} : ${q / g + 1}`, `${a} : ${b}`], `By alligation, cheaper : dearer = (${b} − ${m}) : (${m} − ${a}) = ${p} : ${q}${g > 1 ? ` = ${p / g} : ${q / g}` : ""}.`); },
   () => { const r = pick([4, 5, 8, 10, 12, 15, 20]), P = ri(4, 60) * 500, d = (P * r * r) / 10000; if (!Number.isInteger(d)) return null; return mc(`What is the difference between compound interest and simple interest on ₹${P} for 2 years at ${r}% per annum?`, `₹${d}`, [`₹${2 * d}`, `₹${d + r}`, `₹${(P * r) / 100}`, `₹${d / 2}`], `For 2 years the difference is P(r/100)² = ${P} × (${r}/100)² = ₹${d}.`); },
   () => { const u = ri(3, 6), v = u + ri(1, 3), t1 = pick([5, 10, 12, 15, 20]), t2 = pick([5, 6, 10, 15]); const num = u * v * (t1 + t2), den = 60 * (v - u); if (num % den) return null; const D = num / den; return mc(`Walking at ${u} km/h, a cadet reaches the parade ground ${t1} minutes late; walking at ${v} km/h, he reaches ${t2} minutes early. How far is the parade ground?`, `${D} km`, [`${D + 1} km`, `${Math.max(1, D - 1)} km`, `${D * 2} km`, `${D + 2} km`], `The time difference is ${t1 + t2} min = ${mixed(t1 + t2, 60)} h. D/${u} − D/${v} = ${mixed(t1 + t2, 60)} gives D = ${u} × ${v} × ${mixed(t1 + t2, 60)} ÷ ${v - u} = ${D} km.`); },
-  () => { const a = ri(1, 7), b = ri(a + 1, 9), N = 10 * a + b; return mc(`The sum of the digits of a two-digit number is ${a + b}. When the digits are reversed, the number increases by ${9 * (b - a)}. What is the number?`, N, [10 * b + a, N + 9, N - 9, N + 18].filter((x) => x > 9 && x < 100), `Reversing adds 9 × (units − tens) = ${9 * (b - a)}, so units − tens = ${b - a}; with sum ${a + b}, the digits are ${a} and ${b}: ${N}.`); },
-  () => { const iv = sample([4, 6, 8, 9, 10, 12, 15, 16, 18, 20], 3), L = iv.reduce(lcm), start = ri(7, 10) * 60; if (L > 300) return null; return mc(`Three bugles sound at intervals of ${list(iv)} minutes. They sound together at ${fmtClock(start)}. When will they next sound together?`, fmtClock(start + L), [fmtClock(start + L / 2), fmtClock(start + L + iv[0]), fmtClock(start + iv.reduce((a, b) => a + b)), fmtClock(start + 2 * L)], `They coincide every LCM(${list(iv)}) = ${L} minutes, so next at ${fmtClock(start + L)}.`); },
   () => { const x = ri(2, 9) * 10000, y = ri(2, 9) * 10000, m = ri(4, 10), P = ri(2, 9) * 1000; const ax = x * 12, by = y * m, tot = ax + by; if ((P * ax) % tot) return null; const sa = (P * ax) / tot, g = gcd(ax, by); return mc(`A invests ₹${x} for 12 months and B invests ₹${y} for ${m} months in a business. Out of a profit of ₹${P}, what is A's share?`, `₹${sa}`, [`₹${P - sa}`, `₹${Math.round((P * x) / (x + y))}`, `₹${sa + 100}`, `₹${P / 2}`], `Shares are in the ratio ${x} × 12 : ${y} × ${m} = ${ax / g} : ${by / g}, so A gets ₹${sa}.`); },
   () => { const p1 = ri(25, 40), p2 = p1 + ri(5, 15), M = pick([200, 300, 400, 500, 600]), pass = ri(Math.ceil((p1 * M) / 100) + 5, Math.floor((p2 * M) / 100) - 5), f = pass - (p1 * M) / 100, e = (p2 * M) / 100 - pass; if (!Number.isInteger(f) || !Number.isInteger(e) || f <= 0 || e <= 0) return null; return mc(`A candidate who scores ${p1}% fails by ${f} marks, while another who scores ${p2}% gets ${e} marks more than the pass mark. What are the maximum marks?`, M, nearNums(M, [f + e, (f + e) * 5], 50), `The ${p2 - p1}% difference equals ${f} + ${e} = ${f + e} marks, so 1% = ${(f + e) / (p2 - p1)} marks and the maximum is ${M}.`); },
-  () => { const vt = ri(6, 10), vp = vt + ri(2, 6), lag = pick([6, 10, 12, 15, 20]), head = (vt * lag) / 60, t = head / (vp - vt); if (!Number.isInteger(t * 60)) return null; return mc(`A thief escapes at ${vt} km/h. A policeman starts chasing him ${lag} minutes later at ${vp} km/h. How long after starting will the policeman catch him?`, `${t * 60} minutes`, [`${lag} minutes`, `${t * 60 + lag} minutes`, `${t * 60 + 5} minutes`, `${Math.max(1, t * 60 - 5)} minutes`], `The thief's head start is ${vt} × ${lag}/60 = ${head} km; the gap closes at ${vp - vt} km/h, taking ${head}/${vp - vt} h = ${t * 60} minutes.`); },
+  () => { const vt = ri(6, 10), vp = vt + ri(2, 6), lag = pick([6, 10, 12, 15, 20]), head = (vt * lag) / 60, t = head / (vp - vt); if (!Number.isInteger(t * 60)) return null; return mc(`A thief escapes at ${vt} km/h. A policeman starts chasing him ${lag} minutes later at ${vp} km/h. How long after starting will the policeman catch him?`, `${t * 60} minutes`, [`${lag} minutes`, `${t * 60 + lag} minutes`, `${t * 60 + 5} minutes`, `${Math.max(1, t * 60 - 5)} minutes`], `The thief's head start is ${vt} × ${lag}/60 = ${mixed(vt * lag, 60)} km; the gap closes at ${vp - vt} km/h, taking ${t * 60} minutes.`); },
   () => { const s = ri(8, 20), w = ri(2, 6), d = ((s * s - w * w) * pick([1, 2])) / 2, T = d / (s + w) + d / (s - w); if (!Number.isInteger(d) || !Number.isInteger(T)) return null; return mc(`A boat's speed in still water is ${s} km/h and the stream flows at ${w} km/h. How long does it take to go ${d} km downstream and come back?`, `${T} hours`, [`${mixed(2 * d, s)} hours`, `${T + 1} hours`, `${T - 1} hours`, `${mixed(d, s + w)} hours`], `Downstream: ${d}/${s + w} = ${mixed(d, s + w)} h; upstream: ${d}/${s - w} = ${mixed(d, s - w)} h; total ${T} h.`); },
   () => { const x = pick([10, 20, 25]), y = pick([10, 20, 25, 50]), C = ri(2, 20) * 100, P = (C * (100 + x) * (100 + y)) / 10000; if (!Number.isInteger(P)) return null; return mc(`A sells a bicycle to B at ${x}% profit, and B sells it to C at ${y}% profit. If C pays ₹${P}, what did A pay for it?`, `₹${C}`, [`₹${Math.round((P * (100 - x - y)) / 100)}`, `₹${Math.round((P * 100) / (100 + x + y))}`, `₹${C + 100}`, `₹${Math.round((P * 100) / (100 + y))}`], `₹${P} = cost × ${(100 + x) / 100} × ${(100 + y) / 100}, so the cost was ₹${C}.`); },
   () => { const L = ri(3, 12) * 100, u = ri(3, 7), v = u + ri(1, 5), same = rnd() < 0.5, t = L / (same ? v - u : v + u); if (!Number.isInteger(t)) return null; return mc(`Two runners start together from the same point on a ${L} m circular track at ${u} m/s and ${v} m/s, running in ${same ? "the same direction" : "opposite directions"}. After how many seconds do they first meet again?`, `${t} s`, [`${mixed(L, same ? v + u : v - u)} s`, `${t * 2} s`, `${t + 10} s`, `${mixed(L, v)} s`], `${same ? "The faster runner must gain a full lap" : "Together they must cover one full lap"}: ${L} ÷ ${same ? `(${v} − ${u})` : `(${v} + ${u})`} = ${t} s.`); },
+  () => { const L = pick([40, 50, 60, 80, 81, 100, 125, 160, 200, 243, 250, 256, 320, 343, 400, 500, 625, 729, 1000]), x = ri(2, Math.floor(L / 3)), k = pick([2, 3]); const num = (L - x) ** k, den = L ** (k - 1); if (num % den) return null; const left = num / den, prev = (L - x) ** (k - 1) / L ** (k - 2); return mc(`A container holds ${L} litres of pure milk. ${x} litres are drawn off and replaced with water, and this is done ${k === 2 ? "twice" : "three times"} in all. How much milk is now in the container?`, `${left} litres`, [`${L - k * x} litres`, `${+prev.toFixed(2)} litres`, `${L - left} litres`, `${left + x} litres`], `Each round keeps ${L - x}/${L} of the milk, so milk left = ${L} × (${L - x}/${L})^${k} = ${left} litres (not ${L} − ${k} × ${x}, because later draws remove diluted liquid).`); },
+  () => { const D = pick([100, 200, 400, 500, 1000]), p = ri(2, D / 5), q = ri(2, D / 5), num = (D - p) * (D - q); if (num % D) return null; const ans = D - num / D; if (ans === p + q) return null; return mc(`In a ${D} m race, A beats B by ${p} m and B beats C by ${q} m. By how many metres does A beat C in a ${D} m race?`, `${ans} m`, [`${p + q} m`, `${ans + 1} m`, `${ans - 1} m`, `${Math.abs(p - q) || ans + 2} m`], `When A runs ${D}, B runs ${D - p}. When B runs ${D}, C runs ${D - q}, so when B runs ${D - p}, C runs ${D - q} × ${D - p}/${D} = ${num / D}. A beats C by ${D} − ${num / D} = ${ans} m.`); },
+  () => { const r = pick([5, 10, 20]), P = ri(1, 12) * { 5: 8000, 10: 1000, 20: 125 }[r], A = (P * (100 + r) ** 3) / 1e6; if (!Number.isInteger(A)) return null; const ci = A - P, si = (3 * P * r) / 100, ci2 = (P * (100 + r) ** 2) / 1e4 - P; return mc(`What is the compound interest on ₹${P} for 3 years at ${r}% per annum, compounded annually?`, `₹${ci}`, [`₹${si}`, `₹${ci2}`, `₹${ci + si / 3}`, `₹${ci - (P * r * r) / 1e4}`].filter((o) => !o.includes(".")), `Amount = ${P} × (1 + ${r}/100)³ = ₹${A}, so CI = ${A} − ${P} = ₹${ci}.`); },
+  () => { const a = ri(6, 30), b = ri(6, 30); if (a === b) return null; const W = lcm(a, b), ra = W / a, rb = W / b; let d = 0, done = 0; for (;;) { const rate = d % 2 ? rb : ra; if (done + rate >= W) break; done += rate; d++; } const rate = d % 2 ? rb : ra, ans = mixed(d * rate + (W - done), rate), tog = mixed(a * b, a + b); return mc(`A can do a job in ${a} days and B in ${b} days. They work on alternate days, with A working on the first day. In how many days will the job be finished?`, `${ans} days`, [`${tog} days`, `${mixed(2 * a * b, a + b)} days`, `${d + 1} days`, `${d} days`, `${mixed(d * rate + (W - done) + rate, rate)} days`].filter((o) => o !== `${ans} days`), `Take the job as ${W} units: A does ${ra} and B ${rb} units a day. After ${d} alternate days ${done} units are done; on day ${d + 1} ${d % 2 ? "B" : "A"} finishes the remaining ${W - done} units in ${mixed(W - done, rate)} day. Total ${ans} days.`); },
+  () => { const a = ri(3, 12), b = ri(a + 1, 3 * a), num = a * b, den = b - a; if (num % den) return null; const t = num / den; return mc(`A pipe can fill a tank in ${a} hours. Because of a leak at the bottom, it takes ${b} hours to fill. In how many hours can the leak alone empty the full tank?`, `${t} hours`, [`${b - a} hours`, `${mixed(a * b, a + b)} hours`, `${t + a} hours`, `${Math.max(1, t - a)} hours`], `Leak rate = 1/${a} − 1/${b} = ${den}/${num} = 1/${t} of the tank per hour, so ${t} hours.`); },
+  () => { const n = pick([5, 6, 7]), A = ri(18, 34), k = ri(2, 9), num = n * A - n * k; if (num % (n - 1)) return null; const ans = num / (n - 1); return mc(`The average age of a family of ${n} is ${A} years. The youngest member is ${k} years old. What was the average age of the family just before the youngest member was born?`, `${ans} years`, [`${mixed(n * A - k, n - 1)} years`, `${A - k} years`, `${ans + 1} years`, `${mixed(n * A, n - 1)} years`], `Today the total is ${n} × ${A} = ${n * A}. ${k} years ago the other ${n - 1} were ${k} years younger each and the youngest was not born: ${n * A} − ${k} − ${n - 1} × ${k} = ${num}. Average = ${num} ÷ ${n - 1} = ${ans} years.`); },
+  () => { const [u, v, w] = sample([10, 12, 15, 20, 24, 30, 36, 40, 45, 60], 3), num = 3 * u * v * w, den = u * v + v * w + u * w; if (num % den) return null; const ans = num / den; return mc(`A convoy covers three equal stretches of a road at ${u} km/h, ${v} km/h and ${w} km/h. What is its average speed for the whole journey?`, `${ans} km/h`, [`${mixed(u + v + w, 3)} km/h`, `${ans + 2} km/h`, `${ans - 2} km/h`, `${mixed(2 * u * w, u + w)} km/h`], `For three equal distances the average speed is 3uvw/(uv + vw + uw) = ${num}/${den} = ${ans} km/h — not the plain average of the speeds.`); },
+  () => { const L = ri(5, 30) * 10, V = ri(8, 20) * 5, w1 = ri(2, 8), w2 = ri(2, 8), t1 = (L * 18) / ((V - w1) * 5), t2 = (L * 18) / ((V + w2) * 5); if (!Number.isInteger(t1) || !Number.isInteger(t2) || t1 === t2) return null; return mc(`A train passes a man walking at ${w1} km/h in the same direction in ${t1} seconds, and another man walking at ${w2} km/h towards it in ${t2} seconds. What is the speed of the train?`, `${V} km/h`, [`${V + w1} km/h`, `${V - w2} km/h`, `${V + 5} km/h`, `${V + w2} km/h`], `The train's length is the same both times: (V − ${w1}) × ${t1} = (V + ${w2}) × ${t2}, giving V = (${w1} × ${t1} + ${w2} × ${t2}) / (${t1} − ${t2}) = ${V} km/h (length ${L} m).`); },
+  () => { const p = ri(2, 6), q = ri(p + 1, 9), m = pick([2, 3]), t = ri(4, 15); if (gcd(p, q) !== 1 || m * p <= q) return null; const num = t * (m - 1), den = m * p - q; if (num % den) return null; const x = num / den; if (p * x <= t) return null; return mc(`The present ages of A and B are in the ratio ${p} : ${q}. ${t} years ago, B was ${m === 2 ? "twice" : "three times"} as old as A. What is the sum of their present ages?`, `${(p + q) * x} years`, [`${(p + q) * x + 2 * t} years`, `${(p + q) * (x + 1)} years`, `${(p + q) * x - t} years`, `${q * x} years`], `Let the ages be ${p}x and ${q}x: ${q}x − ${t} = ${m}(${p}x − ${t}) gives x = ${x}, so A = ${p * x}, B = ${q * x} and the sum is ${(p + q) * x}.`); },
+  () => { const x = pick([20, 25, 30, 40, 50, 60]), d1 = pick([10, 20, 25]), d2 = pick([10, 20, 25]), num = (100 + x) * (100 - d1) * (100 - d2); if (num % 10000) return null; const p = num / 10000 - 100; if (!p) return null; const lbl = (v) => (v > 0 ? `${v}% profit` : `${-v}% loss`); return mc(`A trader marks his goods ${x}% above cost price and then allows two successive discounts of ${d1}% and ${d2}%. What is his overall profit or loss?`, lbl(p), [lbl(x - d1 - d2 || 1), lbl(-p), lbl(p + 2), lbl(p - 3)], `Selling price = cost × ${(100 + x) / 100} × ${(100 - d1) / 100} × ${(100 - d2) / 100} = ${num / 10000}% of cost, i.e. ${lbl(p)}.`); },
 ];
 
 // ================= CLOCKS & CALENDARS =================
@@ -684,11 +838,15 @@ const angleAt = (h, m) => { const a = Math.abs(30 * (h % 12) - 5.5 * m); return 
 function clockHard() {
   const t = pick(["angleTime", "angleTime", "watch", "rightAngles", "mirrorAngle", "trueTime"]);
   if (t === "angleTime") {
-    const H = ri(1, 11), th = pick([30, 60, 90, 120, 150]), c = [2 * (30 * H - th), 2 * (30 * H + th)].filter((x) => x >= 0 && x < 660).sort((a, b) => a - b);
+    // 5.5m ≡ 30H ± θ (mod 360); c = 11m, so c = 2(30H ± θ + 360k) for 0 ≤ m < 60.
+    const H = ri(1, 11), th = pick([30, 60, 90, 120, 150]), sols = [];
+    for (const sg of [-1, 1]) for (const k of [-1, 0, 1]) { const x = 30 * H + sg * th + 360 * k; if (2 * x >= 0 && 2 * x < 660) sols.push([2 * x, sg, k]); }
+    sols.sort((a, b) => a[0] - b[0]); const c = sols.map((z) => z[0]);
     if (!c.length) return null;
+    const [, sg0, k0] = sols[0], expr = `${30 * H} ${sg0 > 0 ? "+" : "−"} ${th}${k0 ? ` ${k0 > 0 ? "+" : "−"} 360` : ""}`;
     const f = (num) => `${H}:${String(Math.floor(num / 11)).padStart(2, "0")}${num % 11 ? ` ${num % 11}/11` : ""}`;
     const ans = f(c[0]);
-    return mc(`At what time between ${H} and ${H + 1} o'clock are the hands of a clock ${th}° apart for the first time?`, ans, [c[1] !== undefined ? f(c[1]) : f(c[0] + 22), f(c[0] + 11), f(Math.max(0, c[0] - 11)), `${H}:${String(Math.round(((30 * H + th) / 6) % 60)).padStart(2, "0")}`], `At ${H}:00 the minute hand is ${30 * H}° behind the hour hand and gains 5.5° per minute. They are first ${th}° apart when 5.5m = ${30 * H} ${c[0] === 2 * (30 * H - th) ? "−" : "+"} ${th}, i.e. m = ${mixed(c[0], 11)} minutes past ${H}.`);
+    return mc(`At what time between ${H} and ${H + 1} o'clock are the hands of a clock ${th}° apart for the first time?`, ans, [c[1] !== undefined ? f(c[1]) : f(c[0] + 22), f(c[0] + 11), f(Math.max(0, c[0] - 11)), `${H}:${String(Math.round(((30 * H + th) / 6) % 60)).padStart(2, "0")}`], `At ${H}:00 the minute hand is ${30 * H}° behind the hour hand and gains 5.5° per minute. They are first ${th}° apart when 5.5m = ${expr}, i.e. m = ${mixed(c[0], 11)} minutes past ${H}.`);
   }
   if (t === "watch") {
     const s = ri(2, 10), f = ri(2, 12), H = pick([24, 30, 36, 40, 48, 50, 54, 60]), mins = (H * 60 * s) / (s + f); if (!Number.isInteger(mins)) return null;
@@ -709,7 +867,12 @@ function clockHard() {
   return mc(`A clock gains ${g} minutes every hour. It was set right at ${h0}:00 am. What is the correct time when it shows ${fmtClock(h0 * 60 + shown)}?`, fmtClock(h0 * 60 + real), [fmtClock(h0 * 60 + shown - Math.round((shown * g) / 60)), fmtClock(h0 * 60 + real - g), fmtClock(h0 * 60 + real + g), fmtClock(h0 * 60 + shown - g)], `The clock runs ${60 + g} minutes for every 60 real minutes. It has run ${shown} minutes, so real time elapsed = ${shown} × 60/${60 + g} = ${real} minutes: ${fmtClock(h0 * 60 + real)}.`);
 }
 function calendarHard() {
-  const t = pick(["old", "old", "nth", "count53", "offsets", "after"]);
+  const t = pick(["old", "old", "nth", "offsets", "after", "same", "same"]);
+  if (t === "same") {
+    const isLeap = (Y) => (Y % 4 === 0 && Y % 100 !== 0) || Y % 400 === 0, y = ri(1990, 2090);
+    let z = y, odd = 0; do { odd += isLeap(z) ? 2 : 1; z++; } while (odd % 7 || isLeap(z) !== isLeap(y));
+    return mc(`Which is the first year after ${y} that will have exactly the same calendar as ${y}?`, z, [y + 28, y + 6, y + 11, y + 5, z + 1].filter((v) => v !== z), `Two years share a calendar when the first starts on the same weekday and both are ${isLeap(y) ? "leap" : "non-leap"} years. Adding odd days from ${y} (1 for an ordinary year, 2 for a leap year) first gives a multiple of 7 at a ${isLeap(y) ? "leap" : "non-leap"} year in ${z} (${odd} odd days = ${odd / 7} weeks).`);
+  }
   if (t === "old") {
     const y = ri(1700, 2099), m = ri(0, 11), d = ri(1, 28), date = new Date(Date.UTC(y, m, d)), w = date.getUTCDay();
     const Y = y - 1, centOdd = [0, 5, 3, 1][Math.floor((Y % 400) / 100)], rem = Y % 100, remLeap = Math.floor(rem / 4), remOdd = (rem + remLeap) % 7;
@@ -724,11 +887,6 @@ function calendarHard() {
     const firstW2 = 1 + ((wd2 - first + 7) % 7); let ans = firstW2;
     if (last) while (ans + 7 <= 31) ans += 7; else ans = firstW2 + (k2 - 1) * 7;
     return mc(`In a 31-day month, the ${ord(k1)} ${DAYS[wd1]} falls on the ${ord(date1)}. On which date does the ${last ? "last" : ord(k2)} ${DAYS[wd2]} fall?`, ord(ans), [ord(ans > 7 ? ans - 7 : ans + 7), ord(ans + 1), ord(ans - 1), ord(ans + 2)], `The ${ord(k1)} ${DAYS[wd1]} is the ${ord(date1)}, so the 1st is a ${DAYS[first]}. The first ${DAYS[wd2]} is the ${ord(firstW2)}, so the ${last ? "last" : ord(k2)} one is the ${ord(ans)}.`);
-  }
-  if (t === "count53") {
-    const leap = rnd() < 0.5, s = ri(0, 6), ans = leap ? `${DAYS[s]} and ${DAYS[(s + 1) % 7]}` : DAYS[s];
-    const wr = leap ? [DAYS[s], `${DAYS[(s + 6) % 7]} and ${DAYS[s]}`, `${DAYS[(s + 1) % 7]} and ${DAYS[(s + 2) % 7]}`] : [`${DAYS[s]} and ${DAYS[(s + 1) % 7]}`, DAYS[(s + 6) % 7], DAYS[(s + 1) % 7]];
-    return mc(`A ${leap ? "leap" : "non-leap"} year begins on a ${DAYS[s]}. Which day(s) of the week occur 53 times in that year?`, ans, wr, `${leap ? 366 : 365} days = 52 weeks + ${leap ? "2 days" : "1 day"}; the extra ${leap ? "days are" : "day is"} the first ${leap ? "two days" : "day"} of the year: ${ans}.`);
   }
   if (t === "offsets") {
     const w = ri(0, 6), n = ri(40, 400), today = (w + 5) % 7, ans = (((today - 1 - n) % 7) + 7) % 7;
@@ -752,29 +910,31 @@ function venn(T) {
   }
   return (VENN[T] = { M, ab, anb, ok, T });
 }
-const holds = (V, m, [k, a, b]) => { const i = (m * V.T + a) * V.T + b; return k === "all" ? !V.anb[i] : k === "no" ? !V.ab[i] : k === "some" ? !!V.ab[i] : !!V.anb[i]; };
+const holds = (V, m, [k, a, b]) => { const i = (m * V.T + a) * V.T + b; return k === "all" ? !V.anb[i] : k === "no" ? !V.ab[i] : k === "some" ? !!V.ab[i] : k === "few" ? !!V.ab[i] && !!V.anb[i] : !!V.anb[i]; };
 const OPTS5 = ["Only I follows", "Only II follows", "Either I or II follows", "Neither I nor II follows", "Both I and II follow"];
 const COMP = { some: "no", no: "some", all: "somenot", somenot: "all" };
 function syllogismHard() {
-  const T = pick([3, 4, 4]), V = venn(T), terms = sample(TERMS, T), want = ri(0, 4);
+  const T = pick([4, 4, 4, 3]), V = venn(T), terms = sample(TERMS, T), want = ri(0, 4);
   for (let tries = 0; tries < 400; tries++) {
     const st = [];
-    for (let i = 0; i < T - 1; i++) { const k = pick(["all", "all", "all", "some", "some", "no", "no", "somenot"]); st.push(rnd() < 0.5 ? [k, i, i + 1] : [k, i + 1, i]); }
+    for (let i = 0; i < T - 1; i++) { const k = pick(["all", "all", "all", "some", "few", "few", "no", "no", "somenot"]); st.push(rnd() < 0.5 ? [k, i, i + 1] : [k, i + 1, i]); }
     const models = []; for (let m = 1; m < V.M; m++) if (V.ok[m] && st.every((s) => holds(V, m, s))) models.push(m);
     if (!models.length) continue;
-    const mkC = () => { const [a, b] = sample([...Array(T).keys()], 2); return { k: pick(["all", "some", "no", "somenot", "all", "some"]), a, b, poss: rnd() < 0.3 }; };
+    const mkC = () => { const [a, b] = sample([...Array(T).keys()], 2); return { k: pick(["all", "some", "no", "somenot", "all", "some", "few"]), a, b, poss: rnd() < 0.4 }; };
     const c1 = mkC(); let c2 = mkC();
-    if (want === 2 || rnd() < 0.15) { c1.poss = false; c2 = { k: COMP[c1.k], a: c1.a, b: c1.b, poss: false }; }
+    if (want === 2 || rnd() < 0.15) { if (c1.k === "few") c1.k = "some"; c1.poss = false; c2 = { k: COMP[c1.k], a: c1.a, b: c1.b, poss: false }; }
+    if ([c1, c2].some((c) => !c.poss && st.some(([k, a, b]) => k === c.k && a === c.a && b === c.b))) continue; // no free marks for restating a premise
     const follows = (c) => (c.poss ? models.some((m) => holds(V, m, [c.k, c.a, c.b])) : models.every((m) => holds(V, m, [c.k, c.a, c.b])));
     const f1 = follows(c1), f2 = follows(c2);
     const comp = !c1.poss && !c2.poss && c1.a === c2.a && c1.b === c2.b && COMP[c1.k] === c2.k;
     const ans = f1 && f2 ? 4 : f1 ? 0 : f2 ? 1 : comp ? 2 : 3;
     if (ans !== want) continue;
-    const say = ([k, a, b]) => ({ all: `All ${terms[a][0]} are ${terms[b][0]}`, some: `Some ${terms[a][0]} are ${terms[b][0]}`, no: `No ${terms[a][1]} is ${art(terms[b][1])}`, somenot: `Some ${terms[a][0]} are not ${terms[b][0]}` })[k];
+    const say = ([k, a, b]) => ({ all: `All ${terms[a][0]} are ${terms[b][0]}`, some: `Some ${terms[a][0]} are ${terms[b][0]}`, few: `Only a few ${terms[a][0]} are ${terms[b][0]}`, no: `No ${terms[a][1]} is ${art(terms[b][1])}`, somenot: `Some ${terms[a][0]} are not ${terms[b][0]}` })[k];
     const sayC = (c) => (c.poss ? `It is possible that ${say([c.k, c.a, c.b]).replace(/^./, (x) => x.toLowerCase())}` : say([c.k, c.a, c.b]));
     const why = (c, f, n) => (c.poss ? (f ? `${n} is a possibility — nothing in the statements rules it out.` : `${n} is not possible — the statements rule it out.`) : f ? `${n} follows — every arrangement the statements allow makes it true.` : `${n} does not follow — the statements allow an arrangement in which it is false.`);
+    const fewNote = st.some((x) => x[0] === "few") || [c1, c2].some((c) => c.k === "few") ? " (\"Only a few A are B\" means some A are B and some A are not B.)" : "";
     const either = ans === 2 ? " But I and II are complementary — exactly one of them must be true — so either I or II follows." : "";
-    return { q: `Statements: ${st.map(say).join(". ")}. Conclusions: I. ${sayC(c1)}. II. ${sayC(c2)}.`, options: OPTS5, answer: ans, explanation: `${why(c1, f1, "I")} ${why(c2, f2, "II")}${either}` };
+    return { q: `Statements: ${st.map(say).join(". ")}. Conclusions: I. ${sayC(c1)}. II. ${sayC(c2)}.`, options: OPTS5, answer: ans, explanation: `${why(c1, f1, "I")} ${why(c2, f2, "II")}${either}${fewNote}` };
   }
   return null;
 }
@@ -794,18 +954,20 @@ function dice() {
   const y = [...partners][0], adj = new Set(views.filter((v) => v.includes(x)).flat().filter((f) => f !== x));
   if (adj.size === 4 && rnd() < 0.5) return null; // prefer ones that need elimination
   const forced = pairs.filter((p) => !p.includes(x) && consistent.every((mt) => mt.some((q) => q.includes(p[0]) && q.includes(p[1]))));
-  const how = adj.size === 4 ? `${faces[x]} appears next to ${list([...adj].map((f) => faces[f]))}, so none of these can be opposite it; only ${faces[y]} remains.` : `${faces[x]} appears next to ${list([...adj].map((f) => faces[f]))}.${forced.length ? ` The views also force ${forced.map(([a, b]) => `${faces[a]} opposite ${faces[b]}`).join(" and ")}.` : ""} The only face left for ${faces[x]} is ${faces[y]}.`;
+  const adjY = new Set(views.filter((v) => v.includes(y)).flat().filter((f) => f !== y));
+  const how = adjY.size === 4 && adj.size < 4 ? `${faces[x]} appears next to ${list([...adj].map((f) => faces[f]))}. ${faces[y]} is seen next to ${list([...adjY].map((f) => faces[f]))} — every face except ${faces[x]} — so ${faces[y]} and ${faces[x]} must be opposite.` : adj.size === 4 ? `${faces[x]} appears next to ${list([...adj].map((f) => faces[f]))}, so none of these can be opposite it; only ${faces[y]} remains.` : `${faces[x]} appears next to ${list([...adj].map((f) => faces[f]))}.${forced.length ? ` The views also force ${forced.map(([a, b]) => `${faces[a]} opposite ${faces[b]}`).join(" and ")}.` : ""} The only face left for ${faces[x]} is ${faces[y]}.`;
   return mc(`${nv === 2 ? "Two" : "Three"} views of the same die each show three faces meeting at a corner: ${views.map((v) => `(${v.map((f) => faces[f]).join(", ")})`).join(", ")}. Which ${numbers ? "number" : "colour"} is opposite ${faces[x]}?`, faces[y], shuffle([0, 1, 2, 3, 4, 5].filter((f) => f !== x && f !== y)).map((f) => faces[f]), `Faces seen together are adjacent, so they cannot be opposite. ${how}`);
 }
 function colouredCube() {
-  const n = ri(3, 6), scheme = pick(["opp3", "all6", "partial", "adjPairs"]);
+  const cub = rnd() < 0.6, n = ri(3, 6), [A, B, C] = cub ? [ri(3, 7), ri(3, 7), ri(3, 7)] : [n, n, n], scheme = pick(["opp3", "all6", "partial", "adjPairs"]);
+  if (cub && new Set([A, B, C]).size < 2) return null;
   const [c1, c2, c3, c4, c5] = sample(COLOURS.filter((c) => c !== "White"), 5), c6 = "White";
   const col = { opp3: { top: c1, bottom: c1, front: c2, back: c2, left: c3, right: c3 }, all6: { top: c1, bottom: c2, front: c3, back: c4, left: c5, right: c6 }, partial: { top: c1, bottom: c1, front: c2, back: null, left: null, right: null }, adjPairs: { top: c1, front: c1, bottom: c2, back: c2, left: c3, right: c3 } }[scheme];
   const desc = { opp3: `${c1} on the top and bottom, ${c2} on the front and back, and ${c3} on the left and right faces`, all6: `a different colour on each face — top ${c1}, bottom ${c2}, front ${c3}, back ${c4}, left ${c5}, right ${c6}`, partial: `${c1} on the top and bottom and ${c2} on the front, leaving the other three faces unpainted`, adjPairs: `${c1} on the top and front, ${c2} on the bottom and back, and ${c3} on the left and right faces` }[scheme];
   const cubes = [];
-  for (let x = 0; x < n; x++) for (let y = 0; y < n; y++) for (let z = 0; z < n; z++) {
-    const hitFaces = [[z === n - 1, col.top], [z === 0, col.bottom], [y === 0, col.front], [y === n - 1, col.back], [x === 0, col.left], [x === n - 1, col.right]].filter(([on, c]) => on && c).map(([, c]) => c);
-    const ext = [x, y, z].filter((v) => v === 0 || v === n - 1).length;
+  for (let x = 0; x < A; x++) for (let y = 0; y < B; y++) for (let z = 0; z < C; z++) {
+    const hitFaces = [[z === C - 1, col.top], [z === 0, col.bottom], [y === 0, col.front], [y === B - 1, col.back], [x === 0, col.left], [x === A - 1, col.right]].filter(([on, c]) => on && c).map(([, c]) => c);
+    const ext = [[x, A], [y, B], [z, C]].filter(([v, m]) => v === 0 || v === m - 1).length;
     cubes.push({ s: new Set(hitFaces), faces: hitFaces.length, kind: ["inner", "face-centre", "edge", "corner"][ext] });
   }
   const colours = [...new Set(Object.values(col).filter(Boolean))];
@@ -820,7 +982,8 @@ function colouredCube() {
   const [label, test] = pick(qs)(), hit = cubes.filter(test), ans = hit.length; if (!ans) return null;
   const parts = ["corner", "edge", "face-centre", "inner"].map((k) => [k, hit.filter((c) => c.kind === k).length]).filter(([, v]) => v).map(([k, v]) => `${v} ${k}`);
   const others = qs.map((q) => cubes.filter(q()[1]).length).filter((v) => v !== ans);
-  return mc(`A cube of side ${n} cm is painted with ${desc}. It is then cut into 1 cm cubes. How many small cubes have ${label}?`, ans, nearNums(ans, others, Math.max(1, n - 2)), `Of the ${n ** 3} small cubes (8 corner, ${12 * (n - 2)} edge, ${6 * (n - 2) ** 2} face-centre, ${(n - 2) ** 3} inner), the ones with ${label} are: ${parts.join(" + ")} = ${ans}.`);
+  const [ia, ib, ic] = [A - 2, B - 2, C - 2], solid = cub ? `A cuboid ${A} cm long (left to right), ${B} cm wide (front to back) and ${C} cm high` : `A cube of side ${n} cm`;
+  return mc(`${solid} is painted with ${desc}. It is then cut into 1 cm cubes. How many small cubes have ${label}?`, ans, nearNums(ans, others, Math.max(1, Math.min(ia, ib, ic))), `Of the ${A * B * C} small cubes (8 corner, ${4 * (ia + ib + ic)} edge, ${2 * (ia * ib + ib * ic + ia * ic)} face-centre, ${ia * ib * ic} inner), the ones with ${label} are: ${parts.join(" + ")} = ${ans}.`);
 }
 
 // ================= ALPHABET & WORDS =================
@@ -877,7 +1040,6 @@ function statementFromBank([kind, q, ans, why]) {
 // ---------- assembly ----------
 const keyOf = (q) => (GENERIC.test(q.q) ? q.q + "|" + [...q.options].sort().join("|") : q.q);
 const seen = new Set();
-for (let n = 1; n < FIRST; n++) for (const q of (await import(new URL(`oir-${n}.ts`, DIR))).default.questions) seen.add(keyOf(q));
 function take(make, label) {
   for (let i = 0; i < 800; i++) { const q = make(); if (!q) continue; const k = keyOf(q); if (seen.has(k)) continue; seen.add(k); return q; }
   throw new Error("could not generate a unique question: " + label);
@@ -888,37 +1050,44 @@ const B = { analogies: shuffle(bank.analogies), oddWords: shuffle(bank.oddWords)
 
 function buildTest(n) {
   seed(n * 7919);
-  const i = n - FIRST, fams = shuffle(Object.keys(SERIES)), miss = pick(MISSABLE.filter((f) => !fams.slice(0, 3).includes(f)));
-  const ar = shuffle(ARITH), half = Math.ceil(ar.length / 2);
+  const i = n - FIRST, fams = shuffle(Object.keys(SERIES)), miss = pick(MISSABLE.filter((f) => !fams.slice(0, 4).includes(f)));
+  const ar = shuffle(ARITH), qa = Math.ceil(ar.length / 4), arith = (k) => take(() => pick(ar.slice(k * qa, (k + 1) * qa))(), `arith${k}`);
   return [
     take(() => seriesNext(fams[0]), "series1"),
     take(() => seriesNext(fams[1]), "series2"),
-    take(() => seriesWrong(fams[2]), "wrong"),
+    take(() => seriesWrong(fams[2]), "wrong1"),
+    take(() => seriesWrong(fams[3]), "wrong2"),
     take(() => seriesMissing(miss), "missing"),
-    take(letterSeries, "letters"),
-    take(letterCluster, "cluster"),
+    take(numberMatrix, "matrix"),
+    take(letterCluster, "cluster1"),
+    take(letterCluster, "cluster2"),
     takeBank(fromBank(B.analogies[i]), `analogy ${i}`),
     take(numberAnalogy, "numAnalogy"),
     take(letterAnalogy, "letterAnalogy"),
     takeBank(oddFromBank(B.oddWords[i]), `odd ${i}`),
     take(oddNumber, "oddNumber"),
     take(oddLetterGroup, "oddLetters"),
-    take(coding, "coding"),
+    take(coding, "coding1"),
+    take(coding, "coding2"),
     take(codeLanguage, "codeLanguage"),
     take(n % 2 ? signSwap : trueEquation, "operators"),
+    take(codedInequality, "inequality1"),
+    take(codedInequality, "inequality2"),
     take(codedRelation, "codedRelation"),
     take(pointing, "pointing"),
     take(directions, "directions"),
     take(directionsTurns, "turns"),
     take(ranking, "ranking"),
+    take(seatingFacing, "seatingFacing"),
     take(seating, "seating"),
-    take(() => pick(ar.slice(0, half))(), "arith1"),
-    take(() => pick(ar.slice(half))(), "arith2"),
+    arith(0), arith(1), arith(2), arith(3),
     take(clockHard, "clock"),
     take(calendarHard, "calendar"),
-    take(syllogismHard, "syllogism"),
+    take(syllogismHard, "syllogism1"),
+    take(syllogismHard, "syllogism2"),
     takeBank(statementFromBank(B.statements[i]), `statement ${i}`),
-    take(n % 2 ? dice : colouredCube, "cubes"),
+    take(dice, "dice"),
+    take(colouredCube, "cuboid"),
     take(n % 3 ? alphabetHard : wordHard, "alphabet"),
     takeBank(vocabFromBank(B.vocab[i]), `vocab ${i}`),
   ];
@@ -973,4 +1142,4 @@ export const isLive = (t: Test, now = Date.now()) => !t.releaseAt || Date.parse(
 const tests: Test[] = [${ids.map((k) => `oir${k}`).join(", ")}];
 export default tests;
 `);
-console.log(`wrote oir-${FIRST}..oir-${LAST} (${seen.size} unique questions incl. existing)`);
+console.log(`wrote oir-${FIRST}..oir-${LAST} (${seen.size} unique questions)`);
