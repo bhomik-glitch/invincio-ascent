@@ -151,7 +151,7 @@ const HeroSection = ({
 
 
       {/* Strategic partner logo — top right */}
-      <div className="absolute right-4 md:right-6 z-20" style={{ top: "4px" }}>
+      <div className="absolute right-4 md:right-6 z-20 hidden sm:block" style={{ top: "4px" }}>
         <img
           src="/assets/Monks_and_Worriers_-_1-removebg-preview.png"
           alt="Monks and Warriors — Strategic Partners"
@@ -340,11 +340,28 @@ const HeroSection = ({
             transition={{ duration: candidateStories.length * 2.2, ease: "linear", repeat: Infinity }}
           >
             {duplicatedStories.map((story, index) => (
-              <div key={index} className="w-[92px] shrink-0 overflow-hidden rounded-lg border border-[#e5e7eb]">
-                <img src={story.image} alt={story.name} className="block h-20 w-full object-cover object-[center_20%]" />
-                <div className="px-1.5 py-1.5">
-                  <p className="truncate font-serif text-[10px] font-semibold leading-tight text-[#00568C]">{story.name}</p>
-                  <p className="truncate font-sans text-[8.5px] leading-tight text-[#6B7280]">{story.info.split("\n")[0]}</p>
+              // Branded frame: gold border, navy name plate, Invincio mark on the photo.
+              <div
+                key={index}
+                className="w-[100px] shrink-0 rounded-xl bg-gradient-to-b from-[#F6B828] to-[#b8860b] p-[1.5px]"
+                style={{ boxShadow: "0 4px 12px rgba(0,86,140,0.18)" }}
+              >
+                <div className="overflow-hidden rounded-[10px] bg-[#021526]">
+                  <div className="relative">
+                    <img src={story.image} alt={story.name} className="block h-[88px] w-full object-cover object-[center_20%]" />
+                    <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-[#021526] to-transparent" />
+                    <span className="absolute left-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-white shadow">
+                      <img src="/favicon.png" alt="" className="h-3 w-3" />
+                    </span>
+                    <span className="absolute right-1 top-1 rounded-sm bg-[#F6B828] px-1 text-[6.5px] font-bold uppercase leading-[11px] tracking-wider text-[#021526]">
+                      Recommended
+                    </span>
+                  </div>
+                  <div className="px-1.5 pb-1.5 pt-0.5 text-center">
+                    <p className="truncate font-serif text-[10.5px] font-semibold leading-tight text-white">{story.name}</p>
+                    <p className="truncate font-sans text-[8.5px] font-semibold leading-tight text-[#F6B828]">{story.info.split("\n")[0]}</p>
+                    <p className="mt-0.5 border-t border-white/10 pt-0.5 text-[6.5px] font-bold uppercase tracking-[0.18em] text-white/50">Invincible</p>
+                  </div>
                 </div>
               </div>
             ))}
