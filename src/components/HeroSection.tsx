@@ -353,9 +353,6 @@ const HeroSection = ({
                     <span className="absolute left-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-white shadow">
                       <img src="/favicon.png" alt="" className="h-3 w-3" />
                     </span>
-                    <span className="absolute right-1 top-1 rounded-sm bg-[#F6B828] px-1 text-[6.5px] font-bold uppercase leading-[11px] tracking-wider text-[#021526]">
-                      Recommended
-                    </span>
                   </div>
                   <div className="px-1.5 pb-1.5 pt-0.5 text-center">
                     <p className="truncate font-serif text-[10.5px] font-semibold leading-tight text-white">{story.name}</p>
