@@ -42,12 +42,6 @@ const achievements = [
     image: "/assets/projects/pune/punr-project-2.jpg",
   },
   {
-    title: "SSB Guide Defence Academy, Ambala",
-    desc: "Equipped with SSB-standard obstacles, individual task setups, and personality assessment zones — a flagship centre designed for immersive, all-round preparation.",
-    tag: "Infrastructure",
-    image: "/assets/projects/harayana/img-1.png",
-  },
-  {
     title: "Sainik School Ambikapur — Infra",
     desc: "Hallmark personality development and infrastructure creation project, catapulting the training of aspirants to greater heights with purpose-built SSB simulation setups.",
     tag: "Infrastructure",
