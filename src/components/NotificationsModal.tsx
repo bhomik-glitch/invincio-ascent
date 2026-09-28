@@ -3,7 +3,8 @@ import { X, FileText, Download, ChevronDown, Clock, ExternalLink } from "lucide-
 import { EASE_OUT, TAP_SCALE } from "@/lib/design-system";
 import { useEffect, useState } from "react";
 import armyFeed from "@/data/army-feed.json";
-import { WA_LABEL_SITE, trackWhatsApp, waHref } from "@/lib/whatsapp";
+import { WA_LABEL_SITE, trackWhatsApp } from "@/lib/whatsapp";
+import { MASTERCLASS, masterclassLive } from "@/data/masterclass";
 
 interface NotificationsModalProps {
   isOpen: boolean;
@@ -37,12 +38,12 @@ interface FeedItem {
 type Notification = DetailNotification;
 
 const notifications: Notification[] = [
-  {
-    type: "detail",
+  ...(masterclassLive ? [{
+    type: "detail" as const,
     title: "FREE 4-Day Live Current Affairs & GD Masterclass",
-    badge: "28 Sep – 01 Oct",
-    image: "/assets/gd-masterclass-sep-2026.webp",
-    link: waHref("Hi, I want to register for the FREE 4-Day Current Affairs & GD Masterclass (28 Sep – 01 Oct)"),
+    badge: MASTERCLASS.dates,
+    image: MASTERCLASS.poster,
+    link: MASTERCLASS.registerHref,
     linkLabel: "Register Now on WhatsApp",
     sections: [
       {
@@ -71,7 +72,7 @@ const notifications: Notification[] = [
       },
     ],
     highlight: "Free to attend — registration mandatory. 2–3 scholarships will be considered for deserving, serious participants based on consistency, participation and genuine need.",
-  },
+  }] : []),
   {
     type: "detail",
     title: "SSB Mentorship Program — Offline Batches",

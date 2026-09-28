@@ -7,6 +7,8 @@ import ResultsModal from "./ResultsModal";
 import NewCoursesModal from "./NewCoursesModal";
 import { nextBatch } from "@/data/batches";
 import GtoGroundOverlay from "./GtoGroundOverlay";
+import MasterclassModal from "./MasterclassModal";
+import { MASTERCLASS, masterclassLive } from "@/data/masterclass";
 import { candidateStories, sortedCandidateStories } from "@/data/candidate-selections";
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as [number, number, number, number];
@@ -114,6 +116,7 @@ const HeroSection = ({
   const [resultsOpen, setResultsOpen] = useState(false);
   const [newCoursesOpen, setNewCoursesOpen] = useState(false);
   const [gtoOpen, setGtoOpen] = useState(false);
+  const [masterclassOpen, setMasterclassOpen] = useState(false);
 
   // Rotating SSB entry — paused while the user is reaching for it.
   const [entryIdx, setEntryIdx] = useState(0);
@@ -234,10 +237,10 @@ const HeroSection = ({
               </span>
             </button>
 
-            {/* Secondary — glass outline. Names the batch starting soonest and
-                opens the enrol modal straight on it. */}
+            {/* Secondary — glass outline. Promotes the masterclass while it's live;
+                otherwise names the batch starting soonest and opens enrolment on it. */}
             <button
-              onClick={() => setNewCoursesOpen(true)}
+              onClick={() => (masterclassLive ? setMasterclassOpen(true) : setNewCoursesOpen(true))}
               className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-white/15 px-3.5 py-3 text-center text-[13px] font-semibold tracking-wide text-white/60 sm:border-white/25 sm:px-5 sm:py-3.5 sm:text-white"
               style={{ transition: "background-color 200ms ease, border-color 200ms ease, transform 120ms ease" }}
               onMouseEnter={(e) => {
@@ -252,7 +255,9 @@ const HeroSection = ({
               onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
               onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
             >
-              {nextBatch ? (
+              {masterclassLive ? (
+                <>Join {MASTERCLASS.title} <span className="hidden opacity-70 sm:inline">· {MASTERCLASS.dates}</span></>
+              ) : nextBatch ? (
                 <>Join {nextBatch.batch.title} <span className="opacity-70">· {nextBatch.slot.label}</span></>
               ) : (
                 "View Upcoming Batches"
@@ -428,6 +433,7 @@ const HeroSection = ({
     <NotificationsModal isOpen={notifOpen} onClose={() => setNotifOpen(false)} />
     <ResultsModal isOpen={resultsOpen} onClose={() => setResultsOpen(false)} />
     <NewCoursesModal isOpen={newCoursesOpen} initialBatch={nextBatch?.batch.id} onClose={() => setNewCoursesOpen(false)} />
+    <MasterclassModal isOpen={masterclassOpen} onClose={() => setMasterclassOpen(false)} />
     <GtoGroundOverlay isOpen={gtoOpen} onClose={() => setGtoOpen(false)} />
     </>
   );
