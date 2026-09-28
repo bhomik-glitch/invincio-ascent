@@ -4,8 +4,16 @@ import { useEffect, useState } from "react";
 import { EASE_OUT } from "@/lib/design-system";
 import { useModalLock } from "@/lib/modal-lock";
 
-/* Slider images — drop more ground photos into public/assets and list them here. */
-const GTO_IMAGES = ["/assets/GTO background.png"];
+/* Slider media — drop more ground photos/videos into public/assets/gto and list them here.
+   Videos play muted and advance when they end; `poster` doubles as the blurred fill. */
+type GtoMedia = { src: string; poster?: string };
+const GTO_MEDIA: GtoMedia[] = [
+  { src: "/assets/gto/gto-rope-obstacle.mp4", poster: "/assets/gto/gto-rope-obstacle.webp" },
+  { src: "/assets/gto/gto-briefing.webp" },
+  { src: "/assets/gto/gto-balance-beam.webp" },
+  { src: "/assets/gto/gto-ground-pan.mp4", poster: "/assets/gto/gto-ground-pan.webp" },
+  { src: "/assets/gto/gto-ground-overview.webp" },
+];
 
 interface GtoGroundOverlayProps {
   isOpen: boolean;
@@ -24,14 +32,16 @@ const GtoGroundOverlay = ({ isOpen, onClose }: GtoGroundOverlayProps) => {
   useModalLock(isOpen);
 
   const [idx, setIdx] = useState(0);
-  const go = (d: number) => setIdx(i => (i + d + GTO_IMAGES.length) % GTO_IMAGES.length);
-  const many = GTO_IMAGES.length > 1;
+  const go = (d: number) => setIdx(i => (i + d + GTO_MEDIA.length) % GTO_MEDIA.length);
+  const many = GTO_MEDIA.length > 1;
+  const item = GTO_MEDIA[idx];
 
+  // Photos auto-advance; videos advance on `ended` instead.
   useEffect(() => {
-    if (!isOpen || !many) return;
+    if (!isOpen || !many || item.poster) return;
     const id = setInterval(() => go(1), 4000);
     return () => clearInterval(id);
-  }, [isOpen, many, idx]);
+  }, [isOpen, many, idx, item.poster]);
 
   return (
     <AnimatePresence>
@@ -76,14 +86,13 @@ const GtoGroundOverlay = ({ isOpen, onClose }: GtoGroundOverlayProps) => {
                 </button>
               </div>
 
-              {/* Images — slider (swipe, arrows, dots) */}
+              {/* Media — slider (swipe, arrows, dots). object-contain over a blurred fill so
+                  portrait phone shots and the landscape overview both show uncropped. */}
               <div className="p-5 space-y-3 bg-[#F5F9FC]">
-                <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-white shadow-sm bg-[#021526]">
+                <div className="relative h-[min(62vh,540px)] overflow-hidden rounded-xl border border-white shadow-sm bg-[#021526]">
                   <AnimatePresence initial={false} mode="popLayout">
-                    <motion.img
+                    <motion.div
                       key={idx}
-                      src={GTO_IMAGES[idx]}
-                      alt={`Invincio GTO training ground — photo ${idx + 1}`}
                       initial={{ opacity: 0, x: 40 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -40 }}
@@ -94,24 +103,50 @@ const GtoGroundOverlay = ({ isOpen, onClose }: GtoGroundOverlayProps) => {
                         if (info.offset.x < -50) go(1);
                         else if (info.offset.x > 50) go(-1);
                       }}
-                      className="absolute inset-0 h-full w-full object-cover"
-                      draggable={false}
-                    />
+                      className="absolute inset-0"
+                    >
+                      <img
+                        src={item.poster ?? item.src}
+                        alt=""
+                        aria-hidden
+                        className="absolute inset-0 h-full w-full scale-110 object-cover opacity-60 blur-xl"
+                        draggable={false}
+                      />
+                      {item.poster ? (
+                        <video
+                          src={item.src}
+                          poster={item.poster}
+                          autoPlay
+                          muted
+                          playsInline
+                          onEnded={() => go(1)}
+                          aria-label={`Invincio GTO training ground — video ${idx + 1}`}
+                          className="relative h-full w-full object-contain"
+                        />
+                      ) : (
+                        <img
+                          src={item.src}
+                          alt={`Invincio GTO training ground — photo ${idx + 1}`}
+                          className="relative h-full w-full object-contain"
+                          draggable={false}
+                        />
+                      )}
+                    </motion.div>
                   </AnimatePresence>
                   {many && (
                     <>
-                      <button onClick={() => go(-1)} aria-label="Previous photo" className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/40 p-1.5 text-white backdrop-blur-sm hover:bg-black/60">
+                      <button onClick={() => go(-1)} aria-label="Previous slide" className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/40 p-1.5 text-white backdrop-blur-sm hover:bg-black/60">
                         <ChevronLeft className="h-4 w-4" />
                       </button>
-                      <button onClick={() => go(1)} aria-label="Next photo" className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/40 p-1.5 text-white backdrop-blur-sm hover:bg-black/60">
+                      <button onClick={() => go(1)} aria-label="Next slide" className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/40 p-1.5 text-white backdrop-blur-sm hover:bg-black/60">
                         <ChevronRight className="h-4 w-4" />
                       </button>
                       <div className="absolute inset-x-0 bottom-2 flex justify-center gap-1.5">
-                        {GTO_IMAGES.map((_, i) => (
+                        {GTO_MEDIA.map((_, i) => (
                           <button
                             key={i}
                             onClick={() => setIdx(i)}
-                            aria-label={`Photo ${i + 1}`}
+                            aria-label={`Slide ${i + 1}`}
                             className={`h-1.5 rounded-full transition-all ${i === idx ? "w-5 bg-[#F6B828]" : "w-1.5 bg-white/60"}`}
                           />
                         ))}
