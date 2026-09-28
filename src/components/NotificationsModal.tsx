@@ -3,6 +3,7 @@ import { X, FileText, Download, ChevronDown, Clock, ExternalLink } from "lucide-
 import { EASE_OUT, TAP_SCALE } from "@/lib/design-system";
 import { useEffect, useState } from "react";
 import armyFeed from "@/data/army-feed.json";
+import { WA_LABEL_SITE, trackWhatsApp, waHref } from "@/lib/whatsapp";
 
 interface NotificationsModalProps {
   isOpen: boolean;
@@ -15,6 +16,8 @@ interface DetailNotification {
   badge: string;
   link?: string;
   linkLabel?: string;
+  /** Poster/flyer shown at the top of the expanded card. */
+  image?: string;
   sections: { heading: string; points: string[] }[];
   highlight?: string;
   expected?: { notification: string; application: string };
@@ -34,6 +37,41 @@ interface FeedItem {
 type Notification = DetailNotification;
 
 const notifications: Notification[] = [
+  {
+    type: "detail",
+    title: "FREE 4-Day Live Current Affairs & GD Masterclass",
+    badge: "28 Sep – 01 Oct",
+    image: "/assets/gd-masterclass-sep-2026.webp",
+    link: waHref("Hi, I want to register for the FREE 4-Day Current Affairs & GD Masterclass (28 Sep – 01 Oct)"),
+    linkLabel: "Register Now on WhatsApp",
+    sections: [
+      {
+        heading: "Schedule — Live on Zoom, 7:00 PM – 9:15 PM (IST)",
+        points: [
+          "Day 1 · 28 Sep (Mon) — India's Demography + Personality Development",
+          "Day 2 · 29 Sep (Tue) — India's Coastline & Maritime Power + Communication Skills",
+          "Day 3 · 30 Sep (Wed) — Key Current Affairs for Interviews + Thinking Under Pressure",
+          "Day 4 · 01 Oct (Thu) — The Invincio Live Lab: live GDs with mentor feedback + Integrated Session",
+        ],
+      },
+      {
+        heading: "Mentors",
+        points: [
+          "Lt Col Ankur Sabharwal — Military Veteran, Former GTO & Mentor of Assessors at DIPR",
+          "Ms Vanshika — GS Faculty, Invincio",
+        ],
+      },
+      {
+        heading: "Who Should Attend",
+        points: [
+          "NDA / CDS / AFCAT aspirants and SSB candidates (all entries)",
+          "College students facing GDs & interviews, campus & corporate job aspirants",
+          "Anyone looking to improve confidence, communication & current affairs understanding",
+        ],
+      },
+    ],
+    highlight: "Free to attend — registration mandatory. 2–3 scholarships will be considered for deserving, serious participants based on consistency, participation and genuine need.",
+  },
   {
     type: "detail",
     title: "SSB Mentorship Program — Offline Batches",
@@ -301,6 +339,10 @@ const DetailCard = ({ notif, index }: { notif: DetailNotification; index: number
           >
             <div className="px-4 pb-4 space-y-3 border-t border-[#F6B828]/20 pt-3">
 
+              {notif.image && (
+                <img src={notif.image} alt={notif.title} loading="lazy" className="w-full rounded-lg border border-gray-100" />
+              )}
+
               {/* Sections */}
               {notif.sections.map((sec) => (
                 <div key={sec.heading}>
@@ -349,6 +391,7 @@ const DetailCard = ({ notif, index }: { notif: DetailNotification; index: number
                   href={notif.link}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => notif.link!.startsWith("https://wa.me/") && trackWhatsApp(WA_LABEL_SITE)}
                   className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#2FB4E7] hover:text-[#00568C] transition-colors duration-150"
                 >
                   <ExternalLink className="w-3.5 h-3.5" />
