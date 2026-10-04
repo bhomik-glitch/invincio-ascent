@@ -145,5 +145,17 @@
     "info": "TES Entry\nSSB Bangalore\nChest No. 40",
     "image": "/assets/client_photo/aritro ssb bangalore tes entry.jpeg",
     "addedAt": "2026-09-22"
+  },
+  {
+    "name": "Saransh Pandey",
+    "info": "TGC-144\n20 SSB Bhopal",
+    "image": "/assets/client_photo/saransh pandey 20 ssb bhopal tgc-144.jpeg",
+    "addedAt": "2026-10-04"
+  },
+  {
+    "name": "Ishee Tyagi",
+    "info": "NCC Special Entry\n1 AFSB Dehradun",
+    "image": "/assets/client_photo/ishee tyagi 1 afsb dehradun ncc special entry.jpeg",
+    "addedAt": "2026-10-04"
   }
 ]

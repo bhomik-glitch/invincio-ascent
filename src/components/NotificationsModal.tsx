@@ -146,7 +146,7 @@ const notifications: Notification[] = [
   {
     type: "detail",
     title: "NDA, NDA Foundation & CDS Integrated Programs (Written + SSB)",
-    badge: "Starts: 01 Oct 2026",
+    badge: "Starts: 15 Oct 2026",
     sections: [
       {
         heading: "Programs Available",
@@ -169,17 +169,17 @@ const notifications: Notification[] = [
       {
         heading: "Important Dates & Investment",
         points: [
-          "Batch Commencement: 01st October 2026",
+          "Batch Commencement: 15th October 2026 (postponed from 01st October)",
           "Phases run Oct 2026 to Apr 2027 (exam mode Mar – Apr 2027)",
           "Fees (NDA & CDS Written): Online Rs 30,000/- + GST · Offline Rs 60,000/- + GST",
           "Fees (NDA Foundation): Online Rs 30,000/- + GST",
         ],
       },
     ],
-    highlight: "All three integrated programs start 01 October 2026. The objective: your name in the final merit.",
+    highlight: "All three integrated programs now start 15 October 2026. The objective: your name in the final merit.",
     expected: {
       notification: "Admissions Open",
-      application: "Starts 01 Oct 2026",
+      application: "Starts 15 Oct 2026",
     },
   },
   {

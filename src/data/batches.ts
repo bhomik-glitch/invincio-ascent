@@ -56,7 +56,7 @@ const integrated = (exam: "NDA" | "CDS", id: string, focus: string): Batch => ({
       ? "Online ₹30,000 + 18% GST · Offline ₹60,000 + 18% GST"
       : "Online mode only · ₹30,000 + 18% GST",
   duration: "Oct 2026 – Apr 2027",
-  slots: [writtenSlot("2026-10-01", exam)],
+  slots: [writtenSlot("2026-10-15", exam)],
 });
 
 const allBatches: Batch[] = [
