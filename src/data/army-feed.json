@@ -3,6 +3,15 @@
   "note": "Curated Indian Army notification feed. scripts/track-army.mjs (GitHub Actions, every 6h) auto-publishes new curated items straight to this file, with each link resolved to the real publisher article URL. To remove an item, set its status to \"hidden\" — it renders nowhere and won't come back.",
   "items": [
     {
+      "id": "nursing-assistant-recruitment",
+      "title": "Army to Re-Conduct Zonal Recruitment Rally for Nursing Assistant, Sepoy Pharma Candidates in Chandrapur",
+      "link": "https://t.co/N51yaV2pvK",
+      "source": "t.co",
+      "date": "2026-10-06",
+      "category": "soldier",
+      "status": "published"
+    },
+    {
       "id": "tgc-145-vacancies",
       "title": "Indian Army Opens TGC-145 Applications for Engineering Graduates, 30 Vacancies Announced",
       "link": "https://shop.ssbcrack.com/blogs/blog/indian-army-opens-tgc-145-applications-for-engineering-graduates-30-vacancies-announced",
