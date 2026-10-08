@@ -82,8 +82,8 @@ const notifications: Notification[] = [
         heading: "Batch Start Dates",
         points: [
           "21st September 2026",
-          "06th October 2026",
           "12th October 2026",
+          "19th October 2026",
           "26th October 2026",
           "02nd November 2026",
         ],
@@ -110,7 +110,7 @@ const notifications: Notification[] = [
     highlight: "Five offline batches from September to November 2026. 25 seats only — enroll early to avoid missing your batch.",
     expected: {
       notification: "Admissions Open",
-      application: "Next batch starts 21 Sep 2026",
+      application: "Next batch starts 12 Oct 2026",
     },
   },
   {

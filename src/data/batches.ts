@@ -77,7 +77,7 @@ const allBatches: Batch[] = [
     fee: "₹23,600 (incl. GST)",
     note: "Excludes accommodation & food · Registration ₹3,600 (non-refundable) · 25 seats only",
     duration: "21 Days + Support till SSB",
-    slots: ["2026-09-21", "2026-10-06", "2026-10-12", "2026-10-26", "2026-11-02"].map(ssbSlot),
+    slots: ["2026-09-21", "2026-10-12", "2026-10-19", "2026-10-26", "2026-11-02"].map(ssbSlot),
   },
   {
     id: "officer-online",
