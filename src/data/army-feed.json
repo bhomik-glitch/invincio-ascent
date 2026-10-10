@@ -1,7 +1,16 @@
 {
-  "updated": "2026-10-09",
+  "updated": "2026-10-10",
   "note": "Curated Indian Army notification feed. scripts/track-army.mjs (GitHub Actions, every 6h) auto-publishes new curated items straight to this file, with each link resolved to the real publisher article URL. To remove an item, set its status to \"hidden\" — it renders nowhere and won't come back.",
   "items": [
+    {
+      "id": "nda-ii-result-2026",
+      "title": "UPSC NDA II result 2026 released, check steps to download here",
+      "link": "https://www.educationtimes.com/news/upsc-nda-ii-result-2026-released-check-steps-to-download-here/articleshow/134847026.cms",
+      "source": "Education Times",
+      "date": "2026-10-10",
+      "category": "officer",
+      "status": "published"
+    },
     {
       "id": "nda-na-registration",
       "title": "UPSC NDA, NA 2 results out at upsc.gov.in; SSB interview registration begins",
