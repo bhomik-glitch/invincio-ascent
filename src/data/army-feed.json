@@ -1,7 +1,16 @@
 {
-  "updated": "2026-10-10",
+  "updated": "2026-10-12",
   "note": "Curated Indian Army notification feed. scripts/track-army.mjs (GitHub Actions, every 6h) auto-publishes new curated items straight to this file, with each link resolved to the real publisher article URL. To remove an item, set its status to \"hidden\" — it renders nowhere and won't come back.",
   "items": [
+    {
+      "id": "tes-57-recruitment-2026",
+      "title": "Indian Army TES Recruitment 2026: Apply Online for TES 57 Course, Check Notification, Eligibility and Other Details",
+      "link": "https://www.jagranjosh.com/articles/indian-army-tes-recruitment-2026-for-tes-57-course-check-notification-eligibility-pdf-salary-and-more-1800017671-1",
+      "source": "Jagran Josh",
+      "date": "2026-10-12",
+      "category": "general",
+      "status": "published"
+    },
     {
       "id": "upsc-declares-nda-2026-results-886",
       "title": "UPSC Declares NDA 2 2026 Results, 7,886 Candidates Qualify for SSB Interview",
