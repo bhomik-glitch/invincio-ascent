@@ -1,7 +1,16 @@
 {
-  "updated": "2026-10-12",
+  "updated": "2026-10-17",
   "note": "Curated Indian Army notification feed. scripts/track-army.mjs (GitHub Actions, every 6h) auto-publishes new curated items straight to this file, with each link resolved to the real publisher article URL. To remove an item, set its status to \"hidden\" — it renders nowhere and won't come back.",
   "items": [
+    {
+      "id": "agniveer-cee-result-2026",
+      "title": "Indian Army Agniveer CEE Result 2026 out at joinindianarmy.nic.in; check direct link, how to download meri",
+      "link": "https://m.economictimes.com/news/new-updates/indian-army-agniveer-cee-result-2026-out-at-joinindianarmy-nic-in-check-direct-link-how-to-download-merit-list-pdf-and-next-steps/articleshow/132340307.cms",
+      "source": "The Economic Times",
+      "date": "2026-10-14",
+      "category": "soldier",
+      "status": "published"
+    },
     {
       "id": "tes-57-recruitment-2026",
       "title": "Indian Army TES Recruitment 2026: Apply Online for TES 57 Course, Check Notification, Eligibility and Other Details",
