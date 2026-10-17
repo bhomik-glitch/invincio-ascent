@@ -3,6 +3,15 @@
   "note": "Curated Indian Army notification feed. scripts/track-army.mjs (GitHub Actions, every 6h) auto-publishes new curated items straight to this file, with each link resolved to the real publisher article URL. To remove an item, set its status to \"hidden\" — it renders nowhere and won't come back.",
   "items": [
     {
+      "id": "tes-57-notification-2026",
+      "title": "Indian Army TES 57 Notification 2026 Out: Apply Online Link Active, 90 Vacancies",
+      "link": "https://www.pw.live/defence/exams/indian-army-tes-57-notification-2026",
+      "source": "PW",
+      "date": "2026-10-14",
+      "category": "general",
+      "status": "published"
+    },
+    {
       "id": "agniveer-cee-result-2026",
       "title": "Indian Army Agniveer CEE Result 2026 out at joinindianarmy.nic.in; check direct link, how to download meri",
       "link": "https://m.economictimes.com/news/new-updates/indian-army-agniveer-cee-result-2026-out-at-joinindianarmy-nic-in-check-direct-link-how-to-download-merit-list-pdf-and-next-steps/articleshow/132340307.cms",
