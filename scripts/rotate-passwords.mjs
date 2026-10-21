@@ -4,7 +4,7 @@
 import { randomInt } from "node:crypto";
 
 // Random lowercase word + 3 random digits, e.g. "tiger482": easy to type, nothing derived from name or phone.
-const WORDS = "tiger eagle falcon rocket thunder river mango lotus cobalt summit anchor arrow bravo delta orbit comet maple cedar pearl ember frost harbor jungle kite lantern meadow nectar onyx pepper quartz raven saffron timber velvet walnut zephyr amber bison cactus dragon forest glacier hawk island jasper koala lemon marble nova otter panther ranger shadow storm tango valley willow".split(" ");
+const WORDS = "tiger eagle falcon rocket thunder river mango lotus cobalt summit anchor arrow bravo delta orbit comet maple cedar pearl ember frost harbor jungle kite lantern meadow nectar onyx pepper quartz raven saffron timber velvet walnut zephyr amber bison cactus dragon forest glacier hawk island jasper koala lemon marble nova otter panther ranger shadow storm tango valley willow apple bamboo breeze canyon cherry coral crystal daisy echo emerald fable ginger granite harvest hazel indigo ivory jade lagoon lilac lunar magnet mercury mint monsoon olive opal orchid papaya pebble pine plasma prism puma rhino ruby sable scout sierra silver sonar spruce tulip turbo vapor viking violet".split(" ");
 
 export function password() {
   return WORDS[randomInt(WORDS.length)] + String(randomInt(100, 1000));
