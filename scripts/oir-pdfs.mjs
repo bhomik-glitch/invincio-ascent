@@ -81,7 +81,8 @@ const page = (title, body) => `<!doctype html><html><head><meta charset="utf-8">
   table.grid { border-collapse: collapse; margin: 2px 0 6px; }
   table.grid td { border: 1px solid #cbd5e1; padding: 2px 10px; text-align: center; font-variant-numeric: tabular-nums; }
   .omr { break-before: page; }
-  .cells { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px 14px; }
+  .cells { display: grid; grid-auto-flow: column; grid-template-rows: repeat(10, auto); gap: 8px 14px; }
+  .wm { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-35deg); font: 700 64pt "Playfair Display", Georgia, serif; letter-spacing: .08em; color: var(--blue); opacity: .07; white-space: nowrap; pointer-events: none; z-index: 10; }
   .cells div { display: flex; align-items: center; gap: 6px; font-size: 9pt; }
   .cells b { width: 20px; text-align: right; color: var(--blue); }
   .cells i { font-style: normal; display: inline-grid; place-items: center; width: 18px; height: 18px; border: 1px solid #94a3b8; border-radius: 50%; font-size: 7.5pt; color: var(--muted); }
@@ -92,7 +93,7 @@ const page = (title, body) => `<!doctype html><html><head><meta charset="utf-8">
   table.quick tr:nth-child(odd) td { background: var(--tint); }
   .right { margin: 0; color: #166534; font-size: 10pt; }
   .why { margin: 2px 0 0; color: var(--muted); font-size: 9pt; }
-</style></head><body>${body}</body></html>`;
+</style></head><body><div class="wm">LIVE TO LEARN</div>${body}</body></html>`;
 
 function pdf(name, title, body) {
   const html = join(tmpdir(), `oir-${process.pid}.html`);
