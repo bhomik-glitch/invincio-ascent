@@ -1,7 +1,16 @@
 {
-  "updated": "2026-10-17",
+  "updated": "2026-10-21",
   "note": "Curated Indian Army notification feed. scripts/track-army.mjs (GitHub Actions, every 6h) auto-publishes new curated items straight to this file, with each link resolved to the real publisher article URL. To remove an item, set its status to \"hidden\" — it renders nowhere and won't come back.",
   "items": [
+    {
+      "id": "tes-window-2026-from-oct",
+      "title": "Indian Army TES 57 Apply Online Window 2026 (Active from 14 Oct)",
+      "link": "https://www.pw.live/news/indian-army-tes-57-apply-online-window-2026",
+      "source": "PW",
+      "date": "2026-10-21",
+      "category": "general",
+      "status": "published"
+    },
     {
       "id": "tes-57-notification-2026",
       "title": "Indian Army TES 57 Notification 2026 Out: Apply Online Link Active, 90 Vacancies",
