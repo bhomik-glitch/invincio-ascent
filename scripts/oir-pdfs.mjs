@@ -10,11 +10,8 @@ const ROOT = new URL("..", import.meta.url).pathname;
 const OUT = join(ROOT, "OIR Test PDF");
 const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const logo = "data:image/png;base64," + readFileSync(join(ROOT, "public/assets/logo.png")).toString("base64");
-// Founder photo from the About page, cropped square around his face for the round frames.
-const founderJpg = join(tmpdir(), `oir-founder-${process.pid}.jpg`);
-execFileSync("magick", [join(ROOT, "public/assets/cooperateTraining2.jpeg"), "-crop", "280x280+385+225", "+repage", founderJpg]);
-const founder = "data:image/jpeg;base64," + readFileSync(founderJpg).toString("base64");
-rmSync(founderJpg);
+// Founder portrait, pre-cropped square for the round frames.
+const founder = "data:image/jpeg;base64," + readFileSync(join(ROOT, "scripts/oir-founder.jpg")).toString("base64");
 
 const tests = [];
 for (let n = 1; ; n++) {
