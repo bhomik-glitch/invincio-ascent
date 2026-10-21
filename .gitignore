@@ -25,3 +25,6 @@ dist-ssr
 
 # Payment credentials — never commit
 rzp-key.csv
+
+# Generated OIR PDFs (node scripts/oir-pdfs.mjs)
+OIR Test PDF/
