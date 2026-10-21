@@ -10,9 +10,9 @@ const ROOT = new URL("..", import.meta.url).pathname;
 const OUT = join(ROOT, "OIR Test PDF");
 const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const logo = "data:image/png;base64," + readFileSync(join(ROOT, "public/assets/logo.png")).toString("base64");
-// Founder photo from the About page, shrunk so the booklet stays small.
+// Founder photo from the About page, cropped square around his face for the round frames.
 const founderJpg = join(tmpdir(), `oir-founder-${process.pid}.jpg`);
-execFileSync("sips", ["-Z", "900", join(ROOT, "public/assets/cooperateTraining2.jpeg"), "--out", founderJpg], { stdio: "ignore" });
+execFileSync("magick", [join(ROOT, "public/assets/cooperateTraining2.jpeg"), "-crop", "280x280+385+225", "+repage", founderJpg]);
 const founder = "data:image/jpeg;base64," + readFileSync(founderJpg).toString("base64");
 rmSync(founderJpg);
 
@@ -114,7 +114,7 @@ const page = (title, body) => `<!doctype html><html><head><meta charset="utf-8">
   .cover .stats b { display: block; font: 700 20pt "Playfair Display", Georgia, serif; color: var(--gold); }
   .cover .stats span { font-size: 8.5pt; letter-spacing: .08em; text-transform: uppercase; color: #d6ecf7; }
   .cover .photo { margin-top: 12mm; width: 58mm; height: 58mm; border-radius: 50%; border: 4px solid var(--gold); overflow: hidden; box-shadow: 0 0 0 8px rgba(246,184,40,.18); }
-  .cover .photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 28%; transform: scale(2.3); transform-origin: 50% 40%; }
+  .cover .photo img { width: 100%; height: 100%; object-fit: cover;  }
   .cover .by { margin-top: 5mm; font-size: 9pt; letter-spacing: .2em; text-transform: uppercase; color: #9fd3ee; }
   .cover .who { font: 700 18pt "Playfair Display", Georgia, serif; margin-top: 1mm; }
   .cover .role { font-size: 9.5pt; color: #d6ecf7; }
@@ -124,7 +124,7 @@ const page = (title, body) => `<!doctype html><html><head><meta charset="utf-8">
   .preface h1 { font-size: 30pt; margin: 2mm 0 1mm; }
   .preface .desk { display: flex; align-items: center; gap: 14px; padding-bottom: 10px; border-bottom: 3px solid var(--blue); position: relative; margin-bottom: 14px; }
   .preface .desk::after { content: ""; position: absolute; left: 0; bottom: -6px; width: 30%; height: 3px; background: var(--gold); }
-  .preface .desk img { width: 30mm; height: 30mm; border-radius: 50%; object-fit: cover; object-position: 50% 28%; border: 3px solid var(--gold); }
+  .preface .desk img { width: 30mm; height: 30mm; border-radius: 50%; object-fit: cover; border: 3px solid var(--gold); }
   .preface .desk .meta { text-align: right; }
   .preface .desk .meta img { width: auto; height: 46px; border: 0; border-radius: 0; }
   .preface blockquote { margin: 0 0 12px; padding: 10px 16px; background: var(--tint); border-left: 4px solid var(--gold); font: italic 600 12pt/1.45 "Playfair Display", Georgia, serif; color: var(--blue); }
