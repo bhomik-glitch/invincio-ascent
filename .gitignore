@@ -28,3 +28,6 @@ rzp-key.csv
 
 # Generated OIR PDFs (node scripts/oir-pdfs.mjs)
 OIR Test PDF/
+
+# Student login list — never commit
+password.md
