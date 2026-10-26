@@ -157,5 +157,29 @@
     "info": "NCC Special Entry\n1 AFSB Dehradun",
     "image": "/assets/client_photo/ishee tyagi 1 afsb dehradun ncc special entry.jpeg",
     "addedAt": "2026-10-04"
+  },
+  {
+    "name": "Suyash Kant",
+    "info": "TES-56\nBTES-81517\n31 SSB Jalandhar",
+    "image": "/assets/client_photo/suyash kant 31 ssb jalandhar tes-56.jpeg",
+    "addedAt": "2026-10-26"
+  },
+  {
+    "name": "Cpl Sagar Sharma",
+    "info": "Coast Guard Selection Board\nCGSB Noida",
+    "image": "/assets/client_photo/cpl sagar sharma cgsb noida.jpeg",
+    "addedAt": "2026-10-26"
+  },
+  {
+    "name": "Rfn Limbu",
+    "info": "Assam Rifles Officer Cadre\nNoida SSB\nAIR 3",
+    "image": "/assets/client_photo/rfn limbu noida ssb assam rifles officer cadre.jpeg",
+    "addedAt": "2026-10-26"
+  },
+  {
+    "name": "Rfn Ghosh",
+    "info": "Assam Rifles Officer Cadre\nNoida SSB",
+    "image": "/assets/client_photo/rfn ghosh noida ssb assam rifles officer cadre.jpeg",
+    "addedAt": "2026-10-26"
   }
 ]
