@@ -1,7 +1,16 @@
 {
-  "updated": "2026-10-21",
+  "updated": "2026-10-26",
   "note": "Curated Indian Army notification feed. scripts/track-army.mjs (GitHub Actions, every 6h) auto-publishes new curated items straight to this file, with each link resolved to the real publisher article URL. To remove an item, set its status to \"hidden\" — it renders nowhere and won't come back.",
   "items": [
+    {
+      "id": "agniveer-recruitment-2026",
+      "title": "AGNIVEER RECRUITMENT RALLY AT ONAKE OBAVVA STADIUM, CHITRADURGA FROM 31 OCTOBER TO 03 NOVEMBER 2026",
+      "link": "https://ibgnews.com/2026/10/20/agniveer-recruitment-rally-at-onake-obavva-stadium-chitradurga-from-31-october-to-03-november-2026/",
+      "source": "IBG News",
+      "date": "2026-10-20",
+      "category": "soldier",
+      "status": "published"
+    },
     {
       "id": "tes-window-2026-from-oct",
       "title": "Indian Army TES 57 Apply Online Window 2026 (Active from 14 Oct)",
