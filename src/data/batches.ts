@@ -81,7 +81,7 @@ const allBatches: Batch[] = [
     slots: [
       "2026-10-26",
       "2026-11-02",
-      "2026-11-17",
+      "2026-11-16",
       "2026-11-23",
       "2026-12-07",
       "2026-12-14",
@@ -146,3 +146,15 @@ const openSlots = batches
 
 export const nextBatch: { batch: Batch; slot: Slot } | undefined =
   openSlots.find(({ slot }) => slot.start >= today()) ?? openSlots[0];
+
+// Hero CTA ticker — one entry per open batch, so it rotates through the offline
+// and online programmes. `slot` is the batch's next start, left off once a batch
+// is under way (written prep stays enrollable till the exam) so no stale date shows.
+export const batchCtas: { batch: Batch; slot?: Slot }[] = batches.map((batch) => ({
+  batch,
+  slot: batch.slots.find((s) => s.start >= today()),
+}));
+
+// "SSB Mentorship Program (Offline)" -> "SSB Mentorship Program", to keep the
+// hero button on one line. The modal still shows the full title.
+export const shortTitle = (title: string) => title.replace(/\s*\(.*\)\s*/, "");

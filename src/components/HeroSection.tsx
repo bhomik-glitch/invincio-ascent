@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CalendarCheck } from "lucide-react";
 import ConsultationModal from "./ConsultationModal";
 import NotificationsModal from "./NotificationsModal";
 import ResultsModal from "./ResultsModal";
 import NewCoursesModal from "./NewCoursesModal";
-import { nextBatch } from "@/data/batches";
+import { nextBatch, batchCtas, shortTitle } from "@/data/batches";
 import GtoGroundOverlay from "./GtoGroundOverlay";
 import MasterclassModal from "./MasterclassModal";
 import { MASTERCLASS, masterclassLive } from "@/data/masterclass";
@@ -30,19 +30,13 @@ const heroStories = [
 ];
 const duplicatedStories = [...heroStories, ...heroStories];
 
-const SSB_ENTRIES = [
-  "NDA", "CDS – IMA", "CDS – OTA", "AFCAT – Flying",
-  "SSC Tech", "TGC", "TES Entry", "NCC Entry", "Navy B.Tech", "Coast Guard",
-];
-
 /**
- * Index is owned by HeroSection so the button can open the consultation modal
- * for whichever entry is on screen. The ticker still pauses on hover/touch so
- * you can read the entry before tapping, but the button itself is the tap
- * target now (not a separate label you have to aim for), so the rotation can
- * run faster without risking a mis-tap.
+ * Index is owned by HeroSection so the button can open enrolment on whichever
+ * batch is on screen. The ticker pauses on hover/touch so you can read the
+ * entry before tapping, and the button itself is the tap target (not a separate
+ * label you have to aim for), so a mis-tap never costs you the batch you wanted.
  */
-const TickerText = ({ idx }: { idx: number }) => {
+const TickerText = ({ idx, children }: { idx: number; children: ReactNode }) => {
   return (
     <AnimatePresence mode="wait" initial={false}>
       <motion.span
@@ -53,7 +47,7 @@ const TickerText = ({ idx }: { idx: number }) => {
         transition={{ duration: 0.28, ease: EASE_OUT }}
         style={{ display: "inline-block", whiteSpace: "nowrap", verticalAlign: "middle" }}
       >
-        {SSB_ENTRIES[idx]}
+        {children}
       </motion.span>
     </AnimatePresence>
   );
@@ -118,15 +112,23 @@ const HeroSection = ({
   const [gtoOpen, setGtoOpen] = useState(false);
   const [masterclassOpen, setMasterclassOpen] = useState(false);
 
-  // Rotating SSB entry — paused while the user is reaching for it.
+  // Rotating batch — paused while the user is reaching for it. A single open
+  // batch just sits there; no batch at all falls back to the consultation CTA.
   const [entryIdx, setEntryIdx] = useState(0);
   const [tickerPaused, setTickerPaused] = useState(false);
+  const [coursesBatchId, setCoursesBatchId] = useState<string | undefined>(undefined);
+  const cta = batchCtas[entryIdx];
 
   useEffect(() => {
-    if (tickerPaused) return;
-    const id = setInterval(() => setEntryIdx(i => (i + 1) % SSB_ENTRIES.length), 2000);
+    if (tickerPaused || batchCtas.length < 2) return;
+    const id = setInterval(() => setEntryIdx(i => (i + 1) % batchCtas.length), 3500);
     return () => clearInterval(id);
   }, [tickerPaused]);
+
+  const openBatch = (id?: string) => {
+    setCoursesBatchId(id);
+    setNewCoursesOpen(true);
+  };
 
   const openConsultation = (program?: string) => {
     setModalProgram(program);
@@ -134,7 +136,7 @@ const HeroSection = ({
   };
 
   const stats = [
-    { value: "New Courses", action: () => setNewCoursesOpen(true) },
+    { value: "New Courses", action: () => openBatch(undefined) },
     { value: "Notifications", action: () => setNotifOpen(true) },
     { value: "Result Out!", action: () => setResultsOpen(true) },
   ];
@@ -210,7 +212,7 @@ const HeroSection = ({
                 line — font size is fixed (not bumped up at sm) and the card
                 is sized to fit the longest ticker entry at that size. */}
             <button
-              onClick={() => openConsultation(SSB_ENTRIES[entryIdx])}
+              onClick={() => (cta ? openBatch(cta.batch.id) : openConsultation())}
               onPointerDown={() => setTickerPaused(true)}
               className="inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-xl bg-[#F6B828] px-3.5 py-3 text-[13px] font-semibold tracking-wide text-[#00568C] sm:px-5 sm:py-3.5"
               style={{
@@ -233,14 +235,23 @@ const HeroSection = ({
             >
               <CalendarCheck className="h-3.5 w-3.5 shrink-0" />
               <span>
-                Book Free Consultation for <TickerText idx={entryIdx} />
+                {cta ? (
+                  <TickerText idx={entryIdx}>
+                    Join {shortTitle(cta.batch.title)}
+                    <span className="hidden opacity-70 sm:inline">
+                      {" "}· {cta.slot ? cta.slot.label : "Admissions Open"}
+                    </span>
+                  </TickerText>
+                ) : (
+                  "Book Free Consultation"
+                )}
               </span>
             </button>
 
             {/* Secondary — glass outline. Promotes the masterclass while it's live;
                 otherwise names the batch starting soonest and opens enrolment on it. */}
             <button
-              onClick={() => (masterclassLive ? setMasterclassOpen(true) : setNewCoursesOpen(true))}
+              onClick={() => (masterclassLive ? setMasterclassOpen(true) : openBatch(nextBatch?.batch.id))}
               className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-white/15 px-3.5 py-3 text-center text-[13px] font-semibold tracking-wide text-white/60 sm:border-white/25 sm:px-5 sm:py-3.5 sm:text-white"
               style={{ transition: "background-color 200ms ease, border-color 200ms ease, transform 120ms ease" }}
               onMouseEnter={(e) => {
@@ -432,7 +443,7 @@ const HeroSection = ({
     <ConsultationModal open={modalOpen} onClose={() => setModalOpen(false)} program={modalProgram} />
     <NotificationsModal isOpen={notifOpen} onClose={() => setNotifOpen(false)} />
     <ResultsModal isOpen={resultsOpen} onClose={() => setResultsOpen(false)} />
-    <NewCoursesModal isOpen={newCoursesOpen} initialBatch={nextBatch?.batch.id} onClose={() => setNewCoursesOpen(false)} />
+    <NewCoursesModal isOpen={newCoursesOpen} initialBatch={coursesBatchId} onClose={() => setNewCoursesOpen(false)} />
     <MasterclassModal isOpen={masterclassOpen} onClose={() => setMasterclassOpen(false)} />
     <GtoGroundOverlay isOpen={gtoOpen} onClose={() => setGtoOpen(false)} />
     </>
