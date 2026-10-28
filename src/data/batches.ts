@@ -1,6 +1,6 @@
 // Single source of truth for batch cards (UpcomingBatches + NewCoursesModal).
 // Edit dates/fees here; both views pick them up.
-import { plusDays, isCurrent, SSB_VISIBLE_DAYS, WRITTEN_EXAM_END } from "@/lib/batch-visibility";
+import { plusDays, isCurrent, today, SSB_VISIBLE_DAYS, WRITTEN_EXAM_END } from "@/lib/batch-visibility";
 import { CATALOGUE } from "./catalogue";
 
 export interface Slot {
@@ -138,6 +138,11 @@ export const batches: Batch[] = allBatches
   .filter((b) => b.slots.length > 0);
 
 // The batch starting soonest, for the hero "Join" button. Undefined when nothing is open.
-export const nextBatch: { batch: Batch; slot: Slot } | undefined = batches
+// Written-prep slots stay enrollable after their start date (they run till the exam),
+// so prefer a start that hasn't happened yet and only fall back to one in progress.
+const openSlots = batches
   .flatMap((batch) => batch.slots.map((slot) => ({ batch, slot })))
-  .sort((a, b) => a.slot.start.localeCompare(b.slot.start))[0];
+  .sort((a, b) => a.slot.start.localeCompare(b.slot.start));
+
+export const nextBatch: { batch: Batch; slot: Slot } | undefined =
+  openSlots.find(({ slot }) => slot.start >= today()) ?? openSlots[0];

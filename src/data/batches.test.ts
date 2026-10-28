@@ -14,9 +14,10 @@ describe("batches data", () => {
     }
   });
 
-  it("picks the soonest start date across all batches as the next batch", () => {
+  it("picks the soonest start date that has not happened yet as the next batch", () => {
     const starts = batches.flatMap((b) => b.slots.map((s) => s.start)).sort();
-    expect(nextBatch?.slot.start).toBe(starts[0]);
-    expect(nextBatch?.batch.slots.some((s) => s.start === starts[0])).toBe(true);
+    const upcoming = starts.filter((s) => s >= today());
+    expect(nextBatch?.slot.start).toBe(upcoming[0] ?? starts[0]);
+    expect(nextBatch?.batch.slots.some((s) => s.start === nextBatch!.slot.start)).toBe(true);
   });
 });
