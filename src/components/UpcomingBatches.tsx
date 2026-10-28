@@ -90,7 +90,8 @@ const UpcomingBatches = () => {
                 <div className="flex items-start gap-2">
                   <Calendar className="w-4 h-4 text-neutral-400 mt-0.5 shrink-0" />
                   <span className="text-sm font-bold text-neutral-800">
-                    Starts: {batch.slots.map((s) => s.label).join(" · ")}
+                    Starts: {batch.slots.slice(0, 3).map((s) => s.label).join(" · ")}
+                    {batch.slots.length > 3 && ` + ${batch.slots.length - 3} more`}
                   </span>
                 </div>
 

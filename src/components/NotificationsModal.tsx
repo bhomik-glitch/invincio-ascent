@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import armyFeed from "@/data/army-feed.json";
 import { WA_LABEL_SITE, trackWhatsApp } from "@/lib/whatsapp";
 import { MASTERCLASS, masterclassLive } from "@/data/masterclass";
+import { batches } from "@/data/batches";
 
 interface NotificationsModalProps {
   isOpen: boolean;
@@ -36,6 +37,16 @@ interface FeedItem {
 }
 
 type Notification = DetailNotification;
+
+// SSB offline dates come from src/data/batches.ts, which already drops past slots.
+// No slots left (or batch pulled) => the card isn't listed at all.
+const ssb = batches.find((b) => b.id === "ssb-offline");
+const ssbDates = ssb?.slots.map((s) => s.label) ?? [];
+const monthYear = (label: string) => label.split(" ").slice(1).join(" ");
+const ssbRange =
+  ssbDates.length > 1 && monthYear(ssbDates[0]) !== monthYear(ssbDates[ssbDates.length - 1])
+    ? `${monthYear(ssbDates[0])} – ${monthYear(ssbDates[ssbDates.length - 1])}`
+    : monthYear(ssbDates[0] ?? "");
 
 const notifications: Notification[] = [
   ...(masterclassLive ? [{
@@ -73,20 +84,14 @@ const notifications: Notification[] = [
     ],
     highlight: "Free to attend — registration mandatory. 2–3 scholarships will be considered for deserving, serious participants based on consistency, participation and genuine need.",
   }] : []),
-  {
-    type: "detail",
+  ...(ssb ? [{
+    type: "detail" as const,
     title: "SSB Mentorship Program — Offline Batches",
-    badge: "Sep – Nov 2026",
+    badge: ssbRange,
     sections: [
       {
         heading: "Batch Start Dates",
-        points: [
-          "21st September 2026",
-          "12th October 2026",
-          "19th October 2026",
-          "26th October 2026",
-          "02nd November 2026",
-        ],
+        points: ssbDates,
       },
       {
         heading: "Program Details",
@@ -107,12 +112,12 @@ const notifications: Notification[] = [
         ],
       },
     ],
-    highlight: "Five offline batches from September to November 2026. 25 seats only — enroll early to avoid missing your batch.",
+    highlight: `${ssbDates.length} offline ${ssbDates.length === 1 ? "batch" : "batches"} (${ssbRange}). 25 seats only — enroll early to avoid missing your batch.`,
     expected: {
       notification: "Admissions Open",
-      application: "Next batch starts 12 Oct 2026",
+      application: `Next batch starts ${ssbDates[0]}`,
     },
-  },
+  }] : []),
   {
     type: "detail",
     title: "Online Officer Mentorship Program",
