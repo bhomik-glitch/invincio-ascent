@@ -181,5 +181,23 @@
     "info": "Assam Rifles Officer Cadre\nNoida SSB",
     "image": "/assets/client_photo/rfn ghosh noida ssb assam rifles officer cadre.jpeg",
     "addedAt": "2026-10-26"
+  },
+  {
+    "name": "Bharat Vashisht",
+    "info": "CDS(OTA)\n19 SSB Prayagraj\nChest No. 26",
+    "image": "/assets/client_photo/bharat vashisht 19 ssb prayagraj cds-ota.jpeg",
+    "addedAt": "2026-11-02"
+  },
+  {
+    "name": "Akshit",
+    "info": "ASNL-35927\nCDS(OTA)\n11 SSB Allahabad",
+    "image": "/assets/client_photo/akshit 11 ssb allahabad cds-ota.jpeg",
+    "addedAt": "2026-11-02"
+  },
+  {
+    "name": "Shubham Dahiya",
+    "info": "Navy Tech 10+2 B.Tech\n33 SSB\nChest No. 14",
+    "image": "/assets/client_photo/shubham dahiya 33 ssb navy tech entry.jpeg",
+    "addedAt": "2026-11-02"
   }
 ]
