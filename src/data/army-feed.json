@@ -1,7 +1,16 @@
 {
-  "updated": "2026-10-26",
+  "updated": "2026-11-03",
   "note": "Curated Indian Army notification feed. scripts/track-army.mjs (GitHub Actions, every 6h) auto-publishes new curated items straight to this file, with each link resolved to the real publisher article URL. To remove an item, set its status to \"hidden\" — it renders nowhere and won't come back.",
   "items": [
+    {
+      "id": "agniveer-recruitment-2027",
+      "title": "Agniveer Rally 2027: Big Opportunity for Telangana Youth.. Hyderabad Recruitment Rally Begins from November 13 -- Check Details",
+      "link": "https://education.sakshi.com/en/defence-jobs/education-news/agniveer-rally-2027-big-opportunity-telangana-youth-hyderabad-recruitment-rally-begins-november-13-check-details-202004",
+      "source": "Sakshi Education",
+      "date": "2026-11-02",
+      "category": "soldier",
+      "status": "published"
+    },
     {
       "id": "agniveer-recruitment-2026",
       "title": "AGNIVEER RECRUITMENT RALLY AT ONAKE OBAVVA STADIUM, CHITRADURGA FROM 31 OCTOBER TO 03 NOVEMBER 2026",
