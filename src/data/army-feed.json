@@ -1,7 +1,16 @@
 {
-  "updated": "2026-11-03",
+  "updated": "2026-11-06",
   "note": "Curated Indian Army notification feed. scripts/track-army.mjs (GitHub Actions, every 6h) auto-publishes new curated items straight to this file, with each link resolved to the real publisher article URL. To remove an item, set its status to \"hidden\" — it renders nowhere and won't come back.",
   "items": [
+    {
+      "id": "nda-1-merit-list-2026",
+      "title": "UPSC Declares NDA 1 2026 Final Merit List; 617 Candidates Recommended",
+      "link": "https://shop.ssbcrack.com/blogs/blog/upsc-declares-nda-1-2026-final-merit-list-617-candidates-recommended",
+      "source": "Shop SSBCrack",
+      "date": "2026-11-05",
+      "category": "officer",
+      "status": "published"
+    },
     {
       "id": "agniveer-recruitment-2027",
       "title": "Agniveer Rally 2027: Big Opportunity for Telangana Youth.. Hyderabad Recruitment Rally Begins from November 13 -- Check Details",
