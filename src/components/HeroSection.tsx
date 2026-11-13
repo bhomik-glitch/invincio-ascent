@@ -5,7 +5,7 @@ import ConsultationModal from "./ConsultationModal";
 import NotificationsModal from "./NotificationsModal";
 import ResultsModal from "./ResultsModal";
 import NewCoursesModal from "./NewCoursesModal";
-import { nextBatch, batchCtas, shortTitle } from "@/data/batches";
+import { nextBatch } from "@/data/batches";
 import GtoGroundOverlay from "./GtoGroundOverlay";
 import MasterclassModal from "./MasterclassModal";
 import { MASTERCLASS, masterclassLive } from "@/data/masterclass";
@@ -29,6 +29,11 @@ const heroStories = [
   ...sortedCandidateStories.slice(0, -LEAD_IN),
 ];
 const duplicatedStories = [...heroStories, ...heroStories];
+
+const SSB_ENTRIES = [
+  "NDA", "CDS – IMA", "CDS – OTA", "AFCAT – Flying",
+  "SSC Tech", "TGC", "TES Entry", "NCC Entry", "Navy B.Tech", "Coast Guard",
+];
 
 /**
  * Index is owned by HeroSection so the button can open enrolment on whichever
@@ -117,11 +122,10 @@ const HeroSection = ({
   const [entryIdx, setEntryIdx] = useState(0);
   const [tickerPaused, setTickerPaused] = useState(false);
   const [coursesBatchId, setCoursesBatchId] = useState<string | undefined>(undefined);
-  const cta = batchCtas[entryIdx];
 
   useEffect(() => {
-    if (tickerPaused || batchCtas.length < 2) return;
-    const id = setInterval(() => setEntryIdx(i => (i + 1) % batchCtas.length), 3500);
+    if (tickerPaused) return;
+    const id = setInterval(() => setEntryIdx(i => (i + 1) % SSB_ENTRIES.length), 2000);
     return () => clearInterval(id);
   }, [tickerPaused]);
 
@@ -212,7 +216,7 @@ const HeroSection = ({
                 line — font size is fixed (not bumped up at sm) and the card
                 is sized to fit the longest ticker entry at that size. */}
             <button
-              onClick={() => (cta ? openBatch(cta.batch.id) : openConsultation())}
+              onClick={() => openConsultation(SSB_ENTRIES[entryIdx])}
               onPointerDown={() => setTickerPaused(true)}
               className="inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-xl bg-[#F6B828] px-3.5 py-3 text-[13px] font-semibold tracking-wide text-[#00568C] sm:px-5 sm:py-3.5"
               style={{
@@ -235,16 +239,7 @@ const HeroSection = ({
             >
               <CalendarCheck className="h-3.5 w-3.5 shrink-0" />
               <span>
-                {cta ? (
-                  <TickerText idx={entryIdx}>
-                    Join {shortTitle(cta.batch.title)}
-                    <span className="hidden opacity-70 sm:inline">
-                      {" "}· {cta.slot ? cta.slot.label : "Admissions Open"}
-                    </span>
-                  </TickerText>
-                ) : (
-                  "Book Free Consultation"
-                )}
+                Book Free Consultation for <TickerText idx={entryIdx}>{SSB_ENTRIES[entryIdx]}</TickerText>
               </span>
             </button>
 
