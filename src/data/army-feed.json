@@ -3,6 +3,15 @@
   "note": "Curated Indian Army notification feed. scripts/track-army.mjs (GitHub Actions, every 6h) auto-publishes new curated items straight to this file, with each link resolved to the real publisher article URL. To remove an item, set its status to \"hidden\" — it renders nowhere and won't come back.",
   "items": [
     {
+      "id": "agniveer-result-2026",
+      "title": "Agniveer Result 2026 Final Selection List, ARO-Wise PDF Update",
+      "link": "https://news.kollegeapply.com/news/agniveer-result-2026-final-merit-list-at-joinindianarmynicin-download-pdf-link-shortly",
+      "source": "KollegeApply News",
+      "date": "2026-11-14",
+      "category": "soldier",
+      "status": "published"
+    },
+    {
       "id": "tgc-144-merit-list-2027",
       "title": "Indian Army Releases TGC 144 Merit List for January 2027 Course; 48 Candidates Recommended",
       "link": "https://shop.ssbcrack.com/blogs/blog/indian-army-releases-tgc-144-merit-list-for-january-2027-course-48-candidates-recommended",
