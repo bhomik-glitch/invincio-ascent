@@ -1,7 +1,16 @@
 {
-  "updated": "2026-11-06",
+  "updated": "2026-11-14",
   "note": "Curated Indian Army notification feed. scripts/track-army.mjs (GitHub Actions, every 6h) auto-publishes new curated items straight to this file, with each link resolved to the real publisher article URL. To remove an item, set its status to \"hidden\" — it renders nowhere and won't come back.",
   "items": [
+    {
+      "id": "tgc-144-merit-list-2027",
+      "title": "Indian Army Releases TGC 144 Merit List for January 2027 Course; 48 Candidates Recommended",
+      "link": "https://shop.ssbcrack.com/blogs/blog/indian-army-releases-tgc-144-merit-list-for-january-2027-course-48-candidates-recommended",
+      "source": "Shop SSBCrack",
+      "date": "2026-11-13",
+      "category": "general",
+      "status": "published"
+    },
     {
       "id": "nda-1-merit-list-2026",
       "title": "UPSC Declares NDA 1 2026 Final Merit List; 617 Candidates Recommended",
