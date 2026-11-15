@@ -1,7 +1,16 @@
 {
-  "updated": "2026-11-14",
+  "updated": "2026-11-15",
   "note": "Curated Indian Army notification feed. scripts/track-army.mjs (GitHub Actions, every 6h) auto-publishes new curated items straight to this file, with each link resolved to the real publisher article URL. To remove an item, set its status to \"hidden\" — it renders nowhere and won't come back.",
   "items": [
+    {
+      "id": "agniveer-merit-list-2026",
+      "title": "Agniveer Final Merit List 2026: इंडियन आर्मी अग्निवीर फाइनल मेरिट लिस्ट कब आएगी?, यहां देखें लेटेस्ट अपडेट्स",
+      "link": "https://www.jagranjosh.com/articles/indian-army-agniveer-final-merit-list-2026-soon-at-joinindianarmy-nic-in-check-latest-updates-1800019171-2",
+      "source": "Jagran Josh",
+      "date": "2026-11-15",
+      "category": "soldier",
+      "status": "published"
+    },
     {
       "id": "agniveer-result-2026",
       "title": "Agniveer Result 2026 Final Selection List, ARO-Wise PDF Update",
