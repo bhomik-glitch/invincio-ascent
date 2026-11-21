@@ -1,7 +1,16 @@
 {
-  "updated": "2026-11-15",
+  "updated": "2026-11-21",
   "note": "Curated Indian Army notification feed. scripts/track-army.mjs (GitHub Actions, every 6h) auto-publishes new curated items straight to this file, with each link resolved to the real publisher article URL. To remove an item, set its status to \"hidden\" — it renders nowhere and won't come back.",
   "items": [
+    {
+      "id": "tgc-144-merit-list",
+      "title": "TGC 144 Merit List- 48 Candidates Recommended",
+      "link": "https://www.ssbcrack.com/2026/11/tgc-144-merit-list-48-candidates-recommended.html",
+      "source": "SSBCrack",
+      "date": "2026-11-13",
+      "category": "general",
+      "status": "published"
+    },
     {
       "id": "agniveer-merit-list-2026",
       "title": "Agniveer Final Merit List 2026: इंडियन आर्मी अग्निवीर फाइनल मेरिट लिस्ट कब आएगी?, यहां देखें लेटेस्ट अपडेट्स",
