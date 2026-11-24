@@ -60,7 +60,7 @@ const TickerText = ({ idx, children }: { idx: number; children: ReactNode }) => 
 
 const PILL_TEXTS = [
   "Defence Leadership Institute",
-  "138 SSB Recommendations in 2025 Alone",
+  "160+ SSB Recommendations in a Year",
   "2400+ Lives Transformed — One Mission — Building Future Leaders",
 ];
 
@@ -181,10 +181,15 @@ const HeroSection = ({
         >
 
           {/* Eyebrow pill — sky blue accent */}
-          <motion.div {...fadeUp(0.14)} className="mb-4 sm:mb-6">
+          <motion.div {...fadeUp(0.14)} className="mb-4 flex flex-col items-start gap-2 sm:mb-6">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-white/40 bg-white/15 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white overflow-hidden" style={{ backdropFilter: "blur(8px)", minWidth: "220px", textAlign: "center" }}>
               <RotatingPillText />
             </span>
+            {showStats && (
+              <span className="inline-flex items-center rounded-full border border-[#F6B828]/50 bg-[#F6B828]/15 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-[#F6B828]">
+                160+ Recommendations in a Year
+              </span>
+            )}
           </motion.div>
 
           {/* H1 */}
