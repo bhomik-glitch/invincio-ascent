@@ -5,7 +5,11 @@ import { EASE_OUT } from "@/lib/design-system";
 import { useModalLock } from "@/lib/modal-lock";
 
 const SEEN_KEY = "invincio-wall-of-invincibles-seen";
-const IMAGE = "/assets/wall-of-invincibles.webp";
+// The landscape artwork is an unreadable strip on a portrait phone, so phones get a 9:16 version.
+const IMAGE =
+  typeof window !== "undefined" && window.matchMedia?.("(max-width: 767px) and (orientation: portrait)").matches
+    ? "/assets/wall-of-invincibles-mobile.webp"
+    : "/assets/wall-of-invincibles.webp";
 
 /** Wall of Invincibles image, shown once per browser on the first visit. */
 const WelcomePopup = () => {
@@ -68,13 +72,13 @@ const WelcomePopup = () => {
             <img
               src={IMAGE}
               alt="Wall of Invincibles: Invincio candidates with their all-India ranks and entries"
-              className="block max-h-[85vh] w-auto max-w-full rounded-xl border-2 border-[#2FB4E7] shadow-[0_32px_80px_rgba(0,0,0,0.35)] lg:max-w-5xl"
+              className="block max-h-[85vh] max-md:max-h-[82svh] w-auto max-w-full rounded-xl border-2 border-[#2FB4E7] shadow-[0_32px_80px_rgba(0,0,0,0.35)] lg:max-w-5xl"
             />
             <button
               autoFocus
               onClick={() => setOpen(false)}
               aria-label="Close"
-              className="absolute -right-2 -top-12 rounded-full bg-black/60 p-2.5 text-white hover:bg-black/80"
+              className="absolute -top-12 right-0 rounded-full bg-black/60 p-2.5 text-white hover:bg-black/80"
             >
               <X className="h-5 w-5" />
             </button>
