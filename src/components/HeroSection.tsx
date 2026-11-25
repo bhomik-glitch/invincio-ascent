@@ -60,7 +60,6 @@ const TickerText = ({ idx, children }: { idx: number; children: ReactNode }) => 
 
 const PILL_TEXTS = [
   "Defence Leadership Institute",
-  "160+ SSB Recommendations in a Year",
   "2400+ Lives Transformed — One Mission — Building Future Leaders",
 ];
 
@@ -169,27 +168,38 @@ const HeroSection = ({
       </div>
 
 
-<div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pt-8 pb-6 sm:pt-16 sm:pb-10 md:pt-24 md:pb-16 flex items-center justify-center md:justify-end">
+<div className={`relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 ${showStats ? "pt-16" : "pt-8"} pb-6 sm:pt-16 sm:pb-10 md:pt-24 md:pb-16 flex items-center justify-center md:justify-end`}>
 
         {/* Glass content card */}
         <motion.div
           initial={{ opacity: 0, y: 28, scale: 0.97 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6, ease: EASE_OUT, delay: 0.05 }}
-          className="w-full max-w-[720px] rounded-2xl border border-white/10 bg-black/35 backdrop-blur-md p-5 sm:p-8 md:p-10"
+          className="relative w-full max-w-[720px] rounded-2xl border border-white/10 bg-black/35 backdrop-blur-md p-5 pt-8 sm:p-8 md:p-10"
           style={{ boxShadow: "0 8px 48px rgba(0,0,0,0.40), inset 0 1px 0 rgba(255,255,255,0.06)" }}
         >
 
+          {/* Sticker: overhangs the card corner on phones, sits inside it from sm up */}
+          {showStats && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, rotate: 0 }}
+              animate={{ opacity: 1, scale: 1, rotate: 10 }}
+              transition={{ duration: 0.45, ease: EASE_OUT, delay: 0.5 }}
+              className="pointer-events-none absolute -top-14 right-2 z-10 h-[84px] w-[84px] rounded-full bg-[#F6B828] p-1 shadow-[0_6px_20px_rgba(0,0,0,0.35)] sm:right-6 sm:top-6 sm:h-[116px] sm:w-[116px]"
+            >
+              <p className="flex h-full w-full flex-col items-center justify-center rounded-full border border-dashed border-[#00568C] text-center font-sans font-bold text-[#00568C]">
+                <span className="font-serif text-[22px] leading-none sm:text-[32px]">160+</span>
+                <span className="mt-0.5 text-[8px] leading-tight sm:text-[11px]">Recommendations</span>
+                <span className="text-[8px] leading-tight sm:text-[11px]">in a year</span>
+              </p>
+            </motion.div>
+          )}
+
           {/* Eyebrow pill — sky blue accent */}
-          <motion.div {...fadeUp(0.14)} className="mb-4 flex flex-col items-start gap-2 sm:mb-6">
+          <motion.div {...fadeUp(0.14)} className="mb-4 sm:mb-6">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-white/40 bg-white/15 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white overflow-hidden" style={{ backdropFilter: "blur(8px)", minWidth: "220px", textAlign: "center" }}>
               <RotatingPillText />
             </span>
-            {showStats && (
-              <span className="inline-flex items-center rounded-full border border-[#F6B828]/50 bg-[#F6B828]/15 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-[#F6B828]">
-                160+ Recommendations in a Year
-              </span>
-            )}
           </motion.div>
 
           {/* H1 */}

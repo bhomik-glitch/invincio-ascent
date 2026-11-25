@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import SocialSidebar from "./SocialSidebar";
+import WelcomePopup from "./WelcomePopup";
 import WhatsAppChat from "./WhatsAppChat";
 
 const Layout = () => {
@@ -14,6 +15,7 @@ const Layout = () => {
       </main>
       <Footer />
       <WhatsAppChat />
+      <WelcomePopup />
     </div>
   );
 };

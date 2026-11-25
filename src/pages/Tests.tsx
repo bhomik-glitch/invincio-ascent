@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Clock, ListChecks, LogOut } from "lucide-react";
+import IOppamBanner from "@/components/IOppamBanner";
 import SEO from "@/components/SEO";
 import { api, lastScore, type TestSummary } from "@/lib/api";
 import { BG_BASE, BTN_PRIMARY, CARD_LIGHT, CONTAINER, EYEBROW, H2_LIGHT, H3_LIGHT, BODY_LIGHT, SECTION_PAD } from "@/lib/design-system";
@@ -30,6 +31,8 @@ const Tests = () => {
             <LogOut className="w-4 h-4" /> Log out
           </button>
         </div>
+
+        <IOppamBanner className="mb-10" />
 
         {isLoading ? (
           <p className={BODY_LIGHT}>Loading…</p>

@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
+import IOppamBanner from "@/components/IOppamBanner";
 import SEO from "@/components/SEO";
 import { api } from "@/lib/api";
 import { BG_BASE, BTN_PRIMARY, CONTAINER, EYEBROW, H2_LIGHT, BODY_LIGHT } from "@/lib/design-system";
@@ -57,6 +58,7 @@ const Login = () => {
             {busy ? "Logging in…" : "Log in"}
           </button>
         </form>
+        <IOppamBanner className="mx-auto mt-6 max-w-md" />
       </div>
     </section>
   );

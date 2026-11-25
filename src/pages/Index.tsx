@@ -3,11 +3,13 @@ import CoreOffering from "@/components/CoreOffering";
 import ProcessSection from "@/components/ProcessSection";
 import ResultsSection from "@/components/ResultsSection";
 import PodcastSection from "@/components/PodcastSection";
+import IOppamBanner from "@/components/IOppamBanner";
 import RemtabSection from "@/components/RemtabSection";
 import LeadCentreSection from "@/components/LeadCentreSection";
 import CollaborationsSection from "@/components/CollaborationsSection";
 import CTASection from "@/components/CTASection";
 import SEO from "@/components/SEO";
+import { CONTAINER } from "@/lib/design-system";
 
 const homepageFaq = {
   "@context": "https://schema.org",
@@ -59,6 +61,11 @@ const Index = () => {
         jsonLd={homepageFaq}
       />
       <HeroSection showCarousel={true} />
+      <section className="bg-[#F1FFFF] pt-10 md:pt-16">
+        <div className={CONTAINER}>
+          <IOppamBanner />
+        </div>
+      </section>
       <RemtabSection />
       <LeadCentreSection />
       <CoreOffering />
