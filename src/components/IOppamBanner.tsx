@@ -29,7 +29,10 @@ const IOppamBanner = ({ className = "" }: { className?: string }) => {
           <h2 className="mt-2.5 font-serif text-[2.75rem] sm:mt-5 sm:text-[clamp(3.25rem,13vw,6.5rem)] font-bold leading-[0.95] tracking-[-0.03em] text-white">
             <span className="italic text-[#F6B828]">i</span>-OPPAM
           </h2>
-          <p className="mt-2 max-w-md font-sans text-[13px] leading-snug sm:mt-4 sm:text-base sm:leading-relaxed text-white/80">
+          <p className="mt-2 font-serif text-lg font-bold italic text-[#F6B828] sm:mt-4 sm:text-2xl">
+            Defeat your fear of i-OPPAM.
+          </p>
+          <p className="mt-1 max-w-md font-sans text-[13px] leading-snug sm:mt-2 sm:text-base sm:leading-relaxed text-white/80">
             Invincio&apos;s own personality assessment for future officers, built on the lines of OPAM.
           </p>
         </div>

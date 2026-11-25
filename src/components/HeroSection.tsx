@@ -168,7 +168,7 @@ const HeroSection = ({
       </div>
 
 
-<div className={`relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 ${showStats ? "pt-16" : "pt-8"} pb-6 sm:pt-16 sm:pb-10 md:pt-24 md:pb-16 flex items-center justify-center md:justify-end`}>
+<div className={`relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 ${showStats ? "pt-[70px]" : "pt-8"} pb-6 sm:pt-16 sm:pb-10 md:pt-24 md:pb-16 flex items-center justify-center md:justify-end`}>
 
         {/* Glass content card */}
         <motion.div
@@ -185,10 +185,10 @@ const HeroSection = ({
               initial={{ opacity: 0, scale: 0.8, rotate: 0 }}
               animate={{ opacity: 1, scale: 1, rotate: 10 }}
               transition={{ duration: 0.45, ease: EASE_OUT, delay: 0.5 }}
-              className="pointer-events-none absolute -top-14 right-2 z-10 h-[84px] w-[84px] rounded-full bg-[#F6B828] p-1 shadow-[0_6px_20px_rgba(0,0,0,0.35)] sm:right-6 sm:top-6 sm:h-[116px] sm:w-[116px]"
+              className="pointer-events-none absolute -top-16 right-2 z-10 h-[92px] w-[92px] rounded-full bg-[#FFE600] p-1 ring-[3px] ring-white shadow-[0_0_28px_rgba(255,230,0,0.6),0_6px_20px_rgba(0,0,0,0.4)] sm:right-6 sm:top-[88px] sm:h-[128px] sm:w-[128px]"
             >
-              <p className="flex h-full w-full flex-col items-center justify-center rounded-full border border-dashed border-[#00568C] text-center font-sans font-bold text-[#00568C]">
-                <span className="font-serif text-[22px] leading-none sm:text-[32px]">160+</span>
+              <p className="flex h-full w-full flex-col items-center justify-center rounded-full border-2 border-dashed border-[#021526]/70 text-center font-sans font-extrabold text-[#021526]">
+                <span className="font-sans text-[26px] font-black leading-none tracking-tight sm:text-[37px]">160+</span>
                 <span className="mt-0.5 text-[8px] leading-tight sm:text-[11px]">Recommendations</span>
                 <span className="text-[8px] leading-tight sm:text-[11px]">in a year</span>
               </p>
