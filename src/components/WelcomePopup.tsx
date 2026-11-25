@@ -4,7 +4,7 @@ import { X } from "lucide-react";
 import { EASE_OUT } from "@/lib/design-system";
 import { useModalLock } from "@/lib/modal-lock";
 
-const SEEN_KEY = "invincio-wall-of-invincibles-seen";
+const SEEN_KEY = "invincio-wall-of-invincibles-seen-v2"; // bump to show everyone again
 // The landscape artwork is an unreadable strip on a portrait phone, so phones get a 9:16 version.
 const IMAGE =
   typeof window !== "undefined" && window.matchMedia?.("(max-width: 767px) and (orientation: portrait)").matches
@@ -24,23 +24,26 @@ const WelcomePopup = () => {
     }
     // Open only once the image is ready, so it never pops up empty.
     const img = new Image();
-    img.onload = () => {
-      try {
-        localStorage.setItem(SEEN_KEY, "1");
-      } catch {
-        return;
-      }
-      setOpen(true);
-    };
+    img.onload = () => setOpen(true);
     img.src = IMAGE;
     return () => {
       img.onload = null;
     };
   }, []);
 
+  // Counts as seen when closed, not when opened: a reload mid-popup must not use it up.
+  const close = () => {
+    try {
+      localStorage.setItem(SEEN_KEY, "1");
+    } catch {
+      // storage full or blocked: closing still has to work
+    }
+    setOpen(false);
+  };
+
   useEffect(() => {
     if (!open) return;
-    const handler = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    const handler = (e: KeyboardEvent) => e.key === "Escape" && close();
     document.addEventListener("keydown", handler);
     return () => document.removeEventListener("keydown", handler);
   }, [open]);
@@ -58,7 +61,7 @@ const WelcomePopup = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          onClick={() => setOpen(false)}
+          onClick={close}
           className="fixed inset-0 z-[110] flex items-center justify-center bg-black/65 p-4 backdrop-blur-[3px]"
         >
           <motion.div
@@ -76,7 +79,7 @@ const WelcomePopup = () => {
             />
             <button
               autoFocus
-              onClick={() => setOpen(false)}
+              onClick={close}
               aria-label="Close"
               className="absolute -top-12 right-0 rounded-full bg-black/60 p-2.5 text-white hover:bg-black/80"
             >
