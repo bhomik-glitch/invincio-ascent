@@ -58,7 +58,7 @@ const Login = () => {
             {busy ? "Logging in…" : "Log in"}
           </button>
         </form>
-        <IOppamBanner className="mx-auto mt-6 max-w-md" />
+        <IOppamBanner className="mt-10" />
       </div>
     </section>
   );
