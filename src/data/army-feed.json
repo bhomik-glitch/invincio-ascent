@@ -1,7 +1,16 @@
 {
-  "updated": "2026-11-21",
+  "updated": "2026-11-27",
   "note": "Curated Indian Army notification feed. scripts/track-army.mjs (GitHub Actions, every 6h) auto-publishes new curated items straight to this file, with each link resolved to the real publisher article URL. To remove an item, set its status to \"hidden\" — it renders nowhere and won't come back.",
   "items": [
+    {
+      "id": "nda-1-notification-2027",
+      "title": "UPSC NDA 1 2027 Notification: Registration starts on December 2 at upsconline.nic.in; Check Exam Date & Eligibility",
+      "link": "https://www.jagranjosh.com/lite/articles/upsc-nda-1-2027-notification-registration-starts-on-december-2-at-upsconline-nic-in-check-exam-date-eligibility-1800019625-1",
+      "source": "Jagran Josh",
+      "date": "2026-11-24",
+      "category": "officer",
+      "status": "published"
+    },
     {
       "id": "tgc-144-merit-list",
       "title": "TGC 144 Merit List- 48 Candidates Recommended",
